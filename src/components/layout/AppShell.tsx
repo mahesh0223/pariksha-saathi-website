@@ -1,13 +1,15 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import './layout.css';
 
-// Same 5 tabs as the Android app's bottom nav (Home / Study / Practice / Updates / Progress) -
-// students who use both should feel at home on either.
+// Close to the Android app's bottom nav (Home / Study / Practice / Updates / Progress), but the
+// web version splits "Updates" into its own two buttons - Current Affairs and Exam Notices &
+// Alerts are different enough in purpose that a single combined tab undersold both.
 const TABS = [
   { to: '/app/home', label: 'Home' },
   { to: '/app/study', label: 'Study' },
   { to: '/app/practice', label: 'Practice' },
-  { to: '/app/updates', label: 'Updates' },
+  { to: '/app/current-affairs', label: 'Affairs' },
+  { to: '/app/exam-notices', label: 'Alerts' },
   { to: '/app/progress', label: 'Progress' },
 ];
 

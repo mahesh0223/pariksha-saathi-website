@@ -64,8 +64,11 @@ export function DashboardPage() {
         <Link to="/app/practice" className="dash-quicklink">
           Practice
         </Link>
-        <Link to="/app/updates" className="dash-quicklink">
-          Updates
+        <Link to="/app/current-affairs" className="dash-quicklink">
+          Current Affairs
+        </Link>
+        <Link to="/app/exam-notices" className="dash-quicklink">
+          Exam Notices
         </Link>
       </div>
     </div>

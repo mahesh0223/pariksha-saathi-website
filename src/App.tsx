@@ -12,7 +12,8 @@ import { QuizResultPage } from './pages/app/QuizResultPage';
 import { MistakeNotebookPage } from './pages/app/MistakeNotebookPage';
 import { BookmarksPage } from './pages/app/BookmarksPage';
 import { ProgressPage } from './pages/app/ProgressPage';
-import { UpdatesPage } from './pages/app/UpdatesPage';
+import { CurrentAffairsPage } from './pages/app/CurrentAffairsPage';
+import { ExamNoticesPage } from './pages/app/ExamNoticesPage';
 import { AccountPage } from './pages/app/AccountPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
@@ -35,7 +36,8 @@ export function App() {
         <Route path="mistakes" element={<MistakeNotebookPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="progress" element={<ProgressPage />} />
-        <Route path="updates" element={<UpdatesPage />} />
+        <Route path="current-affairs" element={<CurrentAffairsPage />} />
+        <Route path="exam-notices" element={<ExamNoticesPage />} />
         <Route path="account" element={<AccountPage />} />
       </Route>
 
