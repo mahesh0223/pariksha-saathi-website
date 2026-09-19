@@ -151,8 +151,10 @@ export function HomePage() {
           </div>
           <p className="disclaimer">
             Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or
-            any government body. We don't show ads, and we don't sell or share your data with
-            advertisers.
+            any government body. We don't sell or share your data with advertisers — ads on this
+            site are served by Google AdSense; see our{' '}
+            <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a> for
+            details.
           </p>
         </div>
       </footer>
