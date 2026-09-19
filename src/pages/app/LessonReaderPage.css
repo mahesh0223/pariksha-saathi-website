@@ -1,0 +1,27 @@
+.lesson-reader h1 {
+  color: var(--navy);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.lesson-body p {
+  margin: 0 0 14px;
+}
+.lesson-examples,
+.lesson-summary {
+  margin-top: 24px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.lesson-examples h3,
+.lesson-summary h3 {
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  margin-bottom: 10px;
+}
+.lesson-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}

@@ -1,0 +1,62 @@
+.practice-page h1 {
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.mock-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: 14px;
+  padding: 20px 22px;
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+.mock-card-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.mock-card-sub {
+  color: var(--tan);
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+.mock-card-arrow {
+  font-size: 1.4rem;
+}
+.practice-subject {
+  margin-bottom: 26px;
+}
+.practice-subject-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.practice-subject-head h2 {
+  font-size: 1.05rem;
+  color: var(--terracotta);
+}
+.sectional-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+.practice-topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.practice-topic-chip {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}

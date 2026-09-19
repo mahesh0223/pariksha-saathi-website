@@ -1,0 +1,24 @@
+.review-title {
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+.review-card {
+  margin-bottom: 12px;
+}
+.review-question {
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.review-answer {
+  color: var(--good);
+  font-size: 0.9rem;
+  margin: 0;
+}
+.review-section {
+  margin-bottom: 28px;
+}
+.review-section h2 {
+  font-size: 1.05rem;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+}

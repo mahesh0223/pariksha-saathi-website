@@ -1,0 +1,37 @@
+.account-card {
+  margin-bottom: 14px;
+}
+.account-card h2 {
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+}
+.account-body {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 8px;
+}
+.account-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+}
+.account-lang-row {
+  display: flex;
+  gap: 10px;
+}
+.account-lang-chip {
+  background: var(--paper);
+  border: 1.5px solid var(--rule);
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.account-lang-chip.selected {
+  border-color: var(--navy);
+  color: var(--navy);
+  background: #fff;
+}

@@ -1,0 +1,59 @@
+.result-page h1 {
+  color: var(--navy);
+  margin-bottom: 18px;
+}
+.result-summary {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.result-score {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 2.6rem;
+  color: var(--navy);
+}
+.result-meta {
+  color: var(--muted);
+  margin-top: 4px;
+}
+.result-review-title {
+  font-size: 1.1rem;
+  color: var(--terracotta);
+  margin-bottom: 14px;
+}
+.result-question {
+  margin-bottom: 14px;
+}
+.result-question-text {
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.result-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result-option {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+.result-option.correct {
+  border-color: var(--good);
+  background: #eaf5ec;
+  color: var(--good);
+  font-weight: 600;
+}
+.result-option.incorrect {
+  border-color: var(--bad);
+  background: #fbeee6;
+  color: var(--bad);
+  font-weight: 600;
+}
+.result-marks {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--muted);
+}
