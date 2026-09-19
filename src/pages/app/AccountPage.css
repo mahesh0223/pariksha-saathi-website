@@ -16,6 +16,49 @@
   font-weight: 600;
   color: var(--navy);
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.account-danger-link {
+  color: var(--terracotta);
+}
+.account-mode-toggle {
+  display: block;
+  margin-top: 14px;
+}
+.account-forgot {
+  margin-top: 12px;
+}
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+.account-form input {
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 0.92rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.account-form input:focus {
+  outline: none;
+  border-color: var(--navy);
+}
+.account-me-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 14px;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+.account-me-stats strong {
+  color: var(--navy);
 }
 .account-lang-row {
   display: flex;
