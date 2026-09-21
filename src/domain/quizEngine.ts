@@ -3,6 +3,10 @@ import type { Question } from '../types/api';
 export const TOPIC_QUESTION_LIMIT = 15;
 export const SECTIONAL_QUESTION_LIMIT = 25;
 export const MOCK_QUESTION_LIMIT = 100;
+// Between TOPIC's 15 and SECTIONAL's 25 - a current-affairs pool is deliberately small
+// (weekly-authored, not a deep per-topic bank), so a lower cap keeps it fully usable even right
+// after the rolling ~4-week pool (see api/currentAffairsQuiz.ts) starts refilling for a new week.
+export const CURRENT_AFFAIRS_QUESTION_LIMIT = 20;
 export const SECONDS_PER_QUESTION = 60;
 
 // Fisher-Yates - NOT `array.sort(() => Math.random() - 0.5)`, which is a well-documented biased
@@ -27,6 +31,10 @@ export function assembleSectionalQuiz(questionsAcrossTopics: Question[]): Questi
 
 export function assembleMockQuiz(questionsAcrossTopics: Question[]): Question[] {
   return shuffle(questionsAcrossTopics).slice(0, MOCK_QUESTION_LIMIT);
+}
+
+export function assembleCurrentAffairsQuiz(questions: Question[]): Question[] {
+  return shuffle(questions).slice(0, CURRENT_AFFAIRS_QUESTION_LIMIT);
 }
 
 export function totalTimerSeconds(questionCount: number): number {

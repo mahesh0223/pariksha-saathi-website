@@ -10,7 +10,7 @@ import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 export interface QuizAttemptRecord {
   id: string;
   topicKeys: string[];
-  quizType: 'TOPIC' | 'SECTIONAL' | 'MOCK';
+  quizType: 'TOPIC' | 'SECTIONAL' | 'MOCK' | 'CURRENT_AFFAIRS';
   startedAt: string;
   completedAt: string;
   correctCount: number;
@@ -48,6 +48,13 @@ export interface BookmarkRecord {
   synced: boolean;
 }
 
+/** One active (or finished) 90-day challenge per exam - keyPath `examId`. Local-only, same reasoning as this file's header comment: there's no backend model for this, so it's never synced. */
+export interface StreakChallengeRecord {
+  examId: string;
+  startedAt: string; // ISO
+  targetDays: number;
+}
+
 interface PsDb extends DBSchema {
   quizAttempts: {
     key: string;
@@ -67,25 +74,34 @@ interface PsDb extends DBSchema {
     value: BookmarkRecord;
     indexes: { refType: string };
   };
+  streakChallenges: {
+    key: string;
+    value: StreakChallengeRecord;
+  };
 }
 
 let dbPromise: Promise<IDBPDatabase<PsDb>> | null = null;
 
 export function getDb(): Promise<IDBPDatabase<PsDb>> {
   if (!dbPromise) {
-    dbPromise = openDB<PsDb>('pariksha-saathi', 1, {
-      upgrade(db) {
-        db.createObjectStore('quizAttempts', { keyPath: 'id' });
+    dbPromise = openDB<PsDb>('pariksha-saathi', 2, {
+      upgrade(db, oldVersion) {
+        if (oldVersion < 1) {
+          db.createObjectStore('quizAttempts', { keyPath: 'id' });
 
-        const items = db.createObjectStore('quizAttemptItems', { keyPath: 'id' });
-        items.createIndex('topicKey', 'topicKey');
-        items.createIndex('questionId', 'questionId');
-        items.createIndex('attemptId', 'attemptId');
+          const items = db.createObjectStore('quizAttemptItems', { keyPath: 'id' });
+          items.createIndex('topicKey', 'topicKey');
+          items.createIndex('questionId', 'questionId');
+          items.createIndex('attemptId', 'attemptId');
 
-        db.createObjectStore('lessonCompletions', { keyPath: 'id' });
+          db.createObjectStore('lessonCompletions', { keyPath: 'id' });
 
-        const bookmarks = db.createObjectStore('bookmarks', { keyPath: 'id' });
-        bookmarks.createIndex('refType', 'refType');
+          const bookmarks = db.createObjectStore('bookmarks', { keyPath: 'id' });
+          bookmarks.createIndex('refType', 'refType');
+        }
+        if (oldVersion < 2) {
+          db.createObjectStore('streakChallenges', { keyPath: 'examId' });
+        }
       },
     });
   }

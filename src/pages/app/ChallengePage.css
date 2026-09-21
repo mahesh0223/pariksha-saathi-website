@@ -1,0 +1,44 @@
+.challenge-card {
+  padding: 16px;
+}
+.challenge-progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--tan, #d8d2c0);
+  overflow: hidden;
+  margin: 4px 0 12px;
+}
+.challenge-progress-fill {
+  height: 100%;
+  background: var(--terracotta);
+  border-radius: 4px;
+}
+.challenge-day-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.challenge-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: var(--tan, #d8d2c0);
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+.challenge-day-cell.completed {
+  background: var(--navy);
+  color: #fff;
+}
+.challenge-restart {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--terracotta);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+}

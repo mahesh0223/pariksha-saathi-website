@@ -71,7 +71,7 @@ export interface ExamUpdateNotice {
   isSample?: boolean;
 }
 
-export type QuizType = 'TOPIC' | 'SECTIONAL' | 'MOCK';
+export type QuizType = 'TOPIC' | 'SECTIONAL' | 'MOCK' | 'CURRENT_AFFAIRS';
 
 export interface QuizAttemptItemPayload {
   questionId: string;

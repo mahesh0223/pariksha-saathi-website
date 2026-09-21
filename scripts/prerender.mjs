@@ -42,6 +42,8 @@ const NAV_TABS = [
   { to: '/app/home', label: 'Home' },
   { to: '/app/study', label: 'Study' },
   { to: '/app/practice', label: 'Practice' },
+  { to: '/app/challenge', label: 'Challenge' },
+  { to: '/app/current-affairs-quiz', label: 'CA Quiz' },
   { to: '/app/current-affairs', label: 'Affairs' },
   { to: '/app/exam-notices', label: 'Alerts' },
   { to: '/app/progress', label: 'Progress' },

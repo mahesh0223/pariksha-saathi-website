@@ -17,6 +17,9 @@ import { CurrentAffairsDetailPage } from './pages/app/CurrentAffairsDetailPage';
 import { ExamNoticesPage } from './pages/app/ExamNoticesPage';
 import { ExamNoticeDetailPage } from './pages/app/ExamNoticeDetailPage';
 import { AccountPage } from './pages/app/AccountPage';
+import { ChallengePage } from './pages/app/ChallengePage';
+import { CurrentAffairsQuizPage } from './pages/app/CurrentAffairsQuizPage';
+import { CurrentAffairsQuizPlayPage } from './pages/app/CurrentAffairsQuizPlayPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 export function App() {
@@ -43,6 +46,9 @@ export function App() {
         <Route path="exam-notices" element={<ExamNoticesPage />} />
         <Route path="exam-notices/:id" element={<ExamNoticeDetailPage />} />
         <Route path="account" element={<AccountPage />} />
+        <Route path="challenge" element={<ChallengePage />} />
+        <Route path="current-affairs-quiz" element={<CurrentAffairsQuizPage />} />
+        <Route path="current-affairs-quiz/play" element={<CurrentAffairsQuizPlayPage />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
