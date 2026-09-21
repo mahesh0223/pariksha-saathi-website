@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://parikshasaathi.com/sitemap.xml

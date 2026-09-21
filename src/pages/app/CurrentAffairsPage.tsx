@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
+import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Card, Spinner, Pill } from '../../components/ui/Primitives';
 import './UpdatesPage.css';
 
@@ -17,6 +18,13 @@ export function CurrentAffairsPage() {
   const affairsQuery = useQuery({
     queryKey: ['current-affairs', language],
     queryFn: () => getCurrentAffairs({ lang: language, limit: 30 }),
+  });
+
+  useDocumentMeta({
+    title: 'Current Affairs',
+    description:
+      'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+    path: '/app/current-affairs',
   });
 
   return (

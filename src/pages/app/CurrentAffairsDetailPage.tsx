@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
+import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Pill, Spinner } from '../../components/ui/Primitives';
 import './DetailPage.css';
 
@@ -15,6 +16,27 @@ export function CurrentAffairsDetailPage() {
   });
 
   const item = data?.find((i) => i.id === id);
+
+  useDocumentMeta({
+    title: item?.title ?? 'Current Affairs',
+    description: item
+      ? item.summary.slice(0, 155)
+      : 'Dated current-affairs capsules for SSC, IBPS and SBI exam prep, each with a verifiable source.',
+    path: `/app/current-affairs/${id}`,
+    type: 'article',
+    structuredData: item
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: item.title,
+          description: item.summary,
+          datePublished: item.editionDate,
+          author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+          publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
+          about: item.examTags,
+        }
+      : undefined,
+  });
 
   if (isLoading) return <Spinner />;
   if (!item) return <EmptyState>This item isn't available anymore.</EmptyState>;

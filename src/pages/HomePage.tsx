@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useExamSelection } from '../state/ExamSelectionContext';
+import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import './HomePage.css';
 
 const FEATURES = [
@@ -52,6 +53,13 @@ export function HomePage() {
   function startStudying() {
     navigate(selectedExamIds.length > 0 ? '/app/home' : '/onboarding');
   }
+
+  useDocumentMeta({
+    title: 'Pariksha Saathi',
+    description:
+      'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
+    path: '/',
+  });
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
+import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './DetailPage.css';
 
@@ -15,11 +16,30 @@ export function ExamNoticeDetailPage() {
   });
 
   const item = data?.find((i) => i.id === id);
+  const dateEntries = Object.entries(item?.importantDates ?? {});
+
+  useDocumentMeta({
+    title: item?.title ?? 'Exam Notices & Alerts',
+    description: item
+      ? item.summary.slice(0, 155)
+      : 'Official exam notifications and alerts for SSC, IBPS and SBI recruitment.',
+    path: `/app/exam-notices/${id}`,
+    type: 'article',
+    structuredData: item
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: item.title,
+          description: item.summary,
+          dateModified: item.lastVerifiedAt,
+          author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+          publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
+        }
+      : undefined,
+  });
 
   if (isLoading) return <Spinner />;
   if (!item) return <EmptyState>This notice isn't available anymore.</EmptyState>;
-
-  const dateEntries = Object.entries(item.importantDates ?? {});
 
   return (
     <article className="detail-page">

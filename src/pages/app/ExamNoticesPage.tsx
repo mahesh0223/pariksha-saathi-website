@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
 import { useExamSelection } from '../../state/ExamSelectionContext';
+import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Card, Spinner } from '../../components/ui/Primitives';
 import './UpdatesPage.css';
 
@@ -17,6 +18,13 @@ export function ExamNoticesPage() {
   const noticesQuery = useQuery({
     queryKey: ['exam-updates', selectedExamIds],
     queryFn: () => getExamUpdates(selectedExamIds),
+  });
+
+  useDocumentMeta({
+    title: 'Exam Notices & Alerts',
+    description:
+      'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
+    path: '/app/exam-notices',
   });
 
   return (
