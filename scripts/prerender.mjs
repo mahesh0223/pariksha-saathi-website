@@ -39,18 +39,25 @@ function readBuiltAssets() {
 }
 
 const NAV_TABS = [
-  { to: '/app/home', label: 'Home' },
-  { to: '/app/study', label: 'Study' },
-  { to: '/app/practice', label: 'Practice' },
-  { to: '/app/challenge', label: 'Challenge' },
-  { to: '/app/current-affairs-quiz', label: 'CA Quiz' },
-  { to: '/app/current-affairs', label: 'Affairs' },
-  { to: '/app/exam-notices', label: 'Alerts' },
-  { to: '/app/progress', label: 'Progress' },
+  { to: '/app/home', label: 'Home', icon: '🏠' },
+  { to: '/app/study', label: 'Study', icon: '📖' },
+  { to: '/app/practice', label: 'Practice', icon: '📝' },
+  { to: '/app/challenge', label: 'Goal', icon: '🏆' },
+  { to: '/app/current-affairs-quiz', label: 'CA Quiz', icon: '🌍' },
+  { to: '/app/current-affairs', label: 'Affairs', icon: '📰' },
+  { to: '/app/exam-notices', label: 'Alerts', icon: '🔔' },
+  { to: '/app/progress', label: 'Progress', icon: '📊' },
 ];
 
 function appShell(innerHtml) {
-  const nav = NAV_TABS.map((t) => `<a class="app-nav-item" href="${t.to}">${t.label}</a>`).join('');
+  // Unlike the live SPA (AppShell.tsx), this static nav doesn't know which tab is "active" and
+  // never has - so every label stays visible here rather than icon-only; a crawler/no-JS visitor
+  // benefits from the extra text, and .app-bottom-nav's overflow-x:auto keeps this from breaking
+  // layout if it doesn't all fit on one row.
+  const nav = NAV_TABS.map(
+    (t) =>
+      `<a class="app-nav-item" href="${t.to}"><span class="app-nav-icon" aria-hidden="true">${t.icon}</span><span class="app-nav-label">${t.label}</span></a>`,
+  ).join('');
   return `<div class="app-shell">
   <header class="app-topbar">
     <div class="wrap app-topbar-inner">
