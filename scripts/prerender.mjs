@@ -102,8 +102,92 @@ function writePage(relPath, html) {
   writeFileSync(join(dir, 'index.html'), html, 'utf8');
 }
 
+// Mirrors src/pages/HomePage.tsx's FEATURES array and markup - kept in sync by hand since this
+// script can't import TSX. If HomePage.tsx's copy changes, update this too.
+const HOME_FEATURES = [
+  { n: '01', title: 'Study, then practice', body: 'Topic-wise lessons across Reasoning, Quant, English and General Awareness, each followed by practice in the real exam pattern — negative marking included.' },
+  { n: '02', title: 'Three ways to practice', body: 'Topic-wise quizzes for one weak spot, sectional tests by subject, or full-length mocks spanning your whole exam.' },
+  { n: '03', title: 'Learn from your mistakes', body: 'Every wrong answer lands in your Mistake Notebook automatically, with the topic you should focus on next.' },
+  { n: '04', title: 'Works right in your browser', body: 'No installs — study on any device with progress saved locally and available whenever you come back.' },
+  { n: '05', title: 'English or Hindi', body: 'Switch languages any time — no reinstalling, no separate site.' },
+  { n: '06', title: 'Real current affairs', body: 'Dated current-affairs capsules and official exam notifications, each with a source you can check yourself.' },
+  { n: '07', title: 'Mistake Notebook & Bookmarks', body: 'Build your own revision list from anything you get wrong or want to revisit.' },
+  { n: '08', title: 'No account required', body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.' },
+];
+
+function homePageBody() {
+  return `<div>
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="#top"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="#features">Features</a>
+            <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">Start studying</a>
+        </div>
+      </header>
+      <div id="top" class="hero">
+        <div class="hero-rules"></div>
+        <div class="wrap hero-grid">
+          <div>
+            <div class="eyebrow">SSC &middot; IBPS &middot; SBI</div>
+            <h1>Exam prep that works even where <em>the signal doesn't.</em></h1>
+            <p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — free, right in your browser.</p>
+            <div class="cta-row">
+              <a class="btn-primary-cream" href="/onboarding">Start studying free</a>
+              <a class="btn-ghost-cream" href="#features">See what's inside</a>
+            </div>
+            <div class="exam-pills"><span>SSC CGL</span><span>SSC MTS</span><span>SSC CHSL</span><span>IBPS PO</span><span>IBPS Clerk</span><span>SBI PO</span><span>SBI Clerk</span></div>
+          </div>
+          <div class="phone-stack">
+            <div class="phone"><img src="/assets/screenshots/1-home.jpg" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></div>
+          </div>
+        </div>
+      </div>
+      <section id="features" class="pub-section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">What's inside</div>
+            <h2>Everything you need to get exam-ready</h2>
+            <p>Every feature below is built around one real constraint: aspirants studying on patchy connections, shared devices, and tight budgets.</p>
+          </div>
+          <div class="feature-grid">
+            ${HOME_FEATURES.map((f) => `<div class="feature"><div class="mark">${f.n}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.body)}</p></div>`).join('\n            ')}
+          </div>
+        </div>
+      </section>
+      <footer class="pub-footer">
+        <div class="wrap">
+          <div class="pub-footer-top">
+            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-links">
+              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/account-deletion.html">Delete Account</a>
+              <a href="mailto:sriwastava2@gmail.com">Contact</a>
+            </div>
+          </div>
+          <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. We don't sell or share your data with advertisers — ads on this site are served by Google AdSense; see our <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a> for details.</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
 async function main() {
   const assets = readBuiltAssets();
+
+  // --- Homepage --- the SPA's own dist/index.html is otherwise just an empty <div id="root">
+  // until React mounts - the single most important page to have real content in, since it's what
+  // AdSense's own site review (and every other crawler) checks first for the domain overall.
+  writeFileSync(join(DIST, 'index.html'), page({
+    title: 'Pariksha Saathi',
+    description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
+    path: '/',
+    assets,
+    bodyHtml: homePageBody(),
+    type: 'website',
+  }), 'utf8');
+
   const sitemapUrls = [
     { loc: '/', priority: '1.0' },
     { loc: '/onboarding', priority: '0.5' },
