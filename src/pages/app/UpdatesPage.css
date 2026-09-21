@@ -1,5 +1,14 @@
+.update-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
 .update-card {
   margin-bottom: 14px;
+  transition: border-color 0.15s ease;
+}
+.update-card-link:hover .update-card {
+  border-color: var(--navy);
 }
 .update-meta {
   font-size: 0.76rem;
@@ -24,7 +33,8 @@
   gap: 6px;
   margin-bottom: 10px;
 }
-.update-source {
+.update-readmore {
+  display: inline-block;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--navy);

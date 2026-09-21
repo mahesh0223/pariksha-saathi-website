@@ -1,8 +1,15 @@
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
 import { useExamSelection } from '../../state/ExamSelectionContext';
 import { EmptyState, Card, Spinner } from '../../components/ui/Primitives';
 import './UpdatesPage.css';
+
+const PREVIEW_LENGTH = 150;
+
+function preview(text: string): string {
+  return text.length > PREVIEW_LENGTH ? `${text.slice(0, PREVIEW_LENGTH).trimEnd()}…` : text;
+}
 
 export function ExamNoticesPage() {
   const { selectedExamIds } = useExamSelection();
@@ -18,16 +25,16 @@ export function ExamNoticesPage() {
       {noticesQuery.isLoading && <Spinner />}
       {noticesQuery.data?.length === 0 && <EmptyState>No exam notices yet.</EmptyState>}
       {noticesQuery.data?.map((item) => (
-        <Card key={item.id} className="update-card">
-          <div className="update-meta">
-            {item.type} &middot; verified {item.lastVerifiedAt.slice(0, 10)}
-          </div>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
-          <a href={item.officialUrl} target="_blank" rel="noreferrer" className="update-source">
-            Official notification &rarr;
-          </a>
-        </Card>
+        <Link key={item.id} to={`/app/exam-notices/${item.id}`} className="update-card-link">
+          <Card className="update-card">
+            <div className="update-meta">
+              {item.type} &middot; verified {item.lastVerifiedAt.slice(0, 10)}
+            </div>
+            <h3>{item.title}</h3>
+            <p>{preview(item.summary)}</p>
+            <span className="update-readmore">Read more &rarr;</span>
+          </Card>
+        </Link>
       ))}
     </div>
   );

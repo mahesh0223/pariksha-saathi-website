@@ -1,8 +1,15 @@
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { EmptyState, Card, Spinner, Pill } from '../../components/ui/Primitives';
 import './UpdatesPage.css';
+
+const PREVIEW_LENGTH = 150;
+
+function preview(text: string): string {
+  return text.length > PREVIEW_LENGTH ? `${text.slice(0, PREVIEW_LENGTH).trimEnd()}…` : text;
+}
 
 export function CurrentAffairsPage() {
   const { language } = useLanguage();
@@ -18,21 +25,21 @@ export function CurrentAffairsPage() {
       {affairsQuery.isLoading && <Spinner />}
       {affairsQuery.data?.length === 0 && <EmptyState>No current-affairs items yet.</EmptyState>}
       {affairsQuery.data?.map((item) => (
-        <Card key={item.id} className="update-card">
-          <div className="update-meta">
-            {item.period} &middot; {item.editionDate.slice(0, 10)}
-          </div>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
-          <div className="update-tags">
-            {item.examTags.map((tag) => (
-              <Pill key={tag}>{tag}</Pill>
-            ))}
-          </div>
-          <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="update-source">
-            Source: {item.sourceName}
-          </a>
-        </Card>
+        <Link key={item.id} to={`/app/current-affairs/${item.id}`} className="update-card-link">
+          <Card className="update-card">
+            <div className="update-meta">
+              {item.period} &middot; {item.editionDate.slice(0, 10)}
+            </div>
+            <h3>{item.title}</h3>
+            <p>{preview(item.summary)}</p>
+            <div className="update-tags">
+              {item.examTags.map((tag) => (
+                <Pill key={tag}>{tag}</Pill>
+              ))}
+            </div>
+            <span className="update-readmore">Read more &rarr;</span>
+          </Card>
+        </Link>
       ))}
     </div>
   );

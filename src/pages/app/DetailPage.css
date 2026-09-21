@@ -1,0 +1,82 @@
+.detail-back {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.detail-meta {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 10px;
+}
+.detail-page h1 {
+  font-size: 1.55rem;
+  color: var(--navy);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.detail-tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.detail-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 28px;
+  white-space: pre-line;
+}
+.detail-dates {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 28px;
+}
+.detail-dates h2 {
+  font-size: 0.9rem;
+  color: var(--terracotta);
+  margin-bottom: 12px;
+}
+.detail-dates dl {
+  margin: 0;
+}
+.detail-date-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9rem;
+}
+.detail-date-row:last-child {
+  border-bottom: none;
+}
+.detail-date-row dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+.detail-date-row dd {
+  margin: 0;
+  text-align: right;
+  color: var(--ink);
+}
+.detail-source {
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+.detail-source a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+}
+.detail-source a:hover {
+  color: var(--navy);
+}

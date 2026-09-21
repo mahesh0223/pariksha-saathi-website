@@ -13,7 +13,9 @@ import { MistakeNotebookPage } from './pages/app/MistakeNotebookPage';
 import { BookmarksPage } from './pages/app/BookmarksPage';
 import { ProgressPage } from './pages/app/ProgressPage';
 import { CurrentAffairsPage } from './pages/app/CurrentAffairsPage';
+import { CurrentAffairsDetailPage } from './pages/app/CurrentAffairsDetailPage';
 import { ExamNoticesPage } from './pages/app/ExamNoticesPage';
+import { ExamNoticeDetailPage } from './pages/app/ExamNoticeDetailPage';
 import { AccountPage } from './pages/app/AccountPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
@@ -37,7 +39,9 @@ export function App() {
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="progress" element={<ProgressPage />} />
         <Route path="current-affairs" element={<CurrentAffairsPage />} />
+        <Route path="current-affairs/:id" element={<CurrentAffairsDetailPage />} />
         <Route path="exam-notices" element={<ExamNoticesPage />} />
+        <Route path="exam-notices/:id" element={<ExamNoticeDetailPage />} />
         <Route path="account" element={<AccountPage />} />
       </Route>
 
