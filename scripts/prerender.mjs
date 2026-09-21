@@ -107,8 +107,11 @@ async function main() {
   const sitemapUrls = [
     { loc: '/', priority: '1.0' },
     { loc: '/onboarding', priority: '0.5' },
-    { loc: '/app/current-affairs', priority: '0.9' },
-    { loc: '/app/exam-notices', priority: '0.9' },
+    // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
+    // form to this one (it resolves {path}/index.html), so this is what actually serves with no
+    // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.
+    { loc: '/app/current-affairs/', priority: '0.9' },
+    { loc: '/app/exam-notices/', priority: '0.9' },
   ];
 
   // --- Current affairs ---
@@ -119,7 +122,7 @@ async function main() {
       <h1 class="review-title">Current Affairs</h1>
       ${affairs
         .map(
-          (item) => `<a class="update-card-link" href="/app/current-affairs/${item.id}">
+          (item) => `<a class="update-card-link" href="/app/current-affairs/${item.id}/">
         <div class="card update-card">
           <div class="update-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
           <h3>${escapeHtml(item.title)}</h3>
@@ -135,7 +138,7 @@ async function main() {
   writePage('app/current-affairs', page({
     title: 'Current Affairs',
     description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
-    path: '/app/current-affairs',
+    path: '/app/current-affairs/',
     assets,
     bodyHtml: affairsListBody,
     type: 'website',
@@ -144,7 +147,7 @@ async function main() {
   for (const item of affairs) {
     const detailBody = appShell(`
       <article class="detail-page">
-        <a href="/app/current-affairs" class="detail-back">&larr; Current Affairs</a>
+        <a href="/app/current-affairs/" class="detail-back">&larr; Current Affairs</a>
         <div class="detail-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
         <h1>${escapeHtml(item.title)}</h1>
         <div class="detail-tags">${item.examTags.map(pill).join('')}</div>
@@ -155,7 +158,7 @@ async function main() {
     writePage(`app/current-affairs/${item.id}`, page({
       title: item.title,
       description: item.summary.slice(0, 155),
-      path: `/app/current-affairs/${item.id}`,
+      path: `/app/current-affairs/${item.id}/`,
       assets,
       bodyHtml: detailBody,
       structuredData: {
@@ -169,7 +172,7 @@ async function main() {
         about: item.examTags,
       },
     }));
-    sitemapUrls.push({ loc: `/app/current-affairs/${item.id}`, priority: '0.7', lastmod: item.editionDate.slice(0, 10) });
+    sitemapUrls.push({ loc: `/app/current-affairs/${item.id}/`, priority: '0.7', lastmod: item.editionDate.slice(0, 10) });
   }
 
   // --- Exam notices ---
@@ -180,7 +183,7 @@ async function main() {
       <h1 class="review-title">Exam Notices &amp; Alerts</h1>
       ${notices
         .map(
-          (item) => `<a class="update-card-link" href="/app/exam-notices/${item.id}">
+          (item) => `<a class="update-card-link" href="/app/exam-notices/${item.id}/">
         <div class="card update-card">
           <div class="update-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
           <h3>${escapeHtml(item.title)}</h3>
@@ -195,7 +198,7 @@ async function main() {
   writePage('app/exam-notices', page({
     title: 'Exam Notices & Alerts',
     description: "Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body's own site.",
-    path: '/app/exam-notices',
+    path: '/app/exam-notices/',
     assets,
     bodyHtml: noticesListBody,
     type: 'website',
@@ -207,7 +210,7 @@ async function main() {
       .join('');
     const detailBody = appShell(`
       <article class="detail-page">
-        <a href="/app/exam-notices" class="detail-back">&larr; Exam Notices &amp; Alerts</a>
+        <a href="/app/exam-notices/" class="detail-back">&larr; Exam Notices &amp; Alerts</a>
         <div class="detail-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
         <h1>${escapeHtml(item.title)}</h1>
         <p class="detail-body">${escapeHtml(item.summary)}</p>
@@ -218,7 +221,7 @@ async function main() {
     writePage(`app/exam-notices/${item.id}`, page({
       title: item.title,
       description: item.summary.slice(0, 155),
-      path: `/app/exam-notices/${item.id}`,
+      path: `/app/exam-notices/${item.id}/`,
       assets,
       bodyHtml: detailBody,
       structuredData: {
@@ -231,7 +234,7 @@ async function main() {
         publisher: { '@type': 'Organization', name: SITE_NAME },
       },
     }));
-    sitemapUrls.push({ loc: `/app/exam-notices/${item.id}`, priority: '0.7', lastmod: item.lastVerifiedAt.slice(0, 10) });
+    sitemapUrls.push({ loc: `/app/exam-notices/${item.id}/`, priority: '0.7', lastmod: item.lastVerifiedAt.slice(0, 10) });
   }
 
   // --- sitemap.xml ---

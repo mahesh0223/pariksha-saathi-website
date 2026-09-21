@@ -23,7 +23,8 @@ export function ExamNoticeDetailPage() {
     description: item
       ? item.summary.slice(0, 155)
       : 'Official exam notifications and alerts for SSC, IBPS and SBI recruitment.',
-    path: `/app/exam-notices/${id}`,
+    // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
+    path: `/app/exam-notices/${id}/`,
     type: 'article',
     structuredData: item
       ? {

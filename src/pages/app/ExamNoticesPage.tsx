@@ -24,7 +24,8 @@ export function ExamNoticesPage() {
     title: 'Exam Notices & Alerts',
     description:
       'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
-    path: '/app/exam-notices',
+    // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
+    path: '/app/exam-notices/',
   });
 
   return (

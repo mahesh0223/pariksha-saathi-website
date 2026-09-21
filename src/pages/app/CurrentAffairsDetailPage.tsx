@@ -22,7 +22,8 @@ export function CurrentAffairsDetailPage() {
     description: item
       ? item.summary.slice(0, 155)
       : 'Dated current-affairs capsules for SSC, IBPS and SBI exam prep, each with a verifiable source.',
-    path: `/app/current-affairs/${id}`,
+    // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
+    path: `/app/current-affairs/${id}/`,
     type: 'article',
     structuredData: item
       ? {

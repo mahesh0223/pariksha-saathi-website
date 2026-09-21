@@ -24,7 +24,10 @@ export function CurrentAffairsPage() {
     title: 'Current Affairs',
     description:
       'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
-    path: '/app/current-affairs',
+    // Trailing slash: this page is prerendered to app/current-affairs/index.html, and Cloudflare
+    // Pages 308-redirects the slash-less URL to this exact form - matching it here means the
+    // canonical/OG/sitemap URL is the one that actually resolves with no extra hop.
+    path: '/app/current-affairs/',
   });
 
   return (
