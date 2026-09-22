@@ -63,6 +63,7 @@ export interface ExamUpdateNotice {
   id: string;
   examId: string;
   type: ExamUpdateType;
+  languageCode: string;
   title: string;
   summary: string;
   officialUrl: string;

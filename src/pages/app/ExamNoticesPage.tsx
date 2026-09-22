@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
 import { useExamSelection } from '../../state/ExamSelectionContext';
+import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Card, Spinner } from '../../components/ui/Primitives';
 import './UpdatesPage.css';
@@ -14,10 +15,11 @@ function preview(text: string): string {
 
 export function ExamNoticesPage() {
   const { selectedExamIds } = useExamSelection();
+  const { language } = useLanguage();
 
   const noticesQuery = useQuery({
-    queryKey: ['exam-updates', selectedExamIds],
-    queryFn: () => getExamUpdates(selectedExamIds),
+    queryKey: ['exam-updates', selectedExamIds, language],
+    queryFn: () => getExamUpdates(selectedExamIds, language),
   });
 
   useDocumentMeta({

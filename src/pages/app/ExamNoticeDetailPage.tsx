@@ -1,18 +1,20 @@
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
+import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './DetailPage.css';
 
 export function ExamNoticeDetailPage() {
   const { id = '' } = useParams();
+  const { language } = useLanguage();
 
   // Unfiltered - a notice can be opened by direct link/bookmark regardless of which exams are
   // currently selected, so we look it up across every notice rather than just the selected set.
   const { data, isLoading } = useQuery({
-    queryKey: ['exam-updates', []],
-    queryFn: () => getExamUpdates([]),
+    queryKey: ['exam-updates', [], language],
+    queryFn: () => getExamUpdates([], language),
   });
 
   const item = data?.find((i) => i.id === id);
