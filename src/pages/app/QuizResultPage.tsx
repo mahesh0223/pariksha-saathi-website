@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import type { QuizScore } from '../../domain/quizEngine';
 import type { Question } from '../../types/api';
-import { Button, Card, EmptyState } from '../../components/ui/Primitives';
+import { Button, Card, EmptyState, QuizOption } from '../../components/ui/Primitives';
 import './QuizResultPage.css';
 
 interface ResultState {
@@ -46,13 +46,11 @@ export function QuizResultPage() {
               {question.options.map((option, i) => {
                 const isSelected = answer.selectedOptionIndex === i;
                 const isCorrectOption = question.correctOptionIndex === i;
-                let cls = 'result-option';
-                if (isCorrectOption) cls += ' correct';
-                else if (isSelected) cls += ' incorrect';
+                const state = isCorrectOption ? 'correct' : isSelected ? 'incorrect' : 'unselected';
                 return (
-                  <div key={i} className={cls}>
+                  <QuizOption key={i} label={String.fromCharCode(65 + i)} state={state}>
                     {option}
-                  </div>
+                  </QuizOption>
                 );
               })}
             </div>
@@ -61,6 +59,7 @@ export function QuizResultPage() {
                 ? 'Not attempted'
                 : `${answer.marksAwarded >= 0 ? '+' : ''}${answer.marksAwarded}`}
             </div>
+            {question.explanation && <p className="result-explanation">{question.explanation}</p>}
           </Card>
         );
       })}

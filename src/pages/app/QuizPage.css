@@ -17,9 +17,9 @@
   font-variant-numeric: tabular-nums;
 }
 .quiz-question-card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   padding: 22px;
   margin-top: 16px;
 }
@@ -34,20 +34,8 @@
   flex-direction: column;
   gap: 10px;
 }
-.quiz-option {
-  text-align: left;
-  background: var(--paper);
-  border: 1.5px solid var(--rule);
-  border-radius: 10px;
-  padding: 13px 16px;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
-.quiz-option.selected {
-  border-color: var(--navy);
-  background: #e7edf2;
-  font-weight: 600;
-}
+/* Per-option styling (.option / .option-selected) now lives in ui.css's shared QuizOption
+   primitive - see Primitives.tsx. */
 .quiz-bookmark {
   margin-top: 18px;
   background: none;

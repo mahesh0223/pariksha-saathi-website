@@ -11,6 +11,7 @@
   font-weight: 700;
   font-size: 2.6rem;
   color: var(--navy);
+  font-variant-numeric: tabular-nums;
 }
 .result-meta {
   color: var(--muted);
@@ -33,27 +34,17 @@
   flex-direction: column;
   gap: 6px;
 }
-.result-option {
-  padding: 9px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--rule);
-  font-size: 0.9rem;
-}
-.result-option.correct {
-  border-color: var(--good);
-  background: #eaf5ec;
-  color: var(--good);
-  font-weight: 600;
-}
-.result-option.incorrect {
-  border-color: var(--bad);
-  background: #fbeee6;
-  color: var(--bad);
-  font-weight: 600;
-}
+/* Per-option styling (.option / .option-correct / .option-incorrect) now lives in ui.css's
+   shared QuizOption primitive - see Primitives.tsx. */
 .result-marks {
   margin-top: 10px;
   font-size: 0.82rem;
   font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.result-explanation {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
   color: var(--muted);
 }

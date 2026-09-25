@@ -35,8 +35,11 @@ export interface Question {
   text: string;
   options: string[];
   correctOptionIndex: number;
+  explanation: string;
   marks: number;
   negativeMarks: number;
+  sourceType: string;
+  isSample: boolean;
   year?: number | null;
   status: string;
   version: number;

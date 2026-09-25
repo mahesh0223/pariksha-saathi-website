@@ -35,10 +35,15 @@
 }
 
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 14px;
-  padding: 20px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+/* "Raised Paper Sheet" tier - a flat, hard-edged offset instead of a blurred shadow. */
+.card-raised {
+  box-shadow: var(--shadow-flat);
 }
 
 .empty-state {
@@ -75,8 +80,86 @@
 .note {
   font-size: 0.85rem;
   color: var(--terracotta);
-  background: #fbeee6;
-  border: 1px solid #f0d3c2;
-  border-radius: 8px;
+  background: var(--bad-bg);
+  border: 1px solid var(--tertiary-container);
+  border-radius: var(--radius-sm);
   padding: 10px 14px;
+}
+
+/* Tag/status chip - question metadata ("Polity - High Yield", "Negative: -0.25"), offline pills. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+}
+.badge-neutral {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+.badge-accent {
+  background: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+}
+
+/* The one shared MCQ option primitive - previously QuizPage and QuizResultPage each hand-rolled
+   their own near-identical markup (.quiz-option / .result-option) with duplicated color logic. */
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1.5px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--ink);
+}
+.option-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--rule);
+  color: var(--muted);
+}
+.option-selected {
+  border-color: var(--navy);
+  background: var(--secondary-container);
+  font-weight: 600;
+}
+.option-selected .option-badge {
+  background: var(--navy);
+  color: var(--cream);
+}
+.option-correct {
+  border-color: var(--milestone-sage);
+  background: var(--good-bg);
+  color: var(--good);
+  font-weight: 600;
+}
+.option-correct .option-badge {
+  background: var(--milestone-sage);
+  color: var(--on-milestone-sage);
+}
+.option-incorrect {
+  border-color: var(--bad);
+  background: var(--bad-bg);
+  color: var(--bad);
+  font-weight: 600;
+}
+.option-incorrect .option-badge {
+  background: var(--bad);
+  color: #fff;
 }

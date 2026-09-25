@@ -16,7 +16,7 @@ import {
 import { saveAttempt } from '../../storage/quizAttemptsStore';
 import { addBookmark, isBookmarked, removeBookmark } from '../../storage/bookmarksStore';
 import { syncPendingProgress } from '../../storage/syncQueue';
-import { Button, Note, Spinner } from '../../components/ui/Primitives';
+import { Button, Note, QuizOption, Spinner } from '../../components/ui/Primitives';
 import type { Question, QuizType } from '../../types/api';
 import type { QuizAttemptItemRecord, QuizAttemptRecord } from '../../storage/db';
 import './QuizPage.css';
@@ -168,13 +168,14 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
         <p className="quiz-question-text">{current.text}</p>
         <div className="quiz-options">
           {current.options.map((option, i) => (
-            <button
+            <QuizOption
               key={i}
-              className={`quiz-option${selections.get(current.id) === i ? ' selected' : ''}`}
+              label={String.fromCharCode(65 + i)}
+              state={selections.get(current.id) === i ? 'selected' : 'unselected'}
               onClick={() => selectOption(i)}
             >
               {option}
-            </button>
+            </QuizOption>
           ))}
         </div>
         <button className="quiz-bookmark" onClick={toggleBookmark}>
