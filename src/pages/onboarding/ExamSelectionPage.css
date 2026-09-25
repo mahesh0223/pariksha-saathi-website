@@ -24,7 +24,7 @@
 }
 .exam-tile {
   text-align: left;
-  background: #fff;
+  background: var(--surface);
   border: 1.5px solid var(--rule);
   border-radius: 12px;
   padding: 16px 18px;

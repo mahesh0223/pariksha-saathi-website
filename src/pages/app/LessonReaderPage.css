@@ -9,7 +9,7 @@
 .lesson-examples,
 .lesson-summary {
   margin-top: 24px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: 12px;
   padding: 18px 20px;

@@ -76,5 +76,5 @@
 .account-lang-chip.selected {
   border-color: var(--navy);
   color: var(--navy);
-  background: #fff;
+  background: var(--surface);
 }

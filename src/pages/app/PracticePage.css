@@ -51,7 +51,7 @@
   gap: 8px;
 }
 .practice-topic-chip {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: 999px;
   padding: 8px 16px;

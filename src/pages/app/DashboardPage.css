@@ -10,7 +10,7 @@
 .dash-stat-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: var(--space-3);
   margin-bottom: 14px;
 }
 .dash-card {
@@ -27,24 +27,25 @@
   font-weight: 700;
   font-size: 1.6rem;
   color: var(--navy);
+  font-variant-numeric: tabular-nums;
 }
 .dash-card-body {
   color: var(--muted);
   font-size: 0.9rem;
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-3);
 }
 .dash-quicklinks {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
 }
 .dash-quicklink {
   flex: 1;
   text-align: center;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
   font-weight: 600;
   color: var(--navy);
   text-decoration: none;

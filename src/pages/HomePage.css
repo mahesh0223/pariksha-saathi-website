@@ -231,7 +231,7 @@
   overflow: hidden;
 }
 .feature {
-  background: #fff;
+  background: var(--surface);
   padding: 30px 28px;
   display: flex;
   flex-direction: column;

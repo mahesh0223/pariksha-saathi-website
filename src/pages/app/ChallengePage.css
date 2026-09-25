@@ -1,37 +1,40 @@
 .challenge-card {
-  padding: 16px;
+  padding: var(--space-4);
 }
 .challenge-progress-bar {
   height: 8px;
-  border-radius: 4px;
-  background: var(--tan, #d8d2c0);
+  border-radius: var(--radius-xs);
+  background: var(--tan);
   overflow: hidden;
-  margin: 4px 0 12px;
+  margin: var(--space-1) 0 var(--space-3);
 }
 .challenge-progress-fill {
   height: 100%;
   background: var(--terracotta);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 .challenge-day-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
 }
 .challenge-day-cell {
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  background: var(--tan, #d8d2c0);
+  border-radius: var(--radius-xs);
+  background: var(--tan);
   color: var(--muted);
   font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
 }
+/* Matches the Android client's ChallengeScreen day-grid: completed days use the Milestone Sage
+   achievement color rather than the brand navy, so "done" reads as a distinct semantic state. */
 .challenge-day-cell.completed {
-  background: var(--navy);
-  color: #fff;
+  background: var(--milestone-sage);
+  color: var(--on-milestone-sage);
 }
 .challenge-restart {
   background: none;
