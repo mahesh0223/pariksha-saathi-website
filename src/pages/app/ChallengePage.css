@@ -45,3 +45,28 @@
   cursor: pointer;
   font-size: 0.85rem;
 }
+.challenge-never-miss-twice {
+  font-size: 0.85rem;
+  color: var(--tertiary, var(--terracotta));
+  margin: 0 0 var(--space-3);
+}
+.challenge-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.challenge-day-grid-legend {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0 0 var(--space-3);
+}
+.legend-swatch {
+  font-size: 0.9rem;
+}
+.legend-completed {
+  color: var(--milestone-sage);
+}
+.legend-pending {
+  color: var(--tan);
+}
