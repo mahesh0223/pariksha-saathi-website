@@ -10,7 +10,7 @@ import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 export interface QuizAttemptRecord {
   id: string;
   topicKeys: string[];
-  quizType: 'TOPIC' | 'SECTIONAL' | 'MOCK' | 'CURRENT_AFFAIRS';
+  quizType: 'TOPIC' | 'SECTIONAL' | 'MOCK' | 'CURRENT_AFFAIRS' | 'SPEED_DRILL';
   startedAt: string;
   completedAt: string;
   correctCount: number;

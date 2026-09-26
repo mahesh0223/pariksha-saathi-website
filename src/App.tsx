@@ -13,6 +13,7 @@ import { MistakeNotebookPage } from './pages/app/MistakeNotebookPage';
 import { BookmarksPage } from './pages/app/BookmarksPage';
 import { ProgressPage } from './pages/app/ProgressPage';
 import { CurrentAffairsPage } from './pages/app/CurrentAffairsPage';
+import { DigestPage } from './pages/app/DigestPage';
 import { CurrentAffairsDetailPage } from './pages/app/CurrentAffairsDetailPage';
 import { ExamNoticesPage } from './pages/app/ExamNoticesPage';
 import { ExamNoticeDetailPage } from './pages/app/ExamNoticeDetailPage';
@@ -37,10 +38,12 @@ export function App() {
         <Route path="practice/topic/:topicKey" element={<QuizPage quizType="TOPIC" />} />
         <Route path="practice/sectional/:subjectName" element={<QuizPage quizType="SECTIONAL" />} />
         <Route path="practice/mock" element={<QuizPage quizType="MOCK" />} />
+        <Route path="practice/speed-drill" element={<QuizPage quizType="SPEED_DRILL" />} />
         <Route path="practice/result/:attemptId" element={<QuizResultPage />} />
         <Route path="mistakes" element={<MistakeNotebookPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="progress" element={<ProgressPage />} />
+        <Route path="digest" element={<DigestPage />} />
         <Route path="current-affairs" element={<CurrentAffairsPage />} />
         <Route path="current-affairs/:id" element={<CurrentAffairsDetailPage />} />
         <Route path="exam-notices" element={<ExamNoticesPage />} />

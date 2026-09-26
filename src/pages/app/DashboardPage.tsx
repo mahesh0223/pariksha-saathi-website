@@ -1,13 +1,26 @@
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useLocalProgress } from '../../hooks/useLocalProgress';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
+import { useLanguage } from '../../state/LanguageContext';
 import { computeStreakDays, computeWeakestTopic } from '../../domain/analytics';
+import { buildTodayDigest } from '../../domain/digest';
+import { speedDrillPool } from '../../domain/topicGrouping';
+import { getCurrentAffairs } from '../../api/currentAffairs';
 import { Button, Card } from '../../components/ui/Primitives';
 import './DashboardPage.css';
 
 export function DashboardPage() {
   const { items, completions, attempts, loading } = useLocalProgress();
-  const { topics, exams, selectedExamIds } = useSelectedTopics();
+  const { topics, exams, examNamesById, selectedExamIds } = useSelectedTopics();
+  const { language } = useLanguage();
+
+  const affairsQuery = useQuery({
+    queryKey: ['current-affairs', language],
+    queryFn: () => getCurrentAffairs({ lang: language, limit: 30 }),
+  });
+  const digest = affairsQuery.data ? buildTodayDigest(affairsQuery.data) : null;
+  const speedDrillTopicKeys = speedDrillPool(topics, examNamesById);
 
   const weakest = computeWeakestTopic(items);
   const weakTopicMeta = weakest ? topics.find((t) => t.sharedTopicKey === weakest.topicKey) : null;
@@ -40,6 +53,28 @@ export function DashboardPage() {
           </p>
           <Link to={`/app/practice/topic/${weakest.topicKey}`}>
             <Button size="sm">Practice this topic</Button>
+          </Link>
+        </Card>
+      )}
+
+      {digest && (
+        <Card className="dash-card">
+          <div className="dash-card-title">Today's Digest</div>
+          <p className="dash-card-body">
+            {digest.items.length} article(s) · ~{digest.estimatedReadMinutes} min read
+          </p>
+          <Link to="/app/digest">
+            <Button size="sm">Read today's digest</Button>
+          </Link>
+        </Card>
+      )}
+
+      {speedDrillTopicKeys.length > 0 && (
+        <Card className="dash-card">
+          <div className="dash-card-title">Mini Speed Drill</div>
+          <p className="dash-card-body">25 questions, 15 minutes - a quick mixed Reasoning + Quant sprint.</p>
+          <Link to="/app/practice/speed-drill">
+            <Button size="sm">Start speed drill</Button>
           </Link>
         </Card>
       )}

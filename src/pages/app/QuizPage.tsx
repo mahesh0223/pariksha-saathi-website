@@ -4,11 +4,12 @@ import { useQueries } from '@tanstack/react-query';
 import { useLanguage } from '../../state/LanguageContext';
 import { useAuth } from '../../state/AuthContext';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
-import { groupBySubject } from '../../domain/topicGrouping';
+import { groupBySubject, speedDrillPool } from '../../domain/topicGrouping';
 import { resolveQuestionsWithFallback, ENGLISH_FALLBACK_NOTE } from '../../domain/languageFallback';
 import {
   assembleMockQuiz,
   assembleSectionalQuiz,
+  assembleSpeedDrillQuiz,
   assembleTopicQuiz,
   scoreQuiz,
   totalTimerSeconds,
@@ -36,8 +37,9 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
       const decoded = subjectName ? decodeURIComponent(subjectName) : '';
       return subjects.find((s) => s.subjectName === decoded)?.topics.map((t) => t.sharedTopicKey) ?? [];
     }
+    if (quizType === 'SPEED_DRILL') return speedDrillPool(topics, examNamesById);
     return subjects.flatMap((s) => s.topics.map((t) => t.sharedTopicKey));
-  }, [quizType, topicKey, subjectName, subjects]);
+  }, [quizType, topicKey, subjectName, subjects, topics, examNamesById]);
 
   const questionQueries = useQueries({
     queries: poolTopicKeys.map((key) => ({
@@ -62,7 +64,9 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
         ? assembleTopicQuiz(pool)
         : quizType === 'SECTIONAL'
           ? assembleSectionalQuiz(pool)
-          : assembleMockQuiz(pool);
+          : quizType === 'SPEED_DRILL'
+            ? assembleSpeedDrillQuiz(pool)
+            : assembleMockQuiz(pool);
     setQuestions(assembled);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [poolReady]);
@@ -75,7 +79,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
   const submittedRef = useRef(false);
 
   useEffect(() => {
-    if (questions && secondsLeft === null) setSecondsLeft(totalTimerSeconds(questions.length));
+    if (questions && secondsLeft === null) setSecondsLeft(totalTimerSeconds(questions.length, quizType));
   }, [questions, secondsLeft]);
 
   const current = questions?.[index];
@@ -91,7 +95,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
 
     const score = scoreQuiz(questions, selections);
     const attemptId = crypto.randomUUID();
-    const startedAt = new Date(Date.now() - (totalTimerSeconds(questions.length) - (secondsLeft ?? 0)) * 1000).toISOString();
+    const startedAt = new Date(Date.now() - (totalTimerSeconds(questions.length, quizType) - (secondsLeft ?? 0)) * 1000).toISOString();
     const completedAt = new Date().toISOString();
 
     const attempt: QuizAttemptRecord = {

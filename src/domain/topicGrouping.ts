@@ -64,3 +64,18 @@ export function groupBySubject(topics: Topic[], examNamesById: Map<string, strin
     topics: subjectTopics,
   }));
 }
+
+// Mini Speed Drill's question pool: a quick mixed-topic sprint, deliberately narrower than "every
+// selected-exam topic" (that's what Mock already is). Scoped to Reasoning + Quantitative Aptitude -
+// the content model has no "General Awareness" subject today (current affairs is a separate pool
+// entirely, via the Current Affairs Quiz), and English is excluded since several of its topics
+// test English itself and are deliberately left untranslated, which doesn't fit a quick
+// bilingual-friendly drill. Mirrors pariksha-saathi (Android) TopicGrouping.kt's loadSpeedDrillPool.
+const SPEED_DRILL_SUBJECTS = new Set(['Reasoning', 'Quantitative Aptitude']);
+
+export function speedDrillPool(topics: Topic[], examNamesById: Map<string, string>): string[] {
+  const keys = groupBySubject(topics, examNamesById)
+    .filter((g) => SPEED_DRILL_SUBJECTS.has(g.subjectName))
+    .flatMap((g) => g.topics.map((t) => t.sharedTopicKey));
+  return Array.from(new Set(keys));
+}

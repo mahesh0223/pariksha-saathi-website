@@ -1,4 +1,4 @@
-import type { Question } from '../types/api';
+import type { Question, QuizType } from '../types/api';
 
 export const TOPIC_QUESTION_LIMIT = 15;
 export const SECTIONAL_QUESTION_LIMIT = 25;
@@ -8,6 +8,9 @@ export const MOCK_QUESTION_LIMIT = 100;
 // after the rolling ~4-week pool (see api/currentAffairsQuiz.ts) starts refilling for a new week.
 export const CURRENT_AFFAIRS_QUESTION_LIMIT = 20;
 export const SECONDS_PER_QUESTION = 60;
+// Matches the mockup's "25 Questions, 15 Mins" - see totalTimerSeconds for the matching fixed timer.
+export const SPEED_DRILL_QUESTION_LIMIT = 25;
+export const SPEED_DRILL_SECONDS = 15 * 60;
 
 // Fisher-Yates - NOT `array.sort(() => Math.random() - 0.5)`, which is a well-documented biased
 // shuffle. Mirrors pariksha-saathi (Android) QuizViewModel.kt's question selection exactly: shuffle
@@ -37,7 +40,16 @@ export function assembleCurrentAffairsQuiz(questions: Question[]): Question[] {
   return shuffle(questions).slice(0, CURRENT_AFFAIRS_QUESTION_LIMIT);
 }
 
-export function totalTimerSeconds(questionCount: number): number {
+export function assembleSpeedDrillQuiz(questionsAcrossTopics: Question[]): Question[] {
+  return shuffle(questionsAcrossTopics).slice(0, SPEED_DRILL_QUESTION_LIMIT);
+}
+
+// Every other quiz type times a student at a flat 60s/question - a fair "exam pace" allowance.
+// Speed Drill is explicitly the opposite: a fixed, short sprint regardless of how many questions
+// actually ended up in the pool (matches the mockup's "25 Qs, 15 Mins" - at 60s/question that
+// would be 25 minutes, not a speed drill at all).
+export function totalTimerSeconds(questionCount: number, quizType?: QuizType): number {
+  if (quizType === 'SPEED_DRILL') return SPEED_DRILL_SECONDS;
   return questionCount * SECONDS_PER_QUESTION;
 }
 
