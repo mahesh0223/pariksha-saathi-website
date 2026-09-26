@@ -1,6 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useQueries } from '@tanstack/react-query';
 import type { QuizScore } from '../../domain/quizEngine';
 import { diagnose, markingLedger } from '../../domain/quizResultAnalysis';
+import { useSelectedTopics } from '../../hooks/useSelectedTopics';
+import { useLanguage } from '../../state/LanguageContext';
+import { getCutoffs } from '../../api/cutoffs';
+import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
 import type { Question } from '../../types/api';
 import { Button, Card, EmptyState, QuizOption } from '../../components/ui/Primitives';
 import './QuizResultPage.css';
@@ -13,6 +18,18 @@ interface ResultState {
 export function QuizResultPage() {
   const location = useLocation();
   const state = location.state as ResultState | undefined;
+  const { selectedExamIds } = useSelectedTopics();
+  const { language } = useLanguage();
+
+  // A quiz can span topics across several selected exams (Mock), so this is the union across all
+  // of them rather than one specific exam's figures - same simplification as the Android client.
+  const cutoffQueries = useQueries({
+    queries: selectedExamIds.map((examId) => ({
+      queryKey: ['cutoffs', examId, language],
+      queryFn: () => getCutoffs(examId, language),
+    })),
+  });
+  const cutoffs = cutoffQueries.flatMap((q) => q.data ?? []);
 
   if (!state) {
     return (
@@ -58,6 +75,8 @@ export function QuizResultPage() {
           </div>
         </div>
       </Card>
+
+      <CutoffComparisonCard cutoffs={cutoffs} />
 
       {diagnostics.length > 0 && (
         <>

@@ -1,3 +1,9 @@
+.cutoff-disclaimer {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

@@ -1,11 +1,26 @@
 import { Link } from 'react-router-dom';
+import { useQueries } from '@tanstack/react-query';
 import { useLocalProgress } from '../../hooks/useLocalProgress';
+import { useSelectedTopics } from '../../hooks/useSelectedTopics';
+import { useLanguage } from '../../state/LanguageContext';
 import { computeProgressSummary } from '../../domain/analytics';
+import { getCutoffs } from '../../api/cutoffs';
+import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
 import { Card, Spinner } from '../../components/ui/Primitives';
 import './ProgressPage.css';
 
 export function ProgressPage() {
   const { attempts, completions, pendingSyncCount, loading } = useLocalProgress();
+  const { selectedExamIds } = useSelectedTopics();
+  const { language } = useLanguage();
+
+  const cutoffQueries = useQueries({
+    queries: selectedExamIds.map((examId) => ({
+      queryKey: ['cutoffs', examId, language],
+      queryFn: () => getCutoffs(examId, language),
+    })),
+  });
+  const cutoffs = cutoffQueries.flatMap((q) => q.data ?? []);
 
   if (loading) return <Spinner />;
 
@@ -41,6 +56,9 @@ export function ProgressPage() {
           {summary.thisWeekQuizzes} quiz{summary.thisWeekQuizzes === 1 ? '' : 'zes'} taken
         </p>
       </Card>
+
+      <h2 className="review-title">Exam Readiness</h2>
+      <CutoffComparisonCard cutoffs={cutoffs} />
 
       {summary.pendingSyncCount > 0 && (
         <p className="progress-pending">{summary.pendingSyncCount} item(s) waiting to sync</p>

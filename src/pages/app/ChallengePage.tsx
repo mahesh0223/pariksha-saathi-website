@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useQueries } from '@tanstack/react-query';
 import { useLocalProgress } from '../../hooks/useLocalProgress';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
+import { useLanguage } from '../../state/LanguageContext';
 import { computeChallengeProgress, type ChallengeProgress } from '../../domain/streakChallenge';
 import { computeWeakTopics } from '../../domain/analytics';
 import { badges, MIN_ATTEMPTS_TO_JUDGE_SUBJECT, phaseFor, shouldShowNeverMissTwice, subjectAccuracy } from '../../domain/challengeBadges';
 import { abandonChallenge, getAllChallenges, startChallenge } from '../../storage/streakChallengeStore';
+import { getCutoffs } from '../../api/cutoffs';
+import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
 import type { StreakChallengeRecord } from '../../storage/db';
 import { Badge as BadgeChip, Button, Card, Spinner } from '../../components/ui/Primitives';
 import './ChallengePage.css';
@@ -12,6 +16,15 @@ import './ChallengePage.css';
 export function ChallengePage() {
   const { exams, selectedExamIds, topics } = useSelectedTopics();
   const { completions, attempts, items, loading: progressLoading } = useLocalProgress();
+  const { language } = useLanguage();
+
+  const cutoffQueries = useQueries({
+    queries: selectedExamIds.map((examId) => ({
+      queryKey: ['cutoffs', examId, language],
+      queryFn: () => getCutoffs(examId, language),
+    })),
+  });
+  const cutoffsByExamId = new Map(selectedExamIds.map((examId, i) => [examId, cutoffQueries[i]?.data ?? []]));
 
   const weakTopics = useMemo(() => computeWeakTopics(items), [items]);
   const topicSubjectsById = useMemo(() => {
@@ -144,6 +157,7 @@ export function ChallengePage() {
                   <span className="legend-swatch legend-completed">■</span> Completed &nbsp;
                   <span className="legend-swatch legend-pending">■</span> Not yet completed
                 </p>
+                <CutoffComparisonCard cutoffs={cutoffsByExamId.get(exam.id) ?? []} />
                 <button className="challenge-restart" onClick={() => handleAbandon(exam.id)}>
                   Restart challenge
                 </button>

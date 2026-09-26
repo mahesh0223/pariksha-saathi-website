@@ -77,6 +77,26 @@ export interface ExamUpdateNotice {
 
 export type QuizType = 'TOPIC' | 'SECTIONAL' | 'MOCK' | 'CURRENT_AFFAIRS' | 'SPEED_DRILL';
 
+/**
+ * A verified, previous-cycle official exam cutoff - scaffolding for the "compare your score
+ * against the real cutoff" feature. cycleLabel names the exam cycle this figure is FROM (e.g.
+ * "2025"), never a live one - a not-yet-conducted exam has no official cutoff yet. Mirrors
+ * pariksha-saathi (Android) domain/model/CutoffModels.kt exactly.
+ */
+export interface CutoffTarget {
+  id: string;
+  examId: string;
+  section: string;
+  category: string;
+  cycleLabel: string;
+  targetScore: number;
+  maxScore: number;
+  sourceUrl: string;
+  verifiedAt: string;
+  languageCode: string;
+  isSample?: boolean;
+}
+
 export interface QuizAttemptItemPayload {
   questionId: string;
   topicKey: string;
