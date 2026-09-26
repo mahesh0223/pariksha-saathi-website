@@ -48,3 +48,36 @@
   font-size: 0.85rem;
   color: var(--muted);
 }
+.result-concept-rule-label {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.marking-ledger {
+  display: flex;
+  justify-content: space-between;
+}
+.ledger-tile {
+  text-align: center;
+}
+.ledger-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.ledger-count {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.ledger-marks {
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+}
+.ledger-correct {
+  color: var(--milestone-sage);
+}
+.ledger-wrong {
+  color: var(--bad);
+}

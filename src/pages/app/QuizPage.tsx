@@ -73,6 +73,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
 
   const [index, setIndex] = useState(0);
   const [selections, setSelections] = useState<Map<string, number | null>>(new Map());
+  const [markedForReview, setMarkedForReview] = useState<Set<string>>(new Set());
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
   const [bookmarked, setBookmarked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -148,6 +149,16 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
     setSelections((prev) => new Map(prev).set(current.id, optionIndex));
   }
 
+  function toggleMarkedForReview() {
+    if (!current) return;
+    setMarkedForReview((prev) => {
+      const next = new Set(prev);
+      if (next.has(current.id)) next.delete(current.id);
+      else next.add(current.id);
+      return next;
+    });
+  }
+
   if (!poolReady || !questions) return <Spinner />;
   if (questions.length === 0) return <p>No questions available for this selection yet.</p>;
   if (!current) return null;
@@ -159,7 +170,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
     <div className="quiz-page">
       <div className="quiz-header">
         <span className="quiz-progress">
-          Question {index + 1} of {questions.length}
+          Question {index + 1} of {questions.length} · Attempted: {selections.size} · Marked: {markedForReview.size}
         </span>
         <span className="quiz-timer">
           {minutes}:{seconds.toString().padStart(2, '0')}
@@ -185,6 +196,27 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
         <button className="quiz-bookmark" onClick={toggleBookmark}>
           {bookmarked ? '★ Bookmarked' : '☆ Bookmark this question'}
         </button>
+      </div>
+
+      <button className="quiz-mark-review" onClick={toggleMarkedForReview}>
+        {markedForReview.has(current.id) ? 'Unmark for review' : '🚩 Mark for review'}
+      </button>
+
+      <div className="quiz-jump-strip">
+        {questions.map((q, i) => {
+          const isMarked = markedForReview.has(q.id);
+          const isAnswered = selections.has(q.id);
+          const cls = isMarked ? 'jump-cell-marked' : isAnswered ? 'jump-cell-answered' : 'jump-cell-unvisited';
+          return (
+            <button
+              key={q.id}
+              className={`quiz-jump-cell ${cls}${i === index ? ' jump-cell-current' : ''}`}
+              onClick={() => setIndex(i)}
+            >
+              {i + 1}
+            </button>
+          );
+        })}
       </div>
 
       <div className="quiz-nav">

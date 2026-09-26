@@ -50,3 +50,45 @@
   justify-content: space-between;
   margin-top: 22px;
 }
+.quiz-mark-review {
+  margin-top: var(--space-3);
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.quiz-jump-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+}
+.quiz-jump-cell {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.jump-cell-unvisited {
+  background: var(--tan);
+  color: var(--muted);
+}
+.jump-cell-answered {
+  background: var(--milestone-sage);
+  color: var(--on-milestone-sage);
+}
+.jump-cell-marked {
+  background: var(--momentum-amber);
+  color: var(--on-momentum-amber);
+}
+.jump-cell-current {
+  outline: 2px solid var(--navy);
+  outline-offset: 1px;
+}

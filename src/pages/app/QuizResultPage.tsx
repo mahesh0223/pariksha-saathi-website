@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import type { QuizScore } from '../../domain/quizEngine';
+import { diagnose, markingLedger } from '../../domain/quizResultAnalysis';
 import type { Question } from '../../types/api';
 import { Button, Card, EmptyState, QuizOption } from '../../components/ui/Primitives';
 import './QuizResultPage.css';
@@ -24,6 +25,8 @@ export function QuizResultPage() {
 
   const { score, questions } = state;
   const questionById = new Map(questions.map((q) => [q.id, q]));
+  const ledger = markingLedger(score.answers);
+  const diagnostics = diagnose(score.answers);
 
   return (
     <div className="result-page">
@@ -35,7 +38,43 @@ export function QuizResultPage() {
         </div>
       </Card>
 
-      <h2 className="result-review-title">Review</h2>
+      <Card className="result-question">
+        <h2 className="result-review-title">Marking Ledger</h2>
+        <div className="marking-ledger">
+          <div className="ledger-tile">
+            <div className="ledger-label">Correct</div>
+            <div className="ledger-count ledger-correct">{ledger.correctCount}</div>
+            <div className="ledger-marks ledger-correct">+{ledger.correctMarks.toFixed(2)}</div>
+          </div>
+          <div className="ledger-tile">
+            <div className="ledger-label">Wrong</div>
+            <div className="ledger-count ledger-wrong">{ledger.wrongCount}</div>
+            <div className="ledger-marks ledger-wrong">{ledger.wrongMarks.toFixed(2)}</div>
+          </div>
+          <div className="ledger-tile">
+            <div className="ledger-label">Skipped</div>
+            <div className="ledger-count">{ledger.skippedCount}</div>
+            <div className="ledger-marks">0.00</div>
+          </div>
+        </div>
+      </Card>
+
+      {diagnostics.length > 0 && (
+        <>
+          <h2 className="result-review-title">Syllabus Diagnostics</h2>
+          {diagnostics.map((d) => (
+            <Card key={d.topicKey} className="result-question">
+              <p className="result-question-text">{d.topicKey}</p>
+              <p className="result-marks">
+                {d.correctCount}/{d.totalCount} ({Math.round(d.accuracy * 100)}%)
+              </p>
+              <p className="result-explanation">{d.remark}</p>
+            </Card>
+          ))}
+        </>
+      )}
+
+      <h2 className="result-review-title">Question Ledger</h2>
       {score.answers.map((answer) => {
         const question = questionById.get(answer.questionId);
         if (!question) return null;
@@ -59,7 +98,12 @@ export function QuizResultPage() {
                 ? 'Not attempted'
                 : `${answer.marksAwarded >= 0 ? '+' : ''}${answer.marksAwarded}`}
             </div>
-            {question.explanation && <p className="result-explanation">{question.explanation}</p>}
+            {question.explanation && (
+              <>
+                <p className="result-concept-rule-label">Concept Rule</p>
+                <p className="result-explanation">{question.explanation}</p>
+              </>
+            )}
           </Card>
         );
       })}
