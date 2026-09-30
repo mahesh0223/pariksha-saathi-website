@@ -67,7 +67,7 @@ export function CurrentAffairsDetailPage() {
         </a>
       </div>
 
-      <AdSlot slot="0000000002" />
+      <AdSlot slot="4454763597" />
     </article>
   );
 }

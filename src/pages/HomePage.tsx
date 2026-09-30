@@ -144,9 +144,7 @@ export function HomePage() {
       </section>
 
       <div className="wrap">
-        {/* TODO: replace "0000000000" with a real ad unit ID from AdSense - Ads > By ad unit >
-            Display ads > Create - once Auto ads is turned off account-wide (see index.html). */}
-        <AdSlot slot="0000000000" />
+        <AdSlot slot="8737623533" />
       </div>
 
       <footer className="pub-footer">

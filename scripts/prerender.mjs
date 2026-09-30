@@ -173,7 +173,7 @@ function homePageBody() {
           </div>
         </div>
       </section>
-      <div class="wrap">${adSlot('0000000000')}</div>
+      <div class="wrap">${adSlot('8737623533')}</div>
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
@@ -234,7 +234,7 @@ async function main() {
       </a>`,
         )
         .join('\n')}
-      ${affairs.length > 0 ? adSlot('0000000001') : ''}
+      ${affairs.length > 0 ? adSlot('9595409633') : ''}
     </div>
   `);
   writePage('app/current-affairs', page({
@@ -255,7 +255,7 @@ async function main() {
         <div class="detail-tags">${item.examTags.map(pill).join('')}</div>
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">Official source: ${escapeHtml(item.sourceName)} &#8599;</a></div>
-        ${adSlot('0000000002')}
+        ${adSlot('4454763597')}
       </article>
     `);
     writePage(`app/current-affairs/${item.id}`, page({
@@ -296,7 +296,7 @@ async function main() {
       </a>`,
         )
         .join('\n')}
-      ${notices.length > 0 ? adSlot('0000000003') : ''}
+      ${notices.length > 0 ? adSlot('2732375973') : ''}
     </div>
   `);
   writePage('app/exam-notices', page({
@@ -320,7 +320,7 @@ async function main() {
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         ${dateRows ? `<div class="detail-dates"><h2>Important dates</h2><dl>${dateRows}</dl></div>` : ''}
         <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">Official notification &#8599;</a></div>
-        ${adSlot('0000000004')}
+        ${adSlot('5664651910')}
       </article>
     `);
     writePage(`app/exam-notices/${item.id}`, page({

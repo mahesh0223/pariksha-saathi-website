@@ -48,7 +48,7 @@ export function ExamNoticesPage() {
           </Card>
         </Link>
       ))}
-      {noticesQuery.data && noticesQuery.data.length > 0 && <AdSlot slot="0000000003" />}
+      {noticesQuery.data && noticesQuery.data.length > 0 && <AdSlot slot="2732375973" />}
     </div>
   );
 }

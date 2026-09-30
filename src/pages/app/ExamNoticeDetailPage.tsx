@@ -78,7 +78,7 @@ export function ExamNoticeDetailPage() {
         </a>
       </div>
 
-      <AdSlot slot="0000000004" />
+      <AdSlot slot="5664651910" />
     </article>
   );
 }

@@ -33,7 +33,7 @@ export function CurrentAffairsPage() {
       {affairsQuery.data?.map((item) => (
         <CurrentAffairsItemCard key={item.id} item={item} />
       ))}
-      {affairsQuery.data && affairsQuery.data.length > 0 && <AdSlot slot="0000000001" />}
+      {affairsQuery.data && affairsQuery.data.length > 0 && <AdSlot slot="9595409633" />}
     </div>
   );
 }
