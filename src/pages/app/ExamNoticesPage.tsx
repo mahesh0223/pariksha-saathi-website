@@ -5,6 +5,7 @@ import { useExamSelection } from '../../state/ExamSelectionContext';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Card, Spinner } from '../../components/ui/Primitives';
+import { AdSlot } from '../../components/ads/AdSlot';
 import './UpdatesPage.css';
 
 const PREVIEW_LENGTH = 150;
@@ -47,6 +48,7 @@ export function ExamNoticesPage() {
           </Card>
         </Link>
       ))}
+      {noticesQuery.data && noticesQuery.data.length > 0 && <AdSlot slot="0000000003" />}
     </div>
   );
 }

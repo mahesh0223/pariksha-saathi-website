@@ -169,3 +169,8 @@
   background: var(--bad);
   color: #fff;
 }
+
+.ad-slot {
+  margin-top: 28px;
+  min-height: 90px;
+}

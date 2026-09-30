@@ -4,6 +4,7 @@ import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Pill, Spinner } from '../../components/ui/Primitives';
+import { AdSlot } from '../../components/ads/AdSlot';
 import './DetailPage.css';
 
 export function CurrentAffairsDetailPage() {
@@ -65,6 +66,8 @@ export function CurrentAffairsDetailPage() {
           Official source: {item.sourceName} &#8599;
         </a>
       </div>
+
+      <AdSlot slot="0000000002" />
     </article>
   );
 }

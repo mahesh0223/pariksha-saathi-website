@@ -4,6 +4,7 @@ import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../../components/CurrentAffairsItemCard';
+import { AdSlot } from '../../components/ads/AdSlot';
 import './UpdatesPage.css';
 
 export function CurrentAffairsPage() {
@@ -32,6 +33,7 @@ export function CurrentAffairsPage() {
       {affairsQuery.data?.map((item) => (
         <CurrentAffairsItemCard key={item.id} item={item} />
       ))}
+      {affairsQuery.data && affairsQuery.data.length > 0 && <AdSlot slot="0000000001" />}
     </div>
   );
 }

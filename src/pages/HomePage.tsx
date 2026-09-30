@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useExamSelection } from '../state/ExamSelectionContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
+import { AdSlot } from '../components/ads/AdSlot';
 import './HomePage.css';
 
 const FEATURES = [
@@ -141,6 +142,12 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="wrap">
+        {/* TODO: replace "0000000000" with a real ad unit ID from AdSense - Ads > By ad unit >
+            Display ads > Create - once Auto ads is turned off account-wide (see index.html). */}
+        <AdSlot slot="0000000000" />
+      </div>
 
       <footer className="pub-footer">
         <div className="wrap">

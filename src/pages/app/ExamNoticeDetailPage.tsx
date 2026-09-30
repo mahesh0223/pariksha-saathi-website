@@ -4,6 +4,7 @@ import { getExamUpdates } from '../../api/examUpdates';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
+import { AdSlot } from '../../components/ads/AdSlot';
 import './DetailPage.css';
 
 export function ExamNoticeDetailPage() {
@@ -76,6 +77,8 @@ export function ExamNoticeDetailPage() {
           Official notification &#8599;
         </a>
       </div>
+
+      <AdSlot slot="0000000004" />
     </article>
   );
 }
