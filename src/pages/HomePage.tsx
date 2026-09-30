@@ -1,7 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useExamSelection } from '../state/ExamSelectionContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
+import { getCurrentAffairs } from '../api/currentAffairs';
+import { getExamUpdates } from '../api/examUpdates';
+import { Card } from '../components/ui/Primitives';
+import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
+import '../pages/app/UpdatesPage.css';
 import './HomePage.css';
 
 const FEATURES = [
@@ -45,6 +51,97 @@ const FEATURES = [
     title: 'No account required',
     body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.',
   },
+  {
+    n: '09',
+    title: '90-Day Challenge',
+    body: 'A day-by-day plan across Foundation, Drills and Mock Gauntlet phases, with badges for streaks and subject mastery.',
+  },
+  {
+    n: '10',
+    title: 'Weekly Current Affairs Quiz',
+    body: "A quiz built entirely from that week's real current-affairs items, so revision and current-affairs practice happen together.",
+  },
+  {
+    n: '11',
+    title: 'Daily Digest',
+    body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.',
+  },
+];
+
+const HOW_IT_WORKS = [
+  {
+    n: '1',
+    title: 'Pick your exam(s)',
+    body: 'Choose one or more of SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO or SBI Clerk. Add or change exams any time.',
+  },
+  {
+    n: '2',
+    title: 'Study, then practice',
+    body: 'Work through topic-wise lessons, then practice the same topics as quizzes in the real exam pattern, negative marking included.',
+  },
+  {
+    n: '3',
+    title: 'Track and revise',
+    body: 'Every wrong answer lands in your Mistake Notebook automatically, so revision stays focused on what you actually got wrong.',
+  },
+];
+
+const EXAM_COVERAGE = [
+  {
+    name: 'SSC CGL',
+    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.',
+  },
+  {
+    name: 'SSC MTS',
+    body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness.',
+  },
+  {
+    name: 'SSC CHSL',
+    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.',
+  },
+  {
+    name: 'IBPS PO',
+    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.',
+  },
+  {
+    name: 'IBPS Clerk',
+    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.',
+  },
+  {
+    name: 'SBI PO',
+    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness.',
+  },
+  {
+    name: 'SBI Clerk',
+    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness.',
+  },
+];
+
+const FAQS = [
+  {
+    q: 'Is Pariksha Saathi free?',
+    a: 'Yes. Every lesson, practice quiz, mock test and current-affairs capsule is free, with no paywalled content.',
+  },
+  {
+    q: 'Do I need to create an account?',
+    a: 'No. You can study fully as a guest, with progress saved locally on your device. Create a free account only if you want that progress backed up across devices.',
+  },
+  {
+    q: 'Does it work offline?',
+    a: 'Yes, after your first visit. Lessons, quizzes and practice keep working with patchy or no internet, and sync again once you’re back online.',
+  },
+  {
+    q: 'Is content available in Hindi?',
+    a: 'Yes. Switch between English and Hindi any time, for the same content, without reinstalling or visiting a separate site.',
+  },
+  {
+    q: 'Where does the current-affairs content come from?',
+    a: 'Every current-affairs item and exam notification links to its original official source — PIB or the exam body’s own site — so you can verify it yourself.',
+  },
+  {
+    q: 'Is Pariksha Saathi affiliated with SSC, IBPS or SBI?',
+    a: 'No. Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+  },
 ];
 
 export function HomePage() {
@@ -62,6 +159,17 @@ export function HomePage() {
     path: '/',
   });
 
+  const affairsQuery = useQuery({
+    queryKey: ['current-affairs', 'en', 'home-preview'],
+    queryFn: () => getCurrentAffairs({ lang: 'en', limit: 4 }),
+  });
+
+  const noticesQuery = useQuery({
+    queryKey: ['exam-updates', 'en', 'home-preview'],
+    queryFn: () => getExamUpdates([], 'en'),
+  });
+  const latestNotices = noticesQuery.data?.slice(0, 4) ?? [];
+
   return (
     <div>
       <header className="pub-header">
@@ -72,6 +180,8 @@ export function HomePage() {
           </a>
           <nav className="pub-nav-links">
             <a href="#features">Features</a>
+            <a href="#current-affairs">Current Affairs</a>
+            <a href="#faq">FAQ</a>
             <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
           </nav>
           <button className="pub-cta" onClick={startStudying}>
@@ -137,6 +247,101 @@ export function HomePage() {
                 <div className="mark">{f.n}</div>
                 <h3>{f.title}</h3>
                 <p>{f.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pub-section pub-section-alt">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">How it works</div>
+            <h2>Three steps, no installs</h2>
+          </div>
+          <div className="steps-grid">
+            {HOW_IT_WORKS.map((s) => (
+              <div className="step" key={s.n}>
+                <div className="step-num">{s.n}</div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pub-section">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">Exam coverage</div>
+            <h2>What's covered for each exam</h2>
+          </div>
+          <div className="exam-coverage-grid">
+            {EXAM_COVERAGE.map((e) => (
+              <div className="exam-coverage-item" key={e.name}>
+                <h3>{e.name}</h3>
+                <p dangerouslySetInnerHTML={{ __html: e.body }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="current-affairs" className="pub-section pub-section-alt">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">Stay current</div>
+            <h2>Latest current affairs</h2>
+            <p>Dated, sourced capsules — updated regularly, each linking back to the original release.</p>
+          </div>
+          {affairsQuery.isLoading && <p>Loading…</p>}
+          {affairsQuery.data?.map((item) => (
+            <CurrentAffairsItemCard key={item.id} item={item} />
+          ))}
+          <Link to="/app/current-affairs" className="update-readmore">
+            See all current affairs &rarr;
+          </Link>
+        </div>
+      </section>
+
+      <section className="pub-section">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">Don't miss a date</div>
+            <h2>Latest exam notices &amp; alerts</h2>
+            <p>Admit cards, results and deadlines, verified against each exam body's own site.</p>
+          </div>
+          {noticesQuery.isLoading && <p>Loading…</p>}
+          {latestNotices.map((item) => (
+            <Link key={item.id} to={`/app/exam-notices/${item.id}`} className="update-card-link">
+              <Card className="update-card">
+                <div className="update-meta">
+                  {item.type} &middot; verified {item.lastVerifiedAt.slice(0, 10)}
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.summary.length > 150 ? `${item.summary.slice(0, 150).trimEnd()}…` : item.summary}</p>
+                <span className="update-readmore">Read more &rarr;</span>
+              </Card>
+            </Link>
+          ))}
+          <Link to="/app/exam-notices" className="update-readmore">
+            See all exam notices &rarr;
+          </Link>
+        </div>
+      </section>
+
+      <section id="faq" className="pub-section pub-section-alt">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">FAQ</div>
+            <h2>Common questions</h2>
+          </div>
+          <div className="faq-list">
+            {FAQS.map((f) => (
+              <div className="faq-item" key={f.q}>
+                <h3>{f.q}</h3>
+                <p>{f.a}</p>
               </div>
             ))}
           </div>

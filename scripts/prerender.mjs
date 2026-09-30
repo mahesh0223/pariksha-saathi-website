@@ -118,7 +118,7 @@ function writePage(relPath, html) {
   writeFileSync(join(dir, 'index.html'), html, 'utf8');
 }
 
-// Mirrors src/pages/HomePage.tsx's FEATURES array and markup - kept in sync by hand since this
+// Mirrors src/pages/HomePage.tsx's content arrays and markup - kept in sync by hand since this
 // script can't import TSX. If HomePage.tsx's copy changes, update this too.
 const HOME_FEATURES = [
   { n: '01', title: 'Study, then practice', body: 'Topic-wise lessons across Reasoning, Quant, English and General Awareness, each followed by practice in the real exam pattern — negative marking included.' },
@@ -129,15 +129,45 @@ const HOME_FEATURES = [
   { n: '06', title: 'Real current affairs', body: 'Dated current-affairs capsules and official exam notifications, each with a source you can check yourself.' },
   { n: '07', title: 'Mistake Notebook & Bookmarks', body: 'Build your own revision list from anything you get wrong or want to revisit.' },
   { n: '08', title: 'No account required', body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.' },
+  { n: '09', title: '90-Day Challenge', body: 'A day-by-day plan across Foundation, Drills and Mock Gauntlet phases, with badges for streaks and subject mastery.' },
+  { n: '10', title: 'Weekly Current Affairs Quiz', body: 'A quiz built entirely from that week’s real current-affairs items, so revision and current-affairs practice happen together.' },
+  { n: '11', title: 'Daily Digest', body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.' },
 ];
 
-function homePageBody() {
+const HOW_IT_WORKS = [
+  { n: '1', title: 'Pick your exam(s)', body: 'Choose one or more of SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO or SBI Clerk. Add or change exams any time.' },
+  { n: '2', title: 'Study, then practice', body: 'Work through topic-wise lessons, then practice the same topics as quizzes in the real exam pattern, negative marking included.' },
+  { n: '3', title: 'Track and revise', body: 'Every wrong answer lands in your Mistake Notebook automatically, so revision stays focused on what you actually got wrong.' },
+];
+
+const EXAM_COVERAGE = [
+  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.' },
+  { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness.' },
+  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.' },
+  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.' },
+  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.' },
+  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness.' },
+  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness.' },
+];
+
+const FAQS = [
+  { q: 'Is Pariksha Saathi free?', a: 'Yes. Every lesson, practice quiz, mock test and current-affairs capsule is free, with no paywalled content.' },
+  { q: 'Do I need to create an account?', a: 'No. You can study fully as a guest, with progress saved locally on your device. Create a free account only if you want that progress backed up across devices.' },
+  { q: 'Does it work offline?', a: 'Yes, after your first visit. Lessons, quizzes and practice keep working with patchy or no internet, and sync again once you’re back online.' },
+  { q: 'Is content available in Hindi?', a: 'Yes. Switch between English and Hindi any time, for the same content, without reinstalling or visiting a separate site.' },
+  { q: 'Where does the current-affairs content come from?', a: 'Every current-affairs item and exam notification links to its original official source — PIB or the exam body’s own site — so you can verify it yourself.' },
+  { q: 'Is Pariksha Saathi affiliated with SSC, IBPS or SBI?', a: 'No. Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.' },
+];
+
+function homePageBody(affairsPreview, noticesPreview) {
   return `<div>
       <header class="pub-header">
         <div class="wrap pub-nav">
           <a class="pub-brand" href="#top"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="#features">Features</a>
+            <a href="#current-affairs">Current Affairs</a>
+            <a href="#faq">FAQ</a>
             <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
           </nav>
           <a class="pub-cta" href="/onboarding">Start studying</a>
@@ -173,6 +203,84 @@ function homePageBody() {
           </div>
         </div>
       </section>
+      <section class="pub-section pub-section-alt">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">How it works</div>
+            <h2>Three steps, no installs</h2>
+          </div>
+          <div class="steps-grid">
+            ${HOW_IT_WORKS.map((s) => `<div class="step"><div class="step-num">${s.n}</div><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.body)}</p></div>`).join('\n            ')}
+          </div>
+        </div>
+      </section>
+      <section class="pub-section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Exam coverage</div>
+            <h2>What's covered for each exam</h2>
+          </div>
+          <div class="exam-coverage-grid">
+            ${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('\n            ')}
+          </div>
+        </div>
+      </section>
+      <section id="current-affairs" class="pub-section pub-section-alt">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Stay current</div>
+            <h2>Latest current affairs</h2>
+            <p>Dated, sourced capsules — updated regularly, each linking back to the original release.</p>
+          </div>
+          ${affairsPreview
+            .map(
+              (item) => `<a class="update-card-link" href="/app/current-affairs/${item.id}/">
+          <div class="card update-card">
+            <div class="update-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary.slice(0, 150))}${item.summary.length > 150 ? '…' : ''}</p>
+            <div class="update-tags">${item.examTags.map(pill).join('')}</div>
+            <span class="update-readmore">Read more &rarr;</span>
+          </div>
+        </a>`,
+            )
+            .join('\n          ')}
+          <a class="update-readmore" href="/app/current-affairs/">See all current affairs &rarr;</a>
+        </div>
+      </section>
+      <section class="pub-section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Don't miss a date</div>
+            <h2>Latest exam notices &amp; alerts</h2>
+            <p>Admit cards, results and deadlines, verified against each exam body's own site.</p>
+          </div>
+          ${noticesPreview
+            .map(
+              (item) => `<a class="update-card-link" href="/app/exam-notices/${item.id}/">
+          <div class="card update-card">
+            <div class="update-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary.slice(0, 150))}${item.summary.length > 150 ? '…' : ''}</p>
+            <span class="update-readmore">Read more &rarr;</span>
+          </div>
+        </a>`,
+            )
+            .join('\n          ')}
+          <a class="update-readmore" href="/app/exam-notices/">See all exam notices &rarr;</a>
+        </div>
+      </section>
+      <section id="faq" class="pub-section pub-section-alt">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">FAQ</div>
+            <h2>Common questions</h2>
+          </div>
+          <div class="faq-list">
+            ${FAQS.map((f) => `<div class="faq-item"><h3>${escapeHtml(f.q)}</h3><p>${escapeHtml(f.a)}</p></div>`).join('\n            ')}
+          </div>
+        </div>
+      </section>
       <div class="wrap">${adSlot('8737623533')}</div>
       <footer class="pub-footer">
         <div class="wrap">
@@ -193,6 +301,11 @@ function homePageBody() {
 async function main() {
   const assets = readBuiltAssets();
 
+  // Fetched before the homepage is written, not after - the homepage's "Latest current affairs"/
+  // "Latest exam notices" sections preview the same live data the list pages below use in full.
+  const affairs = await fetch(`${API_BASE}/v1/current-affairs?lang=en&limit=100`).then((r) => r.json());
+  const notices = await fetch(`${API_BASE}/v1/exam-updates`).then((r) => r.json());
+
   // --- Homepage --- the SPA's own dist/index.html is otherwise just an empty <div id="root">
   // until React mounts - the single most important page to have real content in, since it's what
   // AdSense's own site review (and every other crawler) checks first for the domain overall.
@@ -201,7 +314,7 @@ async function main() {
     description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
     path: '/',
     assets,
-    bodyHtml: homePageBody(),
+    bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
     type: 'website',
   }), 'utf8');
 
@@ -216,8 +329,6 @@ async function main() {
   ];
 
   // --- Current affairs ---
-  const affairs = await fetch(`${API_BASE}/v1/current-affairs?lang=en&limit=100`).then((r) => r.json());
-
   const affairsListBody = appShell(`
     <div>
       <h1 class="review-title">Current Affairs</h1>
@@ -278,9 +389,7 @@ async function main() {
     sitemapUrls.push({ loc: `/app/current-affairs/${item.id}/`, priority: '0.7', lastmod: item.editionDate.slice(0, 10) });
   }
 
-  // --- Exam notices ---
-  const notices = await fetch(`${API_BASE}/v1/exam-updates`).then((r) => r.json());
-
+  // --- Exam notices --- (fetched above, alongside `affairs`, for the homepage preview)
   const noticesListBody = appShell(`
     <div>
       <h1 class="review-title">Exam Notices &amp; Alerts</h1>
