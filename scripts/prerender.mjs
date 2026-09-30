@@ -118,20 +118,46 @@ function writePage(relPath, html) {
   writeFileSync(join(dir, 'index.html'), html, 'utf8');
 }
 
+// Mirrors src/components/HomeIcons.tsx's <path> data exactly - see that file for the source of
+// truth on each icon's shape. Kept as plain SVG strings here since this script can't import TSX.
+const ICONS = {
+  book: '<path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5c-.8 0-1.5-.7-1.5-1.5v-13Z"/><path d="M20 5.5c0-.8-.7-1.5-1.5-1.5H12v16h6.5c.8 0 1.5-.7 1.5-1.5v-13Z"/>',
+  target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/>',
+  checkNote: '<rect x="4.5" y="3.5" width="15" height="17" rx="1.8"/><path d="M8 9.5l2.3 2.3L16 6"/><path d="M8 15.5h8"/>',
+  browser: '<rect x="3.5" y="4.5" width="17" height="15" rx="1.8"/><path d="M3.5 8.5h17"/><circle cx="6.2" cy="6.5" r="0.5" fill="currentColor" stroke="none"/><circle cx="8" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>',
+  globe: '<circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4c2.5 2.2 2.5 13.8 0 16M12 4c-2.5 2.2-2.5 13.8 0 16"/>',
+  newspaper: '<rect x="3.5" y="5.5" width="13" height="13" rx="1.5"/><path d="M6.5 9h7M6.5 12h7M6.5 15h4.5"/><path d="M16.5 8.5H19c.55 0 1 .45 1 1v8a1.5 1.5 0 0 1-1.5 1.5h-10"/>',
+  bookmark: '<path d="M6 4h12v16l-6-4-6 4V4Z"/>',
+  guest: '<circle cx="12" cy="8.2" r="3.2"/><path d="M5 19.5c1-3.4 3.9-5.3 7-5.3s6 1.9 7 5.3"/>',
+  calendarFlag: '<rect x="4" y="5" width="16" height="15" rx="1.8"/><path d="M4 9.5h16"/><path d="M8 3.2v3M16 3.2v3"/><path d="M9 13v5M9 13c1.3-.9 2.7-.9 4 0s2.7.9 4 0v-2.4c-1.3.9-2.7.9-4 0s-2.7-.9-4 0V13Z"/>',
+  quizBubble: '<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 4v-4H5.5A1.5 1.5 0 0 1 4 14.5v-9Z"/><path d="M10 9.3c0-1 .9-1.8 2-1.8s2 .7 2 1.7c0 1.5-2 1.6-2 3.1"/><circle cx="12" cy="14.4" r="0.6" fill="currentColor" stroke="none"/>',
+  digest: '<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>',
+};
+function icon(name) {
+  return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
+}
+
 // Mirrors src/pages/HomePage.tsx's content arrays and markup - kept in sync by hand since this
 // script can't import TSX. If HomePage.tsx's copy changes, update this too.
 const HOME_FEATURES = [
-  { n: '01', title: 'Study, then practice', body: 'Topic-wise lessons across Reasoning, Quant, English and General Awareness, each followed by practice in the real exam pattern — negative marking included.' },
-  { n: '02', title: 'Three ways to practice', body: 'Topic-wise quizzes for one weak spot, sectional tests by subject, or full-length mocks spanning your whole exam.' },
-  { n: '03', title: 'Learn from your mistakes', body: 'Every wrong answer lands in your Mistake Notebook automatically, with the topic you should focus on next.' },
-  { n: '04', title: 'Works right in your browser', body: 'No installs — study on any device with progress saved locally and available whenever you come back.' },
-  { n: '05', title: 'English or Hindi', body: 'Switch languages any time — no reinstalling, no separate site.' },
-  { n: '06', title: 'Real current affairs', body: 'Dated current-affairs capsules and official exam notifications, each with a source you can check yourself.' },
-  { n: '07', title: 'Mistake Notebook & Bookmarks', body: 'Build your own revision list from anything you get wrong or want to revisit.' },
-  { n: '08', title: 'No account required', body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.' },
-  { n: '09', title: '90-Day Challenge', body: 'A day-by-day plan across Foundation, Drills and Mock Gauntlet phases, with badges for streaks and subject mastery.' },
-  { n: '10', title: 'Weekly Current Affairs Quiz', body: 'A quiz built entirely from that week’s real current-affairs items, so revision and current-affairs practice happen together.' },
-  { n: '11', title: 'Daily Digest', body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.' },
+  { icon: 'book', accent: 'navy', title: 'Study, then practice', body: 'Topic-wise lessons across Reasoning, Quant, English and General Awareness, each followed by practice in the real exam pattern — negative marking included.' },
+  { icon: 'target', accent: 'terracotta', title: 'Three ways to practice', body: 'Topic-wise quizzes for one weak spot, sectional tests by subject, or full-length mocks spanning your whole exam.' },
+  { icon: 'checkNote', accent: 'sage', title: 'Learn from your mistakes', body: 'Every wrong answer lands in your Mistake Notebook automatically, with the topic you should focus on next.' },
+  { icon: 'browser', accent: 'amber', title: 'Works right in your browser', body: 'No installs — study on any device with progress saved locally and available whenever you come back.' },
+  { icon: 'globe', accent: 'navy', title: 'English or Hindi', body: 'Switch languages any time — no reinstalling, no separate site.' },
+  { icon: 'newspaper', accent: 'terracotta', title: 'Real current affairs', body: 'Dated current-affairs capsules and official exam notifications, each with a source you can check yourself.' },
+  { icon: 'bookmark', accent: 'sage', title: 'Mistake Notebook & Bookmarks', body: 'Build your own revision list from anything you get wrong or want to revisit.' },
+  { icon: 'guest', accent: 'amber', title: 'No account required', body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.' },
+  { icon: 'calendarFlag', accent: 'navy', title: '90-Day Challenge', body: 'A day-by-day plan across Foundation, Drills and Mock Gauntlet phases, with badges for streaks and subject mastery.' },
+  { icon: 'quizBubble', accent: 'terracotta', title: 'Weekly Current Affairs Quiz', body: 'A quiz built entirely from that week’s real current-affairs items, so revision and current-affairs practice happen together.' },
+  { icon: 'digest', accent: 'sage', title: 'Daily Digest', body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.' },
+];
+
+const TRUST_STATS = [
+  { value: '7', label: 'exams covered' },
+  { value: '100%', label: 'free, no paywall' },
+  { value: 'EN / HI', label: 'both languages' },
+  { value: 'Offline', label: 'after first visit' },
 ];
 
 const HOW_IT_WORKS = [
@@ -185,8 +211,12 @@ function homePageBody(affairsPreview, noticesPreview) {
               <a class="btn-ghost-cream" href="#features">See what's inside</a>
             </div>
             <div class="exam-pills"><span>SSC CGL</span><span>SSC MTS</span><span>SSC CHSL</span><span>IBPS PO</span><span>IBPS Clerk</span><span>SBI PO</span><span>SBI Clerk</span></div>
+            <div class="trust-bar">
+              ${TRUST_STATS.map((s) => `<div class="trust-stat"><div class="trust-value">${escapeHtml(s.value)}</div><div class="trust-label">${escapeHtml(s.label)}</div></div>`).join('\n              ')}
+            </div>
           </div>
           <div class="phone-stack">
+            <div class="phone-glow"></div>
             <div class="phone"><img src="/assets/screenshots/1-home.jpg" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></div>
           </div>
         </div>
@@ -199,7 +229,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             <p>Every feature below is built around one real constraint: aspirants studying on patchy connections, shared devices, and tight budgets.</p>
           </div>
           <div class="feature-grid">
-            ${HOME_FEATURES.map((f) => `<div class="feature"><div class="mark">${f.n}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.body)}</p></div>`).join('\n            ')}
+            ${HOME_FEATURES.map((f) => `<div class="feature"><div class="mark mark-${f.accent}">${icon(f.icon)}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.body)}</p></div>`).join('\n            ')}
           </div>
         </div>
       </section>
@@ -277,7 +307,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             <h2>Common questions</h2>
           </div>
           <div class="faq-list">
-            ${FAQS.map((f) => `<div class="faq-item"><h3>${escapeHtml(f.q)}</h3><p>${escapeHtml(f.a)}</p></div>`).join('\n            ')}
+            ${FAQS.map((f, i) => `<details class="faq-item"${i === 0 ? ' open' : ''}><summary>${escapeHtml(f.q)}</summary><p>${escapeHtml(f.a)}</p></details>`).join('\n            ')}
           </div>
         </div>
       </section>

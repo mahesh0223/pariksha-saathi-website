@@ -7,65 +7,96 @@ import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
+import {
+  IconBook,
+  IconTarget,
+  IconCheckNote,
+  IconBrowser,
+  IconGlobe,
+  IconNewspaper,
+  IconBookmark,
+  IconGuest,
+  IconCalendarFlag,
+  IconQuizBubble,
+  IconDigest,
+} from '../components/HomeIcons';
 import '../pages/app/UpdatesPage.css';
 import './HomePage.css';
 
 const FEATURES = [
   {
-    n: '01',
+    icon: IconBook,
+    accent: 'navy' as const,
     title: 'Study, then practice',
     body: 'Topic-wise lessons across Reasoning, Quant, English and General Awareness, each followed by practice in the real exam pattern — negative marking included.',
   },
   {
-    n: '02',
+    icon: IconTarget,
+    accent: 'terracotta' as const,
     title: 'Three ways to practice',
     body: 'Topic-wise quizzes for one weak spot, sectional tests by subject, or full-length mocks spanning your whole exam.',
   },
   {
-    n: '03',
+    icon: IconCheckNote,
+    accent: 'sage' as const,
     title: 'Learn from your mistakes',
     body: 'Every wrong answer lands in your Mistake Notebook automatically, with the topic you should focus on next.',
   },
   {
-    n: '04',
+    icon: IconBrowser,
+    accent: 'amber' as const,
     title: 'Works right in your browser',
     body: 'No installs — study on any device with progress saved locally and available whenever you come back.',
   },
   {
-    n: '05',
+    icon: IconGlobe,
+    accent: 'navy' as const,
     title: 'English or Hindi',
     body: 'Switch languages any time — no reinstalling, no separate site.',
   },
   {
-    n: '06',
+    icon: IconNewspaper,
+    accent: 'terracotta' as const,
     title: 'Real current affairs',
     body: 'Dated current-affairs capsules and official exam notifications, each with a source you can check yourself.',
   },
   {
-    n: '07',
+    icon: IconBookmark,
+    accent: 'sage' as const,
     title: 'Mistake Notebook & Bookmarks',
     body: 'Build your own revision list from anything you get wrong or want to revisit.',
   },
   {
-    n: '08',
+    icon: IconGuest,
+    accent: 'amber' as const,
     title: 'No account required',
     body: 'Study fully as a guest. Create a free account only if you want progress backed up across devices.',
   },
   {
-    n: '09',
+    icon: IconCalendarFlag,
+    accent: 'navy' as const,
     title: '90-Day Challenge',
     body: 'A day-by-day plan across Foundation, Drills and Mock Gauntlet phases, with badges for streaks and subject mastery.',
   },
   {
-    n: '10',
+    icon: IconQuizBubble,
+    accent: 'terracotta' as const,
     title: 'Weekly Current Affairs Quiz',
     body: "A quiz built entirely from that week's real current-affairs items, so revision and current-affairs practice happen together.",
   },
   {
-    n: '11',
+    icon: IconDigest,
+    accent: 'sage' as const,
     title: 'Daily Digest',
     body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.',
   },
+];
+
+const TRUST_STATS = [
+  { value: '7', label: 'exams covered' },
+  { value: '100%', label: 'free, no paywall' },
+  { value: 'EN / HI', label: 'both languages' },
+  { value: 'Offline', label: 'after first visit' },
 ];
 
 const HOW_IT_WORKS = [
@@ -219,8 +250,17 @@ export function HomePage() {
               <span>SBI PO</span>
               <span>SBI Clerk</span>
             </div>
+            <div className="trust-bar">
+              {TRUST_STATS.map((s) => (
+                <div className="trust-stat" key={s.label}>
+                  <div className="trust-value">{s.value}</div>
+                  <div className="trust-label">{s.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="phone-stack">
+            <div className="phone-glow" />
             <div className="phone">
               <img
                 src="/assets/screenshots/1-home.jpg"
@@ -242,13 +282,18 @@ export function HomePage() {
             </p>
           </div>
           <div className="feature-grid">
-            {FEATURES.map((f) => (
-              <div className="feature" key={f.n}>
-                <div className="mark">{f.n}</div>
-                <h3>{f.title}</h3>
-                <p>{f.body}</p>
-              </div>
-            ))}
+            {FEATURES.map((f) => {
+              const Icon = f.icon;
+              return (
+                <div className="feature" key={f.title}>
+                  <div className={`mark mark-${f.accent}`}>
+                    <Icon />
+                  </div>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -338,11 +383,11 @@ export function HomePage() {
             <h2>Common questions</h2>
           </div>
           <div className="faq-list">
-            {FAQS.map((f) => (
-              <div className="faq-item" key={f.q}>
-                <h3>{f.q}</h3>
+            {FAQS.map((f, i) => (
+              <details className="faq-item" key={f.q} open={i === 0}>
+                <summary>{f.q}</summary>
                 <p>{f.a}</p>
-              </div>
+              </details>
             ))}
           </div>
         </div>
