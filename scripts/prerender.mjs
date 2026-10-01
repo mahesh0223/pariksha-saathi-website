@@ -364,6 +364,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Spotting Errors</h3>
               <p>A handful of recurring grammar rules, not obscure trivia. <a href="/learn/spotting-errors">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Average</h3>
+              <p>The formula reversed — going from average back to sum. <a href="/learn/average">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Number Series</h3>
+              <p>Pattern recognition, narrowed down to the four types that actually come up. <a href="/learn/number-series">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Synonyms and Antonyms</h3>
+              <p>Why context, not vocabulary size, is usually what decides the answer. <a href="/learn/synonyms-and-antonyms">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

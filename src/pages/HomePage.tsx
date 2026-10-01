@@ -439,6 +439,27 @@ export function HomePage() {
                 <Link to="/learn/spotting-errors">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Average</h3>
+              <p>
+                The formula reversed — going from average back to sum.{' '}
+                <Link to="/learn/average">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Number Series</h3>
+              <p>
+                Pattern recognition, narrowed down to the four types that actually come up.{' '}
+                <Link to="/learn/number-series">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Synonyms and Antonyms</h3>
+              <p>
+                Why context, not vocabulary size, is usually what decides the answer.{' '}
+                <Link to="/learn/synonyms-and-antonyms">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
