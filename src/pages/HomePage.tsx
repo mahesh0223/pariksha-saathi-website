@@ -418,6 +418,27 @@ export function HomePage() {
                 <Link to="/learn/syllogism">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Ratio and Proportion</h3>
+              <p>
+                The foundation for ages, mixtures and partnership questions.{' '}
+                <Link to="/learn/ratio-and-proportion">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Direction Sense</h3>
+              <p>
+                Plot it on a grid and it turns into simple coordinate geometry.{' '}
+                <Link to="/learn/direction-sense">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Spotting Errors</h3>
+              <p>
+                A handful of recurring grammar rules, not obscure trivia.{' '}
+                <Link to="/learn/spotting-errors">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

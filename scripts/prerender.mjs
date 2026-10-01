@@ -352,6 +352,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Syllogism</h3>
               <p>Pure logic, not real-world knowledge — the Venn-diagram approach that works. <a href="/learn/syllogism">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Ratio and Proportion</h3>
+              <p>The foundation for ages, mixtures and partnership questions. <a href="/learn/ratio-and-proportion">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Direction Sense</h3>
+              <p>Plot it on a grid and it turns into simple coordinate geometry. <a href="/learn/direction-sense">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Spotting Errors</h3>
+              <p>A handful of recurring grammar rules, not obscure trivia. <a href="/learn/spotting-errors">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
