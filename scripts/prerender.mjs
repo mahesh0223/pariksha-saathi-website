@@ -14,6 +14,11 @@
 
 import { readFileSync, writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
+// Node's native TypeScript support (type-stripping, since this project's tsconfig already
+// restricts to erasable-only syntax) lets this import the real .ts data file directly - single
+// source of truth for the syllabus pages' EN/HI content, shared with src/pages/compare/
+// SyllabusPage.tsx, instead of hand-duplicating ~500 lines of bilingual copy into this script.
+import { EXAM_SYLLABI } from '../src/data/examSyllabi.ts';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
@@ -90,15 +95,20 @@ const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" /
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" />`;
 
-function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article' }) {
+function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
   const ld = ldEntries
     .map((entry) => `<script type="application/ld+json">${JSON.stringify(entry).replaceAll('</', '<\\/')}</script>`)
     .join('\n    ');
+  // Mirrors src/hooks/useDocumentMeta.ts's setAlternateLanguages exactly - lets Google serve
+  // searchers the version in their language instead of treating EN/HI as duplicate pages.
+  const hreflangLinks = (alternateLanguages ?? [])
+    .map((alt) => `<link rel="alternate" hreflang="${alt.lang}" href="${SITE_URL}${alt.path}" />`)
+    .join('\n    ');
   return `<!doctype html>
-<html lang="en">
+<html lang="${lang}">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/icon-512.png" />
@@ -106,6 +116,7 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     <title>${escapeHtml(fullTitle)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${url}" />
+    ${hreflangLinks}
     <meta property="og:title" content="${escapeHtml(fullTitle)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
     <meta property="og:type" content="${type}" />
@@ -213,12 +224,12 @@ const HOW_IT_WORKS = [
 
 const EXAM_COVERAGE = [
   { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness.' },
-  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.' },
-  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.' },
-  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.' },
-  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness.' },
-  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness.' },
+  { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness. <a href="/compare/ssc-mts-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
 ];
 
 const FAQS = [
@@ -456,25 +467,18 @@ function comparePageBody() {
     </div>`;
 }
 
-// Mirrors src/pages/compare/SscCglSyllabusPage.tsx exactly.
-const SSC_CGL_OFFICIAL_URL = 'https://ssc.gov.in/for-candidates/cgl-exam/xsd91hjkshdk92xk';
-function cglSyllabusPageBody() {
-  const tiers = [
-    {
-      name: 'Tier-I',
-      body: 'A single computer-based test covering four sections: General Intelligence & Reasoning, General Awareness, Quantitative Aptitude, and English Comprehension. This is the qualifying/screening stage — clearing it is what gets you to Tier-II.',
-    },
-    {
-      name: 'Tier-II',
-      body: 'A further computer-based test for candidates who clear Tier-I, going deeper on the same broad subject areas plus any role-specific papers relevant to the posts you’re eligible for.',
-    },
-  ];
-  const subjects = [
-    { name: 'Quantitative Aptitude', body: 'Number system, percentages, ratio & proportion, profit & loss, time-speed-distance, algebra, geometry, mensuration, trigonometry, and data interpretation.' },
-    { name: 'General Intelligence & Reasoning', body: 'Analogies, classification, series, coding-decoding, blood relations, direction sense, syllogisms, non-verbal reasoning (figures, patterns), and puzzles.' },
-    { name: 'English Comprehension', body: 'Grammar, vocabulary, sentence correction, fill in the blanks, cloze passages, synonyms/antonyms, and reading comprehension.' },
-    { name: 'General Awareness', body: 'Static GK (history, geography, polity, economy, science) plus current affairs — which is where a daily current-affairs habit actually pays off in this exam specifically.' },
-  ];
+// Mirrors src/pages/compare/SyllabusPage.tsx exactly - one generic generator for all 7 exams x 2
+// languages, driven by the same src/data/examSyllabi.ts imported at the top of this file (single
+// source of truth, no hand-duplicated content to drift out of sync).
+function syllabusPageBody(entry, lang) {
+  const c = entry[lang];
+  const homeHref = '/';
+  const enPath = `/compare/${entry.slug}-syllabus`;
+  const hiPath = `/hi/compare/${entry.slug}-syllabus`;
+  const otherLangHref = lang === 'hi' ? enPath : hiPath;
+  const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
+  const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
+  const startStudyingLabel = lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying';
   const tableRows = (rows) =>
     rows
       .map((r) => `<div class="compare-row"><div class="compare-cell compare-label">${escapeHtml(r.name)}</div><div class="compare-cell compare-both">${escapeHtml(r.body)}</div></div>`)
@@ -482,37 +486,39 @@ function cglSyllabusPageBody() {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
-            <a href="/#features">Features</a>
-            <a href="/app/exam-notices">Exam Notices</a>
+            <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">Start studying</a>
+          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
-        <a href="/" class="detail-back">&larr; Home</a>
-        <h1>SSC CGL Syllabus &amp; Exam Pattern</h1>
-        <p class="compare-lede">SSC CGL (Combined Graduate Level) is run as a multi-tier computer-based test. Here&rsquo;s the stable shape of it — what gets tested at each stage — with a link to the official notification for this cycle&rsquo;s exact marks, timing and negative-marking details, since those can be revised from one notification to the next.</p>
-        <h2>The tiers</h2>
-        <div class="compare-table">
-          ${tableRows(tiers)}
+        <div class="compare-top-row">
+          <a href="${homeHref}" class="detail-back">&larr; ${escapeHtml(c.backLabel)}</a>
+          <a href="${otherLangHref}" class="compare-lang-switch">${otherLangLabel}</a>
         </div>
-        <h2>What&rsquo;s tested</h2>
+        <h1>${escapeHtml(c.pageTitle)}</h1>
+        <p class="compare-lede">${escapeHtml(c.lede)}</p>
+        <h2>${escapeHtml(c.stagesHeading)}</h2>
         <div class="compare-table">
-          ${tableRows(subjects)}
+          ${tableRows(c.stages)}
         </div>
-        <p class="compare-note">Exact number of questions, marks per question, section-wise timing and the negative-marking fraction are set by each cycle&rsquo;s own official notification and can change from one CGL cycle to the next. Treat the subjects above as the stable shape to study toward, and check <a href="${SSC_CGL_OFFICIAL_URL}" target="_blank" rel="noreferrer">SSC&rsquo;s own CGL exam page</a> for this cycle&rsquo;s exact pattern before exam day.</p>
-        <h2>What CGL recruits for</h2>
-        <p>CGL fills Group B and Group C posts across central government ministries and departments — roles like Inspector-level posts in central tax departments, Auditor and Accountant posts, Assistant-level posts in various ministries, and more, with the exact post-wise vacancy breakdown published in each cycle&rsquo;s own notification.</p>
-        <h2>What Pariksha Saathi offers for SSC CGL</h2>
-        <p>Topic-wise lessons and practice across all four subjects above, sectional tests by subject, full-length mock tests in the real pattern with negative marking, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules for General Awareness — all free, with no paywalled content.</p>
-        <h2>Official source &amp; latest updates</h2>
+        <h2>${escapeHtml(c.subjectsHeading)}</h2>
+        <div class="compare-table">
+          ${tableRows(c.subjects)}
+        </div>
+        <p class="compare-note">${escapeHtml(c.note)} <a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.noteLinkLabel)}</a>.</p>
+        <h2>${escapeHtml(c.recruitsHeading)}</h2>
+        <p>${escapeHtml(c.recruitsBody)}</p>
+        <h2>${escapeHtml(c.offerHeading)}</h2>
+        <p>${escapeHtml(c.offerBody)}</p>
+        <h2>${escapeHtml(c.sourceHeading)}</h2>
         <ul class="compare-links">
-          <li><a href="${SSC_CGL_OFFICIAL_URL}" target="_blank" rel="noreferrer">SSC CGL — official exam page &#8599;</a></li>
-          <li><a href="/app/exam-notices">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
+          <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
+          <li><a href="/app/exam-notices">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
         </ul>
-        <a class="btn-primary-compare" href="/onboarding">Start studying SSC CGL free &rarr;</a>
+        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
       </article>
       <footer class="pub-footer">
         <div class="wrap">
@@ -523,7 +529,7 @@ function cglSyllabusPageBody() {
               <a href="mailto:sriwastava2@gmail.com">Contact</a>
             </div>
           </div>
-          <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. Syllabus and pattern details above are general and may change — always confirm against the official notification linked above.</p>
+          <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
         </div>
       </footer>
     </div>`;
@@ -588,34 +594,6 @@ async function main() {
     ],
   }));
 
-  // --- SSC CGL syllabus & pattern --- mirrors src/pages/compare/SscCglSyllabusPage.tsx exactly.
-  writePage('compare/ssc-cgl-syllabus', page({
-    title: 'SSC CGL Syllabus & Exam Pattern 2026',
-    description: 'SSC CGL’s Tier-I/Tier-II structure and the four subjects tested at each stage, with a link to the official SSC notification for exact current marks and timing.',
-    path: '/compare/ssc-cgl-syllabus/',
-    assets,
-    bodyHtml: cglSyllabusPageBody(),
-    type: 'article',
-    structuredData: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: 'SSC CGL Syllabus & Exam Pattern 2026',
-        description: 'A breakdown of SSC CGL’s Tier-I/Tier-II structure and the subjects tested at each stage.',
-        author: { '@type': 'Organization', name: SITE_NAME },
-        publisher: { '@type': 'Organization', name: SITE_NAME },
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'SSC CGL Syllabus & Exam Pattern' },
-        ],
-      },
-    ],
-  }));
-
   // This build's date, used as lastmod for pages whose content changes on every rebuild (the
   // homepage's "Latest" previews, and the two list pages) - not exact, but far more useful to a
   // crawler deciding what to recrawl than no lastmod at all.
@@ -625,13 +603,58 @@ async function main() {
     { loc: '/', priority: '1.0', lastmod: BUILD_DATE },
     { loc: '/onboarding', priority: '0.5', lastmod: BUILD_DATE },
     { loc: '/compare/ibps-po-vs-sbi-po/', priority: '0.6', lastmod: BUILD_DATE },
-    { loc: '/compare/ssc-cgl-syllabus/', priority: '0.7', lastmod: BUILD_DATE },
     // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
     // form to this one (it resolves {path}/index.html), so this is what actually serves with no
     // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.
     { loc: '/app/current-affairs/', priority: '0.9', lastmod: BUILD_DATE },
     { loc: '/app/exam-notices/', priority: '0.9', lastmod: BUILD_DATE },
   ];
+
+  // --- Syllabus & exam pattern pages --- one per exam x language (14 total), all driven by
+  // src/data/examSyllabi.ts. Mirrors src/pages/compare/SyllabusPage.tsx exactly.
+  for (const entry of EXAM_SYLLABI) {
+    for (const lang of ['en', 'hi']) {
+      const c = entry[lang];
+      const relPath = lang === 'hi' ? `hi/compare/${entry.slug}-syllabus` : `compare/${entry.slug}-syllabus`;
+      const urlPath = `/${relPath}/`;
+      const enPath = `/compare/${entry.slug}-syllabus`;
+      const hiPath = `/hi/compare/${entry.slug}-syllabus`;
+      writePage(relPath, page({
+        title: c.pageTitle,
+        description: c.lede.slice(0, 155),
+        path: urlPath,
+        assets,
+        bodyHtml: syllabusPageBody(entry, lang),
+        type: 'article',
+        lang,
+        alternateLanguages: [
+          { lang: 'en', path: enPath },
+          { lang: 'hi', path: hiPath },
+          { lang: 'x-default', path: enPath },
+        ],
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: c.pageTitle,
+            description: c.lede,
+            inLanguage: lang,
+            author: { '@type': 'Organization', name: SITE_NAME },
+            publisher: { '@type': 'Organization', name: SITE_NAME },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: c.backLabel, item: `${SITE_URL}/` },
+              { '@type': 'ListItem', position: 2, name: c.pageTitle },
+            ],
+          },
+        ],
+      }));
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: BUILD_DATE });
+    }
+  }
 
   // --- Current affairs ---
   const affairsListBody = appShell(`

@@ -6,6 +6,25 @@
   padding-block: 40px 80px;
   max-width: 820px;
 }
+.compare-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.compare-lang-switch {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--terracotta);
+  text-decoration: none;
+  border: 1px solid var(--tan);
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+.compare-lang-switch:hover {
+  text-decoration: underline;
+}
 .compare-article h1 {
   font-size: clamp(1.8rem, 3.6vw, 2.4rem);
   color: var(--navy);

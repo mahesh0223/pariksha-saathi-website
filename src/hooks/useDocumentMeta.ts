@@ -13,6 +13,12 @@ interface DocumentMetaOptions {
   path: string; // e.g. "/app/current-affairs/abc123"
   type?: 'website' | 'article';
   structuredData?: object | object[];
+  /** BCP 47 tag for this page's own content, e.g. "hi". Defaults to "en" (matches index.html). */
+  lang?: string;
+  /** Other language versions of this same page, for hreflang - e.g. the English page passes its
+   * Hindi counterpart's path and vice versa, so Google can serve searchers the version in their
+   * language instead of treating them as duplicate/competing pages. */
+  alternateLanguages?: { lang: string; path: string }[];
 }
 
 function setMetaTag(attr: 'name' | 'property', key: string, content: string) {
@@ -35,6 +41,19 @@ function setCanonical(url: string) {
   el.setAttribute('href', url);
 }
 
+function setAlternateLanguages(alternates: { lang: string; path: string }[] | undefined) {
+  document.querySelectorAll('link[data-hreflang]').forEach((el) => el.remove());
+  if (!alternates?.length) return;
+  for (const alt of alternates) {
+    const el = document.createElement('link');
+    el.setAttribute('rel', 'alternate');
+    el.setAttribute('hreflang', alt.lang);
+    el.setAttribute('href', `${SITE_URL}${alt.path}`);
+    el.dataset.hreflang = 'true';
+    document.head.appendChild(el);
+  }
+}
+
 // Accepts one object or several (e.g. an Article plus a BreadcrumbList) - each gets its own
 // <script> tag, which is valid JSON-LD and avoids wrapping everything in an artificial @graph.
 function setStructuredData(data: object | object[] | undefined) {
@@ -55,12 +74,21 @@ function setStructuredData(data: object | object[] | undefined) {
 // (scripts/prerender.mjs) bakes the same tags into the static HTML for crawlers that don't run
 // JS; this hook keeps them correct for real browsers navigating client-side afterward, and is the
 // only mechanism at all for pages that only ever exist client-side (the app's non-content screens).
-export function useDocumentMeta({ title, description, path, type = 'website', structuredData }: DocumentMetaOptions) {
+export function useDocumentMeta({
+  title,
+  description,
+  path,
+  type = 'website',
+  structuredData,
+  lang = 'en',
+  alternateLanguages,
+}: DocumentMetaOptions) {
   useEffect(() => {
     const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
     const url = `${SITE_URL}${path}`;
 
     document.title = fullTitle;
+    document.documentElement.lang = lang;
     setMetaTag('name', 'description', description);
     setMetaTag('property', 'og:title', fullTitle);
     setMetaTag('property', 'og:description', description);
@@ -76,5 +104,12 @@ export function useDocumentMeta({ title, description, path, type = 'website', st
     setMetaTag('name', 'twitter:image', DEFAULT_OG_IMAGE);
     setCanonical(url);
     setStructuredData(structuredData);
-  }, [title, description, path, type, structuredData]);
+    setAlternateLanguages(alternateLanguages);
+
+    return () => {
+      // Reset to the document's default language when this page unmounts (e.g. navigating from a
+      // Hindi page to an English one) - otherwise the <html lang> sticks past this page's own life.
+      document.documentElement.lang = 'en';
+    };
+  }, [title, description, path, type, structuredData, lang, alternateLanguages]);
 }

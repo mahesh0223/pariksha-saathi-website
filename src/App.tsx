@@ -2,7 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import { HomePage } from './pages/HomePage';
 import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
-import { SscCglSyllabusPage } from './pages/compare/SscCglSyllabusPage';
+import { SyllabusPage } from './pages/compare/SyllabusPage';
+import { EXAM_SYLLABI } from './data/examSyllabi';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
 import { DashboardPage } from './pages/app/DashboardPage';
 import { StudyPage } from './pages/app/StudyPage';
@@ -30,7 +31,20 @@ export function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/compare/ibps-po-vs-sbi-po" element={<IbpsPoVsSbiPoPage />} />
-      <Route path="/compare/ssc-cgl-syllabus" element={<SscCglSyllabusPage />} />
+      {EXAM_SYLLABI.map((exam) => (
+        <Route
+          key={`${exam.slug}-en`}
+          path={`/compare/${exam.slug}-syllabus`}
+          element={<SyllabusPage slug={exam.slug} lang="en" />}
+        />
+      ))}
+      {EXAM_SYLLABI.map((exam) => (
+        <Route
+          key={`${exam.slug}-hi`}
+          path={`/hi/compare/${exam.slug}-syllabus`}
+          element={<SyllabusPage slug={exam.slug} lang="hi" />}
+        />
+      ))}
       <Route path="/onboarding" element={<ExamSelectionPage />} />
 
       <Route path="/app" element={<AppShell />}>
