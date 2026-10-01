@@ -120,7 +120,7 @@ const HOW_IT_WORKS = [
 const EXAM_COVERAGE = [
   {
     name: 'SSC CGL',
-    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.',
+    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>',
   },
   {
     name: 'SSC MTS',

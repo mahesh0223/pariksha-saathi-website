@@ -212,7 +212,7 @@ const HOW_IT_WORKS = [
 ];
 
 const EXAM_COVERAGE = [
-  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.' },
+  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
   { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness.' },
   { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness.' },
   { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness.' },
@@ -456,6 +456,79 @@ function comparePageBody() {
     </div>`;
 }
 
+// Mirrors src/pages/compare/SscCglSyllabusPage.tsx exactly.
+const SSC_CGL_OFFICIAL_URL = 'https://ssc.gov.in/for-candidates/cgl-exam/xsd91hjkshdk92xk';
+function cglSyllabusPageBody() {
+  const tiers = [
+    {
+      name: 'Tier-I',
+      body: 'A single computer-based test covering four sections: General Intelligence & Reasoning, General Awareness, Quantitative Aptitude, and English Comprehension. This is the qualifying/screening stage — clearing it is what gets you to Tier-II.',
+    },
+    {
+      name: 'Tier-II',
+      body: 'A further computer-based test for candidates who clear Tier-I, going deeper on the same broad subject areas plus any role-specific papers relevant to the posts you’re eligible for.',
+    },
+  ];
+  const subjects = [
+    { name: 'Quantitative Aptitude', body: 'Number system, percentages, ratio & proportion, profit & loss, time-speed-distance, algebra, geometry, mensuration, trigonometry, and data interpretation.' },
+    { name: 'General Intelligence & Reasoning', body: 'Analogies, classification, series, coding-decoding, blood relations, direction sense, syllogisms, non-verbal reasoning (figures, patterns), and puzzles.' },
+    { name: 'English Comprehension', body: 'Grammar, vocabulary, sentence correction, fill in the blanks, cloze passages, synonyms/antonyms, and reading comprehension.' },
+    { name: 'General Awareness', body: 'Static GK (history, geography, polity, economy, science) plus current affairs — which is where a daily current-affairs habit actually pays off in this exam specifically.' },
+  ];
+  const tableRows = (rows) =>
+    rows
+      .map((r) => `<div class="compare-row"><div class="compare-cell compare-label">${escapeHtml(r.name)}</div><div class="compare-cell compare-both">${escapeHtml(r.body)}</div></div>`)
+      .join('\n          ');
+  return `<div class="compare-page">
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="/#features">Features</a>
+            <a href="/app/exam-notices">Exam Notices</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">Start studying</a>
+        </div>
+      </header>
+      <article class="wrap compare-article">
+        <a href="/" class="detail-back">&larr; Home</a>
+        <h1>SSC CGL Syllabus &amp; Exam Pattern</h1>
+        <p class="compare-lede">SSC CGL (Combined Graduate Level) is run as a multi-tier computer-based test. Here&rsquo;s the stable shape of it — what gets tested at each stage — with a link to the official notification for this cycle&rsquo;s exact marks, timing and negative-marking details, since those can be revised from one notification to the next.</p>
+        <h2>The tiers</h2>
+        <div class="compare-table">
+          ${tableRows(tiers)}
+        </div>
+        <h2>What&rsquo;s tested</h2>
+        <div class="compare-table">
+          ${tableRows(subjects)}
+        </div>
+        <p class="compare-note">Exact number of questions, marks per question, section-wise timing and the negative-marking fraction are set by each cycle&rsquo;s own official notification and can change from one CGL cycle to the next. Treat the subjects above as the stable shape to study toward, and check <a href="${SSC_CGL_OFFICIAL_URL}" target="_blank" rel="noreferrer">SSC&rsquo;s own CGL exam page</a> for this cycle&rsquo;s exact pattern before exam day.</p>
+        <h2>What CGL recruits for</h2>
+        <p>CGL fills Group B and Group C posts across central government ministries and departments — roles like Inspector-level posts in central tax departments, Auditor and Accountant posts, Assistant-level posts in various ministries, and more, with the exact post-wise vacancy breakdown published in each cycle&rsquo;s own notification.</p>
+        <h2>What Pariksha Saathi offers for SSC CGL</h2>
+        <p>Topic-wise lessons and practice across all four subjects above, sectional tests by subject, full-length mock tests in the real pattern with negative marking, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules for General Awareness — all free, with no paywalled content.</p>
+        <h2>Official source &amp; latest updates</h2>
+        <ul class="compare-links">
+          <li><a href="${SSC_CGL_OFFICIAL_URL}" target="_blank" rel="noreferrer">SSC CGL — official exam page &#8599;</a></li>
+          <li><a href="/app/exam-notices">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
+        </ul>
+        <a class="btn-primary-compare" href="/onboarding">Start studying SSC CGL free &rarr;</a>
+      </article>
+      <footer class="pub-footer">
+        <div class="wrap">
+          <div class="pub-footer-top">
+            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-links">
+              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <a href="mailto:sriwastava2@gmail.com">Contact</a>
+            </div>
+          </div>
+          <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. Syllabus and pattern details above are general and may change — always confirm against the official notification linked above.</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
 async function main() {
   const assets = readBuiltAssets();
 
@@ -515,6 +588,34 @@ async function main() {
     ],
   }));
 
+  // --- SSC CGL syllabus & pattern --- mirrors src/pages/compare/SscCglSyllabusPage.tsx exactly.
+  writePage('compare/ssc-cgl-syllabus', page({
+    title: 'SSC CGL Syllabus & Exam Pattern 2026',
+    description: 'SSC CGL’s Tier-I/Tier-II structure and the four subjects tested at each stage, with a link to the official SSC notification for exact current marks and timing.',
+    path: '/compare/ssc-cgl-syllabus/',
+    assets,
+    bodyHtml: cglSyllabusPageBody(),
+    type: 'article',
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'SSC CGL Syllabus & Exam Pattern 2026',
+        description: 'A breakdown of SSC CGL’s Tier-I/Tier-II structure and the subjects tested at each stage.',
+        author: { '@type': 'Organization', name: SITE_NAME },
+        publisher: { '@type': 'Organization', name: SITE_NAME },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'SSC CGL Syllabus & Exam Pattern' },
+        ],
+      },
+    ],
+  }));
+
   // This build's date, used as lastmod for pages whose content changes on every rebuild (the
   // homepage's "Latest" previews, and the two list pages) - not exact, but far more useful to a
   // crawler deciding what to recrawl than no lastmod at all.
@@ -524,6 +625,7 @@ async function main() {
     { loc: '/', priority: '1.0', lastmod: BUILD_DATE },
     { loc: '/onboarding', priority: '0.5', lastmod: BUILD_DATE },
     { loc: '/compare/ibps-po-vs-sbi-po/', priority: '0.6', lastmod: BUILD_DATE },
+    { loc: '/compare/ssc-cgl-syllabus/', priority: '0.7', lastmod: BUILD_DATE },
     // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
     // form to this one (it resolves {path}/index.html), so this is what actually serves with no
     // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.
