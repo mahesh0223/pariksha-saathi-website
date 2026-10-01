@@ -376,6 +376,27 @@ export function HomePage() {
                 <Link to="/learn/percentages">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Profit and Loss</h3>
+              <p>
+                Builds on percentages — CP, SP, discount and marked price, worked out.{' '}
+                <Link to="/learn/profit-and-loss">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Simple &amp; Compound Interest</h3>
+              <p>
+                The one distinction that matters, plus a shortcut worth memorising.{' '}
+                <Link to="/learn/simple-compound-interest">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Blood Relations</h3>
+              <p>
+                A clear approach to tracing relationships, not just answers to memorise.{' '}
+                <Link to="/learn/blood-relations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

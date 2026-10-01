@@ -328,6 +328,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Percentages</h3>
               <p>The concept, four worked examples, and a few to try yourself. <a href="/learn/percentages">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Profit and Loss</h3>
+              <p>Builds on percentages — CP, SP, discount and marked price, worked out. <a href="/learn/profit-and-loss">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Simple &amp; Compound Interest</h3>
+              <p>The one distinction that matters, plus a shortcut worth memorising. <a href="/learn/simple-compound-interest">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Blood Relations</h3>
+              <p>A clear approach to tracing relationships, not just answers to memorise. <a href="/learn/blood-relations">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
