@@ -1,4 +1,17 @@
 User-agent: *
-Allow: /
+# The pages below are the interactive app, not content - personalized, client-rendered only
+# (no prerendering), and not meaningfully distinct from each other to a crawler. Indexing them
+# just adds thin/duplicate pages to search results. Home, Current Affairs and Exam Notices are
+# the real content pages and stay crawlable.
+Disallow: /app/home
+Disallow: /app/study
+Disallow: /app/practice
+Disallow: /app/mistakes
+Disallow: /app/bookmarks
+Disallow: /app/progress
+Disallow: /app/digest
+Disallow: /app/account
+Disallow: /app/challenge
+Disallow: /app/current-affairs-quiz
 
 Sitemap: https://parikshasaathi.com/sitemap.xml

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { getExams } from '../../api/exams';
 import { useExamSelection } from '../../state/ExamSelectionContext';
+import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { Button, Spinner } from '../../components/ui/Primitives';
 import './ExamSelectionPage.css';
 
@@ -9,6 +10,13 @@ export function ExamSelectionPage() {
   const navigate = useNavigate();
   const { selectedExamIds, toggleExam } = useExamSelection();
   const { data: exams, isLoading, isError } = useQuery({ queryKey: ['exams'], queryFn: getExams });
+
+  useDocumentMeta({
+    title: 'Choose Your Exam',
+    description:
+      'Pick one or more of SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO or SBI Clerk and start studying free, right in your browser.',
+    path: '/onboarding',
+  });
 
   return (
     <div className="wrap onboarding">

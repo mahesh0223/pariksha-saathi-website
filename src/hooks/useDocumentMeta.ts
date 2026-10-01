@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 
 const SITE_NAME = 'Pariksha Saathi';
 const SITE_URL = 'https://parikshasaathi.com';
+// Reused from the Play Store listing (public/assets/feature-graphic-1024x500.png) - already
+// on-brand and at a social-card-friendly ratio, so sharing a link gets a real preview image
+// instead of a blank one.
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
 interface DocumentMetaOptions {
   title: string;
   description: string;
   path: string; // e.g. "/app/current-affairs/abc123"
   type?: 'website' | 'article';
-  structuredData?: object;
+  structuredData?: object | object[];
 }
 
 function setMetaTag(attr: 'name' | 'property', key: string, content: string) {
@@ -31,15 +35,18 @@ function setCanonical(url: string) {
   el.setAttribute('href', url);
 }
 
-function setStructuredData(data: object | undefined) {
-  const existing = document.getElementById('structured-data');
-  if (existing) existing.remove();
+// Accepts one object or several (e.g. an Article plus a BreadcrumbList) - each gets its own
+// <script> tag, which is valid JSON-LD and avoids wrapping everything in an artificial @graph.
+function setStructuredData(data: object | object[] | undefined) {
+  document.querySelectorAll('script[data-structured-data]').forEach((el) => el.remove());
   if (!data) return;
-  const script = document.createElement('script');
-  script.id = 'structured-data';
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(data);
-  document.head.appendChild(script);
+  for (const entry of Array.isArray(data) ? data : [data]) {
+    const script = document.createElement('script');
+    script.dataset.structuredData = 'true';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(entry);
+    document.head.appendChild(script);
+  }
 }
 
 // Every page that represents real, shareable content (an article, a notice, the homepage) should
@@ -60,9 +67,13 @@ export function useDocumentMeta({ title, description, path, type = 'website', st
     setMetaTag('property', 'og:type', type);
     setMetaTag('property', 'og:url', url);
     setMetaTag('property', 'og:site_name', SITE_NAME);
-    setMetaTag('name', 'twitter:card', 'summary');
+    setMetaTag('property', 'og:image', DEFAULT_OG_IMAGE);
+    setMetaTag('property', 'og:image:width', '1024');
+    setMetaTag('property', 'og:image:height', '500');
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
     setMetaTag('name', 'twitter:title', fullTitle);
     setMetaTag('name', 'twitter:description', description);
+    setMetaTag('name', 'twitter:image', DEFAULT_OG_IMAGE);
     setCanonical(url);
     setStructuredData(structuredData);
   }, [title, description, path, type, structuredData]);

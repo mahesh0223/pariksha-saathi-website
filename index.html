@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser." />
     <title>Pariksha Saathi — SSC, IBPS &amp; SBI Exam Prep</title>
+    <!-- Loaded here (not via theme.css's old @import) so the browser can start fetching it while
+         still parsing the HTML, instead of waiting to parse the main stylesheet first, discover
+         the @import inside it, and only then start the font request - a fully serial chain that
+         delayed first text paint. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    />
     <!-- Google AdSense: this script both loads what AdSense/components/ads/AdSlot.tsx's manual
          <ins> units need and is how Google verifies site ownership. Auto ads must stay OFF for
          this site in the AdSense dashboard (Ads > By site) - Auto ads has no concept of client-side

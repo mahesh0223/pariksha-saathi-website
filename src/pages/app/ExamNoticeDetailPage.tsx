@@ -30,15 +30,26 @@ export function ExamNoticeDetailPage() {
     path: `/app/exam-notices/${id}/`,
     type: 'article',
     structuredData: item
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: item.title,
-          description: item.summary,
-          dateModified: item.lastVerifiedAt,
-          author: { '@type': 'Organization', name: 'Pariksha Saathi' },
-          publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
-        }
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: item.title,
+            description: item.summary,
+            dateModified: item.lastVerifiedAt,
+            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://parikshasaathi.com/' },
+              { '@type': 'ListItem', position: 2, name: 'Exam Notices & Alerts', item: 'https://parikshasaathi.com/app/exam-notices/' },
+              { '@type': 'ListItem', position: 3, name: item.title },
+            ],
+          },
+        ]
       : undefined,
   });
 

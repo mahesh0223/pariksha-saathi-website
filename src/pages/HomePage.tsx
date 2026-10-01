@@ -188,6 +188,30 @@ export function HomePage() {
     description:
       'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
     path: '/',
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Pariksha Saathi',
+        url: 'https://parikshasaathi.com',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Pariksha Saathi',
+        url: 'https://parikshasaathi.com',
+        logo: 'https://parikshasaathi.com/assets/icon-512.png',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    ],
   });
 
   const affairsQuery = useQuery({

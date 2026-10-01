@@ -81,10 +81,22 @@ function adSlot(slot) {
   return `<ins class="adsbygoogle ad-slot" style="display:block" data-ad-client="ca-pub-6818930282969815" data-ad-slot="${slot}" data-ad-format="auto" data-full-width-responsive="true"></ins>`;
 }
 
+// Reused from the Play Store listing (public/assets/feature-graphic-1024x500.png) - matches
+// src/hooks/useDocumentMeta.ts's DEFAULT_OG_IMAGE exactly, so a shared link looks the same
+// whether it was crawled from the prerendered HTML or visited client-side.
+const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
+
+const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" />`;
+
 function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article' }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
-  const ld = structuredData ? JSON.stringify(structuredData).replaceAll('</', '<\\/') : null;
+  const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
+  const ld = ldEntries
+    .map((entry) => `<script type="application/ld+json">${JSON.stringify(entry).replaceAll('</', '<\\/')}</script>`)
+    .join('\n    ');
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -99,8 +111,13 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     <meta property="og:type" content="${type}" />
     <meta property="og:url" content="${url}" />
     <meta property="og:site_name" content="${SITE_NAME}" />
-    <meta name="twitter:card" content="summary" />
-    ${ld ? `<script type="application/ld+json">${ld}</script>` : ''}
+    <meta property="og:image" content="${OG_IMAGE}" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="500" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="${OG_IMAGE}" />
+    ${ld}
+    ${FONT_LINKS}
     ${assets.adsense ? `<script async src="${assets.adsense}" crossorigin="anonymous"></script>` : ''}
     <script type="module" crossorigin src="${assets.script}"></script>
     <link rel="stylesheet" crossorigin href="${assets.style}">
@@ -346,16 +363,31 @@ async function main() {
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
     type: 'website',
+    // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
+    structuredData: [
+      { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
+      { '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, url: SITE_URL, logo: `${SITE_URL}/assets/icon-512.png` },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      },
+    ],
   }), 'utf8');
 
+  // This build's date, used as lastmod for pages whose content changes on every rebuild (the
+  // homepage's "Latest" previews, and the two list pages) - not exact, but far more useful to a
+  // crawler deciding what to recrawl than no lastmod at all.
+  const BUILD_DATE = new Date().toISOString().slice(0, 10);
+
   const sitemapUrls = [
-    { loc: '/', priority: '1.0' },
-    { loc: '/onboarding', priority: '0.5' },
+    { loc: '/', priority: '1.0', lastmod: BUILD_DATE },
+    { loc: '/onboarding', priority: '0.5', lastmod: BUILD_DATE },
     // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
     // form to this one (it resolves {path}/index.html), so this is what actually serves with no
     // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.
-    { loc: '/app/current-affairs/', priority: '0.9' },
-    { loc: '/app/exam-notices/', priority: '0.9' },
+    { loc: '/app/current-affairs/', priority: '0.9', lastmod: BUILD_DATE },
+    { loc: '/app/exam-notices/', priority: '0.9', lastmod: BUILD_DATE },
   ];
 
   // --- Current affairs ---
@@ -405,16 +437,27 @@ async function main() {
       path: `/app/current-affairs/${item.id}/`,
       assets,
       bodyHtml: detailBody,
-      structuredData: {
-        '@context': 'https://schema.org',
-        '@type': 'NewsArticle',
-        headline: item.title,
-        description: item.summary,
-        datePublished: item.editionDate,
-        author: { '@type': 'Organization', name: SITE_NAME },
-        publisher: { '@type': 'Organization', name: SITE_NAME },
-        about: item.examTags,
-      },
+      structuredData: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: item.title,
+          description: item.summary,
+          datePublished: item.editionDate,
+          author: { '@type': 'Organization', name: SITE_NAME },
+          publisher: { '@type': 'Organization', name: SITE_NAME },
+          about: item.examTags,
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Current Affairs', item: `${SITE_URL}/app/current-affairs/` },
+            { '@type': 'ListItem', position: 3, name: item.title },
+          ],
+        },
+      ],
     }));
     sitemapUrls.push({ loc: `/app/current-affairs/${item.id}/`, priority: '0.7', lastmod: item.editionDate.slice(0, 10) });
   }
@@ -468,15 +511,26 @@ async function main() {
       path: `/app/exam-notices/${item.id}/`,
       assets,
       bodyHtml: detailBody,
-      structuredData: {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: item.title,
-        description: item.summary,
-        dateModified: item.lastVerifiedAt,
-        author: { '@type': 'Organization', name: SITE_NAME },
-        publisher: { '@type': 'Organization', name: SITE_NAME },
-      },
+      structuredData: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: item.title,
+          description: item.summary,
+          dateModified: item.lastVerifiedAt,
+          author: { '@type': 'Organization', name: SITE_NAME },
+          publisher: { '@type': 'Organization', name: SITE_NAME },
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { '@type': 'ListItem', position: 2, name: 'Exam Notices & Alerts', item: `${SITE_URL}/app/exam-notices/` },
+            { '@type': 'ListItem', position: 3, name: item.title },
+          ],
+        },
+      ],
     }));
     sitemapUrls.push({ loc: `/app/exam-notices/${item.id}/`, priority: '0.7', lastmod: item.lastVerifiedAt.slice(0, 10) });
   }

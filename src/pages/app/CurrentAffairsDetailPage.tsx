@@ -27,16 +27,27 @@ export function CurrentAffairsDetailPage() {
     path: `/app/current-affairs/${id}/`,
     type: 'article',
     structuredData: item
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'NewsArticle',
-          headline: item.title,
-          description: item.summary,
-          datePublished: item.editionDate,
-          author: { '@type': 'Organization', name: 'Pariksha Saathi' },
-          publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
-          about: item.examTags,
-        }
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'NewsArticle',
+            headline: item.title,
+            description: item.summary,
+            datePublished: item.editionDate,
+            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            about: item.examTags,
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://parikshasaathi.com/' },
+              { '@type': 'ListItem', position: 2, name: 'Current Affairs', item: 'https://parikshasaathi.com/app/current-affairs/' },
+              { '@type': 'ListItem', position: 3, name: item.title },
+            ],
+          },
+        ]
       : undefined,
   });
 
