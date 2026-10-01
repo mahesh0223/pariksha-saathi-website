@@ -1,24 +1,23 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
-import { findSyllabusEntry } from '../../data/examSyllabi.mjs';
+import { findLessonEntry } from '../../data/topicLessons.mjs';
 import { EmptyState } from '../../components/ui/Primitives';
-import './ComparePage.css';
+import '../compare/ComparePage.css';
+import './LessonArticlePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
-export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
-  const entry = findSyllabusEntry(slug);
+export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
+  const entry = findLessonEntry(slug);
   const content = entry?.[lang];
 
-  const enPath = `/compare/${slug}-syllabus`;
-  const hiPath = `/hi/compare/${slug}-syllabus`;
+  const enPath = `/learn/${slug}`;
+  const hiPath = `/hi/learn/${slug}`;
   const path = lang === 'hi' ? hiPath : enPath;
-  // There's no Hindi homepage (out of scope here) - both languages link back to the one real
-  // homepage rather than a dead /hi route.
   const homeHref = '/';
 
   useDocumentMeta({
-    title: content?.pageTitle ?? 'Syllabus & Exam Pattern',
+    title: content?.pageTitle ?? 'Topic Lesson',
     description: content?.lede.slice(0, 155) ?? '',
     path,
     type: 'article',
@@ -34,10 +33,11 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
       ? [
           {
             '@context': 'https://schema.org',
-            '@type': 'Article',
+            '@type': 'LearningResource',
             headline: content!.pageTitle,
             description: content!.lede,
             inLanguage: lang,
+            learningResourceType: 'lesson',
             author: { '@type': 'Organization', name: 'Pariksha Saathi' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
           },
@@ -57,7 +57,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
     return (
       <div className="compare-page">
         <div className="wrap" style={{ paddingTop: 40 }}>
-          <EmptyState>This syllabus page isn&rsquo;t available.</EmptyState>
+          <EmptyState>This lesson isn&rsquo;t available.</EmptyState>
         </div>
       </div>
     );
@@ -93,51 +93,53 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
 
-        <h2>{content.stagesHeading}</h2>
-        <div className="compare-table">
-          {content.stages.map((s) => (
-            <div className="compare-row" key={s.name}>
-              <div className="compare-cell compare-label">{s.name}</div>
-              <div className="compare-cell compare-both">{s.body}</div>
-            </div>
+        <h2>{content.conceptHeading}</h2>
+        <ul className="lesson-concept-list">
+          {content.conceptBody.map((line, i) => (
+            <li key={i}>{line}</li>
+          ))}
+        </ul>
+
+        <h2>{content.examplesHeading}</h2>
+        {content.examples.map((ex, i) => (
+          <div className="lesson-example" key={i}>
+            <p className="lesson-example-q">
+              <strong>
+                {i + 1}. {ex.question}
+              </strong>
+            </p>
+            <p className="lesson-solution-label">{content.solutionLabel}</p>
+            <ol className="lesson-solution-steps">
+              {ex.solution.map((step, j) => (
+                <li key={j}>{step}</li>
+              ))}
+            </ol>
+            <p className="lesson-answer">
+              {content.answerLabel}: {ex.answer}
+            </p>
+          </div>
+        ))}
+
+        <h2>{content.practiceHeading}</h2>
+        <p>{content.practiceIntro}</p>
+        <div className="lesson-practice-list">
+          {content.practiceQuestions.map((q, i) => (
+            <details className="lesson-practice-item" key={i}>
+              <summary>
+                {i + 1}. {q.question}
+              </summary>
+              <p>
+                {content.answerLabel}: {q.answer}
+              </p>
+            </details>
           ))}
         </div>
 
-        <h2>{content.subjectsHeading}</h2>
-        <div className="compare-table">
-          {content.subjects.map((s) => (
-            <div className="compare-row" key={s.name}>
-              <div className="compare-cell compare-label">{s.name}</div>
-              <div className="compare-cell compare-both">{s.body}</div>
-            </div>
-          ))}
-        </div>
-
-        <p className="compare-note">
-          {content.note}{' '}
-          <a href={entry.officialUrl} target="_blank" rel="noreferrer">
-            {content.noteLinkLabel}
-          </a>
-          .
-        </p>
-
-        <h2>{content.recruitsHeading}</h2>
-        <p>{content.recruitsBody}</p>
+        <h2>{content.relevantForHeading}</h2>
+        <p>{content.relevantForBody}</p>
 
         <h2>{content.offerHeading}</h2>
         <p>{content.offerBody}</p>
-
-        <h2>{content.sourceHeading}</h2>
-        <ul className="compare-links">
-          <li>
-            <a href={entry.officialUrl} target="_blank" rel="noreferrer">
-              {content.officialLinkLabel} &#8599;
-            </a>
-          </li>
-          <li>
-            <Link to="/app/exam-notices">{content.examNoticesLinkLabel} &rarr;</Link>
-          </li>
-        </ul>
 
         <Link className="btn-primary-compare" to="/onboarding">
           {content.ctaLabel} &rarr;

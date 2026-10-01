@@ -14,11 +14,15 @@
 
 import { readFileSync, writeFileSync, mkdirSync, cpSync } from 'node:fs';
 import { join } from 'node:path';
-// Node's native TypeScript support (type-stripping, since this project's tsconfig already
-// restricts to erasable-only syntax) lets this import the real .ts data file directly - single
-// source of truth for the syllabus pages' EN/HI content, shared with src/pages/compare/
-// SyllabusPage.tsx, instead of hand-duplicating ~500 lines of bilingual copy into this script.
-import { EXAM_SYLLABI } from '../src/data/examSyllabi.ts';
+// Plain .mjs (not .ts) specifically so this works on whatever Node version Cloudflare Pages'
+// build image runs - an earlier version of this imported the .ts file directly, relying on
+// Node's native TypeScript type-stripping (unflagged only on very recent Node), which silently
+// broke production: the build never errors out visibly to us, Cloudflare just keeps serving the
+// last successful deploy forever. These .mjs files are the single source of truth for the
+// syllabus/lesson pages' EN/HI content either way, shared with the React components under
+// src/pages/ - just without compile-time typing on the data shape.
+import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
+import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
@@ -312,6 +316,21 @@ function homePageBody(affairsPreview, noticesPreview) {
           <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
         </div>
       </section>
+      <section class="pub-section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="eyebrow">Topic lessons</div>
+            <h2>Worked examples, free to read</h2>
+            <p>The same topics the app teaches, as standalone lessons with fully worked solutions — no account needed to read these.</p>
+          </div>
+          <div class="exam-coverage-grid">
+            <div class="exam-coverage-item">
+              <h3>Percentages</h3>
+              <p>The concept, four worked examples, and a few to try yourself. <a href="/learn/percentages">Read the lesson &rarr;</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="current-affairs" class="pub-section pub-section-alt">
         <div class="wrap">
           <div class="section-head">
@@ -535,6 +554,86 @@ function syllabusPageBody(entry, lang) {
     </div>`;
 }
 
+// Mirrors src/pages/learn/LessonArticlePage.tsx exactly - driven by src/data/topicLessons.ts,
+// same single-source-of-truth pattern as syllabusPageBody above.
+function lessonPageBody(entry, lang) {
+  const c = entry[lang];
+  const homeHref = '/';
+  const enPath = `/learn/${entry.slug}`;
+  const hiPath = `/hi/learn/${entry.slug}`;
+  const otherLangHref = lang === 'hi' ? enPath : hiPath;
+  const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
+  const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
+  const startStudyingLabel = lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying';
+  const examples = c.examples
+    .map(
+      (ex, i) => `<div class="lesson-example">
+          <p class="lesson-example-q"><strong>${i + 1}. ${escapeHtml(ex.question)}</strong></p>
+          <p class="lesson-solution-label">${escapeHtml(c.solutionLabel)}</p>
+          <ol class="lesson-solution-steps">
+            ${ex.solution.map((step) => `<li>${escapeHtml(step)}</li>`).join('\n            ')}
+          </ol>
+          <p class="lesson-answer">${escapeHtml(c.answerLabel)}: ${escapeHtml(ex.answer)}</p>
+        </div>`,
+    )
+    .join('\n        ');
+  const practice = c.practiceQuestions
+    .map(
+      (q, i) => `<details class="lesson-practice-item">
+            <summary>${i + 1}. ${escapeHtml(q.question)}</summary>
+            <p>${escapeHtml(c.answerLabel)}: ${escapeHtml(q.answer)}</p>
+          </details>`,
+    )
+    .join('\n          ');
+  return `<div class="compare-page">
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="/app/exam-notices">${examNoticesLabel}</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+        </div>
+      </header>
+      <article class="wrap compare-article">
+        <div class="compare-top-row">
+          <a href="${homeHref}" class="detail-back">&larr; ${escapeHtml(c.backLabel)}</a>
+          <a href="${otherLangHref}" class="compare-lang-switch">${otherLangLabel}</a>
+        </div>
+        <h1>${escapeHtml(c.pageTitle)}</h1>
+        <p class="compare-lede">${escapeHtml(c.lede)}</p>
+        <h2>${escapeHtml(c.conceptHeading)}</h2>
+        <ul class="lesson-concept-list">
+          ${c.conceptBody.map((line) => `<li>${escapeHtml(line)}</li>`).join('\n          ')}
+        </ul>
+        <h2>${escapeHtml(c.examplesHeading)}</h2>
+        ${examples}
+        <h2>${escapeHtml(c.practiceHeading)}</h2>
+        <p>${escapeHtml(c.practiceIntro)}</p>
+        <div class="lesson-practice-list">
+          ${practice}
+        </div>
+        <h2>${escapeHtml(c.relevantForHeading)}</h2>
+        <p>${escapeHtml(c.relevantForBody)}</p>
+        <h2>${escapeHtml(c.offerHeading)}</h2>
+        <p>${escapeHtml(c.offerBody)}</p>
+        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
+      </article>
+      <footer class="pub-footer">
+        <div class="wrap">
+          <div class="pub-footer-top">
+            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-links">
+              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <a href="mailto:sriwastava2@gmail.com">Contact</a>
+            </div>
+          </div>
+          <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
 async function main() {
   const assets = readBuiltAssets();
 
@@ -639,6 +738,53 @@ async function main() {
             headline: c.pageTitle,
             description: c.lede,
             inLanguage: lang,
+            author: { '@type': 'Organization', name: SITE_NAME },
+            publisher: { '@type': 'Organization', name: SITE_NAME },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: c.backLabel, item: `${SITE_URL}/` },
+              { '@type': 'ListItem', position: 2, name: c.pageTitle },
+            ],
+          },
+        ],
+      }));
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: BUILD_DATE });
+    }
+  }
+
+  // --- Topic lesson pages --- one per topic x language, driven by src/data/topicLessons.ts.
+  // Mirrors src/pages/learn/LessonArticlePage.tsx exactly.
+  for (const entry of TOPIC_LESSONS) {
+    for (const lang of ['en', 'hi']) {
+      const c = entry[lang];
+      const relPath = lang === 'hi' ? `hi/learn/${entry.slug}` : `learn/${entry.slug}`;
+      const urlPath = `/${relPath}/`;
+      const enPath = `/learn/${entry.slug}`;
+      const hiPath = `/hi/learn/${entry.slug}`;
+      writePage(relPath, page({
+        title: c.pageTitle,
+        description: c.lede.slice(0, 155),
+        path: urlPath,
+        assets,
+        bodyHtml: lessonPageBody(entry, lang),
+        type: 'article',
+        lang,
+        alternateLanguages: [
+          { lang: 'en', path: enPath },
+          { lang: 'hi', path: hiPath },
+          { lang: 'x-default', path: enPath },
+        ],
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'LearningResource',
+            headline: c.pageTitle,
+            description: c.lede,
+            inLanguage: lang,
+            learningResourceType: 'lesson',
             author: { '@type': 'Organization', name: SITE_NAME },
             publisher: { '@type': 'Organization', name: SITE_NAME },
           },

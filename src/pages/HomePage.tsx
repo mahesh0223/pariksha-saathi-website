@@ -361,6 +361,25 @@ export function HomePage() {
         </div>
       </section>
 
+      <section className="pub-section">
+        <div className="wrap">
+          <div className="section-head">
+            <div className="eyebrow">Topic lessons</div>
+            <h2>Worked examples, free to read</h2>
+            <p>The same topics the app teaches, as standalone lessons with fully worked solutions — no account needed to read these.</p>
+          </div>
+          <div className="exam-coverage-grid">
+            <div className="exam-coverage-item">
+              <h3>Percentages</h3>
+              <p>
+                The concept, four worked examples, and a few to try yourself.{' '}
+                <Link to="/learn/percentages">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="current-affairs" className="pub-section pub-section-alt">
         <div className="wrap">
           <div className="section-head">

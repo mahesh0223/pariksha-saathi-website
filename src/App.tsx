@@ -3,7 +3,9 @@ import { AppShell } from './components/layout/AppShell';
 import { HomePage } from './pages/HomePage';
 import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { SyllabusPage } from './pages/compare/SyllabusPage';
-import { EXAM_SYLLABI } from './data/examSyllabi';
+import { EXAM_SYLLABI } from './data/examSyllabi.mjs';
+import { LessonArticlePage } from './pages/learn/LessonArticlePage';
+import { TOPIC_LESSONS } from './data/topicLessons.mjs';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
 import { DashboardPage } from './pages/app/DashboardPage';
 import { StudyPage } from './pages/app/StudyPage';
@@ -44,6 +46,12 @@ export function App() {
           path={`/hi/compare/${exam.slug}-syllabus`}
           element={<SyllabusPage slug={exam.slug} lang="hi" />}
         />
+      ))}
+      {TOPIC_LESSONS.map((topic) => (
+        <Route key={`${topic.slug}-en`} path={`/learn/${topic.slug}`} element={<LessonArticlePage slug={topic.slug} lang="en" />} />
+      ))}
+      {TOPIC_LESSONS.map((topic) => (
+        <Route key={`${topic.slug}-hi`} path={`/hi/learn/${topic.slug}`} element={<LessonArticlePage slug={topic.slug} lang="hi" />} />
       ))}
       <Route path="/onboarding" element={<ExamSelectionPage />} />
 

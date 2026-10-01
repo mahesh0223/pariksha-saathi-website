@@ -4,41 +4,7 @@
 // Each page links to the real official source for that exam instead of asserting a number this
 // file can't keep current. See src/pages/compare/SyllabusPage.tsx for how this renders.
 
-export interface SyllabusStage {
-  name: string;
-  body: string;
-}
-
-export interface SyllabusContent {
-  pageTitle: string;
-  lede: string;
-  stagesHeading: string;
-  stages: SyllabusStage[];
-  subjectsHeading: string;
-  subjects: SyllabusStage[];
-  note: string;
-  noteLinkLabel: string;
-  recruitsHeading: string;
-  recruitsBody: string;
-  offerHeading: string;
-  offerBody: string;
-  sourceHeading: string;
-  officialLinkLabel: string;
-  examNoticesLinkLabel: string;
-  ctaLabel: string;
-  backLabel: string;
-  disclaimer: string;
-}
-
-export interface ExamSyllabusEntry {
-  slug: string;
-  examName: string;
-  officialUrl: string;
-  en: SyllabusContent;
-  hi: SyllabusContent;
-}
-
-export const EXAM_SYLLABI: ExamSyllabusEntry[] = [
+export const EXAM_SYLLABI = [
   {
     slug: 'ssc-cgl',
     examName: 'SSC CGL',
@@ -472,6 +438,6 @@ export const EXAM_SYLLABI: ExamSyllabusEntry[] = [
   },
 ];
 
-export function findSyllabusEntry(slug: string): ExamSyllabusEntry | undefined {
+export function findSyllabusEntry(slug) {
   return EXAM_SYLLABI.find((e) => e.slug === slug);
 }
