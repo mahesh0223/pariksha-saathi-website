@@ -340,6 +340,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Blood Relations</h3>
               <p>A clear approach to tracing relationships, not just answers to memorise. <a href="/learn/blood-relations">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Time, Speed and Distance</h3>
+              <p>Unit conversion and the average-speed trap, with trains thrown in. <a href="/learn/time-speed-distance">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Coding-Decoding</h3>
+              <p>Four rule-types that cover almost everything actually asked. <a href="/learn/coding-decoding">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Syllogism</h3>
+              <p>Pure logic, not real-world knowledge — the Venn-diagram approach that works. <a href="/learn/syllogism">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

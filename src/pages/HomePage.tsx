@@ -397,6 +397,27 @@ export function HomePage() {
                 <Link to="/learn/blood-relations">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Time, Speed and Distance</h3>
+              <p>
+                Unit conversion and the average-speed trap, with trains thrown in.{' '}
+                <Link to="/learn/time-speed-distance">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Coding-Decoding</h3>
+              <p>
+                Four rule-types that cover almost everything actually asked.{' '}
+                <Link to="/learn/coding-decoding">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Syllogism</h3>
+              <p>
+                Pure logic, not real-world knowledge — the Venn-diagram approach that works.{' '}
+                <Link to="/learn/syllogism">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
