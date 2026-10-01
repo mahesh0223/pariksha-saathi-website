@@ -298,6 +298,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           <div class="exam-coverage-grid">
             ${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('\n            ')}
           </div>
+          <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
         </div>
       </section>
       <section id="current-affairs" class="pub-section pub-section-alt">
@@ -373,6 +374,88 @@ function homePageBody(affairsPreview, noticesPreview) {
     </div>`;
 }
 
+// Mirrors src/pages/compare/IbpsPoVsSbiPoPage.tsx exactly - see that component for why each
+// claim is phrased the way it is (hedged where the exact pattern can change notification to
+// notification, linked to the official source either way).
+function comparePageBody() {
+  const rows = [
+    {
+      label: 'Conducted by',
+      ibps: 'The Institute of Banking Personnel Selection (IBPS), on behalf of a group of participating public sector banks.',
+      sbi: 'State Bank of India itself — SBI runs its own recruitment, using IBPS’s testing platform as a service provider.',
+    },
+    {
+      label: 'Who you join',
+      ibps: 'Not decided when you apply. Selected candidates are allotted to one of the participating banks based on merit and the preferences you submit.',
+      sbi: 'State Bank of India, specifically. You know which bank you’re joining before you even apply.',
+    },
+    {
+      label: 'Selection stages',
+      ibps: 'Preliminary exam, Main exam, then an interview.',
+      sbi: 'Preliminary exam, Main exam, then a Group Exercise and Interview.',
+    },
+  ];
+  return `<div class="compare-page">
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="/#features">Features</a>
+            <a href="/app/exam-notices">Exam Notices</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">Start studying</a>
+        </div>
+      </header>
+      <article class="wrap compare-article">
+        <a href="/" class="detail-back">&larr; Home</a>
+        <h1>IBPS PO vs SBI PO: What&rsquo;s Actually Different</h1>
+        <p class="compare-lede">Both lead to the same job title — Probationary Officer at a public sector bank — which is exactly why the two get confused. They&rsquo;re run by different organisations, for different outcomes, and they&rsquo;re separate applications with separate forms and fees. Here&rsquo;s what actually distinguishes them.</p>
+        <div class="compare-table">
+          <div class="compare-row compare-row-head">
+            <div class="compare-cell"></div>
+            <div class="compare-cell">IBPS PO</div>
+            <div class="compare-cell">SBI PO</div>
+          </div>
+          ${rows
+            .map(
+              (row) => `<div class="compare-row">
+            <div class="compare-cell compare-label">${escapeHtml(row.label)}</div>
+            <div class="compare-cell" data-label="IBPS PO: ">${escapeHtml(row.ibps)}</div>
+            <div class="compare-cell" data-label="SBI PO: ">${escapeHtml(row.sbi)}</div>
+          </div>`,
+            )
+            .join('\n          ')}
+          <div class="compare-row">
+            <div class="compare-cell compare-label">Can I apply to both?</div>
+            <div class="compare-cell compare-both">Yes — they&rsquo;re separate recruitment cycles with separate notifications, forms and fees, so applying to one has no bearing on your eligibility for the other.</div>
+          </div>
+        </div>
+        <p class="compare-note">Exact section-wise marks, number of questions and interview weightage can change from one notification to the next for either exam. Treat the structure above as the stable shape, and check that cycle&rsquo;s official notification for the exact current pattern — linked below for each.</p>
+        <h2>What Pariksha Saathi offers for each</h2>
+        <p>The same practice content either way: Reasoning, Quantitative Aptitude and English for Prelims and Mains, plus dated current-affairs capsules for Banking Awareness — free, with no paywalled mock tests. Select whichever one (or both) you&rsquo;re preparing for from the exam picker.</p>
+        <h2>Official notifications</h2>
+        <ul class="compare-links">
+          <li><a href="https://www.ibps.in/index.php/management-trainees-xvi/" target="_blank" rel="noreferrer">IBPS PO/MT — official CRP page &#8599;</a></li>
+          <li><a href="https://sbi.bank.in/web/careers/current-openings" target="_blank" rel="noreferrer">SBI PO — official SBI careers page &#8599;</a></li>
+          <li><a href="/app/exam-notices">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
+        </ul>
+        <a class="btn-primary-compare" href="/onboarding">Start studying free &rarr;</a>
+      </article>
+      <footer class="pub-footer">
+        <div class="wrap">
+          <div class="pub-footer-top">
+            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-links">
+              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <a href="mailto:sriwastava2@gmail.com">Contact</a>
+            </div>
+          </div>
+          <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with IBPS, SBI, or any government body. Figures and process details above are general and may change — always confirm against the official notification linked above.</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
 async function main() {
   const assets = readBuiltAssets();
 
@@ -403,6 +486,35 @@ async function main() {
     ],
   }), 'utf8');
 
+  // --- IBPS PO vs SBI PO comparison --- mirrors src/pages/compare/IbpsPoVsSbiPoPage.tsx exactly.
+  // Kept in sync by hand, same as every other page this script prerenders.
+  writePage('compare/ibps-po-vs-sbi-po', page({
+    title: 'IBPS PO vs SBI PO: What’s Actually Different',
+    description: 'IBPS PO and SBI PO both lead to a Probationary Officer role at a public sector bank, but they’re run by different organisations with different outcomes. Here’s how they actually differ.',
+    path: '/compare/ibps-po-vs-sbi-po/',
+    assets,
+    bodyHtml: comparePageBody(),
+    type: 'article',
+    structuredData: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'IBPS PO vs SBI PO: What’s Actually Different',
+        description: 'A comparison of how IBPS PO and SBI PO recruitment are conducted, who they recruit for, and how their selection stages differ.',
+        author: { '@type': 'Organization', name: SITE_NAME },
+        publisher: { '@type': 'Organization', name: SITE_NAME },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'IBPS PO vs SBI PO' },
+        ],
+      },
+    ],
+  }));
+
   // This build's date, used as lastmod for pages whose content changes on every rebuild (the
   // homepage's "Latest" previews, and the two list pages) - not exact, but far more useful to a
   // crawler deciding what to recrawl than no lastmod at all.
@@ -411,6 +523,7 @@ async function main() {
   const sitemapUrls = [
     { loc: '/', priority: '1.0', lastmod: BUILD_DATE },
     { loc: '/onboarding', priority: '0.5', lastmod: BUILD_DATE },
+    { loc: '/compare/ibps-po-vs-sbi-po/', priority: '0.6', lastmod: BUILD_DATE },
     // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
     // form to this one (it resolves {path}/index.html), so this is what actually serves with no
     // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.

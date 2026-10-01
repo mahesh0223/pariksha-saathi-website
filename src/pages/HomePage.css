@@ -378,6 +378,19 @@
     grid-template-columns: 1fr;
   }
 }
+.exam-coverage-note {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.exam-coverage-note a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+}
+.exam-coverage-note a:hover {
+  text-decoration: underline;
+}
 
 .faq-list {
   display: flex;

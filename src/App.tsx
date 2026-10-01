@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
 import { HomePage } from './pages/HomePage';
+import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
 import { DashboardPage } from './pages/app/DashboardPage';
 import { StudyPage } from './pages/app/StudyPage';
@@ -27,6 +28,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/compare/ibps-po-vs-sbi-po" element={<IbpsPoVsSbiPoPage />} />
       <Route path="/onboarding" element={<ExamSelectionPage />} />
 
       <Route path="/app" element={<AppShell />}>

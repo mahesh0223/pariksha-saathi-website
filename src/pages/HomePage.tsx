@@ -354,6 +354,10 @@ export function HomePage() {
               </div>
             ))}
           </div>
+          <p className="exam-coverage-note">
+            Not sure whether to go for a bank-wide posting or State Bank of India specifically?{' '}
+            <Link to="/compare/ibps-po-vs-sbi-po">See how IBPS PO and SBI PO actually differ &rarr;</Link>
+          </p>
         </div>
       </section>
 
