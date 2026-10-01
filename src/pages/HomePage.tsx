@@ -460,6 +460,27 @@ export function HomePage() {
                 <Link to="/learn/synonyms-and-antonyms">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Time and Work</h3>
+              <p>
+                Convert everyone to a daily rate, combine, then convert back.{' '}
+                <Link to="/learn/time-and-work">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Analogy</h3>
+              <p>
+                Name the relationship precisely before you look at the options.{' '}
+                <Link to="/learn/analogy">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>One Word Substitution</h3>
+              <p>
+                A narrow, learnable vocabulary list — the same few dozen words repeat.{' '}
+                <Link to="/learn/one-word-substitution">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

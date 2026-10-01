@@ -376,6 +376,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Synonyms and Antonyms</h3>
               <p>Why context, not vocabulary size, is usually what decides the answer. <a href="/learn/synonyms-and-antonyms">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Time and Work</h3>
+              <p>Convert everyone to a daily rate, combine, then convert back. <a href="/learn/time-and-work">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Analogy</h3>
+              <p>Name the relationship precisely before you look at the options. <a href="/learn/analogy">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>One Word Substitution</h3>
+              <p>A narrow, learnable vocabulary list — the same few dozen words repeat. <a href="/learn/one-word-substitution">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
