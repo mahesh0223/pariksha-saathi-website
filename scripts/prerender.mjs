@@ -154,6 +154,34 @@ function icon(name) {
   return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
 }
 
+// Mirrors src/lib/seoNoticeTitle.ts exactly - see that file for why this exists (a <title>-tag-only
+// prefix built from the structured examId/type fields, never touching the on-page <h1>).
+const EXAM_NAMES = {
+  ssc_cgl: 'SSC CGL', ssc_chsl: 'SSC CHSL', ssc_mts: 'SSC MTS',
+  ibps_po: 'IBPS PO', ibps_clerk: 'IBPS Clerk', sbi_po: 'SBI PO', sbi_clerk: 'SBI Clerk',
+};
+const TYPE_LABELS = {
+  ADMIT_CARD: 'Admit Card', RESULT: 'Result', ANSWER_KEY: 'Answer Key',
+  NOTIFICATION: 'Notification', DEADLINE: 'Deadline',
+};
+const TYPE_SYNONYMS = {
+  ADMIT_CARD: /call letter|admit card/i,
+  RESULT: /\bresult\b|\bscores?\b/i,
+  ANSWER_KEY: /answer key/i,
+  DEADLINE: /deadline|last date|extended/i,
+};
+function seoNoticeTitle(examId, type, title, year) {
+  const examName = EXAM_NAMES[examId];
+  const typeLabel = TYPE_LABELS[type];
+  if (!examName || !typeLabel) return title;
+  const lower = title.toLowerCase();
+  const hasExam = lower.includes(examName.toLowerCase());
+  const hasType = lower.includes(typeLabel.toLowerCase()) || (TYPE_SYNONYMS[type]?.test(title) ?? false);
+  const examPart = hasExam ? '' : `${examName} `;
+  const typePart = hasType ? '' : `${typeLabel} ${year}: `;
+  return `${examPart}${typePart}${title}`;
+}
+
 // Mirrors src/pages/HomePage.tsx's content arrays and markup - kept in sync by hand since this
 // script can't import TSX. If HomePage.tsx's copy changes, update this too.
 const HOME_FEATURES = [
@@ -482,7 +510,7 @@ async function main() {
     </div>
   `);
   writePage('app/exam-notices', page({
-    title: 'Exam Notices & Alerts',
+    title: 'SSC, IBPS & SBI Admit Card & Result Alerts',
     description: "Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body's own site.",
     path: '/app/exam-notices/',
     assets,
@@ -506,7 +534,7 @@ async function main() {
       </article>
     `);
     writePage(`app/exam-notices/${item.id}`, page({
-      title: item.title,
+      title: seoNoticeTitle(item.examId, item.type, item.title, item.lastVerifiedAt.slice(0, 4)),
       description: item.summary.slice(0, 155),
       path: `/app/exam-notices/${item.id}/`,
       assets,

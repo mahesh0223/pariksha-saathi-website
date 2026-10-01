@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { seoNoticeTitle } from '../../lib/seoNoticeTitle';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { AdSlot } from '../../components/ads/AdSlot';
 import './DetailPage.css';
@@ -22,7 +23,10 @@ export function ExamNoticeDetailPage() {
   const dateEntries = Object.entries(item?.importantDates ?? {});
 
   useDocumentMeta({
-    title: item?.title ?? 'Exam Notices & Alerts',
+    // The <title> tag only - the on-page <h1> below keeps the original official wording.
+    title: item
+      ? seoNoticeTitle(item.examId, item.type, item.title, item.lastVerifiedAt.slice(0, 4))
+      : 'Exam Notices & Alerts',
     description: item
       ? item.summary.slice(0, 155)
       : 'Official exam notifications and alerts for SSC, IBPS and SBI recruitment.',

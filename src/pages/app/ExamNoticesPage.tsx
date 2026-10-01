@@ -24,7 +24,7 @@ export function ExamNoticesPage() {
   });
 
   useDocumentMeta({
-    title: 'Exam Notices & Alerts',
+    title: 'SSC, IBPS & SBI Admit Card & Result Alerts',
     description:
       'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
     // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
