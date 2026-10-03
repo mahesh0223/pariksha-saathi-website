@@ -568,6 +568,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Para Completion</h3>
               <p>Continuing a paragraph&rsquo;s direction without overreaching or contradicting it. <a href="/learn/para-completion">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Problems on Trains</h3>
+              <p>The same Time-Speed-Distance method, plus the train&rsquo;s own length. <a href="/learn/problems-on-trains">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Mathematical Operations</h3>
+              <p>Substitute the swapped symbols first, then apply the usual order of operations. <a href="/learn/mathematical-operations">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Commonly Confused Words</h3>
+              <p>Affect vs effect, principal vs principle &mdash; learned by meaning, not spelling. <a href="/learn/commonly-confused-words">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

@@ -796,6 +796,27 @@ export function HomePage() {
                 <Link to="/learn/para-completion">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Problems on Trains</h3>
+              <p>
+                The same Time-Speed-Distance method, plus the train’s own length.{' '}
+                <Link to="/learn/problems-on-trains">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Mathematical Operations</h3>
+              <p>
+                Substitute the swapped symbols first, then apply the usual order of operations.{' '}
+                <Link to="/learn/mathematical-operations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Commonly Confused Words</h3>
+              <p>
+                Affect vs effect, principal vs principle — learned by meaning, not spelling.{' '}
+                <Link to="/learn/commonly-confused-words">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
