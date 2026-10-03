@@ -817,6 +817,27 @@ export function HomePage() {
                 <Link to="/learn/commonly-confused-words">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Races and Games</h3>
+              <p>
+                "Start" and "beats by" — comparing how far each runner has gone.{' '}
+                <Link to="/learn/races-and-games">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Word Formation</h3>
+              <p>
+                Careful letter-by-letter accounting, not a guessing game.{' '}
+                <Link to="/learn/word-formation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Reading Comprehension</h3>
+              <p>
+                Every answer comes from the passage itself, not outside knowledge.{' '}
+                <Link to="/learn/reading-comprehension">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

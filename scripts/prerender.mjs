@@ -580,6 +580,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Commonly Confused Words</h3>
               <p>Affect vs effect, principal vs principle &mdash; learned by meaning, not spelling. <a href="/learn/commonly-confused-words">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Races and Games</h3>
+              <p>&quot;Start&quot; and &quot;beats by&quot; &mdash; comparing how far each runner has gone. <a href="/learn/races-and-games">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Word Formation</h3>
+              <p>Careful letter-by-letter accounting, not a guessing game. <a href="/learn/word-formation">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Reading Comprehension</h3>
+              <p>Every answer comes from the passage itself, not outside knowledge. <a href="/learn/reading-comprehension">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
