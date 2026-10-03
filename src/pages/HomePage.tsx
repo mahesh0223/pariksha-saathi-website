@@ -607,6 +607,27 @@ export function HomePage() {
                 <Link to="/learn/degrees-of-comparison">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Problems on Ages</h3>
+              <p>
+                Algebra in disguise — one variable, carried through every condition.{' '}
+                <Link to="/learn/problems-on-ages">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Venn Diagram</h3>
+              <p>
+                Inclusion-exclusion — add the groups, subtract what got counted twice.{' '}
+                <Link to="/learn/venn-diagram">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Prepositions</h3>
+              <p>
+                Fixed pairings to learn like vocabulary, plus a size-based pattern for time and place.{' '}
+                <Link to="/learn/prepositions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

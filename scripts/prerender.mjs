@@ -460,6 +460,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Degrees of Comparison</h3>
               <p>Matching an adjective&rsquo;s form to how many things are being compared. <a href="/learn/degrees-of-comparison">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Problems on Ages</h3>
+              <p>Algebra in disguise &mdash; one variable, carried through every condition. <a href="/learn/problems-on-ages">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Venn Diagram</h3>
+              <p>Inclusion-exclusion &mdash; add the groups, subtract what got counted twice. <a href="/learn/venn-diagram">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Prepositions</h3>
+              <p>Fixed pairings to learn like vocabulary, plus a size-based pattern for time and place. <a href="/learn/prepositions">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
