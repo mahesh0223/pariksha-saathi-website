@@ -691,6 +691,27 @@ export function HomePage() {
                 <Link to="/learn/homophones">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Number System</h3>
+              <p>
+                Divisibility shortcuts, plus how remainders behave under addition and multiplication.{' '}
+                <Link to="/learn/number-system">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Data Sufficiency</h3>
+              <p>
+                Judging whether the data is enough — not computing the final answer.{' '}
+                <Link to="/learn/data-sufficiency">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Phrasal Verbs</h3>
+              <p>
+                Learned the same way as idioms — one verb-plus-particle combination at a time.{' '}
+                <Link to="/learn/phrasal-verbs">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

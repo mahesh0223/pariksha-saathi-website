@@ -508,6 +508,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Homophones</h3>
               <p>Words that sound identical &mdash; spelling and meaning are the only tell. <a href="/learn/homophones">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Number System</h3>
+              <p>Divisibility shortcuts, plus how remainders behave under addition and multiplication. <a href="/learn/number-system">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Data Sufficiency</h3>
+              <p>Judging whether the data is enough &mdash; not computing the final answer. <a href="/learn/data-sufficiency">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Phrasal Verbs</h3>
+              <p>Learned the same way as idioms &mdash; one verb-plus-particle combination at a time. <a href="/learn/phrasal-verbs">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
