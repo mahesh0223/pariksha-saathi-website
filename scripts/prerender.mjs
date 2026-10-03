@@ -448,6 +448,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Cloze Test</h3>
               <p>Grammar plus meaning &mdash; reading the whole passage before picking an answer. <a href="/learn/cloze-test">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>LCM and HCF</h3>
+              <p>Prime factorization, plus the one shortcut connecting the two. <a href="/learn/lcm-and-hcf">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Classification</h3>
+              <p>Finding the exact rule the majority share, not just a hunch. <a href="/learn/classification">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Degrees of Comparison</h3>
+              <p>Matching an adjective&rsquo;s form to how many things are being compared. <a href="/learn/degrees-of-comparison">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

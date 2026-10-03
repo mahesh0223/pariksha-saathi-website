@@ -586,6 +586,27 @@ export function HomePage() {
                 <Link to="/learn/cloze-test">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>LCM and HCF</h3>
+              <p>
+                Prime factorization, plus the one shortcut connecting the two.{' '}
+                <Link to="/learn/lcm-and-hcf">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Classification</h3>
+              <p>
+                Finding the exact rule the majority share, not just a hunch.{' '}
+                <Link to="/learn/classification">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Degrees of Comparison</h3>
+              <p>
+                Matching an adjective’s form to how many things are being compared.{' '}
+                <Link to="/learn/degrees-of-comparison">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
