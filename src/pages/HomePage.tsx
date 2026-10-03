@@ -1090,6 +1090,27 @@ export function HomePage() {
                 <Link to="/learn/conditional-sentences">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Syllogism: Possibility Cases</h3>
+              <p>
+                "Possible" needs just one valid diagram, not every diagram.{' '}
+                <Link to="/learn/syllogism-possibility-cases">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Stocks and Shares</h3>
+              <p>
+                Face value, market value, and dividend — three values, one investment.{' '}
+                <Link to="/learn/stocks-and-shares">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Confusable Verbs</h3>
+              <p>
+                Lay vs lie, rise vs raise — does the sentence have a direct object?{' '}
+                <Link to="/learn/confusable-verbs">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

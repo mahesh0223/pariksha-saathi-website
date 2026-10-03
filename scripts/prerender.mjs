@@ -736,6 +736,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Conditional Sentences</h3>
               <p>Four &quot;if&quot; patterns, each tied to a different degree of reality. <a href="/learn/conditional-sentences">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Syllogism: Possibility Cases</h3>
+              <p>&quot;Possible&quot; needs just one valid diagram, not every diagram. <a href="/learn/syllogism-possibility-cases">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Stocks and Shares</h3>
+              <p>Face value, market value, and dividend &mdash; three values, one investment. <a href="/learn/stocks-and-shares">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Confusable Verbs</h3>
+              <p>Lay vs lie, rise vs raise &mdash; does the sentence have a direct object? <a href="/learn/confusable-verbs">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
