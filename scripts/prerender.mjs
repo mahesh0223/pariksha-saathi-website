@@ -664,6 +664,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Subject-Verb Agreement</h3>
               <p>Finding the true subject, even when a phrase gets in the way. <a href="/learn/subject-verb-agreement">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Compound Interest: Half-Yearly &amp; Quarterly</h3>
+              <p>Same formula &mdash; just adjust the rate and the number of periods first. <a href="/learn/compound-interest-half-yearly-quarterly">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Cubes and Dice</h3>
+              <p>One fact &mdash; opposite faces sum to 7 &mdash; unlocks almost every question. <a href="/learn/cubes-and-dice">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Infinitives and Gerunds</h3>
+              <p>A short, fixed list of verbs to learn &mdash; enjoy reading, decide to accept. <a href="/learn/infinitives-and-gerunds">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

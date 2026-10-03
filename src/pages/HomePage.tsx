@@ -964,6 +964,27 @@ export function HomePage() {
                 <Link to="/learn/subject-verb-agreement">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Compound Interest: Half-Yearly &amp; Quarterly</h3>
+              <p>
+                Same formula — just adjust the rate and the number of periods first.{' '}
+                <Link to="/learn/compound-interest-half-yearly-quarterly">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Cubes and Dice</h3>
+              <p>
+                One fact — opposite faces sum to 7 — unlocks almost every question.{' '}
+                <Link to="/learn/cubes-and-dice">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Infinitives and Gerunds</h3>
+              <p>
+                A short, fixed list of verbs to learn — enjoy reading, decide to accept.{' '}
+                <Link to="/learn/infinitives-and-gerunds">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
