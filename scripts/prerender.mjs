@@ -628,6 +628,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Collective Nouns</h3>
               <p>A pride of lions, a pack of wolves &mdash; fixed terms, learned like vocabulary. <a href="/learn/collective-nouns">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Geometry: Lines, Angles and Triangles</h3>
+              <p>The angle sum of a triangle, and how an exterior angle relates to it. <a href="/learn/geometry-lines-angles-triangles">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Wrong Number Series</h3>
+              <p>Number Series in reverse &mdash; spot the term that breaks the pattern. <a href="/learn/wrong-number-series">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Determiners</h3>
+              <p>Much vs many, few vs a few &mdash; countable, uncountable, positive, negative. <a href="/learn/determiners">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

@@ -901,6 +901,27 @@ export function HomePage() {
                 <Link to="/learn/collective-nouns">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Geometry: Lines, Angles and Triangles</h3>
+              <p>
+                The angle sum of a triangle, and how an exterior angle relates to it.{' '}
+                <Link to="/learn/geometry-lines-angles-triangles">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Wrong Number Series</h3>
+              <p>
+                Number Series in reverse — spot the term that breaks the pattern.{' '}
+                <Link to="/learn/wrong-number-series">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Determiners</h3>
+              <p>
+                Much vs many, few vs a few — countable, uncountable, positive, negative.{' '}
+                <Link to="/learn/determiners">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
