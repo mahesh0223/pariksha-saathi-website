@@ -1006,6 +1006,27 @@ export function HomePage() {
                 <Link to="/learn/redundancy">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Set Theory</h3>
+              <p>
+                One formula — add the two group sizes, subtract the overlap.{' '}
+                <Link to="/learn/set-theory">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Odd Pair Out</h3>
+              <p>
+                Classification for pairs — three share a relationship, one breaks it.{' '}
+                <Link to="/learn/odd-pair-out">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Modal Verbs</h3>
+              <p>
+                "Must not" vs "need not" — a classic trap between prohibition and no obligation.{' '}
+                <Link to="/learn/modal-verbs">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

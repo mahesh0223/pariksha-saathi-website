@@ -688,6 +688,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Redundancy</h3>
               <p>&quot;Repeat again,&quot; &quot;free gift&quot; &mdash; spotting words that say the same thing twice. <a href="/learn/redundancy">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Set Theory</h3>
+              <p>One formula &mdash; add the two group sizes, subtract the overlap. <a href="/learn/set-theory">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Odd Pair Out</h3>
+              <p>Classification for pairs &mdash; three share a relationship, one breaks it. <a href="/learn/odd-pair-out">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Modal Verbs</h3>
+              <p>&quot;Must not&quot; vs &quot;need not&quot; &mdash; a classic trap between prohibition and no obligation. <a href="/learn/modal-verbs">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
