@@ -424,6 +424,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Direct and Indirect Speech</h3>
               <p>Tense shifts, pronoun changes, and how questions convert differently. <a href="/learn/direct-indirect-speech">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Partnership</h3>
+              <p>Why profit splits by capital &times; time, not capital alone. <a href="/learn/partnership">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Clock</h3>
+              <p>A disguised speed problem &mdash; two hands moving at fixed rates. <a href="/learn/clock">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Para Jumbles</h3>
+              <p>Following the pronoun and connector chain to the one order that works. <a href="/learn/para-jumbles">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

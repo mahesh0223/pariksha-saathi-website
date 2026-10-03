@@ -3015,6 +3015,411 @@ export const TOPIC_LESSONS = [
       disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
     },
   },
+  {
+    slug: 'partnership',
+    en: {
+      pageTitle: 'Partnership Questions with Solutions',
+      lede: 'Partnership questions extend Ratio and Proportion to shared business profit — the one idea to hold onto is that profit splits by capital × time, not capital alone, whenever partners invest for different durations. Here’s the concept, four fully worked examples, and a few to try yourself.',
+      conceptHeading: 'The concept, quickly',
+      conceptBody: [
+        'If all partners invest for the SAME length of time, profit is split simply in the ratio of their capital amounts.',
+        'If partners invest for DIFFERENT durations, each partner’s share of the ratio is capital × time — this product is what determines the split, not the capital amount on its own.',
+        'This can produce a non-obvious ratio: a smaller capital invested for much longer can earn an equal or even larger share than a bigger capital invested briefly.',
+        'For a "working partner" who manages the business and earns an extra fixed fee for that on top of their investment return: subtract the fee from the total profit first, then split only the REMAINDER in the capital × time ratio.',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question: 'A and B start a business with capitals of ₹8,000 and ₹12,000 respectively, investing for the same time period. At the end of the year, they earn a profit of ₹5,000. Find each partner’s share.',
+          solution: ['Since the time period is the same for both, the ratio is simply the capital ratio: 8,000 : 12,000 = 2 : 3.', 'A’s share = (2/5) × 5,000 = ₹2,000. B’s share = (3/5) × 5,000 = ₹3,000.'],
+          answer: 'A gets ₹2,000, B gets ₹3,000',
+        },
+        {
+          question: 'A invests ₹10,000 for 12 months and B invests ₹15,000 for 8 months in a business. At the end, they earn a profit of ₹6,200. Find each partner’s share.',
+          solution: [
+            'The capitals alone (10,000 vs 15,000) are NOT the ratio to use, since the time periods differ — use capital × time instead.',
+            'A: 10,000 × 12 = 1,20,000. B: 15,000 × 8 = 1,20,000. The two products are actually equal, so the ratio is 1 : 1, even though the capitals themselves weren’t equal.',
+            'Each partner gets half of ₹6,200 = ₹3,100.',
+          ],
+          answer: 'A gets ₹3,100, B gets ₹3,100',
+        },
+        {
+          question: 'A, B and C invest in a business in the ratio 2 : 3 : 5, for the same time period. If the total profit is ₹20,000, find C’s share.',
+          solution: ['Sum of ratio terms = 2 + 3 + 5 = 10.', 'C’s share = (5/10) × 20,000 = ₹10,000.'],
+          answer: '₹10,000',
+        },
+        {
+          question: 'A invests ₹40,000 and manages the business, while B invests ₹60,000 as a sleeping partner. A receives 10% of the total profit as a management fee, and the rest is split in the ratio of their capitals. If the total profit is ₹25,000, find B’s total share.',
+          solution: [
+            'Management fee (A only) = 10% of 25,000 = ₹2,500. Remaining profit to split = 25,000 − 2,500 = ₹22,500.',
+            'Capital ratio A : B = 40,000 : 60,000 = 2 : 3.',
+            'B’s share of the remainder = (3/5) × 22,500 = ₹13,500. (B gets no management fee, so this is B’s total share.)',
+          ],
+          answer: '₹13,500',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Work through these the same way, then check against the answer.',
+      practiceQuestions: [
+        { question: 'P and Q start a business with capitals of ₹15,000 and ₹25,000, investing for the same time period. At the end of the year, they earn a profit of ₹8,000. Find each partner’s share.', answer: 'P gets ₹3,000, Q gets ₹5,000' },
+        { question: 'X invests ₹12,000 for 4 months and Y invests ₹8,000 for 9 months. If the profit is ₹5,000, find each partner’s share.', answer: 'X gets ₹2,000, Y gets ₹3,000' },
+        { question: 'A, B and C invest in a business in the ratio 3 : 4 : 5, for the same time period. If the total profit is ₹36,000, find A’s share.', answer: '₹9,000' },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Partnership is tested directly in the Quantitative/Numerical Aptitude section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — and builds directly on Ratio and Proportion.',
+      offerHeading: 'Practice more Partnership questions',
+      offerBody: 'This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Partnership (and every other Quant/Reasoning/English topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Partnership free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'साझेदारी (पार्टनरशिप) के प्रश्न हल सहित',
+      lede: 'साझेदारी के प्रश्न अनुपात और समानुपात को साझा व्यावसायिक लाभ तक बढ़ाते हैं — याद रखने वाली एक बात है कि लाभ पूंजी × समय के अनुपात में बंटता है, केवल पूंजी के अनुपात में नहीं, जब भी साझेदार अलग-अलग समय के लिए निवेश करते हैं। यहां अवधारणा, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'अवधारणा, संक्षेप में',
+      conceptBody: [
+        'यदि सभी साझेदार एक ही अवधि के लिए निवेश करते हैं, तो लाभ बस उनकी पूंजी राशियों के अनुपात में बंटता है।',
+        'यदि साझेदार अलग-अलग अवधियों के लिए निवेश करते हैं, तो हर साझेदार के अनुपात का हिस्सा पूंजी × समय होता है — यही गुणनफल बंटवारा तय करता है, अकेले पूंजी राशि नहीं।',
+        'यह एक गैर-स्पष्ट अनुपात पैदा कर सकता है: बहुत लंबे समय के लिए निवेश की गई छोटी पूंजी, कम समय के लिए निवेश की गई बड़ी पूंजी के बराबर या उससे भी ज़्यादा हिस्सा कमा सकती है।',
+        'एक "कार्यशील साझेदार" के लिए जो व्यवसाय चलाता है और अपने निवेश के रिटर्न के ऊपर उसके लिए एक अतिरिक्त निश्चित शुल्क कमाता है: पहले कुल लाभ से शुल्क घटाएं, फिर केवल शेष राशि को पूंजी × समय के अनुपात में बांटें।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question: 'A और B ₹8,000 और ₹12,000 की पूंजी से एक व्यवसाय शुरू करते हैं, एक ही समय अवधि के लिए निवेश करते हुए। वर्ष के अंत में, उन्हें ₹5,000 का लाभ होता है। हर साझेदार का हिस्सा ज्ञात करें।',
+          solution: ['चूंकि समय अवधि दोनों के लिए समान है, अनुपात बस पूंजी अनुपात है: 8,000 : 12,000 = 2 : 3।', 'A का हिस्सा = (2/5) × 5,000 = ₹2,000। B का हिस्सा = (3/5) × 5,000 = ₹3,000।'],
+          answer: 'A को ₹2,000, B को ₹3,000',
+        },
+        {
+          question: 'A एक व्यवसाय में ₹10,000, 12 महीनों के लिए निवेश करता है और B ₹15,000, 8 महीनों के लिए निवेश करता है। अंत में, उन्हें ₹6,200 का लाभ होता है। हर साझेदार का हिस्सा ज्ञात करें।',
+          solution: [
+            'अकेली पूंजी (10,000 बनाम 15,000) उपयोग करने वाला अनुपात नहीं है, क्योंकि समय अवधियां अलग हैं — इसके बजाय पूंजी × समय का उपयोग करें।',
+            'A: 10,000 × 12 = 1,20,000। B: 15,000 × 8 = 1,20,000। दोनों गुणनफल असल में बराबर हैं, तो अनुपात 1 : 1 है, भले ही पूंजी खुद बराबर नहीं थी।',
+            'हर साझेदार को ₹6,200 का आधा मिलता है = ₹3,100।',
+          ],
+          answer: 'A को ₹3,100, B को ₹3,100',
+        },
+        {
+          question: 'A, B और C एक व्यवसाय में 2 : 3 : 5 के अनुपात में निवेश करते हैं, एक ही समय अवधि के लिए। यदि कुल लाभ ₹20,000 है, तो C का हिस्सा ज्ञात करें।',
+          solution: ['अनुपात पदों का योग = 2 + 3 + 5 = 10।', 'C का हिस्सा = (5/10) × 20,000 = ₹10,000।'],
+          answer: '₹10,000',
+        },
+        {
+          question: 'A, ₹40,000 निवेश करता है और व्यवसाय चलाता है, जबकि B, ₹60,000 एक सुप्त (sleeping) साझेदार के रूप में निवेश करता है। A को कुल लाभ का 10% प्रबंधन शुल्क के रूप में मिलता है, और बाकी उनकी पूंजी के अनुपात में बंटता है। यदि कुल लाभ ₹25,000 है, तो B का कुल हिस्सा ज्ञात करें।',
+          solution: [
+            'प्रबंधन शुल्क (केवल A) = 25,000 का 10% = ₹2,500। बांटने के लिए शेष लाभ = 25,000 − 2,500 = ₹22,500।',
+            'पूंजी अनुपात A : B = 40,000 : 60,000 = 2 : 3।',
+            'शेष में B का हिस्सा = (3/5) × 22,500 = ₹13,500। (B को कोई प्रबंधन शुल्क नहीं मिलता, तो यही B का कुल हिस्सा है।)',
+          ],
+          answer: '₹13,500',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        { question: 'P और Q ₹15,000 और ₹25,000 की पूंजी से एक व्यवसाय शुरू करते हैं, एक ही समय अवधि के लिए निवेश करते हुए। वर्ष के अंत में, उन्हें ₹8,000 का लाभ होता है। हर साझेदार का हिस्सा ज्ञात करें।', answer: 'P को ₹3,000, Q को ₹5,000' },
+        { question: 'X, ₹12,000, 4 महीनों के लिए निवेश करता है और Y, ₹8,000, 9 महीनों के लिए निवेश करता है। यदि लाभ ₹5,000 है, तो हर साझेदार का हिस्सा ज्ञात करें।', answer: 'X को ₹2,000, Y को ₹3,000' },
+        { question: 'A, B और C एक व्यवसाय में 3 : 4 : 5 के अनुपात में निवेश करते हैं, एक ही समय अवधि के लिए। यदि कुल लाभ ₹36,000 है, तो A का हिस्सा ज्ञात करें।', answer: '₹9,000' },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के मात्रात्मक/संख्यात्मक अभियोग्यता खंड में साझेदारी सीधे परखा जाता है, और यह सीधे अनुपात और समानुपात पर आधारित है।',
+      offerHeading: 'साझेदारी के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर साझेदारी (और हर दूसरे मात्रात्मक/तर्कशक्ति/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'साझेदारी का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
+  {
+    slug: 'clock',
+    en: {
+      pageTitle: 'Clock Questions with Solutions (Angle Between Hands)',
+      lede: 'Clock questions are a disguised speed problem — the hour and minute hands move at fixed rates, so finding the angle between them at any given time is just plugging into a formula. Here’s the concept, four fully worked examples, and a few to try yourself.',
+      conceptHeading: 'The concept, quickly',
+      conceptBody: [
+        'The minute hand completes 360° in 60 minutes, so it moves 6° every minute. The hour hand completes 360° in 12 hours (720 minutes), so it moves 0.5° every minute — it creeps forward steadily, not staying fixed at the hour mark.',
+        'At M minutes past H o’clock: minute-hand angle (from 12) = 6 × M degrees. Hour-hand angle (from 12) = 30 × H + 0.5 × M degrees.',
+        'Angle between the hands = the absolute difference between those two angles. If that difference is more than 180°, subtract it from 360° — "the angle between the hands" always means the smaller of the two possible angles.',
+        'For "when are the hands opposite" (180° apart) or "when do they overlap" (0° apart) questions within a given hour, set up the equation using the formulas above and solve for M directly, rather than trying to picture it.',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question: 'Find the angle between the hour and minute hands at 3:00.',
+          solution: ['Hour-hand angle = 30 × 3 + 0.5 × 0 = 90°. Minute-hand angle = 6 × 0 = 0°.', 'Difference = |90 − 0| = 90°.'],
+          answer: '90°',
+        },
+        {
+          question: 'Find the angle between the hour and minute hands at 4:30.',
+          solution: ['Hour-hand angle = 30 × 4 + 0.5 × 30 = 120 + 15 = 135°. Minute-hand angle = 6 × 30 = 180°.', 'Difference = |135 − 180| = 45°.'],
+          answer: '45°',
+        },
+        {
+          question: 'Find the angle between the hour and minute hands at 7:20.',
+          solution: ['Hour-hand angle = 30 × 7 + 0.5 × 20 = 210 + 10 = 220°. Minute-hand angle = 6 × 20 = 120°.', 'Difference = |220 − 120| = 100°.'],
+          answer: '100°',
+        },
+        {
+          question: 'At what time between 9 and 10 o’clock will the hour and minute hands be exactly opposite each other (180° apart)?',
+          solution: [
+            'Hour-hand angle at M minutes past 9 = 270 + 0.5M. Minute-hand angle = 6M.',
+            'For the hands to be opposite: (270 + 0.5M) − 6M = 180 → 270 − 5.5M = 180 → 5.5M = 90 → M = 90/5.5 = 180/11 ≈ 16.36.',
+            'So the hands are opposite at 9 hours and 180/11 minutes, i.e., 16 4/11 minutes past 9.',
+          ],
+          answer: '9:16 4/11 (16 4/11 minutes past 9)',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Apply the formulas the same way, then check against the answer.',
+      practiceQuestions: [
+        { question: 'Find the angle between the hour and minute hands at 6:00.', answer: '180°' },
+        { question: 'Find the angle between the hour and minute hands at 2:40.', answer: '160°' },
+        { question: 'At what time between 2 and 3 o’clock will the hour and minute hands be exactly opposite each other (180° apart)?', answer: '2:43 7/11 (43 7/11 minutes past 2)' },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Clock is a regular topic in the Reasoning/General Intelligence section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      offerHeading: 'Practice more Clock questions',
+      offerBody: 'This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Clock (and every other Reasoning/Quant/English topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Clock free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'घड़ी (क्लॉक) के प्रश्न हल सहित (हाथों के बीच का कोण)',
+      lede: 'घड़ी के प्रश्न छुपे हुए चाल वाले प्रश्न हैं — घंटे और मिनट की सुई एक निश्चित दर पर चलती हैं, तो किसी भी समय उनके बीच का कोण ज्ञात करना बस एक सूत्र में मान रखने जैसा है। यहां अवधारणा, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'अवधारणा, संक्षेप में',
+      conceptBody: [
+        'मिनट की सुई 60 मिनट में 360° पूरा करती है, तो यह हर मिनट 6° चलती है। घंटे की सुई 12 घंटे (720 मिनट) में 360° पूरा करती है, तो यह हर मिनट 0.5° चलती है — यह लगातार धीरे-धीरे आगे खिसकती है, घंटे के निशान पर स्थिर नहीं रहती।',
+        'H बजे के M मिनट बाद: मिनट-सुई का कोण (12 से) = 6 × M डिग्री। घंटे-सुई का कोण (12 से) = 30 × H + 0.5 × M डिग्री।',
+        'सुइयों के बीच का कोण = इन दोनों कोणों के बीच का निरपेक्ष अंतर। यदि वह अंतर 180° से ज़्यादा है, तो इसे 360° से घटाएं — "सुइयों के बीच का कोण" हमेशा दो संभावित कोणों में से छोटे वाले को दर्शाता है।',
+        '"सुइयां कब विपरीत होती हैं" (180° अलग) या "वे कब मिलती हैं" (0° अलग) जैसे किसी दिए गए घंटे के भीतर वाले प्रश्नों के लिए, ऊपर के सूत्रों का उपयोग करके समीकरण बनाएं और सीधे M के लिए हल करें, बजाय इसे चित्रित करने की कोशिश करने के।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question: '3:00 बजे घंटे और मिनट की सुई के बीच का कोण ज्ञात करें।',
+          solution: ['घंटे-सुई का कोण = 30 × 3 + 0.5 × 0 = 90°। मिनट-सुई का कोण = 6 × 0 = 0°।', 'अंतर = |90 − 0| = 90°।'],
+          answer: '90°',
+        },
+        {
+          question: '4:30 बजे घंटे और मिनट की सुई के बीच का कोण ज्ञात करें।',
+          solution: ['घंटे-सुई का कोण = 30 × 4 + 0.5 × 30 = 120 + 15 = 135°। मिनट-सुई का कोण = 6 × 30 = 180°।', 'अंतर = |135 − 180| = 45°।'],
+          answer: '45°',
+        },
+        {
+          question: '7:20 बजे घंटे और मिनट की सुई के बीच का कोण ज्ञात करें।',
+          solution: ['घंटे-सुई का कोण = 30 × 7 + 0.5 × 20 = 210 + 10 = 220°। मिनट-सुई का कोण = 6 × 20 = 120°।', 'अंतर = |220 − 120| = 100°।'],
+          answer: '100°',
+        },
+        {
+          question: '9 और 10 बजे के बीच किस समय घंटे और मिनट की सुई ठीक विपरीत (180° अलग) होंगी?',
+          solution: [
+            '9 बजे के M मिनट बाद घंटे-सुई का कोण = 270 + 0.5M। मिनट-सुई का कोण = 6M।',
+            'सुइयों के विपरीत होने के लिए: (270 + 0.5M) − 6M = 180 → 270 − 5.5M = 180 → 5.5M = 90 → M = 90/5.5 = 180/11 ≈ 16.36।',
+            'तो सुइयां 9 बजे के 180/11 मिनट बाद, यानी 9 बजकर 16 4/11 मिनट पर विपरीत होती हैं।',
+          ],
+          answer: '9:16 4/11 (9 बजे के 16 4/11 मिनट बाद)',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'उसी तरीके से सूत्र लागू करें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        { question: '6:00 बजे घंटे और मिनट की सुई के बीच का कोण ज्ञात करें।', answer: '180°' },
+        { question: '2:40 बजे घंटे और मिनट की सुई के बीच का कोण ज्ञात करें।', answer: '160°' },
+        { question: '2 और 3 बजे के बीच किस समय घंटे और मिनट की सुई ठीक विपरीत (180° अलग) होंगी?', answer: '2:43 7/11 (2 बजे के 43 7/11 मिनट बाद)' },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के तर्कशक्ति/सामान्य बुद्धिमत्ता खंड में घड़ी एक नियमित विषय है।',
+      offerHeading: 'घड़ी के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर घड़ी (और हर दूसरे तर्कशक्ति/मात्रात्मक/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'घड़ी का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
+  {
+    slug: 'para-jumbles',
+    en: {
+      pageTitle: 'Para Jumbles Questions with Solutions (Sentence Rearrangement)',
+      lede: 'Para Jumbles give you a set of sentences out of order and ask for the sequence that reads as one coherent paragraph — the fastest way in is to follow the pronouns and connector words, which only make sense in a specific order. Here’s the approach, four fully worked examples, and a few to try yourself.',
+      conceptHeading: 'The approach, quickly',
+      conceptBody: [
+        'Find the opening sentence first: it introduces the topic in general terms, without a pronoun ("it", "this", "they") or connector ("however", "as a result") that would need something earlier to refer back to.',
+        'Pronouns and demonstratives must point at something already introduced — use them to chain a sentence directly to whichever sentence mentioned that thing.',
+        'Connector words carry a specific logical relationship: "however"/"but" signal a contrast with the idea just stated; "therefore"/"as a result" signal a consequence; "for instance"/"for example" signal that the previous sentence made a general claim this one illustrates.',
+        'Once the opening sentence is fixed, follow the pronoun/connector chain one link at a time rather than trying to see the whole order at once — each sentence should point unambiguously to exactly one predecessor.',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: This pollen is then transferred to the next flower they visit, fertilising it.\nB: Honeybees play a vital role in pollinating flowering plants.\nC: Without this process, many fruits, vegetables and nuts that we eat would not exist.\nD: As they fly from flower to flower in search of nectar, pollen sticks to their bodies.',
+          solution: [
+            'B introduces the topic in general terms (honeybees and pollination) with no pronoun needing an antecedent — it’s the opening sentence.',
+            'D follows B: "they" refers to the honeybees just introduced, and it explains the mechanism (pollen sticking to their bodies).',
+            'A follows D: "This pollen" refers to the pollen just mentioned in D.',
+            'C closes the paragraph: "this process" sums up the pollination process described in D and A, and states why it matters.',
+          ],
+          answer: 'B, D, A, C',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: Johannes Gutenberg’s printing press, introduced in the 15th century, changed this completely.\nB: With it, identical copies of a text could be produced quickly and cheaply.\nC: Before the invention of the printing press, books had to be copied out by hand, a slow and expensive process.\nD: As a result, literacy rates rose and ideas spread faster than ever before.',
+          solution: [
+            'C opens the paragraph: it describes the "before" state with no pronoun needing an earlier reference.',
+            'A follows C: "changed this completely" — "this" refers to the slow, expensive hand-copying described in C.',
+            'B follows A: "With it" — "it" refers to the printing press just introduced in A.',
+            'D closes the paragraph: "As a result" draws the consequence from the fast, cheap copying just described in B.',
+          ],
+          answer: 'C, A, B, D',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: For instance, recycling one tonne of paper can save about seventeen trees.\nB: Given these benefits, many cities now offer separate collection bins for recyclable waste.\nC: Recycling helps reduce the amount of waste sent to landfills.\nD: It also conserves natural resources such as trees, water and minerals that would otherwise be used to make new products from scratch.',
+          solution: [
+            'C opens the paragraph with a general claim (recycling reduces landfill waste) and no pronoun needing an antecedent.',
+            'D follows C: "It also conserves..." — "It" refers to recycling from C, and "also" signals a second benefit being added.',
+            'A follows D: "For instance" illustrates D’s point specifically — D names trees as one of the conserved resources, and A gives the tree-saving example.',
+            'B closes the paragraph: "these benefits" sums up the two benefits from C and D, concluding with the real-world response.',
+          ],
+          answer: 'C, D, A, B',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: For this reason, experts recommend a full night’s sleep over last-minute, late-night cramming.\nB: However, research shows that sleep plays a crucial role in consolidating memory.\nC: Many people believe that studying late at night is the most effective way to prepare for exams.\nD: Students who sleep well after studying tend to retain information better than those who stay up all night.',
+          solution: [
+            'C opens the paragraph by stating a common belief, with no pronoun needing an antecedent.',
+            'B follows C: "However" signals a contrast between the common belief in C and what research actually shows.',
+            'D follows B: it elaborates on B’s claim with a specific comparison, supporting the point about sleep and memory.',
+            'A closes the paragraph: "For this reason" draws the recommendation from the case just built in B and D.',
+          ],
+          answer: 'C, B, D, A',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Find the opening sentence, then follow the pronoun/connector chain, then check against the answer.',
+      practiceQuestions: [
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: Despite this brief duration, the achievement marked the beginning of modern aviation.\nB: The Wright brothers achieved the first powered, sustained flight in 1903.\nC: Within decades, powered flight transformed travel, trade and warfare around the world.\nD: Their aircraft, the Flyer, stayed airborne for just twelve seconds on its first flight.',
+          answer: 'B, D, A, C',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: They provide habitat and shelter for thousands of species of fish and other marine life.\nB: Rising ocean temperatures, however, are causing widespread coral bleaching.\nC: Coral reefs are among the most biodiverse ecosystems on Earth.\nD: This threatens not just the coral itself but the entire web of life that depends on it.',
+          answer: 'C, A, B, D',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: Critics argue, however, that remote work can weaken team collaboration and company culture.\nB: This shift has reduced commuting time and given workers more flexibility over their schedules.\nC: As a result, many organisations are experimenting with hybrid models that combine both approaches.\nD: Many companies now allow employees to work from home at least part of the week.',
+          answer: 'D, B, A, C',
+        },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Para Jumbles is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      offerHeading: 'Practice more Para Jumbles questions',
+      offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Para Jumbles (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Para Jumbles free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'पैरा जम्बल्स के प्रश्न हल सहित (वाक्य पुनर्व्यवस्था)',
+      lede: 'पैरा जम्बल्स आपको बिना क्रम के कुछ वाक्य देते हैं और वह क्रम पूछते हैं जो एक सुसंगत अनुच्छेद बनाता है — अंदर जाने का सबसे तेज़ तरीका है सर्वनामों और जोड़ने वाले शब्दों का पीछा करना, जो केवल एक विशिष्ट क्रम में ही अर्थ रखते हैं। यहां तरीका, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'तरीका, संक्षेप में',
+      conceptBody: [
+        'पहले शुरुआती वाक्य ढूंढें: यह विषय को सामान्य शब्दों में पेश करता है, बिना किसी सर्वनाम ("it", "this", "they") या जोड़ने वाले शब्द ("however", "as a result") के जिसे पहले किसी चीज़ का संदर्भ चाहिए हो।',
+        'सर्वनाम और संकेतवाचक शब्दों को किसी पहले से पेश की गई चीज़ की ओर इशारा करना चाहिए — इनका उपयोग किसी वाक्य को सीधे उस वाक्य से जोड़ने के लिए करें जिसने वह चीज़ पहले बताई थी।',
+        'जोड़ने वाले शब्द एक विशिष्ट तार्किक संबंध रखते हैं: "however"/"but" अभी बताए गए विचार से एक विरोधाभास दर्शाते हैं; "therefore"/"as a result" एक परिणाम दर्शाते हैं; "for instance"/"for example" दर्शाते हैं कि पिछले वाक्य ने एक सामान्य दावा किया जिसे यह वाक्य उदाहरण से स्पष्ट करता है।',
+        'शुरुआती वाक्य तय होने के बाद, पूरे क्रम को एक साथ देखने की कोशिश करने के बजाय सर्वनाम/जोड़ने वाले शब्द की श्रृंखला को एक-एक कड़ी करके पालन करें — हर वाक्य को बिल्कुल एक ही पूर्ववर्ती वाक्य की ओर स्पष्ट रूप से इशारा करना चाहिए।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: This pollen is then transferred to the next flower they visit, fertilising it.\nB: Honeybees play a vital role in pollinating flowering plants.\nC: Without this process, many fruits, vegetables and nuts that we eat would not exist.\nD: As they fly from flower to flower in search of nectar, pollen sticks to their bodies.',
+          solution: [
+            'B बिना किसी ऐसे सर्वनाम के जिसे संदर्भ चाहिए, विषय (मधुमक्खियां और परागण) को सामान्य शब्दों में पेश करता है — यह शुरुआती वाक्य है।',
+            'D, B के बाद आता है: "they" अभी पेश की गई मधुमक्खियों की ओर इशारा करता है, और यह प्रक्रिया (शरीर पर पराग चिपकना) बताता है।',
+            'A, D के बाद आता है: "This pollen" D में अभी बताए गए पराग की ओर इशारा करता है।',
+            'C अनुच्छेद को बंद करता है: "this process" D और A में बताई गई परागण प्रक्रिया को समेटता है, और बताता है कि यह क्यों महत्वपूर्ण है।',
+          ],
+          answer: 'B, D, A, C',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: Johannes Gutenberg’s printing press, introduced in the 15th century, changed this completely.\nB: With it, identical copies of a text could be produced quickly and cheaply.\nC: Before the invention of the printing press, books had to be copied out by hand, a slow and expensive process.\nD: As a result, literacy rates rose and ideas spread faster than ever before.',
+          solution: [
+            'C अनुच्छेद खोलता है: यह बिना किसी ऐसे सर्वनाम के जिसे पहले के संदर्भ की ज़रूरत हो, "पहले" वाली स्थिति बताता है।',
+            'A, C के बाद आता है: "changed this completely" — "this" C में बताई गई धीमी, महंगी हाथ-प्रतिलिपि की ओर इशारा करता है।',
+            'B, A के बाद आता है: "With it" — "it" A में अभी पेश किए गए छापेखाने की ओर इशारा करता है।',
+            'D अनुच्छेद को बंद करता है: "As a result" B में अभी बताई गई तेज़, सस्ती प्रतिलिपि से परिणाम निकालता है।',
+          ],
+          answer: 'C, A, B, D',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: For instance, recycling one tonne of paper can save about seventeen trees.\nB: Given these benefits, many cities now offer separate collection bins for recyclable waste.\nC: Recycling helps reduce the amount of waste sent to landfills.\nD: It also conserves natural resources such as trees, water and minerals that would otherwise be used to make new products from scratch.',
+          solution: [
+            'C एक सामान्य दावे (रीसाइक्लिंग लैंडफिल कचरा घटाता है) के साथ अनुच्छेद खोलता है, बिना किसी ऐसे सर्वनाम के जिसे संदर्भ चाहिए।',
+            'D, C के बाद आता है: "It also conserves..." — "It" C के रीसाइक्लिंग की ओर इशारा करता है, और "also" एक दूसरा फायदा जोड़े जाने का संकेत देता है।',
+            'A, D के बाद आता है: "For instance" विशेष रूप से D के बिंदु को स्पष्ट करता है — D पेड़ों को संरक्षित संसाधनों में से एक बताता है, और A पेड़ बचाने का उदाहरण देता है।',
+            'B अनुच्छेद को बंद करता है: "these benefits" C और D के दोनों फायदों को समेटता है, वास्तविक दुनिया की प्रतिक्रिया के साथ निष्कर्ष निकालते हुए।',
+          ],
+          answer: 'C, D, A, B',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: For this reason, experts recommend a full night’s sleep over last-minute, late-night cramming.\nB: However, research shows that sleep plays a crucial role in consolidating memory.\nC: Many people believe that studying late at night is the most effective way to prepare for exams.\nD: Students who sleep well after studying tend to retain information better than those who stay up all night.',
+          solution: [
+            'C एक आम धारणा बताकर अनुच्छेद खोलता है, बिना किसी ऐसे सर्वनाम के जिसे संदर्भ चाहिए।',
+            'B, C के बाद आता है: "However" C की आम धारणा और शोध वास्तव में जो बताता है, के बीच एक विरोधाभास दर्शाता है।',
+            'D, B के बाद आता है: यह नींद और याददाश्त के बिंदु का समर्थन करते हुए एक विशिष्ट तुलना के साथ B के दावे को विस्तार देता है।',
+            'A अनुच्छेद को बंद करता है: "For this reason" B और D में अभी बनाए गए मामले से सिफारिश निकालता है।',
+          ],
+          answer: 'C, B, D, A',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'शुरुआती वाक्य ढूंढें, फिर सर्वनाम/जोड़ने वाले शब्द की श्रृंखला का पालन करें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: Despite this brief duration, the achievement marked the beginning of modern aviation.\nB: The Wright brothers achieved the first powered, sustained flight in 1903.\nC: Within decades, powered flight transformed travel, trade and warfare around the world.\nD: Their aircraft, the Flyer, stayed airborne for just twelve seconds on its first flight.',
+          answer: 'B, D, A, C',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: They provide habitat and shelter for thousands of species of fish and other marine life.\nB: Rising ocean temperatures, however, are causing widespread coral bleaching.\nC: Coral reefs are among the most biodiverse ecosystems on Earth.\nD: This threatens not just the coral itself but the entire web of life that depends on it.',
+          answer: 'C, A, B, D',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: Critics argue, however, that remote work can weaken team collaboration and company culture.\nB: This shift has reduced commuting time and given workers more flexibility over their schedules.\nC: As a result, many organisations are experimenting with hybrid models that combine both approaches.\nD: Many companies now allow employees to work from home at least part of the week.',
+          answer: 'D, B, A, C',
+        },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में पैरा जम्बल्स एक नियमित विषय है।',
+      offerHeading: 'पैरा जम्बल्स के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर पैरा जम्बल्स (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'पैरा जम्बल्स का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
 ];
 
 export function findLessonEntry(slug) {

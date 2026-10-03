@@ -544,6 +544,27 @@ export function HomePage() {
                 <Link to="/learn/direct-indirect-speech">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Partnership</h3>
+              <p>
+                Why profit splits by capital × time, not capital alone.{' '}
+                <Link to="/learn/partnership">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Clock</h3>
+              <p>
+                A disguised speed problem — two hands moving at fixed rates.{' '}
+                <Link to="/learn/clock">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Para Jumbles</h3>
+              <p>
+                Following the pronoun and connector chain to the one order that works.{' '}
+                <Link to="/learn/para-jumbles">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
