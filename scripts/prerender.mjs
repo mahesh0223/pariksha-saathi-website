@@ -652,6 +652,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Sentence Transformation</h3>
               <p>Simple, compound, or complex &mdash; same meaning, different structure. <a href="/learn/sentence-transformation">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Trigonometric Ratios and Identities</h3>
+              <p>sin&sup2;&theta; + cos&sup2;&theta; = 1, and what it unlocks &mdash; directly, not word problems. <a href="/learn/trigonometric-ratios-identities">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Comparison Puzzles</h3>
+              <p>Taller, shorter, heavier &mdash; merge the clues into one ordered chain. <a href="/learn/comparison-puzzles">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Subject-Verb Agreement</h3>
+              <p>Finding the true subject, even when a phrase gets in the way. <a href="/learn/subject-verb-agreement">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

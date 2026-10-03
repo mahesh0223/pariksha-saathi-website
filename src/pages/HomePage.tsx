@@ -943,6 +943,27 @@ export function HomePage() {
                 <Link to="/learn/sentence-transformation">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Trigonometric Ratios and Identities</h3>
+              <p>
+                sin²θ + cos²θ = 1, and what it unlocks — directly, not word problems.{' '}
+                <Link to="/learn/trigonometric-ratios-identities">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Comparison Puzzles</h3>
+              <p>
+                Taller, shorter, heavier — merge the clues into one ordered chain.{' '}
+                <Link to="/learn/comparison-puzzles">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Subject-Verb Agreement</h3>
+              <p>
+                Finding the true subject, even when a phrase gets in the way.{' '}
+                <Link to="/learn/subject-verb-agreement">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
