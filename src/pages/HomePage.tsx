@@ -1048,6 +1048,27 @@ export function HomePage() {
                 <Link to="/learn/tenses">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Circular Permutations</h3>
+              <p>
+                Arranging people around a table — one fixed seat removes the rotation duplicates.{' '}
+                <Link to="/learn/circular-permutations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Letter Group Classification</h3>
+              <p>
+                Three letter-groups share a gap pattern — spot the one that breaks it.{' '}
+                <Link to="/learn/letter-group-classification">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Relative Pronouns</h3>
+              <p>
+                Who vs whom, which vs that — subject, object, person, or thing.{' '}
+                <Link to="/learn/relative-pronouns">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
