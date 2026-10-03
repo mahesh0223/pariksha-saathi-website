@@ -532,6 +532,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Spelling Correction</h3>
               <p>The correct spelling of one intended word, not a choice between different words. <a href="/learn/spelling-correction">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Data Interpretation</h3>
+              <p>Ordinary percentage and average arithmetic, read carefully off a table. <a href="/learn/data-interpretation">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Course of Action</h3>
+              <p>Judging whether a response is practical and proportionate, not just well-intentioned. <a href="/learn/course-of-action">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Tag Questions</h3>
+              <p>One flip rule &mdash; positive statement, negative tag &mdash; plus matching the auxiliary verb. <a href="/learn/tag-questions">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

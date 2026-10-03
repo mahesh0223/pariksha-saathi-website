@@ -733,6 +733,27 @@ export function HomePage() {
                 <Link to="/learn/spelling-correction">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Data Interpretation</h3>
+              <p>
+                Ordinary percentage and average arithmetic, read carefully off a table.{' '}
+                <Link to="/learn/data-interpretation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Course of Action</h3>
+              <p>
+                Judging whether a response is practical and proportionate, not just well-intentioned.{' '}
+                <Link to="/learn/course-of-action">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Tag Questions</h3>
+              <p>
+                One flip rule — positive statement, negative tag — plus matching the auxiliary verb.{' '}
+                <Link to="/learn/tag-questions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
