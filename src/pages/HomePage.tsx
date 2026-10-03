@@ -922,6 +922,27 @@ export function HomePage() {
                 <Link to="/learn/determiners">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Mean, Median and Mode</h3>
+              <p>
+                Three different "typical values" — a sum, a sort, and a count.{' '}
+                <Link to="/learn/mean-median-mode">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Double Row Seating</h3>
+              <p>
+                Two rows facing each other — Seating Arrangement, doubled.{' '}
+                <Link to="/learn/double-row-seating">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Sentence Transformation</h3>
+              <p>
+                Simple, compound, or complex — same meaning, different structure.{' '}
+                <Link to="/learn/sentence-transformation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

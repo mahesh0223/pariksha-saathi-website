@@ -640,6 +640,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Determiners</h3>
               <p>Much vs many, few vs a few &mdash; countable, uncountable, positive, negative. <a href="/learn/determiners">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Mean, Median and Mode</h3>
+              <p>Three different &quot;typical values&quot; &mdash; a sum, a sort, and a count. <a href="/learn/mean-median-mode">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Double Row Seating</h3>
+              <p>Two rows facing each other &mdash; Seating Arrangement, doubled. <a href="/learn/double-row-seating">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Sentence Transformation</h3>
+              <p>Simple, compound, or complex &mdash; same meaning, different structure. <a href="/learn/sentence-transformation">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
