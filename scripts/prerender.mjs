@@ -400,6 +400,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Sentence Improvement</h3>
               <p>The same grammar rules as Spotting Errors, in a pick-the-fix format. <a href="/learn/sentence-improvement">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Mensuration</h3>
+              <p>Picking the right formula and plugging in carefully. <a href="/learn/mensuration">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Inequality</h3>
+              <p>Chains of coded symbols, and the counterexample trick for ruling conclusions out. <a href="/learn/inequality">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Active and Passive Voice</h3>
+              <p>A mechanical three-step transformation, applied consistently across tenses. <a href="/learn/active-passive-voice">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

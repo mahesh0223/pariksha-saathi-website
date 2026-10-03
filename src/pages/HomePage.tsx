@@ -502,6 +502,27 @@ export function HomePage() {
                 <Link to="/learn/sentence-improvement">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Mensuration</h3>
+              <p>
+                Picking the right formula and plugging in carefully.{' '}
+                <Link to="/learn/mensuration">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Inequality</h3>
+              <p>
+                Chains of coded symbols, and the counterexample trick for ruling conclusions out.{' '}
+                <Link to="/learn/inequality">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Active and Passive Voice</h3>
+              <p>
+                A mechanical three-step transformation, applied consistently across tenses.{' '}
+                <Link to="/learn/active-passive-voice">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
