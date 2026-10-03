@@ -544,6 +544,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Tag Questions</h3>
               <p>One flip rule &mdash; positive statement, negative tag &mdash; plus matching the auxiliary verb. <a href="/learn/tag-questions">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Quadratic Equations</h3>
+              <p>Solve two equations, compare every pair of roots, then read off the relationship. <a href="/learn/quadratic-equations">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Input-Output</h3>
+              <p>Apply a fixed machine rule step by step, then read off a position. <a href="/learn/input-output">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Fill in the Blanks</h3>
+              <p>Reading the whole sentence for the fixed collocation the blank is testing. <a href="/learn/fill-in-the-blanks">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

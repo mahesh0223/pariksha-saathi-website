@@ -754,6 +754,27 @@ export function HomePage() {
                 <Link to="/learn/tag-questions">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Quadratic Equations</h3>
+              <p>
+                Solve two equations, compare every pair of roots, then read off the relationship.{' '}
+                <Link to="/learn/quadratic-equations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Input-Output</h3>
+              <p>
+                Apply a fixed machine rule step by step, then read off a position.{' '}
+                <Link to="/learn/input-output">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Fill in the Blanks</h3>
+              <p>
+                Reading the whole sentence for the fixed collocation the blank is testing.{' '}
+                <Link to="/learn/fill-in-the-blanks">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
