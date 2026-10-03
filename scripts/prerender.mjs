@@ -436,6 +436,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Para Jumbles</h3>
               <p>Following the pronoun and connector chain to the one order that works. <a href="/learn/para-jumbles">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Boat and Stream</h3>
+              <p>Time, Speed and Distance in a different costume &mdash; convert, then apply. <a href="/learn/boat-and-stream">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Alphabet Series</h3>
+              <p>Number Series with letters &mdash; convert to positions and solve the same way. <a href="/learn/alphabet-series">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Cloze Test</h3>
+              <p>Grammar plus meaning &mdash; reading the whole passage before picking an answer. <a href="/learn/cloze-test">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

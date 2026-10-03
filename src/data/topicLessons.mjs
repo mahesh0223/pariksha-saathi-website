@@ -3420,6 +3420,405 @@ export const TOPIC_LESSONS = [
       disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
     },
   },
+  {
+    slug: 'boat-and-stream',
+    en: {
+      pageTitle: 'Boat and Stream Questions with Solutions',
+      lede: 'Boat and Stream questions are Time, Speed and Distance questions wearing a different costume — convert the boat’s and stream’s speeds into a downstream or upstream speed first, then it’s the same formulas you already know. Here’s the concept, four fully worked examples, and a few to try yourself.',
+      conceptHeading: 'The concept, quickly',
+      conceptBody: [
+        'If a boat’s speed in still water is B and the stream’s speed is S: downstream speed (with the current) = B + S. Upstream speed (against the current) = B − S.',
+        'Given the downstream speed (D) and upstream speed (U), you can recover the boat’s and stream’s own speeds by reversing the formula: boat speed = (D + U) / 2, stream speed = (D − U) / 2.',
+        'Once you have a downstream or upstream speed, it’s an ordinary Time, Speed and Distance problem — apply Time = Distance / Speed as usual.',
+        'For a round trip covering the same distance downstream and back upstream, use the same two-unequal-speeds average-speed shortcut from Time, Speed and Distance: average speed = 2 × downstream speed × upstream speed / (downstream speed + upstream speed).',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question: 'A boat’s speed in still water is 10 km/hr, and the speed of the stream is 4 km/hr. Find the boat’s downstream and upstream speeds.',
+          solution: ['Downstream speed = boat speed + stream speed = 10 + 4 = 14 km/hr.', 'Upstream speed = boat speed − stream speed = 10 − 4 = 6 km/hr.'],
+          answer: 'Downstream = 14 km/hr, Upstream = 6 km/hr',
+        },
+        {
+          question: 'A boat can row 24 km downstream in 2 hours. If the boat’s speed in still water is 9 km/hr, find the speed of the stream.',
+          solution: ['Downstream speed = Distance / Time = 24 / 2 = 12 km/hr.', 'Stream speed = downstream speed − boat speed = 12 − 9 = 3 km/hr.'],
+          answer: '3 km/hr',
+        },
+        {
+          question: 'A man can row 15 km upstream in 3 hours, and his speed in still water is 7 km/hr. Find the speed of the stream and the time he would take to cover the same 15 km downstream.',
+          solution: [
+            'Upstream speed = Distance / Time = 15 / 3 = 5 km/hr.',
+            'Stream speed = boat speed − upstream speed = 7 − 5 = 2 km/hr.',
+            'Downstream speed = boat speed + stream speed = 7 + 2 = 9 km/hr.',
+            'Time downstream = Distance / Speed = 15 / 9 = 5/3 hours = 1 hour 40 minutes.',
+          ],
+          answer: 'Stream speed = 2 km/hr, Time downstream = 1 hour 40 minutes',
+        },
+        {
+          question: 'A boat’s downstream speed is 18 km/hr and its upstream speed is 12 km/hr. Find the boat’s speed in still water, the speed of the stream, and the boat’s average speed for a round trip covering the same distance each way.',
+          solution: [
+            'Boat speed = (downstream + upstream) / 2 = (18 + 12) / 2 = 15 km/hr.',
+            'Stream speed = (downstream − upstream) / 2 = (18 − 12) / 2 = 3 km/hr.',
+            'Average round-trip speed = 2 × 18 × 12 / (18 + 12) = 432 / 30 = 14.4 km/hr.',
+          ],
+          answer: 'Boat speed = 15 km/hr, Stream speed = 3 km/hr, Average round-trip speed = 14.4 km/hr',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Work through these the same way, then check against the answer.',
+      practiceQuestions: [
+        { question: 'A boat’s speed in still water is 12 km/hr, and the speed of the stream is 3 km/hr. Find the boat’s downstream and upstream speeds.', answer: 'Downstream = 15 km/hr, Upstream = 9 km/hr' },
+        { question: 'A boat can row 32 km downstream in 4 hours. If the boat’s speed in still water is 6 km/hr, find the speed of the stream.', answer: '2 km/hr' },
+        { question: 'A boat’s downstream speed is 20 km/hr and its upstream speed is 10 km/hr. Find the boat’s average speed for a round trip covering the same distance each way.', answer: '40/3 ≈ 13.33 km/hr' },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Boat and Stream is tested directly in the Quantitative/Numerical Aptitude section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — as a direct extension of Time, Speed and Distance.',
+      offerHeading: 'Practice more Boat and Stream questions',
+      offerBody: 'This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Boat and Stream (and every other Quant/Reasoning/English topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Boat and Stream free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'नाव और धारा (बोट एंड स्ट्रीम) के प्रश्न हल सहित',
+      lede: 'नाव और धारा के प्रश्न चाल, समय और दूरी के प्रश्न ही हैं, बस एक अलग रूप में — पहले नाव और धारा की चाल को डाउनस्ट्रीम या अपस्ट्रीम चाल में बदलें, फिर वही सूत्र लागू होते हैं जो आप पहले से जानते हैं। यहां अवधारणा, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'अवधारणा, संक्षेप में',
+      conceptBody: [
+        'यदि शांत पानी में नाव की चाल B है और धारा की चाल S है: धारा की दिशा में (डाउनस्ट्रीम) चाल = B + S। धारा के विपरीत (अपस्ट्रीम) चाल = B − S।',
+        'डाउनस्ट्रीम चाल (D) और अपस्ट्रीम चाल (U) दिए जाने पर, आप सूत्र को उल्टा करके नाव और धारा की अपनी चाल निकाल सकते हैं: नाव की चाल = (D + U) / 2, धारा की चाल = (D − U) / 2।',
+        'एक बार आपके पास डाउनस्ट्रीम या अपस्ट्रीम चाल आ जाए, तो यह एक सामान्य चाल, समय और दूरी का सवाल है — हमेशा की तरह समय = दूरी / चाल लागू करें।',
+        'एक ही दूरी डाउनस्ट्रीम और वापस अपस्ट्रीम तय करने वाले राउंड ट्रिप के लिए, चाल, समय और दूरी वाला वही दो-असमान-चाल औसत-चाल शॉर्टकट उपयोग करें: औसत चाल = 2 × डाउनस्ट्रीम चाल × अपस्ट्रीम चाल / (डाउनस्ट्रीम चाल + अपस्ट्रीम चाल)।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question: 'शांत पानी में एक नाव की चाल 10 km/hr है, और धारा की चाल 4 km/hr है। नाव की डाउनस्ट्रीम और अपस्ट्रीम चाल ज्ञात करें।',
+          solution: ['डाउनस्ट्रीम चाल = नाव की चाल + धारा की चाल = 10 + 4 = 14 km/hr।', 'अपस्ट्रीम चाल = नाव की चाल − धारा की चाल = 10 − 4 = 6 km/hr।'],
+          answer: 'डाउनस्ट्रीम = 14 km/hr, अपस्ट्रीम = 6 km/hr',
+        },
+        {
+          question: 'एक नाव डाउनस्ट्रीम 24 km, 2 घंटे में तय कर सकती है। यदि शांत पानी में नाव की चाल 9 km/hr है, तो धारा की चाल ज्ञात करें।',
+          solution: ['डाउनस्ट्रीम चाल = दूरी / समय = 24 / 2 = 12 km/hr।', 'धारा की चाल = डाउनस्ट्रीम चाल − नाव की चाल = 12 − 9 = 3 km/hr।'],
+          answer: '3 km/hr',
+        },
+        {
+          question: 'एक व्यक्ति अपस्ट्रीम 15 km, 3 घंटे में तय कर सकता है, और शांत पानी में उसकी चाल 7 km/hr है। धारा की चाल ज्ञात करें और वह उतनी ही 15 km डाउनस्ट्रीम तय करने में कितना समय लेगा।',
+          solution: [
+            'अपस्ट्रीम चाल = दूरी / समय = 15 / 3 = 5 km/hr।',
+            'धारा की चाल = नाव की चाल − अपस्ट्रीम चाल = 7 − 5 = 2 km/hr।',
+            'डाउनस्ट्रीम चाल = नाव की चाल + धारा की चाल = 7 + 2 = 9 km/hr।',
+            'डाउनस्ट्रीम समय = दूरी / चाल = 15 / 9 = 5/3 घंटे = 1 घंटा 40 मिनट।',
+          ],
+          answer: 'धारा की चाल = 2 km/hr, डाउनस्ट्रीम समय = 1 घंटा 40 मिनट',
+        },
+        {
+          question: 'एक नाव की डाउनस्ट्रीम चाल 18 km/hr है और अपस्ट्रीम चाल 12 km/hr है। नाव की शांत पानी में चाल, धारा की चाल, और नाव की एक ही दूरी दोनों तरफ तय करने वाले राउंड ट्रिप की औसत चाल ज्ञात करें।',
+          solution: [
+            'नाव की चाल = (डाउनस्ट्रीम + अपस्ट्रीम) / 2 = (18 + 12) / 2 = 15 km/hr।',
+            'धारा की चाल = (डाउनस्ट्रीम − अपस्ट्रीम) / 2 = (18 − 12) / 2 = 3 km/hr।',
+            'राउंड ट्रिप की औसत चाल = 2 × 18 × 12 / (18 + 12) = 432 / 30 = 14.4 km/hr।',
+          ],
+          answer: 'नाव की चाल = 15 km/hr, धारा की चाल = 3 km/hr, राउंड ट्रिप औसत चाल = 14.4 km/hr',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        { question: 'शांत पानी में एक नाव की चाल 12 km/hr है, और धारा की चाल 3 km/hr है। नाव की डाउनस्ट्रीम और अपस्ट्रीम चाल ज्ञात करें।', answer: 'डाउनस्ट्रीम = 15 km/hr, अपस्ट्रीम = 9 km/hr' },
+        { question: 'एक नाव डाउनस्ट्रीम 32 km, 4 घंटे में तय कर सकती है। यदि शांत पानी में नाव की चाल 6 km/hr है, तो धारा की चाल ज्ञात करें।', answer: '2 km/hr' },
+        { question: 'एक नाव की डाउनस्ट्रीम चाल 20 km/hr है और अपस्ट्रीम चाल 10 km/hr है। नाव की एक ही दूरी दोनों तरफ तय करने वाले राउंड ट्रिप की औसत चाल ज्ञात करें।', answer: '40/3 ≈ 13.33 km/hr' },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के मात्रात्मक/संख्यात्मक अभियोग्यता खंड में नाव और धारा सीधे परखा जाता है, चाल, समय और दूरी के सीधे विस्तार के रूप में।',
+      offerHeading: 'नाव और धारा के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर नाव और धारा (और हर दूसरे मात्रात्मक/तर्कशक्ति/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'नाव और धारा का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
+  {
+    slug: 'alphabet-series',
+    en: {
+      pageTitle: 'Alphabet Series Questions with Solutions',
+      lede: 'Alphabet Series questions work exactly like Number Series, once you convert each letter to its position number (A=1, B=2, … Z=26) — find the numeric pattern, then convert the answer back to a letter. Here’s the approach, four fully worked examples, and a few to try yourself.',
+      conceptHeading: 'The approach, quickly',
+      conceptBody: [
+        'Convert every letter to its position number first (A=1, B=2, … Z=26). Solve the resulting number pattern exactly as you would for Number Series, then convert the final answer back to a letter.',
+        'Common patterns: a fixed gap between letters (skip 1, skip 2…), an increasing or decreasing gap (mirroring Number Series’ "differences of differences"), or two interleaved sequences running at once.',
+        'Some series alternate forward and backward movement (e.g., +3 then −1, repeating) — treat this the same as an alternating-operations Number Series pattern, just in letter-position space.',
+        'Watch for a position going past 26 or below 1 — in that case the series wraps around the alphabet (26 wraps to 1, or 1 wraps to 26), though this is relatively rare and worth double-checking for before assuming a pattern is broken.',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question: 'Find the next letter in the series: B, D, F, H, J, ?',
+          solution: ['Positions: B=2, D=4, F=6, H=8, J=10 — each one is 2 more than the last.', 'Next position = 10 + 2 = 12 = L.'],
+          answer: 'L',
+        },
+        {
+          question: 'Find the missing letter in the series: A, C, F, J, O, ?',
+          solution: ['Positions: A=1, C=3, F=6, J=10, O=15. Differences between them: 2, 3, 4, 5 — each one is 1 more than the last.', 'Next difference = 6. Next position = 15 + 6 = 21 = U.'],
+          answer: 'U',
+        },
+        {
+          question: 'Find the next term in the series: AZ, BY, CX, DW, ?',
+          solution: [
+            'Split into two interleaved sequences: the first letters (A, B, C, D) move forward by 1 each time, and the second letters (Z, Y, X, W) move backward by 1 each time.',
+            'Next first letter: D + 1 = E. Next second letter: W − 1 = V.',
+          ],
+          answer: 'EV',
+        },
+        {
+          question: 'Find the next letter in the series: C, F, E, H, G, J, ?',
+          solution: [
+            'Positions: C=3, F=6, E=5, H=8, G=7, J=10. Check the pattern of steps, not a single constant gap: C→F is +3, F→E is −1, E→H is +3, H→G is −1, G→J is +3.',
+            'The steps alternate +3, −1, +3, −1, … and the last one shown was +3 (G→J), so the next step is −1.',
+            'Next position = 10 − 1 = 9 = I.',
+          ],
+          answer: 'I',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Convert to positions the same way, then check against the answer.',
+      practiceQuestions: [
+        { question: 'Find the next letter in the series: C, F, I, L, O, ?', answer: 'R (each position is 3 more than the last)' },
+        { question: 'Find the missing letter in the series: B, D, G, K, P, ?', answer: 'V (differences are 2, 3, 4, 5, so the next difference is 6)' },
+        { question: 'Find the next term in the series: ZA, YB, XC, WD, ?', answer: 'VE (first letters move backward by 1, second letters move forward by 1)' },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Alphabet Series is a regular topic in the Reasoning/General Intelligence section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      offerHeading: 'Practice more Alphabet Series questions',
+      offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Alphabet Series (and every other Reasoning/Quant/English topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Alphabet Series free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'वर्णमाला श्रृंखला (अल्फाबेट सीरीज़) के प्रश्न हल सहित',
+      lede: 'वर्णमाला श्रृंखला के प्रश्न बिल्कुल नंबर सीरीज़ जैसे ही काम करते हैं, एक बार जब आप हर अक्षर को उसकी स्थिति संख्या में बदल दें (A=1, B=2, … Z=26) — संख्यात्मक पैटर्न ढूंढें, फिर उत्तर को वापस अक्षर में बदलें। यहां तरीका, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'तरीका, संक्षेप में',
+      conceptBody: [
+        'पहले हर अक्षर को उसकी स्थिति संख्या में बदलें (A=1, B=2, … Z=26)। परिणामी संख्या पैटर्न को ठीक वैसे ही हल करें जैसे नंबर सीरीज़ के लिए करते हैं, फिर अंतिम उत्तर को वापस अक्षर में बदलें।',
+        'आम पैटर्न: अक्षरों के बीच एक निश्चित अंतर (1 छोड़ें, 2 छोड़ें…), बढ़ता या घटता अंतर (नंबर सीरीज़ के "अंतरों के अंतर" जैसा), या एक साथ चलने वाली दो गुंथी हुई श्रृंखलाएं।',
+        'कुछ श्रृंखलाएं आगे और पीछे की गति को बारी-बारी से बदलती हैं (जैसे, +3 फिर −1, दोहराते हुए) — इसे वैसे ही मानें जैसे बारी-बारी क्रियाओं वाली नंबर सीरीज़ का पैटर्न, बस अक्षर-स्थिति में।',
+        'किसी स्थिति के 26 से आगे या 1 से नीचे जाने पर ध्यान दें — ऐसे मामले में श्रृंखला वर्णमाला के चारों ओर लपेटती है (26, 1 पर लपेटता है, या 1, 26 पर), हालांकि यह अपेक्षाकृत दुर्लभ है और किसी पैटर्न को टूटा हुआ मानने से पहले इसकी दोबारा जांच करने लायक है।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question: 'इस श्रृंखला की अगली अक्षर ज्ञात करें: B, D, F, H, J, ?',
+          solution: ['स्थितियां: B=2, D=4, F=6, H=8, J=10 — हर एक पिछले से 2 ज़्यादा है।', 'अगली स्थिति = 10 + 2 = 12 = L।'],
+          answer: 'L',
+        },
+        {
+          question: 'इस श्रृंखला की लुप्त अक्षर ज्ञात करें: A, C, F, J, O, ?',
+          solution: ['स्थितियां: A=1, C=3, F=6, J=10, O=15। उनके बीच अंतर: 2, 3, 4, 5 — हर एक पिछले से 1 ज़्यादा है।', 'अगला अंतर = 6। अगली स्थिति = 15 + 6 = 21 = U।'],
+          answer: 'U',
+        },
+        {
+          question: 'इस श्रृंखला का अगला पद ज्ञात करें: AZ, BY, CX, DW, ?',
+          solution: [
+            'दो गुंथी हुई श्रृंखलाओं में बांटें: पहले अक्षर (A, B, C, D) हर बार 1 आगे बढ़ते हैं, और दूसरे अक्षर (Z, Y, X, W) हर बार 1 पीछे जाते हैं।',
+            'अगला पहला अक्षर: D + 1 = E। अगला दूसरा अक्षर: W − 1 = V।',
+          ],
+          answer: 'EV',
+        },
+        {
+          question: 'इस श्रृंखला की अगली अक्षर ज्ञात करें: C, F, E, H, G, J, ?',
+          solution: [
+            'स्थितियां: C=3, F=6, E=5, H=8, G=7, J=10। एक स्थिर अंतर के बजाय कदमों का पैटर्न जांचें: C→F है +3, F→E है −1, E→H है +3, H→G है −1, G→J है +3।',
+            'कदम बारी-बारी से +3, −1, +3, −1, … होते हैं, और आखिरी दिखाया गया +3 था (G→J), तो अगला कदम −1 होगा।',
+            'अगली स्थिति = 10 − 1 = 9 = I।',
+          ],
+          answer: 'I',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'उसी तरीके से स्थितियों में बदलें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        { question: 'इस श्रृंखला की अगली अक्षर ज्ञात करें: C, F, I, L, O, ?', answer: 'R (हर स्थिति पिछले से 3 ज़्यादा है)' },
+        { question: 'इस श्रृंखला की लुप्त अक्षर ज्ञात करें: B, D, G, K, P, ?', answer: 'V (अंतर 2, 3, 4, 5 हैं, तो अगला अंतर 6 है)' },
+        { question: 'इस श्रृंखला का अगला पद ज्ञात करें: ZA, YB, XC, WD, ?', answer: 'VE (पहले अक्षर 1 पीछे जाते हैं, दूसरे अक्षर 1 आगे बढ़ते हैं)' },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के तर्कशक्ति/सामान्य बुद्धिमत्ता खंड में वर्णमाला श्रृंखला एक नियमित विषय है।',
+      offerHeading: 'वर्णमाला श्रृंखला के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर वर्णमाला श्रृंखला (और हर दूसरे तर्कशक्ति/मात्रात्मक/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'वर्णमाला श्रृंखला का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
+  {
+    slug: 'cloze-test',
+    en: {
+      pageTitle: 'Cloze Test Questions with Solutions',
+      lede: 'Cloze Test questions give you a short passage with several blanks — each answer has to fit the grammar of its own sentence AND stay consistent with the passage’s overall meaning. Here’s the approach, four fully worked passages, and a few to try yourself.',
+      conceptHeading: 'The approach, quickly',
+      conceptBody: [
+        'Read the whole passage once before filling in any blank, so you understand its overall topic and tone — an option can be grammatically fine in isolation and still wrong because it contradicts the passage elsewhere.',
+        'Pay attention to connector words already in the passage ("however", "therefore", "although") — they tell you whether the missing word should continue the same idea or contrast with it.',
+        'Apply the same grammar checks as Spotting Errors and Sentence Improvement to each blank individually: subject-verb agreement, correct preposition, and tense consistency with the rest of the passage.',
+        'When two options both seem grammatically valid, re-read the sentence with each substituted in — the one that fits the passage’s actual meaning, not just its grammar, is correct.',
+      ],
+      examplesHeading: 'Worked examples',
+      examples: [
+        {
+          question:
+            'Fill in the blanks: Reading regularly (1)___ vocabulary and improves concentration. Many students, (2)___, find it hard to make time for books because of their busy schedules. Experts suggest setting aside just twenty minutes a day (3)___ build the habit gradually.\n(1) (A) improve (B) improves (C) improving (D) improved\n(2) (A) therefore (B) for example (C) however (D) moreover\n(3) (A) to (B) for (C) at (D) in',
+          solution: [
+            '(1): The subject "Reading regularly" is singular, so the verb must be singular — "improves", not "improve".',
+            '(2): The passage shifts from reading’s benefits to students finding it HARD to read — a contrast, so "however" fits, not a continuation word like "therefore" or "moreover".',
+            '(3): "Setting aside time TO build a habit" is the standard infinitive-of-purpose construction.',
+          ],
+          answer: '(1) B improves, (2) C however, (3) A to',
+        },
+        {
+          question:
+            'Fill in the blanks: Solar energy is becoming increasingly popular (1)___ it is renewable and produces no harmful emissions. (2)___, the initial cost of installing solar panels remains high for many households. Governments in several countries (3)___ now offering subsidies to make the switch more affordable.\n(1) (A) because (B) although (C) unless (D) despite\n(2) (A) Similarly (B) However (C) Therefore (D) For instance\n(3) (A) is (B) was (C) are (D) has',
+          solution: [
+            '(1): The clause gives a REASON solar energy is popular (renewable, no emissions), so "because" fits.',
+            '(2): The passage shifts from solar energy’s benefits to a drawback (high cost) — a contrast, so "However".',
+            '(3): The subject "Governments… in several countries" is plural, so the verb must be plural — "are".',
+          ],
+          answer: '(1) A because, (2) B However, (3) C are',
+        },
+        {
+          question:
+            'Fill in the blanks: The human brain uses (1)___ twenty percent of the body’s total energy, even though it makes up only about two percent of body weight. This is largely (2)___ neurons require a constant supply of glucose and oxygen to function properly. (3)___ we are resting or asleep, this energy demand does not pause.\n(1) (A) near (B) nearly (C) nearer (D) nearest\n(2) (A) because of (B) because (C) due to (D) owing\n(3) (A) Despite (B) Although (C) Because (D) Unless',
+          solution: [
+            '(1): The blank modifies the approximate number "twenty percent", which needs the adverb "nearly", not the adjective "near".',
+            '(2): What follows is a full clause ("neurons require…"), which needs "because" — "because of", "due to" and "owing" all need a noun phrase instead, not a full clause.',
+            '(3): What follows is a full clause ("we are resting or asleep") expressing a concession, which needs "Although" — "Despite" would need a noun phrase ("Despite resting"), not a full clause.',
+          ],
+          answer: '(1) B nearly, (2) B because, (3) B Although',
+        },
+        {
+          question:
+            'Fill in the blanks: Many companies today (1)___ remote work policies to attract talent from a wider pool of candidates. Employees, (2)___, often report feeling isolated without regular face-to-face contact with colleagues. To address this, many organisations now schedule periodic in-person meetups (3)___ maintain a sense of team connection.\n(1) (A) adopt (B) adopts (C) adopting (D) adopted\n(2) (A) therefore (B) however (C) for instance (D) similarly\n(3) (A) for (B) to (C) at (D) with',
+          solution: [
+            '(1): The plural subject "Many companies" needs the plural verb "adopt", not "adopts".',
+            '(2): The passage shifts from companies’ good reason for remote work to a downside employees report — a contrast, so "however".',
+            '(3): "Schedule meetups TO maintain a sense of connection" is the standard infinitive-of-purpose construction.',
+          ],
+          answer: '(1) A adopt, (2) B however, (3) B to',
+        },
+      ],
+      practiceHeading: 'Try these yourself',
+      practiceIntro: 'Read the whole sentence first, then check against the answer.',
+      practiceQuestions: [
+        {
+          question: 'Fill in the blanks: Regular exercise (1)___ both physical and mental health. Doctors recommend at least thirty minutes of activity most days (2)___ the week.\n(1) (A) benefit (B) benefits (C) benefiting (D) benefited\n(2) (A) of (B) in (C) for (D) at',
+          answer: '(1) B benefits, (2) A of',
+        },
+        {
+          question: 'Fill in the blanks: The committee (1)___ yet to announce its final decision on the proposal. Members say they need more time (2)___ consider all the options carefully.\n(1) (A) is (B) are (C) was (D) have\n(2) (A) for (B) to (C) at (D) of',
+          answer: '(1) A is, (2) B to',
+        },
+        {
+          question: 'Fill in the blanks: Despite the heavy rain, the match (1)___ as scheduled. Fans who had travelled long distances were relieved that it was (2)___ postponed.\n(1) (A) go (B) goes (C) went (D) going\n(2) (A) not (B) no (C) none (D) never',
+          answer: '(1) C went, (2) A not',
+        },
+      ],
+      relevantForHeading: 'Where this comes up',
+      relevantForBody: 'Cloze Test is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      offerHeading: 'Practice more Cloze Test questions',
+      offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Cloze Test (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
+      ctaLabel: 'Practice Cloze Test free',
+      backLabel: 'Home',
+      solutionLabel: 'Solution',
+      answerLabel: 'Answer',
+      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+    },
+    hi: {
+      pageTitle: 'क्लोज़ टेस्ट के प्रश्न हल सहित',
+      lede: 'क्लोज़ टेस्ट के प्रश्न आपको कई खाली जगहों वाला एक छोटा अनुच्छेद देते हैं — हर उत्तर को अपने वाक्य के व्याकरण के साथ फिट होना चाहिए और अनुच्छेद के समग्र अर्थ के साथ भी सुसंगत रहना चाहिए। यहां तरीका, चार पूरी तरह हल किए गए अनुच्छेद, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      conceptHeading: 'तरीका, संक्षेप में',
+      conceptBody: [
+        'किसी भी खाली जगह को भरने से पहले पूरा अनुच्छेद एक बार पढ़ें, ताकि आप इसका समग्र विषय और लहजा समझ सकें — कोई विकल्प अकेले व्याकरण की दृष्टि से ठीक हो सकता है फिर भी गलत हो सकता है क्योंकि वह अनुच्छेद के किसी और हिस्से से विरोधाभास रखता है।',
+        'अनुच्छेद में पहले से मौजूद जोड़ने वाले शब्दों ("however", "therefore", "although") पर ध्यान दें — वे बताते हैं कि लुप्त शब्द को वही विचार जारी रखना चाहिए या उससे विरोधाभास करना चाहिए।',
+        'स्पॉटिंग एरर्स और सेंटेंस इम्प्रूवमेंट वाले वही व्याकरण जांच हर खाली जगह पर अलग-अलग लागू करें: कर्ता-क्रिया का मेल, सही preposition, और बाकी अनुच्छेद के साथ काल की संगति।',
+        'जब दो विकल्प दोनों व्याकरण की दृष्टि से सही लगें, तो हर एक को रखकर वाक्य दोबारा पढ़ें — जो अनुच्छेद के वास्तविक अर्थ से मेल खाता है, केवल व्याकरण से नहीं, वही सही है।',
+      ],
+      examplesHeading: 'हल किए गए उदाहरण',
+      examples: [
+        {
+          question:
+            'Fill in the blanks: Reading regularly (1)___ vocabulary and improves concentration. Many students, (2)___, find it hard to make time for books because of their busy schedules. Experts suggest setting aside just twenty minutes a day (3)___ build the habit gradually.\n(1) (A) improve (B) improves (C) improving (D) improved\n(2) (A) therefore (B) for example (C) however (D) moreover\n(3) (A) to (B) for (C) at (D) in',
+          solution: [
+            '(1): कर्ता "Reading regularly" एकवचन है, तो क्रिया एकवचन होनी चाहिए — "improves", "improve" नहीं।',
+            '(2): अनुच्छेद पढ़ने के फायदों से विद्यार्थियों के पढ़ना कठिन पाने की ओर बदलता है — एक विरोधाभास, तो "however" फिट बैठता है, "therefore" या "moreover" जैसा जारी रखने वाला शब्द नहीं।',
+            '(3): "Setting aside time TO build a habit" मानक infinitive-of-purpose संरचना है।',
+          ],
+          answer: '(1) B improves, (2) C however, (3) A to',
+        },
+        {
+          question:
+            'Fill in the blanks: Solar energy is becoming increasingly popular (1)___ it is renewable and produces no harmful emissions. (2)___, the initial cost of installing solar panels remains high for many households. Governments in several countries (3)___ now offering subsidies to make the switch more affordable.\n(1) (A) because (B) although (C) unless (D) despite\n(2) (A) Similarly (B) However (C) Therefore (D) For instance\n(3) (A) is (B) was (C) are (D) has',
+          solution: [
+            '(1): यह खंड सौर ऊर्जा के लोकप्रिय होने का एक कारण देता है (नवीकरणीय, कोई हानिकारक उत्सर्जन नहीं), तो "because" फिट बैठता है।',
+            '(2): अनुच्छेद सौर ऊर्जा के फायदों से एक कमी (उच्च लागत) की ओर बदलता है — एक विरोधाभास, तो "However"।',
+            '(3): कर्ता "Governments… in several countries" बहुवचन है, तो क्रिया बहुवचन होनी चाहिए — "are"।',
+          ],
+          answer: '(1) A because, (2) B However, (3) C are',
+        },
+        {
+          question:
+            'Fill in the blanks: The human brain uses (1)___ twenty percent of the body’s total energy, even though it makes up only about two percent of body weight. This is largely (2)___ neurons require a constant supply of glucose and oxygen to function properly. (3)___ we are resting or asleep, this energy demand does not pause.\n(1) (A) near (B) nearly (C) nearer (D) nearest\n(2) (A) because of (B) because (C) due to (D) owing\n(3) (A) Despite (B) Although (C) Because (D) Unless',
+          solution: [
+            '(1): यह खाली जगह अनुमानित संख्या "twenty percent" को संशोधित करती है, जिसे क्रिया-विशेषण "nearly" चाहिए, विशेषण "near" नहीं।',
+            '(2): इसके बाद एक पूरा उपवाक्य आता है ("neurons require…"), जिसे "because" चाहिए — "because of", "due to" और "owing" सभी को एक पूरे उपवाक्य के बजाय एक संज्ञा-वाक्यांश चाहिए।',
+            '(3): इसके बाद एक पूरा उपवाक्य आता है ("we are resting or asleep") जो एक रियायत व्यक्त करता है, जिसे "Although" चाहिए — "Despite" को एक पूरे उपवाक्य के बजाय एक संज्ञा-वाक्यांश ("Despite resting") चाहिए।',
+          ],
+          answer: '(1) B nearly, (2) B because, (3) B Although',
+        },
+        {
+          question:
+            'Fill in the blanks: Many companies today (1)___ remote work policies to attract talent from a wider pool of candidates. Employees, (2)___, often report feeling isolated without regular face-to-face contact with colleagues. To address this, many organisations now schedule periodic in-person meetups (3)___ maintain a sense of team connection.\n(1) (A) adopt (B) adopts (C) adopting (D) adopted\n(2) (A) therefore (B) however (C) for instance (D) similarly\n(3) (A) for (B) to (C) at (D) with',
+          solution: [
+            '(1): बहुवचन कर्ता "Many companies" को बहुवचन क्रिया "adopt" चाहिए, "adopts" नहीं।',
+            '(2): अनुच्छेद कंपनियों के रिमोट वर्क अपनाने के अच्छे कारण से कर्मचारियों द्वारा बताई गई एक कमी की ओर बदलता है — एक विरोधाभास, तो "however"।',
+            '(3): "Schedule meetups TO maintain a sense of connection" मानक infinitive-of-purpose संरचना है।',
+          ],
+          answer: '(1) A adopt, (2) B however, (3) B to',
+        },
+      ],
+      practiceHeading: 'खुद हल करके देखें',
+      practiceIntro: 'पहले पूरा वाक्य पढ़ें, फिर उत्तर से मिलान करें।',
+      practiceQuestions: [
+        {
+          question: 'Fill in the blanks: Regular exercise (1)___ both physical and mental health. Doctors recommend at least thirty minutes of activity most days (2)___ the week.\n(1) (A) benefit (B) benefits (C) benefiting (D) benefited\n(2) (A) of (B) in (C) for (D) at',
+          answer: '(1) B benefits, (2) A of',
+        },
+        {
+          question: 'Fill in the blanks: The committee (1)___ yet to announce its final decision on the proposal. Members say they need more time (2)___ consider all the options carefully.\n(1) (A) is (B) are (C) was (D) have\n(2) (A) for (B) to (C) at (D) of',
+          answer: '(1) A is, (2) B to',
+        },
+        {
+          question: 'Fill in the blanks: Despite the heavy rain, the match (1)___ as scheduled. Fans who had travelled long distances were relieved that it was (2)___ postponed.\n(1) (A) go (B) goes (C) went (D) going\n(2) (A) not (B) no (C) none (D) never',
+          answer: '(1) C went, (2) A not',
+        },
+      ],
+      relevantForHeading: 'यह कहां काम आता है',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में क्लोज़ टेस्ट एक नियमित विषय है।',
+      offerHeading: 'क्लोज़ टेस्ट के और प्रश्नों का अभ्यास करें',
+      offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर क्लोज़ टेस्ट (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
+      ctaLabel: 'क्लोज़ टेस्ट का मुफ्त अभ्यास करें',
+      backLabel: 'होम',
+      solutionLabel: 'हल',
+      answerLabel: 'उत्तर',
+      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
+    },
+  },
 ];
 
 export function findLessonEntry(slug) {

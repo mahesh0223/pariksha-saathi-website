@@ -565,6 +565,27 @@ export function HomePage() {
                 <Link to="/learn/para-jumbles">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Boat and Stream</h3>
+              <p>
+                Time, Speed and Distance in a different costume — convert, then apply.{' '}
+                <Link to="/learn/boat-and-stream">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Alphabet Series</h3>
+              <p>
+                Number Series with letters — convert to positions and solve the same way.{' '}
+                <Link to="/learn/alphabet-series">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Cloze Test</h3>
+              <p>
+                Grammar plus meaning — reading the whole passage before picking an answer.{' '}
+                <Link to="/learn/cloze-test">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
