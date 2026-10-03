@@ -649,6 +649,27 @@ export function HomePage() {
                 <Link to="/learn/idioms-and-phrases">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Probability</h3>
+              <p>
+                Careful counting — favorable outcomes over total outcomes.{' '}
+                <Link to="/learn/probability">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Statement and Assumption</h3>
+              <p>
+                The "if this were false, would it still make sense?" test.{' '}
+                <Link to="/learn/statement-and-assumption">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Articles</h3>
+              <p>
+                "A"/"an" vs "the" — specific and identified, or just any one example?{' '}
+                <Link to="/learn/articles">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

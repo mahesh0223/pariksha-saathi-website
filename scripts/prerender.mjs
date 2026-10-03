@@ -484,6 +484,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Idioms and Phrases</h3>
               <p>Pure recognition &mdash; fixed phrases that can&rsquo;t be worked out from their words. <a href="/learn/idioms-and-phrases">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Probability</h3>
+              <p>Careful counting &mdash; favorable outcomes over total outcomes. <a href="/learn/probability">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Statement and Assumption</h3>
+              <p>The "if this were false, would it still make sense?" test. <a href="/learn/statement-and-assumption">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Articles</h3>
+              <p>"A"/"an" vs "the" &mdash; specific and identified, or just any one example? <a href="/learn/articles">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
