@@ -388,6 +388,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>One Word Substitution</h3>
               <p>A narrow, learnable vocabulary list — the same few dozen words repeat. <a href="/learn/one-word-substitution">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Mixture and Alligation</h3>
+              <p>The weighted-average formula, run backwards to find a ratio. <a href="/learn/mixture-and-alligation">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Seating Arrangement</h3>
+              <p>Sketch the row, fill in what&rsquo;s forced, then eliminate the rest. <a href="/learn/seating-arrangement">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Sentence Improvement</h3>
+              <p>The same grammar rules as Spotting Errors, in a pick-the-fix format. <a href="/learn/sentence-improvement">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

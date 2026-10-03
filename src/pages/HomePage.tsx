@@ -481,6 +481,27 @@ export function HomePage() {
                 <Link to="/learn/one-word-substitution">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Mixture and Alligation</h3>
+              <p>
+                The weighted-average formula, run backwards to find a ratio.{' '}
+                <Link to="/learn/mixture-and-alligation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Seating Arrangement</h3>
+              <p>
+                Sketch the row, fill in what’s forced, then eliminate the rest.{' '}
+                <Link to="/learn/seating-arrangement">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Sentence Improvement</h3>
+              <p>
+                The same grammar rules as Spotting Errors, in a pick-the-fix format.{' '}
+                <Link to="/learn/sentence-improvement">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
