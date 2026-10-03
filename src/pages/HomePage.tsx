@@ -985,6 +985,27 @@ export function HomePage() {
                 <Link to="/learn/infinitives-and-gerunds">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Mean, Third and Fourth Proportional</h3>
+              <p>
+                Completing a proportion with a missing term — set it up, then cross-multiply.{' '}
+                <Link to="/learn/mean-third-fourth-proportional">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Family Tree (Blood Relations)</h3>
+              <p>
+                Blood Relations at a larger scale — build the tree, then read off every answer.{' '}
+                <Link to="/learn/family-tree-blood-relations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Redundancy</h3>
+              <p>
+                "Repeat again," "free gift" — spotting words that say the same thing twice.{' '}
+                <Link to="/learn/redundancy">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -676,6 +676,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Infinitives and Gerunds</h3>
               <p>A short, fixed list of verbs to learn &mdash; enjoy reading, decide to accept. <a href="/learn/infinitives-and-gerunds">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Mean, Third and Fourth Proportional</h3>
+              <p>Completing a proportion with a missing term &mdash; set it up, then cross-multiply. <a href="/learn/mean-third-fourth-proportional">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Family Tree (Blood Relations)</h3>
+              <p>Blood Relations at a larger scale &mdash; build the tree, then read off every answer. <a href="/learn/family-tree-blood-relations">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Redundancy</h3>
+              <p>&quot;Repeat again,&quot; &quot;free gift&quot; &mdash; spotting words that say the same thing twice. <a href="/learn/redundancy">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
