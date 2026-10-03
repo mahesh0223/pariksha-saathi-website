@@ -670,6 +670,27 @@ export function HomePage() {
                 <Link to="/learn/articles">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Pipes and Cisterns</h3>
+              <p>
+                Time and Work with a twist — an outlet pipe gets a negative rate.{' '}
+                <Link to="/learn/pipes-and-cisterns">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Statement and Conclusion</h3>
+              <p>
+                A conclusion only counts if it’s a direct restatement, nothing borrowed.{' '}
+                <Link to="/learn/statement-and-conclusion">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Homophones</h3>
+              <p>
+                Words that sound identical — spelling and meaning are the only tell.{' '}
+                <Link to="/learn/homophones">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

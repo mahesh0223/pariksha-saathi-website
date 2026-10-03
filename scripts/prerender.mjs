@@ -496,6 +496,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Articles</h3>
               <p>"A"/"an" vs "the" &mdash; specific and identified, or just any one example? <a href="/learn/articles">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Pipes and Cisterns</h3>
+              <p>Time and Work with a twist &mdash; an outlet pipe gets a negative rate. <a href="/learn/pipes-and-cisterns">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Statement and Conclusion</h3>
+              <p>A conclusion only counts if it&rsquo;s a direct restatement, nothing borrowed. <a href="/learn/statement-and-conclusion">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Homophones</h3>
+              <p>Words that sound identical &mdash; spelling and meaning are the only tell. <a href="/learn/homophones">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
