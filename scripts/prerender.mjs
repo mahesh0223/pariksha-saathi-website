@@ -472,6 +472,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Prepositions</h3>
               <p>Fixed pairings to learn like vocabulary, plus a size-based pattern for time and place. <a href="/learn/prepositions">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Permutation and Combination</h3>
+              <p>One question decides the formula: does the order of arrangement matter? <a href="/learn/permutation-and-combination">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Ranking and Order</h3>
+              <p>One small formula connecting rank from the top, the bottom, and the total. <a href="/learn/ranking-and-order">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Idioms and Phrases</h3>
+              <p>Pure recognition &mdash; fixed phrases that can&rsquo;t be worked out from their words. <a href="/learn/idioms-and-phrases">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

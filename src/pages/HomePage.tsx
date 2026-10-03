@@ -628,6 +628,27 @@ export function HomePage() {
                 <Link to="/learn/prepositions">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Permutation and Combination</h3>
+              <p>
+                One question decides the formula: does the order of arrangement matter?{' '}
+                <Link to="/learn/permutation-and-combination">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Ranking and Order</h3>
+              <p>
+                One small formula connecting rank from the top, the bottom, and the total.{' '}
+                <Link to="/learn/ranking-and-order">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Idioms and Phrases</h3>
+              <p>
+                Pure recognition — fixed phrases that can’t be worked out from their words.{' '}
+                <Link to="/learn/idioms-and-phrases">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
