@@ -1027,6 +1027,27 @@ export function HomePage() {
                 <Link to="/learn/modal-verbs">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Algebraic Identities</h3>
+              <p>
+                Find a²+b² or ab without ever solving for a and b individually.{' '}
+                <Link to="/learn/algebraic-identities">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Logical Sequence of Words</h3>
+              <p>
+                Ordering by hierarchy, real-world process, or dictionary order.{' '}
+                <Link to="/learn/logical-sequence-of-words">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Tenses</h3>
+              <p>
+                Present Perfect vs Simple Past, and "since" vs "for" — the two recurring traps.{' '}
+                <Link to="/learn/tenses">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

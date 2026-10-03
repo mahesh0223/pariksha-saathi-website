@@ -700,6 +700,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Modal Verbs</h3>
               <p>&quot;Must not&quot; vs &quot;need not&quot; &mdash; a classic trap between prohibition and no obligation. <a href="/learn/modal-verbs">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Algebraic Identities</h3>
+              <p>Find a&sup2;+b&sup2; or ab without ever solving for a and b individually. <a href="/learn/algebraic-identities">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Logical Sequence of Words</h3>
+              <p>Ordering by hierarchy, real-world process, or dictionary order. <a href="/learn/logical-sequence-of-words">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Tenses</h3>
+              <p>Present Perfect vs Simple Past, and &quot;since&quot; vs &quot;for&quot; &mdash; the two recurring traps. <a href="/learn/tenses">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
