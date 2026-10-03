@@ -412,6 +412,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Active and Passive Voice</h3>
               <p>A mechanical three-step transformation, applied consistently across tenses. <a href="/learn/active-passive-voice">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Simplification</h3>
+              <p>BODMAS order, not left-to-right — a speed test more than a difficulty test. <a href="/learn/simplification">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Calendar</h3>
+              <p>Counting odd days, and the century-year leap-year exception. <a href="/learn/calendar">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Direct and Indirect Speech</h3>
+              <p>Tense shifts, pronoun changes, and how questions convert differently. <a href="/learn/direct-indirect-speech">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

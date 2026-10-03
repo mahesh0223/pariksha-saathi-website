@@ -523,6 +523,27 @@ export function HomePage() {
                 <Link to="/learn/active-passive-voice">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Simplification</h3>
+              <p>
+                BODMAS order, not left-to-right — a speed test more than a difficulty test.{' '}
+                <Link to="/learn/simplification">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Calendar</h3>
+              <p>
+                Counting odd days, and the century-year leap-year exception.{' '}
+                <Link to="/learn/calendar">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Direct and Indirect Speech</h3>
+              <p>
+                Tense shifts, pronoun changes, and how questions convert differently.{' '}
+                <Link to="/learn/direct-indirect-speech">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
