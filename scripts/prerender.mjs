@@ -556,6 +556,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Fill in the Blanks</h3>
               <p>Reading the whole sentence for the fixed collocation the blank is testing. <a href="/learn/fill-in-the-blanks">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Approximation</h3>
+              <p>Round every number first &mdash; the goal is close, not exact. <a href="/learn/approximation">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Statement and Argument</h3>
+              <p>Judging whether a reason is specific and weighty, not just plausible-sounding. <a href="/learn/statement-and-argument">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Para Completion</h3>
+              <p>Continuing a paragraph&rsquo;s direction without overreaching or contradicting it. <a href="/learn/para-completion">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

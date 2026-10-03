@@ -775,6 +775,27 @@ export function HomePage() {
                 <Link to="/learn/fill-in-the-blanks">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Approximation</h3>
+              <p>
+                Round every number first — the goal is close, not exact.{' '}
+                <Link to="/learn/approximation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Statement and Argument</h3>
+              <p>
+                Judging whether a reason is specific and weighty, not just plausible-sounding.{' '}
+                <Link to="/learn/statement-and-argument">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Para Completion</h3>
+              <p>
+                Continuing a paragraph’s direction without overreaching or contradicting it.{' '}
+                <Link to="/learn/para-completion">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
