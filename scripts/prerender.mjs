@@ -520,6 +520,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Phrasal Verbs</h3>
               <p>Learned the same way as idioms &mdash; one verb-plus-particle combination at a time. <a href="/learn/phrasal-verbs">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Surds and Indices</h3>
+              <p>A handful of fixed rules for combining powers of the same base. <a href="/learn/surds-and-indices">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Floor-Based Puzzles</h3>
+              <p>Seating Arrangement turned on its side &mdash; the same method, vertically. <a href="/learn/floor-puzzle">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Spelling Correction</h3>
+              <p>The correct spelling of one intended word, not a choice between different words. <a href="/learn/spelling-correction">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

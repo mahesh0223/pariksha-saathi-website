@@ -712,6 +712,27 @@ export function HomePage() {
                 <Link to="/learn/phrasal-verbs">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Surds and Indices</h3>
+              <p>
+                A handful of fixed rules for combining powers of the same base.{' '}
+                <Link to="/learn/surds-and-indices">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Floor-Based Puzzles</h3>
+              <p>
+                Seating Arrangement turned on its side — the same method, vertically.{' '}
+                <Link to="/learn/floor-puzzle">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Spelling Correction</h3>
+              <p>
+                The correct spelling of one intended word, not a choice between different words.{' '}
+                <Link to="/learn/spelling-correction">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
