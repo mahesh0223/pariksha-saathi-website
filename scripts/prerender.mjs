@@ -604,6 +604,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Sentence Rearrangement</h3>
               <p>Reassembling one sentence&rsquo;s fragments, not a paragraph&rsquo;s sentences. <a href="/learn/sentence-rearrangement">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Height and Distance</h3>
+              <p>One right triangle, one of three standard angles &mdash; 30&deg;, 45&deg;, or 60&deg;. <a href="/learn/height-and-distance">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Scheduling Puzzle</h3>
+              <p>Seating Arrangement&rsquo;s method, applied to a calendar instead of a row. <a href="/learn/scheduling-puzzle">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Punctuation</h3>
+              <p>Fixed, learnable rules for commas, apostrophes, and semicolons. <a href="/learn/punctuation">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

@@ -859,6 +859,27 @@ export function HomePage() {
                 <Link to="/learn/sentence-rearrangement">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Height and Distance</h3>
+              <p>
+                One right triangle, one of three standard angles — 30°, 45°, or 60°.{' '}
+                <Link to="/learn/height-and-distance">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Scheduling Puzzle</h3>
+              <p>
+                Seating Arrangement’s method, applied to a calendar instead of a row.{' '}
+                <Link to="/learn/scheduling-puzzle">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Punctuation</h3>
+              <p>
+                Fixed, learnable rules for commas, apostrophes, and semicolons.{' '}
+                <Link to="/learn/punctuation">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
