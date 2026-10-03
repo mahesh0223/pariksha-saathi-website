@@ -616,6 +616,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Punctuation</h3>
               <p>Fixed, learnable rules for commas, apostrophes, and semicolons. <a href="/learn/punctuation">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Chain Rule</h3>
+              <p>Three or more quantities at once &mdash; chain the ratios, don&rsquo;t guess. <a href="/learn/chain-rule">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Coded Relationships</h3>
+              <p>Blood relations with a symbol key &mdash; decode, then trace the family tree. <a href="/learn/coded-relationships">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Collective Nouns</h3>
+              <p>A pride of lions, a pack of wolves &mdash; fixed terms, learned like vocabulary. <a href="/learn/collective-nouns">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

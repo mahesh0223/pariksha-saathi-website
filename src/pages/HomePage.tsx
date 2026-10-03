@@ -880,6 +880,27 @@ export function HomePage() {
                 <Link to="/learn/punctuation">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Chain Rule</h3>
+              <p>
+                Three or more quantities at once — chain the ratios, don’t guess.{' '}
+                <Link to="/learn/chain-rule">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Coded Relationships</h3>
+              <p>
+                Blood relations with a symbol key — decode, then trace the family tree.{' '}
+                <Link to="/learn/coded-relationships">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Collective Nouns</h3>
+              <p>
+                A pride of lions, a pack of wolves — fixed terms, learned like vocabulary.{' '}
+                <Link to="/learn/collective-nouns">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
