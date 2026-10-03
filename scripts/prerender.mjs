@@ -724,6 +724,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Relative Pronouns</h3>
               <p>Who vs whom, which vs that &mdash; subject, object, person, or thing. <a href="/learn/relative-pronouns">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Banker&rsquo;s Discount and True Discount</h3>
+              <p>A future bill&rsquo;s present worth, versus what a banker charges upfront. <a href="/learn/bankers-discount-true-discount">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Alphanumeric Series</h3>
+              <p>A letter pattern and a number pattern, running side by side. <a href="/learn/alphanumeric-series">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Conditional Sentences</h3>
+              <p>Four &quot;if&quot; patterns, each tied to a different degree of reality. <a href="/learn/conditional-sentences">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

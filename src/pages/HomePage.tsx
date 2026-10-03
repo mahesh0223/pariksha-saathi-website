@@ -1069,6 +1069,27 @@ export function HomePage() {
                 <Link to="/learn/relative-pronouns">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Banker’s Discount and True Discount</h3>
+              <p>
+                A future bill’s present worth, versus what a banker charges upfront.{' '}
+                <Link to="/learn/bankers-discount-true-discount">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Alphanumeric Series</h3>
+              <p>
+                A letter pattern and a number pattern, running side by side.{' '}
+                <Link to="/learn/alphanumeric-series">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Conditional Sentences</h3>
+              <p>
+                Four "if" patterns, each tied to a different degree of reality.{' '}
+                <Link to="/learn/conditional-sentences">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
