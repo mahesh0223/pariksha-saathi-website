@@ -592,6 +592,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Reading Comprehension</h3>
               <p>Every answer comes from the passage itself, not outside knowledge. <a href="/learn/reading-comprehension">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Simple Equations</h3>
+              <p>The hard part is translating the sentence into algebra, not solving it. <a href="/learn/simple-equations">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Cause and Effect</h3>
+              <p>Deciding whether one statement causes the other, or neither. <a href="/learn/cause-and-effect">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Sentence Rearrangement</h3>
+              <p>Reassembling one sentence&rsquo;s fragments, not a paragraph&rsquo;s sentences. <a href="/learn/sentence-rearrangement">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

@@ -838,6 +838,27 @@ export function HomePage() {
                 <Link to="/learn/reading-comprehension">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Simple Equations</h3>
+              <p>
+                The hard part is translating the sentence into algebra, not solving it.{' '}
+                <Link to="/learn/simple-equations">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Cause and Effect</h3>
+              <p>
+                Deciding whether one statement causes the other, or neither.{' '}
+                <Link to="/learn/cause-and-effect">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Sentence Rearrangement</h3>
+              <p>
+                Reassembling one sentence’s fragments, not a paragraph’s sentences.{' '}
+                <Link to="/learn/sentence-rearrangement">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
