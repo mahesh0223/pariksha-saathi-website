@@ -252,6 +252,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           <a class="pub-brand" href="#top"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="#features">Features</a>
+            <a href="#topic-lessons">Learn</a>
             <a href="#current-affairs">Current Affairs</a>
             <a href="#faq">FAQ</a>
             <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
@@ -316,7 +317,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
         </div>
       </section>
-      <section class="pub-section">
+      <section id="topic-lessons" class="pub-section">
         <div class="wrap">
           <div class="section-head">
             <div class="eyebrow">Topic lessons</div>

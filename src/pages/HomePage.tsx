@@ -235,6 +235,7 @@ export function HomePage() {
           </a>
           <nav className="pub-nav-links">
             <a href="#features">Features</a>
+            <a href="#topic-lessons">Learn</a>
             <a href="#current-affairs">Current Affairs</a>
             <a href="#faq">FAQ</a>
             <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
@@ -361,7 +362,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="pub-section">
+      <section id="topic-lessons" className="pub-section">
         <div className="wrap">
           <div className="section-head">
             <div className="eyebrow">Topic lessons</div>
