@@ -761,6 +761,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Passive Voice: Questions and Negatives</h3>
               <p>The auxiliary verb moves to a new position, not just the subject. <a href="/learn/passive-voice-questions-negatives">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Pie Chart</h3>
+              <p>Data Interpretation with categories as a share of 360&deg; instead of a table. <a href="/learn/pie-chart">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Letter Pairs with Equal Alphabet Gap</h3>
+              <p>Does the word-gap between two letters match their alphabet-gap? <a href="/learn/letter-pairs-alphabet-gap">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Connectors and Conjunctions</h3>
+              <p>Same idea, different connector &mdash; but each needs a clause or just a noun. <a href="/learn/connectors-and-conjunctions">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>

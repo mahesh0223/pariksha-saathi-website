@@ -1133,6 +1133,27 @@ export function HomePage() {
                 <Link to="/learn/passive-voice-questions-negatives">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Pie Chart</h3>
+              <p>
+                Data Interpretation with categories as a share of 360° instead of a table.{' '}
+                <Link to="/learn/pie-chart">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Letter Pairs with Equal Alphabet Gap</h3>
+              <p>
+                Does the word-gap between two letters match their alphabet-gap?{' '}
+                <Link to="/learn/letter-pairs-alphabet-gap">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Connectors and Conjunctions</h3>
+              <p>
+                Same idea, different connector — but each needs a clause or just a noun.{' '}
+                <Link to="/learn/connectors-and-conjunctions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
