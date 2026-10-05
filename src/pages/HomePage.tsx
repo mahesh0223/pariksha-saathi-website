@@ -1196,6 +1196,27 @@ export function HomePage() {
                 <Link to="/learn/countable-and-uncountable-nouns">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Successive Discount</h3>
+              <p>
+                Two discounts don’t add up — the second one bites into an already-cut price.{' '}
+                <Link to="/learn/successive-discount">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Seating Arrangement (Mixed Directions)</h3>
+              <p>
+                When someone faces South, their own right and left flip relative to the row.{' '}
+                <Link to="/learn/seating-arrangement-mixed-directions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Prefixes and Suffixes</h3>
+              <p>
+                A prefix usually flips the meaning; a suffix usually changes the part of speech.{' '}
+                <Link to="/learn/prefixes-and-suffixes">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

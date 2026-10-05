@@ -797,6 +797,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Countable and Uncountable Nouns</h3>
               <p>&quot;Much&quot; or &quot;many&quot;? It depends whether the noun has a plural at all. <a href="/learn/countable-and-uncountable-nouns">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Successive Discount</h3>
+              <p>Two discounts don&rsquo;t add up &mdash; the second one bites into an already-cut price. <a href="/learn/successive-discount">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Seating Arrangement (Mixed Directions)</h3>
+              <p>When someone faces South, their own right and left flip relative to the row. <a href="/learn/seating-arrangement-mixed-directions">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Prefixes and Suffixes</h3>
+              <p>A prefix usually flips the meaning; a suffix usually changes the part of speech. <a href="/learn/prefixes-and-suffixes">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
