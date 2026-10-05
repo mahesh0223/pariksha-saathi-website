@@ -1154,6 +1154,27 @@ export function HomePage() {
                 <Link to="/learn/connectors-and-conjunctions">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Bar Graph</h3>
+              <p>
+                Read each value off a bar's height, then it's the same DI arithmetic.{' '}
+                <Link to="/learn/bar-graph">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Circular Seating Arrangement</h3>
+              <p>
+                No "ends" on a circle — every clue is relative, and left/right flips.{' '}
+                <Link to="/learn/circular-seating-arrangement">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Correlative Conjunctions</h3>
+              <p>
+                Either...or, neither...nor — fixed pairs, never mixed or broken.{' '}
+                <Link to="/learn/correlative-conjunctions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

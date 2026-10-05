@@ -773,6 +773,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Connectors and Conjunctions</h3>
               <p>Same idea, different connector &mdash; but each needs a clause or just a noun. <a href="/learn/connectors-and-conjunctions">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Bar Graph</h3>
+              <p>Read each value off a bar&rsquo;s height, then it&rsquo;s the same DI arithmetic. <a href="/learn/bar-graph">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Circular Seating Arrangement</h3>
+              <p>No &quot;ends&quot; on a circle &mdash; every clue is relative, and left/right flips. <a href="/learn/circular-seating-arrangement">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Correlative Conjunctions</h3>
+              <p>Either...or, neither...nor &mdash; fixed pairs, never mixed or broken. <a href="/learn/correlative-conjunctions">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
