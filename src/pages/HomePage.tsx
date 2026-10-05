@@ -1111,6 +1111,27 @@ export function HomePage() {
                 <Link to="/learn/confusable-verbs">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>HCF and LCM of Fractions</h3>
+              <p>
+                The same method as whole numbers — but the denominator rule flips.{' '}
+                <Link to="/learn/hcf-lcm-of-fractions">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Scheduling Puzzle: Month and Date</h3>
+              <p>
+                Two attributes to track at once — sort every clue into its own track.{' '}
+                <Link to="/learn/scheduling-puzzle-month-date">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Passive Voice: Questions and Negatives</h3>
+              <p>
+                The auxiliary verb moves to a new position, not just the subject.{' '}
+                <Link to="/learn/passive-voice-questions-negatives">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

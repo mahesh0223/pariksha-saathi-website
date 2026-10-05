@@ -748,6 +748,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Confusable Verbs</h3>
               <p>Lay vs lie, rise vs raise &mdash; does the sentence have a direct object? <a href="/learn/confusable-verbs">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>HCF and LCM of Fractions</h3>
+              <p>The same method as whole numbers &mdash; but the denominator rule flips. <a href="/learn/hcf-lcm-of-fractions">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Scheduling Puzzle: Month and Date</h3>
+              <p>Two attributes to track at once &mdash; sort every clue into its own track. <a href="/learn/scheduling-puzzle-month-date">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Passive Voice: Questions and Negatives</h3>
+              <p>The auxiliary verb moves to a new position, not just the subject. <a href="/learn/passive-voice-questions-negatives">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
