@@ -1175,6 +1175,27 @@ export function HomePage() {
                 <Link to="/learn/correlative-conjunctions">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Line Graph</h3>
+              <p>
+                Same DI arithmetic as a bar graph, just read off a sloped line instead.{' '}
+                <Link to="/learn/line-graph">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Matrix Puzzle</h3>
+              <p>
+                Two attributes, one group of people — the grids lock together clue by clue.{' '}
+                <Link to="/learn/matrix-puzzle">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Countable and Uncountable Nouns</h3>
+              <p>
+                "Much" or "many"? It depends whether the noun has a plural at all.{' '}
+                <Link to="/learn/countable-and-uncountable-nouns">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -785,6 +785,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Correlative Conjunctions</h3>
               <p>Either...or, neither...nor &mdash; fixed pairs, never mixed or broken. <a href="/learn/correlative-conjunctions">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Line Graph</h3>
+              <p>Same DI arithmetic as a bar graph, just read off a sloped line instead. <a href="/learn/line-graph">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Matrix Puzzle</h3>
+              <p>Two attributes, one group of people &mdash; the grids lock together clue by clue. <a href="/learn/matrix-puzzle">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Countable and Uncountable Nouns</h3>
+              <p>&quot;Much&quot; or &quot;many&quot;? It depends whether the noun has a plural at all. <a href="/learn/countable-and-uncountable-nouns">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
