@@ -1217,6 +1217,27 @@ export function HomePage() {
                 <Link to="/learn/prefixes-and-suffixes">Read the lesson &rarr;</Link>
               </p>
             </div>
+            <div className="exam-coverage-item">
+              <h3>Work and Wages</h3>
+              <p>
+                Wages split in the ratio of work rates, not in the ratio of days worked.{' '}
+                <Link to="/learn/work-and-wages">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Floor and Flat Puzzle</h3>
+              <p>
+                A floor puzzle with a second axis — everyone needs a floor AND a flat.{' '}
+                <Link to="/learn/floor-and-flat-puzzle">Read the lesson &rarr;</Link>
+              </p>
+            </div>
+            <div className="exam-coverage-item">
+              <h3>Clauses (Noun, Adjective, Adverb)</h3>
+              <p>
+                Every clause has a subject and verb — the question is what job it’s doing.{' '}
+                <Link to="/learn/clauses-noun-adjective-adverb">Read the lesson &rarr;</Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -809,6 +809,18 @@ function homePageBody(affairsPreview, noticesPreview) {
               <h3>Prefixes and Suffixes</h3>
               <p>A prefix usually flips the meaning; a suffix usually changes the part of speech. <a href="/learn/prefixes-and-suffixes">Read the lesson &rarr;</a></p>
             </div>
+            <div class="exam-coverage-item">
+              <h3>Work and Wages</h3>
+              <p>Wages split in the ratio of work rates, not in the ratio of days worked. <a href="/learn/work-and-wages">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Floor and Flat Puzzle</h3>
+              <p>A floor puzzle with a second axis &mdash; everyone needs a floor AND a flat. <a href="/learn/floor-and-flat-puzzle">Read the lesson &rarr;</a></p>
+            </div>
+            <div class="exam-coverage-item">
+              <h3>Clauses (Noun, Adjective, Adverb)</h3>
+              <p>Every clause has a subject and verb &mdash; the question is what job it&rsquo;s doing. <a href="/learn/clauses-noun-adjective-adverb">Read the lesson &rarr;</a></p>
+            </div>
           </div>
         </div>
       </section>
