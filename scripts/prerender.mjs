@@ -227,13 +227,13 @@ const HOW_IT_WORKS = [
 ];
 
 const EXAM_COVERAGE = [
-  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness. <a href="/compare/ssc-mts-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness. <a href="/compare/ssc-mts-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
 ];
 
 const FAQS = [
@@ -314,7 +314,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           <div class="exam-coverage-grid">
             ${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('\n            ')}
           </div>
-          <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
+          <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
         </div>
       </section>
       <section id="topic-lessons" class="pub-section">
@@ -327,499 +327,499 @@ function homePageBody(affairsPreview, noticesPreview) {
           <div class="exam-coverage-grid">
             <div class="exam-coverage-item">
               <h3>Percentages</h3>
-              <p>The concept, four worked examples, and a few to try yourself. <a href="/learn/percentages">Read the lesson &rarr;</a></p>
+              <p>The concept, four worked examples, and a few to try yourself. <a href="/learn/percentages/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Profit and Loss</h3>
-              <p>Builds on percentages — CP, SP, discount and marked price, worked out. <a href="/learn/profit-and-loss">Read the lesson &rarr;</a></p>
+              <p>Builds on percentages — CP, SP, discount and marked price, worked out. <a href="/learn/profit-and-loss/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Simple &amp; Compound Interest</h3>
-              <p>The one distinction that matters, plus a shortcut worth memorising. <a href="/learn/simple-compound-interest">Read the lesson &rarr;</a></p>
+              <p>The one distinction that matters, plus a shortcut worth memorising. <a href="/learn/simple-compound-interest/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Blood Relations</h3>
-              <p>A clear approach to tracing relationships, not just answers to memorise. <a href="/learn/blood-relations">Read the lesson &rarr;</a></p>
+              <p>A clear approach to tracing relationships, not just answers to memorise. <a href="/learn/blood-relations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Time, Speed and Distance</h3>
-              <p>Unit conversion and the average-speed trap, with trains thrown in. <a href="/learn/time-speed-distance">Read the lesson &rarr;</a></p>
+              <p>Unit conversion and the average-speed trap, with trains thrown in. <a href="/learn/time-speed-distance/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Coding-Decoding</h3>
-              <p>Four rule-types that cover almost everything actually asked. <a href="/learn/coding-decoding">Read the lesson &rarr;</a></p>
+              <p>Four rule-types that cover almost everything actually asked. <a href="/learn/coding-decoding/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Syllogism</h3>
-              <p>Pure logic, not real-world knowledge — the Venn-diagram approach that works. <a href="/learn/syllogism">Read the lesson &rarr;</a></p>
+              <p>Pure logic, not real-world knowledge — the Venn-diagram approach that works. <a href="/learn/syllogism/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Ratio and Proportion</h3>
-              <p>The foundation for ages, mixtures and partnership questions. <a href="/learn/ratio-and-proportion">Read the lesson &rarr;</a></p>
+              <p>The foundation for ages, mixtures and partnership questions. <a href="/learn/ratio-and-proportion/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Direction Sense</h3>
-              <p>Plot it on a grid and it turns into simple coordinate geometry. <a href="/learn/direction-sense">Read the lesson &rarr;</a></p>
+              <p>Plot it on a grid and it turns into simple coordinate geometry. <a href="/learn/direction-sense/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Spotting Errors</h3>
-              <p>A handful of recurring grammar rules, not obscure trivia. <a href="/learn/spotting-errors">Read the lesson &rarr;</a></p>
+              <p>A handful of recurring grammar rules, not obscure trivia. <a href="/learn/spotting-errors/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Average</h3>
-              <p>The formula reversed — going from average back to sum. <a href="/learn/average">Read the lesson &rarr;</a></p>
+              <p>The formula reversed — going from average back to sum. <a href="/learn/average/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Number Series</h3>
-              <p>Pattern recognition, narrowed down to the four types that actually come up. <a href="/learn/number-series">Read the lesson &rarr;</a></p>
+              <p>Pattern recognition, narrowed down to the four types that actually come up. <a href="/learn/number-series/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Synonyms and Antonyms</h3>
-              <p>Why context, not vocabulary size, is usually what decides the answer. <a href="/learn/synonyms-and-antonyms">Read the lesson &rarr;</a></p>
+              <p>Why context, not vocabulary size, is usually what decides the answer. <a href="/learn/synonyms-and-antonyms/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Time and Work</h3>
-              <p>Convert everyone to a daily rate, combine, then convert back. <a href="/learn/time-and-work">Read the lesson &rarr;</a></p>
+              <p>Convert everyone to a daily rate, combine, then convert back. <a href="/learn/time-and-work/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Analogy</h3>
-              <p>Name the relationship precisely before you look at the options. <a href="/learn/analogy">Read the lesson &rarr;</a></p>
+              <p>Name the relationship precisely before you look at the options. <a href="/learn/analogy/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>One Word Substitution</h3>
-              <p>A narrow, learnable vocabulary list — the same few dozen words repeat. <a href="/learn/one-word-substitution">Read the lesson &rarr;</a></p>
+              <p>A narrow, learnable vocabulary list — the same few dozen words repeat. <a href="/learn/one-word-substitution/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Mixture and Alligation</h3>
-              <p>The weighted-average formula, run backwards to find a ratio. <a href="/learn/mixture-and-alligation">Read the lesson &rarr;</a></p>
+              <p>The weighted-average formula, run backwards to find a ratio. <a href="/learn/mixture-and-alligation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Seating Arrangement</h3>
-              <p>Sketch the row, fill in what&rsquo;s forced, then eliminate the rest. <a href="/learn/seating-arrangement">Read the lesson &rarr;</a></p>
+              <p>Sketch the row, fill in what&rsquo;s forced, then eliminate the rest. <a href="/learn/seating-arrangement/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Sentence Improvement</h3>
-              <p>The same grammar rules as Spotting Errors, in a pick-the-fix format. <a href="/learn/sentence-improvement">Read the lesson &rarr;</a></p>
+              <p>The same grammar rules as Spotting Errors, in a pick-the-fix format. <a href="/learn/sentence-improvement/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Mensuration</h3>
-              <p>Picking the right formula and plugging in carefully. <a href="/learn/mensuration">Read the lesson &rarr;</a></p>
+              <p>Picking the right formula and plugging in carefully. <a href="/learn/mensuration/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Inequality</h3>
-              <p>Chains of coded symbols, and the counterexample trick for ruling conclusions out. <a href="/learn/inequality">Read the lesson &rarr;</a></p>
+              <p>Chains of coded symbols, and the counterexample trick for ruling conclusions out. <a href="/learn/inequality/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Active and Passive Voice</h3>
-              <p>A mechanical three-step transformation, applied consistently across tenses. <a href="/learn/active-passive-voice">Read the lesson &rarr;</a></p>
+              <p>A mechanical three-step transformation, applied consistently across tenses. <a href="/learn/active-passive-voice/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Simplification</h3>
-              <p>BODMAS order, not left-to-right — a speed test more than a difficulty test. <a href="/learn/simplification">Read the lesson &rarr;</a></p>
+              <p>BODMAS order, not left-to-right — a speed test more than a difficulty test. <a href="/learn/simplification/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Calendar</h3>
-              <p>Counting odd days, and the century-year leap-year exception. <a href="/learn/calendar">Read the lesson &rarr;</a></p>
+              <p>Counting odd days, and the century-year leap-year exception. <a href="/learn/calendar/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Direct and Indirect Speech</h3>
-              <p>Tense shifts, pronoun changes, and how questions convert differently. <a href="/learn/direct-indirect-speech">Read the lesson &rarr;</a></p>
+              <p>Tense shifts, pronoun changes, and how questions convert differently. <a href="/learn/direct-indirect-speech/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Partnership</h3>
-              <p>Why profit splits by capital &times; time, not capital alone. <a href="/learn/partnership">Read the lesson &rarr;</a></p>
+              <p>Why profit splits by capital &times; time, not capital alone. <a href="/learn/partnership/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Clock</h3>
-              <p>A disguised speed problem &mdash; two hands moving at fixed rates. <a href="/learn/clock">Read the lesson &rarr;</a></p>
+              <p>A disguised speed problem &mdash; two hands moving at fixed rates. <a href="/learn/clock/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Para Jumbles</h3>
-              <p>Following the pronoun and connector chain to the one order that works. <a href="/learn/para-jumbles">Read the lesson &rarr;</a></p>
+              <p>Following the pronoun and connector chain to the one order that works. <a href="/learn/para-jumbles/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Boat and Stream</h3>
-              <p>Time, Speed and Distance in a different costume &mdash; convert, then apply. <a href="/learn/boat-and-stream">Read the lesson &rarr;</a></p>
+              <p>Time, Speed and Distance in a different costume &mdash; convert, then apply. <a href="/learn/boat-and-stream/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Alphabet Series</h3>
-              <p>Number Series with letters &mdash; convert to positions and solve the same way. <a href="/learn/alphabet-series">Read the lesson &rarr;</a></p>
+              <p>Number Series with letters &mdash; convert to positions and solve the same way. <a href="/learn/alphabet-series/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Cloze Test</h3>
-              <p>Grammar plus meaning &mdash; reading the whole passage before picking an answer. <a href="/learn/cloze-test">Read the lesson &rarr;</a></p>
+              <p>Grammar plus meaning &mdash; reading the whole passage before picking an answer. <a href="/learn/cloze-test/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>LCM and HCF</h3>
-              <p>Prime factorization, plus the one shortcut connecting the two. <a href="/learn/lcm-and-hcf">Read the lesson &rarr;</a></p>
+              <p>Prime factorization, plus the one shortcut connecting the two. <a href="/learn/lcm-and-hcf/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Classification</h3>
-              <p>Finding the exact rule the majority share, not just a hunch. <a href="/learn/classification">Read the lesson &rarr;</a></p>
+              <p>Finding the exact rule the majority share, not just a hunch. <a href="/learn/classification/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Degrees of Comparison</h3>
-              <p>Matching an adjective&rsquo;s form to how many things are being compared. <a href="/learn/degrees-of-comparison">Read the lesson &rarr;</a></p>
+              <p>Matching an adjective&rsquo;s form to how many things are being compared. <a href="/learn/degrees-of-comparison/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Problems on Ages</h3>
-              <p>Algebra in disguise &mdash; one variable, carried through every condition. <a href="/learn/problems-on-ages">Read the lesson &rarr;</a></p>
+              <p>Algebra in disguise &mdash; one variable, carried through every condition. <a href="/learn/problems-on-ages/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Venn Diagram</h3>
-              <p>Inclusion-exclusion &mdash; add the groups, subtract what got counted twice. <a href="/learn/venn-diagram">Read the lesson &rarr;</a></p>
+              <p>Inclusion-exclusion &mdash; add the groups, subtract what got counted twice. <a href="/learn/venn-diagram/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Prepositions</h3>
-              <p>Fixed pairings to learn like vocabulary, plus a size-based pattern for time and place. <a href="/learn/prepositions">Read the lesson &rarr;</a></p>
+              <p>Fixed pairings to learn like vocabulary, plus a size-based pattern for time and place. <a href="/learn/prepositions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Permutation and Combination</h3>
-              <p>One question decides the formula: does the order of arrangement matter? <a href="/learn/permutation-and-combination">Read the lesson &rarr;</a></p>
+              <p>One question decides the formula: does the order of arrangement matter? <a href="/learn/permutation-and-combination/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Ranking and Order</h3>
-              <p>One small formula connecting rank from the top, the bottom, and the total. <a href="/learn/ranking-and-order">Read the lesson &rarr;</a></p>
+              <p>One small formula connecting rank from the top, the bottom, and the total. <a href="/learn/ranking-and-order/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Idioms and Phrases</h3>
-              <p>Pure recognition &mdash; fixed phrases that can&rsquo;t be worked out from their words. <a href="/learn/idioms-and-phrases">Read the lesson &rarr;</a></p>
+              <p>Pure recognition &mdash; fixed phrases that can&rsquo;t be worked out from their words. <a href="/learn/idioms-and-phrases/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Probability</h3>
-              <p>Careful counting &mdash; favorable outcomes over total outcomes. <a href="/learn/probability">Read the lesson &rarr;</a></p>
+              <p>Careful counting &mdash; favorable outcomes over total outcomes. <a href="/learn/probability/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Statement and Assumption</h3>
-              <p>The "if this were false, would it still make sense?" test. <a href="/learn/statement-and-assumption">Read the lesson &rarr;</a></p>
+              <p>The "if this were false, would it still make sense?" test. <a href="/learn/statement-and-assumption/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Articles</h3>
-              <p>"A"/"an" vs "the" &mdash; specific and identified, or just any one example? <a href="/learn/articles">Read the lesson &rarr;</a></p>
+              <p>"A"/"an" vs "the" &mdash; specific and identified, or just any one example? <a href="/learn/articles/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Pipes and Cisterns</h3>
-              <p>Time and Work with a twist &mdash; an outlet pipe gets a negative rate. <a href="/learn/pipes-and-cisterns">Read the lesson &rarr;</a></p>
+              <p>Time and Work with a twist &mdash; an outlet pipe gets a negative rate. <a href="/learn/pipes-and-cisterns/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Statement and Conclusion</h3>
-              <p>A conclusion only counts if it&rsquo;s a direct restatement, nothing borrowed. <a href="/learn/statement-and-conclusion">Read the lesson &rarr;</a></p>
+              <p>A conclusion only counts if it&rsquo;s a direct restatement, nothing borrowed. <a href="/learn/statement-and-conclusion/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Homophones</h3>
-              <p>Words that sound identical &mdash; spelling and meaning are the only tell. <a href="/learn/homophones">Read the lesson &rarr;</a></p>
+              <p>Words that sound identical &mdash; spelling and meaning are the only tell. <a href="/learn/homophones/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Number System</h3>
-              <p>Divisibility shortcuts, plus how remainders behave under addition and multiplication. <a href="/learn/number-system">Read the lesson &rarr;</a></p>
+              <p>Divisibility shortcuts, plus how remainders behave under addition and multiplication. <a href="/learn/number-system/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Data Sufficiency</h3>
-              <p>Judging whether the data is enough &mdash; not computing the final answer. <a href="/learn/data-sufficiency">Read the lesson &rarr;</a></p>
+              <p>Judging whether the data is enough &mdash; not computing the final answer. <a href="/learn/data-sufficiency/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Phrasal Verbs</h3>
-              <p>Learned the same way as idioms &mdash; one verb-plus-particle combination at a time. <a href="/learn/phrasal-verbs">Read the lesson &rarr;</a></p>
+              <p>Learned the same way as idioms &mdash; one verb-plus-particle combination at a time. <a href="/learn/phrasal-verbs/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Surds and Indices</h3>
-              <p>A handful of fixed rules for combining powers of the same base. <a href="/learn/surds-and-indices">Read the lesson &rarr;</a></p>
+              <p>A handful of fixed rules for combining powers of the same base. <a href="/learn/surds-and-indices/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Floor-Based Puzzles</h3>
-              <p>Seating Arrangement turned on its side &mdash; the same method, vertically. <a href="/learn/floor-puzzle">Read the lesson &rarr;</a></p>
+              <p>Seating Arrangement turned on its side &mdash; the same method, vertically. <a href="/learn/floor-puzzle/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Spelling Correction</h3>
-              <p>The correct spelling of one intended word, not a choice between different words. <a href="/learn/spelling-correction">Read the lesson &rarr;</a></p>
+              <p>The correct spelling of one intended word, not a choice between different words. <a href="/learn/spelling-correction/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Data Interpretation</h3>
-              <p>Ordinary percentage and average arithmetic, read carefully off a table. <a href="/learn/data-interpretation">Read the lesson &rarr;</a></p>
+              <p>Ordinary percentage and average arithmetic, read carefully off a table. <a href="/learn/data-interpretation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Course of Action</h3>
-              <p>Judging whether a response is practical and proportionate, not just well-intentioned. <a href="/learn/course-of-action">Read the lesson &rarr;</a></p>
+              <p>Judging whether a response is practical and proportionate, not just well-intentioned. <a href="/learn/course-of-action/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Tag Questions</h3>
-              <p>One flip rule &mdash; positive statement, negative tag &mdash; plus matching the auxiliary verb. <a href="/learn/tag-questions">Read the lesson &rarr;</a></p>
+              <p>One flip rule &mdash; positive statement, negative tag &mdash; plus matching the auxiliary verb. <a href="/learn/tag-questions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Quadratic Equations</h3>
-              <p>Solve two equations, compare every pair of roots, then read off the relationship. <a href="/learn/quadratic-equations">Read the lesson &rarr;</a></p>
+              <p>Solve two equations, compare every pair of roots, then read off the relationship. <a href="/learn/quadratic-equations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Input-Output</h3>
-              <p>Apply a fixed machine rule step by step, then read off a position. <a href="/learn/input-output">Read the lesson &rarr;</a></p>
+              <p>Apply a fixed machine rule step by step, then read off a position. <a href="/learn/input-output/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Fill in the Blanks</h3>
-              <p>Reading the whole sentence for the fixed collocation the blank is testing. <a href="/learn/fill-in-the-blanks">Read the lesson &rarr;</a></p>
+              <p>Reading the whole sentence for the fixed collocation the blank is testing. <a href="/learn/fill-in-the-blanks/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Approximation</h3>
-              <p>Round every number first &mdash; the goal is close, not exact. <a href="/learn/approximation">Read the lesson &rarr;</a></p>
+              <p>Round every number first &mdash; the goal is close, not exact. <a href="/learn/approximation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Statement and Argument</h3>
-              <p>Judging whether a reason is specific and weighty, not just plausible-sounding. <a href="/learn/statement-and-argument">Read the lesson &rarr;</a></p>
+              <p>Judging whether a reason is specific and weighty, not just plausible-sounding. <a href="/learn/statement-and-argument/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Para Completion</h3>
-              <p>Continuing a paragraph&rsquo;s direction without overreaching or contradicting it. <a href="/learn/para-completion">Read the lesson &rarr;</a></p>
+              <p>Continuing a paragraph&rsquo;s direction without overreaching or contradicting it. <a href="/learn/para-completion/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Problems on Trains</h3>
-              <p>The same Time-Speed-Distance method, plus the train&rsquo;s own length. <a href="/learn/problems-on-trains">Read the lesson &rarr;</a></p>
+              <p>The same Time-Speed-Distance method, plus the train&rsquo;s own length. <a href="/learn/problems-on-trains/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Mathematical Operations</h3>
-              <p>Substitute the swapped symbols first, then apply the usual order of operations. <a href="/learn/mathematical-operations">Read the lesson &rarr;</a></p>
+              <p>Substitute the swapped symbols first, then apply the usual order of operations. <a href="/learn/mathematical-operations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Commonly Confused Words</h3>
-              <p>Affect vs effect, principal vs principle &mdash; learned by meaning, not spelling. <a href="/learn/commonly-confused-words">Read the lesson &rarr;</a></p>
+              <p>Affect vs effect, principal vs principle &mdash; learned by meaning, not spelling. <a href="/learn/commonly-confused-words/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Races and Games</h3>
-              <p>&quot;Start&quot; and &quot;beats by&quot; &mdash; comparing how far each runner has gone. <a href="/learn/races-and-games">Read the lesson &rarr;</a></p>
+              <p>&quot;Start&quot; and &quot;beats by&quot; &mdash; comparing how far each runner has gone. <a href="/learn/races-and-games/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Word Formation</h3>
-              <p>Careful letter-by-letter accounting, not a guessing game. <a href="/learn/word-formation">Read the lesson &rarr;</a></p>
+              <p>Careful letter-by-letter accounting, not a guessing game. <a href="/learn/word-formation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Reading Comprehension</h3>
-              <p>Every answer comes from the passage itself, not outside knowledge. <a href="/learn/reading-comprehension">Read the lesson &rarr;</a></p>
+              <p>Every answer comes from the passage itself, not outside knowledge. <a href="/learn/reading-comprehension/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Simple Equations</h3>
-              <p>The hard part is translating the sentence into algebra, not solving it. <a href="/learn/simple-equations">Read the lesson &rarr;</a></p>
+              <p>The hard part is translating the sentence into algebra, not solving it. <a href="/learn/simple-equations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Cause and Effect</h3>
-              <p>Deciding whether one statement causes the other, or neither. <a href="/learn/cause-and-effect">Read the lesson &rarr;</a></p>
+              <p>Deciding whether one statement causes the other, or neither. <a href="/learn/cause-and-effect/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Sentence Rearrangement</h3>
-              <p>Reassembling one sentence&rsquo;s fragments, not a paragraph&rsquo;s sentences. <a href="/learn/sentence-rearrangement">Read the lesson &rarr;</a></p>
+              <p>Reassembling one sentence&rsquo;s fragments, not a paragraph&rsquo;s sentences. <a href="/learn/sentence-rearrangement/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Height and Distance</h3>
-              <p>One right triangle, one of three standard angles &mdash; 30&deg;, 45&deg;, or 60&deg;. <a href="/learn/height-and-distance">Read the lesson &rarr;</a></p>
+              <p>One right triangle, one of three standard angles &mdash; 30&deg;, 45&deg;, or 60&deg;. <a href="/learn/height-and-distance/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Scheduling Puzzle</h3>
-              <p>Seating Arrangement&rsquo;s method, applied to a calendar instead of a row. <a href="/learn/scheduling-puzzle">Read the lesson &rarr;</a></p>
+              <p>Seating Arrangement&rsquo;s method, applied to a calendar instead of a row. <a href="/learn/scheduling-puzzle/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Punctuation</h3>
-              <p>Fixed, learnable rules for commas, apostrophes, and semicolons. <a href="/learn/punctuation">Read the lesson &rarr;</a></p>
+              <p>Fixed, learnable rules for commas, apostrophes, and semicolons. <a href="/learn/punctuation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Chain Rule</h3>
-              <p>Three or more quantities at once &mdash; chain the ratios, don&rsquo;t guess. <a href="/learn/chain-rule">Read the lesson &rarr;</a></p>
+              <p>Three or more quantities at once &mdash; chain the ratios, don&rsquo;t guess. <a href="/learn/chain-rule/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Coded Relationships</h3>
-              <p>Blood relations with a symbol key &mdash; decode, then trace the family tree. <a href="/learn/coded-relationships">Read the lesson &rarr;</a></p>
+              <p>Blood relations with a symbol key &mdash; decode, then trace the family tree. <a href="/learn/coded-relationships/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Collective Nouns</h3>
-              <p>A pride of lions, a pack of wolves &mdash; fixed terms, learned like vocabulary. <a href="/learn/collective-nouns">Read the lesson &rarr;</a></p>
+              <p>A pride of lions, a pack of wolves &mdash; fixed terms, learned like vocabulary. <a href="/learn/collective-nouns/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Geometry: Lines, Angles and Triangles</h3>
-              <p>The angle sum of a triangle, and how an exterior angle relates to it. <a href="/learn/geometry-lines-angles-triangles">Read the lesson &rarr;</a></p>
+              <p>The angle sum of a triangle, and how an exterior angle relates to it. <a href="/learn/geometry-lines-angles-triangles/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Wrong Number Series</h3>
-              <p>Number Series in reverse &mdash; spot the term that breaks the pattern. <a href="/learn/wrong-number-series">Read the lesson &rarr;</a></p>
+              <p>Number Series in reverse &mdash; spot the term that breaks the pattern. <a href="/learn/wrong-number-series/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Determiners</h3>
-              <p>Much vs many, few vs a few &mdash; countable, uncountable, positive, negative. <a href="/learn/determiners">Read the lesson &rarr;</a></p>
+              <p>Much vs many, few vs a few &mdash; countable, uncountable, positive, negative. <a href="/learn/determiners/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Mean, Median and Mode</h3>
-              <p>Three different &quot;typical values&quot; &mdash; a sum, a sort, and a count. <a href="/learn/mean-median-mode">Read the lesson &rarr;</a></p>
+              <p>Three different &quot;typical values&quot; &mdash; a sum, a sort, and a count. <a href="/learn/mean-median-mode/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Double Row Seating</h3>
-              <p>Two rows facing each other &mdash; Seating Arrangement, doubled. <a href="/learn/double-row-seating">Read the lesson &rarr;</a></p>
+              <p>Two rows facing each other &mdash; Seating Arrangement, doubled. <a href="/learn/double-row-seating/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Sentence Transformation</h3>
-              <p>Simple, compound, or complex &mdash; same meaning, different structure. <a href="/learn/sentence-transformation">Read the lesson &rarr;</a></p>
+              <p>Simple, compound, or complex &mdash; same meaning, different structure. <a href="/learn/sentence-transformation/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Trigonometric Ratios and Identities</h3>
-              <p>sin&sup2;&theta; + cos&sup2;&theta; = 1, and what it unlocks &mdash; directly, not word problems. <a href="/learn/trigonometric-ratios-identities">Read the lesson &rarr;</a></p>
+              <p>sin&sup2;&theta; + cos&sup2;&theta; = 1, and what it unlocks &mdash; directly, not word problems. <a href="/learn/trigonometric-ratios-identities/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Comparison Puzzles</h3>
-              <p>Taller, shorter, heavier &mdash; merge the clues into one ordered chain. <a href="/learn/comparison-puzzles">Read the lesson &rarr;</a></p>
+              <p>Taller, shorter, heavier &mdash; merge the clues into one ordered chain. <a href="/learn/comparison-puzzles/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Subject-Verb Agreement</h3>
-              <p>Finding the true subject, even when a phrase gets in the way. <a href="/learn/subject-verb-agreement">Read the lesson &rarr;</a></p>
+              <p>Finding the true subject, even when a phrase gets in the way. <a href="/learn/subject-verb-agreement/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Compound Interest: Half-Yearly &amp; Quarterly</h3>
-              <p>Same formula &mdash; just adjust the rate and the number of periods first. <a href="/learn/compound-interest-half-yearly-quarterly">Read the lesson &rarr;</a></p>
+              <p>Same formula &mdash; just adjust the rate and the number of periods first. <a href="/learn/compound-interest-half-yearly-quarterly/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Cubes and Dice</h3>
-              <p>One fact &mdash; opposite faces sum to 7 &mdash; unlocks almost every question. <a href="/learn/cubes-and-dice">Read the lesson &rarr;</a></p>
+              <p>One fact &mdash; opposite faces sum to 7 &mdash; unlocks almost every question. <a href="/learn/cubes-and-dice/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Infinitives and Gerunds</h3>
-              <p>A short, fixed list of verbs to learn &mdash; enjoy reading, decide to accept. <a href="/learn/infinitives-and-gerunds">Read the lesson &rarr;</a></p>
+              <p>A short, fixed list of verbs to learn &mdash; enjoy reading, decide to accept. <a href="/learn/infinitives-and-gerunds/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Mean, Third and Fourth Proportional</h3>
-              <p>Completing a proportion with a missing term &mdash; set it up, then cross-multiply. <a href="/learn/mean-third-fourth-proportional">Read the lesson &rarr;</a></p>
+              <p>Completing a proportion with a missing term &mdash; set it up, then cross-multiply. <a href="/learn/mean-third-fourth-proportional/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Family Tree (Blood Relations)</h3>
-              <p>Blood Relations at a larger scale &mdash; build the tree, then read off every answer. <a href="/learn/family-tree-blood-relations">Read the lesson &rarr;</a></p>
+              <p>Blood Relations at a larger scale &mdash; build the tree, then read off every answer. <a href="/learn/family-tree-blood-relations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Redundancy</h3>
-              <p>&quot;Repeat again,&quot; &quot;free gift&quot; &mdash; spotting words that say the same thing twice. <a href="/learn/redundancy">Read the lesson &rarr;</a></p>
+              <p>&quot;Repeat again,&quot; &quot;free gift&quot; &mdash; spotting words that say the same thing twice. <a href="/learn/redundancy/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Set Theory</h3>
-              <p>One formula &mdash; add the two group sizes, subtract the overlap. <a href="/learn/set-theory">Read the lesson &rarr;</a></p>
+              <p>One formula &mdash; add the two group sizes, subtract the overlap. <a href="/learn/set-theory/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Odd Pair Out</h3>
-              <p>Classification for pairs &mdash; three share a relationship, one breaks it. <a href="/learn/odd-pair-out">Read the lesson &rarr;</a></p>
+              <p>Classification for pairs &mdash; three share a relationship, one breaks it. <a href="/learn/odd-pair-out/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Modal Verbs</h3>
-              <p>&quot;Must not&quot; vs &quot;need not&quot; &mdash; a classic trap between prohibition and no obligation. <a href="/learn/modal-verbs">Read the lesson &rarr;</a></p>
+              <p>&quot;Must not&quot; vs &quot;need not&quot; &mdash; a classic trap between prohibition and no obligation. <a href="/learn/modal-verbs/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Algebraic Identities</h3>
-              <p>Find a&sup2;+b&sup2; or ab without ever solving for a and b individually. <a href="/learn/algebraic-identities">Read the lesson &rarr;</a></p>
+              <p>Find a&sup2;+b&sup2; or ab without ever solving for a and b individually. <a href="/learn/algebraic-identities/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Logical Sequence of Words</h3>
-              <p>Ordering by hierarchy, real-world process, or dictionary order. <a href="/learn/logical-sequence-of-words">Read the lesson &rarr;</a></p>
+              <p>Ordering by hierarchy, real-world process, or dictionary order. <a href="/learn/logical-sequence-of-words/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Tenses</h3>
-              <p>Present Perfect vs Simple Past, and &quot;since&quot; vs &quot;for&quot; &mdash; the two recurring traps. <a href="/learn/tenses">Read the lesson &rarr;</a></p>
+              <p>Present Perfect vs Simple Past, and &quot;since&quot; vs &quot;for&quot; &mdash; the two recurring traps. <a href="/learn/tenses/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Circular Permutations</h3>
-              <p>Arranging people around a table &mdash; one fixed seat removes the rotation duplicates. <a href="/learn/circular-permutations">Read the lesson &rarr;</a></p>
+              <p>Arranging people around a table &mdash; one fixed seat removes the rotation duplicates. <a href="/learn/circular-permutations/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Letter Group Classification</h3>
-              <p>Three letter-groups share a gap pattern &mdash; spot the one that breaks it. <a href="/learn/letter-group-classification">Read the lesson &rarr;</a></p>
+              <p>Three letter-groups share a gap pattern &mdash; spot the one that breaks it. <a href="/learn/letter-group-classification/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Relative Pronouns</h3>
-              <p>Who vs whom, which vs that &mdash; subject, object, person, or thing. <a href="/learn/relative-pronouns">Read the lesson &rarr;</a></p>
+              <p>Who vs whom, which vs that &mdash; subject, object, person, or thing. <a href="/learn/relative-pronouns/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Banker&rsquo;s Discount and True Discount</h3>
-              <p>A future bill&rsquo;s present worth, versus what a banker charges upfront. <a href="/learn/bankers-discount-true-discount">Read the lesson &rarr;</a></p>
+              <p>A future bill&rsquo;s present worth, versus what a banker charges upfront. <a href="/learn/bankers-discount-true-discount/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Alphanumeric Series</h3>
-              <p>A letter pattern and a number pattern, running side by side. <a href="/learn/alphanumeric-series">Read the lesson &rarr;</a></p>
+              <p>A letter pattern and a number pattern, running side by side. <a href="/learn/alphanumeric-series/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Conditional Sentences</h3>
-              <p>Four &quot;if&quot; patterns, each tied to a different degree of reality. <a href="/learn/conditional-sentences">Read the lesson &rarr;</a></p>
+              <p>Four &quot;if&quot; patterns, each tied to a different degree of reality. <a href="/learn/conditional-sentences/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Syllogism: Possibility Cases</h3>
-              <p>&quot;Possible&quot; needs just one valid diagram, not every diagram. <a href="/learn/syllogism-possibility-cases">Read the lesson &rarr;</a></p>
+              <p>&quot;Possible&quot; needs just one valid diagram, not every diagram. <a href="/learn/syllogism-possibility-cases/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Stocks and Shares</h3>
-              <p>Face value, market value, and dividend &mdash; three values, one investment. <a href="/learn/stocks-and-shares">Read the lesson &rarr;</a></p>
+              <p>Face value, market value, and dividend &mdash; three values, one investment. <a href="/learn/stocks-and-shares/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Confusable Verbs</h3>
-              <p>Lay vs lie, rise vs raise &mdash; does the sentence have a direct object? <a href="/learn/confusable-verbs">Read the lesson &rarr;</a></p>
+              <p>Lay vs lie, rise vs raise &mdash; does the sentence have a direct object? <a href="/learn/confusable-verbs/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>HCF and LCM of Fractions</h3>
-              <p>The same method as whole numbers &mdash; but the denominator rule flips. <a href="/learn/hcf-lcm-of-fractions">Read the lesson &rarr;</a></p>
+              <p>The same method as whole numbers &mdash; but the denominator rule flips. <a href="/learn/hcf-lcm-of-fractions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Scheduling Puzzle: Month and Date</h3>
-              <p>Two attributes to track at once &mdash; sort every clue into its own track. <a href="/learn/scheduling-puzzle-month-date">Read the lesson &rarr;</a></p>
+              <p>Two attributes to track at once &mdash; sort every clue into its own track. <a href="/learn/scheduling-puzzle-month-date/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Passive Voice: Questions and Negatives</h3>
-              <p>The auxiliary verb moves to a new position, not just the subject. <a href="/learn/passive-voice-questions-negatives">Read the lesson &rarr;</a></p>
+              <p>The auxiliary verb moves to a new position, not just the subject. <a href="/learn/passive-voice-questions-negatives/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Pie Chart</h3>
-              <p>Data Interpretation with categories as a share of 360&deg; instead of a table. <a href="/learn/pie-chart">Read the lesson &rarr;</a></p>
+              <p>Data Interpretation with categories as a share of 360&deg; instead of a table. <a href="/learn/pie-chart/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Letter Pairs with Equal Alphabet Gap</h3>
-              <p>Does the word-gap between two letters match their alphabet-gap? <a href="/learn/letter-pairs-alphabet-gap">Read the lesson &rarr;</a></p>
+              <p>Does the word-gap between two letters match their alphabet-gap? <a href="/learn/letter-pairs-alphabet-gap/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Connectors and Conjunctions</h3>
-              <p>Same idea, different connector &mdash; but each needs a clause or just a noun. <a href="/learn/connectors-and-conjunctions">Read the lesson &rarr;</a></p>
+              <p>Same idea, different connector &mdash; but each needs a clause or just a noun. <a href="/learn/connectors-and-conjunctions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Bar Graph</h3>
-              <p>Read each value off a bar&rsquo;s height, then it&rsquo;s the same DI arithmetic. <a href="/learn/bar-graph">Read the lesson &rarr;</a></p>
+              <p>Read each value off a bar&rsquo;s height, then it&rsquo;s the same DI arithmetic. <a href="/learn/bar-graph/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Circular Seating Arrangement</h3>
-              <p>No &quot;ends&quot; on a circle &mdash; every clue is relative, and left/right flips. <a href="/learn/circular-seating-arrangement">Read the lesson &rarr;</a></p>
+              <p>No &quot;ends&quot; on a circle &mdash; every clue is relative, and left/right flips. <a href="/learn/circular-seating-arrangement/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Correlative Conjunctions</h3>
-              <p>Either...or, neither...nor &mdash; fixed pairs, never mixed or broken. <a href="/learn/correlative-conjunctions">Read the lesson &rarr;</a></p>
+              <p>Either...or, neither...nor &mdash; fixed pairs, never mixed or broken. <a href="/learn/correlative-conjunctions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Line Graph</h3>
-              <p>Same DI arithmetic as a bar graph, just read off a sloped line instead. <a href="/learn/line-graph">Read the lesson &rarr;</a></p>
+              <p>Same DI arithmetic as a bar graph, just read off a sloped line instead. <a href="/learn/line-graph/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Matrix Puzzle</h3>
-              <p>Two attributes, one group of people &mdash; the grids lock together clue by clue. <a href="/learn/matrix-puzzle">Read the lesson &rarr;</a></p>
+              <p>Two attributes, one group of people &mdash; the grids lock together clue by clue. <a href="/learn/matrix-puzzle/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Countable and Uncountable Nouns</h3>
-              <p>&quot;Much&quot; or &quot;many&quot;? It depends whether the noun has a plural at all. <a href="/learn/countable-and-uncountable-nouns">Read the lesson &rarr;</a></p>
+              <p>&quot;Much&quot; or &quot;many&quot;? It depends whether the noun has a plural at all. <a href="/learn/countable-and-uncountable-nouns/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Successive Discount</h3>
-              <p>Two discounts don&rsquo;t add up &mdash; the second one bites into an already-cut price. <a href="/learn/successive-discount">Read the lesson &rarr;</a></p>
+              <p>Two discounts don&rsquo;t add up &mdash; the second one bites into an already-cut price. <a href="/learn/successive-discount/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Seating Arrangement (Mixed Directions)</h3>
-              <p>When someone faces South, their own right and left flip relative to the row. <a href="/learn/seating-arrangement-mixed-directions">Read the lesson &rarr;</a></p>
+              <p>When someone faces South, their own right and left flip relative to the row. <a href="/learn/seating-arrangement-mixed-directions/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Prefixes and Suffixes</h3>
-              <p>A prefix usually flips the meaning; a suffix usually changes the part of speech. <a href="/learn/prefixes-and-suffixes">Read the lesson &rarr;</a></p>
+              <p>A prefix usually flips the meaning; a suffix usually changes the part of speech. <a href="/learn/prefixes-and-suffixes/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Work and Wages</h3>
-              <p>Wages split in the ratio of work rates, not in the ratio of days worked. <a href="/learn/work-and-wages">Read the lesson &rarr;</a></p>
+              <p>Wages split in the ratio of work rates, not in the ratio of days worked. <a href="/learn/work-and-wages/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Floor and Flat Puzzle</h3>
-              <p>A floor puzzle with a second axis &mdash; everyone needs a floor AND a flat. <a href="/learn/floor-and-flat-puzzle">Read the lesson &rarr;</a></p>
+              <p>A floor puzzle with a second axis &mdash; everyone needs a floor AND a flat. <a href="/learn/floor-and-flat-puzzle/">Read the lesson &rarr;</a></p>
             </div>
             <div class="exam-coverage-item">
               <h3>Clauses (Noun, Adjective, Adverb)</h3>
-              <p>Every clause has a subject and verb &mdash; the question is what job it&rsquo;s doing. <a href="/learn/clauses-noun-adjective-adverb">Read the lesson &rarr;</a></p>
+              <p>Every clause has a subject and verb &mdash; the question is what job it&rsquo;s doing. <a href="/learn/clauses-noun-adjective-adverb/">Read the lesson &rarr;</a></p>
             </div>
           </div>
         </div>
@@ -1209,8 +1209,10 @@ async function main() {
       const c = entry[lang];
       const relPath = lang === 'hi' ? `hi/compare/${entry.slug}-syllabus` : `compare/${entry.slug}-syllabus`;
       const urlPath = `/${relPath}/`;
-      const enPath = `/compare/${entry.slug}-syllabus`;
-      const hiPath = `/hi/compare/${entry.slug}-syllabus`;
+      // Trailing slash to match urlPath/canonical above - these only feed hreflang below, but an
+      // hreflang href that doesn't match the target page's own canonical is a signal mismatch.
+      const enPath = `/compare/${entry.slug}-syllabus/`;
+      const hiPath = `/hi/compare/${entry.slug}-syllabus/`;
       writePage(relPath, page({
         title: c.pageTitle,
         description: c.lede.slice(0, 155),
@@ -1255,8 +1257,10 @@ async function main() {
       const c = entry[lang];
       const relPath = lang === 'hi' ? `hi/learn/${entry.slug}` : `learn/${entry.slug}`;
       const urlPath = `/${relPath}/`;
-      const enPath = `/learn/${entry.slug}`;
-      const hiPath = `/hi/learn/${entry.slug}`;
+      // Trailing slash to match urlPath/canonical above - these only feed hreflang below, but an
+      // hreflang href that doesn't match the target page's own canonical is a signal mismatch.
+      const enPath = `/learn/${entry.slug}/`;
+      const hiPath = `/hi/learn/${entry.slug}/`;
       writePage(relPath, page({
         title: c.pageTitle,
         description: c.lede.slice(0, 155),

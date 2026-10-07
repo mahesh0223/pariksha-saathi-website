@@ -10,8 +10,11 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
   const entry = findSyllabusEntry(slug);
   const content = entry?.[lang];
 
-  const enPath = `/compare/${slug}-syllabus`;
-  const hiPath = `/hi/compare/${slug}-syllabus`;
+  // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
+  // and the prerendered HTML's canonical/sitemap already use it - this hook runs after hydration
+  // and would otherwise overwrite that correct canonical with a redirecting, slash-less one.
+  const enPath = `/compare/${slug}-syllabus/`;
+  const hiPath = `/hi/compare/${slug}-syllabus/`;
   const path = lang === 'hi' ? hiPath : enPath;
   // There's no Hindi homepage (out of scope here) - both languages link back to the one real
   // homepage rather than a dead /hi route.

@@ -11,8 +11,11 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
   const entry = findLessonEntry(slug);
   const content = entry?.[lang];
 
-  const enPath = `/learn/${slug}`;
-  const hiPath = `/hi/learn/${slug}`;
+  // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
+  // and the prerendered HTML's canonical/sitemap already use it - this hook runs after hydration
+  // and would otherwise overwrite that correct canonical with a redirecting, slash-less one.
+  const enPath = `/learn/${slug}/`;
+  const hiPath = `/hi/learn/${slug}/`;
   const path = lang === 'hi' ? hiPath : enPath;
   const homeHref = '/';
 
