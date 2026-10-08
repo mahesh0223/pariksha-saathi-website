@@ -1,14 +1,31 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
-import { findLessonEntry } from '../../data/topicLessons.mjs';
-import { EmptyState } from '../../components/ui/Primitives';
+import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
+import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import '../compare/ComparePage.css';
 import './LessonArticlePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
 export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
-  const entry = findLessonEntry(slug);
+  // topicLessons.mjs carries every topic's full bilingual content (~1.6MB) - loading it
+  // dynamically, only once an actual lesson page mounts, keeps that weight out of every other
+  // page's bundle (including the homepage, which links to all 124 of these without needing their
+  // content). The prerendered static HTML this page replaces already has the real content baked
+  // in, so this brief loading gap only affects the client-side re-render, never what a crawler or
+  // no-JS visitor sees.
+  const [entry, setEntry] = useState<TopicLessonEntry | undefined>(undefined);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    import('../../data/topicLessons.mjs').then(({ findLessonEntry }) => {
+      setEntry(findLessonEntry(slug));
+      setLoaded(true);
+    });
+  }, [slug]);
+
   const content = entry?.[lang];
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
@@ -55,6 +72,16 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         ]
       : undefined,
   });
+
+  if (!loaded) {
+    return (
+      <div className="compare-page">
+        <div className="wrap" style={{ paddingTop: 40 }}>
+          <Spinner />
+        </div>
+      </div>
+    );
+  }
 
   if (!entry || !content) {
     return (

@@ -1,32 +1,40 @@
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AppShell } from './components/layout/AppShell';
+import { Spinner } from './components/ui/Primitives';
 import { HomePage } from './pages/HomePage';
 import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { SyllabusPage } from './pages/compare/SyllabusPage';
 import { EXAM_SYLLABI } from './data/examSyllabi.mjs';
 import { LessonArticlePage } from './pages/learn/LessonArticlePage';
-import { TOPIC_LESSONS } from './data/topicLessons.mjs';
+import { TOPIC_SLUGS } from './data/topicSlugs.mjs';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
-import { DashboardPage } from './pages/app/DashboardPage';
-import { StudyPage } from './pages/app/StudyPage';
-import { TopicLessonsPage } from './pages/app/TopicLessonsPage';
-import { LessonReaderPage } from './pages/app/LessonReaderPage';
-import { PracticePage } from './pages/app/PracticePage';
-import { QuizPage } from './pages/app/QuizPage';
-import { QuizResultPage } from './pages/app/QuizResultPage';
-import { MistakeNotebookPage } from './pages/app/MistakeNotebookPage';
-import { BookmarksPage } from './pages/app/BookmarksPage';
-import { ProgressPage } from './pages/app/ProgressPage';
-import { CurrentAffairsPage } from './pages/app/CurrentAffairsPage';
-import { DigestPage } from './pages/app/DigestPage';
-import { CurrentAffairsDetailPage } from './pages/app/CurrentAffairsDetailPage';
-import { ExamNoticesPage } from './pages/app/ExamNoticesPage';
-import { ExamNoticeDetailPage } from './pages/app/ExamNoticeDetailPage';
-import { AccountPage } from './pages/app/AccountPage';
-import { ChallengePage } from './pages/app/ChallengePage';
-import { CurrentAffairsQuizPage } from './pages/app/CurrentAffairsQuizPage';
-import { CurrentAffairsQuizPlayPage } from './pages/app/CurrentAffairsQuizPlayPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+
+// Everything under /app/* is lazy-loaded as one chunk: it's the signed-in-feeling quiz/dashboard
+// experience, gated behind onboarding and excluded from robots.txt (except the two Current
+// Affairs/Exam Notices screens, which are prerendered - crawlers see their full HTML before this
+// chunk ever loads, so splitting it out costs them nothing). Every page above this line is what
+// actually gets crawled and ranked, so it stays in the main bundle a first-time visitor downloads.
+const AppShell = lazy(() => import('./components/layout/AppShell').then((m) => ({ default: m.AppShell })));
+const DashboardPage = lazy(() => import('./pages/app/DashboardPage').then((m) => ({ default: m.DashboardPage })));
+const StudyPage = lazy(() => import('./pages/app/StudyPage').then((m) => ({ default: m.StudyPage })));
+const TopicLessonsPage = lazy(() => import('./pages/app/TopicLessonsPage').then((m) => ({ default: m.TopicLessonsPage })));
+const LessonReaderPage = lazy(() => import('./pages/app/LessonReaderPage').then((m) => ({ default: m.LessonReaderPage })));
+const PracticePage = lazy(() => import('./pages/app/PracticePage').then((m) => ({ default: m.PracticePage })));
+const QuizPage = lazy(() => import('./pages/app/QuizPage').then((m) => ({ default: m.QuizPage })));
+const QuizResultPage = lazy(() => import('./pages/app/QuizResultPage').then((m) => ({ default: m.QuizResultPage })));
+const MistakeNotebookPage = lazy(() => import('./pages/app/MistakeNotebookPage').then((m) => ({ default: m.MistakeNotebookPage })));
+const BookmarksPage = lazy(() => import('./pages/app/BookmarksPage').then((m) => ({ default: m.BookmarksPage })));
+const ProgressPage = lazy(() => import('./pages/app/ProgressPage').then((m) => ({ default: m.ProgressPage })));
+const CurrentAffairsPage = lazy(() => import('./pages/app/CurrentAffairsPage').then((m) => ({ default: m.CurrentAffairsPage })));
+const DigestPage = lazy(() => import('./pages/app/DigestPage').then((m) => ({ default: m.DigestPage })));
+const CurrentAffairsDetailPage = lazy(() => import('./pages/app/CurrentAffairsDetailPage').then((m) => ({ default: m.CurrentAffairsDetailPage })));
+const ExamNoticesPage = lazy(() => import('./pages/app/ExamNoticesPage').then((m) => ({ default: m.ExamNoticesPage })));
+const ExamNoticeDetailPage = lazy(() => import('./pages/app/ExamNoticeDetailPage').then((m) => ({ default: m.ExamNoticeDetailPage })));
+const AccountPage = lazy(() => import('./pages/app/AccountPage').then((m) => ({ default: m.AccountPage })));
+const ChallengePage = lazy(() => import('./pages/app/ChallengePage').then((m) => ({ default: m.ChallengePage })));
+const CurrentAffairsQuizPage = lazy(() => import('./pages/app/CurrentAffairsQuizPage').then((m) => ({ default: m.CurrentAffairsQuizPage })));
+const CurrentAffairsQuizPlayPage = lazy(() => import('./pages/app/CurrentAffairsQuizPlayPage').then((m) => ({ default: m.CurrentAffairsQuizPlayPage })));
 
 export function App() {
   return (
@@ -47,15 +55,22 @@ export function App() {
           element={<SyllabusPage slug={exam.slug} lang="hi" />}
         />
       ))}
-      {TOPIC_LESSONS.map((topic) => (
-        <Route key={`${topic.slug}-en`} path={`/learn/${topic.slug}`} element={<LessonArticlePage slug={topic.slug} lang="en" />} />
+      {TOPIC_SLUGS.map((slug) => (
+        <Route key={`${slug}-en`} path={`/learn/${slug}`} element={<LessonArticlePage slug={slug} lang="en" />} />
       ))}
-      {TOPIC_LESSONS.map((topic) => (
-        <Route key={`${topic.slug}-hi`} path={`/hi/learn/${topic.slug}`} element={<LessonArticlePage slug={topic.slug} lang="hi" />} />
+      {TOPIC_SLUGS.map((slug) => (
+        <Route key={`${slug}-hi`} path={`/hi/learn/${slug}`} element={<LessonArticlePage slug={slug} lang="hi" />} />
       ))}
       <Route path="/onboarding" element={<ExamSelectionPage />} />
 
-      <Route path="/app" element={<AppShell />}>
+      <Route
+        path="/app"
+        element={
+          <Suspense fallback={<Spinner />}>
+            <AppShell />
+          </Suspense>
+        }
+      >
         <Route path="home" element={<DashboardPage />} />
         <Route path="study" element={<StudyPage />} />
         <Route path="study/:topicKey" element={<TopicLessonsPage />} />
