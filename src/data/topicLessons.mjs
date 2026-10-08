@@ -9,7 +9,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'percentages',
     en: {
-      pageTitle: 'Percentage Questions with Solutions',
+      pageTitle: 'Percentage Solved Questions',
       lede: 'Percentages show up in some form in every one of these exams’ Quantitative Aptitude sections — and in a lot of General/Banking Awareness questions too, once you count statistics and data interpretation. Here’s the concept, four fully worked examples covering the patterns that actually come up, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -130,7 +130,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'profit-and-loss',
     en: {
-      pageTitle: 'Profit and Loss Questions with Solutions',
+      pageTitle: 'Profit and Loss Solved Questions',
       lede: 'Profit and Loss builds directly on percentages, and the two are often tested together — a marked-price-and-discount question is really a percentage question wearing a different costume. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -243,7 +243,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'simple-compound-interest',
     en: {
-      pageTitle: 'Simple & Compound Interest Questions with Solutions',
+      pageTitle: 'Simple & Compound Interest',
       lede: 'Interest questions are about keeping one distinction straight: simple interest is the same amount every year, compound interest grows on top of itself. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -354,7 +354,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'blood-relations',
     en: {
-      pageTitle: 'Blood Relation Questions with Solutions',
+      pageTitle: 'Blood Relation Solved Questions',
       lede: 'Blood relation puzzles are really just careful reading — the logic is simple once you trace each relationship one step at a time instead of trying to hold the whole family tree in your head. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -475,7 +475,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'time-speed-distance',
     en: {
-      pageTitle: 'Time, Speed and Distance Questions with Solutions',
+      pageTitle: 'Time, Speed and Distance Solved Questions',
       lede: 'Time, Speed and Distance is one of the most frequently tested Quant topics across these exams — and most marks lost here come from just two traps: forgetting to convert units, and averaging two speeds the wrong way. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -598,7 +598,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'coding-decoding',
     en: {
-      pageTitle: 'Coding-Decoding Questions with Solutions',
+      pageTitle: 'Coding-Decoding Solved Questions',
       lede: 'Coding-Decoding questions give you a rule in disguise — one coded example — and ask you to apply the same rule to a new word or sentence. There’s no single trick that cracks every question, but four rule-types cover almost everything that’s actually asked. Here they are, with a fully worked example each, plus a few to try yourself.',
       conceptHeading: 'The common rule-types, quickly',
       conceptBody: [
@@ -719,7 +719,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'syllogism',
     en: {
-      pageTitle: 'Syllogism Questions with Solutions',
+      pageTitle: 'Syllogism Solved Questions',
       lede: 'Syllogism questions test pure logic, not real-world knowledge — you have to accept the given statements as true even when they sound absurd, and judge only whether each conclusion is logically forced. Here’s the approach, four fully worked examples covering the patterns that trip people up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -856,7 +856,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'ratio-and-proportion',
     en: {
-      pageTitle: 'Ratio and Proportion Questions with Solutions',
+      pageTitle: 'Ratio and Proportion Solved Questions',
       lede: 'Ratio and Proportion is foundational — ages, mixtures, partnerships and even some Profit and Loss questions all lean on it. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -987,7 +987,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'direction-sense',
     en: {
-      pageTitle: 'Direction Sense Questions with Solutions',
+      pageTitle: 'Direction Sense Solved Questions',
       lede: 'Direction Sense questions turn into simple coordinate geometry once you plot each step on a grid — the only real skill is tracking turns correctly. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1116,7 +1116,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'spotting-errors',
     en: {
-      pageTitle: 'Spotting Errors Questions with Solutions (English Grammar)',
+      pageTitle: 'Spotting Errors (English Grammar)',
       lede: 'Spotting Errors questions split a sentence into parts and ask which part has a grammar mistake — most of them turn on a small set of recurring rules, not obscure grammar trivia. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1245,7 +1245,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'average',
     en: {
-      pageTitle: 'Average Questions with Solutions',
+      pageTitle: 'Average Solved Questions',
       lede: 'Average questions are mostly about handling the formula backwards — getting from an average back to a sum is more often the actual skill being tested than the plain average itself. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -1364,7 +1364,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'number-series',
     en: {
-      pageTitle: 'Number Series Questions with Solutions',
+      pageTitle: 'Number Series Solved Questions',
       lede: 'Number Series questions test pattern recognition — the pattern is usually one of a small set of standard types, and finding which one applies is the whole game. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1491,7 +1491,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'synonyms-and-antonyms',
     en: {
-      pageTitle: 'Synonyms and Antonyms Questions with Solutions',
+      pageTitle: 'Synonyms and Antonyms Solved Questions',
       lede: 'Synonym and antonym questions reward a sharp read more than a huge vocabulary — many words have more than one meaning, and the sentence around a word usually tells you which one is in play. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1602,7 +1602,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'time-and-work',
     en: {
-      pageTitle: 'Time and Work Questions with Solutions',
+      pageTitle: 'Time and Work Solved Questions',
       lede: 'Time and Work questions all rest on one idea: convert everyone’s time into a daily work-rate, combine the rates, then convert back to time. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -1729,7 +1729,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'analogy',
     en: {
-      pageTitle: 'Analogy Questions with Solutions',
+      pageTitle: 'Analogy Solved Questions',
       lede: 'Analogy questions ask you to complete a pair using the same relationship as a given pair — the whole skill is naming that relationship precisely before looking at the options. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1832,7 +1832,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'one-word-substitution',
     en: {
-      pageTitle: 'One Word Substitution Questions with Solutions',
+      pageTitle: 'One Word Substitution Solved Questions',
       lede: 'One Word Substitution questions give you a phrase or a whole sentence and ask for the single precise word that means the same thing — it’s a vocabulary topic, but a narrow and learnable one, since the same few dozen words come up again and again. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -1935,7 +1935,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'mixture-and-alligation',
     en: {
-      pageTitle: 'Mixture and Alligation Questions with Solutions',
+      pageTitle: 'Mixture and Alligation Solved Questions',
       lede: 'Alligation is a shortcut for finding the ratio to mix two things of different value so the mixture comes out at a target average — it’s really just the weighted-average formula worked backwards. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -2058,7 +2058,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'seating-arrangement',
     en: {
-      pageTitle: 'Seating Arrangement Questions with Solutions',
+      pageTitle: 'Seating Arrangement Solved Questions',
       lede: 'Seating Arrangement questions reward working methodically more than being clever — sketch a row of blank slots, fill in whatever the clues force directly, then use elimination for the rest. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -2199,7 +2199,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'sentence-improvement',
     en: {
-      pageTitle: 'Sentence Improvement Questions with Solutions',
+      pageTitle: 'Sentence Improvement Solved Questions',
       lede: 'Sentence Improvement asks for the best replacement for an underlined part of a sentence — sometimes the original is already correct. The same grammar rules from Spotting Errors apply here, just in a pick-the-fix format instead of find-the-fault. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -2320,7 +2320,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'mensuration',
     en: {
-      pageTitle: 'Mensuration Questions with Solutions (Area and Perimeter)',
+      pageTitle: 'Mensuration (Area & Perimeter)',
       lede: 'Mensuration questions are mostly about picking the right formula and plugging in carefully — the shapes themselves are simple. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -2437,7 +2437,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'inequality',
     en: {
-      pageTitle: 'Inequality (Coded Inequality) Questions with Solutions',
+      pageTitle: 'Inequality (Coded Inequality)',
       lede: 'Coded Inequality questions give you a chain of order relationships between letters and ask which conclusions definitely follow — the logic is close to Syllogism, but with ordering instead of set membership. Here’s the approach, four fully worked examples covering the patterns that trip people up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -2552,7 +2552,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'active-passive-voice',
     en: {
-      pageTitle: 'Active and Passive Voice Questions with Solutions',
+      pageTitle: 'Active and Passive Voice Solved Questions',
       lede: 'Converting active to passive voice is a purely mechanical transformation once you know the three moving parts — the whole topic is just applying the same steps consistently across every tense. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -2679,7 +2679,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'simplification',
     en: {
-      pageTitle: 'Simplification (BODMAS) Questions with Solutions',
+      pageTitle: 'Simplification (BODMAS) Solved Questions',
       lede: 'Simplification questions are a speed test more than a difficulty test — the only real skill is applying the BODMAS order correctly instead of solving strictly left to right. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -2792,7 +2792,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'calendar',
     en: {
-      pageTitle: 'Calendar Questions with Solutions (Day of the Week)',
+      pageTitle: 'Calendar (Day of the Week)',
       lede: 'Calendar questions ask you to find the day of the week for a given date — the whole topic rests on counting "odd days" (the remainder left over after dividing the day-gap by 7) and shifting a known reference day forward by that many. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -2901,7 +2901,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'direct-indirect-speech',
     en: {
-      pageTitle: 'Direct and Indirect Speech Questions with Solutions',
+      pageTitle: 'Direct & Indirect Speech',
       lede: 'Converting direct speech to indirect (reported) speech is another mechanical transformation, like Active and Passive Voice — tense shifts back a step, pronouns and time words change to match the new perspective, and questions lose their question-word-order. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -3018,7 +3018,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'partnership',
     en: {
-      pageTitle: 'Partnership Questions with Solutions',
+      pageTitle: 'Partnership Solved Questions',
       lede: 'Partnership questions extend Ratio and Proportion to shared business profit — the one idea to hold onto is that profit splits by capital × time, not capital alone, whenever partners invest for different durations. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -3137,7 +3137,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'clock',
     en: {
-      pageTitle: 'Clock Questions with Solutions (Angle Between Hands)',
+      pageTitle: 'Clock (Angle Between Hands)',
       lede: 'Clock questions are a disguised speed problem — the hour and minute hands move at fixed rates, so finding the angle between them at any given time is just plugging into a formula. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -3248,7 +3248,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'para-jumbles',
     en: {
-      pageTitle: 'Para Jumbles Questions with Solutions (Sentence Rearrangement)',
+      pageTitle: 'Para Jumbles (Sentence Rearrangement)',
       lede: 'Para Jumbles give you a set of sentences out of order and ask for the sequence that reads as one coherent paragraph — the fastest way in is to follow the pronouns and connector words, which only make sense in a specific order. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -3423,7 +3423,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'boat-and-stream',
     en: {
-      pageTitle: 'Boat and Stream Questions with Solutions',
+      pageTitle: 'Boat and Stream Solved Questions',
       lede: 'Boat and Stream questions are Time, Speed and Distance questions wearing a different costume — convert the boat’s and stream’s speeds into a downstream or upstream speed first, then it’s the same formulas you already know. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -3544,7 +3544,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'alphabet-series',
     en: {
-      pageTitle: 'Alphabet Series Questions with Solutions',
+      pageTitle: 'Alphabet Series Solved Questions',
       lede: 'Alphabet Series questions work exactly like Number Series, once you convert each letter to its position number (A=1, B=2, … Z=26) — find the numeric pattern, then convert the answer back to a letter. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -3661,7 +3661,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'cloze-test',
     en: {
-      pageTitle: 'Cloze Test Questions with Solutions',
+      pageTitle: 'Cloze Test Solved Questions',
       lede: 'Cloze Test questions give you a short passage with several blanks — each answer has to fit the grammar of its own sentence AND stay consistent with the passage’s overall meaning. Here’s the approach, four fully worked passages, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -3822,7 +3822,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'lcm-and-hcf',
     en: {
-      pageTitle: 'LCM and HCF Questions with Solutions',
+      pageTitle: 'LCM and HCF Solved Questions',
       lede: 'LCM and HCF questions reward knowing the prime-factorization method cold, plus one shortcut connecting the two — once you have that, most questions in this topic become routine. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -3959,7 +3959,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'classification',
     en: {
-      pageTitle: 'Classification Questions with Solutions (Odd One Out)',
+      pageTitle: 'Classification (Odd One Out)',
       lede: 'Classification questions give you a handful of items and ask which one doesn’t belong — the trick is finding the exact rule the majority share, not just going by a hunch. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -4068,7 +4068,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'degrees-of-comparison',
     en: {
-      pageTitle: 'Degrees of Comparison Questions with Solutions',
+      pageTitle: 'Degrees of Comparison Solved Questions',
       lede: 'Degrees of Comparison questions test whether you can match an adjective’s form to how many things are actually being compared — one straightforward rule, plus a short list of irregular forms to memorise. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -4171,7 +4171,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'problems-on-ages',
     en: {
-      pageTitle: 'Problems on Ages Questions with Solutions',
+      pageTitle: 'Problems on Ages Solved Questions',
       lede: 'Problems on Ages are really just algebra in disguise — assign a variable to one age, express every other age in terms of it, and the given relationship becomes a solvable equation. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -4310,7 +4310,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'venn-diagram',
     en: {
-      pageTitle: 'Venn Diagram Questions with Solutions',
+      pageTitle: 'Venn Diagram Solved Questions',
       lede: 'Venn Diagram questions here are about counting overlapping groups correctly — the core idea is "inclusion-exclusion": add the groups, then subtract whatever got counted twice. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -4419,7 +4419,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'prepositions',
     en: {
-      pageTitle: 'Prepositions Questions with Solutions',
+      pageTitle: 'Prepositions Solved Questions',
       lede: 'Most preposition questions test fixed pairings — words that always take one specific preposition by convention, not by logic — plus a size-based pattern for time and place. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -4522,7 +4522,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'permutation-and-combination',
     en: {
-      pageTitle: 'Permutation and Combination Questions with Solutions',
+      pageTitle: 'Permutation & Combination',
       lede: 'The whole topic comes down to one question: does the order of arrangement matter? Get that right and the correct formula follows automatically. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -4637,7 +4637,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'ranking-and-order',
     en: {
-      pageTitle: 'Ranking and Order Questions with Solutions',
+      pageTitle: 'Ranking and Order Solved Questions',
       lede: 'Ranking questions all hang off one small formula connecting rank from the top, rank from the bottom, and the total count — once that’s automatic, these become quick points. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -4746,7 +4746,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'idioms-and-phrases',
     en: {
-      pageTitle: 'Idioms and Phrases Questions with Solutions',
+      pageTitle: 'Idioms and Phrases Solved Questions',
       lede: 'Idioms can’t be worked out from their individual words — "break the ice" has nothing to do with ice — so this topic is pure recognition, built up one phrase at a time. Here’s the approach, four fully worked examples using some of the most common idioms tested, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -4849,7 +4849,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'probability',
     en: {
-      pageTitle: 'Probability Questions with Solutions',
+      pageTitle: 'Probability Solved Questions',
       lede: 'Probability questions almost always reduce to careful counting — list (or count) the favorable outcomes, list (or count) all possible outcomes, and divide. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -4966,7 +4966,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'statement-and-assumption',
     en: {
-      pageTitle: 'Statement and Assumption Questions with Solutions',
+      pageTitle: 'Statement and Assumption Solved Questions',
       lede: 'An assumption is something the speaker must be silently taking for granted for their statement to make sense — not something they said, and not a conclusion drawn from what they said. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5093,7 +5093,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'articles',
     en: {
-      pageTitle: 'Articles (A, An, The) Questions with Solutions',
+      pageTitle: 'Articles (A, An, The) Solved Questions',
       lede: '"A"/"an" versus "the" comes down to one question — is this something specific and already identified, or just any one example of its kind? Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5196,7 +5196,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'pipes-and-cisterns',
     en: {
-      pageTitle: 'Pipes and Cisterns Questions with Solutions',
+      pageTitle: 'Pipes and Cisterns Solved Questions',
       lede: 'Pipes and Cisterns is Time and Work with one twist — an outlet pipe drains the tank instead of filling it, so its rate is negative. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -5313,7 +5313,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'statement-and-conclusion',
     en: {
-      pageTitle: 'Statement and Conclusion Questions with Solutions',
+      pageTitle: 'Statement and Conclusion Solved Questions',
       lede: 'A conclusion "follows" only if it’s a direct, inevitable restatement or combination of what the statement already says — nothing borrowed from outside knowledge or common sense. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5434,7 +5434,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'homophones',
     en: {
-      pageTitle: 'Homophones and Commonly Confused Words with Solutions',
+      pageTitle: 'Homophones & Commonly Confused Words',
       lede: 'Homophones sound identical, so the only way to tell them apart in writing is by what each one means and does in the sentence. Here’s the approach, four fully worked examples covering the most frequently confused pairs, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5537,7 +5537,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'number-system',
     en: {
-      pageTitle: 'Number System Questions with Solutions',
+      pageTitle: 'Number System Solved Questions',
       lede: 'Number System questions reward knowing a handful of divisibility shortcuts and one idea about remainders — that they behave predictably under addition and multiplication, so you never need to compute a huge number in full. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -5660,7 +5660,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'data-sufficiency',
     en: {
-      pageTitle: 'Data Sufficiency Questions with Solutions',
+      pageTitle: 'Data Sufficiency Solved Questions',
       lede: 'Data Sufficiency doesn’t ask you to solve the problem — it asks whether the given information is enough to solve it, in principle, without you ever finishing the arithmetic. Here’s the approach, four fully worked examples covering all the standard answer patterns, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5791,7 +5791,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'phrasal-verbs',
     en: {
-      pageTitle: 'Phrasal Verbs Questions with Solutions',
+      pageTitle: 'Phrasal Verbs Solved Questions',
       lede: 'A phrasal verb’s meaning is rarely the sum of its parts — "give up" has nothing to do with giving or being up — so this topic is learned the same way as idioms, one combination at a time. Here’s the approach, four fully worked examples using some of the most common phrasal verbs tested, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -5894,7 +5894,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'surds-and-indices',
     en: {
-      pageTitle: 'Surds and Indices Questions with Solutions',
+      pageTitle: 'Surds and Indices Solved Questions',
       lede: 'A handful of fixed rules for combining powers of the same base cover almost everything in this topic — the only real skill is applying them in the right order. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -6005,7 +6005,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'floor-puzzle',
     en: {
-      pageTitle: 'Floor-Based Puzzle Questions with Solutions',
+      pageTitle: 'Floor-Based Puzzle Solved Questions',
       lede: 'Floor puzzles are Seating Arrangement turned on its side — the same clue-by-clue method works, just vertically instead of left-to-right. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6120,7 +6120,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'spelling-correction',
     en: {
-      pageTitle: 'Spelling Correction Questions with Solutions',
+      pageTitle: 'Spelling Correction Solved Questions',
       lede: 'Unlike Homophones (choosing between different words that sound alike), this topic tests the correct spelling of a single intended word — pure recognition, built from exposure to the words that repeat most often. Here’s the approach, four fully worked examples using some of the most frequently tested misspellings, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6223,7 +6223,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'data-interpretation',
     en: {
-      pageTitle: 'Data Interpretation Questions with Solutions',
+      pageTitle: 'Data Interpretation Solved Questions',
       lede: 'Data Interpretation is mostly ordinary arithmetic wearing a table or chart as a disguise — reading the data accurately is the only genuinely new skill; the calculations themselves are Percentages, Ratios and Averages you already know. Here’s the concept, four fully worked examples using one shared table, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -6332,7 +6332,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'course-of-action',
     en: {
-      pageTitle: 'Course of Action Questions with Solutions',
+      pageTitle: 'Course of Action Solved Questions',
       lede: 'A course of action is judged by whether it’s a practical, proportionate response to the specific problem described — not whether it sounds like a nice idea in general. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6447,7 +6447,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'tag-questions',
     en: {
-      pageTitle: 'Tag Questions Questions with Solutions',
+      pageTitle: 'Tag Questions Solved Questions',
       lede: 'Tag questions run on one flip rule — positive statement, negative tag; negative statement, positive tag — plus matching the auxiliary verb and pronoun exactly. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6550,7 +6550,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'quadratic-equations',
     en: {
-      pageTitle: 'Quadratic Equations Questions with Solutions',
+      pageTitle: 'Quadratic Equations Solved Questions',
       lede: 'This topic isn’t about solving one quadratic equation — it’s about solving two of them (one in x, one in y) and then comparing every possible pair of roots to decide the relationship between x and y. Here’s the concept, four fully worked examples covering each possible relationship, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -6685,7 +6685,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'input-output',
     en: {
-      pageTitle: 'Input-Output Questions with Solutions',
+      pageTitle: 'Input-Output Solved Questions',
       lede: 'An input-output machine rearranges a line of words and numbers through a fixed set of steps — once you know the rule, every question is just carefully applying it and reading off a position. Here’s the approach, four fully worked examples using one shared input, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6798,7 +6798,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'fill-in-the-blanks',
     en: {
-      pageTitle: 'Fill in the Blanks Questions with Solutions',
+      pageTitle: 'Fill in the Blanks Solved Questions',
       lede: 'One blank, one correct word — but picking it means reading the whole sentence for meaning, not just the words right next to the gap, since English pairs certain words with certain prepositions and forms by fixed convention. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -6901,7 +6901,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'approximation',
     en: {
-      pageTitle: 'Approximation Questions with Solutions',
+      pageTitle: 'Approximation Solved Questions',
       lede: 'Approximation questions aren’t asking for the exact answer — they’re asking for the answer closest to the options given, so rounding every number first is the technique, not a shortcut around it. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -7004,7 +7004,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'statement-and-argument',
     en: {
-      pageTitle: 'Statement and Argument Questions with Solutions',
+      pageTitle: 'Statement and Argument Solved Questions',
       lede: 'A strong argument gives a specific, weighty reason that directly addresses the question — a weak argument is vague, trivial, or beside the point, even if it sounds reasonable on first read. Here’s the approach, four fully worked examples covering each possible pattern, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -7131,7 +7131,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'para-completion',
     en: {
-      pageTitle: 'Para Completion Questions with Solutions',
+      pageTitle: 'Para Completion Solved Questions',
       lede: 'A paragraph has an internal logic — a direction it’s building toward — and the right completion continues that direction without overreaching, contradicting, or wandering off into an unrelated detail. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -7258,7 +7258,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'problems-on-trains',
     en: {
-      pageTitle: 'Problems on Trains Questions with Solutions',
+      pageTitle: 'Problems on Trains Solved Questions',
       lede: 'Train problems are Time-Speed-Distance with one extra twist: the train itself has a length, so "crossing" something means covering that length too — a pole, a platform, or another train. Here’s the concept, four fully worked examples covering each standard scenario, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -7397,7 +7397,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'mathematical-operations',
     en: {
-      pageTitle: 'Mathematical Operations Questions with Solutions',
+      pageTitle: 'Mathematical Operations Solved Questions',
       lede: 'These questions hand you a fake rulebook — "+ means ÷", "− means ×" — and ask you to compute an expression using the swapped meanings. The trick is purely mechanical: substitute carefully, then apply the normal order of operations. Here’s the approach, four fully worked examples sharing one symbol key, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -7532,7 +7532,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'commonly-confused-words',
     en: {
-      pageTitle: 'Commonly Confused Words Questions with Solutions',
+      pageTitle: 'Commonly Confused Words Solved Questions',
       lede: 'These word pairs sound alike, look alike, or get mixed up in casual speech — but each has one fixed, distinct meaning, and exam questions test exactly that distinction. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -7635,7 +7635,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'races-and-games',
     en: {
-      pageTitle: 'Races and Games Questions with Solutions',
+      pageTitle: 'Races and Games Solved Questions',
       lede: 'A race is just Time-Speed-Distance with a finish line — the twist is "start" (a head start in distance or time) and "beats by" (the gap at the finish), both of which just mean comparing how far each runner has gone at a shared moment in time. Here’s the concept, four fully worked examples covering each standard pattern, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -7772,7 +7772,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'word-formation',
     en: {
-      pageTitle: 'Word Formation Questions with Solutions',
+      pageTitle: 'Word Formation Solved Questions',
       lede: 'This is pure letter-accounting — can a target word be spelled using only the letters available in a given word, each used at most as many times as it actually appears? No shortcuts, just a careful letter-by-letter check. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -7899,7 +7899,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'reading-comprehension',
     en: {
-      pageTitle: 'Reading Comprehension Questions with Solutions',
+      pageTitle: 'Reading Comprehension Solved Questions',
       lede: 'Reading Comprehension rewards careful reading over prior knowledge — every answer is drawn directly from the passage itself, not from what you already know about the topic. Here’s the approach, one short passage with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8002,7 +8002,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'simple-equations',
     en: {
-      pageTitle: 'Simple Equations Questions with Solutions',
+      pageTitle: 'Simple Equations Solved Questions',
       lede: 'The hard part of these questions isn’t solving the equation — it’s translating the sentence into one. Once the word problem becomes algebra, it’s routine. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8137,7 +8137,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'cause-and-effect',
     en: {
-      pageTitle: 'Cause and Effect Questions with Solutions',
+      pageTitle: 'Cause and Effect Solved Questions',
       lede: 'Given two statements, the question is how they relate: does one cause the other, are they both effects of some third, unstated cause, or are they simply unrelated? Here’s the approach, four fully worked examples covering each pattern, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8240,7 +8240,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'sentence-rearrangement',
     en: {
-      pageTitle: 'Sentence Rearrangement Questions with Solutions',
+      pageTitle: 'Sentence Rearrangement Solved Questions',
       lede: 'A single sentence is broken into labelled fragments, and the job is to put them back in the order that forms one grammatically correct, meaningful sentence — distinct from Para Jumbles, which reorders whole sentences into a paragraph. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8343,7 +8343,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'height-and-distance',
     en: {
-      pageTitle: 'Height and Distance Questions with Solutions',
+      pageTitle: 'Height and Distance Solved Questions',
       lede: 'Almost every question in this topic reduces to one right triangle and one of three standard angles — 30°, 45°, or 60° — so the real skill is drawing the triangle correctly and picking the right trig ratio, not memorizing many formulas. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -8470,7 +8470,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'scheduling-puzzle',
     en: {
-      pageTitle: 'Scheduling Puzzle Questions with Solutions',
+      pageTitle: 'Scheduling Puzzle Solved Questions',
       lede: 'A scheduling puzzle assigns people to days (or months, or dates) using a handful of relational clues — the method is identical to Seating Arrangement, just on a calendar instead of a row of chairs. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8581,7 +8581,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'punctuation',
     en: {
-      pageTitle: 'Punctuation Questions with Solutions',
+      pageTitle: 'Punctuation Solved Questions',
       lede: 'Punctuation questions test a handful of fixed, learnable rules — comma placement, apostrophes, and semicolons — not a feel for "what looks right." Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8684,7 +8684,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'chain-rule',
     en: {
-      pageTitle: 'Chain Rule (Compound Proportion) Questions with Solutions',
+      pageTitle: 'Chain Rule (Compound Proportion)',
       lede: 'Chain Rule questions involve three or more related quantities at once (workers, days, hours; or men and days) — the method is to set up a direct or inverse proportion for each pair and chain them together, not to guess which way to multiply. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -8815,7 +8815,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'coded-relationships',
     en: {
-      pageTitle: 'Coded Relationships Questions with Solutions',
+      pageTitle: 'Coded Relationships Solved Questions',
       lede: 'These questions hand you a symbol key for family relationships — "+" means "mother of," "×" means "husband of" — and ask you to trace a chain of two or three coded relationships through to the final answer. Here’s the approach, four fully worked examples sharing one key, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -8950,7 +8950,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'collective-nouns',
     en: {
-      pageTitle: 'Collective Nouns Questions with Solutions',
+      pageTitle: 'Collective Nouns Solved Questions',
       lede: 'English has a specific, fixed noun for a group of almost any animal or thing — a pride of lions, not a "group" of lions — and these are simply learned, not derived from logic. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9053,7 +9053,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'geometry-lines-angles-triangles',
     en: {
-      pageTitle: 'Geometry: Lines, Angles and Triangles Questions with Solutions',
+      pageTitle: 'Geometry: Lines, Angles & Triangles',
       lede: 'This slice of Geometry runs on a small set of fixed facts — the angle sum of a triangle, and how an exterior angle relates to the two interior angles across from it. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -9168,7 +9168,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'wrong-number-series',
     en: {
-      pageTitle: 'Wrong Number Series Questions with Solutions',
+      pageTitle: 'Wrong Number Series Solved Questions',
       lede: 'This is Number Series run in reverse — instead of extending a pattern, you’re given a sequence with one term that breaks it, and the job is to find which term doesn’t belong. Here’s the approach, four fully worked examples covering the patterns that come up most, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9295,7 +9295,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'determiners',
     en: {
-      pageTitle: 'Determiners Questions with Solutions',
+      pageTitle: 'Determiners Solved Questions',
       lede: 'Determiners like "much," "many," "few" and "a few" are chosen based on two things: whether the noun is countable or uncountable, and whether the sentence means "almost none" or "a reasonable amount." Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9398,7 +9398,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'mean-median-mode',
     en: {
-      pageTitle: 'Mean, Median and Mode Questions with Solutions',
+      pageTitle: 'Mean, Median and Mode Solved Questions',
       lede: 'These are three different ways to describe "the typical value" of a data set, and each needs its own method — mean needs a sum, median needs sorting, mode needs counting. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -9521,7 +9521,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'double-row-seating',
     en: {
-      pageTitle: 'Double Row Seating Questions with Solutions',
+      pageTitle: 'Double Row Seating Solved Questions',
       lede: 'Two rows face each other, and every clue about one row has a mirror effect on the other — the method is still Seating Arrangement’s clue-by-clue elimination, just tracking two rows and the "faces" relationship between them. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9632,7 +9632,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'sentence-transformation',
     en: {
-      pageTitle: 'Sentence Transformation Questions with Solutions',
+      pageTitle: 'Sentence Transformation Solved Questions',
       lede: 'The same idea can be written as a simple, compound, or complex sentence — the content stays the same, only the grammatical structure changes. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9735,7 +9735,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'trigonometric-ratios-identities',
     en: {
-      pageTitle: 'Trigonometric Ratios and Identities Questions with Solutions',
+      pageTitle: 'Trigonometric Ratios & Identities',
       lede: 'Unlike Height and Distance, which applies trigonometry to real-world triangles, this topic works with the ratios and identities directly — given one ratio, find another, or simplify an expression using a fixed identity. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -9864,7 +9864,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'comparison-puzzles',
     en: {
-      pageTitle: 'Comparison Puzzle Questions with Solutions',
+      pageTitle: 'Comparison Puzzle Solved Questions',
       lede: 'These puzzles give relative comparisons (taller than, shorter than, heavier than) instead of exact positions — the method is to convert every clue into one ordered chain, from the most extreme to the least. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -9973,7 +9973,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'subject-verb-agreement',
     en: {
-      pageTitle: 'Subject-Verb Agreement Questions with Solutions',
+      pageTitle: 'Subject-Verb Agreement Solved Questions',
       lede: 'The core rule is simple — singular subjects take singular verbs, plural subjects take plural verbs — but exam questions test it through a handful of specific situations where it’s easy to lose track of which word is actually the subject. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -10076,7 +10076,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'compound-interest-half-yearly-quarterly',
     en: {
-      pageTitle: 'Compound Interest: Half-Yearly and Quarterly Compounding Questions with Solutions',
+      pageTitle: 'Half-Yearly & Quarterly Compound Interest',
       lede: 'The compound interest formula doesn’t change when compounding happens more often than once a year — only the rate and the time do, and getting that adjustment right is the entire skill in this topic. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -10209,7 +10209,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'cubes-and-dice',
     en: {
-      pageTitle: 'Cubes and Dice Questions with Solutions',
+      pageTitle: 'Cubes and Dice Solved Questions',
       lede: 'On a standard die, opposite faces always add up to 7 — that single fact is the key to almost every question in this topic, from finding a hidden face to totalling what’s visible on a stack of dice. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -10326,7 +10326,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'infinitives-and-gerunds',
     en: {
-      pageTitle: 'Infinitives and Gerunds Questions with Solutions',
+      pageTitle: 'Infinitives and Gerunds Solved Questions',
       lede: 'Some verbs are always followed by "to + verb," others always by the "-ing" form, and a few change meaning depending on which one follows — this is a short, fixed list to learn, not a rule to derive. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -10429,7 +10429,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'mean-third-fourth-proportional',
     en: {
-      pageTitle: 'Mean, Third and Fourth Proportional Questions with Solutions',
+      pageTitle: 'Mean, Third & Fourth Proportional',
       lede: 'These three question types all ask you to complete a proportion with a missing term — the only real skill is setting up the right proportion statement before cross-multiplying. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -10532,7 +10532,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'family-tree-blood-relations',
     en: {
-      pageTitle: 'Family Tree (Blood Relations) Questions with Solutions',
+      pageTitle: 'Family Tree (Blood Relations)',
       lede: 'This is Blood Relations at a larger scale — instead of tracing one relationship, you build a small family tree across generations and read multiple relationships off it. Here’s the approach, one shared family tree with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -10641,7 +10641,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'redundancy',
     en: {
-      pageTitle: 'Redundancy Questions with Solutions',
+      pageTitle: 'Redundancy Solved Questions',
       lede: 'A redundant phrase pairs two words that say the same thing twice — "repeat again," "free gift" — where one word already contains the other’s meaning. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -10744,7 +10744,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'set-theory',
     en: {
-      pageTitle: 'Set Theory Questions with Solutions',
+      pageTitle: 'Set Theory Solved Questions',
       lede: 'Most Set Theory questions here reduce to one formula — the union of two groups equals their sizes added together, minus whatever they share — since adding the overlap twice is the error this formula exists to fix. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -10859,7 +10859,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'odd-pair-out',
     en: {
-      pageTitle: 'Odd Pair Out Questions with Solutions',
+      pageTitle: 'Odd Pair Out Solved Questions',
       lede: 'This is Classification applied to pairs instead of single items — three pairs share a hidden numeric relationship, and one pair breaks it. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -10986,7 +10986,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'modal-verbs',
     en: {
-      pageTitle: 'Modal Verbs Questions with Solutions',
+      pageTitle: 'Modal Verbs Solved Questions',
       lede: 'Modal verbs each carry a specific shade of meaning — obligation, permission, possibility, deduction — and exam questions test exactly that distinction, most often the trap between "must not" (forbidden) and "need not" (no obligation). Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11089,7 +11089,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'algebraic-identities',
     en: {
-      pageTitle: 'Algebraic Identities Questions with Solutions',
+      pageTitle: 'Algebraic Identities Solved Questions',
       lede: 'A handful of fixed identities let you find a²+b² or ab without ever solving for a and b individually — and the same identities turn an awkward multiplication like 97×103 into subtraction. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -11192,7 +11192,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'logical-sequence-of-words',
     en: {
-      pageTitle: 'Logical Sequence of Words Questions with Solutions',
+      pageTitle: 'Logical Sequence of Words Solved Questions',
       lede: 'These questions ask you to order a set of words by some external logic — a hierarchy, a real-world process, or plain dictionary order — not by any pattern within the words themselves. Here’s the approach, four fully worked examples covering each pattern, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11301,7 +11301,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'tenses',
     en: {
-      pageTitle: 'Tenses Questions with Solutions',
+      pageTitle: 'Tenses Solved Questions',
       lede: 'The two traps that come up again and again: Present Perfect versus Simple Past, and "since" versus "for" — both come down to whether a specific past time is named. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11404,7 +11404,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'circular-permutations',
     en: {
-      pageTitle: 'Circular Permutations Questions with Solutions',
+      pageTitle: 'Circular Permutations Solved Questions',
       lede: 'Arranging people around a circle is different from arranging them in a row — rotating everyone one seat over gives the "same" arrangement, so one fixed reference point gets removed from the count. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -11523,7 +11523,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'letter-group-classification',
     en: {
-      pageTitle: 'Letter Group Classification Questions with Solutions',
+      pageTitle: 'Letter Group Classification',
       lede: 'Three letter-groups share a hidden gap pattern between their letters, and one group breaks it — this is Classification applied specifically to letter clusters, checked using the same position-number trick as Alphabet Series. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11650,7 +11650,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'relative-pronouns',
     en: {
-      pageTitle: 'Relative Pronouns Questions with Solutions',
+      pageTitle: 'Relative Pronouns Solved Questions',
       lede: '"Who," "whom," "which," "that" and "whose" each have one fixed job — the trick is checking whether the pronoun is acting as a subject or an object, and whether it points to a person or a thing. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11753,7 +11753,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'bankers-discount-true-discount',
     en: {
-      pageTitle: 'Banker’s Discount and True Discount Questions with Solutions',
+      pageTitle: 'Banker’s Discount & True Discount',
       lede: 'A bill due in the future is worth less today — True Discount measures that gap properly, while a banker who pays out immediately charges simple interest on the full future amount instead, which is always a little more. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -11868,7 +11868,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'alphanumeric-series',
     en: {
-      pageTitle: 'Alphanumeric Series Questions with Solutions',
+      pageTitle: 'Alphanumeric Series Solved Questions',
       lede: 'Each term pairs a letter with a number, and the two run as separate, parallel patterns — solve them independently using Alphabet Series and Number Series methods, then combine the results. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -11995,7 +11995,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'conditional-sentences',
     en: {
-      pageTitle: 'Conditional Sentences Questions with Solutions',
+      pageTitle: 'Conditional Sentences Solved Questions',
       lede: 'There are four standard "if" patterns, each tied to a different degree of reality — a general fact, a real future possibility, a present hypothetical, or a past that didn’t happen. Here’s the approach, four fully worked examples covering each type, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -12098,7 +12098,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'syllogism-possibility-cases',
     en: {
-      pageTitle: 'Syllogism: Possibility Cases Questions with Solutions',
+      pageTitle: 'Syllogism: Possibility Cases',
       lede: 'A regular Syllogism conclusion has to hold in EVERY valid diagram to follow. A possibility conclusion only needs to hold in AT LEAST ONE valid diagram consistent with the statements — a much lower bar, and a different question entirely. Here’s the approach, four fully worked examples covering each pattern, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -12221,7 +12221,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'stocks-and-shares',
     en: {
-      pageTitle: 'Stocks and Shares Questions with Solutions',
+      pageTitle: 'Stocks and Shares Solved Questions',
       lede: 'Three values matter for every share — Face Value (the printed value, dividend is always a percentage of this), Market Value (what you actually pay), and the dividend income itself — and most questions just connect these three through one investment. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -12356,7 +12356,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'confusable-verbs',
     en: {
-      pageTitle: 'Confusable Verbs (Lay/Lie, Rise/Raise) Questions with Solutions',
+      pageTitle: 'Confusable Verbs (Lay/Lie, Rise/Raise)',
       lede: '"Lie" and "lay," "rise" and "raise" trip people up because one verb in each pair doesn’t take a direct object and the other always does — and to make it worse, "lay" is also the past tense of "lie." Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -12459,7 +12459,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'hcf-lcm-of-fractions',
     en: {
-      pageTitle: 'HCF and LCM of Fractions Questions with Solutions',
+      pageTitle: 'HCF and LCM of Fractions Solved Questions',
       lede: 'This isn’t a new idea — it’s the same HCF/LCM method from whole numbers, applied to the numerators and denominators separately, with one twist: the denominator rule is swapped compared to what you’d expect. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -12562,7 +12562,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'scheduling-puzzle-month-date',
     en: {
-      pageTitle: 'Scheduling Puzzle: Month and Date Questions with Solutions',
+      pageTitle: 'Scheduling Puzzle: Month & Date',
       lede: 'This is the Scheduling Puzzle method with a second attribute added — each person now has both a month AND a date to pin down, so every clue needs to be sorted into which attribute it actually fixes. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -12673,7 +12673,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'passive-voice-questions-negatives',
     en: {
-      pageTitle: 'Passive Voice: Questions and Negative Sentences Questions with Solutions',
+      pageTitle: 'Passive Voice: Questions & Negatives',
       lede: 'Converting a statement to passive voice is routine — converting a question or a negative sentence adds one extra move: the auxiliary verb has to come along to a new position instead of just swapping with the subject. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -12776,7 +12776,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'pie-chart',
     en: {
-      pageTitle: 'Pie Chart Questions with Solutions',
+      pageTitle: 'Pie Chart Solved Questions',
       lede: 'A pie chart is Data Interpretation with the categories expressed as a share of 360° instead of a plain table — the arithmetic underneath is the same percentage work, just one extra conversion step when a question gives degrees instead of a percentage directly. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -12879,7 +12879,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'letter-pairs-alphabet-gap',
     en: {
-      pageTitle: 'Letter Pairs with Equal Alphabet Gap Questions with Solutions',
+      pageTitle: 'Letter Pairs with Equal Alphabet Gap',
       lede: 'This topic asks a precise, mechanical question: for a pair of letters in a word, does the number of letters separating them IN THE WORD match the number of letters separating them IN THE ALPHABET? Here’s the exact rule, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13008,7 +13008,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'connectors-and-conjunctions',
     en: {
-      pageTitle: 'Connectors and Conjunctions Questions with Solutions',
+      pageTitle: 'Connectors & Conjunctions',
       lede: 'The same idea — contrast, cause, condition — can be expressed with different connectors, but each one has a fixed grammatical requirement: some need a full clause after them, others need just a noun. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13111,7 +13111,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'bar-graph',
     en: {
-      pageTitle: 'Bar Graph Questions with Solutions',
+      pageTitle: 'Bar Graph Solved Questions',
       lede: 'A bar graph is Data Interpretation with each category’s value read directly off a bar’s height instead of a table cell — once you’ve read the numbers correctly, it’s the same percentage, average and ratio work as every other DI format. Here’s the concept, four fully worked examples using one shared data set, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -13220,7 +13220,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'circular-seating-arrangement',
     en: {
-      pageTitle: 'Circular Seating Arrangement Questions with Solutions',
+      pageTitle: 'Circular Seating Arrangement',
       lede: 'A circular table has no "ends," so clues are always relative to another person — not an absolute position — and left/right flips depending on whether everyone faces the center or faces outward. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13331,7 +13331,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'correlative-conjunctions',
     en: {
-      pageTitle: 'Correlative Conjunctions Questions with Solutions',
+      pageTitle: 'Correlative Conjunctions Solved Questions',
       lede: 'Correlative conjunctions come as fixed pairs — either...or, neither...nor, not only...but also — and the two most common errors are mixing the pair (either...nor) or breaking the parallel structure after each half. Here’s the approach, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13434,7 +13434,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'line-graph',
     en: {
-      pageTitle: 'Line Graph Questions with Solutions',
+      pageTitle: 'Line Graph Solved Questions',
       lede: 'A line graph plots values over time (or another ordered variable) as points joined by straight segments — each point’s height is read off the same way a bar’s height is, and once you’ve read the numbers correctly it’s the same percentage, average and ratio work as any other Data Interpretation format. Here’s the concept, four fully worked examples using one shared data set, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -13543,7 +13543,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'matrix-puzzle',
     en: {
-      pageTitle: 'Matrix Puzzle Questions with Solutions',
+      pageTitle: 'Matrix Puzzle Solved Questions',
       lede: 'A matrix puzzle links two (or more) separate attributes to the same group of people — here, each person’s city AND profession — so every clue narrows down one grid while the other stays open, and the two grids only lock together once enough clues combine. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13670,7 +13670,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'countable-and-uncountable-nouns',
     en: {
-      pageTitle: 'Countable and Uncountable Nouns Questions with Solutions',
+      pageTitle: 'Countable & Uncountable Nouns',
       lede: 'Countable nouns can be counted one by one and take a plural form; uncountable nouns are treated as a single mass and never take "-s" or a number in front of them — mixing up which is which is what trips up "much/many," "a few/a little," and singular/plural verb questions. Here’s the rule, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The rule, quickly',
       conceptBody: [
@@ -13773,7 +13773,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'successive-discount',
     en: {
-      pageTitle: 'Successive Discount Questions with Solutions',
+      pageTitle: 'Successive Discount Solved Questions',
       lede: 'When two or more discounts are applied one after another, they do NOT simply add up — each discount is calculated on the price that’s already been reduced by the one before it, so successive discounts are always worth less to the shopper than their sum suggests. Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -13876,7 +13876,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'seating-arrangement-mixed-directions',
     en: {
-      pageTitle: 'Seating Arrangement (Mixed Directions) Questions with Solutions',
+      pageTitle: 'Mixed-Direction Seating Arrangement',
       lede: 'Most seating arrangement questions have everyone facing the same way, but some mix it up — a few people face North and others face South, so "immediately to X’s right" depends on which way X personally faces, not on the row as drawn on paper. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -13989,7 +13989,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'prefixes-and-suffixes',
     en: {
-      pageTitle: 'Prefixes and Suffixes Questions with Solutions',
+      pageTitle: 'Prefixes and Suffixes Solved Questions',
       lede: 'A prefix attaches to the FRONT of a word and usually changes its meaning (often to a negative or opposite); a suffix attaches to the END and usually changes its part of speech (turning a verb or adjective into a noun, for instance) — knowing the common ones by sight is most of this topic. Here’s the rule, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The rule, quickly',
       conceptBody: [
@@ -14092,7 +14092,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'work-and-wages',
     en: {
-      pageTitle: 'Work and Wages Questions with Solutions',
+      pageTitle: 'Work and Wages Solved Questions',
       lede: 'When people work together and get paid as a group, the total wage is split in the same ratio as how much work each person actually did — which, for the same time worked, is the ratio of their individual work rates (1/days taken). Here’s the concept, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The concept, quickly',
       conceptBody: [
@@ -14209,7 +14209,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'floor-and-flat-puzzle',
     en: {
-      pageTitle: 'Floor and Flat Puzzle Questions with Solutions',
+      pageTitle: 'Floor and Flat Puzzle Solved Questions',
       lede: 'This is Floor-Based Puzzle with a second dimension added — each floor has more than one flat side by side, so a person isn’t placed by floor alone, but by floor AND flat together. Here’s the approach, one shared puzzle with four fully worked questions, and a few more to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
@@ -14322,7 +14322,7 @@ export const TOPIC_LESSONS = [
   {
     slug: 'clauses-noun-adjective-adverb',
     en: {
-      pageTitle: 'Clauses (Noun, Adjective, Adverb) Questions with Solutions',
+      pageTitle: 'Clauses (Noun, Adjective, Adverb)',
       lede: 'A clause has its own subject and verb — a main (independent) clause can stand alone as a sentence, while a subordinate (dependent) clause cannot, and plays the role of a noun, an adjective, or an adverb inside the sentence instead. Here’s the rule, four fully worked examples, and a few to try yourself.',
       conceptHeading: 'The rule, quickly',
       conceptBody: [
