@@ -1148,7 +1148,17 @@ async function main() {
     // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
     structuredData: [
       { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
-      { '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, url: SITE_URL, logo: `${SITE_URL}/assets/icon-512.png` },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: `${SITE_URL}/assets/icon-512.png`,
+        sameAs: [
+          'https://www.youtube.com/@ParikshaSathiApp',
+          'https://www.instagram.com/parkishasathi/',
+        ],
+      },
       {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',

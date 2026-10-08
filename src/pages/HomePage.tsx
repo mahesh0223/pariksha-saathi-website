@@ -201,6 +201,10 @@ export function HomePage() {
         name: 'Pariksha Saathi',
         url: 'https://parikshasaathi.com',
         logo: 'https://parikshasaathi.com/assets/icon-512.png',
+        sameAs: [
+          'https://www.youtube.com/@ParikshaSathiApp',
+          'https://www.instagram.com/parkishasathi/',
+        ],
       },
       {
         '@context': 'https://schema.org',
