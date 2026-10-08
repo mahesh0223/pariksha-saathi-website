@@ -1,1 +1,26 @@
-/*  /index.html  200
+# Cloudflare Pages always serves a real static file first (prerendered /learn/*, /compare/*,
+# /app/current-affairs/*, /app/exam-notices/* pages) before ever consulting this file - these
+# rules only run for paths with no matching file on disk.
+#
+# Known client-side-only screens (no prerendered HTML - correctly excluded from robots.txt) still
+# need an explicit 200 here so real users/bookmarks/shares get the app, not a 404 interstitial.
+/onboarding                    /index.html  200
+/app/home                      /index.html  200
+/app/study                     /index.html  200
+/app/study/*                   /index.html  200
+/app/practice                  /index.html  200
+/app/practice/*                /index.html  200
+/app/mistakes                  /index.html  200
+/app/bookmarks                 /index.html  200
+/app/progress                  /index.html  200
+/app/digest                    /index.html  200
+/app/account                   /index.html  200
+/app/challenge                 /index.html  200
+/app/current-affairs-quiz      /index.html  200
+/app/current-affairs-quiz/*    /index.html  200
+
+# Everything else (typos, removed lesson slugs, old/invalid IDs) is a genuine 404 - serving the
+# SPA shell with a real 404 status lets React Router show NotFoundPage while still telling Google
+# and other crawlers the page doesn't exist, instead of a "soft 404" (200 on a page that says
+# "not found"), which Search Console flags as a quality problem.
+/*  /index.html  404
