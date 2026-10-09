@@ -1139,7 +1139,11 @@ async function main() {
   // until React mounts - the single most important page to have real content in, since it's what
   // AdSense's own site review (and every other crawler) checks first for the domain overall.
   writeFileSync(join(DIST, 'index.html'), page({
-    title: 'Pariksha Saathi',
+    // Was literally 'Pariksha Saathi' (the bare brand name, via the title===SITE_NAME special
+    // case that skips the "| Pariksha Saathi" suffix) - the single highest-authority page on the
+    // site had a title with zero keywords or value proposition in it. Mirrors
+    // src/pages/HomePage.tsx's useDocumentMeta call.
+    title: 'Free SSC, IBPS & SBI Exam Prep',
     description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
     path: '/',
     assets,

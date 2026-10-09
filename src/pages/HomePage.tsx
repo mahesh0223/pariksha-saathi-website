@@ -184,7 +184,9 @@ export function HomePage() {
   }
 
   useDocumentMeta({
-    title: 'Pariksha Saathi',
+    // Was literally 'Pariksha Saathi' (the bare brand name) - the single highest-authority page
+    // on the site had a title with zero keywords or value proposition in it.
+    title: 'Free SSC, IBPS & SBI Exam Prep',
     description:
       'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
     path: '/',
