@@ -4646,7 +4646,7 @@ export const TOPIC_LESSONS = [
           question: 'At what time between 9 and 10 o’clock will the hour and minute hands be exactly opposite each other (180° apart)?',
           solution: [
             'Hour-hand angle at M minutes past 9 = 270 + 0.5M. Minute-hand angle = 6M.',
-            'For the hands to be opposite: 6M − (270 + 0.5M) = 180 → 5.5M − 270 = 180 → 5.5M = 450 → M = 450/5.5 = 900/11... recheck: 6M - 0.5M = 5.5M; 5.5M - 270 = 180 → 5.5M = 450 → M = 450/5.5 = 81.8. This doesn\'t match the simpler known form, so instead solve directly: (270 + 0.5M) − 6M = 180 → 270 − 5.5M = 180 → 5.5M = 90 → M = 90/5.5 = 180/11 ≈ 16.36.',
+            'For the hands to be opposite, the hour hand (still ahead at this point in the hour) must lead the minute hand by 180°: (270 + 0.5M) − 6M = 180 → 270 − 5.5M = 180 → 5.5M = 90 → M = 90/5.5 = 180/11 ≈ 16.36.',
             'So the hands are opposite at 9 hours and 180/11 minutes, i.e., 16 4/11 minutes past 9.',
           ],
           answer: '9:16 4/11 (16 4/11 minutes past 9)',
