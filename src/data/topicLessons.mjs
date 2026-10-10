@@ -7,125 +7,299 @@
 
 export const TOPIC_LESSONS = [
   {
-    slug: 'percentages',
-    en: {
-      pageTitle: 'Percentage Solved Questions',
-      lede: 'Percentages show up in some form in every one of these exams’ Quantitative Aptitude sections — and in a lot of General/Banking Awareness questions too, once you count statistics and data interpretation. Here’s the concept, four fully worked examples covering the patterns that actually come up, and a few to try yourself.',
-      conceptHeading: 'The concept, quickly',
-      conceptBody: [
-        '"Percent" just means "per hundred" — x% of a number N is (x/100) × N.',
-        'Percentage change (increase or decrease) is always calculated on the original value: (change / original value) × 100.',
-        'For two successive percentage changes of a% and b% (either can be negative, for a decrease), the net change is a + b + (ab/100) — not simply a + b. This is the single most common mistake in percentage questions.',
+    "slug": "percentages",
+    "en": {
+      "pageTitle": "Percentage Solved Questions",
+      "lede": "Learn how to choose the correct percentage base, reverse a percentage change, combine successive changes and distinguish percentages from percentage points. Work from simple calculations to comparison and data-interpretation problems, then check your method with the practice questions.",
+      "conceptHeading": "The concept, quickly",
+      "conceptBody": [
+        "\"Percent\" just means \"per hundred\" — x% of a number N is (x/100) × N.",
+        "Percentage change (increase or decrease) is always calculated on the original value: (change / original value) × 100.",
+        "For two successive percentage changes of a% and b% (either can be negative, for a decrease), the net change is a + b + (ab/100) — not simply a + b. This is the single most common mistake in percentage questions.",
+        "Before calculating, name the base: “A is 20% more than B” uses B as 100%. Reversing the comparison changes the base, so the reverse percentage is different.",
+        "A percentage multiplier is 1 + r/100 for an increase and 1 − r/100 for a decrease. To recover an original value, divide the final value by the multiplier; do not subtract the same percentage from the final value.",
+        "A change in a rate from 40% to 50% is 10 percentage points, but a 25% relative increase: (50 − 40)/40 × 100. State which measure you are using.",
+        "For a combined percentage, add the underlying quantities before dividing. Averaging percentages is valid only when their bases are equal.",
+        "Useful checks: an increase followed by an equal percentage decrease leaves a loss; a value after a discount must be below its original value; a percentage of a total cannot exceed 100% unless the comparison allows it."
       ],
-      examplesHeading: 'Worked examples',
-      examples: [
+      "examplesHeading": "Worked examples",
+      "examples": [
         {
-          question: 'What is 35% of 240?',
-          solution: ['35% of 240 = (35/100) × 240', '= 35 × 2.4', '= 84'],
-          answer: '84',
-        },
-        {
-          question: 'The price of an item increased from ₹800 to ₹920. What is the percentage increase?',
-          solution: ['Increase = 920 − 800 = 120', 'Percentage increase = (120 / 800) × 100', '= 15%'],
-          answer: '15%',
-        },
-        {
-          question: 'A number is first increased by 20%, then the result is decreased by 20%. What is the net percentage change?',
-          solution: [
-            'Using the successive-change formula: net change = a + b + (ab/100)',
-            '= 20 + (−20) + (20 × −20)/100',
-            '= 0 − 4 = −4%',
-            'Check directly: start with 100 → increase 20% → 120 → decrease 20% → 120 × 0.8 = 96, which is 4% less than 100.',
+          "question": "What is 35% of 240?",
+          "solution": [
+            "35% of 240 = (35/100) × 240",
+            "= 35 × 2.4",
+            "= 84"
           ],
-          answer: 'Net decrease of 4% (not 0%, even though +20 and −20 look like they should cancel)',
+          "answer": "84"
         },
         {
-          question: 'In an election between two candidates, the winner received 60% of the votes and won by 4,800 votes. Find the total number of votes polled.',
-          solution: [
-            'Winner: 60%, Loser: 40% → difference = 20% of total votes',
-            '20% of total = 4,800',
-            '1% of total = 240',
-            '100% of total = 24,000',
+          "question": "The price of an item increased from ₹800 to ₹920. What is the percentage increase?",
+          "solution": [
+            "Increase = 920 − 800 = 120",
+            "Percentage increase = (120 / 800) × 100",
+            "= 15%"
           ],
-          answer: '24,000 votes',
+          "answer": "15%"
         },
+        {
+          "question": "A number is first increased by 20%, then the result is decreased by 20%. What is the net percentage change?",
+          "solution": [
+            "Using the successive-change formula: net change = a + b + (ab/100)",
+            "= 20 + (−20) + (20 × −20)/100",
+            "= 0 − 4 = −4%",
+            "Check directly: start with 100 → increase 20% → 120 → decrease 20% → 120 × 0.8 = 96, which is 4% less than 100."
+          ],
+          "answer": "Net decrease of 4% (not 0%, even though +20 and −20 look like they should cancel)"
+        },
+        {
+          "question": "In an election between two candidates, the winner received 60% of the votes and won by 4,800 votes. Find the total number of votes polled.",
+          "solution": [
+            "Winner: 60%, Loser: 40% → difference = 20% of total votes",
+            "20% of total = 4,800",
+            "1% of total = 240",
+            "100% of total = 24,000"
+          ],
+          "answer": "24,000 votes"
+        },
+        {
+          "question": "A salary becomes ₹28,800 after a 20% increase. What was the original salary?",
+          "solution": [
+            "Final = original × 1.20.",
+            "Original = 28,800 ÷ 1.20 = 24,000.",
+            "Check: 20% of 24,000 is 4,800; adding it gives 28,800. Subtracting 20% of 28,800 would use the wrong base."
+          ],
+          "answer": "₹24,000"
+        },
+        {
+          "question": "A is 25% greater than B. By what percentage is B less than A?",
+          "solution": [
+            "Let B = 100, so A = 125.",
+            "The difference is 25, but the requested comparison uses A as the base.",
+            "25/125 × 100 = 20%."
+          ],
+          "answer": "20%"
+        },
+        {
+          "question": "The price of rice rises by 25%. By what percentage should consumption fall to keep spending unchanged?",
+          "solution": [
+            "Spending = price × quantity. Let the old price and quantity each be 100.",
+            "New price = 125. To keep the product 10,000, new quantity = 10,000/125 = 80.",
+            "Quantity falls from 100 to 80, a 20% reduction."
+          ],
+          "answer": "20%"
+        },
+        {
+          "question": "One class has 40 students with a 75% pass rate; another has 60 students with a 50% pass rate. Find the combined pass rate.",
+          "solution": [
+            "Passed in first class = 40 × 0.75 = 30.",
+            "Passed in second class = 60 × 0.50 = 30.",
+            "Combined = 60 passes out of 100 students = 60%. The unweighted average 62.5% is wrong because the class sizes differ."
+          ],
+          "answer": "60%"
+        },
+        {
+          "question": "A pass rate rises from 60% to 72%. Find the increase in percentage points and the relative percentage increase.",
+          "solution": [
+            "Percentage-point change = 72 − 60 = 12.",
+            "Relative change uses the old rate: 12/60 × 100 = 20%.",
+            "Both describe the same change using different units."
+          ],
+          "answer": "12 percentage points; 20% relative increase"
+        }
       ],
-      practiceHeading: 'Try these yourself',
-      practiceIntro: 'Work through these the same way, then check against the answer.',
-      practiceQuestions: [
-        { question: 'What is 45% of 160?', answer: '72' },
-        { question: 'A number increased from 250 to 300. Find the percentage increase.', answer: '20%' },
-        { question: 'If 20% of a number is 50, find the number.', answer: '250' },
+      "practiceHeading": "Try these yourself",
+      "practiceIntro": "Work through these the same way, then check against the answer.",
+      "practiceQuestions": [
+        {
+          "question": "What is 45% of 160?",
+          "answer": "72. Split 45% into 40% + 5%: 64 + 8 = 72."
+        },
+        {
+          "question": "A number increased from 250 to 300. Find the percentage increase.",
+          "answer": "20%. The increase is 50 and the original base is 250: 50/250 × 100."
+        },
+        {
+          "question": "If 20% of a number is 50, find the number.",
+          "answer": "250. Divide 50 by 0.20."
+        },
+        {
+          "question": "A price after a 15% discount is ₹1,020. Find the original price.",
+          "answer": "₹1,200. The final price is 85% of the original: 1,020/0.85 = 1,200."
+        },
+        {
+          "question": "A value rises by 10% and then 20%. Find the net increase.",
+          "answer": "32%. Multiply 1.10 × 1.20 = 1.32; adding 10 and 20 ignores the changed base."
+        },
+        {
+          "question": "A value falls by 20%. What increase restores it?",
+          "answer": "25%. Start with 100 → 80. The required gain is 20 on a base of 80: 20/80 × 100."
+        },
+        {
+          "question": "A rate changes from 8% to 10%. State both measures of increase.",
+          "answer": "2 percentage points; 25% relative increase because 2/8 × 100 = 25."
+        },
+        {
+          "question": "30% of 200 candidates and 50% of 100 candidates pass. What percentage passes overall?",
+          "answer": "36⅔%. Passes = 60 + 50 = 110; total candidates = 300; 110/300 × 100."
+        }
       ],
-      relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Percentages are tested directly in the Quantitative/Numerical Aptitude section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — and indirectly in data-interpretation and General/Banking Awareness questions that quote statistics as percentages.',
-      offerHeading: 'Practice more percentage questions',
-      offerBody: 'This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Percentages (and every other Quant/Reasoning/English topic) with instant scoring and explanations — free, no account required.',
-      ctaLabel: 'Practice Percentages free',
-      backLabel: 'Home',
-      solutionLabel: 'Solution',
-      answerLabel: 'Answer',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+      "relevantForHeading": "Where this comes up",
+      "relevantForBody": "Percentages are tested directly in the Quantitative/Numerical Aptitude section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — and indirectly in data-interpretation and General/Banking Awareness questions that quote statistics as percentages.",
+      "offerHeading": "Practice more percentage questions",
+      "offerBody": "This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Percentages (and every other Quant/Reasoning/English topic) with instant scoring and explanations — free, no account required.",
+      "ctaLabel": "Practice Percentages free",
+      "backLabel": "Home",
+      "solutionLabel": "Solution",
+      "answerLabel": "Answer",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body."
     },
-    hi: {
-      pageTitle: 'प्रतिशत के प्रश्न हल सहित',
-      lede: 'प्रतिशत इन सभी परीक्षाओं के मात्रात्मक अभियोग्यता खंड में किसी न किसी रूप में ज़रूर आता है — और सांख्यिकी व डेटा इंटरप्रिटेशन को जोड़ें तो सामान्य/बैंकिंग जागरूकता के कई सवालों में भी। यहां अवधारणा, चार पूरी तरह हल किए गए उदाहरण जो वास्तव में आने वाले पैटर्न को कवर करते हैं, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
-      conceptHeading: 'अवधारणा, संक्षेप में',
-      conceptBody: [
-        '"प्रतिशत" का अर्थ है "प्रति सौ" — किसी संख्या N का x% = (x/100) × N होता है।',
-        'प्रतिशत परिवर्तन (वृद्धि या कमी) हमेशा मूल मान पर आधारित होकर निकाला जाता है: (परिवर्तन / मूल मान) × 100।',
-        'दो क्रमिक प्रतिशत परिवर्तनों a% और b% के लिए (कमी के लिए कोई भी ऋणात्मक हो सकता है), शुद्ध परिवर्तन होता है a + b + (ab/100) — सीधे a + b नहीं। प्रतिशत के प्रश्नों में यह सबसे आम गलती है।',
+    "hi": {
+      "pageTitle": "प्रतिशत के प्रश्न हल सहित",
+      "lede": "प्रतिशत का सही आधार चुनना, परिवर्तन से मूल मान निकालना, क्रमिक परिवर्तन जोड़ना और प्रतिशत तथा प्रतिशत-अंक का अंतर सीखें। सरल गणना से तुलना और आँकड़ों के प्रश्नों तक बढ़ें, फिर अभ्यास से अपनी विधि जाँचें।",
+      "conceptHeading": "अवधारणा, संक्षेप में",
+      "conceptBody": [
+        "\"प्रतिशत\" का अर्थ है \"प्रति सौ\" — किसी संख्या N का x% = (x/100) × N होता है।",
+        "प्रतिशत परिवर्तन (वृद्धि या कमी) हमेशा मूल मान पर आधारित होकर निकाला जाता है: (परिवर्तन / मूल मान) × 100।",
+        "दो क्रमिक प्रतिशत परिवर्तनों a% और b% के लिए (कमी के लिए कोई भी ऋणात्मक हो सकता है), शुद्ध परिवर्तन होता है a + b + (ab/100) — सीधे a + b नहीं। प्रतिशत के प्रश्नों में यह सबसे आम गलती है।",
+        "पहले आधार पहचानें: “A, B से 20% अधिक है” में B को 100% मानते हैं। उलटी तुलना में आधार बदलता है, इसलिए प्रतिशत भी बदलता है।",
+        "r% वृद्धि का गुणक 1 + r/100 और कमी का गुणक 1 − r/100 है। मूल मान पाने के लिए अंतिम मान को गुणक से भाग दें; अंतिम मान में से वही प्रतिशत न घटाएँ।",
+        "दर 40% से 50% होने पर अंतर 10 प्रतिशत-अंक है। सापेक्ष वृद्धि (50 − 40)/40 × 100 = 25% है। दोनों को अलग रखें।",
+        "संयुक्त प्रतिशत में पहले वास्तविक संख्याएँ जोड़ें, फिर कुल आधार से भाग दें। प्रतिशतों का साधारण औसत तभी सही है जब आधार समान हों।",
+        "जाँच: समान प्रतिशत की वृद्धि और कमी के बाद हानि होती है। छूट के बाद मूल्य मूल से कम होना चाहिए। प्रश्न के आधार के अनुसार परिणाम की तार्किकता देखें।"
       ],
-      examplesHeading: 'हल किए गए उदाहरण',
-      examples: [
+      "examplesHeading": "हल किए गए उदाहरण",
+      "examples": [
         {
-          question: '240 का 35% क्या है?',
-          solution: ['240 का 35% = (35/100) × 240', '= 35 × 2.4', '= 84'],
-          answer: '84',
-        },
-        {
-          question: 'एक वस्तु की कीमत ₹800 से बढ़कर ₹920 हो गई। प्रतिशत वृद्धि क्या है?',
-          solution: ['वृद्धि = 920 − 800 = 120', 'प्रतिशत वृद्धि = (120 / 800) × 100', '= 15%'],
-          answer: '15%',
-        },
-        {
-          question: 'एक संख्या को पहले 20% बढ़ाया जाता है, फिर परिणाम को 20% घटाया जाता है। शुद्ध प्रतिशत परिवर्तन क्या है?',
-          solution: [
-            'क्रमिक परिवर्तन सूत्र का उपयोग करते हुए: शुद्ध परिवर्तन = a + b + (ab/100)',
-            '= 20 + (−20) + (20 × −20)/100',
-            '= 0 − 4 = −4%',
-            'सीधे जांचें: 100 से शुरू करें → 20% वृद्धि → 120 → 20% कमी → 120 × 0.8 = 96, जो 100 से 4% कम है।',
+          "question": "240 का 35% क्या है?",
+          "solution": [
+            "240 का 35% = (35/100) × 240",
+            "= 35 × 2.4",
+            "= 84"
           ],
-          answer: 'शुद्ध रूप से 4% की कमी (0% नहीं, भले ही +20 और −20 एक-दूसरे को रद्द करते हुए लगें)',
+          "answer": "84"
         },
         {
-          question: 'दो उम्मीदवारों के बीच एक चुनाव में, विजेता को 60% वोट मिले और वह 4,800 वोटों से जीता। कुल डाले गए वोटों की संख्या ज्ञात करें।',
-          solution: [
-            'विजेता: 60%, हारने वाला: 40% → अंतर = कुल वोटों का 20%',
-            'कुल का 20% = 4,800',
-            'कुल का 1% = 240',
-            'कुल का 100% = 24,000',
+          "question": "एक वस्तु की कीमत ₹800 से बढ़कर ₹920 हो गई। प्रतिशत वृद्धि क्या है?",
+          "solution": [
+            "वृद्धि = 920 − 800 = 120",
+            "प्रतिशत वृद्धि = (120 / 800) × 100",
+            "= 15%"
           ],
-          answer: '24,000 वोट',
+          "answer": "15%"
         },
+        {
+          "question": "एक संख्या को पहले 20% बढ़ाया जाता है, फिर परिणाम को 20% घटाया जाता है। शुद्ध प्रतिशत परिवर्तन क्या है?",
+          "solution": [
+            "क्रमिक परिवर्तन सूत्र का उपयोग करते हुए: शुद्ध परिवर्तन = a + b + (ab/100)",
+            "= 20 + (−20) + (20 × −20)/100",
+            "= 0 − 4 = −4%",
+            "सीधे जांचें: 100 से शुरू करें → 20% वृद्धि → 120 → 20% कमी → 120 × 0.8 = 96, जो 100 से 4% कम है।"
+          ],
+          "answer": "शुद्ध रूप से 4% की कमी (0% नहीं, भले ही +20 और −20 एक-दूसरे को रद्द करते हुए लगें)"
+        },
+        {
+          "question": "दो उम्मीदवारों के बीच एक चुनाव में, विजेता को 60% वोट मिले और वह 4,800 वोटों से जीता। कुल डाले गए वोटों की संख्या ज्ञात करें।",
+          "solution": [
+            "विजेता: 60%, हारने वाला: 40% → अंतर = कुल वोटों का 20%",
+            "कुल का 20% = 4,800",
+            "कुल का 1% = 240",
+            "कुल का 100% = 24,000"
+          ],
+          "answer": "24,000 वोट"
+        },
+        {
+          "question": "20% वृद्धि के बाद वेतन ₹28,800 है। मूल वेतन कितना था?",
+          "solution": [
+            "अंतिम = मूल × 1.20।",
+            "मूल = 28,800 ÷ 1.20 = 24,000।",
+            "जाँच: 24,000 का 20% = 4,800; कुल 28,800। अंतिम राशि का 20% घटाना गलत आधार होगा।"
+          ],
+          "answer": "₹24,000"
+        },
+        {
+          "question": "A, B से 25% अधिक है। B, A से कितने प्रतिशत कम है?",
+          "solution": [
+            "B = 100 लें, तो A = 125।",
+            "अंतर 25 है, लेकिन माँगी गई तुलना में आधार A है।",
+            "25/125 × 100 = 20%।"
+          ],
+          "answer": "20%"
+        },
+        {
+          "question": "चावल का मूल्य 25% बढ़ता है। खर्च समान रखने के लिए खपत कितने प्रतिशत घटाएँ?",
+          "solution": [
+            "खर्च = मूल्य × मात्रा। पुराने मूल्य और मात्रा दोनों को 100 मानें।",
+            "नया मूल्य 125 है। खर्च 10,000 रखने के लिए नई मात्रा = 10,000/125 = 80।",
+            "100 से 80 तक कमी 20% है।"
+          ],
+          "answer": "20%"
+        },
+        {
+          "question": "40 विद्यार्थियों की कक्षा में 75% और 60 विद्यार्थियों की कक्षा में 50% उत्तीर्ण हैं। संयुक्त उत्तीर्ण प्रतिशत क्या है?",
+          "solution": [
+            "पहली कक्षा में 40 × 0.75 = 30 उत्तीर्ण।",
+            "दूसरी में 60 × 0.50 = 30 उत्तीर्ण।",
+            "कुल 100 में 60 उत्तीर्ण = 60%। कक्षाओं के आकार अलग होने से 62.5% का साधारण औसत गलत है।"
+          ],
+          "answer": "60%"
+        },
+        {
+          "question": "उत्तीर्ण दर 60% से 72% हो जाती है। प्रतिशत-अंक और सापेक्ष प्रतिशत वृद्धि निकालें।",
+          "solution": [
+            "प्रतिशत-अंक का अंतर = 72 − 60 = 12।",
+            "पुरानी दर के आधार पर सापेक्ष वृद्धि = 12/60 × 100 = 20%।",
+            "दोनों एक ही परिवर्तन को अलग इकाइयों में बताते हैं।"
+          ],
+          "answer": "12 प्रतिशत-अंक; 20% सापेक्ष वृद्धि"
+        }
       ],
-      practiceHeading: 'खुद हल करके देखें',
-      practiceIntro: 'इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।',
-      practiceQuestions: [
-        { question: '160 का 45% क्या है?', answer: '72' },
-        { question: 'एक संख्या 250 से बढ़कर 300 हो गई। प्रतिशत वृद्धि ज्ञात करें।', answer: '20%' },
-        { question: 'यदि किसी संख्या का 20%, 50 है, तो वह संख्या ज्ञात करें।', answer: '250' },
+      "practiceHeading": "खुद हल करके देखें",
+      "practiceIntro": "इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।",
+      "practiceQuestions": [
+        {
+          "question": "160 का 45% कितना है?",
+          "answer": "72। 40% + 5% = 64 + 8 = 72।"
+        },
+        {
+          "question": "250 से 300 तक कितने प्रतिशत वृद्धि है?",
+          "answer": "20%। अंतर 50 और मूल आधार 250 है: 50/250 × 100।"
+        },
+        {
+          "question": "किसी संख्या का 20% = 50 है। संख्या क्या है?",
+          "answer": "250। 50 को 0.20 से भाग दें।"
+        },
+        {
+          "question": "15% छूट के बाद मूल्य ₹1,020 है। मूल मूल्य क्या है?",
+          "answer": "₹1,200। अंतिम मूल्य मूल का 85% है: 1,020/0.85 = 1,200।"
+        },
+        {
+          "question": "10% और फिर 20% वृद्धि का शुद्ध प्रभाव क्या है?",
+          "answer": "32% वृद्धि। 1.10 × 1.20 = 1.32; केवल प्रतिशत जोड़ने से बदला हुआ आधार छूट जाता है।"
+        },
+        {
+          "question": "20% कमी के बाद मूल मान पाने के लिए कितनी वृद्धि चाहिए?",
+          "answer": "25%। 100 से 80 हुआ; अब 80 के आधार पर 20 बढ़ाना है: 20/80 × 100।"
+        },
+        {
+          "question": "दर 8% से 10% हो जाती है। वृद्धि के दोनों माप बताइए।",
+          "answer": "2 प्रतिशत-अंक और 25% सापेक्ष वृद्धि: 2/8 × 100 = 25।"
+        },
+        {
+          "question": "200 अभ्यर्थियों में 30% और अन्य 100 में 50% उत्तीर्ण हैं। कुल प्रतिशत?",
+          "answer": "36⅔%। उत्तीर्ण 60 + 50 = 110, कुल 300; 110/300 × 100।"
+        }
       ],
-      relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के मात्रात्मक/संख्यात्मक अभियोग्यता खंड में प्रतिशत सीधे परखा जाता है, और डेटा इंटरप्रिटेशन व सामान्य/बैंकिंग जागरूकता के उन प्रश्नों में परोक्ष रूप से भी जो आंकड़ों को प्रतिशत में बताते हैं।',
-      offerHeading: 'प्रतिशत के और प्रश्नों का अभ्यास करें',
-      offerBody: 'इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर प्रतिशत (और हर दूसरे मात्रात्मक/तर्कशक्ति/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
-      ctaLabel: 'प्रतिशत का मुफ्त अभ्यास करें',
-      backLabel: 'होम',
-      solutionLabel: 'हल',
-      answerLabel: 'उत्तर',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
-    },
+      "relevantForHeading": "यह कहां काम आता है",
+      "relevantForBody": "Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के मात्रात्मक/संख्यात्मक अभियोग्यता खंड में प्रतिशत सीधे परखा जाता है, और डेटा इंटरप्रिटेशन व सामान्य/बैंकिंग जागरूकता के उन प्रश्नों में परोक्ष रूप से भी जो आंकड़ों को प्रतिशत में बताते हैं।",
+      "offerHeading": "प्रतिशत के और प्रश्नों का अभ्यास करें",
+      "offerBody": "इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर प्रतिशत (और हर दूसरे मात्रात्मक/तर्कशक्ति/अंग्रेजी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।",
+      "ctaLabel": "प्रतिशत का मुफ्त अभ्यास करें",
+      "backLabel": "होम",
+      "solutionLabel": "हल",
+      "answerLabel": "उत्तर",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।"
+    }
   },
   {
     slug: 'profit-and-loss',
@@ -10207,121 +10381,263 @@ export const TOPIC_LESSONS = [
     },
   },
   {
-    slug: 'cubes-and-dice',
-    en: {
-      pageTitle: 'Cubes and Dice Solved Questions',
-      lede: 'On a standard die, opposite faces always add up to 7 — that single fact is the key to almost every question in this topic, from finding a hidden face to totalling what’s visible on a stack of dice. Here’s the concept, four fully worked examples, and a few to try yourself.',
-      conceptHeading: 'The concept, quickly',
-      conceptBody: [
-        'The core rule: on a standard die, numbers on opposite faces always sum to 7 (1↔6, 2↔5, 3↔4).',
-        'To find a face opposite a given number, subtract it from 7.',
-        'The six faces of one die always sum to 1+2+3+4+5+6 = 21 — a fast way to find the total of several hidden faces is "21 minus whatever’s visible," instead of adding up each hidden face individually.',
-        'When two dice are joined face-to-face, the two touching faces are both hidden — find their sum, then subtract it from the combined total (42 for two dice) to get everything visible on the outside.',
+    "slug": "cubes-and-dice",
+    "en": {
+      "pageTitle": "Cubes and Dice Solved Questions",
+      "lede": "Dice questions, cube nets and painted-cube problems need different methods. Learn when opposite faces sum to seven, how to infer an opposite face from views, and how to count painted smaller cubes without double-counting edges and corners.",
+      "conceptHeading": "The concept, quickly",
+      "conceptBody": [
+        "The core rule: on a standard die, numbers on opposite faces always sum to 7 (1↔6, 2↔5, 3↔4).",
+        "To find a face opposite a given number, subtract it from 7.",
+        "The six faces of one die always sum to 1+2+3+4+5+6 = 21 — a fast way to find the total of several hidden faces is \"21 minus whatever’s visible,\" instead of adding up each hidden face individually.",
+        "When two dice are joined face-to-face, the two touching faces are both hidden — find their sum, then subtract it from the combined total (42 for two dice) to get everything visible on the outside.",
+        "Scope of the seven rule: use it only when a standard die is specified. An arbitrary numbered cube can have a different arrangement; infer its opposites from the views or net instead.",
+        "A cube has six faces. Each face has four neighbours and one opposite. Faces seen together at a corner are adjacent, never opposite. If four neighbours of a face are known, the remaining label must be opposite.",
+        "For a net, fold mentally around a chosen base. Do not assume that squares separated on the flat sheet are opposite after folding. In a strip A–B–C–D with E above B and F below B, opposite pairs are A/C, B/D and E/F.",
+        "For a cube painted on all six outer faces and cut into n × n × n equal cubes (n ≥ 2): three painted faces = 8 corners; exactly two = 12(n − 2); exactly one = 6(n − 2)²; none = (n − 2)³.",
+        "These counts assume every outer face was painted before cutting. For n = 1 there is just one cube with six painted faces; do not use the corner formula. For partial painting, count the affected faces and edges separately.",
+        "Check the count: all categories must add up to n³. A corner belongs to three faces, so counting each face independently would count it three times."
       ],
-      examplesHeading: 'Worked examples',
-      examples: [
+      "examplesHeading": "Worked examples",
+      "examples": [
         {
-          question: 'On a standard die, the numbers on opposite faces always add up to 7. If one face shows 2, what number is on the face opposite to it?',
-          solution: ['7 − 2 = 5.'],
-          answer: '5',
-        },
-        {
-          question: 'A standard die shows 1, 3 and 5 on three visible faces meeting at a corner. What is the sum of the numbers on the three hidden faces?',
-          solution: [
-            'The six faces of a die always total 1+2+3+4+5+6 = 21.',
-            'Hidden sum = 21 − (1 + 3 + 5) = 21 − 9 = 12.',
+          "question": "On a standard die, the numbers on opposite faces always add up to 7. If one face shows 2, what number is on the face opposite to it?",
+          "solution": [
+            "7 − 2 = 5."
           ],
-          answer: '12',
+          "answer": "5"
         },
         {
-          question: 'On a standard die, if the face showing 4 is on top, which number is on the bottom face?',
-          solution: ['The bottom face is opposite the top face: 7 − 4 = 3.'],
-          answer: '3',
-        },
-        {
-          question: 'Two standard dice are placed together so that the face showing 6 on one die touches the face showing 6 on the other. What is the sum of all the numbers visible on the outside of this combined block?',
-          solution: [
-            'Two dice together have a total face-sum of 2 × 21 = 42.',
-            'The two touching (hidden) faces both show 6, so their sum is 6 + 6 = 12.',
-            'Visible sum = 42 − 12 = 30.',
+          "question": "A standard die shows 1, 3 and 5 on three visible faces meeting at a corner. What is the sum of the numbers on the three hidden faces?",
+          "solution": [
+            "The six faces of a die always total 1+2+3+4+5+6 = 21.",
+            "Hidden sum = 21 − (1 + 3 + 5) = 21 − 9 = 12."
           ],
-          answer: '30',
+          "answer": "12"
         },
+        {
+          "question": "On a standard die, if the face showing 4 is on top, which number is on the bottom face?",
+          "solution": [
+            "The bottom face is opposite the top face: 7 − 4 = 3."
+          ],
+          "answer": "3"
+        },
+        {
+          "question": "Two standard dice are placed together so that the face showing 6 on one die touches the face showing 6 on the other. What is the sum of all the numbers visible on the outside of this combined block?",
+          "solution": [
+            "Two dice together have a total face-sum of 2 × 21 = 42.",
+            "The two touching (hidden) faces both show 6, so their sum is 6 + 6 = 12.",
+            "Visible sum = 42 − 12 = 30."
+          ],
+          "answer": "30"
+        },
+        {
+          "question": "On a cube labelled 1 to 6, one view shows 1, 2, 3 and another shows 1, 4, 5 meeting at corners. What is opposite 1?",
+          "solution": [
+            "The first view makes 2 and 3 neighbours of 1. The second makes 4 and 5 neighbours of 1.",
+            "All four neighbours are now known. The only remaining label is 6.",
+            "No standard-die assumption is needed."
+          ],
+          "answer": "6"
+        },
+        {
+          "question": "A cube is painted on all outer faces and cut into 64 equal cubes. How many have exactly two painted faces?",
+          "solution": [
+            "64 = 4³, so there are four small cubes along each edge.",
+            "Exactly two painted faces occur on an edge, excluding its two corner cubes.",
+            "There are 12 edges, with 4 − 2 = 2 qualifying cubes each: 12 × 2 = 24."
+          ],
+          "answer": "24"
+        },
+        {
+          "question": "For the same 4 × 4 × 4 painted cube, count all four categories.",
+          "solution": [
+            "Three painted faces: 8 corner cubes.",
+            "Exactly two: 12 × 2 = 24. Exactly one: 6 × 2² = 24.",
+            "Unpainted: 2³ = 8. Check: 8 + 24 + 24 + 8 = 64."
+          ],
+          "answer": "8 with three, 24 with two, 24 with one, 8 with none"
+        },
+        {
+          "question": "A net has A, B, C, D in a horizontal strip, with E above B and F below B. Which face is opposite B?",
+          "solution": [
+            "Keep B as the base. A and C fold up as two opposite side faces.",
+            "E and F fold up as the other two side faces.",
+            "D is attached beyond C and folds over to close the cube above B."
+          ],
+          "answer": "D"
+        }
       ],
-      practiceHeading: 'Try these yourself',
-      practiceIntro: 'Use the opposite-faces-sum-to-7 rule, then check against the answer.',
-      practiceQuestions: [
-        { question: 'On a standard die, if one face shows 6, what number is on the opposite face?', answer: '1' },
-        { question: 'A standard die shows 2, 4 and 6 on three visible faces at a corner. Find the sum of the three hidden faces.', answer: '9' },
-        { question: 'Two standard dice are placed together so that the face showing 3 on one die touches the face showing 4 on the other. What is the sum of all the numbers visible on the outside of this combined block?', answer: '35' },
+      "practiceHeading": "Try these yourself",
+      "practiceIntro": "First identify whether the question specifies a standard die, an arbitrary cube, or a painted cube. Then solve before expanding the answer.",
+      "practiceQuestions": [
+        {
+          "question": "On a standard die, if one face shows 6, what number is on the opposite face?",
+          "answer": "1"
+        },
+        {
+          "question": "A standard die shows 2, 4 and 6 on three visible faces at a corner. Find the sum of the three hidden faces.",
+          "answer": "9"
+        },
+        {
+          "question": "Two standard dice are placed together so that the face showing 3 on one die touches the face showing 4 on the other. What is the sum of all the numbers visible on the outside of this combined block?",
+          "answer": "35"
+        },
+        {
+          "question": "A cube painted on all sides is cut into 125 equal cubes. How many have exactly one painted face?",
+          "answer": "54. Since n = 5, each outer face has (5 − 2)² = 9 non-edge cubes; six faces give 54."
+        },
+        {
+          "question": "For that 5 × 5 × 5 cube, how many small cubes have no paint?",
+          "answer": "27. Remove the outer layer: the inner cube is 3 × 3 × 3."
+        },
+        {
+          "question": "A painted cube is cut into 2 × 2 × 2 cubes. How many have exactly two painted faces?",
+          "answer": "0. All eight cubes are corners with three painted faces; there are no interior edge cubes."
+        },
+        {
+          "question": "An arbitrary cube has 2 next to 1, 3, 5 and 6. What is opposite 2?",
+          "answer": "4. It is the remaining label. Using 7 − 2 would incorrectly give 5, which is known to be adjacent."
+        }
       ],
-      relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Cubes and Dice is a regular topic in the Reasoning/General Intelligence section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
-      offerHeading: 'Practice more Cubes and Dice questions',
-      offerBody: 'This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Cubes and Dice (and every other Reasoning/Quant/English topic) with instant scoring and explanations — free, no account required.',
-      ctaLabel: 'Practice Cubes and Dice free',
-      backLabel: 'Home',
-      solutionLabel: 'Solution',
-      answerLabel: 'Answer',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.',
+      "relevantForHeading": "Where this comes up",
+      "relevantForBody": "Use this lesson for spatial-reasoning practice. Check your target exam’s current syllabus before allocating study time; coverage and question frequency differ between exams.",
+      "offerHeading": "Practice more Cubes and Dice questions",
+      "offerBody": "This page covers the concept and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Cubes and Dice (and every other Reasoning/Quant/English topic) with instant scoring and explanations — free, no account required.",
+      "ctaLabel": "Practice Cubes and Dice free",
+      "backLabel": "Home",
+      "solutionLabel": "Solution",
+      "answerLabel": "Answer",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body."
     },
-    hi: {
-      pageTitle: 'क्यूब्स और डाइस (Cubes and Dice) के प्रश्न हल सहित',
-      lede: 'एक मानक पासे पर, आमने-सामने के फलक हमेशा 7 जोड़ते हैं — यह एक तथ्य इस विषय के लगभग हर प्रश्न की कुंजी है, एक छिपा हुआ फलक खोजने से लेकर पासों के एक ढेर पर दिखाई देने वाले का योग निकालने तक। यहां अवधारणा, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
-      conceptHeading: 'अवधारणा, संक्षेप में',
-      conceptBody: [
-        'मूल नियम: एक मानक पासे पर, आमने-सामने के फलकों की संख्याएं हमेशा 7 जोड़ती हैं (1↔6, 2↔5, 3↔4)।',
-        'किसी दी गई संख्या के सामने वाला फलक खोजने के लिए, इसे 7 से घटाएं।',
-        'एक पासे के छह फलक हमेशा 1+2+3+4+5+6 = 21 जोड़ते हैं — कई छिपे हुए फलकों का कुल निकालने का एक तेज़ तरीका है "21 माइनस जो भी दिखाई दे रहा है," प्रत्येक छिपे हुए फलक को अलग-अलग जोड़ने के बजाय।',
-        'जब दो पासे फलक-से-फलक जोड़े जाते हैं, तो दोनों स्पर्श करने वाले फलक छिपे होते हैं — उनका योग निकालें, फिर बाहर दिखाई देने वाला सब कुछ पाने के लिए इसे संयुक्त कुल (दो पासों के लिए 42) से घटाएं।',
+    "hi": {
+      "pageTitle": "क्यूब्स और डाइस (Cubes and Dice) के प्रश्न हल सहित",
+      "lede": "पासे, घन-जाल और रंगे हुए घन के प्रश्नों की विधियाँ अलग हैं। सीखें कि विपरीत फलकों का योग सात कब होता है, दृश्यों से विपरीत फलक कैसे पहचानें और कोनों व किनारों को दो बार गिने बिना छोटे घनों की गिनती कैसे करें।",
+      "conceptHeading": "अवधारणा, संक्षेप में",
+      "conceptBody": [
+        "मूल नियम: एक मानक पासे पर, आमने-सामने के फलकों की संख्याएं हमेशा 7 जोड़ती हैं (1↔6, 2↔5, 3↔4)।",
+        "किसी दी गई संख्या के सामने वाला फलक खोजने के लिए, इसे 7 से घटाएं।",
+        "एक पासे के छह फलक हमेशा 1+2+3+4+5+6 = 21 जोड़ते हैं — कई छिपे हुए फलकों का कुल निकालने का एक तेज़ तरीका है \"21 माइनस जो भी दिखाई दे रहा है,\" प्रत्येक छिपे हुए फलक को अलग-अलग जोड़ने के बजाय।",
+        "जब दो पासे फलक-से-फलक जोड़े जाते हैं, तो दोनों स्पर्श करने वाले फलक छिपे होते हैं — उनका योग निकालें, फिर बाहर दिखाई देने वाला सब कुछ पाने के लिए इसे संयुक्त कुल (दो पासों के लिए 42) से घटाएं।",
+        "सात वाला नियम केवल मानक पासे पर लागू करें। मनमाने अंकित घन में क्रम अलग हो सकता है; उसके दृश्यों या जाल से विपरीत फलक निकालें।",
+        "घन के छह फलक होते हैं। हर फलक के चार पड़ोसी और एक विपरीत फलक होता है। एक कोने पर साथ दिखने वाले फलक आसन्न होते हैं। चार पड़ोसी ज्ञात हों तो बचा हुआ अंक विपरीत होगा।",
+        "जाल को आधार फलक के चारों ओर मोड़कर सोचें। समतल जाल में दूरी देखकर विपरीत न मानें। A–B–C–D की पट्टी में B के ऊपर E और नीचे F हो तो विपरीत युग्म A/C, B/D और E/F हैं।",
+        "सभी छह बाहरी फलक रंगने के बाद n × n × n बराबर घन काटें (n ≥ 2): तीन रंगे फलक वाले 8, ठीक दो वाले 12(n − 2), ठीक एक वाले 6(n − 2)² और बिना रंग वाले (n − 2)³ हैं।",
+        "यह सभी बाहरी फलक पहले रंगने की स्थिति है। n = 1 पर एक ही घन के छह फलक रंगे हैं; कोने वाला सूत्र लागू नहीं होगा। आंशिक रंगाई में अलग गिनती करें।",
+        "जाँच: सभी श्रेणियों का योग n³ होना चाहिए। हर कोना तीन फलकों पर होता है; फलकों को अलग-अलग गिनने से कोना तीन बार गिना जा सकता है।"
       ],
-      examplesHeading: 'हल किए गए उदाहरण',
-      examples: [
+      "examplesHeading": "हल किए गए उदाहरण",
+      "examples": [
         {
-          question: 'एक मानक पासे पर, आमने-सामने के फलकों की संख्याएं हमेशा 7 जोड़ती हैं। यदि एक फलक 2 दिखाता है, तो उसके सामने वाले फलक पर कौन सी संख्या है?',
-          solution: ['7 − 2 = 5।'],
-          answer: '5',
-        },
-        {
-          question: 'एक मानक पासा एक कोने पर मिलने वाले तीन दृश्य फलकों पर 1, 3 और 5 दिखाता है। तीन छिपे हुए फलकों की संख्याओं का योग क्या है?',
-          solution: [
-            'एक पासे के छह फलक हमेशा 1+2+3+4+5+6 = 21 जोड़ते हैं।',
-            'छिपा हुआ योग = 21 − (1 + 3 + 5) = 21 − 9 = 12।',
+          "question": "एक मानक पासे पर, आमने-सामने के फलकों की संख्याएं हमेशा 7 जोड़ती हैं। यदि एक फलक 2 दिखाता है, तो उसके सामने वाले फलक पर कौन सी संख्या है?",
+          "solution": [
+            "7 − 2 = 5।"
           ],
-          answer: '12',
+          "answer": "5"
         },
         {
-          question: 'एक मानक पासे पर, यदि 4 दिखाने वाला फलक ऊपर है, तो नीचे वाले फलक पर कौन सी संख्या है?',
-          solution: ['नीचे वाला फलक ऊपर वाले फलक के सामने है: 7 − 4 = 3।'],
-          answer: '3',
-        },
-        {
-          question: 'दो मानक पासों को इस तरह साथ रखा जाता है कि एक पासे का 6 दिखाने वाला फलक दूसरे पासे के 6 दिखाने वाले फलक को छूता है। इस संयुक्त ब्लॉक के बाहर दिखाई देने वाली सभी संख्याओं का योग क्या है?',
-          solution: [
-            'दो पासों का कुल फलक-योग 2 × 21 = 42 होता है।',
-            'दोनों स्पर्श करने वाले (छिपे) फलक दोनों 6 दिखाते हैं, तो उनका योग 6 + 6 = 12 है।',
-            'दृश्य योग = 42 − 12 = 30।',
+          "question": "एक मानक पासा एक कोने पर मिलने वाले तीन दृश्य फलकों पर 1, 3 और 5 दिखाता है। तीन छिपे हुए फलकों की संख्याओं का योग क्या है?",
+          "solution": [
+            "एक पासे के छह फलक हमेशा 1+2+3+4+5+6 = 21 जोड़ते हैं।",
+            "छिपा हुआ योग = 21 − (1 + 3 + 5) = 21 − 9 = 12।"
           ],
-          answer: '30',
+          "answer": "12"
         },
+        {
+          "question": "एक मानक पासे पर, यदि 4 दिखाने वाला फलक ऊपर है, तो नीचे वाले फलक पर कौन सी संख्या है?",
+          "solution": [
+            "नीचे वाला फलक ऊपर वाले फलक के सामने है: 7 − 4 = 3।"
+          ],
+          "answer": "3"
+        },
+        {
+          "question": "दो मानक पासों को इस तरह साथ रखा जाता है कि एक पासे का 6 दिखाने वाला फलक दूसरे पासे के 6 दिखाने वाले फलक को छूता है। इस संयुक्त ब्लॉक के बाहर दिखाई देने वाली सभी संख्याओं का योग क्या है?",
+          "solution": [
+            "दो पासों का कुल फलक-योग 2 × 21 = 42 होता है।",
+            "दोनों स्पर्श करने वाले (छिपे) फलक दोनों 6 दिखाते हैं, तो उनका योग 6 + 6 = 12 है।",
+            "दृश्य योग = 42 − 12 = 30।"
+          ],
+          "answer": "30"
+        },
+        {
+          "question": "1 से 6 अंकित घन के एक दृश्य में 1, 2, 3 और दूसरे में 1, 4, 5 एक कोने पर दिखते हैं। 1 के विपरीत क्या है?",
+          "solution": [
+            "पहले दृश्य से 2 और 3, तथा दूसरे से 4 और 5, अंक 1 के पड़ोसी हैं।",
+            "चारों पड़ोसी ज्ञात हैं। बचा हुआ अंक 6 विपरीत होगा।",
+            "मानक पासा मानने की आवश्यकता नहीं है।"
+          ],
+          "answer": "6"
+        },
+        {
+          "question": "सभी बाहरी फलक रंगे घन को 64 बराबर घनों में काटा गया। ठीक दो रंगे फलक वाले कितने हैं?",
+          "solution": [
+            "64 = 4³, इसलिए प्रत्येक किनारे पर चार छोटे घन हैं।",
+            "ठीक दो रंगे फलक किनारे पर होते हैं, दोनों कोनों को छोड़कर।",
+            "12 किनारों पर 4 − 2 = 2 घन: 12 × 2 = 24।"
+          ],
+          "answer": "24"
+        },
+        {
+          "question": "उसी 4 × 4 × 4 रंगे घन की चारों श्रेणियाँ गिनें।",
+          "solution": [
+            "तीन रंगे फलक: 8 कोने।",
+            "ठीक दो: 12 × 2 = 24। ठीक एक: 6 × 2² = 24।",
+            "बिना रंग: 2³ = 8। जाँच: 8 + 24 + 24 + 8 = 64।"
+          ],
+          "answer": "तीन वाले 8, दो वाले 24, एक वाले 24, बिना रंग 8"
+        },
+        {
+          "question": "जाल में A, B, C, D क्षैतिज पट्टी में हैं। B के ऊपर E और नीचे F हैं। B के विपरीत क्या है?",
+          "solution": [
+            "B को आधार लें। A और C मुड़कर दो विपरीत पार्श्व फलक बनते हैं।",
+            "E और F अन्य दो पार्श्व फलक बनते हैं।",
+            "C के आगे लगा D ऊपर मुड़कर B के सामने घन बंद करता है।"
+          ],
+          "answer": "D"
+        }
       ],
-      practiceHeading: 'खुद हल करके देखें',
-      practiceIntro: 'सामने-वाले-फलक-7-जोड़ते-हैं नियम का उपयोग करें, फिर उत्तर से मिलान करें।',
-      practiceQuestions: [
-        { question: 'एक मानक पासे पर, यदि एक फलक 6 दिखाता है, तो सामने वाले फलक पर कौन सी संख्या है?', answer: '1' },
-        { question: 'एक मानक पासा एक कोने पर तीन दृश्य फलकों पर 2, 4 और 6 दिखाता है। तीन छिपे हुए फलकों का योग ज्ञात करें।', answer: '9' },
-        { question: 'दो मानक पासों को इस तरह साथ रखा जाता है कि एक पासे का 3 दिखाने वाला फलक दूसरे पासे के 4 दिखाने वाले फलक को छूता है। इस संयुक्त ब्लॉक के बाहर दिखाई देने वाली सभी संख्याओं का योग क्या है?', answer: '35' },
+      "practiceHeading": "खुद हल करके देखें",
+      "practiceIntro": "पहले पहचानें कि प्रश्न मानक पासे, मनमाने घन या रंगे घन का है। उत्तर खोलने से पहले हल करें।",
+      "practiceQuestions": [
+        {
+          "question": "एक मानक पासे पर, यदि एक फलक 6 दिखाता है, तो सामने वाले फलक पर कौन सी संख्या है?",
+          "answer": "1"
+        },
+        {
+          "question": "एक मानक पासा एक कोने पर तीन दृश्य फलकों पर 2, 4 और 6 दिखाता है। तीन छिपे हुए फलकों का योग ज्ञात करें।",
+          "answer": "9"
+        },
+        {
+          "question": "दो मानक पासों को इस तरह साथ रखा जाता है कि एक पासे का 3 दिखाने वाला फलक दूसरे पासे के 4 दिखाने वाले फलक को छूता है। इस संयुक्त ब्लॉक के बाहर दिखाई देने वाली सभी संख्याओं का योग क्या है?",
+          "answer": "35"
+        },
+        {
+          "question": "सभी फलक रंगे घन को 125 बराबर घनों में काटें। ठीक एक रंगे फलक वाले कितने?",
+          "answer": "54। n = 5; हर फलक पर (5 − 2)² = 9 किनारे से अलग घन। छह फलकों पर 54।"
+        },
+        {
+          "question": "उसी 5 × 5 × 5 घन में बिना रंग वाले कितने हैं?",
+          "answer": "27। बाहरी परत हटाने पर भीतरी घन 3 × 3 × 3 है।"
+        },
+        {
+          "question": "रंगे घन को 2 × 2 × 2 घनों में काटें। ठीक दो रंगे फलक वाले कितने?",
+          "answer": "0। सभी आठ कोने हैं और प्रत्येक के तीन फलक रंगे हैं।"
+        },
+        {
+          "question": "मनमाने घन में 2 के पड़ोसी 1, 3, 5 और 6 हैं। 2 के विपरीत क्या है?",
+          "answer": "4, क्योंकि वही अंक बचा है। 7 − 2 = 5 करना गलत होगा; 5 तो पड़ोसी है।"
+        }
       ],
-      relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के तर्कशक्ति/सामान्य बुद्धिमत्ता खंड में क्यूब्स और डाइस एक नियमित विषय है।',
-      offerHeading: 'क्यूब्स और डाइस के और प्रश्नों का अभ्यास करें',
-      offerBody: 'इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर क्यूब्स और डाइस (और हर दूसरे तर्कशक्ति/मात्रात्मक/अंग्रेज़ी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
-      ctaLabel: 'क्यूब्स और डाइस का मुफ्त अभ्यास करें',
-      backLabel: 'होम',
-      solutionLabel: 'हल',
-      answerLabel: 'उत्तर',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।',
-    },
+      "relevantForHeading": "यह कहां काम आता है",
+      "relevantForBody": "यह पाठ स्थानिक तर्क के अभ्यास के लिए है। समय तय करने से पहले अपनी परीक्षा का वर्तमान पाठ्यक्रम देखें; विषय और प्रश्नों की आवृत्ति परीक्षा के अनुसार बदलती है।",
+      "offerHeading": "क्यूब्स और डाइस के और प्रश्नों का अभ्यास करें",
+      "offerBody": "इस पेज में अवधारणा और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर क्यूब्स और डाइस (और हर दूसरे तर्कशक्ति/मात्रात्मक/अंग्रेज़ी विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।",
+      "ctaLabel": "क्यूब्स और डाइस का मुफ्त अभ्यास करें",
+      "backLabel": "होम",
+      "solutionLabel": "हल",
+      "answerLabel": "उत्तर",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी भी सरकारी निकाय से संबद्ध नहीं है।"
+    }
   },
   {
     slug: 'infinitives-and-gerunds',

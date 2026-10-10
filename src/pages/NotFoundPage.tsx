@@ -12,6 +12,7 @@ export function NotFoundPage() {
     title: 'Page not found',
     description: 'This page does not exist on Pariksha Saathi.',
     path: location.pathname,
+    robots: 'noindex,follow',
   });
 
   return (

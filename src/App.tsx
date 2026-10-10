@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Spinner } from './components/ui/Primitives';
+import { PublicPage } from './pages/PublicPage';
 import { HomePage } from './pages/HomePage';
 import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { SyllabusPage } from './pages/compare/SyllabusPage';
@@ -40,6 +41,8 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/learn" element={<PublicPage page="learn" />} />
+      <Route path="/about" element={<PublicPage page="about" />} />
       <Route path="/compare/ibps-po-vs-sbi-po" element={<IbpsPoVsSbiPoPage />} />
       {EXAM_SYLLABI.map((exam) => (
         <Route

@@ -15,7 +15,8 @@ export function ExamSelectionPage() {
     title: 'Choose Your Exam',
     description:
       'Pick one or more of SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO or SBI Clerk and start studying free, right in your browser.',
-    path: '/onboarding',
+    path: '/onboarding/',
+    robots: 'noindex,follow',
   });
 
   return (

@@ -16,16 +16,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     />
-    <!-- Google AdSense: this script both loads what AdSense/components/ads/AdSlot.tsx's manual
-         <ins> units need and is how Google verifies site ownership. Auto ads must stay OFF for
-         this site in the AdSense dashboard (Ads > By site) - Auto ads has no concept of client-side
-         routing, so once this script is loaded on any page it keeps scanning the DOM as React
-         Router swaps in a different screen and will place ads on interactive app screens (quiz,
-         lesson reader, dashboard) that have no real publisher content - that's what got this site
-         flagged ("Google-served ads on screens without publisher content"). AdSlot's manually
-         placed <ins> units, used only on Home/Current Affairs/Exam Notices, are the only thing
-         that should ever put an ad on this site. -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6818930282969815" crossorigin="anonymous"></script>
+    <!-- Ownership verification remains available while ad serving is paused. -->
+    <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
   </head>
   <body>
     <div id="root"></div>
