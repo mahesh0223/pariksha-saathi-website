@@ -40,3 +40,6 @@ assert(!shell.includes('Exam prep that works'));
 assert(readFileSync('dist/_redirects','utf8').includes('/spa  200'));
 assert(readFileSync('dist/app/current-affairs/index.html','utf8').includes('daily-reading'));
 console.log(`Verified ${files.length} HTML files, 124 bilingual lesson routes, catalog, sitemap, ad pause and practice links.`);
+
+assert(existsSync('dist/404.html'));
+assert(!readFileSync('dist/_redirects','utf8').includes('/*  /spa'));

@@ -638,6 +638,7 @@ function lessonPageBody(entry, lang) {
 async function main() {
   const assets = readBuiltAssets();
   cpSync(join(DIST, 'index.html'), join(DIST, 'spa.html'));
+  writeFileSync(join(DIST, '404.html'), page({ title: 'Page not found', description: 'This page does not exist on Pariksha Saathi.', path: '/404', assets, type: 'website', robots: 'noindex,follow', bodyHtml: '<main class="wrap compare-article"><h1>Page not found</h1><p><a href="/learn/">Browse the lesson library</a> or <a href="/">return home</a>.</p></main>' }));
   writePage('onboarding', page({ title: 'Choose Your Exam', description: 'Choose your exams to personalise your study plan.', path: '/onboarding/', assets, type: 'website', robots: 'noindex,follow', bodyHtml: '<main class="wrap onboarding"><h1>Which exams are you preparing for?</h1><p>Choose your exams to personalise your study plan.</p><noscript>Enable JavaScript to select exams, or <a href="/learn/">read the public lessons</a>.</noscript></main>' }));
 
   // Fetched before the homepage is written, not after - the homepage's "Latest current affairs"/
