@@ -3,8 +3,8 @@ import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
-import { CurrentAffairsItemCard } from '../../components/CurrentAffairsItemCard';
-import { AdSlot } from '../../components/ads/AdSlot';
+import { currentAffairsDigest } from '../../data/currentAffairsReading.mjs';
+
 import './UpdatesPage.css';
 
 export function CurrentAffairsPage() {
@@ -12,7 +12,7 @@ export function CurrentAffairsPage() {
 
   const affairsQuery = useQuery({
     queryKey: ['current-affairs', language],
-    queryFn: () => getCurrentAffairs({ lang: language, limit: 30 }),
+    queryFn: () => getCurrentAffairs({ lang: language, limit: 100 }),
   });
 
   useDocumentMeta({
@@ -27,13 +27,11 @@ export function CurrentAffairsPage() {
 
   return (
     <div>
-      <h1 className="review-title">Current Affairs</h1>
       {affairsQuery.isLoading && <Spinner />}
+      {affairsQuery.isError && <EmptyState>Could not load current affairs. Please try again.</EmptyState>}
       {affairsQuery.data?.length === 0 && <EmptyState>No current-affairs items yet.</EmptyState>}
-      {affairsQuery.data?.map((item) => (
-        <CurrentAffairsItemCard key={item.id} item={item} />
-      ))}
-      {affairsQuery.data && affairsQuery.data.length > 0 && <AdSlot slot="9595409633" />}
+      {affairsQuery.data && <div dangerouslySetInnerHTML={{ __html: currentAffairsDigest(affairsQuery.data, language) }} />}
+
     </div>
   );
 }

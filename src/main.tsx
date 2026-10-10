@@ -32,3 +32,8 @@ createRoot(document.getElementById('root')!).render(
     </QueryClientProvider>
   </StrictMode>,
 );
+
+// Shared styles must be in the entry CSS for prerendered public pages without JavaScript.
+import './pages/app/UpdatesPage.css';
+import './pages/app/DetailPage.css';
+import './components/layout/layout.css';

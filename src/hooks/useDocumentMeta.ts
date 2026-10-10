@@ -12,6 +12,7 @@ interface DocumentMetaOptions {
   description: string;
   path: string; // e.g. "/app/current-affairs/abc123"
   type?: 'website' | 'article';
+  robots?: string;
   structuredData?: object | object[];
   /** BCP 47 tag for this page's own content, e.g. "hi". Defaults to "en" (matches index.html). */
   lang?: string;
@@ -42,7 +43,7 @@ function setCanonical(url: string) {
 }
 
 function setAlternateLanguages(alternates: { lang: string; path: string }[] | undefined) {
-  document.querySelectorAll('link[data-hreflang]').forEach((el) => el.remove());
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
   if (!alternates?.length) return;
   for (const alt of alternates) {
     const el = document.createElement('link');
@@ -57,7 +58,7 @@ function setAlternateLanguages(alternates: { lang: string; path: string }[] | un
 // Accepts one object or several (e.g. an Article plus a BreadcrumbList) - each gets its own
 // <script> tag, which is valid JSON-LD and avoids wrapping everything in an artificial @graph.
 function setStructuredData(data: object | object[] | undefined) {
-  document.querySelectorAll('script[data-structured-data]').forEach((el) => el.remove());
+  document.querySelectorAll('script[type="application/ld+json"]').forEach((el) => el.remove());
   if (!data) return;
   for (const entry of Array.isArray(data) ? data : [data]) {
     const script = document.createElement('script');
@@ -79,6 +80,7 @@ export function useDocumentMeta({
   description,
   path,
   type = 'website',
+  robots = 'index,follow',
   structuredData,
   lang = 'en',
   alternateLanguages,
@@ -88,6 +90,7 @@ export function useDocumentMeta({
     const url = `${SITE_URL}${path}`;
 
     document.title = fullTitle;
+    setMetaTag('name', 'robots', robots);
     document.documentElement.lang = lang;
     setMetaTag('name', 'description', description);
     setMetaTag('property', 'og:title', fullTitle);
@@ -111,5 +114,5 @@ export function useDocumentMeta({
       // Hindi page to an English one) - otherwise the <html lang> sticks past this page's own life.
       document.documentElement.lang = 'en';
     };
-  }, [title, description, path, type, structuredData, lang, alternateLanguages]);
+  }, [title, description, path, type, robots, structuredData, lang, alternateLanguages]);
 }

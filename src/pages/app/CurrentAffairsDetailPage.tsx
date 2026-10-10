@@ -4,7 +4,7 @@ import { getCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Pill, Spinner } from '../../components/ui/Primitives';
-import { AdSlot } from '../../components/ads/AdSlot';
+import { learningNote } from '../../data/currentAffairsReading.mjs';
 import './DetailPage.css';
 
 export function CurrentAffairsDetailPage() {
@@ -78,7 +78,8 @@ export function CurrentAffairsDetailPage() {
         </a>
       </div>
 
-      <AdSlot slot="4454763597" />
+      <div dangerouslySetInnerHTML={{ __html: learningNote(item, language) }} />
+      <p><Link to="/app/current-affairs">Read the daily collection →</Link> · <Link to="/about/">Editorial standards & corrections</Link></p>
     </article>
   );
 }

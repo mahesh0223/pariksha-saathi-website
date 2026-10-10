@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
@@ -27,6 +28,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
   }, [slug]);
 
   const content = entry?.[lang];
+  const topicKey = LESSON_CATALOG.find((item) => item.slug === slug)?.topicKey;
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
   // and the prerendered HTML's canonical/sitemap already use it - this hook runs after hydration
@@ -101,7 +103,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             <img src="/assets/icon-512.png" alt="" />
             Pariksha Saathi
           </Link>
-          <nav className="pub-nav-links">
+          <nav className="pub-nav-links"><Link to="/learn/">{lang === 'hi' ? 'विषय सूची' : 'Lesson library'}</Link>
             <Link to="/app/exam-notices">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
           </nav>
           <Link className="pub-cta" to="/onboarding">
@@ -122,6 +124,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
+        <p className="lesson-credit">{lang === 'hi' ? 'प्रकाशक: परीक्षा साथी।' : 'Published by Pariksha Saathi.'} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
+        <p><a href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
 
         <h2>{content.conceptHeading}</h2>
         <ul className="lesson-concept-list">
@@ -150,7 +154,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
           </div>
         ))}
 
-        <h2>{content.practiceHeading}</h2>
+        <h2 id="practice">{content.practiceHeading}</h2>
         <p>{content.practiceIntro}</p>
         <div className="lesson-practice-list">
           {content.practiceQuestions.map((q, i) => (
@@ -168,12 +172,12 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         <h2>{content.relevantForHeading}</h2>
         <p>{content.relevantForBody}</p>
 
-        <h2>{content.offerHeading}</h2>
-        <p>{content.offerBody}</p>
-
-        <Link className="btn-primary-compare" to="/onboarding">
-          {content.ctaLabel} &rarr;
-        </Link>
+        <h2>{lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
+        <p>{lang === 'hi' ? 'ऊपर के प्रश्न हल करें और उत्तर से अपनी विधि जाँचें।' : 'Solve the questions above before opening the answers. Explain each step in your own words, then revisit any mistakes.'}</p>
+        {topicKey ? <Link className="btn-primary-compare" to={`/app/practice/topic/${topicKey}?lang=${lang}`}>
+          {lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →
+        </Link> : <a className="btn-primary-compare" href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →</a>}
+        <p><Link to="/learn/">{lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</Link></p>
       </article>
 
       <footer className="pub-footer">

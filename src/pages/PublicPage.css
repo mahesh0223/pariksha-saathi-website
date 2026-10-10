@@ -1,0 +1,11 @@
+.library-jumps { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0; }
+.library-jumps a { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 16px; }
+.library-section { scroll-margin-top: 100px; }
+.library-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.library-card { padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); }
+.library-card h3 { margin: 0; font-size: 1.1rem; }
+.library-card p { font-size: .95rem; line-height: 1.6; }
+.lesson-credit { font-size: .9rem; color: var(--ink-muted); }
+#practice { scroll-margin-top: 100px; }
+.detail-page details { margin: 12px 0; padding: 14px; border: 1px solid var(--rule); border-radius: 8px; }
+.detail-page summary { cursor: pointer; font-weight: 600; }

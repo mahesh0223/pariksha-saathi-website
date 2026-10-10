@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useLanguage } from '../../state/LanguageContext';
 import { useAuth } from '../../state/AuthContext';
@@ -25,7 +25,10 @@ import './QuizPage.css';
 export function QuizPage({ quizType }: { quizType: QuizType }) {
   const { topicKey, subjectName } = useParams();
   const navigate = useNavigate();
-  const { language } = useLanguage();
+  const { language: preferredLanguage } = useLanguage();
+  const [searchParams] = useSearchParams();
+  const requestedLanguage = searchParams.get('lang');
+  const language = requestedLanguage === 'hi' || requestedLanguage === 'en' ? requestedLanguage : preferredLanguage;
   const { token } = useAuth();
   const { topics, examNamesById } = useSelectedTopics();
 
@@ -159,6 +162,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
     });
   }
 
+  if (questionQueries.some((query) => query.isError)) return <p role="alert">Could not load this quiz. <Link to="/learn/">Return to the lessons</Link> and try again.</p>;
   if (!poolReady || !questions) return <Spinner />;
   if (questions.length === 0) return <p>No questions available for this selection yet.</p>;
   if (!current) return null;
