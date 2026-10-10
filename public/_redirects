@@ -2,25 +2,26 @@
 # /app/current-affairs/*, /app/exam-notices/* pages) before ever consulting this file - these
 # rules only run for paths with no matching file on disk.
 #
+# Use the extensionless fallback to avoid Cloudflare canonicalizing .html to a new URL.
+# Onboarding has its own generated HTML entry.
 # Known client-side-only screens (no prerendered HTML - correctly excluded from robots.txt) still
 # need an explicit 200 here so real users/bookmarks/shares get the app, not a 404 interstitial.
-/onboarding                    /spa.html  200
-/app/home                      /spa.html  200
-/app/study                     /spa.html  200
-/app/study/*                   /spa.html  200
-/app/practice                  /spa.html  200
-/app/practice/*                /spa.html  200
-/app/mistakes                  /spa.html  200
-/app/bookmarks                 /spa.html  200
-/app/progress                  /spa.html  200
-/app/digest                    /spa.html  200
-/app/account                   /spa.html  200
-/app/challenge                 /spa.html  200
-/app/current-affairs-quiz      /spa.html  200
-/app/current-affairs-quiz/*    /spa.html  200
+/app/home                      /spa  200
+/app/study                     /spa  200
+/app/study/*                   /spa  200
+/app/practice                  /spa  200
+/app/practice/*                /spa  200
+/app/mistakes                  /spa  200
+/app/bookmarks                 /spa  200
+/app/progress                  /spa  200
+/app/digest                    /spa  200
+/app/account                   /spa  200
+/app/challenge                 /spa  200
+/app/current-affairs-quiz      /spa  200
+/app/current-affairs-quiz/*    /spa  200
 
 # Everything else (typos, removed lesson slugs, old/invalid IDs) is a genuine 404 - serving the
 # SPA shell with a real 404 status lets React Router show NotFoundPage while still telling Google
 # and other crawlers the page doesn't exist, instead of a "soft 404" (200 on a page that says
 # "not found"), which Search Console flags as a quality problem.
-/*  /spa.html  404
+/*  /spa  404

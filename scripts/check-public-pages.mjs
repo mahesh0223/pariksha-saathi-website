@@ -37,6 +37,6 @@ assert(!sitemap.includes('/onboarding'));
 for(const [,url] of sitemap.matchAll(/<loc>https:\/\/parikshasaathi.com([^<]+)<\/loc>/g))assert(existsSync(`dist${url}index.html`),`Missing sitemap target: ${url}`);
 const shell=readFileSync('dist/spa.html','utf8');
 assert(!shell.includes('Exam prep that works'));
-assert(readFileSync('dist/_redirects','utf8').includes('/spa.html  200'));
+assert(readFileSync('dist/_redirects','utf8').includes('/spa  200'));
 assert(readFileSync('dist/app/current-affairs/index.html','utf8').includes('daily-reading'));
 console.log(`Verified ${files.length} HTML files, 124 bilingual lesson routes, catalog, sitemap, ad pause and practice links.`);
