@@ -4478,13 +4478,14 @@ export const TOPIC_LESSONS = [
     slug: 'direct-indirect-speech',
     en: {
       pageTitle: 'Direct & Indirect Speech',
-      lede: 'Converting direct speech to indirect (reported) speech is another mechanical transformation, like Active and Passive Voice — tense shifts back a step, pronouns and time words change to match the new perspective, and questions lose their question-word-order. Here’s the approach, four fully worked examples, and a few to try yourself.',
+      lede: 'Converting direct speech to indirect (reported) speech is another mechanical transformation, like Active and Passive Voice — tense shifts back a step, pronouns and time words change to match the new perspective, and questions lose their question-word-order. Here’s the approach, six fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
         'Direct speech quotes a speaker’s exact words. Indirect (reported) speech reports them without quotation marks, usually introduced by "that" (statements), "if/whether" (yes/no questions), or a wh-word (wh-questions).',
         'When the reporting verb is in the past ("said", "told"), the tense inside the quoted speech generally shifts one step back: present simple → past simple, present continuous → past continuous, "will" → "would", "can" → "could".',
         'Pronouns and time/place words shift to match the reporting perspective: "I" becomes whoever is speaking in the reported version, "here" → "there", "now" → "then", "today" → "that day", "tomorrow" → "the next day", "yesterday" → "the day before".',
         'Questions convert differently from statements: the word order reverts to normal statement order (no more question-style inversion), a yes/no question gains "if"/"whether", and an imperative (a command) becomes "told...to + base verb" instead of "said that".',
+        'Other modals shift the same way: "may" (permission/possibility) → "might"; "must" (a specific, one-time obligation) usually becomes "had to". Demonstratives shift too: "this/these" → "that/those" when the reporting removes the speaker’s immediate context.',
       ],
       examplesHeading: 'Worked examples',
       examples: [
@@ -4515,6 +4516,16 @@ export const TOPIC_LESSONS = [
           ],
           answer: 'She asked where I lived.',
         },
+        {
+          question: 'Change to indirect speech: He told me, "I can help you with this."',
+          solution: ['"Can" shifts back to "could" since the reporting verb is past.', '"This" shifts to "that" since the speaker’s immediate context is gone in the reported version.', '"I" becomes "he", and "you" (the listener, "me" in the original) becomes "me".'],
+          answer: 'He told me that he could help me with that.',
+        },
+        {
+          question: 'Change to indirect speech: She said, "I must finish this report today."',
+          solution: ['"Must", expressing a specific one-time obligation, shifts back to "had to".', '"This" shifts to "that", and "today" shifts to "that day" since it’s now relative to the moment of speaking, not reporting.'],
+          answer: 'She said that she had to finish that report that day.',
+        },
       ],
       practiceHeading: 'Try these yourself',
       practiceIntro: 'Work through these the same way, then check against the answer.',
@@ -4522,9 +4533,11 @@ export const TOPIC_LESSONS = [
         { question: 'Change to indirect speech: He said, "I am going to the market now."', answer: 'He said that he was going to the market then.' },
         { question: 'Change to indirect speech: She asked, "Did you complete the assignment?"', answer: 'She asked if I had completed the assignment. (simple past shifts back to past perfect)' },
         { question: 'Change to indirect speech: The teacher said to the students, "Submit your homework today."', answer: 'The teacher told the students to submit their homework that day. (an imperative becomes "told...to + base verb")' },
+        { question: 'Change to indirect speech: He said, "I may come to the party."', answer: 'He said that he might come to the party.' },
+        { question: 'Change to indirect speech: She said, "These are my books."', answer: 'She said that those were her books.' },
       ],
       relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Direct and Indirect Speech is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      relevantForBody: 'Direct and Indirect Speech is a regular topic in the English Language section of exams Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — a mechanical, rule-based topic much like Active and Passive Voice.',
       offerHeading: 'Practice more Direct and Indirect Speech questions',
       offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Direct and Indirect Speech (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
       ctaLabel: 'Practice Direct and Indirect Speech free',
@@ -4535,13 +4548,14 @@ export const TOPIC_LESSONS = [
     },
     hi: {
       pageTitle: 'डायरेक्ट और इनडायरेक्ट स्पीच के प्रश्न हल सहित',
-      lede: 'डायरेक्ट स्पीच को इनडायरेक्ट (रिपोर्टेड) स्पीच में बदलना एक्टिव और पैसिव वॉयस जैसा ही एक यांत्रिक रूपांतरण है — काल एक कदम पीछे खिसकता है, सर्वनाम और समय-शब्द नए नज़रिए से मेल खाने के लिए बदलते हैं, और प्रश्नों का प्रश्न-जैसा शब्द-क्रम खत्म हो जाता है। यहां तरीका, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      lede: 'डायरेक्ट स्पीच को इनडायरेक्ट (रिपोर्टेड) स्पीच में बदलना एक्टिव और पैसिव वॉयस जैसा ही एक यांत्रिक रूपांतरण है — काल एक कदम पीछे खिसकता है, सर्वनाम और समय-शब्द नए नज़रिए से मेल खाने के लिए बदलते हैं, और प्रश्नों का प्रश्न-जैसा शब्द-क्रम खत्म हो जाता है। यहां तरीका, छह पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
       conceptHeading: 'तरीका, संक्षेप में',
       conceptBody: [
         'डायरेक्ट स्पीच किसी वक्ता के ठीक वही शब्द उद्धृत करती है। इनडायरेक्ट (रिपोर्टेड) स्पीच उन्हें बिना उद्धरण चिह्नों के बताती है, आमतौर पर "that" (कथन), "if/whether" (yes/no प्रश्न), या किसी wh-शब्द (wh-प्रश्न) से शुरू होकर।',
         'जब रिपोर्टिंग क्रिया भूतकाल में हो ("said", "told"), तो उद्धृत भाषण के अंदर का काल आमतौर पर एक कदम पीछे खिसकता है: present simple → past simple, present continuous → past continuous, "will" → "would", "can" → "could"।',
         'सर्वनाम और समय/स्थान के शब्द रिपोर्टिंग नज़रिए से मेल खाने के लिए बदलते हैं: "I" रिपोर्टेड रूप में बोलने वाला जो भी हो वह बन जाता है, "here" → "there", "now" → "then", "today" → "that day", "tomorrow" → "the next day", "yesterday" → "the day before"।',
         'प्रश्न कथनों से अलग तरीके से बदलते हैं: शब्द-क्रम सामान्य कथन-क्रम में लौट आता है (अब प्रश्न-जैसा उलटा क्रम नहीं रहता), एक yes/no प्रश्न "if"/"whether" पाता है, और एक आज्ञासूचक (आदेश) "said that" के बजाय "told...to + मूल क्रिया" बन जाता है।',
+        'बाकी मोडल भी इसी तरह बदलते हैं: "may" (अनुमति/संभावना) → "might"; "must" (एक विशिष्ट, एक-बार वाला दायित्व) आमतौर पर "had to" बन जाता है। संकेतवाचक शब्द भी बदलते हैं: "this/these" → "that/those" जब रिपोर्टिंग वक्ता के तुरंत संदर्भ को हटा देती है।',
       ],
       examplesHeading: 'हल किए गए उदाहरण',
       examples: [
@@ -4572,6 +4586,16 @@ export const TOPIC_LESSONS = [
           ],
           answer: 'She asked where I lived.',
         },
+        {
+          question: 'Change to indirect speech: He told me, "I can help you with this."',
+          solution: ['"Can" रिपोर्टिंग क्रिया भूतकाल में होने के कारण "could" में बदल जाता है।', '"This", "that" में बदल जाता है क्योंकि रिपोर्टेड रूप में वक्ता का तुरंत संदर्भ नहीं रहता।', '"I", "he" बन जाता है, और "you" (सुनने वाला, मूल में "me") "me" बन जाता है।'],
+          answer: 'He told me that he could help me with that.',
+        },
+        {
+          question: 'Change to indirect speech: She said, "I must finish this report today."',
+          solution: ['"Must", जो एक विशिष्ट एक-बार वाला दायित्व व्यक्त करता है, "had to" में बदल जाता है।', '"This", "that" में बदल जाता है, और "today", "that day" में बदल जाता है क्योंकि यह अब रिपोर्ट करने के क्षण के बजाय बोलने के क्षण के सापेक्ष है।'],
+          answer: 'She said that she had to finish that report that day.',
+        },
       ],
       practiceHeading: 'खुद हल करके देखें',
       practiceIntro: 'इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।',
@@ -4579,9 +4603,11 @@ export const TOPIC_LESSONS = [
         { question: 'Change to indirect speech: He said, "I am going to the market now."', answer: 'He said that he was going to the market then.' },
         { question: 'Change to indirect speech: She asked, "Did you complete the assignment?"', answer: 'She asked if I had completed the assignment. (simple past, past perfect में बदल जाता है)' },
         { question: 'Change to indirect speech: The teacher said to the students, "Submit your homework today."', answer: 'The teacher told the students to submit their homework that day. (एक आज्ञासूचक "told...to + मूल क्रिया" बन जाता है)' },
+        { question: 'Change to indirect speech: He said, "I may come to the party."', answer: 'He said that he might come to the party.' },
+        { question: 'Change to indirect speech: She said, "These are my books."', answer: 'She said that those were her books.' },
       ],
       relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में डायरेक्ट और इनडायरेक्ट स्पीच एक नियमित विषय है।',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली परीक्षाओं — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में डायरेक्ट और इनडायरेक्ट स्पीच एक नियमित विषय है, एक्टिव और पैसिव वॉयस जैसा ही एक यांत्रिक, नियम-आधारित विषय।',
       offerHeading: 'डायरेक्ट और इनडायरेक्ट स्पीच के और प्रश्नों का अभ्यास करें',
       offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर डायरेक्ट और इनडायरेक्ट स्पीच (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
       ctaLabel: 'डायरेक्ट और इनडायरेक्ट स्पीच का मुफ्त अभ्यास करें',
@@ -4964,6 +4990,7 @@ export const TOPIC_LESSONS = [
         'Pronouns and demonstratives must point at something already introduced — use them to chain a sentence directly to whichever sentence mentioned that thing.',
         'Connector words carry a specific logical relationship: "however"/"but" signal a contrast with the idea just stated; "therefore"/"as a result" signal a consequence; "for instance"/"for example" signal that the previous sentence made a general claim this one illustrates.',
         'Once the opening sentence is fixed, follow the pronoun/connector chain one link at a time rather than trying to see the whole order at once — each sentence should point unambiguously to exactly one predecessor.',
+        'When two sentences could both plausibly open the paragraph on topic grounds alone, check for a pronoun or connector needing an earlier antecedent — the one that genuinely stands alone, with nothing to refer back to, is the real opening sentence.',
       ],
       examplesHeading: 'Worked examples',
       examples: [
@@ -5011,6 +5038,17 @@ export const TOPIC_LESSONS = [
           ],
           answer: 'C, B, D, A',
         },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: This infrastructure gap remains one of the biggest obstacles to a full transition away from fossil fuels.\nB: Many governments have set ambitious targets to shift towards renewable energy sources like solar and wind.\nC: However, achieving these targets requires significant investment in storage and grid infrastructure.\nD: Without reliable storage, excess energy generated on sunny or windy days is often wasted.',
+          solution: [
+            'B opens the paragraph with a general claim (governments’ renewable energy targets) and no pronoun needing an antecedent.',
+            'C follows B: "these targets" refers to the targets just named in B, and "However" introduces the catch.',
+            'D follows C: it elaborates specifically on "storage", one of the two things C says is needed.',
+            'A closes the paragraph: "this infrastructure gap" sums up the storage-and-grid problem described in C and D.',
+          ],
+          answer: 'B, C, D, A',
+        },
       ],
       practiceHeading: 'Try these yourself',
       practiceIntro: 'Find the opening sentence, then follow the pronoun/connector chain, then check against the answer.',
@@ -5030,9 +5068,19 @@ export const TOPIC_LESSONS = [
             'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: Critics argue, however, that remote work can weaken team collaboration and company culture.\nB: This shift has reduced commuting time and given workers more flexibility over their schedules.\nC: As a result, many organisations are experimenting with hybrid models that combine both approaches.\nD: Many companies now allow employees to work from home at least part of the week.',
           answer: 'D, B, A, C',
         },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: However, today, free online encyclopedias allow anyone with an internet connection to access a vast range of knowledge instantly.\nB: Access to information was once limited to those who could visit a library or afford expensive reference books.\nC: This shift has democratised learning on a scale that would have been unimaginable a century ago.\nD: As a result, people in remote areas now have the same access to basic knowledge as those in major cities.',
+          answer: 'B, A, D, C',
+        },
+        {
+          question:
+            'Arrange A, B, C and D into the correct order to form a coherent paragraph.\nA: However, consuming caffeine too close to bedtime can disrupt the body’s ability to fall asleep.\nB: Caffeine is widely used to combat tiredness and improve alertness during the day.\nC: For this reason, experts recommend avoiding caffeine at least six hours before going to bed.\nD: This disruption occurs because caffeine blocks adenosine, a chemical that promotes sleepiness.',
+          answer: 'B, A, D, C',
+        },
       ],
       relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Para Jumbles is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      relevantForBody: 'Para Jumbles is a regular topic in the English Language section of exams Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — testing careful reading more than any memorisable rule.',
       offerHeading: 'Practice more Para Jumbles questions',
       offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Para Jumbles (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
       ctaLabel: 'Practice Para Jumbles free',
@@ -5050,6 +5098,7 @@ export const TOPIC_LESSONS = [
         'सर्वनाम और संकेतवाचक शब्दों को किसी पहले से पेश की गई चीज़ की ओर इशारा करना चाहिए — इनका उपयोग किसी वाक्य को सीधे उस वाक्य से जोड़ने के लिए करें जिसने वह चीज़ पहले बताई थी।',
         'जोड़ने वाले शब्द एक विशिष्ट तार्किक संबंध रखते हैं: "however"/"but" अभी बताए गए विचार से एक विरोधाभास दर्शाते हैं; "therefore"/"as a result" एक परिणाम दर्शाते हैं; "for instance"/"for example" दर्शाते हैं कि पिछले वाक्य ने एक सामान्य दावा किया जिसे यह वाक्य उदाहरण से स्पष्ट करता है।',
         'शुरुआती वाक्य तय होने के बाद, पूरे क्रम को एक साथ देखने की कोशिश करने के बजाय सर्वनाम/जोड़ने वाले शब्द की श्रृंखला को एक-एक कड़ी करके पालन करें — हर वाक्य को बिल्कुल एक ही पूर्ववर्ती वाक्य की ओर स्पष्ट रूप से इशारा करना चाहिए।',
+        'जब केवल विषय के आधार पर दो वाक्य शुरुआती लग सकते हैं, तो जांचें कि कहीं किसी को पहले से पेश किए गए किसी सर्वनाम या जोड़ने वाले शब्द की ज़रूरत तो नहीं — जो सच में अकेले खड़ा रह सके, जिसे पीछे मुड़कर किसी का संदर्भ न लेना पड़े, वही असली शुरुआती वाक्य है।',
       ],
       examplesHeading: 'हल किए गए उदाहरण',
       examples: [
@@ -5097,6 +5146,17 @@ export const TOPIC_LESSONS = [
           ],
           answer: 'C, B, D, A',
         },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: This infrastructure gap remains one of the biggest obstacles to a full transition away from fossil fuels.\nB: Many governments have set ambitious targets to shift towards renewable energy sources like solar and wind.\nC: However, achieving these targets requires significant investment in storage and grid infrastructure.\nD: Without reliable storage, excess energy generated on sunny or windy days is often wasted.',
+          solution: [
+            'B बिना किसी ऐसे सर्वनाम के जिसे संदर्भ चाहिए, एक सामान्य दावे (सरकारों के नवीकरणीय ऊर्जा लक्ष्य) के साथ अनुच्छेद खोलता है।',
+            'C, B के बाद आता है: "these targets" B में बताए गए लक्ष्यों की ओर इशारा करता है, और "However" मुश्किल को पेश करता है।',
+            'D, C के बाद आता है: यह विशेष रूप से "storage" पर विस्तार देता है, जो C द्वारा बताई गई दो ज़रूरी चीज़ों में से एक है।',
+            'A अनुच्छेद को बंद करता है: "this infrastructure gap" C और D में बताई गई storage-और-grid समस्या को समेटता है।',
+          ],
+          answer: 'B, C, D, A',
+        },
       ],
       practiceHeading: 'खुद हल करके देखें',
       practiceIntro: 'शुरुआती वाक्य ढूंढें, फिर सर्वनाम/जोड़ने वाले शब्द की श्रृंखला का पालन करें, फिर उत्तर से मिलान करें।',
@@ -5116,9 +5176,19 @@ export const TOPIC_LESSONS = [
             'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: Critics argue, however, that remote work can weaken team collaboration and company culture.\nB: This shift has reduced commuting time and given workers more flexibility over their schedules.\nC: As a result, many organisations are experimenting with hybrid models that combine both approaches.\nD: Many companies now allow employees to work from home at least part of the week.',
           answer: 'D, B, A, C',
         },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: However, today, free online encyclopedias allow anyone with an internet connection to access a vast range of knowledge instantly.\nB: Access to information was once limited to those who could visit a library or afford expensive reference books.\nC: This shift has democratised learning on a scale that would have been unimaginable a century ago.\nD: As a result, people in remote areas now have the same access to basic knowledge as those in major cities.',
+          answer: 'B, A, D, C',
+        },
+        {
+          question:
+            'A, B, C और D को सही क्रम में व्यवस्थित करें ताकि एक सुसंगत अनुच्छेद बने।\nA: However, consuming caffeine too close to bedtime can disrupt the body’s ability to fall asleep.\nB: Caffeine is widely used to combat tiredness and improve alertness during the day.\nC: For this reason, experts recommend avoiding caffeine at least six hours before going to bed.\nD: This disruption occurs because caffeine blocks adenosine, a chemical that promotes sleepiness.',
+          answer: 'B, A, D, C',
+        },
       ],
       relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में पैरा जम्बल्स एक नियमित विषय है।',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली परीक्षाओं — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में पैरा जम्बल्स एक नियमित विषय है, जो किसी याद किए जाने वाले नियम से ज़्यादा सावधानी से पढ़ने की परख करता है।',
       offerHeading: 'पैरा जम्बल्स के और प्रश्नों का अभ्यास करें',
       offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर पैरा जम्बल्स (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
       ctaLabel: 'पैरा जम्बल्स का मुफ्त अभ्यास करें',
@@ -5472,13 +5542,14 @@ export const TOPIC_LESSONS = [
     slug: 'cloze-test',
     en: {
       pageTitle: 'Cloze Test Solved Questions',
-      lede: 'Cloze Test questions give you a short passage with several blanks — each answer has to fit the grammar of its own sentence AND stay consistent with the passage’s overall meaning. Here’s the approach, four fully worked passages, and a few to try yourself.',
+      lede: 'Cloze Test questions give you a short passage with several blanks — each answer has to fit the grammar of its own sentence AND stay consistent with the passage’s overall meaning. Here’s the approach, six fully worked passages, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
         'Read the whole passage once before filling in any blank, so you understand its overall topic and tone — an option can be grammatically fine in isolation and still wrong because it contradicts the passage elsewhere.',
         'Pay attention to connector words already in the passage ("however", "therefore", "although") — they tell you whether the missing word should continue the same idea or contrast with it.',
         'Apply the same grammar checks as Spotting Errors and Sentence Improvement to each blank individually: subject-verb agreement, correct preposition, and tense consistency with the rest of the passage.',
         'When two options both seem grammatically valid, re-read the sentence with each substituted in — the one that fits the passage’s actual meaning, not just its grammar, is correct.',
+        'A blank inside a clause describing an earlier, completed event should match the TENSE already established around it, even if the surrounding verbs are in the present — check the specific sentence the blank sits in, not just the passage’s dominant tense.',
       ],
       examplesHeading: 'Worked examples',
       examples: [
@@ -5522,6 +5593,24 @@ export const TOPIC_LESSONS = [
           ],
           answer: '(1) A adopt, (2) B however, (3) B to',
         },
+        {
+          question:
+            'Fill in the blanks: Many startups fail within the first few years because they (1)___ underestimate the time needed to achieve profitability. Investors, (2)___, continue to fund promising ideas despite this high failure rate.\n(1) (A) usual (B) usually (C) use (D) using\n(2) (A) therefore (B) however (C) for example (D) likewise',
+          solution: [
+            '(1): The blank modifies the verb "underestimate", which needs the adverb "usually", not the adjective "usual".',
+            '(2): The passage shifts from startups failing to investors continuing to fund them anyway — a contrast, so "however".',
+          ],
+          answer: '(1) B usually, (2) B however',
+        },
+        {
+          question:
+            'Fill in the blanks: The ancient city was built along a river that (1)___ fresh water and enabled trade with neighbouring regions. Archaeologists believe the settlement (2)___ abandoned after the river changed its course.\n(1) (A) provide (B) provides (C) provided (D) providing\n(2) (A) was (B) is (C) were (D) are',
+          solution: [
+            '(1): The passage is describing a historical situation ("was built"); the relative clause describing the river’s role at that time needs the matching past tense, "provided".',
+            '(2): The subject "the settlement" is singular, and the passive describes a past event, so "was" fits — not the present-tense "is".',
+          ],
+          answer: '(1) C provided, (2) A was',
+        },
       ],
       practiceHeading: 'Try these yourself',
       practiceIntro: 'Read the whole sentence first, then check against the answer.',
@@ -5538,9 +5627,17 @@ export const TOPIC_LESSONS = [
           question: 'Fill in the blanks: Despite the heavy rain, the match (1)___ as scheduled. Fans who had travelled long distances were relieved that it was (2)___ postponed.\n(1) (A) go (B) goes (C) went (D) going\n(2) (A) not (B) no (C) none (D) never',
           answer: '(1) C went, (2) A not',
         },
+        {
+          question: 'Fill in the blanks: The museum’s new exhibit (1)___ artefacts from over twenty different civilisations. Visitors are advised to book tickets in advance (2)___ the exhibit has been extremely popular.\n(1) (A) feature (B) features (C) featuring (D) featured\n(2) (A) because (B) although (C) unless (D) despite',
+          answer: '(1) B features, (2) A because',
+        },
+        {
+          question: 'Fill in the blanks: Climate scientists warn that global temperatures (1)___ to rise unless emissions are cut sharply. Several island nations, (2)___, are already experiencing the effects of rising sea levels.\n(1) (A) is likely (B) are likely (C) likely (D) likely to be\n(2) (A) therefore (B) for instance (C) however (D) in addition',
+          answer: '(1) B are likely, (2) B for instance',
+        },
       ],
       relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Cloze Test is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      relevantForBody: 'Cloze Test is a regular topic in the English Language section of exams Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — combining grammar accuracy with reading comprehension.',
       offerHeading: 'Practice more Cloze Test questions',
       offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Cloze Test (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
       ctaLabel: 'Practice Cloze Test free',
@@ -5551,13 +5648,14 @@ export const TOPIC_LESSONS = [
     },
     hi: {
       pageTitle: 'क्लोज़ टेस्ट के प्रश्न हल सहित',
-      lede: 'क्लोज़ टेस्ट के प्रश्न आपको कई खाली जगहों वाला एक छोटा अनुच्छेद देते हैं — हर उत्तर को अपने वाक्य के व्याकरण के साथ फिट होना चाहिए और अनुच्छेद के समग्र अर्थ के साथ भी सुसंगत रहना चाहिए। यहां तरीका, चार पूरी तरह हल किए गए अनुच्छेद, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      lede: 'क्लोज़ टेस्ट के प्रश्न आपको कई खाली जगहों वाला एक छोटा अनुच्छेद देते हैं — हर उत्तर को अपने वाक्य के व्याकरण के साथ फिट होना चाहिए और अनुच्छेद के समग्र अर्थ के साथ भी सुसंगत रहना चाहिए। यहां तरीका, छह पूरी तरह हल किए गए अनुच्छेद, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
       conceptHeading: 'तरीका, संक्षेप में',
       conceptBody: [
         'किसी भी खाली जगह को भरने से पहले पूरा अनुच्छेद एक बार पढ़ें, ताकि आप इसका समग्र विषय और लहजा समझ सकें — कोई विकल्प अकेले व्याकरण की दृष्टि से ठीक हो सकता है फिर भी गलत हो सकता है क्योंकि वह अनुच्छेद के किसी और हिस्से से विरोधाभास रखता है।',
         'अनुच्छेद में पहले से मौजूद जोड़ने वाले शब्दों ("however", "therefore", "although") पर ध्यान दें — वे बताते हैं कि लुप्त शब्द को वही विचार जारी रखना चाहिए या उससे विरोधाभास करना चाहिए।',
         'स्पॉटिंग एरर्स और सेंटेंस इम्प्रूवमेंट वाले वही व्याकरण जांच हर खाली जगह पर अलग-अलग लागू करें: कर्ता-क्रिया का मेल, सही preposition, और बाकी अनुच्छेद के साथ काल की संगति।',
         'जब दो विकल्प दोनों व्याकरण की दृष्टि से सही लगें, तो हर एक को रखकर वाक्य दोबारा पढ़ें — जो अनुच्छेद के वास्तविक अर्थ से मेल खाता है, केवल व्याकरण से नहीं, वही सही है।',
+        'किसी पहले, पूरी हो चुकी घटना का वर्णन करने वाले उपवाक्य के भीतर की खाली जगह को अपने आस-पास पहले से स्थापित काल से मेल खाना चाहिए, भले ही आस-पास की क्रियाएं वर्तमान काल में हों — पूरे अनुच्छेद के प्रमुख काल के बजाय उस विशिष्ट वाक्य को जांचें जिसमें खाली जगह है।',
       ],
       examplesHeading: 'हल किए गए उदाहरण',
       examples: [
@@ -5601,6 +5699,24 @@ export const TOPIC_LESSONS = [
           ],
           answer: '(1) A adopt, (2) B however, (3) B to',
         },
+        {
+          question:
+            'Fill in the blanks: Many startups fail within the first few years because they (1)___ underestimate the time needed to achieve profitability. Investors, (2)___, continue to fund promising ideas despite this high failure rate.\n(1) (A) usual (B) usually (C) use (D) using\n(2) (A) therefore (B) however (C) for example (D) likewise',
+          solution: [
+            '(1): यह खाली जगह क्रिया "underestimate" को संशोधित करती है, जिसे क्रिया-विशेषण "usually" चाहिए, विशेषण "usual" नहीं।',
+            '(2): अनुच्छेद स्टार्टअप्स के असफल होने से निवेशकों द्वारा फिर भी निधि देते रहने की ओर बदलता है — एक विरोधाभास, तो "however"।',
+          ],
+          answer: '(1) B usually, (2) B however',
+        },
+        {
+          question:
+            'Fill in the blanks: The ancient city was built along a river that (1)___ fresh water and enabled trade with neighbouring regions. Archaeologists believe the settlement (2)___ abandoned after the river changed its course.\n(1) (A) provide (B) provides (C) provided (D) providing\n(2) (A) was (B) is (C) were (D) are',
+          solution: [
+            '(1): अनुच्छेद एक ऐतिहासिक स्थिति का वर्णन कर रहा है ("was built"); उस समय नदी की भूमिका बताने वाले उपवाक्य को मेल खाता भूतकाल चाहिए, "provided"।',
+            '(2): कर्ता "the settlement" एकवचन है, और passive एक भूतकालीन घटना का वर्णन करता है, तो "was" फिट बैठता है — वर्तमान काल "is" नहीं।',
+          ],
+          answer: '(1) C provided, (2) A was',
+        },
       ],
       practiceHeading: 'खुद हल करके देखें',
       practiceIntro: 'पहले पूरा वाक्य पढ़ें, फिर उत्तर से मिलान करें।',
@@ -5617,9 +5733,17 @@ export const TOPIC_LESSONS = [
           question: 'Fill in the blanks: Despite the heavy rain, the match (1)___ as scheduled. Fans who had travelled long distances were relieved that it was (2)___ postponed.\n(1) (A) go (B) goes (C) went (D) going\n(2) (A) not (B) no (C) none (D) never',
           answer: '(1) C went, (2) A not',
         },
+        {
+          question: 'Fill in the blanks: The museum’s new exhibit (1)___ artefacts from over twenty different civilisations. Visitors are advised to book tickets in advance (2)___ the exhibit has been extremely popular.\n(1) (A) feature (B) features (C) featuring (D) featured\n(2) (A) because (B) although (C) unless (D) despite',
+          answer: '(1) B features, (2) A because',
+        },
+        {
+          question: 'Fill in the blanks: Climate scientists warn that global temperatures (1)___ to rise unless emissions are cut sharply. Several island nations, (2)___, are already experiencing the effects of rising sea levels.\n(1) (A) is likely (B) are likely (C) likely (D) likely to be\n(2) (A) therefore (B) for instance (C) however (D) in addition',
+          answer: '(1) B are likely, (2) B for instance',
+        },
       ],
       relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में क्लोज़ टेस्ट एक नियमित विषय है।',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली परीक्षाओं — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में क्लोज़ टेस्ट एक नियमित विषय है, जो व्याकरण की सटीकता को पठन-बोध के साथ जोड़ता है।',
       offerHeading: 'क्लोज़ टेस्ट के और प्रश्नों का अभ्यास करें',
       offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर क्लोज़ टेस्ट (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
       ctaLabel: 'क्लोज़ टेस्ट का मुफ्त अभ्यास करें',
@@ -5983,13 +6107,15 @@ export const TOPIC_LESSONS = [
     slug: 'degrees-of-comparison',
     en: {
       pageTitle: 'Degrees of Comparison Solved Questions',
-      lede: 'Degrees of Comparison questions test whether you can match an adjective’s form to how many things are actually being compared — one straightforward rule, plus a short list of irregular forms to memorise. Here’s the approach, four fully worked examples, and a few to try yourself.',
+      lede: 'Degrees of Comparison questions test whether you can match an adjective’s form to how many things are actually being compared — one straightforward rule, plus a short list of irregular forms to memorise. Here’s the approach, six fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
         'Adjectives have three degrees: positive (describing one thing on its own — "tall"), comparative (comparing exactly two things — "taller"), and superlative (comparing three or more things, picking out the extreme — "tallest").',
         'Short adjectives usually add "-er"/"-est" (tall → taller → tallest). Longer adjectives usually use "more"/"most" instead (beautiful → more beautiful → most beautiful).',
         'Never combine both forms — "more taller" or "most tallest" is always wrong. Pick either the suffix or "more"/"most", never both.',
         'Some common adjectives are irregular and must be memorised directly: good → better → best, bad → worse → worst, little → less → least, much/many → more → most, far → farther/further → farthest/furthest.',
+        'A small set of adjectives already describe an absolute or complete state (perfect, complete, ideal, impossible) — these exams treat them as not normally gradable, so "more perfect" or "most complete" is typically marked wrong in favour of the plain form.',
+        'The structure "than" always signals the comparative, regardless of how many things are being compared overall — "she sang better than everyone else" stays comparative (not "best") because it’s phrased as one thing against a group via "than".',
       ],
       examplesHeading: 'Worked examples',
       examples: [
@@ -6013,6 +6139,16 @@ export const TOPIC_LESSONS = [
           solution: ['Comparing Arjun against ALL the other players (three or more) needs the superlative degree.', '"Good" is irregular — its superlative is "best", not "goodest" or any "-est"/"most" form.'],
           answer: '(C) best',
         },
+        {
+          question: 'Choose the correct form: "This is the ___ solution to the problem." (A) most perfect (B) more perfect (C) perfect (D) perfectest',
+          solution: ['"Perfect" already describes an absolute, complete state.', 'It isn’t graded with "more"/"most" in this exam convention — the plain form, "perfect", is correct.'],
+          answer: '(C) perfect',
+        },
+        {
+          question: 'Choose the correct form: "Of the two routes, this one is ___." (A) short (B) shorter (C) shortest (D) more shortest',
+          solution: ['Comparing exactly two routes needs the comparative degree.', '"Short" is a short adjective, so it takes "-er": "shorter".'],
+          answer: '(B) shorter',
+        },
       ],
       practiceHeading: 'Try these yourself',
       practiceIntro: 'Count how many things are being compared, then check against the answer.',
@@ -6020,9 +6156,11 @@ export const TOPIC_LESSONS = [
         { question: 'Choose the correct form: "My bag is ___ than yours." (A) heavy (B) heavier (C) more heavy (D) heaviest', answer: '(B) heavier' },
         { question: 'Choose the correct form: "This is ___ book I have ever read." (A) bad (B) worse (C) worst (D) the worst', answer: '(D) the worst' },
         { question: 'Choose the correct form: "She is ___ experienced than her colleague." (A) more (B) most (C) much (D) many', answer: '(A) more' },
+        { question: 'Choose the correct form: "She sang ___ than everyone else in the competition." (A) good (B) well (C) better (D) best', answer: '(C) better ("than" signals the comparative, regardless of group size)' },
+        { question: 'Choose the correct form: "This is one of the ___ methods to learn a language." (A) effective (B) more effective (C) most effective (D) effectivest', answer: '(C) most effective ("one of the + superlative + plural noun" needs the superlative)' },
       ],
       relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Degrees of Comparison is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      relevantForBody: 'Degrees of Comparison is a regular topic in the English Language section of exams Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — a rule-based topic that is quick to score once the positive/comparative/superlative distinction is automatic.',
       offerHeading: 'Practice more Degrees of Comparison questions',
       offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Degrees of Comparison (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
       ctaLabel: 'Practice Degrees of Comparison free',
@@ -6033,13 +6171,15 @@ export const TOPIC_LESSONS = [
     },
     hi: {
       pageTitle: 'डिग्रीज़ ऑफ कम्पैरिज़न के प्रश्न हल सहित',
-      lede: 'डिग्रीज़ ऑफ कम्पैरिज़न के प्रश्न परखते हैं कि क्या आप किसी विशेषण के रूप को वास्तव में तुलना की जा रही चीज़ों की संख्या से मिला सकते हैं — एक सीधा नियम, साथ में याद करने के लिए अनियमित रूपों की एक छोटी सूची। यहां तरीका, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      lede: 'डिग्रीज़ ऑफ कम्पैरिज़न के प्रश्न परखते हैं कि क्या आप किसी विशेषण के रूप को वास्तव में तुलना की जा रही चीज़ों की संख्या से मिला सकते हैं — एक सीधा नियम, साथ में याद करने के लिए अनियमित रूपों की एक छोटी सूची। यहां तरीका, छह पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
       conceptHeading: 'तरीका, संक्षेप में',
       conceptBody: [
         'विशेषणों की तीन डिग्रियां होती हैं: सकारात्मक (एक चीज़ को अकेले बताना — "tall"), तुलनात्मक (ठीक दो चीज़ों की तुलना — "taller"), और उत्कृष्टतासूचक (तीन या ज़्यादा चीज़ों की तुलना, सबसे अलग को चुनना — "tallest")।',
         'छोटे विशेषण आमतौर पर "-er"/"-est" जोड़ते हैं (tall → taller → tallest)। लंबे विशेषण आमतौर पर इसके बजाय "more"/"most" का उपयोग करते हैं (beautiful → more beautiful → most beautiful)।',
         'कभी भी दोनों रूपों को न मिलाएं — "more taller" या "most tallest" हमेशा गलत है। या तो प्रत्यय चुनें या "more"/"most", दोनों कभी नहीं।',
         'कुछ आम विशेषण अनियमित हैं और सीधे याद करने होते हैं: good → better → best, bad → worse → worst, little → less → least, much/many → more → most, far → farther/further → farthest/furthest।',
+        'कुछ विशेषण पहले से ही एक पूर्ण या पूर्ण स्थिति बताते हैं (perfect, complete, ideal, impossible) — ये परीक्षाएं इन्हें सामान्य रूप से तुलना योग्य नहीं मानती हैं, तो "more perfect" या "most complete" आमतौर पर गलत माना जाता है, सामान्य रूप के पक्ष में।',
+        '"than" की संरचना हमेशा तुलनात्मक डिग्री का संकेत देती है, चाहे कुल मिलाकर कितनी भी चीज़ों की तुलना हो रही हो — "she sang better than everyone else" तुलनात्मक ही रहता है ("best" नहीं) क्योंकि इसे "than" के ज़रिए एक चीज़ बनाम एक समूह के रूप में बताया गया है।',
       ],
       examplesHeading: 'हल किए गए उदाहरण',
       examples: [
@@ -6063,6 +6203,16 @@ export const TOPIC_LESSONS = [
           solution: ['Arjun की टीम के बाकी सभी खिलाड़ियों (तीन या ज़्यादा) से तुलना करने के लिए उत्कृष्टतासूचक डिग्री चाहिए।', '"Good" अनियमित है — इसकी उत्कृष्टतासूचक डिग्री "best" है, "goodest" या कोई "-est"/"most" रूप नहीं।'],
           answer: '(C) best',
         },
+        {
+          question: 'Choose the correct form: "This is the ___ solution to the problem." (A) most perfect (B) more perfect (C) perfect (D) perfectest',
+          solution: ['"Perfect" पहले से ही एक पूर्ण, पूर्ण स्थिति बताता है।', 'इस परीक्षा-परंपरा में इसे "more"/"most" से तुलना योग्य नहीं माना जाता — सामान्य रूप, "perfect", सही है।'],
+          answer: '(C) perfect',
+        },
+        {
+          question: 'Choose the correct form: "Of the two routes, this one is ___." (A) short (B) shorter (C) shortest (D) more shortest',
+          solution: ['ठीक दो रास्तों की तुलना करने के लिए तुलनात्मक डिग्री चाहिए।', '"Short" एक छोटा विशेषण है, तो यह "-er" लेता है: "shorter"।'],
+          answer: '(B) shorter',
+        },
       ],
       practiceHeading: 'खुद हल करके देखें',
       practiceIntro: 'गिनें कि कितनी चीज़ों की तुलना की जा रही है, फिर उत्तर से मिलान करें।',
@@ -6070,9 +6220,11 @@ export const TOPIC_LESSONS = [
         { question: 'Choose the correct form: "My bag is ___ than yours." (A) heavy (B) heavier (C) more heavy (D) heaviest', answer: '(B) heavier' },
         { question: 'Choose the correct form: "This is ___ book I have ever read." (A) bad (B) worse (C) worst (D) the worst', answer: '(D) the worst' },
         { question: 'Choose the correct form: "She is ___ experienced than her colleague." (A) more (B) most (C) much (D) many', answer: '(A) more' },
+        { question: 'Choose the correct form: "She sang ___ than everyone else in the competition." (A) good (B) well (C) better (D) best', answer: '(C) better ("than" तुलनात्मक डिग्री का संकेत देता है, समूह के आकार की परवाह किए बिना)' },
+        { question: 'Choose the correct form: "This is one of the ___ methods to learn a language." (A) effective (B) more effective (C) most effective (D) effectivest', answer: '(C) most effective ("one of the + उत्कृष्टतासूचक + बहुवचन संज्ञा" को उत्कृष्टतासूचक डिग्री चाहिए)' },
       ],
       relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में डिग्रीज़ ऑफ कम्पैरिज़न एक नियमित विषय है।',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली परीक्षाओं — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में डिग्रीज़ ऑफ कम्पैरिज़न एक नियमित विषय है, एक नियम-आधारित विषय जो सकारात्मक/तुलनात्मक/उत्कृष्टतासूचक अंतर सहज होने पर जल्दी अंक दिलाता है।',
       offerHeading: 'डिग्रीज़ ऑफ कम्पैरिज़न के और प्रश्नों का अभ्यास करें',
       offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर डिग्रीज़ ऑफ कम्पैरिज़न (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
       ctaLabel: 'डिग्रीज़ ऑफ कम्पैरिज़न का मुफ्त अभ्यास करें',
@@ -6442,13 +6594,14 @@ export const TOPIC_LESSONS = [
     slug: 'prepositions',
     en: {
       pageTitle: 'Prepositions Solved Questions',
-      lede: 'Most preposition questions test fixed pairings — words that always take one specific preposition by convention, not by logic — plus a size-based pattern for time and place. Here’s the approach, four fully worked examples, and a few to try yourself.',
+      lede: 'Most preposition questions test fixed pairings — words that always take one specific preposition by convention, not by logic — plus a size-based pattern for time and place. Here’s the approach, six fully worked examples, and a few to try yourself.',
       conceptHeading: 'The approach, quickly',
       conceptBody: [
         'Many verbs and adjectives pair with ONE specific preposition by convention — these fixed pairings have to be learned individually, like vocabulary, rather than reasoned out from a rule: "interested in", "good at", "afraid of", "married to", "different from", "depend on", "apologise for".',
         'Time prepositions follow a size-based pattern: "at" for a precise point (at 5 o’clock), "on" for a specific day or date (on Monday, on 15 August), "in" for a longer period (in May, in 2024, in the morning).',
         'Place prepositions follow a similar size-based pattern: "at" for a specific point (at the bus stop), "in" for an enclosed space (in the room, in Delhi), "on" for a surface (on the table).',
         'When unsure, say the sentence out loud with each option — fixed pairings usually "sound" wrong immediately in a way that’s hard to explain logically but easy to hear.',
+        'The same verb can take different prepositions depending on what follows, with a real shift in meaning: "agree WITH" a person, but "agree TO" a plan or proposal — check what noun comes next before picking the preposition.',
       ],
       examplesHeading: 'Worked examples',
       examples: [
@@ -6472,6 +6625,16 @@ export const TOPIC_LESSONS = [
           solution: ['"In" is used for an enclosed space: "in the drawer".', '"On" is used for a surface: "on the table".'],
           answer: '(A) in / on',
         },
+        {
+          question: 'Choose the correct preposition: "I agree ___ you on this matter." (A) to (B) with (C) for (D) at',
+          solution: ['When agreeing with a PERSON, the fixed pairing is "agree WITH".'],
+          answer: '(B) with',
+        },
+        {
+          question: 'Choose the correct preposition: "He finally agreed ___ the new proposal." (A) with (B) to (C) at (D) for',
+          solution: ['When agreeing to a PLAN or PROPOSAL (not a person), the fixed pairing is "agree TO".'],
+          answer: '(B) to',
+        },
       ],
       practiceHeading: 'Try these yourself',
       practiceIntro: 'Work through these the same way, then check against the answer.',
@@ -6479,9 +6642,11 @@ export const TOPIC_LESSONS = [
         { question: 'Choose the correct preposition: "I am afraid ___ spiders." (A) from (B) of (C) with (D) about', answer: '(B) of' },
         { question: 'Choose the correct preposition: "This result is quite different ___ what we expected." (A) than (B) to (C) from (D) with', answer: '(C) from' },
         { question: 'Choose the correct preposition: "The company depends heavily ___ exports for its revenue." (A) of (B) on (C) in (D) with', answer: '(B) on' },
+        { question: 'Choose the correct preposition: "The students were divided ___ four groups for the project." (A) in (B) into (C) with (D) at', answer: '(B) into' },
+        { question: 'Choose the correct preposition: "She succeeded ___ convincing the committee." (A) at (B) to (C) in (D) with', answer: '(C) in' },
       ],
       relevantForHeading: 'Where this comes up',
-      relevantForBody: 'Prepositions is a regular topic in the English Language section of every exam Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk.',
+      relevantForBody: 'Prepositions is a regular topic in the English Language section of exams Pariksha Saathi covers — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — a vocabulary-like topic built on memorising fixed pairings.',
       offerHeading: 'Practice more Prepositions questions',
       offerBody: 'This page covers the approach and a handful of worked examples. Pariksha Saathi has full topic-wise practice sets for Prepositions (and every other English/Reasoning/Quant topic) with instant scoring and explanations — free, no account required.',
       ctaLabel: 'Practice Prepositions free',
@@ -6492,13 +6657,14 @@ export const TOPIC_LESSONS = [
     },
     hi: {
       pageTitle: 'प्रीपोज़िशन के प्रश्न हल सहित',
-      lede: 'ज़्यादातर preposition के प्रश्न स्थिर जोड़ियों की परख करते हैं — ऐसे शब्द जो परंपरा से हमेशा एक विशिष्ट preposition लेते हैं, तर्क से नहीं — साथ ही समय और स्थान के लिए एक आकार-आधारित पैटर्न। यहां तरीका, चार पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
+      lede: 'ज़्यादातर preposition के प्रश्न स्थिर जोड़ियों की परख करते हैं — ऐसे शब्द जो परंपरा से हमेशा एक विशिष्ट preposition लेते हैं, तर्क से नहीं — साथ ही समय और स्थान के लिए एक आकार-आधारित पैटर्न। यहां तरीका, छह पूरी तरह हल किए गए उदाहरण, और खुद हल करने के लिए कुछ प्रश्न दिए गए हैं।',
       conceptHeading: 'तरीका, संक्षेप में',
       conceptBody: [
         'कई क्रियाएं और विशेषण परंपरा से एक विशिष्ट preposition के साथ जुड़ते हैं — इन स्थिर जोड़ियों को शब्दावली की तरह अलग-अलग याद करना पड़ता है, किसी नियम से तर्क निकालकर नहीं: "interested in", "good at", "afraid of", "married to", "different from", "depend on", "apologise for"।',
         'समय के preposition एक आकार-आधारित पैटर्न का पालन करते हैं: एक सटीक बिंदु के लिए "at" (at 5 o\'clock), किसी विशिष्ट दिन या तारीख के लिए "on" (on Monday, on 15 August), एक लंबी अवधि के लिए "in" (in May, in 2024, in the morning)।',
         'स्थान के preposition एक समान आकार-आधारित पैटर्न का पालन करते हैं: एक विशिष्ट बिंदु के लिए "at" (at the bus stop), एक घिरे हुए स्थान के लिए "in" (in the room, in Delhi), एक सतह के लिए "on" (on the table)।',
         'जब अनिश्चित हों, तो हर विकल्प के साथ वाक्य को ज़ोर से बोलें — स्थिर जोड़ियां आमतौर पर तुरंत गलत "सुनाई" देती हैं, भले ही इसे तार्किक रूप से समझाना मुश्किल हो लेकिन सुनना आसान हो।',
+        'एक ही क्रिया आगे आने वाले शब्द के आधार पर अलग-अलग preposition ले सकती है, अर्थ में असली बदलाव के साथ: किसी व्यक्ति से "agree WITH", पर किसी योजना या प्रस्ताव से "agree TO" — preposition चुनने से पहले जांचें कि आगे कौन सी संज्ञा आ रही है।',
       ],
       examplesHeading: 'हल किए गए उदाहरण',
       examples: [
@@ -6522,6 +6688,16 @@ export const TOPIC_LESSONS = [
           solution: ['एक घिरे हुए स्थान के लिए "In" का उपयोग होता है: "in the drawer"।', 'एक सतह के लिए "On" का उपयोग होता है: "on the table"।'],
           answer: '(A) in / on',
         },
+        {
+          question: 'Choose the correct preposition: "I agree ___ you on this matter." (A) to (B) with (C) for (D) at',
+          solution: ['किसी व्यक्ति से सहमत होने पर, स्थिर जोड़ी है "agree WITH"।'],
+          answer: '(B) with',
+        },
+        {
+          question: 'Choose the correct preposition: "He finally agreed ___ the new proposal." (A) with (B) to (C) at (D) for',
+          solution: ['किसी योजना या प्रस्ताव से सहमत होने पर (व्यक्ति से नहीं), स्थिर जोड़ी है "agree TO"।'],
+          answer: '(B) to',
+        },
       ],
       practiceHeading: 'खुद हल करके देखें',
       practiceIntro: 'इन्हें उसी तरीके से हल करें, फिर उत्तर से मिलान करें।',
@@ -6529,9 +6705,11 @@ export const TOPIC_LESSONS = [
         { question: 'Choose the correct preposition: "I am afraid ___ spiders." (A) from (B) of (C) with (D) about', answer: '(B) of' },
         { question: 'Choose the correct preposition: "This result is quite different ___ what we expected." (A) than (B) to (C) from (D) with', answer: '(C) from' },
         { question: 'Choose the correct preposition: "The company depends heavily ___ exports for its revenue." (A) of (B) on (C) in (D) with', answer: '(B) on' },
+        { question: 'Choose the correct preposition: "The students were divided ___ four groups for the project." (A) in (B) into (C) with (D) at', answer: '(B) into' },
+        { question: 'Choose the correct preposition: "She succeeded ___ convincing the committee." (A) at (B) to (C) in (D) with', answer: '(C) in' },
       ],
       relevantForHeading: 'यह कहां काम आता है',
-      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली हर परीक्षा — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में प्रीपोज़िशन एक नियमित विषय है।',
+      relevantForBody: 'Pariksha Saathi द्वारा कवर की जाने वाली परीक्षाओं — SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS क्लर्क, SBI PO और SBI क्लर्क — के अंग्रेज़ी भाषा खंड में प्रीपोज़िशन एक नियमित विषय है, एक शब्दावली जैसा विषय जो स्थिर जोड़ियां याद करने पर आधारित है।',
       offerHeading: 'प्रीपोज़िशन के और प्रश्नों का अभ्यास करें',
       offerBody: 'इस पेज में तरीका और कुछ हल किए गए उदाहरण शामिल हैं। Pariksha Saathi पर प्रीपोज़िशन (और हर दूसरे अंग्रेज़ी/तर्कशक्ति/मात्रात्मक विषय) के लिए पूरे विषयवार अभ्यास सेट हैं, तुरंत स्कोरिंग और स्पष्टीकरण के साथ — मुफ्त, बिना किसी खाते की आवश्यकता के।',
       ctaLabel: 'प्रीपोज़िशन का मुफ्त अभ्यास करें',
