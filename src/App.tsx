@@ -10,12 +10,17 @@ import { LessonArticlePage } from './pages/learn/LessonArticlePage';
 import { TOPIC_SLUGS } from './data/topicSlugs.mjs';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { PublicContentLayout } from './components/layout/PublicContentLayout';
 
 // Everything under /app/* is lazy-loaded as one chunk: it's the signed-in-feeling quiz/dashboard
-// experience, gated behind onboarding and excluded from robots.txt (except the two Current
-// Affairs/Exam Notices screens, which are prerendered - crawlers see their full HTML before this
-// chunk ever loads, so splitting it out costs them nothing). Every page above this line is what
-// actually gets crawled and ranked, so it stays in the main bundle a first-time visitor downloads.
+// experience, gated behind onboarding and excluded from robots.txt. The Current Affairs/Exam
+// Notices screens keep their existing /app/current-affairs and /app/exam-notices URLs (already
+// indexed and sitemapped - not worth a URL change) but are routed under PublicContentLayout
+// instead, below: they're genuine crawlable editorial content, not the gated app experience, so
+// they get that layout's plain-article chrome instead of AppShell's bottom tab bar and Account
+// link - a reviewer (or reader) landing on a news capsule shouldn't see six links to app screens
+// they can't use without onboarding first. Every page above this line is what actually gets
+// crawled and ranked, so it stays in the main bundle a first-time visitor downloads.
 const AppShell = lazy(() => import('./components/layout/AppShell').then((m) => ({ default: m.AppShell })));
 const DashboardPage = lazy(() => import('./pages/app/DashboardPage').then((m) => ({ default: m.DashboardPage })));
 const StudyPage = lazy(() => import('./pages/app/StudyPage').then((m) => ({ default: m.StudyPage })));
@@ -89,14 +94,45 @@ export function App() {
         <Route path="bookmarks" element={<BookmarksPage />} />
         <Route path="progress" element={<ProgressPage />} />
         <Route path="digest" element={<DigestPage />} />
-        <Route path="current-affairs" element={<CurrentAffairsPage />} />
-        <Route path="current-affairs/:id" element={<CurrentAffairsDetailPage />} />
-        <Route path="exam-notices" element={<ExamNoticesPage />} />
-        <Route path="exam-notices/:id" element={<ExamNoticeDetailPage />} />
         <Route path="account" element={<AccountPage />} />
         <Route path="challenge" element={<ChallengePage />} />
         <Route path="current-affairs-quiz" element={<CurrentAffairsQuizPage />} />
         <Route path="current-affairs-quiz/play" element={<CurrentAffairsQuizPlayPage />} />
+      </Route>
+
+      <Route element={<PublicContentLayout />}>
+        <Route
+          path="/app/current-affairs"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <CurrentAffairsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/app/current-affairs/:id"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <CurrentAffairsDetailPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/app/exam-notices"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <ExamNoticesPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/app/exam-notices/:id"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <ExamNoticeDetailPage />
+            </Suspense>
+          }
+        />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

@@ -49,35 +49,33 @@ function readBuiltAssets() {
   return { script, style };
 }
 
-const NAV_TABS = [
-  { to: '/app/home', label: 'Home', icon: '🏠' },
-  { to: '/app/study', label: 'Study', icon: '📖' },
-  { to: '/app/practice', label: 'Practice', icon: '📝' },
-  { to: '/app/challenge', label: 'Goal', icon: '🏆' },
-  { to: '/app/current-affairs-quiz', label: 'CA Quiz', icon: '🌍' },
-  { to: '/app/current-affairs', label: 'Affairs', icon: '📰' },
-  { to: '/app/exam-notices', label: 'Alerts', icon: '🔔' },
-  { to: '/app/progress', label: 'Progress', icon: '📊' },
-];
-
-function appShell(innerHtml) {
-  // Unlike the live SPA (AppShell.tsx), this static nav doesn't know which tab is "active" and
-  // never has - so every label stays visible here rather than icon-only; a crawler/no-JS visitor
-  // benefits from the extra text, and .app-bottom-nav's overflow-x:auto keeps this from breaking
-  // layout if it doesn't all fit on one row.
-  const nav = NAV_TABS.map(
-    (t) =>
-      `<a class="app-nav-item" href="${t.to}"><span class="app-nav-icon" aria-hidden="true">${t.icon}</span><span class="app-nav-label">${t.label}</span></a>`,
-  ).join('');
-  return `<div class="app-shell">
-  <header class="app-topbar">
-    <div class="wrap app-topbar-inner">
-      <a href="/" class="app-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
-      <a href="/app/account" class="app-account-link">Account</a>
+// Current affairs and exam notices are genuine crawlable editorial content - not the gated,
+// robots.txt-excluded app experience - so they get the same plain-article chrome as /learn/,
+// /compare/* and /about/ (mirrors publicFrame() in src/data/publicPages.mjs and the live SPA's
+// PublicContentLayout.tsx exactly) instead of the app shell's bottom tab bar and Account link.
+// A reviewer or reader landing on a news capsule shouldn't see six links to app screens they
+// can't use without onboarding first.
+function publicContentFrame(innerHtml) {
+  return `<div class="compare-page">
+  <header class="pub-header">
+    <div class="wrap pub-nav">
+      <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+      <nav class="pub-nav-links">
+        <a href="/learn/">Lessons</a>
+        <a href="/app/current-affairs">Current affairs</a>
+        <a href="/app/exam-notices">Exam Notices</a>
+      </nav>
+      <a class="pub-cta" href="/onboarding">Start studying</a>
     </div>
   </header>
-  <main class="app-content wrap">${innerHtml}</main>
-  <nav class="app-bottom-nav">${nav}</nav>
+  <main class="wrap public-content-main">${innerHtml}</main>
+  <footer class="pub-footer">
+    <div class="wrap pub-footer-links">
+      <a href="/about/">About &amp; editorial standards</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="mailto:sriwastava2@gmail.com">Contact</a>
+    </div>
+  </footer>
 </div>`;
 }
 
@@ -830,7 +828,7 @@ async function main() {
   }
 
   // --- Current affairs ---
-  const affairsListBody = appShell(currentAffairsDigest(affairs));
+  const affairsListBody = publicContentFrame(currentAffairsDigest(affairs));
   writePage('app/current-affairs', page({
     title: 'Current Affairs',
     description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
@@ -841,7 +839,7 @@ async function main() {
   }));
 
   for (const item of affairs) {
-    const detailBody = appShell(`
+    const detailBody = publicContentFrame(`
       <article class="detail-page">
         <a href="/app/current-affairs/" class="detail-back">&larr; Current Affairs</a>
         <div class="detail-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
@@ -885,7 +883,7 @@ async function main() {
   }
 
   // --- Exam notices --- (fetched above, alongside `affairs`, for the homepage preview)
-  const noticesListBody = appShell(`
+  const noticesListBody = publicContentFrame(`
     <div>
       <h1 class="review-title">Exam Notices &amp; Alerts</h1>
       ${notices
@@ -916,7 +914,7 @@ async function main() {
     const dateRows = Object.entries(item.importantDates ?? {})
       .map(([label, value]) => `<div class="detail-date-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`)
       .join('');
-    const detailBody = appShell(`
+    const detailBody = publicContentFrame(`
       <article class="detail-page">
         <a href="/app/exam-notices/" class="detail-back">&larr; Exam Notices &amp; Alerts</a>
         <div class="detail-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
