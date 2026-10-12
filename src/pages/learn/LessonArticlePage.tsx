@@ -189,7 +189,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             </div>
             <div className="pub-footer-links">
               <a href="/privacy/">Privacy Policy</a>
-              <a href="mailto:sriwastava2@gmail.com">Contact</a>
+              <a href="/terms/">Terms of Use</a>
+              <a href="/contact/">Contact</a>
             </div>
           </div>
           <p className="disclaimer">{content.disclaimer}</p>
