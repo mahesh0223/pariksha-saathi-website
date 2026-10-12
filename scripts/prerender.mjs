@@ -598,7 +598,7 @@ function lessonPageBody(entry, lang) {
         </div>
         <h1>${escapeHtml(c.pageTitle)}</h1>
         <p class="compare-lede">${escapeHtml(c.lede)}</p>
-        <p class="lesson-credit">${lang === 'hi' ? 'प्रकाशक: परीक्षा साथी।' : 'Published by Pariksha Saathi.'} <a href="/about/">${lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</a></p>
+        <p class="lesson-credit">${lang === 'hi' ? 'लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक।' : 'Written by Mahesh Srivastava, Founder of Pariksha Saathi.'} <a href="/about/">${lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</a></p>
         <p><a href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
         <h2>${escapeHtml(c.conceptHeading)}</h2>
         <ul class="lesson-concept-list">

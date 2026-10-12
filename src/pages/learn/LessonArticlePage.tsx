@@ -124,7 +124,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
-        <p className="lesson-credit">{lang === 'hi' ? 'प्रकाशक: परीक्षा साथी।' : 'Published by Pariksha Saathi.'} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
+        <p className="lesson-credit">{lang === 'hi' ? 'लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक।' : 'Written by Mahesh Srivastava, Founder of Pariksha Saathi.'} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
         <p><a href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
 
         <h2>{content.conceptHeading}</h2>
