@@ -244,7 +244,7 @@ export function HomePage() {
             <Link to="/learn/">Learn</Link>
             <a href="#current-affairs">Current Affairs</a>
             <a href="#faq">FAQ</a>
-            <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy</a>
+            <Link to="/privacy/">Privacy</Link>
           </nav>
           <button className="pub-cta" onClick={startStudying}>
             Start studying
@@ -460,7 +460,7 @@ export function HomePage() {
               Pariksha Saathi
             </div>
             <div className="pub-footer-links"><Link to="/about/">About &amp; editorial standards</Link>
-              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <Link to="/privacy/">Privacy Policy</Link>
               <a href="https://mahesh0223.github.io/pariksha-saathi-legal/account-deletion.html">
                 Delete Account
               </a>
@@ -470,7 +470,7 @@ export function HomePage() {
           <p className="disclaimer">
             Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or
             any government body. For information about accounts, study progress and website data, see our{' '}
-            <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a> for
+            <Link to="/privacy/">Privacy Policy</Link> for
             details.
           </p>
         </div>

@@ -154,7 +154,7 @@ export function IbpsPoVsSbiPoPage() {
               Pariksha Saathi
             </div>
             <div className="pub-footer-links">
-              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/">Privacy Policy</a>
+              <a href="/privacy/">Privacy Policy</a>
               <a href="mailto:sriwastava2@gmail.com">Contact</a>
             </div>
           </div>
