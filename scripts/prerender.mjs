@@ -22,6 +22,7 @@ import { join } from 'node:path';
 // syllabus/lesson pages' EN/HI content either way, shared with the React components under
 // src/pages/ - just without compile-time typing on the data shape.
 import { currentAffairsDigest, learningNote } from '../src/data/currentAffairsReading.mjs';
+import { noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
 import { PUBLIC_PAGES, publicPageBody } from '../src/data/publicPages.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -926,6 +927,7 @@ async function main() {
         <h1>${escapeHtml(item.title)}</h1>
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         ${dateRows ? `<div class="detail-dates"><h2>Important dates</h2><dl>${dateRows}</dl></div>` : ''}
+        ${noticeGuidance(item.id, 'en') ? `<section class="news-learning"><h2>What this means for you</h2><p>${escapeHtml(noticeGuidance(item.id, 'en'))}</p></section>` : ''}
         <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">Official notification &#8599;</a></div>
         ${adSlot('5664651910')}
       </article>

@@ -6,9 +6,17 @@ import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { seoNoticeTitle } from '../../lib/seoNoticeTitle';
 import { EmptyState, Note, Spinner } from '../../components/ui/Primitives';
 import { AdSlot } from '../../components/ads/AdSlot';
+import { noticeGuidance, knownCounterpartId } from '../../data/examNoticeGuidance.mjs';
+import type { ExamUpdateNotice } from '../../types/api';
 import './DetailPage.css';
+import './UpdatesPage.css';
 
 const OTHER_LANGUAGE: Record<LanguageCode, LanguageCode> = { en: 'hi', hi: 'en' };
+
+function findUnambiguousMatch(data: ExamUpdateNotice[] | undefined, officialUrl: string): ExamUpdateNotice | undefined {
+  const matches = data?.filter((i) => i.officialUrl === officialUrl) ?? [];
+  return matches.length === 1 ? matches[0] : undefined;
+}
 
 export function ExamNoticeDetailPage() {
   const { id = '' } = useParams();
@@ -26,8 +34,12 @@ export function ExamNoticeDetailPage() {
 
   // Same root cause as CurrentAffairsDetailPage: English and Hindi rows for the same notice have
   // independent ids, so a link/bookmark made in one language 404s in the other. Fall back to the
-  // other language, then try to match it back to this language via officialUrl (the one field
-  // both language rows of the same notice share) before giving up.
+  // other language, then try to match it back to this language. Prefer the hand-verified id
+  // pairing in examNoticeGuidance.mjs - officialUrl alone isn't safe here (unlike current-affairs'
+  // sourceUrl): it's often one recruitment cycle's shared landing page, so several distinct
+  // notices can have the identical officialUrl, and matching on it naively could silently land on
+  // the wrong sibling notice. Only fall back to an officialUrl guess - and only when it's
+  // unambiguous (exactly one candidate) - for a notice not yet in that hand-verified table.
   const needsFallback = !isLoading && !item;
   const { data: otherData, isLoading: otherLoading } = useQuery({
     queryKey: ['exam-updates', [], otherLanguage],
@@ -35,7 +47,9 @@ export function ExamNoticeDetailPage() {
     enabled: needsFallback,
   });
   const otherItem = needsFallback ? otherData?.find((i) => i.id === id) : undefined;
-  const counterpart = otherItem ? data?.find((i) => i.officialUrl === otherItem.officialUrl) : undefined;
+  const counterpart = otherItem
+    ? data?.find((i) => i.id === knownCounterpartId(otherItem.id)) ?? findUnambiguousMatch(data, otherItem.officialUrl)
+    : undefined;
   const display = item ?? otherItem;
   const dateEntries = Object.entries(display?.importantDates ?? {});
 
@@ -111,6 +125,13 @@ export function ExamNoticeDetailPage() {
             ))}
           </dl>
         </div>
+      )}
+
+      {noticeGuidance(display.id, language) && (
+        <section className="news-learning">
+          <h2>{language === 'hi' ? 'आपके लिए इसका मतलब' : 'What this means for you'}</h2>
+          <p>{noticeGuidance(display.id, language)}</p>
+        </section>
       )}
 
       <div className="detail-source">
