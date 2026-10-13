@@ -43,3 +43,28 @@ console.log(`Verified ${files.length} HTML files, 124 bilingual lesson routes, c
 
 assert(existsSync('dist/404.html'));
 assert(!readFileSync('dist/_redirects','utf8').includes('/*  /spa'));
+
+// Standing policy since 2026-10-13 (a real incident: a 44-item afternoon batch landed with only
+// 21 having a "learning context" note, reviving the thin/replicated-content risk an AdSense audit
+// had specifically flagged): every current-affairs item published FROM THAT DATE ON must carry a
+// genuine note before it goes live - no exceptions, and no forcing a shaky one just to pass this
+// check (see currentAffairsReading.mjs's own comment on when a note is and isn't warranted).
+// Earlier items are grandfathered - this isn't a mandate to backfill the whole archive, just a
+// gate on what gets published next. If this ever fails, the fix is to write the missing note (or
+// hold the item back), not to loosen this check.
+const POLICY_EFFECTIVE_DATE = '2026-10-13';
+const noNoteSinceGate = [];
+for (const dir of readdirSync('dist/app/current-affairs', { withFileTypes: true })) {
+  if (!dir.isDirectory()) continue;
+  const file = `dist/app/current-affairs/${dir.name}/index.html`;
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, 'utf8');
+  const dateMatch = html.match(/"datePublished":"(\d{4}-\d{2}-\d{2})/);
+  if (!dateMatch) continue; // not a dated article page (e.g. a stray non-item file)
+  if (dateMatch[1] < POLICY_EFFECTIVE_DATE) continue; // grandfathered
+  if (!html.includes('class="news-learning"')) noNoteSinceGate.push(`${dir.name} (${dateMatch[1]})`);
+}
+assert(
+  noNoteSinceGate.length === 0,
+  `${noNoteSinceGate.length} current-affairs item(s) published on/after ${POLICY_EFFECTIVE_DATE} have no learning note, violating the standing policy: ${noNoteSinceGate.join(', ')}`,
+);

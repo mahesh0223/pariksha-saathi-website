@@ -7,6 +7,16 @@ import { escapeHtml } from './publicPages.mjs';
 // unrelated story. Only add an entry here when the background facts are
 // well-established and checkable against an authoritative reference; do not
 // add commentary on numbers or claims that could change release to release.
+//
+// STANDING POLICY since 2026-10-13 (a real incident: a 44-item current-affairs batch landed in
+// one afternoon with only 21 having a note, reviving the exact "thin, no added value" risk an
+// AdSense audit had already flagged once): every new current-affairs item needs an entry here
+// before it's published - no exceptions - and new items should land a handful a day, not dozens
+// at once, so this stays a deliberate editorial pass rather than a backlog to clear. This is a
+// real build gate, not just a convention: scripts/check-public-pages.mjs fails the build if any
+// item dated 2026-10-13 or later has no matching entry here. If a genuinely clean, checkable fact
+// doesn't exist for an item (it won't for every item - don't force one, see above), hold that
+// item back rather than publish it without one.
 const LEARNING_NOTES = [
   {
     match: /[?&]PRID=2319890(?:&|$)/i,
@@ -1602,6 +1612,44 @@ const LEARNING_NOTES = [
       checkQ: 'खुद जाँचें: राष्ट्रीय गंगा परिषद की अध्यक्षता कौन करता है?',
       checkA: 'प्रधानमंत्री। इसके नीचे अधिकार प्राप्त कार्यबल की अध्यक्षता केंद्रीय जल शक्ति मंत्री करते हैं, और NMCG कार्यान्वयन मिशन है।',
       task: 'अभ्यास: इस खबर में केवल गंगा बेसिन वाले आंकड़ों (अनुपालन 39% से 86%, BOD भार 26 से 7.16 TPD) को गंगा-यमुना के संयुक्त आंकड़ों (3,703 GPI की जांच) से अलग करके लिखें, क्योंकि प्रश्नों में इन्हें मिलाया जा सकता है।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322625(?:&|$)/i,
+    en: {
+      body: 'KVIC (Khadi and Village Industries Commission) is a statutory body, not a government department - it was established under the Khadi and Village Industries Commission Act, 1956, and functions under the Ministry of Micro, Small and Medium Enterprises (MSME). Its mandate is to plan, promote and support khadi and village industries in rural areas.',
+      refUrl: 'https://msme.gov.in/',
+      refLabel: 'Reference: Ministry of MSME\'s official website',
+      checkQ: 'Check yourself: is KVIC itself a ministry?',
+      checkA: 'No - KVIC is a statutory body created by its own 1956 Act; it functions under the Ministry of MSME, which is a separate central ministry.',
+      task: 'Revision task: note that this release describes KVIC\'s sales performance, not a new policy announcement - distinguish a performance update from an actual scheme or Act change.',
+    },
+    hi: {
+      body: 'KVIC (खादी और ग्रामोद्योग आयोग) एक सरकारी विभाग नहीं, बल्कि एक सांविधिक (स्टैच्युटरी) निकाय है - इसकी स्थापना खादी और ग्रामोद्योग आयोग अधिनियम, 1956 के तहत हुई थी, और यह सूक्ष्म, लघु एवं मध्यम उद्यम मंत्रालय (MSME) के अधीन कार्य करता है। इसका कार्य ग्रामीण क्षेत्रों में खादी और ग्रामोद्योगों की योजना बनाना, बढ़ावा देना और सहायता करना है।',
+      refUrl: 'https://msme.gov.in/',
+      refLabel: 'संदर्भ: MSME मंत्रालय की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या KVIC स्वयं एक मंत्रालय है?',
+      checkA: 'नहीं - KVIC अपने 1956 के अधिनियम द्वारा बनाया गया एक सांविधिक निकाय है; यह MSME मंत्रालय के अधीन कार्य करता है, जो एक अलग केंद्रीय मंत्रालय है।',
+      task: 'अभ्यास: ध्यान दें कि यह विज्ञप्ति KVIC के बिक्री प्रदर्शन के बारे में है, किसी नई नीति की घोषणा के बारे में नहीं - प्रदर्शन अपडेट और वास्तविक योजना या अधिनियम परिवर्तन के बीच अंतर पहचानें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322621(?:&|$)/i,
+    en: {
+      body: 'BHASHINI is India\'s National Language Translation Mission, launched on 4 July 2022 during Digital India Week in Gandhinagar. It operates under the Ministry of Electronics and Information Technology (MeitY) as part of the Digital India programme, run by the Digital India BHASHINI Division under Digital India Corporation (a Section 8 company under MeitY).',
+      refUrl: 'https://bhashini.gov.in/',
+      refLabel: 'Reference: BHASHINI\'s official website',
+      checkQ: 'Check yourself: is BHASHINI a standalone ministry?',
+      checkA: 'No - it is a mission/platform run by the Digital India BHASHINI Division, operating under MeitY\'s Digital India programme, not a ministry in its own right.',
+      task: 'Revision task: note which specific language pair and use case (civil-servant training at NCGG) this release describes, separate from BHASHINI\'s broader, standing mandate.',
+    },
+    hi: {
+      body: 'भाषिणी (BHASHINI) भारत का राष्ट्रीय भाषा अनुवाद मिशन है, जिसे 4 जुलाई 2022 को गांधीनगर में डिजिटल इंडिया सप्ताह के दौरान लॉन्च किया गया था। यह इलेक्ट्रॉनिक्स और सूचना प्रौद्योगिकी मंत्रालय (MeitY) के डिजिटल इंडिया कार्यक्रम के तहत कार्य करता है, और डिजिटल इंडिया कॉरपोरेशन (MeitY के अधीन एक धारा 8 कंपनी) के डिजिटल इंडिया भाषिणी डिवीज़न द्वारा संचालित होता है।',
+      refUrl: 'https://bhashini.gov.in/',
+      refLabel: 'संदर्भ: भाषिणी की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या भाषिणी स्वयं एक अलग मंत्रालय है?',
+      checkA: 'नहीं - यह डिजिटल इंडिया भाषिणी डिवीज़न द्वारा संचालित एक मिशन/प्लेटफॉर्म है, जो MeitY के डिजिटल इंडिया कार्यक्रम के तहत कार्य करता है, स्वयं कोई मंत्रालय नहीं है।',
+      task: 'अभ्यास: ध्यान दें कि यह विज्ञप्ति किस विशिष्ट भाषा-युग्म और उपयोग-मामले (NCGG में सिविल सेवकों का प्रशिक्षण) के बारे में है, भाषिणी के व्यापक, स्थायी उद्देश्य से अलग करके।',
     },
   },
 ];
