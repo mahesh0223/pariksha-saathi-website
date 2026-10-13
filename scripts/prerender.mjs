@@ -149,6 +149,43 @@ function writePage(relPath, html) {
   writeFileSync(join(dir, 'index.html'), html, 'utf8');
 }
 
+// Pages through every published English current-affairs item via `offset`, not a single
+// `?limit=100` call - see the 2026-10-13 incident note at this function's call site in main().
+// `limit=100` per page (the API's own hard cap) keeps this to one request per 100 items.
+async function fetchAllCurrentAffairs() {
+  const PAGE_SIZE = 100;
+  const all = [];
+  for (let offset = 0; ; offset += PAGE_SIZE) {
+    const page = await fetch(`${API_BASE}/v1/current-affairs?lang=en&limit=${PAGE_SIZE}&offset=${offset}`).then((r) => r.json());
+    all.push(...page);
+    if (page.length < PAGE_SIZE) break;
+  }
+  return all;
+}
+
+// Build-time guard against the exact failure mode of the 2026-10-13 incident: fetches the
+// sitemap this same script last deployed and fails the build if any URL that sitemap listed is
+// missing from the one about to replace it. A real content removal should go through this check
+// deliberately (temporarily allow-list the URL here with a comment explaining why), not slip
+// through silently the way the 100-item cap did.
+async function assertNoPublishedUrlWentMissing(newSitemapUrls) {
+  let previousXml;
+  try {
+    previousXml = await fetch(`${SITE_URL}/sitemap.xml`).then((r) => (r.ok ? r.text() : ''));
+  } catch {
+    previousXml = ''; // offline/first-ever build - nothing to compare against yet.
+  }
+  const previousUrls = new Set([...previousXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE_URL, '')));
+  const newUrls = new Set(newSitemapUrls.map((u) => u.loc));
+  const missing = [...previousUrls].filter((u) => !newUrls.has(u));
+  if (missing.length > 0) {
+    throw new Error(
+      `Build check failed: ${missing.length} previously-published URL(s) are missing from the new sitemap - ` +
+      `this would 404 at origin a page Google may have already indexed. First few: ${missing.slice(0, 5).join(', ')}`,
+    );
+  }
+}
+
 // Mirrors src/components/HomeIcons.tsx's <path> data exactly - see that file for the source of
 // truth on each icon's shape. Kept as plain SVG strings here since this script can't import TSX.
 const ICONS = {
@@ -647,7 +684,15 @@ async function main() {
 
   // Fetched before the homepage is written, not after - the homepage's "Latest current affairs"/
   // "Latest exam notices" sections preview the same live data the list pages below use in full.
-  const affairs = await fetch(`${API_BASE}/v1/current-affairs?lang=en&limit=100`).then((r) => r.json());
+  //
+  // A single `?limit=100` fetch used to be the whole story here, before a real incident
+  // (2026-10-13): once the published total grew past 100, the API's own hard cap
+  // (Math.min(limit, 100) in src/routes/public.js) silently truncated the response to the 100
+  // newest items, so the oldest ones got no static page on the next build - a URL Google had
+  // already indexed started 404ing at origin with no warning, while Cloudflare's edge cache
+  // masked it for days by still serving the old cached 200. Page through `offset` instead so
+  // every published item always gets prerendered, no matter how many there are.
+  const affairs = await fetchAllCurrentAffairs();
   const notices = await fetch(`${API_BASE}/v1/exam-updates`).then((r) => r.json());
 
   // --- Homepage --- the SPA's own dist/index.html is otherwise just an empty <div id="root">
@@ -963,6 +1008,7 @@ async function main() {
   }
 
   // --- sitemap.xml ---
+  await assertNoPublishedUrlWentMissing(sitemapUrls);
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls
