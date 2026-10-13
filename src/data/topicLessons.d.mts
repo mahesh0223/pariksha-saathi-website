@@ -35,6 +35,8 @@ export interface LessonContent {
 
 export interface TopicLessonEntry {
   slug: string;
+  /** ISO date this lesson first went live - sourced from the commit that added it, not fabricated. */
+  publishedDate: string;
   en: LessonContent;
   hi: LessonContent;
 }

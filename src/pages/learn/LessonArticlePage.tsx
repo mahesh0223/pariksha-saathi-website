@@ -60,7 +60,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             description: content!.lede,
             inLanguage: lang,
             learningResourceType: 'lesson',
-            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            datePublished: entry!.publishedDate,
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
           },
           {
@@ -124,7 +125,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
-        <p className="lesson-credit">{lang === 'hi' ? 'लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक।' : 'Written by Mahesh Srivastava, Founder of Pariksha Saathi.'} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
+        <p className="lesson-credit">{lang === 'hi' ? `लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक। प्रकाशित: ${entry.publishedDate}।` : `Written by Mahesh Srivastava, Founder of Pariksha Saathi. Published: ${entry.publishedDate}.`} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
         <p><a href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
 
         <h2>{content.conceptHeading}</h2>

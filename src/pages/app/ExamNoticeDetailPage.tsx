@@ -72,7 +72,7 @@ export function ExamNoticeDetailPage() {
             headline: display.title,
             description: display.summary,
             dateModified: display.lastVerifiedAt,
-            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
           },
           {

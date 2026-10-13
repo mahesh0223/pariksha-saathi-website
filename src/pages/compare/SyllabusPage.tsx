@@ -41,7 +41,10 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
             headline: content!.pageTitle,
             description: content!.lede,
             inLanguage: lang,
-            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            // All 7 exams' syllabus pages shipped together in one pass on 2026-10-01 - the
+            // real commit date, not a per-exam fabrication. Mirrors scripts/prerender.mjs.
+            datePublished: '2026-10-01',
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
           },
           {

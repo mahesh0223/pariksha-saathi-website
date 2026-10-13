@@ -54,7 +54,7 @@ export function CurrentAffairsDetailPage() {
             headline: display.title,
             description: display.summary,
             datePublished: display.editionDate,
-            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
             about: display.examTags,
           },

@@ -20,7 +20,9 @@ export function IbpsPoVsSbiPoPage() {
         headline: 'IBPS PO vs SBI PO: What’s Actually Different',
         description:
           'A comparison of how IBPS PO and SBI PO recruitment are conducted, who they recruit for, and how their selection stages differ.',
-        author: { '@type': 'Organization', name: 'Pariksha Saathi' },
+        // Real date this page shipped (commit 9232611), not a fabrication. Mirrors scripts/prerender.mjs.
+        datePublished: '2026-10-01',
+        author: { '@type': 'Person', name: 'Mahesh Srivastava' },
         publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
       },
       {

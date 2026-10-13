@@ -32,6 +32,10 @@ const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
 const API_BASE = 'https://api.parikshasaathi.com';
 const SITE_NAME = 'Pariksha Saathi';
+// Real publish dates for static pages that have no per-entry date field of their own - taken from
+// the git commit that actually shipped them (489ecf6 and 9232611), not guessed.
+const SYLLABUS_PUBLISHED_DATE = '2026-10-01';
+const IBPS_VS_SBI_PUBLISHED_DATE = '2026-10-01';
 
 function escapeHtml(str) {
   return String(str)
@@ -640,7 +644,7 @@ function lessonPageBody(entry, lang) {
         </div>
         <h1>${escapeHtml(c.pageTitle)}</h1>
         <p class="compare-lede">${escapeHtml(c.lede)}</p>
-        <p class="lesson-credit">${lang === 'hi' ? 'लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक।' : 'Written by Mahesh Srivastava, Founder of Pariksha Saathi.'} <a href="/about/">${lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</a></p>
+        <p class="lesson-credit">${lang === 'hi' ? `लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक। प्रकाशित: ${entry.publishedDate}।` : `Written by Mahesh Srivastava, Founder of Pariksha Saathi. Published: ${entry.publishedDate}.`} <a href="/about/">${lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</a></p>
         <p><a href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
         <h2>${escapeHtml(c.conceptHeading)}</h2>
         <ul class="lesson-concept-list">
@@ -746,7 +750,8 @@ async function main() {
         '@type': 'Article',
         headline: 'IBPS PO vs SBI PO: What’s Actually Different',
         description: 'A comparison of how IBPS PO and SBI PO recruitment are conducted, who they recruit for, and how their selection stages differ.',
-        author: { '@type': 'Organization', name: SITE_NAME },
+        datePublished: IBPS_VS_SBI_PUBLISHED_DATE,
+        author: { '@type': 'Person', name: 'Mahesh Srivastava' },
         publisher: { '@type': 'Organization', name: SITE_NAME },
       },
       {
@@ -768,7 +773,7 @@ async function main() {
   const sitemapUrls = [
     { loc: '/', priority: '1.0', lastmod: BUILD_DATE },
 
-    { loc: '/compare/ibps-po-vs-sbi-po/', priority: '0.6', lastmod: BUILD_DATE },
+    { loc: '/compare/ibps-po-vs-sbi-po/', priority: '0.6', lastmod: IBPS_VS_SBI_PUBLISHED_DATE },
     // Trailing slash on every prerendered route: Cloudflare Pages 308-redirects the slash-less
     // form to this one (it resolves {path}/index.html), so this is what actually serves with no
     // extra hop - keeping canonical/sitemap/OG URLs in that same form throughout this file.
@@ -812,7 +817,9 @@ async function main() {
             headline: c.pageTitle,
             description: c.lede,
             inLanguage: lang,
-            author: { '@type': 'Organization', name: SITE_NAME },
+            // All 7 exams' syllabus pages shipped together in one pass - a real date, not per-exam.
+            datePublished: SYLLABUS_PUBLISHED_DATE,
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: SITE_NAME },
           },
           {
@@ -825,7 +832,7 @@ async function main() {
           },
         ],
       }));
-      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6' });
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: SYLLABUS_PUBLISHED_DATE });
     }
   }
 
@@ -861,7 +868,8 @@ async function main() {
             description: c.lede,
             inLanguage: lang,
             learningResourceType: 'lesson',
-            author: { '@type': 'Organization', name: SITE_NAME },
+            datePublished: entry.publishedDate,
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
             publisher: { '@type': 'Organization', name: SITE_NAME },
           },
           {
@@ -874,7 +882,7 @@ async function main() {
           },
         ],
       }));
-      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6' });
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: entry.publishedDate });
     }
   }
 
@@ -915,7 +923,7 @@ async function main() {
           headline: item.title,
           description: item.summary,
           datePublished: item.editionDate,
-          author: { '@type': 'Organization', name: SITE_NAME },
+          author: { '@type': 'Person', name: 'Mahesh Srivastava' },
           publisher: { '@type': 'Organization', name: SITE_NAME },
           about: item.examTags,
         },
@@ -990,7 +998,7 @@ async function main() {
           headline: item.title,
           description: item.summary,
           dateModified: item.lastVerifiedAt,
-          author: { '@type': 'Organization', name: SITE_NAME },
+          author: { '@type': 'Person', name: 'Mahesh Srivastava' },
           publisher: { '@type': 'Organization', name: SITE_NAME },
         },
         {
