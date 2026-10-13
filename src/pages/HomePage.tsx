@@ -462,9 +462,9 @@ export function HomePage() {
             <div className="pub-footer-links"><Link to="/about/">About &amp; editorial standards</Link>
               <Link to="/privacy/">Privacy Policy</Link>
               <Link to="/terms/">Terms of Use</Link>
-              <a href="https://mahesh0223.github.io/pariksha-saathi-legal/account-deletion.html">
+              <Link to="/account-deletion/">
                 Delete Account
-              </a>
+              </Link>
               <Link to="/contact/">Contact</Link>
             </div>
           </div>

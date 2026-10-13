@@ -51,6 +51,7 @@ export function App() {
       <Route path="/privacy" element={<PublicPage page="privacy" />} />
       <Route path="/contact" element={<PublicPage page="contact" />} />
       <Route path="/terms" element={<PublicPage page="terms" />} />
+      <Route path="/account-deletion" element={<PublicPage page="account-deletion" />} />
       <Route path="/compare/ibps-po-vs-sbi-po" element={<IbpsPoVsSbiPoPage />} />
       {EXAM_SYLLABI.map((exam) => (
         <Route

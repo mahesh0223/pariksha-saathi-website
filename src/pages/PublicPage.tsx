@@ -4,7 +4,7 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { PUBLIC_PAGES, publicPageBody } from '../data/publicPages.mjs';
 import './compare/ComparePage.css';
 import './PublicPage.css';
-export function PublicPage({ page }: { page: 'learn' | 'about' | 'privacy' | 'contact' | 'terms' }) {
+export function PublicPage({ page }: { page: 'learn' | 'about' | 'privacy' | 'contact' | 'terms' | 'account-deletion' }) {
   const { hash } = useLocation();
   useDocumentMeta({ ...PUBLIC_PAGES[page], path: `/${page}/` });
   useEffect(() => { if (hash) document.getElementById(hash.slice(1))?.scrollIntoView(); }, [hash, page]);
