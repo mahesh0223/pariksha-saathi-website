@@ -1652,6 +1652,609 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: ध्यान दें कि यह विज्ञप्ति किस विशिष्ट भाषा-युग्म और उपयोग-मामले (NCGG में सिविल सेवकों का प्रशिक्षण) के बारे में है, भाषिणी के व्यापक, स्थायी उद्देश्य से अलग करके।',
     },
   },
+
+  // --- Backlog batch: 30 pre-policy current-affairs items that predate the
+  // 2026-10-13 standing-note policy, written 2026-10-13 to close the gap. ---
+
+  // 1. cmu72o5zx0006pjjvnvfh2wla | PRID=2310000 | INS Mysore completes fourth Samudra Laksamana exercise
+  {
+    match: /[?&]PRID=2310000(?:&|$)/i,
+    en: {
+      body: 'India-Malaysia defence cooperation runs through a standing institutional track, separate from individual exercises such as Samudra Laksamana. The main channel is the India-Malaysia Defence Cooperation Meeting (MIDCOM); its 13th round was held in Malaysia on 19 February 2025. A newer India-Malaysia Security Dialogue, covering wider security issues, held its first meeting in New Delhi on 7 January 2025.',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-Malaysia-bilateral-relations-2025.pdf',
+      refLabel: 'Reference: Ministry of External Affairs — India-Malaysia bilateral relations brief',
+      checkQ: 'Check yourself: are MIDCOM and the India-Malaysia Security Dialogue the same mechanism?',
+      checkA: 'No. MIDCOM is the dedicated defence cooperation meeting (its 13th round met in February 2025); the Security Dialogue is a separate, newer track whose first meeting was in January 2025.',
+      task: 'Revision task: note which edition of Exercise Samudra Laksamana this release describes and where it was held, then check it against the previous (3rd) edition, which was held in India off Visakhapatnam in Feb-Mar 2024 — the venue alternates between the two countries.',
+    },
+    hi: {
+      body: 'भारत-मलेशिया रक्षा सहयोग एक स्थायी संस्थागत ढांचे से चलता है, जो समुद्र लक्षमना जैसे किसी एक अभ्यास से अलग है। मुख्य माध्यम भारत-मलेशिया रक्षा सहयोग बैठक (MIDCOM) है; इसका 13वां दौर 19 फरवरी 2025 को मलेशिया में हुआ। एक नया भारत-मलेशिया सुरक्षा संवाद, जो व्यापक सुरक्षा मुद्दों को कवर करता है, उसकी पहली बैठक 7 जनवरी 2025 को नई दिल्ली में हुई।',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-Malaysia-bilateral-relations-2025.pdf',
+      refLabel: 'संदर्भ: विदेश मंत्रालय — भारत-मलेशिया द्विपक्षीय संबंध संक्षिप्त विवरण',
+      checkQ: 'खुद जाँचें: क्या MIDCOM और भारत-मलेशिया सुरक्षा संवाद एक ही तंत्र हैं?',
+      checkA: 'नहीं। MIDCOM रक्षा सहयोग की समर्पित बैठक है (इसका 13वां दौर फरवरी 2025 में हुआ); सुरक्षा संवाद एक अलग, नया तंत्र है जिसकी पहली बैठक जनवरी 2025 में हुई।',
+      task: 'अभ्यास: इस खबर में बताया गया समुद्र लक्षमना अभ्यास का कौन-सा संस्करण है और वह कहाँ हुआ, यह नोट करें, फिर पिछले (तीसरे) संस्करण से तुलना करें, जो फरवरी-मार्च 2024 में भारत में विशाखापत्तनम के निकट हुआ था — स्थान दोनों देशों के बीच बदलता रहता है।',
+    },
+  },
+
+  // 2. cmu72o5zz0007pjjvhf7bsz85 | PRID=2310476 | India-US Exercise Yudh Abhyas begins at Auli and Mahajan
+  {
+    match: /[?&]PRID=2310476(?:&|$)/i,
+    en: {
+      body: 'Exercise Yudh Abhyas is a bilateral India-US Army exercise that began in 2004, originally at the platoon-exchange level, under a Theater Security Cooperation Program sponsored by US Army Pacific. It is held annually, alternating between venues in India and the United States, and has grown over two decades into larger drills involving brigade-level manoeuvres, drones and live-fire elements.',
+      refUrl: 'https://www.army.mil/article/47441/yudh_abhyas',
+      refLabel: "Reference: U.S. Army's official article on Exercise Yudh Abhyas",
+      checkQ: 'Check yourself: did Yudh Abhyas begin as a large, brigade-level exercise?',
+      checkA: 'No. It began in 2004 at the platoon-exchange level and has scaled up gradually over two decades to larger, more complex drills.',
+      task: "Revision task: from this release, separate the fixed facts (Yudh Abhyas's 2004 origin, its annual and alternating-venue format) from this year's specifics — the two simultaneous locations (Auli and Mahajan) and what each site focuses on.",
+    },
+    hi: {
+      body: 'यूध अभ्यास भारत-अमेरिका थल सेनाओं के बीच एक द्विपक्षीय अभ्यास है, जिसकी शुरुआत 2004 में प्लाटून-स्तरीय आदान-प्रदान के रूप में हुई थी, और यह अमेरिकी सेना प्रशांत कमान द्वारा प्रायोजित थिएटर सुरक्षा सहयोग कार्यक्रम के अंतर्गत आता है। यह हर साल आयोजित होता है, जिसका स्थान भारत और अमेरिका के बीच बदलता रहता है, और दो दशकों में यह ड्रोन व लाइव-फायर तत्वों सहित ब्रिगेड-स्तर के बड़े अभ्यासों तक विकसित हो गया है।',
+      refUrl: 'https://www.army.mil/article/47441/yudh_abhyas',
+      refLabel: 'संदर्भ: यूध अभ्यास पर अमेरिकी सेना का आधिकारिक लेख',
+      checkQ: 'खुद जाँचें: क्या यूध अभ्यास की शुरुआत एक बड़े, ब्रिगेड-स्तरीय अभ्यास के रूप में हुई थी?',
+      checkA: 'नहीं। इसकी शुरुआत 2004 में प्लाटून-स्तरीय आदान-प्रदान से हुई थी, और दो दशकों में यह धीरे-धीरे बड़े, जटिल अभ्यासों तक विकसित हुआ।',
+      task: 'अभ्यास: इस खबर से स्थायी तथ्यों (यूध अभ्यास की 2004 में शुरुआत, इसका वार्षिक और बदलते स्थान वाला स्वरूप) को इस वर्ष की विशिष्ट बातों — दो एक साथ हो रहे स्थान (औली और महाजन) और हर स्थान का फोकस — से अलग लिखें।',
+    },
+  },
+
+  // 3. cmuinuxsd000tpjjuk4jwkkzx | PRID=2313871 | MY Bharat crosses 3 crore registered youth milestone
+  {
+    match: /[?&]PRID=2313871(?:&|$)/i,
+    en: {
+      body: "MY Bharat (Mera Yuva Bharat) is a flagship digital platform of the Department of Youth Affairs, Ministry of Youth Affairs and Sports, launched by Prime Minister Narendra Modi on 31 October 2023 — National Unity Day — and built by the Digital India Corporation. It is open to Indians aged 15 to 29 and offers experiential learning, volunteering ('Volunteer for Bharat') and mentorship opportunities in 15 Indian languages.",
+      refUrl: 'https://www.digitalindia.gov.in/initiative/my-bharat',
+      refLabel: 'Reference: Digital India (MeitY) — MY Bharat initiative page',
+      checkQ: 'Check yourself: is MY Bharat run by the Ministry of Electronics and IT, since the Digital India Corporation built the platform?',
+      checkA: 'No. MY Bharat is an initiative of the Ministry of Youth Affairs and Sports; the Digital India Corporation, under MeitY, only built and maintains the technology platform.',
+      task: 'Revision task: from this release, note the registration figure given (3 crore) and the number of experiential learning programmes or youth mentioned, then separate these from the standing facts above — the launch date and the eligibility age band (15-29).',
+    },
+    hi: {
+      body: 'MY भारत (मेरा युवा भारत) युवा कार्य एवं खेल मंत्रालय के युवा कार्य विभाग का एक प्रमुख डिजिटल मंच है, जिसे प्रधानमंत्री नरेंद्र मोदी ने 31 अक्टूबर 2023 — राष्ट्रीय एकता दिवस — को लॉन्च किया था, और जिसे डिजिटल इंडिया कॉर्पोरेशन ने बनाया है। यह 15 से 29 वर्ष के भारतीयों के लिए खुला है और 15 भारतीय भाषाओं में अनुभवात्मक शिक्षा, स्वयंसेवा ("वॉलंटियर फॉर भारत") और मेंटरशिप के अवसर देता है।',
+      refUrl: 'https://www.digitalindia.gov.in/initiative/my-bharat',
+      refLabel: 'संदर्भ: डिजिटल इंडिया (MeitY) — MY भारत पहल पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या MY भारत का संचालन इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय करता है, क्योंकि इसका मंच डिजिटल इंडिया कॉर्पोरेशन ने बनाया?',
+      checkA: 'नहीं। MY भारत युवा कार्य एवं खेल मंत्रालय की पहल है; MeitY के अंतर्गत आने वाली डिजिटल इंडिया कॉर्पोरेशन ने केवल तकनीकी मंच बनाया और बनाए रखा है।',
+      task: 'अभ्यास: इस खबर से पंजीकरण का आंकड़ा (3 करोड़) और बताए गए अनुभवात्मक शिक्षण कार्यक्रमों या युवाओं की संख्या नोट करें, फिर इन्हें ऊपर दिए स्थायी तथ्यों — मंच की शुरुआत की तारीख और पात्रता आयु वर्ग (15-29) — से अलग रखें।',
+    },
+  },
+
+  // 4. cmuinuxs9000rpjjuw7ffjz0x | PRID=2313942 | MoD signs Rs 811 crore contract with BDL for 160 Satellite Smart Anti Airfield Weapons
+  {
+    match: /[?&]PRID=2313942(?:&|$)/i,
+    en: {
+      body: 'SAAW (Smart Anti-Airfield Weapon) is a long-range, stand-off, precision air-to-surface glide bomb designed by DRDO and manufactured by Bharat Dynamics Limited (BDL). It weighs about 125 kg, is roughly 1.85 m long, has a range of about 90-100 km depending on release conditions, and strikes within about 7 m using INS-GPS guidance (under 3 m with its seeker active). BDL itself is a Government of India enterprise under the Ministry of Defence, headquartered in Hyderabad.',
+      refUrl: 'https://www.ddpmod.gov.in/node/6868',
+      refLabel: 'Reference: Department of Defence Production (Ministry of Defence) — SAAW product page',
+      checkQ: 'Check yourself: is SAAW built by the same organisation that designed it?',
+      checkA: 'No. DRDO designed SAAW; it is manufactured by Bharat Dynamics Limited, a separate defence public sector enterprise under the Ministry of Defence.',
+      task: 'Revision task: note the exact contract value (Rs 811 crore / Rs 810.79 crore) and the acquisition category named in this release (Buy Indian-IDDM), and compare the number of weapons being procured (160) against the standing specifications above.',
+    },
+    hi: {
+      body: 'SAAW (स्मार्ट एंटी-एयरफील्ड वेपन) एक लंबी दूरी का, स्टैंड-ऑफ, सटीक एयर-टू-सरफेस ग्लाइड बम है, जिसे DRDO ने डिज़ाइन किया है और भारत डायनेमिक्स लिमिटेड (BDL) बनाती है। इसका वज़न लगभग 125 किलोग्राम है, लंबाई करीब 1.85 मीटर है, यह स्थिति के अनुसार लगभग 90-100 किमी तक मार कर सकता है, और INS-GPS मार्गदर्शन से लगभग 7 मीटर (सीकर सक्रिय होने पर 3 मीटर से कम) की सटीकता रखता है। BDL स्वयं रक्षा मंत्रालय के अधीन भारत सरकार का उपक्रम है, जिसका मुख्यालय हैदराबाद में है।',
+      refUrl: 'https://www.ddpmod.gov.in/node/6868',
+      refLabel: 'संदर्भ: रक्षा उत्पादन विभाग (रक्षा मंत्रालय) — SAAW उत्पाद पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या SAAW को डिज़ाइन करने वाली और उसे बनाने वाली संस्था एक ही है?',
+      checkA: 'नहीं। DRDO ने SAAW को डिज़ाइन किया है; इसका निर्माण भारत डायनेमिक्स लिमिटेड करती है, जो रक्षा मंत्रालय के अधीन एक अलग रक्षा सार्वजनिक उपक्रम है।',
+      task: 'अभ्यास: इस खबर में बताई गई अनुबंध राशि (₹811 करोड़ / ₹810.79 करोड़) और खरीद श्रेणी (बाय इंडियन-IDDM) नोट करें, और खरीदे जा रहे हथियारों की संख्या (160) की तुलना ऊपर दी गई मानक विशेषताओं से करें।',
+    },
+  },
+
+  // 5. cmum8b1o5000apjjvsgu86gr0 | PRID=2315640 | India Ranks 10th at WorldSkills Shanghai 2026
+  {
+    match: /[?&]PRID=2315640(?:&|$)/i,
+    en: {
+      body: 'WorldSkills began as a single competition in Madrid in November 1950, when 24 young competitors from Spain and Portugal took part at the Virgen de la Paloma trade college; the organisation that runs the event today grew out of it. The competition first moved outside Spain in 1958, to Brussels, and WorldSkills now counts 90 member countries and regions.',
+      refUrl: 'https://worldskills.org/media/news/worldskills-celebrates-70-years/',
+      refLabel: 'Reference: WorldSkills International — 70th-anniversary history article',
+      checkQ: 'Check yourself: was the first WorldSkills competition a large international event like Shanghai 2026?',
+      checkA: 'No. The 1950 Madrid event had just 24 competitors from Spain and Portugal; the competition only moved outside Spain for the first time in 1958, and membership has since grown to 90 countries and regions.',
+      task: "Revision task: from this release, separate the competition-specific results (India's 10th-place finish, six silver medals, 20 Medals for Excellence) from the standing facts above about WorldSkills' own history.",
+    },
+    hi: {
+      body: 'वर्ल्डस्किल्स की शुरुआत नवंबर 1950 में मैड्रिड में हुई एक अकेली प्रतियोगिता से हुई थी, जिसमें स्पेन और पुर्तगाल के 24 युवा प्रतिभागियों ने वर्जन डे ला पालोमा ट्रेड कॉलेज में भाग लिया था; आज जो संगठन इसे चलाता है, वह उसी आयोजन से विकसित हुआ। यह प्रतियोगिता पहली बार 1958 में स्पेन से बाहर, ब्रसेल्स में हुई, और अब वर्ल्डस्किल्स के 90 सदस्य देश और क्षेत्र हैं।',
+      refUrl: 'https://worldskills.org/media/news/worldskills-celebrates-70-years/',
+      refLabel: 'संदर्भ: वर्ल्डस्किल्स इंटरनेशनल — 70वीं वर्षगांठ पर इतिहास लेख',
+      checkQ: 'खुद जाँचें: क्या पहली वर्ल्डस्किल्स प्रतियोगिता शंघाई 2026 जैसी बड़ी अंतरराष्ट्रीय प्रतियोगिता थी?',
+      checkA: 'नहीं। 1950 के मैड्रिड आयोजन में स्पेन और पुर्तगाल के केवल 24 प्रतिभागी थे; यह प्रतियोगिता पहली बार 1958 में स्पेन से बाहर गई, और तब से इसकी सदस्यता बढ़कर 90 देशों और क्षेत्रों तक पहुँच गई है।',
+      task: 'अभ्यास: इस खबर से प्रतियोगिता-विशिष्ट नतीजों (भारत की 10वीं रैंक, छह रजत पदक, 20 मेडल फॉर एक्सीलेंस) को ऊपर दिए वर्ल्डस्किल्स के स्थायी इतिहास से अलग लिखें।',
+    },
+  },
+
+  // 6. cmum8b1o30009pjjvw48d1fcp | PRID=2315705 | NMDC commissions Rs 5,427 crore Iron ore processing plant, slurry pipeline and pellet plant in Bastar, Chhattisgarh
+  {
+    match: /[?&]PRID=2315705(?:&|$)/i,
+    en: {
+      body: "NMDC Limited was incorporated in November 1958 and is a Navratna public sector enterprise under the Ministry of Steel, with its registered and corporate offices in Hyderabad. It is India's largest iron-ore producer, running open-cast mines at Kirandul and Bacheli in Chhattisgarh's Bastar region and at Donimalai in Karnataka.",
+      refUrl: 'https://cag.gov.in/en/audit-report/details/1945',
+      refLabel: 'Reference: Comptroller and Auditor General of India — audit report on NMDC Limited',
+      checkQ: "Check yourself: is NMDC's registered office in Chhattisgarh, where its mines are located?",
+      checkA: "No. NMDC's mines are in Chhattisgarh (Bacheli, Kirandul) and Karnataka (Donimalai), but its registered and corporate offices are in Hyderabad.",
+      task: "Revision task: from this release, note the three components of the new project (processing plant, slurry pipeline, pellet plant) and their individual capacities, and separate them from the standing facts above about NMDC's founding year and mine locations.",
+    },
+    hi: {
+      body: 'NMDC लिमिटेड की स्थापना नवंबर 1958 में हुई थी और यह इस्पात मंत्रालय के अंतर्गत एक नवरत्न सार्वजनिक उपक्रम है, जिसका पंजीकृत एवं कॉर्पोरेट कार्यालय हैदराबाद में है। यह भारत की सबसे बड़ी लौह अयस्क उत्पादक कंपनी है, जो छत्तीसगढ़ के बस्तर क्षेत्र में किरंदुल और बचेली तथा कर्नाटक के डोनिमलाई में खुली खदानें चलाती है।',
+      refUrl: 'https://cag.gov.in/en/audit-report/details/1945',
+      refLabel: 'संदर्भ: भारत के नियंत्रक एवं महालेखा परीक्षक (CAG) — NMDC लिमिटेड पर लेखापरीक्षा रिपोर्ट',
+      checkQ: 'खुद जाँचें: क्या NMDC का पंजीकृत कार्यालय छत्तीसगढ़ में है, जहाँ उसकी खदानें हैं?',
+      checkA: 'नहीं। NMDC की खदानें छत्तीसगढ़ (बचेली, किरंदुल) और कर्नाटक (डोनिमलाई) में हैं, लेकिन इसका पंजीकृत एवं कॉर्पोरेट कार्यालय हैदराबाद में है।',
+      task: 'अभ्यास: इस खबर से नई परियोजना के तीन हिस्सों (प्रोसेसिंग प्लांट, स्लरी पाइपलाइन, पेलेट प्लांट) और उनकी अलग-अलग क्षमताएं नोट करें, और इन्हें ऊपर दिए NMDC के स्थापना वर्ष और खदानों के स्थान से जुड़े स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+
+  // 7. cmum8b1ob000dpjjvoob11w6w | PRID=2316062 | FASTag Annual Pass Reaches One Crore Milestone
+  {
+    match: /[?&]PRID=2316062(?:&|$)/i,
+    en: {
+      body: "FASTag is an RFID-based device affixed to a vehicle's windscreen for automatic toll payment, implemented by the Indian Highways Management Company Limited (IHMCL) — a company promoted by NHAI — with the National Payments Corporation of India providing clearing and settlement. Under amendments to the Central Motor Vehicles Rules, 1989, FASTag has been mandatory for all Class M and N vehicles (four-wheelers and above) since 1 January 2021, and mandatory for new third-party vehicle insurance since 1 April 2021.",
+      refUrl: 'https://nhai.gov.in/nhai/sites/default/files/mix_file/FAQ-FASTag.pdf',
+      refLabel: 'Reference: NHAI/IHMCL — Frequently Asked Questions on FASTag',
+      checkQ: 'Check yourself: does the FASTag Annual Pass replace the need to have a FASTag?',
+      checkA: "No. The Annual Pass is an add-on that attaches to a vehicle's existing FASTag; FASTag itself has been mandatory for all Class M and N vehicles since 1 January 2021, regardless of any pass.",
+      task: 'Revision task: note the Annual Pass\'s own launch date and fee structure in this release (launched 15 August 2025; Rs 3,075 for one year or 200 toll crossings), and separate these pass-specific rules from the standing FASTag mandate above.',
+    },
+    hi: {
+      body: 'फास्टैग एक RFID आधारित उपकरण है जो वाहन के विंडस्क्रीन पर लगाया जाता है और स्वचालित टोल भुगतान के लिए उपयोग होता है; इसे इंडियन हाइवेज़ मैनेजमेंट कंपनी लिमिटेड (IHMCL) लागू करती है, जो NHAI द्वारा प्रवर्तित कंपनी है, और नेशनल पेमेंट्स कॉरपोरेशन ऑफ इंडिया समाशोधन एवं निपटान सेवाएं देता है। केंद्रीय मोटर वाहन नियम, 1989 में संशोधन के तहत, 1 जनवरी 2021 से सभी श्रेणी M और N वाहनों (चार पहिया और उससे बड़े) के लिए फास्टैग अनिवार्य है, और 1 अप्रैल 2021 से नए तृतीय-पक्ष वाहन बीमा के लिए भी अनिवार्य है।',
+      refUrl: 'https://nhai.gov.in/nhai/sites/default/files/mix_file/FAQ-FASTag.pdf',
+      refLabel: 'संदर्भ: NHAI/IHMCL — फास्टैग पर अक्सर पूछे जाने वाले प्रश्न',
+      checkQ: 'खुद जाँचें: क्या फास्टैग वार्षिक पास, फास्टैग रखने की ज़रूरत को खत्म कर देता है?',
+      checkA: 'नहीं। वार्षिक पास वाहन के मौजूदा फास्टैग से जुड़ने वाली एक अतिरिक्त सुविधा है; फास्टैग स्वयं 1 जनवरी 2021 से सभी श्रेणी M और N वाहनों के लिए अनिवार्य है, चाहे कोई पास हो या न हो।',
+      task: 'अभ्यास: इस खबर में बताई गई वार्षिक पास की अपनी शुरुआत की तारीख और शुल्क संरचना (15 अगस्त 2025 को लॉन्च; एक वर्ष या 200 टोल पार करने तक ₹3,075) नोट करें, और इन पास-विशिष्ट नियमों को ऊपर दिए गए स्थायी फास्टैग अनिवार्यता से अलग रखें।',
+    },
+  },
+
+  // 8. cmup9bn5d000dpjjv9ul0119r | PRID=2316474 | Government to Launch Special Campaign 6 from 2 to 31 October with Focus on Swachhata and Reducing Pendency
+  {
+    match: /[?&]PRID=2316474(?:&|$)/i,
+    en: {
+      body: 'The Special Campaign for Disposal of Pending Matters is an annual, DARPG-coordinated drive across central government ministries, departments, PSUs and autonomous bodies. Its first edition ran from 2 to 31 October 2021, targeting pending MP references, inter-ministerial consultations, parliamentary assurances and public grievances; later editions added office-space management and Swachhata (cleanliness) drives, and have followed the same 2-31 October window each year since.',
+      refUrl: 'https://icar.org.in/en/node/13939',
+      refLabel: 'Reference: ICAR circular — Special Campaign for Disposal of Pending Matters, October 2021',
+      checkQ: "Check yourself: is this year's Special Campaign 6 the first time Swachhata and pendency reduction have been combined in this drive?",
+      checkA: 'No. Swachhata and office-space/scrap-disposal targets were already part of Special Campaign 2.0 in October 2022; the campaign has repeated annually in the same 2-31 October window since 2021, with later editions building on the original pendency-clearance focus.',
+      task: 'Revision task: from this release, note the specific preparatory-phase dates given for Campaign 6 and the named focus areas (e-waste, record management, space management), and separate them from the standing fact above — that the campaign has run every October since 2021.',
+    },
+    hi: {
+      body: 'लंबित मामलों के निपटान हेतु विशेष अभियान, केंद्र सरकार के मंत्रालयों, विभागों, सार्वजनिक उपक्रमों और स्वायत्त निकायों में DARPG द्वारा समन्वित एक वार्षिक अभियान है। इसका पहला संस्करण 2 से 31 अक्टूबर 2021 तक चला था, जिसमें सांसदों के संदर्भ, अंतर-मंत्रालयी परामर्श, संसदीय आश्वासन और लोक शिकायतों के निपटान पर ध्यान दिया गया; बाद के संस्करणों में कार्यालय-स्थान प्रबंधन और स्वच्छता अभियान भी जोड़े गए, और तब से हर साल यह 2-31 अक्टूबर की समान अवधि में होता रहा है।',
+      refUrl: 'https://icar.org.in/en/node/13939',
+      refLabel: 'संदर्भ: ICAR परिपत्र — लंबित मामलों के निपटान हेतु विशेष अभियान, अक्टूबर 2021',
+      checkQ: 'खुद जाँचें: क्या इस वर्ष के विशेष अभियान 6 में पहली बार स्वच्छता और लंबित मामलों में कमी को एक साथ जोड़ा गया है?',
+      checkA: 'नहीं। स्वच्छता और कार्यालय-स्थान/स्क्रैप निपटान के लक्ष्य अक्टूबर 2022 के विशेष अभियान 2.0 में ही शामिल हो चुके थे; यह अभियान 2021 से हर साल उसी 2-31 अक्टूबर की अवधि में दोहराया जाता रहा है, और बाद के संस्करणों ने शुरुआती लंबित-मामला निपटान फोकस को आगे बढ़ाया।',
+      task: 'अभ्यास: इस खबर से अभियान 6 के लिए बताई गई तैयारी-चरण की तारीखें और नामित फोकस क्षेत्र (ई-वेस्ट, रिकॉर्ड प्रबंधन, स्थान प्रबंधन) नोट करें, और इन्हें ऊपर दिए स्थायी तथ्य — कि यह अभियान 2021 से हर अक्टूबर में होता आया है — से अलग रखें।',
+    },
+  },
+
+  // 9. cmuxp0o1g000dpjjv0zsn851v | PRID=2319908 | Commerce Minister Piyush Goyal Holds Meetings with Leading U.S. Companies in New York
+  {
+    match: /[?&]PRID=2319908(?:&|$)/i,
+    en: {
+      body: "The India-US Trade Policy Forum (TPF) is the two countries' main ministerial-level mechanism for trade and investment issues, created during Prime Minister Manmohan Singh's 2005 US visit and continuing the earlier US-India Working Group on Trade (which began in 2000). It is co-chaired by the US Trade Representative and India's Minister of Commerce and Industry (or their deputies), and covers tariffs, non-tariff barriers, investment, intellectual property and services.",
+      refUrl: 'https://ustr.gov/archive/Document_Library/Fact_Sheets/2005/US_-_India_Trade_Policy_Forum.html',
+      refLabel: 'Reference: Office of the United States Trade Representative — 2005 fact sheet on the US-India Trade Policy Forum',
+      checkQ: 'Check yourself: did ministerial-level India-US trade dialogue begin with the Trade Policy Forum in 2005?',
+      checkA: 'No. The TPF (2005) formalised and continued the US-India Working Group on Trade, which had already been meeting since 2000.',
+      task: "Revision task: from this release, list the specific companies and sectors Piyush Goyal's meetings covered, and separate this ad hoc industry outreach from the standing, ministerial-level TPF mechanism described above.",
+    },
+    hi: {
+      body: 'भारत-अमेरिका व्यापार नीति मंच (Trade Policy Forum, TPF) दोनों देशों के बीच व्यापार और निवेश मुद्दों पर मंत्री-स्तरीय मुख्य तंत्र है, जिसे प्रधानमंत्री मनमोहन सिंह की 2005 की अमेरिका यात्रा के दौरान बनाया गया था और जो इससे पहले के भारत-अमेरिका व्यापार कार्यकारी समूह (जिसकी शुरुआत 2000 में हुई थी) को आगे बढ़ाता है। इसकी सह-अध्यक्षता अमेरिकी व्यापार प्रतिनिधि (USTR) और भारत के वाणिज्य एवं उद्योग मंत्री (या उनके प्रतिनिधि) करते हैं, और यह शुल्क, गैर-शुल्क बाधाओं, निवेश, बौद्धिक संपदा और सेवाओं जैसे विषयों को कवर करता है।',
+      refUrl: 'https://ustr.gov/archive/Document_Library/Fact_Sheets/2005/US_-_India_Trade_Policy_Forum.html',
+      refLabel: 'संदर्भ: अमेरिकी व्यापार प्रतिनिधि कार्यालय (USTR) — भारत-अमेरिका व्यापार नीति मंच पर 2005 का फैक्ट शीट',
+      checkQ: 'खुद जाँचें: क्या भारत-अमेरिका मंत्री-स्तरीय व्यापार संवाद की शुरुआत 2005 में व्यापार नीति मंच से हुई थी?',
+      checkA: 'नहीं। TPF (2005) ने भारत-अमेरिका व्यापार कार्यकारी समूह को औपचारिक रूप दिया और आगे बढ़ाया, जो 2000 से ही बैठकें कर रहा था।',
+      task: 'अभ्यास: इस खबर से पीयूष गोयल की बैठकों में शामिल विशिष्ट कंपनियों और क्षेत्रों की सूची बनाएं, और इस तात्कालिक उद्योग संपर्क को ऊपर बताए गए स्थायी, मंत्री-स्तरीय TPF तंत्र से अलग रखें।',
+    },
+  },
+
+  // 10. cmv6e9wrn000bpjk5cltn2d19 | PRID=2321726 | Defence Secretary Rajesh Kumar Singh to Visit Cyprus and Greece, 12-15 October 2026
+  {
+    match: /[?&]PRID=2321726(?:&|$)/i,
+    en: {
+      body: "The India-EU Security and Defence Partnership was signed on 27 January 2026 on the margins of the 16th India-EU Summit, by EU High Representative/Vice-President Kaja Kallas and India's External Affairs Minister Dr S. Jaishankar. Cyprus and Greece are both European Union member states, so a visit like this one by India's Defence Secretary sits within that wider EU-India security framework as well as India's separate bilateral defence ties with each country.",
+      refUrl: 'https://www.eeas.europa.eu/eeas/security-and-defence-eu-and-india-sign-security-defence-partnership_en',
+      refLabel: 'Reference: European External Action Service (EEAS) — EU-India Security and Defence Partnership',
+      checkQ: 'Check yourself: is the India-EU Security and Defence Partnership a bilateral India-Greece or India-Cyprus agreement?',
+      checkA: "No. It is a separate framework between India and the European Union as a whole, signed in January 2026; India's ties with Greece and Cyprus individually rest on their own bilateral mechanisms.",
+      task: "Revision task: from this release, note the specific dates and sequence of the Defence Secretary's visit (Cyprus on 12-13 October, Greece thereafter) and the named focus areas (maritime security, defence industrial cooperation), and separate these from the standing EU-level framework above.",
+    },
+    hi: {
+      body: 'भारत-यूरोपीय संघ सुरक्षा एवं रक्षा भागीदारी पर 27 जनवरी 2026 को 16वें भारत-EU शिखर सम्मेलन के मौके पर हस्ताक्षर हुए थे, जिसमें EU की उच्च प्रतिनिधि/उपाध्यक्ष काया कैलास और भारत के विदेश मंत्री डॉ. एस. जयशंकर ने हस्ताक्षर किए। साइप्रस और ग्रीस दोनों यूरोपीय संघ के सदस्य देश हैं, इसलिए भारत के रक्षा सचिव की ऐसी यात्राएं इस व्यापक EU-भारत सुरक्षा ढांचे के साथ-साथ हर देश के साथ भारत के अलग द्विपक्षीय रक्षा संबंधों के दायरे में भी आती हैं।',
+      refUrl: 'https://www.eeas.europa.eu/eeas/security-and-defence-eu-and-india-sign-security-defence-partnership_en',
+      refLabel: 'संदर्भ: यूरोपियन एक्सटर्नल एक्शन सर्विस (EEAS) — EU-भारत सुरक्षा एवं रक्षा भागीदारी',
+      checkQ: 'खुद जाँचें: क्या भारत-EU सुरक्षा एवं रक्षा भागीदारी भारत-ग्रीस या भारत-साइप्रस के बीच कोई द्विपक्षीय समझौता है?',
+      checkA: 'नहीं। यह भारत और समूचे यूरोपीय संघ के बीच एक अलग ढांचा है, जिस पर जनवरी 2026 में हस्ताक्षर हुए; ग्रीस और साइप्रस के साथ भारत के अलग-अलग संबंध उनके अपने द्विपक्षीय तंत्रों पर आधारित हैं।',
+      task: 'अभ्यास: इस खबर से रक्षा सचिव की यात्रा की विशिष्ट तारीखें और क्रम (12-13 अक्टूबर को साइप्रस, उसके बाद ग्रीस) और बताए गए फोकस क्षेत्र (समुद्री सुरक्षा, रक्षा औद्योगिक सहयोग) नोट करें, और इन्हें ऊपर दिए गए स्थायी EU-स्तरीय ढांचे से अलग रखें।',
+    },
+  },
+
+  // 11. cmv6e9wrh0009pjk584v4y87m | PRID=2321828 | Fifth Kautilya Economic Conclave Wraps Up Under the Theme 'Resilience in an Age of Flux'
+  {
+    match: /[?&]PRID=2321828(?:&|$)/i,
+    en: {
+      body: 'The Kautilya Economic Conclave was conceived and sponsored by the Ministry of Finance and is organised by the Institute of Economic Growth (IEG), with its first edition held in New Delhi from 8 to 10 July 2022. IEG itself is a Delhi-based economic research institute founded by V.K.R.V. Rao that dates its own history to 1958.',
+      refUrl: 'https://iegindia.org/kautilya-economic-conclave-kec-organised-by-the-institute-of-economic-growth-ieg-during-8-10-july-2022/',
+      refLabel: 'Reference: Institute of Economic Growth (IEG) — page on the first Kautilya Economic Conclave, 2022',
+      checkQ: 'Check yourself: has the Kautilya Economic Conclave been held for as long as the Institute of Economic Growth has existed?',
+      checkA: 'No. IEG, the organising institute, traces its own history to 1958; the Kautilya Economic Conclave itself is a much newer annual event whose first edition was only in July 2022.',
+      task: "Revision task: from this release, note this year's theme ('Resilience in an Age of Flux') and the speakers named, and separate these year-specific details from the standing facts above about when the conclave itself began and who organises it.",
+    },
+    hi: {
+      body: 'कौटिल्य आर्थिक सम्मेलन (Kautilya Economic Conclave) की परिकल्पना और प्रायोजन वित्त मंत्रालय ने किया, और इसका आयोजन आर्थिक विकास संस्थान (IEG) करता है; इसका पहला संस्करण 8 से 10 जुलाई 2022 को नई दिल्ली में हुआ था। IEG स्वयं दिल्ली स्थित एक आर्थिक शोध संस्थान है, जिसकी स्थापना वी.के.आर.वी. राव ने की थी, और यह अपने इतिहास को 1958 से मानता है।',
+      refUrl: 'https://iegindia.org/kautilya-economic-conclave-kec-organised-by-the-institute-of-economic-growth-ieg-during-8-10-july-2022/',
+      refLabel: 'संदर्भ: आर्थिक विकास संस्थान (IEG) — पहले कौटिल्य आर्थिक सम्मेलन, 2022 पर पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या कौटिल्य आर्थिक सम्मेलन उतने ही समय से आयोजित हो रहा है जितने समय से आर्थिक विकास संस्थान (IEG) अस्तित्व में है?',
+      checkA: 'नहीं। IEG, जो इस सम्मेलन का आयोजक है, अपना इतिहास 1958 से मानता है; कौटिल्य आर्थिक सम्मेलन एक बहुत नया वार्षिक आयोजन है, जिसका पहला संस्करण जुलाई 2022 में ही हुआ था।',
+      task: 'अभ्यास: इस खबर से इस वर्ष की थीम ("अस्थिरता के दौर में लचीलापन") और उल्लेखित वक्ताओं के नाम नोट करें, और इन वर्ष-विशिष्ट विवरणों को ऊपर दिए स्थायी तथ्यों — सम्मेलन की शुरुआत कब हुई और इसका आयोजक कौन है — से अलग रखें।',
+    },
+  },
+
+  // 12. cmv6e9wr40003pjk5q06xnlct | PRID=2321795 | Navy's Next Generation Offshore Patrol Vessel 'Shreyas' Launched at GRSE Kolkata
+  {
+    match: /[?&]PRID=2321795(?:&|$)/i,
+    en: {
+      body: 'GRSE traces its origin to an 1884 shipbuilding and repair workshop on the Hooghly; it was incorporated as Garden Reach Workshops Limited in 1934, nationalised in 1960 and brought under the Ministry of Defence, and renamed Garden Reach Shipbuilders & Engineers in 1976. Wholly owned by the President of India, it is now a Navratna public sector undertaking under the Ministry of Defence, headquartered in Kolkata.',
+      refUrl: 'https://www.grse.in/historical-background/',
+      refLabel: 'Reference: Garden Reach Shipbuilders & Engineers (GRSE) — official historical background page',
+      checkQ: 'Check yourself: has GRSE always been a central government shipyard?',
+      checkA: 'No. It began in 1884 as a shipbuilding and repair workshop; government ownership and its move under the Ministry of Defence only came with nationalisation in 1960.',
+      task: "Revision task: from this release, note where 'Shreyas' fits in GRSE's four-ship Next Generation Offshore Patrol Vessel programme (which ships preceded it, and at what interval), and separate this programme-specific detail from the standing facts above about GRSE's own history.",
+    },
+    hi: {
+      body: 'GRSE की शुरुआत 1884 में हुगली नदी किनारे एक जहाज़ निर्माण एवं मरम्मत कार्यशाला से हुई थी; इसे 1934 में गार्डन रीच वर्कशॉप्स लिमिटेड के रूप में निगमित किया गया, 1960 में राष्ट्रीयकृत कर रक्षा मंत्रालय के अधीन लाया गया, और 1976 में इसका नाम बदलकर गार्डन रीच शिपबिल्डर्स एंड इंजीनियर्स रखा गया। भारत के राष्ट्रपति के पूर्ण स्वामित्व वाली यह कंपनी अब रक्षा मंत्रालय के अधीन एक नवरत्न सार्वजनिक उपक्रम है, जिसका मुख्यालय कोलकाता में है।',
+      refUrl: 'https://www.grse.in/historical-background/',
+      refLabel: 'संदर्भ: गार्डन रीच शिपबिल्डर्स एंड इंजीनियर्स (GRSE) — आधिकारिक ऐतिहासिक पृष्ठभूमि पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या GRSE हमेशा से केंद्र सरकार का जहाज़ निर्माण यार्ड रहा है?',
+      checkA: 'नहीं। इसकी शुरुआत 1884 में एक जहाज़ निर्माण एवं मरम्मत कार्यशाला के रूप में हुई थी; सरकारी स्वामित्व और रक्षा मंत्रालय के अधीन आना 1960 के राष्ट्रीयकरण के साथ ही हुआ।',
+      task: 'अभ्यास: इस खबर से नोट करें कि "श्रेयस" GRSE के चार जहाज़ों वाले नेक्स्ट जनरेशन ऑफशोर पेट्रोल वेसल कार्यक्रम में कहाँ आता है (इससे पहले कौन-से जहाज़ आए, और कितने अंतराल पर), और इस कार्यक्रम-विशिष्ट विवरण को ऊपर दिए GRSE के स्थायी इतिहास से अलग रखें।',
+    },
+  },
+
+  // 13. cmv6e9wph0001pjk56mszimbg | PRID=2321694 | Tarang Shakti 2026: Rajnath Singh Addresses IAF-Hosted Multinational Air Exercise at Jodhpur
+  {
+    match: /[?&]PRID=2321694(?:&|$)/i,
+    en: {
+      body: "Tarang Shakti 2024 was the Indian Air Force's first-ever multinational air exercise that it hosted, held in two phases — at Sulur Air Force Station, Tamil Nadu, from 6 August 2024, and later at Jodhpur. The first phase brought together India, the UK's Royal Air Force, and the German, Spanish and French air forces; the Royal Air Force deployed six Eurofighter Typhoons, two Voyager tankers and an Atlas transport aircraft.",
+      refUrl: 'https://www.gov.uk/government/news/royal-air-force-takes-to-indian-skies-to-participate-in-exercise-tarang-shakti',
+      refLabel: "Reference: UK Government (British High Commission) — news on RAF's participation in Exercise Tarang Shakti",
+      checkQ: 'Check yourself: had the IAF hosted a major multinational air exercise before Tarang Shakti?',
+      checkA: "No. The UK government and the Royal Air Force both described Tarang Shakti 2024 as the IAF's maiden (first) multilateral/multinational air exercise.",
+      task: "Revision task: from this release, note this year's (2026) edition's dates, participating air forces and any new elements, and check how the Jodhpur leg described here compares with the first edition's two-phase Sulur-then-Jodhpur structure in 2024.",
+    },
+    hi: {
+      body: 'तरंग शक्ति 2024 भारतीय वायुसेना का पहला बहुराष्ट्रीय वायु अभ्यास था, जिसकी मेज़बानी उसने स्वयं की; यह दो चरणों में हुआ — पहला सुलूर वायुसेना स्टेशन, तमिलनाडु में 6 अगस्त 2024 से, और बाद में जोधपुर में। पहले चरण में भारत के साथ ब्रिटेन की रॉयल एयर फ़ोर्स, और जर्मनी, स्पेन व फ्रांस की वायुसेनाएं शामिल हुईं; रॉयल एयर फ़ोर्स ने छह यूरोफाइटर टाइफून, दो वॉयेजर टैंकर विमान और एक एटलस परिवहन विमान तैनात किए।',
+      refUrl: 'https://www.gov.uk/government/news/royal-air-force-takes-to-indian-skies-to-participate-in-exercise-tarang-shakti',
+      refLabel: 'संदर्भ: यूके सरकार (ब्रिटिश उच्चायोग) — तरंग शक्ति अभ्यास में RAF की भागीदारी पर समाचार',
+      checkQ: 'खुद जाँचें: क्या तरंग शक्ति से पहले भारतीय वायुसेना ने कोई बड़ा बहुराष्ट्रीय वायु अभ्यास आयोजित किया था?',
+      checkA: 'नहीं। ब्रिटिश सरकार और रॉयल एयर फ़ोर्स दोनों ने तरंग शक्ति 2024 को भारतीय वायुसेना का पहला बहुराष्ट्रीय/बहुपक्षीय वायु अभ्यास बताया।',
+      task: 'अभ्यास: इस खबर से इस वर्ष (2026) के संस्करण की तारीखें, भाग लेने वाली वायुसेनाएं और कोई नया तत्व नोट करें, और जाँचें कि यहाँ बताया गया जोधपुर चरण 2024 के पहले संस्करण के सुलूर-फिर-जोधपुर दो-चरण ढांचे से कैसे मेल खाता है।',
+    },
+  },
+
+  // 14. cmv6e9wxp000jpjk5m5vgt4kb | PRID=2321926 | INS Sahyadri Reaches Vladivostok for India-Russia Naval Exercise INDRA 2026
+  {
+    match: /[?&]PRID=2321926(?:&|$)/i,
+    en: {
+      body: 'Exercise INDRA is not a single drill: India and Russia run it in two separate tracks. A joint tri-service/land training exercise (the 14th edition was held at Bikaner, Rajasthan, from 6-15 October 2025, with more than 250 personnel from each side) is distinct from the bilateral Naval Exercise INDRA, whose most recent edition before this ran in two phases — a harbour phase at Chennai and a sea phase in the Bay of Bengal — from 28 March to 2 April 2025.',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-Russia0726.pdf',
+      refLabel: 'Reference: Ministry of External Affairs — Brief on India-Russia Relations (2026)',
+      checkQ: 'Check yourself: is the INDRA exercise held at Bikaner in October the same exercise as the naval INDRA exercise?',
+      checkA: 'No. India and Russia run INDRA as two separate tracks — a joint tri-service/land training exercise (most recently the 14th edition, at Bikaner in October 2025) and a separate bilateral Naval Exercise INDRA (most recently held at Chennai and in the Bay of Bengal in March-April 2025).',
+      task: "Revision task: from this release, note which of the two INDRA tracks INS Sahyadri's visit to Vladivostok belongs to (the naval one), and check whether this year's naval edition follows the same harbour-plus-sea-phase format as the 2025 edition described above.",
+    },
+    hi: {
+      body: 'अभ्यास इंद्र कोई एक अभ्यास नहीं है: भारत और रूस इसे दो अलग-अलग ट्रैक में चलाते हैं। एक संयुक्त त्रि-सेवा/थल प्रशिक्षण अभ्यास (14वां संस्करण 6-15 अक्टूबर 2025 को बीकानेर, राजस्थान में हुआ, जिसमें हर पक्ष से 250 से अधिक कर्मी शामिल थे) द्विपक्षीय नौसैनिक अभ्यास इंद्र से अलग है, जिसका इससे पहले का हालिया संस्करण दो चरणों में हुआ — चेन्नई में पत्तन चरण और बंगाल की खाड़ी में समुद्री चरण — 28 मार्च से 2 अप्रैल 2025 तक।',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-Russia0726.pdf',
+      refLabel: 'संदर्भ: विदेश मंत्रालय — भारत-रूस संबंधों पर संक्षिप्त विवरण (2026)',
+      checkQ: 'खुद जाँचें: क्या अक्टूबर में बीकानेर में हुआ इंद्र अभ्यास वही है जो नौसैनिक इंद्र अभ्यास है?',
+      checkA: 'नहीं। भारत और रूस इंद्र को दो अलग ट्रैक में चलाते हैं — एक संयुक्त त्रि-सेवा/थल प्रशिक्षण अभ्यास (हाल ही में 14वां संस्करण, अक्टूबर 2025 में बीकानेर में) और एक अलग द्विपक्षीय नौसैनिक अभ्यास इंद्र (हाल ही में मार्च-अप्रैल 2025 में चेन्नई और बंगाल की खाड़ी में हुआ)।',
+      task: 'अभ्यास: इस खबर से नोट करें कि INS सह्याद्रि की व्लादिवोस्तोक यात्रा इंद्र के किस ट्रैक से जुड़ी है (नौसैनिक वाले से), और जाँचें कि क्या इस वर्ष का नौसैनिक संस्करण ऊपर बताए गए 2025 संस्करण जैसे ही पत्तन-एवं-समुद्री चरण प्रारूप का पालन करता है।',
+    },
+  },
+
+  // 15. cmv6e9wzz000lpjk5zjrhisvi | PRID=2321915 | INS Trishul Joins Royal Navy off Plymouth for Exercise KONKAN-26
+  {
+    match: /[?&]PRID=2321915(?:&|$)/i,
+    en: {
+      body: 'Exercise Konkan is a bilateral India-UK naval exercise held biennially since 2004, sometimes in Indian waters when Royal Navy ships deploy to the Indian Ocean, and sometimes in UK waters when Indian Navy ships visit — as with INS Trishul off Plymouth. In October 2025, the UK Carrier Strike Group (led by HMS Prince of Wales) and an Indian Carrier Strike Group (led by INS Vikrant) also exercised together for the first time — a separate, larger engagement from the regular Konkan series.',
+      refUrl: 'https://www.gov.uk/government/news/uk-carrier-strike-group-strengthens-partnership-with-india',
+      refLabel: 'Reference: UK Government — news on the UK-India Carrier Strike Group partnership and Exercise Konkan',
+      checkQ: 'Check yourself: was the October 2025 carrier-to-carrier exercise between HMS Prince of Wales and INS Vikrant itself called "Konkan"?',
+      checkA: 'No. That carrier exercise was a distinct, first-of-its-kind engagement; Konkan is the older, separate biennial series that has run since 2004 and is typically a smaller bilateral drill.',
+      task: "Revision task: from this release, note which year's Konkan edition this is (Konkan-26) and where it was held (off Plymouth), and check that against Konkan's standing biennial pattern since 2004 above.",
+    },
+    hi: {
+      body: 'अभ्यास कोंकण भारत-ब्रिटेन के बीच एक द्विपक्षीय नौसैनिक अभ्यास है, जो 2004 से हर दो साल में होता है — कभी भारतीय जलक्षेत्र में जब रॉयल नेवी के जहाज़ हिंद महासागर में आते हैं, और कभी ब्रिटिश जलक्षेत्र में जब भारतीय नौसेना के जहाज़ वहां जाते हैं, जैसे INS त्रिशूल का प्लायमाउथ के निकट जाना। अक्टूबर 2025 में ब्रिटेन के कैरियर स्ट्राइक ग्रुप (HMS प्रिंस ऑफ वेल्स के नेतृत्व में) और भारत के कैरियर स्ट्राइक ग्रुप (INS विक्रांत के नेतृत्व में) ने भी पहली बार एक साथ अभ्यास किया, जो नियमित कोंकण शृंखला से अलग और बड़ा जुड़ाव था।',
+      refUrl: 'https://www.gov.uk/government/news/uk-carrier-strike-group-strengthens-partnership-with-india',
+      refLabel: 'संदर्भ: यूके सरकार — यूके-भारत कैरियर स्ट्राइक ग्रुप साझेदारी और अभ्यास कोंकण पर समाचार',
+      checkQ: 'खुद जाँचें: क्या अक्टूबर 2025 में HMS प्रिंस ऑफ वेल्स और INS विक्रांत के बीच हुआ कैरियर-दर-कैरियर अभ्यास स्वयं "कोंकण" कहलाया?',
+      checkA: 'नहीं। वह कैरियर अभ्यास अपनी तरह का पहला, अलग जुड़ाव था; कोंकण एक पुरानी, अलग द्विवार्षिक शृंखला है जो 2004 से चल रही है और आमतौर पर एक छोटा द्विपक्षीय अभ्यास होता है।',
+      task: 'अभ्यास: इस खबर से नोट करें कि यह कोंकण का कौन-सा वर्ष का संस्करण है (कोंकण-26) और यह कहाँ हुआ (प्लायमाउथ के निकट), और इसकी तुलना ऊपर बताए गए 2004 से चले आ रहे कोंकण के द्विवार्षिक स्थायी प्रारूप से करें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2321985(?:&|$)/i,
+    en: {
+      body: 'Chennai Metro Rail Limited (CMRL) — the joint venture of the Union Government and the Government of Tamil Nadu that builds and runs the Chennai Metro — was incorporated on 3 December 2007. The network’s first commercial stretch, the 4.5-km run between Alandur and Koyambedu on the Green Line, opened to the public only on 29 June 2015, with the rest of Phase 1 completed in stages through February 2019.',
+      refUrl: 'https://chennaimetrorail.org/',
+      refLabel: 'Reference: Chennai Metro Rail Limited’s official website',
+      checkQ: 'Check yourself: did Chennai Metro start carrying passengers in the same year CMRL was incorporated?',
+      checkA: 'No — CMRL was incorporated in December 2007, but the first stretch opened to commuters only in June 2015, almost eight years later.',
+      task: 'Revision task: note which stretch the Prime Minister opened today and how it fits into CMRL’s phase-wise expansion described above, separate from the ₹13,000 crore worth of other projects in this release.',
+    },
+    hi: {
+      body: 'चेन्नई मेट्रो रेल लिमिटेड (CMRL) — केंद्र सरकार और तमिलनाडु सरकार का संयुक्त उपक्रम, जो चेन्नई मेट्रो का निर्माण और संचालन करता है — 3 दिसंबर 2007 को निगमित हुआ था। नेटवर्क का पहला व्यावसायिक खंड, ग्रीन लाइन पर अलंदूर-कोयम्बेडु के बीच 4.5 किमी का हिस्सा, जनता के लिए केवल 29 जून 2015 को खुला, और पहले चरण का बाकी हिस्सा फरवरी 2019 तक चरणों में पूरा हुआ।',
+      refUrl: 'https://chennaimetrorail.org/',
+      refLabel: 'संदर्भ: चेन्नई मेट्रो रेल लिमिटेड की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या चेन्नई मेट्रो ने CMRL के निगमित होने के उसी वर्ष यात्रियों को ढोना शुरू कर दिया था?',
+      checkA: 'नहीं — CMRL दिसंबर 2007 में निगमित हुआ, लेकिन पहला खंड यात्रियों के लिए जून 2015 में, यानी लगभग आठ साल बाद खुला।',
+      task: 'अभ्यास: नोट करें कि आज प्रधानमंत्री ने कौन-सा खंड खोला और वह ऊपर बताए गए CMRL के चरणबद्ध विस्तार में कहाँ फिट होता है, इसे इस खबर में बताई गई ₹13,000 करोड़ की अन्य परियोजनाओं से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2321856(?:&|$)/i,
+    en: {
+      body: 'Jayaprakash Narayan (born 11 October 1902) was conferred the Bharat Ratna posthumously in 1999, twenty years after his death in 1979. Nanaji Deshmukh (born 11 October 1916) received it posthumously only in 2019, along with Pranab Mukherjee and Bhupen Hazarika — two decades after JP’s award, even though both leaders share the same birth date.',
+      refUrl: 'https://padmaawards.gov.in/',
+      refLabel: 'Reference: Padma Awards portal (President’s Secretariat) — Bharat Ratna notifications',
+      checkQ: 'Check yourself: did Jayaprakash Narayan and Nanaji Deshmukh receive the Bharat Ratna in the same year?',
+      checkA: 'No — JP’s Bharat Ratna came in 1999; Nanaji Deshmukh’s came only in 2019, a 20-year gap, even though they share a birthday.',
+      task: 'Revision task: note what the PM highlighted about each leader’s legacy in today’s tribute, and check it against the Bharat Ratna years above rather than assuming both awards came together.',
+    },
+    hi: {
+      body: 'जयप्रकाश नारायण (जन्म 11 अक्टूबर 1902) को 1999 में, यानी उनके 1979 में निधन के बीस साल बाद, मरणोपरांत भारत रत्न दिया गया। नानाजी देशमुख (जन्म 11 अक्टूबर 1916) को यह सम्मान प्रणब मुखर्जी और भूपेन हजारिका के साथ 2019 में ही मरणोपरांत मिला — जेपी के पुरस्कार के दो दशक बाद, भले ही दोनों नेताओं का जन्मदिन एक ही है।',
+      refUrl: 'https://padmaawards.gov.in/',
+      refLabel: 'संदर्भ: पद्म पुरस्कार पोर्टल (राष्ट्रपति सचिवालय) — भारत रत्न अधिसूचनाएं',
+      checkQ: 'खुद जाँचें: क्या जयप्रकाश नारायण और नानाजी देशमुख को भारत रत्न एक ही वर्ष में मिला था?',
+      checkA: 'नहीं — जेपी को भारत रत्न 1999 में मिला; नानाजी देशमुख को यह सम्मान 2019 में ही मिला, यानी 20 साल का अंतर, जबकि दोनों की जन्मतिथि एक ही है।',
+      task: 'अभ्यास: इस खबर में प्रधानमंत्री द्वारा दोनों नेताओं की विरासत के बारे में बताई गई बातों को नोट करें, और यह न मानें कि दोनों को भारत रत्न साथ मिला था — ऊपर दिए वर्षों से इसकी जाँच करें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2321873(?:&|$)/i,
+    en: {
+      body: 'Railway recruitment for Group C posts such as NTPC is handled by 21 regional Railway Recruitment Boards (RRBs), coordinated by the Railway Recruitment Control Board (RRCB) under the Ministry of Railways. For graduate-level NTPC posts, selection runs through two stages of a Computer Based Test (CBT-1 for screening, CBT-2 for merit), followed — for specific posts — by a typing skill test or a computer-based aptitude test, and then document verification and a medical examination.',
+      refUrl: 'https://rrbcdg.gov.in/',
+      refLabel: 'Reference: Railway Recruitment Control Board’s official website',
+      checkQ: 'Check yourself: does a candidate’s CBT-1 score usually count directly toward the final merit list for NTPC posts?',
+      checkA: 'No — CBT-1 is mainly used to screen candidates for CBT-2; it is CBT-2 (and, where applicable, the skill test) that primarily decides merit for a specific post.',
+      task: 'Revision task: note this notification’s number (CEN 06/2026), the vacancy count (3,548) and the application deadline (6 November), and separate these release-specific details from the standing stages of selection above.',
+    },
+    hi: {
+      body: 'NTPC जैसे ग्रुप सी पदों की रेलवे भर्ती 21 क्षेत्रीय रेलवे भर्ती बोर्डों (RRB) द्वारा की जाती है, जिनका समन्वय रेल मंत्रालय के अंतर्गत रेलवे भर्ती नियंत्रण बोर्ड (RRCB) करता है। स्नातक स्तर के NTPC पदों के लिए चयन कंप्यूटर आधारित परीक्षा (CBT) के दो चरणों से होकर गुजरता है — स्क्रीनिंग के लिए CBT-1, और मेरिट के लिए CBT-2 — इसके बाद कुछ पदों के लिए टाइपिंग स्किल टेस्ट या कंप्यूटर आधारित योग्यता परीक्षण, और फिर दस्तावेज़ सत्यापन व चिकित्सा जांच होती है।',
+      refUrl: 'https://rrbcdg.gov.in/',
+      refLabel: 'संदर्भ: रेलवे भर्ती नियंत्रण बोर्ड की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या किसी उम्मीदवार का CBT-1 अंक सामान्यतः NTPC पदों की अंतिम मेरिट सूची में सीधे गिना जाता है?',
+      checkA: 'नहीं — CBT-1 मुख्यतः CBT-2 के लिए उम्मीदवारों की स्क्रीनिंग करता है; किसी विशेष पद के लिए मेरिट मुख्यतः CBT-2 (और जहाँ लागू हो, स्किल टेस्ट) से तय होती है।',
+      task: 'अभ्यास: इस अधिसूचना की संख्या (CEN 06/2026), रिक्तियों की संख्या (3,548) और आवेदन की अंतिम तिथि (6 नवंबर) नोट करें, और इन्हें ऊपर बताए गए चयन के स्थायी चरणों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322306(?:&|$)/i,
+    en: {
+      body: 'The India-UK Science and Innovation Council has met periodically since the mid-2000s to review and expand research collaboration between the two countries, including the Newton-Bhabha Fund partnership formalised at its fourth meeting in 2014. Earlier sessions include the 6th Council meeting, held in New Delhi on 26 July 2018 and co-chaired by the two countries’ science ministers.',
+      refUrl: 'https://dst.gov.in/',
+      refLabel: 'Reference: Department of Science and Technology’s official website',
+      checkQ: 'Check yourself: was this October 2026 Delhi meeting the first-ever session of the India-UK Science and Innovation Council?',
+      checkA: 'No — it was the 8th meeting of a Council that has been meeting periodically for roughly two decades; for instance, the 6th meeting was held in New Delhi back in July 2018.',
+      task: 'Revision task: note what is specifically new in this release — the Genomics Centre of Excellence — and keep it separate from the Council’s standing, recurring mandate described above.',
+    },
+    hi: {
+      body: 'भारत-यूके विज्ञान एवं नवाचार परिषद 2000 के दशक के मध्य से समय-समय पर दोनों देशों के बीच शोध सहयोग की समीक्षा और विस्तार के लिए मिलती रही है, जिसमें 2014 में इसकी चौथी बैठक में औपचारिक रूप दी गई न्यूटन-भाभा फंड साझेदारी भी शामिल है। इससे पहले की बैठकों में छठी परिषद बैठक शामिल है, जो 26 जुलाई 2018 को नई दिल्ली में हुई थी और दोनों देशों के विज्ञान मंत्रियों की सह-अध्यक्षता में संपन्न हुई।',
+      refUrl: 'https://dst.gov.in/',
+      refLabel: 'संदर्भ: विज्ञान एवं प्रौद्योगिकी विभाग की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या अक्टूबर 2026 की यह दिल्ली बैठक भारत-यूके विज्ञान एवं नवाचार परिषद की पहली बैठक थी?',
+      checkA: 'नहीं — यह परिषद की 8वीं बैठक थी, जो लगभग दो दशकों से समय-समय पर मिलती रही है; उदाहरण के लिए, छठी बैठक जुलाई 2018 में नई दिल्ली में हुई थी।',
+      task: 'अभ्यास: इस खबर में जो खास नया है — जीनोमिक्स उत्कृष्टता केंद्र — उसे नोट करें, और इसे परिषद के ऊपर बताए गए स्थायी, बार-बार होने वाले जनादेश से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322253(?:&|$)/i,
+    en: {
+      body: 'ARIES, headquartered at Manora Peak, Nainital, began life as the Uttar Pradesh State Observatory, which started functioning at Varanasi on 20 April 1954. After Uttarakhand’s creation in 2000, it briefly became the ‘State Observatory’, before being renamed the Aryabhatta Research Institute of Observational Sciences (ARIES) on 22 March 2004, when it became an autonomous institute under the Department of Science and Technology, Government of India.',
+      refUrl: 'https://www.aries.res.in/',
+      refLabel: 'Reference: ARIES official website (history)',
+      checkQ: 'Check yourself: has ARIES always been called by that name since its founding?',
+      checkA: 'No — it was founded in 1954 as the Uttar Pradesh State Observatory; the ARIES name and its status as a DST autonomous institute date only from 2004, exactly 50 years later.',
+      task: 'Revision task: separate today’s specific finding (the Sun’s microwave-bright poles linked to coronal holes) from this standing fact about the institute that led the study.',
+    },
+    hi: {
+      body: 'मनोरा पीक, नैनीताल में मुख्यालय वाला ARIES, उत्तर प्रदेश राज्य वेधशाला के रूप में शुरू हुआ था, जिसने 20 अप्रैल 1954 को वाराणसी में काम करना शुरू किया। 2000 में उत्तराखंड के गठन के बाद यह कुछ समय के लिए ‘राज्य वेधशाला’ बना, और फिर 22 मार्च 2004 को इसका नाम आर्यभट्ट प्रेक्षणात्मक विज्ञान शोध संस्थान (ARIES) रखा गया, जब यह भारत सरकार के विज्ञान एवं प्रौद्योगिकी विभाग के अंतर्गत एक स्वायत्त संस्थान बना।',
+      refUrl: 'https://www.aries.res.in/',
+      refLabel: 'संदर्भ: ARIES की आधिकारिक वेबसाइट (इतिहास)',
+      checkQ: 'खुद जाँचें: क्या ARIES अपनी स्थापना के समय से ही इस नाम से जाना जाता रहा है?',
+      checkA: 'नहीं — इसकी स्थापना 1954 में उत्तर प्रदेश राज्य वेधशाला के रूप में हुई थी; ARIES नाम और DST के स्वायत्त संस्थान का दर्जा केवल 2004 से मिला, यानी ठीक 50 साल बाद।',
+      task: 'अभ्यास: आज की विशेष खोज (सूर्य के माइक्रोवेव-उज्ज्वल ध्रुवों का कोरोनल होल से संबंध) को इस खबर में बताए गए संस्थान के स्थायी तथ्य से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322389(?:&|$)/i,
+    en: {
+      body: 'The India-UK Joint Economic and Trade Committee (JETCO) was established on 13 January 2005, following the September 2004 joint declaration ‘India-UK: Towards a New and Dynamic Partnership’. It meets roughly annually, alternating between New Delhi and London, co-chaired by India’s Commerce and Industry Minister and the UK’s trade minister — two decades before the Comprehensive Economic and Trade Agreement (CETA) that this meeting followed up on.',
+      refUrl: 'https://www.mea.gov.in/',
+      refLabel: 'Reference: Ministry of External Affairs’ official website',
+      checkQ: 'Check yourself: is JETCO the same thing as the new India-UK trade agreement (CETA) that took effect this year?',
+      checkA: 'No — JETCO is a two-decade-old standing mechanism (established 2005) for reviewing trade ties annually; CETA is a specific trade agreement that took effect only in 2026, two decades after JETCO began.',
+      task: 'Revision task: note which JETCO meeting number this one is and what new target (doubling trade by 2030) it set, keeping that separate from JETCO’s standing history above.',
+    },
+    hi: {
+      body: 'भारत-यूके संयुक्त आर्थिक एवं व्यापार समिति (JETCO) की स्थापना 13 जनवरी 2005 को हुई थी, जो सितंबर 2004 की संयुक्त घोषणा ‘भारत-यूके: एक नई और गतिशील साझेदारी की ओर’ के बाद हुई। यह लगभग वार्षिक रूप से नई दिल्ली और लंदन में बारी-बारी मिलती है, जिसकी सह-अध्यक्षता भारत के वाणिज्य एवं उद्योग मंत्री और यूके के व्यापार मंत्री करते हैं — यह उस व्यापक आर्थिक एवं व्यापार समझौते (CETA) से दो दशक पहले से मौजूद है, जिसके बाद यह बैठक हुई।',
+      refUrl: 'https://www.mea.gov.in/',
+      refLabel: 'संदर्भ: विदेश मंत्रालय की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या JETCO और इस वर्ष लागू हुआ नया भारत-यूके व्यापार समझौता (CETA) एक ही चीज़ हैं?',
+      checkA: 'नहीं — JETCO व्यापार संबंधों की वार्षिक समीक्षा के लिए दो दशक पुराना (2005 से) स्थायी तंत्र है; CETA एक विशेष व्यापार समझौता है जो JETCO शुरू होने के दो दशक बाद, 2026 में ही लागू हुआ।',
+      task: 'अभ्यास: नोट करें कि यह JETCO की कौन-सी बैठक संख्या है और इसमें 2030 तक व्यापार दोगुना करने का जो नया लक्ष्य रखा गया, उसे ऊपर दिए JETCO के स्थायी इतिहास से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322562(?:&|$)/i,
+    en: {
+      body: 'IMD’s Regional Specialised Meteorological Centre (RSMC) in New Delhi was designated for tropical cyclones with effect from 1 July 1988, under the WMO/ESCAP Panel on Tropical Cyclones framework. It keeps round-the-clock watch over the North Indian Ocean and issues cyclone advisories to Panel member countries — including Bangladesh, Myanmar, Pakistan, Sri Lanka, Oman and Thailand — making IMD one of only six WMO-recognised RSMCs for tropical cyclones worldwide.',
+      refUrl: 'https://rsmcnewdelhi.imd.gov.in/',
+      refLabel: 'Reference: RSMC New Delhi’s official website',
+      checkQ: 'Check yourself: does IMD issue cyclone warnings only for India?',
+      checkA: 'No — as the WMO/ESCAP Panel’s designated RSMC since 1988, IMD issues tropical cyclone advisories for the whole North Indian Ocean region, covering several Panel member countries besides India.',
+      task: 'Revision task: separate the new public-facing tool launched today (the interactive decision support system) from IMD’s standing international mandate as RSMC described above.',
+    },
+    hi: {
+      body: 'IMD के नई दिल्ली स्थित क्षेत्रीय विशिष्ट मौसम विज्ञान केंद्र (RSMC) को 1 जुलाई 1988 से WMO/ESCAP उष्णकटिबंधीय चक्रवात पैनल के तहत चक्रवातों के लिए नामित किया गया था। यह पूरे उत्तरी हिंद महासागर पर चौबीसों घंटे नज़र रखता है और बांग्लादेश, म्यांमार, पाकिस्तान, श्रीलंका, ओमान और थाईलैंड सहित पैनल के सदस्य देशों को चक्रवात सलाह जारी करता है — जिससे IMD विश्व भर में चक्रवातों के लिए WMO-मान्यता प्राप्त केवल छह RSMC में से एक बन जाता है।',
+      refUrl: 'https://rsmcnewdelhi.imd.gov.in/',
+      refLabel: 'संदर्भ: RSMC नई दिल्ली की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या IMD केवल भारत के लिए चक्रवात चेतावनी जारी करता है?',
+      checkA: 'नहीं — 1988 से WMO/ESCAP पैनल के नामित RSMC के रूप में, IMD भारत के अलावा कई पैनल सदस्य देशों के लिए भी पूरे उत्तरी हिंद महासागर क्षेत्र हेतु उष्णकटिबंधीय चक्रवात सलाह जारी करता है।',
+      task: 'अभ्यास: आज शुरू किए गए नए सार्वजनिक उपकरण (इंटरैक्टिव निर्णय सहायता तंत्र) को ऊपर बताए गए IMD के RSMC के रूप में स्थायी अंतरराष्ट्रीय जनादेश से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322494(?:&|$)/i,
+    en: {
+      body: 'INS Mangrol is the third of eight Anti-Submarine Warfare Shallow Water Craft (ASW-SWC) that Cochin Shipyard is building for the Navy under a contract signed in April 2019, worth about ₹6,311 crore, following a Defence Acquisition Council approval in December 2013; the class replaces the Abhay-class corvettes commissioned in 1989-91. Its namesake class lead ship, Mahe, is a former French enclave and one of the four non-contiguous districts of the Union Territory of Puducherry, surrounded by Kerala’s Kannur and Kozhikode districts.',
+      refUrl: 'https://knowindia.india.gov.in/states-uts/puducherry.php',
+      refLabel: 'Reference: Know India portal (Government of India) — Puducherry',
+      checkQ: 'Check yourself: is Mahe, the town, part of Kerala state?',
+      checkA: 'No — though it is geographically surrounded by Kerala’s Kannur and Kozhikode districts, Mahe is administratively one of the four districts of the Union Territory of Puducherry, a former French colony.',
+      task: 'Revision task: note INS Mangrol’s specific induction details from this release and compare them with the lead ship INS Mahe’s commissioning (November 2025) from the standing facts above.',
+    },
+    hi: {
+      body: 'INS मंगरोल, कोचीन शिपयार्ड द्वारा नौसेना के लिए बनाए जा रहे आठ पनडुब्बी-रोधी तटवर्ती जलयानों (ASW-SWC) में से तीसरा है, जिसका ठेका अप्रैल 2019 में लगभग ₹6,311 करोड़ में हुआ था — यह रक्षा अधिग्रहण परिषद की दिसंबर 2013 की मंजूरी के बाद हुआ; यह श्रेणी 1989-91 में शामिल अभय श्रेणी के कार्वेट की जगह लेती है। इस श्रेणी के प्रमुख जलयान महे का नामकरण जिस स्थान पर हुआ, वह पुडुचेरी केंद्र-शासित प्रदेश के चार असंबद्ध ज़िलों में से एक है, जो पहले फ्रांसीसी उपनिवेश था और केरल के कन्नूर व कोझीकोड ज़िलों से घिरा है।',
+      refUrl: 'https://knowindia.india.gov.in/states-uts/puducherry.php',
+      refLabel: 'संदर्भ: नो इंडिया पोर्टल (भारत सरकार) — पुडुचेरी',
+      checkQ: 'खुद जाँचें: क्या महे शहर केरल राज्य का हिस्सा है?',
+      checkA: 'नहीं — भौगोलिक रूप से केरल के कन्नूर और कोझीकोड ज़िलों से घिरा होने के बावजूद, महे प्रशासनिक रूप से पुडुचेरी केंद्र-शासित प्रदेश के चार ज़िलों में से एक है, जो पहले फ्रांसीसी उपनिवेश था।',
+      task: 'अभ्यास: इस खबर से INS मंगरोल की विशेष शामिल होने की जानकारी नोट करें और उसकी तुलना ऊपर दिए गए प्रमुख जलयान INS महे के कमीशन (नवंबर 2025) से करें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322377(?:&|$)/i,
+    en: {
+      body: 'IBSAMAR is a trilateral naval exercise among India, Brazil and South Africa that grew out of the IBSA Dialogue Forum, formed when the three countries’ foreign ministers adopted the Brasília Declaration on 6 June 2003. The first IBSAMAR edition was held off Simon’s Town, South Africa, from 2 to 16 May 2008; the fifth edition, in 2016, was the first held in Indian waters, off Goa.',
+      refUrl: 'https://www.gov.za/issues/india-brazil-south-africa-ibsa-dialogue-forum',
+      refLabel: 'Reference: Government of South Africa — IBSA Dialogue Forum page',
+      checkQ: 'Check yourself: has IBSAMAR always been held in Indian waters?',
+      checkA: 'No — the first edition in 2008 was held off South Africa; only from the fifth edition in 2016 did the exercise come to Indian waters, off Goa.',
+      task: 'Revision task: note today’s edition number (the ninth) and INS Tarkash’s departure port and date from this release, and separate these from IBSAMAR’s standing origin above.',
+    },
+    hi: {
+      body: 'IBSAMAR भारत, ब्राज़ील और दक्षिण अफ्रीका के बीच एक त्रिपक्षीय नौसैनिक अभ्यास है, जो IBSA संवाद मंच से उभरा — जिसे तीनों देशों के विदेश मंत्रियों ने 6 जून 2003 को ब्रासीलिया घोषणापत्र अपनाकर बनाया था। IBSAMAR का पहला संस्करण 2 से 16 मई 2008 तक दक्षिण अफ्रीका के साइमन्स टाउन के पास हुआ था; 2016 में हुआ पांचवां संस्करण पहली बार भारतीय जलक्षेत्र में, गोवा के पास आयोजित हुआ।',
+      refUrl: 'https://www.gov.za/issues/india-brazil-south-africa-ibsa-dialogue-forum',
+      refLabel: 'संदर्भ: दक्षिण अफ्रीका सरकार — IBSA संवाद मंच पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या IBSAMAR हमेशा भारतीय जलक्षेत्र में ही आयोजित होता रहा है?',
+      checkA: 'नहीं — 2008 का पहला संस्करण दक्षिण अफ्रीका के पास हुआ था; यह अभ्यास भारतीय जलक्षेत्र (गोवा) में पहली बार केवल 2016 के पांचवें संस्करण से आया।',
+      task: 'अभ्यास: इस खबर से आज के संस्करण की संख्या (नौवां) और INS तरकश के प्रस्थान बंदरगाह व तारीख को नोट करें, और इन्हें ऊपर बताए गए IBSAMAR के स्थायी इतिहास से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322458(?:&|$)/i,
+    en: {
+      body: 'The SARAS Aajeevika Mela is a marketing initiative organised at national and state levels under the Deendayal Antyodaya Yojana-National Rural Livelihoods Mission (DAY-NRLM), the Ministry of Rural Development’s flagship livelihoods scheme launched in 2011. It brings rural women’s self-help groups formed under the mission onto one platform to sell their products directly to buyers, cutting out middlemen.',
+      refUrl: 'https://rsdebate.nic.in/',
+      refLabel: 'Reference: Rajya Sabha Secretariat — parliamentary reply on SARAS Aajeevika Mela',
+      checkQ: 'Check yourself: is SARAS Mela a standalone central scheme on its own?',
+      checkA: 'No — it is a marketing initiative organised under DAY-NRLM, the Ministry of Rural Development’s broader rural livelihoods mission, not a separate scheme in itself.',
+      task: 'Revision task: note why this edition is significant (the first time it has moved outside Delhi-NCR, to Vijayawada) and its dates, keeping these separate from the standing fact about DAY-NRLM above.',
+    },
+    hi: {
+      body: 'सरस आजीविका मेला, ग्रामीण विकास मंत्रालय की प्रमुख आजीविका योजना दीनदयाल अंत्योदय योजना-राष्ट्रीय ग्रामीण आजीविका मिशन (DAY-NRLM) — जो 2011 में शुरू हुई थी — के अंतर्गत राष्ट्रीय और राज्य स्तर पर आयोजित एक मार्केटिंग पहल है। यह मिशन के तहत बनी ग्रामीण महिलाओं के स्वयं सहायता समूहों को एक मंच पर लाकर, बिचौलियों को हटाकर, उनके उत्पाद सीधे खरीदारों को बेचने में मदद करता है।',
+      refUrl: 'https://rsdebate.nic.in/',
+      refLabel: 'संदर्भ: राज्यसभा सचिवालय — सरस आजीविका मेला पर संसदीय उत्तर',
+      checkQ: 'खुद जाँचें: क्या सरस मेला अपने आप में एक स्वतंत्र केंद्रीय योजना है?',
+      checkA: 'नहीं — यह DAY-NRLM, यानी ग्रामीण विकास मंत्रालय के व्यापक ग्रामीण आजीविका मिशन के अंतर्गत आयोजित एक मार्केटिंग पहल है, अपने आप में अलग योजना नहीं।',
+      task: 'अभ्यास: नोट करें कि यह संस्करण क्यों खास है (पहली बार दिल्ली-NCR से बाहर, विजयवाड़ा में) और इसकी तारीखें, इन्हें ऊपर बताए गए DAY-NRLM के स्थायी तथ्य से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322267(?:&|$)/i,
+    en: {
+      body: 'PM Dhan-Dhaanya Krishi Yojana, announced in the Budget Speech of 1 February 2025 and approved by the Union Cabinet on 16 July 2025, is explicitly modelled on NITI Aayog’s Aspirational Districts Programme (launched January 2018 for 112 districts), but is the first such convergence scheme focused solely on agriculture. Rather than creating new funding, it works by converging 36 existing schemes across 11 central departments, with each district’s plan finalised by a District Dhan-Dhaanya Samiti headed by the Collector.',
+      refUrl: 'https://www.niti.gov.in/',
+      refLabel: 'Reference: NITI Aayog’s official website — Aspirational Districts Programme',
+      checkQ: 'Check yourself: does PM Dhan-Dhaanya Krishi Yojana bring in new, separate funding on top of existing schemes?',
+      checkA: 'No — it is implemented mainly through the convergence of 36 existing schemes across 11 departments, not fresh dedicated funding for each activity.',
+      task: 'Revision task: note how Gaya, Nagaur and Umaria were ranked best districts in this release, and check which of the three selection indicators (productivity, cropping intensity, credit) the release credits them on.',
+    },
+    hi: {
+      body: 'प्रधानमंत्री धन-धान्य कृषि योजना, जिसकी घोषणा 1 फरवरी 2025 के बजट भाषण में हुई और जिसे केंद्रीय मंत्रिमंडल ने 16 जुलाई 2025 को मंज़ूरी दी, स्पष्ट रूप से नीति आयोग के आकांक्षी ज़िला कार्यक्रम (जनवरी 2018 में 112 ज़िलों के लिए शुरू) पर आधारित है, लेकिन यह केवल कृषि पर केंद्रित पहली ऐसी अभिसरण योजना है। नई फंडिंग बनाने के बजाय, यह 11 केंद्रीय विभागों की 36 मौजूदा योजनाओं के अभिसरण से काम करती है, और हर ज़िले की योजना कलेक्टर की अध्यक्षता वाली जिला धन-धान्य समिति द्वारा अंतिम रूप दी जाती है।',
+      refUrl: 'https://www.niti.gov.in/',
+      refLabel: 'संदर्भ: नीति आयोग की आधिकारिक वेबसाइट — आकांक्षी ज़िला कार्यक्रम',
+      checkQ: 'खुद जाँचें: क्या प्रधानमंत्री धन-धान्य कृषि योजना मौजूदा योजनाओं के ऊपर नई, अलग फंडिंग लाती है?',
+      checkA: 'नहीं — यह मुख्यतः 11 विभागों की 36 मौजूदा योजनाओं के अभिसरण से लागू होती है, हर गतिविधि के लिए नई समर्पित फंडिंग से नहीं।',
+      task: 'अभ्यास: नोट करें कि इस खबर में गया, नागौर और उमरिया को सर्वश्रेष्ठ ज़िले कैसे रैंक किया गया, और जाँचें कि तीन चयन मानकों (उत्पादकता, फसल सघनता, ऋण) में से किस पर खबर उन्हें श्रेय देती है।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322164(?:&|$)/i,
+    en: {
+      body: 'PM GatiShakti National Master Plan was first announced in the Prime Minister’s Independence Day speech on 15 August 2021, and formally launched almost two months later, on 13 October 2021, at Pragati Maidan, New Delhi. It runs on a GIS-based digital platform, developed by BISAG-N, meant to end departmental silos by giving ministries shared visibility of each other’s infrastructure projects.',
+      refUrl: 'https://pmindia.gov.in/',
+      refLabel: 'Reference: Prime Minister’s Office’s official website',
+      checkQ: 'Check yourself: were the announcement and the formal launch of PM GatiShakti on the same day?',
+      checkA: 'No — it was announced in the Independence Day speech on 15 August 2021 and formally launched separately, almost two months later, on 13 October 2021.',
+      task: 'Revision task: note today’s release figure for ministries covered (58) and states/UTs (36), and compare them with the plan’s original scope at launch in 2021.',
+    },
+    hi: {
+      body: 'पीएम गतिशक्ति राष्ट्रीय मास्टर प्लान की घोषणा पहली बार प्रधानमंत्री के 15 अगस्त 2021 के स्वतंत्रता दिवस भाषण में हुई थी, और इसे औपचारिक रूप से लगभग दो महीने बाद, 13 अक्टूबर 2021 को नई दिल्ली के प्रगति मैदान में शुरू किया गया। यह BISAG-N द्वारा विकसित एक GIS-आधारित डिजिटल मंच पर चलता है, जिसका उद्देश्य मंत्रालयों को एक-दूसरे की बुनियादी ढांचा परियोजनाओं की साझा जानकारी देकर विभागीय दीवारें तोड़ना है।',
+      refUrl: 'https://pmindia.gov.in/',
+      refLabel: 'संदर्भ: प्रधानमंत्री कार्यालय की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या पीएम गतिशक्ति की घोषणा और उसका औपचारिक शुभारंभ एक ही दिन हुआ था?',
+      checkA: 'नहीं — इसकी घोषणा 15 अगस्त 2021 के स्वतंत्रता दिवस भाषण में हुई, और औपचारिक शुभारंभ अलग से, लगभग दो महीने बाद, 13 अक्टूबर 2021 को हुआ।',
+      task: 'अभ्यास: इस खबर में बताई गई मंत्रालयों (58) और राज्यों/केंद्र-शासित प्रदेशों (36) की संख्या नोट करें, और उनकी तुलना 2021 में शुभारंभ के समय योजना के मूल दायरे से करें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322170(?:&|$)/i,
+    en: {
+      body: 'PM-SETU (Pradhan Mantri Skilling and Employability Transformation through Upgraded ITIs) is a Centrally Sponsored Scheme launched by the Ministry of Skill Development and Entrepreneurship on 4 October 2025, aiming to upgrade 1,000 government ITIs through a hub-and-spoke model of 200 Hub ITIs supporting 800 Spoke ITIs, with a total outlay of about ₹60,000 crore shared between the Centre, states and industry.',
+      refUrl: 'https://pmsetu.nimi.co.in/',
+      refLabel: 'Reference: PM-SETU official portal (National Instructional Media Institute, MSDE)',
+      checkQ: 'Check yourself: does PM-SETU aim to build new ITIs from scratch?',
+      checkA: 'No — its goal is to upgrade 1,000 existing government ITIs into modern, industry-aligned institutes through the hub-and-spoke model, not to set up new ones.',
+      task: 'Revision task: from this release, note that AM/NS India is upgrading nine ITIs in Surat and Visakhapatnam under a ₹440 crore plan, and check whether these fall within the 200 Hub or 800 Spoke count described above.',
+    },
+    hi: {
+      body: 'PM-SETU (प्रधानमंत्री कौशल एवं रोज़गार क्षमता परिवर्तन उन्नत ITI योजना) कौशल विकास एवं उद्यमिता मंत्रालय द्वारा 4 अक्टूबर 2025 को शुरू की गई एक केंद्र प्रवर्तित योजना है, जिसका लक्ष्य 200 हब ITI और 800 स्पोक ITI के हब-एंड-स्पोक मॉडल के ज़रिए 1,000 सरकारी ITI को उन्नत करना है, जिसका कुल परिव्यय लगभग ₹60,000 करोड़ है, जो केंद्र, राज्यों और उद्योग के बीच साझा होता है।',
+      refUrl: 'https://pmsetu.nimi.co.in/',
+      refLabel: 'संदर्भ: PM-SETU का आधिकारिक पोर्टल (राष्ट्रीय अनुदेशात्मक माध्यम संस्थान, MSDE)',
+      checkQ: 'खुद जाँचें: क्या PM-SETU का लक्ष्य नए ITI शुरू से बनाना है?',
+      checkA: 'नहीं — इसका लक्ष्य हब-एंड-स्पोक मॉडल के ज़रिए 1,000 मौजूदा सरकारी ITI को आधुनिक, उद्योग-अनुरूप संस्थानों में बदलना है, नए ITI बनाना नहीं।',
+      task: 'अभ्यास: इस खबर से नोट करें कि AM/NS India सूरत और विशाखापत्तनम में ₹440 करोड़ की योजना के तहत नौ ITI को उन्नत कर रहा है, और जाँचें कि ये ऊपर बताई गई 200 हब या 800 स्पोक की संख्या में कहाँ आते हैं।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322172(?:&|$)/i,
+    en: {
+      body: 'The Services Sports Control Board (SSCB) traces its roots to the Army Sports Control Board, founded in March 1919 on the lines of its British counterpart; the sports bodies of the three Services were merged into the single tri-Service SSCB on 3 April 1945, and it was reconstituted with an inter-Services character in 1947. It remains the body that identifies, trains and fields armed-forces sportspersons for national and international competition.',
+      refUrl: 'https://www.sscbindia.in/',
+      refLabel: 'Reference: Services Sports Control Board’s official website',
+      checkQ: 'Check yourself: was the Services Sports Control Board always a combined tri-Service body since 1919?',
+      checkA: 'No — it began in 1919 as the single-service Army Sports Control Board; the three services’ sports bodies were merged into the joint SSCB only in 1945.',
+      task: 'Revision task: note this release’s medal count (27 of India’s 85 medals from the Armed Forces) and check it against the standing fact above about which body trains and fields these athletes.',
+    },
+    hi: {
+      body: 'सेवा खेल नियंत्रण बोर्ड (SSCB) की जड़ें आर्मी स्पोर्ट्स कंट्रोल बोर्ड से जुड़ी हैं, जिसकी स्थापना मार्च 1919 में ब्रिटेन के समान बोर्ड की तर्ज पर हुई थी; तीनों सेनाओं के खेल निकायों का विलय करके एकल त्रि-सेना SSCB 3 अप्रैल 1945 को बनाया गया, और 1947 में इसे अंतर-सेना स्वरूप में पुनर्गठित किया गया। यह आज भी वह निकाय है जो राष्ट्रीय और अंतरराष्ट्रीय प्रतियोगिताओं के लिए सशस्त्र बलों के खिलाड़ियों की पहचान, प्रशिक्षण और चयन करता है।',
+      refUrl: 'https://www.sscbindia.in/',
+      refLabel: 'संदर्भ: सेवा खेल नियंत्रण बोर्ड की आधिकारिक वेबसाइट',
+      checkQ: 'खुद जाँचें: क्या सेवा खेल नियंत्रण बोर्ड 1919 से ही तीनों सेनाओं का संयुक्त निकाय था?',
+      checkA: 'नहीं — यह 1919 में केवल आर्मी स्पोर्ट्स कंट्रोल बोर्ड के रूप में शुरू हुआ; तीनों सेनाओं के खेल निकायों का विलय संयुक्त SSCB में केवल 1945 में हुआ।',
+      task: 'अभ्यास: इस खबर में बताए गए पदकों की संख्या (भारत के 85 में से 27 पदक सशस्त्र बलों से) नोट करें और इसकी जाँच ऊपर बताए गए इस स्थायी तथ्य से करें कि इन खिलाड़ियों को कौन-सा निकाय प्रशिक्षित व चयनित करता है।',
+    },
+  },
+  {
+    match: /[?&]PRID=2322388(?:&|$)/i,
+    en: {
+      body: 'Tele-density — the number of telephone (wireline plus wireless) connections per 100 population — is a penetration metric reported separately for urban and rural circles, not a count of unique subscribers. Because many users hold more than one SIM, urban tele-density in TRAI’s recent quarterly reports has stayed well above 100, even as rural tele-density remains far lower, which is why the national average sits between the two.',
+      refUrl: 'https://www.trai.gov.in/release-publication/reports',
+      refLabel: 'Reference: TRAI’s Performance Indicator Reports',
+      checkQ: 'Check yourself: can tele-density ever be more than 100?',
+      checkA: 'Yes — because it counts connections, not unique people, and multiple SIM ownership is common; TRAI’s reports regularly show urban tele-density above 100, well ahead of rural tele-density.',
+      task: 'Revision task: note today’s release figures (94.31% overall tele-density, 28.39 GB average monthly data use) and check whether they describe unique subscribers or connections, based on the definition above.',
+    },
+    hi: {
+      body: 'टेली-घनत्व — यानी प्रति 100 जनसंख्या पर टेलीफोन (वायरलाइन व वायरलेस) कनेक्शनों की संख्या — एक प्रवेश-मापक है, जो शहरी और ग्रामीण क्षेत्रों के लिए अलग-अलग दर्ज किया जाता है, न कि अद्वितीय उपयोगकर्ताओं की गिनती। चूंकि कई उपयोगकर्ताओं के पास एक से अधिक सिम होते हैं, ट्राई की हाल की तिमाही रिपोर्टों में शहरी टेली-घनत्व लगातार 100 से काफी ऊपर रहा है, जबकि ग्रामीण टेली-घनत्व इससे बहुत कम है — इसीलिए राष्ट्रीय औसत दोनों के बीच रहता है।',
+      refUrl: 'https://www.trai.gov.in/release-publication/reports',
+      refLabel: 'संदर्भ: ट्राई की परफॉर्मेंस इंडिकेटर रिपोर्ट्स',
+      checkQ: 'खुद जाँचें: क्या टेली-घनत्व कभी 100 से अधिक हो सकता है?',
+      checkA: 'हाँ — क्योंकि यह अद्वितीय लोगों की नहीं, बल्कि कनेक्शनों की गिनती करता है, और एक से अधिक सिम रखना सामान्य है; ट्राई की रिपोर्टों में शहरी टेली-घनत्व नियमित रूप से 100 से ऊपर और ग्रामीण से कहीं अधिक दिखता है।',
+      task: 'अभ्यास: इस खबर के आंकड़े (94.31% कुल टेली-घनत्व, 28.39 GB औसत मासिक डेटा उपयोग) नोट करें और ऊपर दी गई परिभाषा के आधार पर जाँचें कि ये अद्वितीय उपयोगकर्ताओं या कनेक्शनों के बारे में बताते हैं।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
