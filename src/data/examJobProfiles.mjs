@@ -11,7 +11,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'SSC CGL',
     officialUrl: 'https://ssc.gov.in/for-candidates/cgl-exam/xsd91hjkshdk92xk',
     en: {
-      pageTitle: 'SSC CGL Job Profile & Salary: What You’ll Actually Do, Earn and Become',
+      pageTitle: 'SSC CGL Job Profile & Salary',
       lede: 'SSC CGL doesn’t recruit for one job — it’s a single exam that places you into any of nearly twenty different Group B and C roles across central government departments, from anti-evasion fieldwork as a GST Inspector to desk-level policy coordination as an Assistant Section Officer. Here’s what the main posts actually involve, what each one pays, and how promotion works once you’re in.',
       profileHeading: 'One exam, many different jobs',
       profileBody: [
@@ -60,7 +60,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision.',
     },
     hi: {
-      pageTitle: 'SSC CGL जॉब प्रोफाइल और सैलरी: आप असल में क्या करेंगे, क्या कमाएंगे और क्या बनेंगे',
+      pageTitle: 'SSC CGL जॉब प्रोफाइल और सैलरी',
       lede: 'SSC CGL किसी एक नौकरी के लिए भर्ती नहीं करता — यह एक ऐसी परीक्षा है जो आपको केंद्र सरकार के विभागों में लगभग बीस अलग-अलग ग्रुप B और C भूमिकाओं में से किसी एक में रखती है, GST इंस्पेक्टर के रूप में कर-चोरी रोकने के फील्ड काम से लेकर असिस्टेंट सेक्शन ऑफिसर के रूप में डेस्क-स्तर की नीति-समन्वय तक। यहां बताया गया है कि मुख्य पद वास्तव में क्या करते हैं, हर एक की सैलरी कितनी है, और एक बार अंदर आने पर प्रोमोशन कैसे काम करता है।',
       profileHeading: 'एक परीक्षा, कई अलग-अलग नौकरियां',
       profileBody: [
@@ -114,7 +114,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'SSC CHSL',
     officialUrl: 'https://ssc.gov.in/for-candidates/chsl-exam/jd0is9pdf8adhfakjshd98',
     en: {
-      pageTitle: 'SSC CHSL Job Profile & Salary: LDC, Postal Assistant and DEO Explained',
+      pageTitle: 'SSC CHSL Job Profile & Salary',
       lede: 'SSC CHSL is also a multi-post exam — it fills clerical and data-entry roles across central government offices and the Department of Posts. The three main posts have genuinely different daily work and different pay levels, so “what does CHSL pay” depends on which one you land.',
       profileHeading: 'Three different jobs under one exam',
       profileBody: [
@@ -161,7 +161,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision.',
     },
     hi: {
-      pageTitle: 'SSC CHSL जॉब प्रोफाइल और सैलरी: LDC, पोस्टल असिस्टेंट और DEO समझाया गया',
+      pageTitle: 'SSC CHSL जॉब प्रोफाइल और सैलरी',
       lede: 'SSC CHSL भी एक मल्टी-पोस्ट परीक्षा है — यह केंद्र सरकार के कार्यालयों और डाक विभाग में क्लेरिकल और डेटा-एंट्री भूमिकाएं भरती है। तीन मुख्य पदों का दैनिक काम और पे लेवल वास्तव में अलग-अलग है, इसलिए "CHSL कितना देता है" यह इस पर निर्भर करता है कि आपको कौन-सा पद मिला।',
       profileHeading: 'एक परीक्षा के अंतर्गत तीन अलग-अलग नौकरियां',
       profileBody: [
@@ -213,7 +213,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'IBPS PO',
     officialUrl: 'https://www.ibps.in/',
     en: {
-      pageTitle: 'IBPS PO Job Profile & Salary: What a Bank Probationary Officer Actually Does',
+      pageTitle: 'IBPS PO Job Profile & Salary',
       lede: 'IBPS PO is the entry point into bank management at public sector banks other than SBI — Junior Management Grade Scale I, the first rung of a ladder that can eventually lead to a bank’s top leadership. Here’s what the two-year probation actually involves, what it pays, and how promotion works from there.',
       profileHeading: 'What a PO actually does',
       profileBody: [
@@ -255,7 +255,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
     },
     hi: {
-      pageTitle: 'IBPS PO जॉब प्रोफाइल और सैलरी: बैंक प्रोबेशनरी ऑफिसर असल में क्या करता है',
+      pageTitle: 'IBPS PO जॉब प्रोफाइल और सैलरी',
       lede: 'IBPS PO, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों में बैंक प्रबंधन में प्रवेश का रास्ता है — जूनियर मैनेजमेंट ग्रेड स्केल I, उस सीढ़ी का पहला पड़ाव जो आखिरकार बैंक के शीर्ष नेतृत्व तक ले जा सकता है। यहां बताया गया है कि दो साल की प्रोबेशन में वास्तव में क्या होता है, इसकी सैलरी कितनी है, और उसके बाद प्रोमोशन कैसे काम करता है।',
       profileHeading: 'एक PO वास्तव में क्या करता है',
       profileBody: [
@@ -302,7 +302,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'IBPS Clerk',
     officialUrl: 'https://www.ibps.in/',
     en: {
-      pageTitle: 'IBPS Clerk Job Profile & Salary: What a Customer Service Associate Actually Does',
+      pageTitle: 'IBPS Clerk Job Profile & Salary',
       lede: 'IBPS Clerk recruits Customer Service Associates for public sector banks other than SBI — the front line of most branches, and for many, the first step toward an officer career. Here’s the actual day-to-day, the salary, and the two real paths up from here.',
       profileHeading: 'What a Clerk actually does',
       profileBody: [
@@ -343,7 +343,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
     },
     hi: {
-      pageTitle: 'IBPS क्लर्क जॉब प्रोफाइल और सैलरी: कस्टमर सर्विस एसोसिएट असल में क्या करता है',
+      pageTitle: 'IBPS क्लर्क जॉब प्रोफाइल और सैलरी',
       lede: 'IBPS क्लर्क, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों के लिए कस्टमर सर्विस एसोसिएट भर्ती करता है — ज़्यादातर शाखाओं की फ्रंट लाइन, और कई लोगों के लिए, अधिकारी करियर की ओर पहला पड़ाव। यहां बताया गया है कि असल रोज़मर्रा का काम क्या है, सैलरी कितनी है, और यहां से ऊपर जाने के दो वास्तविक रास्ते क्या हैं।',
       profileHeading: 'एक क्लर्क वास्तव में क्या करता है',
       profileBody: [
@@ -389,7 +389,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'SBI PO',
     officialUrl: 'https://sbi.co.in/web/careers',
     en: {
-      pageTitle: 'SBI PO Job Profile & Salary: Inside India’s Largest Bank’s Officer Cadre',
+      pageTitle: 'SBI PO Job Profile & Salary',
       lede: 'SBI runs its own Probationary Officer recruitment, separate from IBPS, for Junior Management Grade Scale I at the country’s largest public sector bank. The role is broadly similar to an IBPS PO’s, but SBI’s own pay structure and nationwide branch network make the specifics worth knowing separately.',
       profileHeading: 'What an SBI PO actually does',
       profileBody: [
@@ -430,7 +430,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
     },
     hi: {
-      pageTitle: 'SBI PO जॉब प्रोफाइल और सैलरी: भारत के सबसे बड़े बैंक के अधिकारी कैडर के भीतर',
+      pageTitle: 'SBI PO जॉब प्रोफाइल और सैलरी',
       lede: 'SBI, IBPS से अलग, अपनी स्वयं की प्रोबेशनरी ऑफिसर भर्ती चलाता है, देश के सबसे बड़े सार्वजनिक क्षेत्र के बैंक में जूनियर मैनेजमेंट ग्रेड स्केल I के लिए। भूमिका मोटे तौर पर IBPS PO जैसी ही है, लेकिन SBI का अपना वेतन ढांचा और देशभर का शाखा नेटवर्क इसकी विशिष्टताओं को अलग से जानना ज़रूरी बनाते हैं।',
       profileHeading: 'एक SBI PO वास्तव में क्या करता है',
       profileBody: [
@@ -476,7 +476,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'SBI Clerk',
     officialUrl: 'https://sbi.co.in/web/careers',
     en: {
-      pageTitle: 'SBI Clerk Job Profile & Salary: Junior Associate at India’s Largest Bank',
+      pageTitle: 'SBI Clerk Job Profile & Salary',
       lede: 'SBI runs its own clerical recruitment, separate from IBPS Clerk, for the Junior Associate (Customer Support & Sales) role at the State Bank of India. The daily work closely mirrors any PSU bank clerk’s, but SBI’s own allowance structure and internal promotion route are worth knowing on their own terms.',
       profileHeading: 'What an SBI Junior Associate actually does',
       profileBody: [
@@ -516,7 +516,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
     },
     hi: {
-      pageTitle: 'SBI क्लर्क जॉब प्रोफाइल और सैलरी: भारत के सबसे बड़े बैंक में जूनियर एसोसिएट',
+      pageTitle: 'SBI क्लर्क जॉब प्रोफाइल और सैलरी',
       lede: 'SBI, IBPS क्लर्क से अलग, स्टेट बैंक ऑफ इंडिया में जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स) भूमिका के लिए अपनी स्वयं की क्लेरिकल भर्ती चलाता है। दैनिक काम किसी भी PSU बैंक क्लर्क जैसा ही है, लेकिन SBI का अपना भत्ता ढांचा और आंतरिक प्रोमोशन रास्ता अलग से जानना ज़रूरी है।',
       profileHeading: 'एक SBI जूनियर एसोसिएट वास्तव में क्या करता है',
       profileBody: [
