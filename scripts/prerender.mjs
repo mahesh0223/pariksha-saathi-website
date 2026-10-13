@@ -25,6 +25,7 @@ import { currentAffairsDigest, learningNote } from '../src/data/currentAffairsRe
 import { noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
 import { PUBLIC_PAGES, publicPageBody } from '../src/data/publicPages.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
+import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
@@ -35,6 +36,7 @@ const SITE_NAME = 'Pariksha Saathi';
 // Real publish dates for static pages that have no per-entry date field of their own - taken from
 // the git commit that actually shipped them (489ecf6 and 9232611), not guessed.
 const SYLLABUS_PUBLISHED_DATE = '2026-10-01';
+const JOB_PROFILE_PUBLISHED_DATE = '2026-10-13';
 const IBPS_VS_SBI_PUBLISHED_DATE = '2026-10-01';
 
 function escapeHtml(str) {
@@ -267,13 +269,13 @@ const HOW_IT_WORKS = [
 ];
 
 const EXAM_COVERAGE = [
-  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC CGL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ssc-cgl-job-profile/">Job profile &amp; salary &rarr;</a>' },
   { name: 'SSC MTS', body: 'Focused lessons and practice across Numerical Ability, Reasoning and English, plus current-affairs coverage for General Awareness. <a href="/compare/ssc-mts-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
-  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>' },
+  { name: 'SSC CHSL', body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ssc-chsl-job-profile/">Job profile &amp; salary &rarr;</a>' },
+  { name: 'IBPS PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ibps-po-job-profile/">Job profile &amp; salary &rarr;</a>' },
+  { name: 'IBPS Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ibps-clerk-job-profile/">Job profile &amp; salary &rarr;</a>' },
+  { name: 'SBI PO', body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/sbi-po-job-profile/">Job profile &amp; salary &rarr;</a>' },
+  { name: 'SBI Clerk', body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/sbi-clerk-job-profile/">Job profile &amp; salary &rarr;</a>' },
 ];
 
 const FAQS = [
@@ -595,6 +597,82 @@ function syllabusPageBody(entry, lang) {
     </div>`;
 }
 
+// Mirrors src/pages/compare/JobProfilePage.tsx exactly - driven by src/data/examJobProfiles.mjs,
+// same single-source-of-truth pattern as syllabusPageBody above.
+function jobProfilePageBody(entry, lang) {
+  const c = entry[lang];
+  const homeHref = '/';
+  const enPath = `/compare/${entry.slug}-job-profile`;
+  const hiPath = `/hi/compare/${entry.slug}-job-profile`;
+  const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus` : `/compare/${entry.slug}-syllabus`;
+  const otherLangHref = lang === 'hi' ? enPath : hiPath;
+  const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
+  const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
+  const startStudyingLabel = lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying';
+  const paragraphs = (items) => items.map((p) => `<p>${escapeHtml(p)}</p>`).join('\n        ');
+  const postsTable = c.posts
+    ? `<h2>${escapeHtml(c.postsHeading)}</h2>
+        <div class="compare-table">
+          ${c.posts.map((post) => `<div class="compare-row"><div class="compare-cell compare-label">${escapeHtml(post.name)}</div><div class="compare-cell compare-both">${escapeHtml(post.body)}</div></div>`).join('\n          ')}
+        </div>`
+    : '';
+  return `<div class="compare-page">
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="/app/exam-notices">${examNoticesLabel}</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+        </div>
+      </header>
+      <article class="wrap compare-article">
+        <div class="compare-top-row">
+          <a href="${homeHref}" class="detail-back">&larr; ${escapeHtml(c.backLabel)}</a>
+          <a href="${otherLangHref}" class="compare-lang-switch">${otherLangLabel}</a>
+        </div>
+        <h1>${escapeHtml(c.pageTitle)}</h1>
+        <p class="compare-lede">${escapeHtml(c.lede)}</p>
+        <h2>${escapeHtml(c.profileHeading)}</h2>
+        ${paragraphs(c.profileBody)}
+        ${postsTable}
+        <h2>${escapeHtml(c.promotionHeading)}</h2>
+        ${paragraphs(c.promotionBody)}
+        <h2>${escapeHtml(c.salaryHeading)}</h2>
+        ${paragraphs(c.salaryBody)}
+        <h2>${escapeHtml(c.perksHeading)}</h2>
+        <ul class="lesson-concept-list">
+          ${c.perks.map((perk) => `<li>${escapeHtml(perk)}</li>`).join('\n          ')}
+        </ul>
+        <p class="compare-note">${escapeHtml(c.note)} <a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.noteLinkLabel)}</a>.</p>
+        <h2>${escapeHtml(c.recruitsHeading)}</h2>
+        <p>${escapeHtml(c.recruitsBody)}</p>
+        <h2>${escapeHtml(c.offerHeading)}</h2>
+        <p>${escapeHtml(c.offerBody)}</p>
+        <h2>${escapeHtml(c.sourceHeading)}</h2>
+        <ul class="compare-links">
+          <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
+          <li><a href="${syllabusPath}">${escapeHtml(c.syllabusLinkLabel)} &rarr;</a></li>
+          <li><a href="/app/exam-notices">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
+        </ul>
+        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
+      </article>
+      <footer class="pub-footer">
+        <div class="wrap">
+          <div class="pub-footer-top">
+            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
+              <a href="/privacy/">Privacy Policy</a>
+              <a href="/terms/">Terms of Use</a>
+              <a href="/contact/">Contact</a>
+            </div>
+          </div>
+          <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
 // Mirrors src/pages/learn/LessonArticlePage.tsx exactly - driven by src/data/topicLessons.ts,
 // same single-source-of-truth pattern as syllabusPageBody above.
 function lessonPageBody(entry, lang) {
@@ -833,6 +911,56 @@ async function main() {
         ],
       }));
       sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: SYLLABUS_PUBLISHED_DATE });
+    }
+  }
+
+  // --- Job profile & salary pages --- one per exam x language (12 total), all driven by
+  // src/data/examJobProfiles.mjs. Mirrors src/pages/compare/JobProfilePage.tsx exactly.
+  for (const entry of EXAM_JOB_PROFILES) {
+    for (const lang of ['en', 'hi']) {
+      const c = entry[lang];
+      const relPath = lang === 'hi' ? `hi/compare/${entry.slug}-job-profile` : `compare/${entry.slug}-job-profile`;
+      const urlPath = `/${relPath}/`;
+      // Trailing slash to match urlPath/canonical above - see the matching comment on the
+      // syllabus loop above for why this specifically matters.
+      const enPath = `/compare/${entry.slug}-job-profile/`;
+      const hiPath = `/hi/compare/${entry.slug}-job-profile/`;
+      writePage(relPath, page({
+        title: c.pageTitle,
+        description: c.lede.slice(0, 155),
+        path: urlPath,
+        assets,
+        bodyHtml: jobProfilePageBody(entry, lang),
+        type: 'article',
+        lang,
+        alternateLanguages: [
+          { lang: 'en', path: enPath },
+          { lang: 'hi', path: hiPath },
+          { lang: 'x-default', path: enPath },
+        ],
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: c.pageTitle,
+            description: c.lede,
+            inLanguage: lang,
+            // All 6 job-profile pages shipped together in one pass - a real date, not per-exam.
+            datePublished: JOB_PROFILE_PUBLISHED_DATE,
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            publisher: { '@type': 'Organization', name: SITE_NAME },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: c.backLabel, item: `${SITE_URL}/` },
+              { '@type': 'ListItem', position: 2, name: c.pageTitle },
+            ],
+          },
+        ],
+      }));
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: JOB_PROFILE_PUBLISHED_DATE });
     }
   }
 

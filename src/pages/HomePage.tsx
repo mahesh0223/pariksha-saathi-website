@@ -120,7 +120,7 @@ const HOW_IT_WORKS = [
 const EXAM_COVERAGE = [
   {
     name: 'SSC CGL',
-    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-cgl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ssc-cgl-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
   {
     name: 'SSC MTS',
@@ -128,23 +128,23 @@ const EXAM_COVERAGE = [
   },
   {
     name: 'SSC CHSL',
-    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Topic-wise lessons and practice across Quantitative Aptitude, Reasoning and English, plus dated current-affairs capsules for General Awareness. <a href="/compare/ssc-chsl-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ssc-chsl-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
   {
     name: 'IBPS PO',
-    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ibps-po-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
   {
     name: 'IBPS Clerk',
-    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for Banking Awareness. <a href="/compare/ibps-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/ibps-clerk-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
   {
     name: 'SBI PO',
-    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Reasoning, Quantitative Aptitude and English practice for Prelims and Mains, with current-affairs coverage for Banking &amp; Economy Awareness. <a href="/compare/sbi-po-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/sbi-po-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
   {
     name: 'SBI Clerk',
-    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a>',
+    body: 'Reasoning, Numerical Ability and English practice for Prelims and Mains, with current-affairs coverage for General &amp; Financial Awareness. <a href="/compare/sbi-clerk-syllabus/">Full syllabus &amp; exam pattern &rarr;</a> · <a href="/compare/sbi-clerk-job-profile/">Job profile &amp; salary &rarr;</a>',
   },
 ];
 
