@@ -5,6 +5,7 @@ import { useLanguage, type LanguageCode } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Note, Pill, Spinner } from '../../components/ui/Primitives';
 import { learningNote } from '../../data/currentAffairsReading.mjs';
+import { shortenTitle } from '../../lib/seoTitle.mjs';
 import './DetailPage.css';
 
 const OTHER_LANGUAGE: Record<LanguageCode, LanguageCode> = { en: 'hi', hi: 'en' };
@@ -39,7 +40,7 @@ export function CurrentAffairsDetailPage() {
   const display = item ?? otherItem;
 
   useDocumentMeta({
-    title: display?.title ?? 'Current Affairs',
+    title: display ? shortenTitle(display.title) : 'Current Affairs',
     description: display
       ? display.summary.slice(0, 155)
       : 'Dated current-affairs capsules for SSC, IBPS and SBI exam prep, each with a verifiable source.',

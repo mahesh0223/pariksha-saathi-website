@@ -8,7 +8,7 @@ export function IbpsPoVsSbiPoPage() {
   useDocumentMeta({
     title: 'IBPS PO vs SBI PO: What’s Actually Different',
     description:
-      'IBPS PO and SBI PO both lead to a Probationary Officer role at a public sector bank, but they’re run by different organisations with different outcomes. Here’s how they actually differ.',
+      'IBPS PO and SBI PO lead to a Probationary Officer role at different public sector banks, with different outcomes — here’s how they differ.',
     // Trailing slash matters: Cloudflare Pages 308-redirects the slash-less form to this one, and
     // the prerendered HTML's canonical/sitemap already use it.
     path: '/compare/ibps-po-vs-sbi-po/',

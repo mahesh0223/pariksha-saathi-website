@@ -1,13 +1,28 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
-import { findJobProfileEntry } from '../../data/examJobProfiles.mjs';
-import { EmptyState } from '../../components/ui/Primitives';
+import type { ExamJobProfileEntry } from '../../data/examJobProfiles.mjs';
+import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './ComparePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
 export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
-  const entry = findJobProfileEntry(slug);
+  // examJobProfiles.mjs carries all 6 exams' full bilingual content - loading it dynamically,
+  // only once an actual job-profile page mounts, keeps that weight out of every other page's
+  // bundle (including the homepage, which links to all 6 without needing their content). Mirrors
+  // src/pages/learn/LessonArticlePage.tsx's identical treatment of the much larger topicLessons.mjs.
+  const [entry, setEntry] = useState<ExamJobProfileEntry | undefined>(undefined);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    import('../../data/examJobProfiles.mjs').then(({ findJobProfileEntry }) => {
+      setEntry(findJobProfileEntry(slug));
+      setLoaded(true);
+    });
+  }, [slug]);
+
   const content = entry?.[lang];
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
@@ -57,6 +72,16 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
         ]
       : undefined,
   });
+
+  if (!loaded) {
+    return (
+      <div className="compare-page">
+        <div className="wrap" style={{ paddingTop: 40 }}>
+          <Spinner />
+        </div>
+      </div>
+    );
+  }
 
   if (!entry || !content) {
     return (

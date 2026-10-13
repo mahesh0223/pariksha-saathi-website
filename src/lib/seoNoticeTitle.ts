@@ -1,4 +1,5 @@
 import type { ExamUpdateType } from '../types/api';
+import { shortenTitle } from './seoTitle.mjs';
 
 // Real government/exam-body titles ("Corrigendum and updated vacancy count released") read well
 // but rarely match how an anxious candidate actually searches ("IBPS clerk vacancy 2026"). This
@@ -48,5 +49,8 @@ export function seoNoticeTitle(examId: string, type: ExamUpdateType, title: stri
   // to avoid.
   const examPart = hasExam ? '' : `${examName} `;
   const typePart = hasType ? '' : `${typeLabel} ${year}: `;
-  return `${examPart}${typePart}${title}`;
+  // Real notification titles (and the exam/type prefix just added) can run well past what
+  // Google displays before truncating - cap it, never touching the on-page title this is built
+  // from.
+  return shortenTitle(`${examPart}${typePart}${title}`);
 }

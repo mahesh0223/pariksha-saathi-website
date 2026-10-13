@@ -29,6 +29,13 @@ export function ExamNoticesPage() {
       'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
     // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
     path: '/app/exam-notices/',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'SSC, IBPS & SBI Admit Card & Result Alerts',
+      description: 'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
+      publisher: { '@type': 'Organization', name: 'Pariksha Saathi', url: 'https://parikshasaathi.com' },
+    },
   });
 
   return (

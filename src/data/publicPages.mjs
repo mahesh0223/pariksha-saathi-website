@@ -10,6 +10,37 @@ export const PUBLIC_PAGES = {
   terms: { title: 'Terms of Use', description: 'The terms that apply to using the Pariksha Saathi website and app.' },
   'account-deletion': { title: 'Account & Data Deletion', description: 'How to delete your Pariksha Saathi account and what happens to your data, with or without the app installed.' },
 };
+const SITE_URL = 'https://parikshasaathi.com';
+const PUBLISHER = { '@type': 'Organization', name: 'Pariksha Saathi', url: SITE_URL };
+const FOUNDER = { '@type': 'Person', name: 'Mahesh Srivastava' };
+
+// Structured data per PUBLIC_PAGES key - kept here (not inline per-page) so prerender.mjs and
+// PublicPage.tsx both call one function instead of duplicating the schema objects. dateModified
+// is only set where the page's own body states a real "Last updated" date - never guessed.
+export function publicPageStructuredData(key) {
+  const path = `/${key}/`;
+  const base = { '@context': 'https://schema.org', url: `${SITE_URL}${path}`, publisher: PUBLISHER };
+  if (key === 'about') {
+    return [
+      { ...base, '@type': 'AboutPage', name: PUBLIC_PAGES.about.title, description: PUBLIC_PAGES.about.description, mainEntity: FOUNDER },
+      { '@context': 'https://schema.org', '@type': 'Person', name: 'Mahesh Srivastava', jobTitle: 'Founder', worksFor: PUBLISHER, url: `${SITE_URL}/about/` },
+    ];
+  }
+  if (key === 'contact') {
+    return { ...base, '@type': 'ContactPage', name: PUBLIC_PAGES.contact.title, description: PUBLIC_PAGES.contact.description };
+  }
+  if (key === 'privacy') {
+    return { ...base, '@type': 'WebPage', name: PUBLIC_PAGES.privacy.title, description: PUBLIC_PAGES.privacy.description, dateModified: '2026-10-12', author: FOUNDER };
+  }
+  if (key === 'terms') {
+    return { ...base, '@type': 'WebPage', name: PUBLIC_PAGES.terms.title, description: PUBLIC_PAGES.terms.description, dateModified: '2026-10-13', author: FOUNDER };
+  }
+  if (key === 'account-deletion') {
+    return { ...base, '@type': 'WebPage', name: PUBLIC_PAGES['account-deletion'].title, description: PUBLIC_PAGES['account-deletion'].description, dateModified: '2026-10-13', author: FOUNDER };
+  }
+  // 'learn' - the lesson library index
+  return { ...base, '@type': 'CollectionPage', name: PUBLIC_PAGES.learn.title, description: PUBLIC_PAGES.learn.description };
+}
 export function publicFrame(body) {
   return `<div class="compare-page"><header class="pub-header"><div class="wrap pub-nav"><a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a><nav class="pub-nav-links"><a href="/learn/">Lessons</a><a href="/app/current-affairs/">Current affairs</a></nav><a class="pub-cta" href="/onboarding">Start studying</a></div></header><main class="wrap compare-article">${body}</main><footer class="pub-footer"><div class="wrap pub-footer-links"><a href="/about/">About &amp; editorial standards</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a><a href="/contact/">Contact</a></div></footer></div>`;
 }

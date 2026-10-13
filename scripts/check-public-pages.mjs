@@ -4,7 +4,10 @@ import { join } from 'node:path';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 import { TOPIC_SLUGS } from '../src/data/topicSlugs.mjs';
+import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
+import { EXAM_JOB_PROFILE_SLUGS } from '../src/data/examJobProfileSlugs.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
+assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 for (const entry of LESSON_CATALOG) {
   assert(!/[<>{}]/.test(entry.title + entry.description), `Invalid catalog text: ${entry.slug}`);
   for (const lang of ['', 'hi/']) assert(existsSync(`dist/${lang}learn/${entry.slug}/index.html`));

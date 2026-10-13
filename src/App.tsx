@@ -7,7 +7,7 @@ import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { SyllabusPage } from './pages/compare/SyllabusPage';
 import { EXAM_SYLLABI } from './data/examSyllabi.mjs';
 import { JobProfilePage } from './pages/compare/JobProfilePage';
-import { EXAM_JOB_PROFILES } from './data/examJobProfiles.mjs';
+import { EXAM_JOB_PROFILE_SLUGS } from './data/examJobProfileSlugs.mjs';
 import { LessonArticlePage } from './pages/learn/LessonArticlePage';
 import { TOPIC_SLUGS } from './data/topicSlugs.mjs';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
@@ -69,18 +69,18 @@ export function App() {
           element={<SyllabusPage slug={exam.slug} lang="hi" />}
         />
       ))}
-      {EXAM_JOB_PROFILES.map((exam) => (
+      {EXAM_JOB_PROFILE_SLUGS.map((slug) => (
         <Route
-          key={`${exam.slug}-job-profile-en`}
-          path={`/compare/${exam.slug}-job-profile`}
-          element={<JobProfilePage slug={exam.slug} lang="en" />}
+          key={`${slug}-job-profile-en`}
+          path={`/compare/${slug}-job-profile`}
+          element={<JobProfilePage slug={slug} lang="en" />}
         />
       ))}
-      {EXAM_JOB_PROFILES.map((exam) => (
+      {EXAM_JOB_PROFILE_SLUGS.map((slug) => (
         <Route
-          key={`${exam.slug}-job-profile-hi`}
-          path={`/hi/compare/${exam.slug}-job-profile`}
-          element={<JobProfilePage slug={exam.slug} lang="hi" />}
+          key={`${slug}-job-profile-hi`}
+          path={`/hi/compare/${slug}-job-profile`}
+          element={<JobProfilePage slug={slug} lang="hi" />}
         />
       ))}
       {TOPIC_SLUGS.map((slug) => (

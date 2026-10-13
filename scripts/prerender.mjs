@@ -23,9 +23,10 @@ import { join } from 'node:path';
 // src/pages/ - just without compile-time typing on the data shape.
 import { currentAffairsDigest, learningNote } from '../src/data/currentAffairsReading.mjs';
 import { noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
-import { PUBLIC_PAGES, publicPageBody } from '../src/data/publicPages.mjs';
+import { PUBLIC_PAGES, publicPageBody, publicPageStructuredData } from '../src/data/publicPages.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
+import { shortenTitle } from '../src/lib/seoTitle.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
@@ -236,7 +237,10 @@ function seoNoticeTitle(examId, type, title, year) {
   const hasType = lower.includes(typeLabel.toLowerCase()) || (TYPE_SYNONYMS[type]?.test(title) ?? false);
   const examPart = hasExam ? '' : `${examName} `;
   const typePart = hasType ? '' : `${typeLabel} ${year}: `;
-  return `${examPart}${typePart}${title}`;
+  // Real notification titles (and the exam/type prefix just added) can run well past what
+  // Google displays before truncating - cap it, never touching the on-page title this is built
+  // from.
+  return shortenTitle(`${examPart}${typePart}${title}`);
 }
 
 // Mirrors src/pages/HomePage.tsx's content arrays and markup - kept in sync by hand since this
@@ -786,7 +790,7 @@ async function main() {
     // site had a title with zero keywords or value proposition in it. Mirrors
     // src/pages/HomePage.tsx's useDocumentMeta call.
     title: 'Free SSC, IBPS & SBI Exam Prep',
-    description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice, and take mock tests right in your browser.',
+    description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice and take mock tests in your browser.',
     path: '/',
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
@@ -817,7 +821,7 @@ async function main() {
   // Kept in sync by hand, same as every other page this script prerenders.
   writePage('compare/ibps-po-vs-sbi-po', page({
     title: 'IBPS PO vs SBI PO: What’s Actually Different',
-    description: 'IBPS PO and SBI PO both lead to a Probationary Officer role at a public sector bank, but they’re run by different organisations with different outcomes. Here’s how they actually differ.',
+    description: 'IBPS PO and SBI PO lead to a Probationary Officer role at different public sector banks, with different outcomes — here’s how they differ.',
     path: '/compare/ibps-po-vs-sbi-po/',
     assets,
     bodyHtml: comparePageBody(),
@@ -860,7 +864,7 @@ async function main() {
   ];
 
   for (const key of ['learn', 'about', 'privacy', 'contact', 'terms', 'account-deletion']) {
-    writePage(key, page({ ...PUBLIC_PAGES[key], path: `/${key}/`, assets, bodyHtml: publicPageBody(key), type: 'website' }));
+    writePage(key, page({ ...PUBLIC_PAGES[key], path: `/${key}/`, assets, bodyHtml: publicPageBody(key), type: 'website', structuredData: publicPageStructuredData(key) }));
     sitemapUrls.push({ loc: `/${key}/`, priority: '0.7' });
   }
 
@@ -1023,6 +1027,13 @@ async function main() {
     assets,
     bodyHtml: affairsListBody,
     type: 'website',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Current Affairs',
+      description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+      publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    },
   }));
 
   for (const item of affairs) {
@@ -1039,7 +1050,7 @@ async function main() {
       </article>
     `);
     writePage(`app/current-affairs/${item.id}`, page({
-      title: item.title,
+      title: shortenTitle(item.title),
       description: item.summary.slice(0, 155),
       path: `/app/current-affairs/${item.id}/`,
       assets,
@@ -1095,6 +1106,13 @@ async function main() {
     assets,
     bodyHtml: noticesListBody,
     type: 'website',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'SSC, IBPS & SBI Admit Card & Result Alerts',
+      description: "Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body's own site.",
+      publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    },
   }));
 
   for (const item of notices) {
