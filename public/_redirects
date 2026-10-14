@@ -21,3 +21,5 @@
 /app/current-affairs-quiz/*    /spa  200
 
 # Unmatched paths use the generated 404.html (Cloudflare returns HTTP 404).
+
+/daily-pdf /pdf/latest.pdf 302
