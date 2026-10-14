@@ -52,6 +52,7 @@ export function App() {
       <Route path="/about" element={<PublicPage page="about" />} />
       <Route path="/privacy" element={<PublicPage page="privacy" />} />
       <Route path="/contact" element={<PublicPage page="contact" />} />
+      <Route path="/downloads" element={<PublicPage page="downloads" />} />
       <Route path="/terms" element={<PublicPage page="terms" />} />
       <Route path="/account-deletion" element={<PublicPage page="account-deletion" />} />
       <Route path="/compare/ibps-po-vs-sbi-po" element={<IbpsPoVsSbiPoPage />} />

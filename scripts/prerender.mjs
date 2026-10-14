@@ -82,7 +82,7 @@ function publicContentFrame(innerHtml) {
       <a href="/about/">About &amp; editorial standards</a>
       <a href="/privacy/">Privacy Policy</a>
       <a href="/terms/">Terms of Use</a>
-      <a href="/contact/">Contact</a>
+      <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
     </div>
   </footer>
 </div>`;
@@ -440,7 +440,7 @@ function homePageBody(affairsPreview, noticesPreview) {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/account-deletion/">Delete Account</a>
-              <a href="/contact/">Contact</a>
+              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. For information about accounts, study progress and website data, see our <a href="/privacy/">Privacy Policy</a> for details.</p>
@@ -523,7 +523,7 @@ function comparePageBody() {
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a>
+              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with IBPS, SBI, or any government body. Figures and process details above are general and may change — always confirm against the official notification linked above.</p>
@@ -592,7 +592,7 @@ function syllabusPageBody(entry, lang) {
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a>
+              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
@@ -668,7 +668,7 @@ function jobProfilePageBody(entry, lang) {
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a>
+              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
@@ -753,7 +753,7 @@ function lessonPageBody(entry, lang) {
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a>
+              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
@@ -863,7 +863,7 @@ async function main() {
     { loc: '/app/exam-notices/', priority: '0.9', lastmod: BUILD_DATE },
   ];
 
-  for (const key of ['learn', 'about', 'privacy', 'contact', 'terms', 'account-deletion']) {
+  for (const key of ['learn', 'about', 'privacy', 'contact', 'downloads', 'terms', 'account-deletion']) {
     writePage(key, page({ ...PUBLIC_PAGES[key], path: `/${key}/`, assets, bodyHtml: publicPageBody(key), type: 'website', structuredData: publicPageStructuredData(key) }));
     sitemapUrls.push({ loc: `/${key}/`, priority: '0.7' });
   }

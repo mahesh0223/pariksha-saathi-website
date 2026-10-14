@@ -466,6 +466,7 @@ export function HomePage() {
                 Delete Account
               </Link>
               <Link to="/contact/">Contact</Link>
+              <Link to="/downloads/">Daily PDF</Link>
             </div>
           </div>
           <p className="disclaimer">

@@ -9,7 +9,8 @@
     "lint": "oxlint",
     "check:public": "node scripts/check-public-pages.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pdf:daily": "python3 scripts/daily-pdf/make_pdf.py"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.103.1",

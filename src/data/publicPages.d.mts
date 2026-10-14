@@ -1,4 +1,4 @@
-export const PUBLIC_PAGES: Record<'learn' | 'about' | 'privacy' | 'contact' | 'terms' | 'account-deletion', {title: string; description: string}>;
-export function publicPageBody(key: 'learn' | 'about' | 'privacy' | 'contact' | 'terms' | 'account-deletion'): string;
-export function publicPageStructuredData(key: 'learn' | 'about' | 'privacy' | 'contact' | 'terms' | 'account-deletion'): object | object[];
+export const PUBLIC_PAGES: Record<'learn' | 'about' | 'privacy' | 'contact' | 'downloads' | 'terms' | 'account-deletion', {title: string; description: string}>;
+export function publicPageBody(key: 'learn' | 'about' | 'privacy' | 'contact' | 'downloads' | 'terms' | 'account-deletion'): string;
+export function publicPageStructuredData(key: 'learn' | 'about' | 'privacy' | 'contact' | 'downloads' | 'terms' | 'account-deletion'): object | object[];
 export function escapeHtml(value: unknown): string;
