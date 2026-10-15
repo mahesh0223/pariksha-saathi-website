@@ -2471,10 +2471,6 @@ const LEARNING_NOTES = [
     },
   },
   // --- 2026-10-15 batch, part 2: 4 items from the 14-15 October 2026 PIB releases ---
-  // Two release ids below are still 0000000: the live API and pib.gov.in could not be reached from the
-  // session that drafted these, so the PRIDs for the SIOFA and WPI releases must be filled in when those
-  // items are seeded. Until then the build gate in scripts/check-public-pages.mjs will (correctly) fail
-  // for them - that is the intended safety net, not a bug.
 
   {
     match: /[?&]PRID=2323795(?:&|$)/i,
@@ -2515,9 +2511,7 @@ const LEARNING_NOTES = [
     },
   },
   {
-    // TODO: replace 0000000 with the PRID of the Department of Fisheries release "Central Government approves
-    // India's accession to Southern Indian Ocean Fisheries Agreement (SIOFA)" (14 October 2026) when seeding.
-    match: /[?&]PRID=0000000(?:&|$)/i,
+    match: /[?&]PRID=2323370(?:&|$)/i,
     en: {
       body: 'The Southern Indian Ocean Fisheries Agreement (SIOFA) was signed in Rome on 7 July 2006 and entered into force in June 2012; FAO is its depositary and its secretariat sits at Saint-Denis on La Réunion, a French territory in the Indian Ocean. It manages non-highly-migratory fish stocks on the high seas of the southern Indian Ocean, that is, outside any country’s exclusive economic zone. Highly migratory species such as tuna are not covered by SIOFA; they fall under the Indian Ocean Tuna Commission (IOTC), of which India is already a member.',
       refUrl: 'https://siofa.org/',
@@ -2536,9 +2530,7 @@ const LEARNING_NOTES = [
     },
   },
   {
-    // TODO: replace 0000000 with the PRID of the DPIIT release "Index Numbers of Wholesale Price in India for
-    // the month of September, 2026" (14 October 2026) when seeding.
-    match: /[?&]PRID=0000000(?:&|$)/i,
+    match: /[?&]PRID=2323098(?:&|$)/i,
     en: {
       body: 'The Wholesale Price Index is compiled by the Office of the Economic Adviser in the Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce and Industry, and the provisional figure for a month is released on the 14th of the following month. It is not the measure the Reserve Bank targets: under the flexible inflation targeting framework in force since 5 August 2016 (Section 45ZA-45ZB of the RBI Act, inserted by the Finance Act, 2016), the Monetary Policy Committee aims at 4% inflation measured by the Consumer Price Index (Combined), with a tolerance band of 2% to 6%.',
       refUrl: 'https://www.rbi.org.in/Scripts/FAQView.aspx?Id=118',
