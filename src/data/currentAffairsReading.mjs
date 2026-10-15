@@ -2470,6 +2470,93 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस खबर से भारत के CTF 154 नेतृत्व की सटीक अवधि (11 फरवरी से 14 अक्टूबर 2026, लगभग आठ महीने) नोट करें और यह भी कि यह किसी भारतीय नौसेना दल द्वारा पहली बार किसी CMF टास्क फोर्स की कमान संभालने का मामला था, और इसे ऊपर दिए CMF के स्थायी ढांचे से अलग रखें।',
     },
   },
+  // --- 2026-10-15 batch, part 2: 4 items from the 14-15 October 2026 PIB releases ---
+  // Two release ids below are still 0000000: the live API and pib.gov.in could not be reached from the
+  // session that drafted these, so the PRIDs for the SIOFA and WPI releases must be filled in when those
+  // items are seeded. Until then the build gate in scripts/check-public-pages.mjs will (correctly) fail
+  // for them - that is the intended safety net, not a bug.
+
+  {
+    match: /[?&]PRID=2323795(?:&|$)/i,
+    en: {
+      body: 'Ladakh became a Union Territory on 31 October 2019 under the Jammu and Kashmir Reorganisation Act, 2019, which split the former state into two UTs. Unlike the UT of Jammu and Kashmir, Ladakh has no legislature: it is administered by a Lieutenant Governor appointed by the President, and it has just two districts, Leh and Kargil. The Nimmu-Padum-Darcha road dedicated in this release is the third road axis into Ladakh after the Srinagar-Leh and Manali-Leh highways; the Border Roads Organisation connected its full 298 km in March 2024.',
+      refUrl: 'https://www.indiacode.nic.in/handle/123456789/13234',
+      refLabel: 'Reference: Jammu and Kashmir Reorganisation Act, 2019 on India Code',
+      checkQ: 'Check yourself: does the Union Territory of Ladakh have its own Legislative Assembly, like the UT of Jammu and Kashmir?',
+      checkA: 'No. The 2019 Act created Jammu and Kashmir as a UT with a legislature and Ladakh as a UT without one; Ladakh is run by a Lieutenant Governor, and the President can make regulations for its governance.',
+      task: 'Revision task: from this release, list the five projects (the new Leh airport terminal, the Nimmu-Padum-Darcha road, the Hanu small hydro project with its transmission line, the petroglyph conservation park at Sindhu Ghat and the Him Sarovar water bodies) with the total outlay (about ₹3,350 crore), and keep these separate from the standing facts about Ladakh’s constitutional status above.',
+    },
+    hi: {
+      body: 'लद्दाख 31 अक्टूबर 2019 को जम्मू और कश्मीर पुनर्गठन अधिनियम, 2019 के तहत केंद्र-शासित प्रदेश बना, जिसने पूर्व राज्य को दो केंद्र-शासित प्रदेशों में बाँटा। जम्मू-कश्मीर के विपरीत लद्दाख में कोई विधानसभा नहीं है: इसका प्रशासन राष्ट्रपति द्वारा नियुक्त उपराज्यपाल चलाते हैं, और इसमें केवल दो ज़िले हैं — लेह और कारगिल। इस खबर में समर्पित निम्मू-पदम-दारचा सड़क श्रीनगर-लेह और मनाली-लेह राजमार्गों के बाद लद्दाख तक पहुँचने का तीसरा सड़क मार्ग है; सीमा सड़क संगठन (BRO) ने मार्च 2024 में इसके पूरे 298 किमी को जोड़ा था।',
+      refUrl: 'https://www.indiacode.nic.in/handle/123456789/13234',
+      refLabel: 'संदर्भ: जम्मू और कश्मीर पुनर्गठन अधिनियम, 2019 (इंडिया कोड)',
+      checkQ: 'खुद जाँचें: क्या केंद्र-शासित प्रदेश लद्दाख की अपनी विधानसभा है, जैसे जम्मू-कश्मीर की है?',
+      checkA: 'नहीं। 2019 के अधिनियम ने जम्मू-कश्मीर को विधानसभा वाला और लद्दाख को बिना विधानसभा वाला केंद्र-शासित प्रदेश बनाया; लद्दाख का प्रशासन उपराज्यपाल चलाते हैं और राष्ट्रपति इसके शासन के लिए विनियम बना सकते हैं।',
+      task: 'अभ्यास: इस खबर से पाँचों परियोजनाएँ (लेह हवाई अड्डे का नया टर्मिनल, निम्मू-पदम-दारचा सड़क, हानू लघु जलविद्युत परियोजना और उसकी ट्रांसमिशन लाइन, सिंधु घाट का पेट्रोग्लिफ़ संरक्षण पार्क, और हिम सरोवर जलाशय) और कुल लागत (लगभग ₹3,350 करोड़) नोट करें, और इन्हें ऊपर दिए लद्दाख की संवैधानिक स्थिति के स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2323085(?:&|$)/i,
+    en: {
+      body: 'India’s formal ties with ASEAN began in 1992 as a Sectoral Dialogue Partner, became a full Dialogue Partnership in 1995, moved to summit level with the first ASEAN-India Summit at Phnom Penh in 2002, were raised to a Strategic Partnership in 2012 and to a Comprehensive Strategic Partnership at the 19th ASEAN-India Summit on 12 November 2022. ASEAN itself was founded by the Bangkok Declaration of 8 August 1967 and admitted Timor-Leste as its 11th member on 26 October 2025. The host of this forum, MP-IDSA, is the Institute for Defence Studies and Analyses set up in 1965, renamed after Manohar Parrikar in 2020.',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-ASEAN-july-2025.pdf',
+      refLabel: 'Reference: Ministry of External Affairs brief on India-ASEAN relations (July 2025)',
+      checkQ: 'Check yourself: how many ASEAN member states are there today, and when did the newest one join?',
+      checkA: 'Eleven. Timor-Leste became the 11th member at the 47th ASEAN Summit in Kuala Lumpur on 26 October 2025, the first expansion since Cambodia joined in 1999, which is why this release speaks of all eleven ASEAN member states.',
+      task: 'Revision task: from this release, note what is new (the first ASEAN-India Defence Think Tank Forum, held at MP-IDSA in New Delhi on 14-15 October 2026, announced by the Raksha Mantri at Kuala Lumpur on 31 October 2025) and that 2026 is the ASEAN-India Year of Maritime Cooperation, and keep these apart from the standing partnership timeline above.',
+    },
+    hi: {
+      body: 'आसियान के साथ भारत के औपचारिक संबंध 1992 में ‘क्षेत्रीय संवाद साझेदार’ के रूप में शुरू हुए, 1995 में पूर्ण संवाद साझेदारी बने, 2002 में नोम पेन्ह में पहले आसियान-भारत शिखर सम्मेलन के साथ शिखर स्तर पर पहुँचे, 2012 में रणनीतिक साझेदारी और 12 नवंबर 2022 को 19वें आसियान-भारत शिखर सम्मेलन में व्यापक रणनीतिक साझेदारी बने। आसियान की स्थापना 8 अगस्त 1967 की बैंकॉक घोषणा से हुई और 26 अक्टूबर 2025 को तिमोर-लेस्ते इसका 11वाँ सदस्य बना। इस मंच का मेज़बान MP-IDSA 1965 में स्थापित रक्षा अध्ययन और विश्लेषण संस्थान है, जिसका नाम 2020 में मनोहर पर्रिकर के नाम पर रखा गया।',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/India-ASEAN-july-2025.pdf',
+      refLabel: 'संदर्भ: भारत-आसियान संबंधों पर विदेश मंत्रालय का विवरण (जुलाई 2025)',
+      checkQ: 'खुद जाँचें: आज आसियान के कितने सदस्य देश हैं, और सबसे नया सदस्य कब जुड़ा?',
+      checkA: 'ग्यारह। तिमोर-लेस्ते 26 अक्टूबर 2025 को कुआलालंपुर में 47वें आसियान शिखर सम्मेलन में 11वाँ सदस्य बना — 1999 में कंबोडिया के शामिल होने के बाद पहला विस्तार; इसीलिए इस खबर में ‘सभी ग्यारह आसियान सदस्य देशों’ का ज़िक्र है।',
+      task: 'अभ्यास: इस खबर से नया क्या है (पहला आसियान-भारत रक्षा थिंक टैंक फ़ोरम, 14-15 अक्टूबर 2026 को नई दिल्ली में MP-IDSA में, जिसकी घोषणा रक्षा मंत्री ने 31 अक्टूबर 2025 को कुआलालंपुर में की थी) और यह कि 2026 आसियान-भारत समुद्री सहयोग वर्ष है — इन्हें ऊपर दी गई साझेदारी की स्थायी समय-रेखा से अलग रखें।',
+    },
+  },
+  {
+    // TODO: replace 0000000 with the PRID of the Department of Fisheries release "Central Government approves
+    // India's accession to Southern Indian Ocean Fisheries Agreement (SIOFA)" (14 October 2026) when seeding.
+    match: /[?&]PRID=0000000(?:&|$)/i,
+    en: {
+      body: 'The Southern Indian Ocean Fisheries Agreement (SIOFA) was signed in Rome on 7 July 2006 and entered into force in June 2012; FAO is its depositary and its secretariat sits at Saint-Denis on La Réunion, a French territory in the Indian Ocean. It manages non-highly-migratory fish stocks on the high seas of the southern Indian Ocean, that is, outside any country’s exclusive economic zone. Highly migratory species such as tuna are not covered by SIOFA; they fall under the Indian Ocean Tuna Commission (IOTC), of which India is already a member.',
+      refUrl: 'https://siofa.org/',
+      refLabel: 'Reference: SIOFA’s official website (agreement text, parties and secretariat)',
+      checkQ: 'Check yourself: after this accession, does SIOFA give India the right to regulate tuna fishing in the southern Indian Ocean?',
+      checkA: 'No. SIOFA covers only non-highly-migratory stocks such as toothfish, squid and alfonsino on the high seas; tuna and other highly migratory species are managed by the Indian Ocean Tuna Commission, and accession gives no exclusive rights: Indian vessels still need authorisation and must follow SIOFA’s conservation measures.',
+      task: 'Revision task: from this release, note the change of status (from Cooperating Non-Contracting Party to Contracting Party), the new rights it brings (seats on the Scientific and Compliance Committees, authorised fishing by Indian-flagged vessels) and the domestic policy it builds on (the 2025 guidelines for high-seas fishing by Indian-flagged vessels), and keep these apart from the standing facts about the agreement above.',
+    },
+    hi: {
+      body: 'दक्षिणी हिंद महासागर मत्स्य समझौते (SIOFA) पर 7 जुलाई 2006 को रोम में हस्ताक्षर हुए और यह जून 2012 में लागू हुआ; FAO इसका निक्षेपागार (डिपॉज़िटरी) है और इसका सचिवालय हिंद महासागर में फ्रांस के क्षेत्र ला रेयूनियों के सेंट-डेनी में है। यह दक्षिणी हिंद महासागर के खुले समुद्र (किसी भी देश के विशेष आर्थिक क्षेत्र से बाहर) में गैर-प्रवासी मछली भंडारों का प्रबंधन करता है। टूना जैसी अत्यधिक प्रवासी प्रजातियाँ SIOFA के दायरे में नहीं आतीं; वे हिंद महासागर टूना आयोग (IOTC) के अंतर्गत आती हैं, जिसका भारत पहले से सदस्य है।',
+      refUrl: 'https://siofa.org/',
+      refLabel: 'संदर्भ: SIOFA की आधिकारिक वेबसाइट (समझौते का पाठ, पक्षकार और सचिवालय)',
+      checkQ: 'खुद जाँचें: क्या इस परिग्रहण के बाद SIOFA भारत को दक्षिणी हिंद महासागर में टूना मछली पकड़ने का नियमन करने का अधिकार देता है?',
+      checkA: 'नहीं। SIOFA केवल खुले समुद्र में टूथफ़िश, स्क्विड और अल्फ़ोन्सिनो जैसे गैर-प्रवासी भंडारों को कवर करता है; टूना और अन्य अत्यधिक प्रवासी प्रजातियों का प्रबंधन हिंद महासागर टूना आयोग करता है, और परिग्रहण से कोई विशेष अधिकार नहीं मिलता: भारतीय जहाजों को अब भी अनुमति लेनी होगी और SIOFA के संरक्षण उपायों का पालन करना होगा।',
+      task: 'अभ्यास: इस खबर से स्थिति में बदलाव (सहयोगी गैर-अनुबंधकारी पक्ष से अनुबंधकारी पक्ष), इससे मिलने वाले नए अधिकार (वैज्ञानिक और अनुपालन समितियों में भागीदारी, भारतीय ध्वज वाले जहाजों द्वारा अधिकृत मछली पकड़ना) और जिस घरेलू नीति पर यह आधारित है (भारतीय ध्वज वाले जहाजों द्वारा खुले समुद्र में मछली पकड़ने के 2025 के दिशानिर्देश) नोट करें, और इन्हें ऊपर दिए समझौते के स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    // TODO: replace 0000000 with the PRID of the DPIIT release "Index Numbers of Wholesale Price in India for
+    // the month of September, 2026" (14 October 2026) when seeding.
+    match: /[?&]PRID=0000000(?:&|$)/i,
+    en: {
+      body: 'The Wholesale Price Index is compiled by the Office of the Economic Adviser in the Department for Promotion of Industry and Internal Trade (DPIIT), Ministry of Commerce and Industry, and the provisional figure for a month is released on the 14th of the following month. It is not the measure the Reserve Bank targets: under the flexible inflation targeting framework in force since 5 August 2016 (Section 45ZA-45ZB of the RBI Act, inserted by the Finance Act, 2016), the Monetary Policy Committee aims at 4% inflation measured by the Consumer Price Index (Combined), with a tolerance band of 2% to 6%.',
+      refUrl: 'https://www.rbi.org.in/Scripts/FAQView.aspx?Id=118',
+      refLabel: 'Reference: RBI’s FAQ on the Monetary Policy Committee and the inflation target',
+      checkQ: 'Check yourself: if WPI inflation crosses 6%, has the RBI’s inflation target been breached?',
+      checkA: 'Not by itself. The 4% target and the 2-6% band apply to CPI (Combined) inflation published by the National Statistics Office, not to the WPI; the WPI is a separate producer-side index from DPIIT, so a WPI print above 6% is not a breach of the statutory target.',
+      task: 'Revision task: from this release, note the headline WPI inflation rate for September 2026 and the previous month’s figure, which of the three groups (primary articles, fuel and power, manufactured products) moved most, and keep these month-specific numbers apart from the standing facts about who compiles the index and what the RBI actually targets.',
+    },
+    hi: {
+      body: 'थोक मूल्य सूचकांक (WPI) वाणिज्य और उद्योग मंत्रालय के उद्योग और आंतरिक व्यापार संवर्धन विभाग (DPIIT) का आर्थिक सलाहकार कार्यालय तैयार करता है, और किसी महीने का अनंतिम आँकड़ा अगले महीने की 14 तारीख को जारी होता है। यह वह पैमाना नहीं है जिसे रिज़र्व बैंक लक्षित करता है: 5 अगस्त 2016 से लागू लचीले मुद्रास्फीति लक्ष्यीकरण ढाँचे (वित्त अधिनियम, 2016 द्वारा जोड़ी गई RBI अधिनियम की धारा 45ZA-45ZB) के तहत मौद्रिक नीति समिति उपभोक्ता मूल्य सूचकांक (संयुक्त) से मापी गई 4% मुद्रास्फीति का लक्ष्य रखती है, जिसमें 2% से 6% की सहनशीलता सीमा है।',
+      refUrl: 'https://www.rbi.org.in/Scripts/FAQView.aspx?Id=118',
+      refLabel: 'संदर्भ: मौद्रिक नीति समिति और मुद्रास्फीति लक्ष्य पर रिज़र्व बैंक का FAQ',
+      checkQ: 'खुद जाँचें: अगर WPI मुद्रास्फीति 6% पार कर जाए, तो क्या रिज़र्व बैंक का मुद्रास्फीति लक्ष्य टूट गया?',
+      checkA: 'अपने आप नहीं। 4% का लक्ष्य और 2-6% की सीमा राष्ट्रीय सांख्यिकी कार्यालय द्वारा जारी CPI (संयुक्त) मुद्रास्फीति पर लागू होती है, WPI पर नहीं; WPI DPIIT का अलग, उत्पादक-पक्ष का सूचकांक है, इसलिए 6% से ऊपर का WPI आँकड़ा वैधानिक लक्ष्य का उल्लंघन नहीं है।',
+      task: 'अभ्यास: इस खबर से सितंबर 2026 की मुख्य WPI मुद्रास्फीति दर और पिछले महीने का आँकड़ा नोट करें, तीनों समूहों (प्राथमिक वस्तुएँ, ईंधन और बिजली, विनिर्मित उत्पाद) में से कौन-सा सबसे ज़्यादा बदला, और इन महीने-विशेष आँकड़ों को ऊपर दिए स्थायी तथ्यों (सूचकांक कौन बनाता है और रिज़र्व बैंक वास्तव में क्या लक्षित करता है) से अलग रखें।',
+    },
+  },
+
 ];
 
 export function learningNote(item, lang = 'en') {
