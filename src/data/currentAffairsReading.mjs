@@ -2410,6 +2410,66 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस खबर से नीलामी में पेश दोनों ब्लॉकों का कुल क्षेत्रफल (1,632 वर्ग किलोमीटर) और वह अधिनियम (अपतटीय क्षेत्र खनिज अधिनियम, 2002) नोट करें जिसके तहत नीलामी हो रही है, और दोनों को ऊपर दी गई UNCLOS परिभाषा से अलग रखें।',
     },
   },
+
+  // --- 2026-10-15 batch: 3 items from 14 October 2026 PIB releases ---
+
+  {
+    match: /[?&]PRID=2323468(?:&|$)/i,
+    en: {
+      body: 'RBI’s Prompt Corrective Action (PCA) Framework — the mechanism IDBI Bank was placed under in 2017 — has itself been revised since then. The version RBI uses today took effect from 1 January 2022 and tracks three parameters only (capital/CET1 ratio, net NPA ratio and the Tier 1 leverage ratio), applying to all scheduled commercial banks except small finance banks, payment banks and regional rural banks.',
+      refUrl: 'https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=12186',
+      refLabel: 'Reference: RBI’s notification on the revised PCA Framework for Scheduled Commercial Banks (2021)',
+      checkQ: 'Check yourself: is the PCA framework IDBI Bank was placed under in 2017 still the exact version RBI uses today?',
+      checkA: 'No — RBI revised the PCA Framework again in November 2021 (effective from 1 January 2022), well after IDBI Bank had already exited PCA in March 2021; today’s framework tracks capital, asset quality and leverage, not necessarily the identical indicators used in 2017.',
+      task: 'Revision task: from this release, note the exact date RBI lifted IDBI Bank’s PCA restrictions (10 March 2021) and the size of the stake now being sold (60.72%), and keep both separate from the standing PCA framework details above.',
+    },
+    hi: {
+      body: 'रिज़र्व बैंक की ‘त्वरित सुधारात्मक कार्रवाई’ (PCA) व्यवस्था — जिसके दायरे में आईडीबीआई बैंक को 2017 में रखा गया था — उसके बाद खुद संशोधित हो चुकी है। आज लागू संस्करण 1 जनवरी 2022 से प्रभावी है और केवल तीन पैमानों (पूंजी/CET1 अनुपात, नेट NPA अनुपात और टियर-1 लीवरेज अनुपात) पर नज़र रखता है, और यह छोटे वित्त बैंकों, पेमेंट बैंकों व क्षेत्रीय ग्रामीण बैंकों को छोड़कर सभी अनुसूचित वाणिज्यिक बैंकों पर लागू होता है।',
+      refUrl: 'https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=12186',
+      refLabel: 'संदर्भ: अनुसूचित वाणिज्यिक बैंकों के लिए संशोधित PCA व्यवस्था (2021) पर रिज़र्व बैंक की अधिसूचना',
+      checkQ: 'खुद जाँचें: क्या 2017 में आईडीबीआई बैंक पर लागू की गई PCA व्यवस्था ही आज रिज़र्व बैंक का मौजूदा संस्करण है?',
+      checkA: 'नहीं — रिज़र्व बैंक ने नवंबर 2021 में PCA व्यवस्था को फिर संशोधित किया (1 जनवरी 2022 से प्रभावी), यह आईडीबीआई बैंक के मार्च 2021 में ही PCA से बाहर आ जाने के बाद की बात है; आज की व्यवस्था पूंजी, आस्ति-गुणवत्ता और लीवरेज पर नज़र रखती है, जरूरी नहीं कि ठीक वही पैमाने हों जो 2017 में इस्तेमाल हुए थे।',
+      task: 'अभ्यास: इस खबर से वह सटीक तारीख (10 मार्च 2021, जब रिज़र्व बैंक ने आईडीबीआई बैंक पर PCA प्रतिबंध हटाए) और अभी बेची जा रही हिस्सेदारी का आकार (60.72%) नोट करें, और दोनों को ऊपर दिए गए PCA व्यवस्था के स्थायी ब्यौरे से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2323264(?:&|$)/i,
+    en: {
+      body: 'This scheme traces back to Article 41 of the Constitution of India, under the Directive Principles of State Policy in Part IV: ‘The State shall, within the limits of its economic capacity and development, make effective provision for securing the right to work, to education and to public assistance in cases of unemployment, old age, sickness and disablement, and in other cases of undeserved want.’ Directive Principles are not enforceable in court (Article 37), unlike Fundamental Rights.',
+      refUrl: 'https://www.constitutionofindia.net/articles/article-41-right-to-work-to-education-and-to-public-assistance-in-certain-cases/',
+      refLabel: 'Reference: Constitution of India, Article 41 (Directive Principles of State Policy)',
+      checkQ: 'Check yourself: could a citizen go to court to enforce Article 41 directly, the way they could a Fundamental Right?',
+      checkA: 'No — under Article 37, Directive Principles of State Policy (which include Article 41) are not enforceable by any court, even though they are described as fundamental to the governance of the country; NSAP is one of the schemes through which the State acts on this Article, not a court-ordered entitlement.',
+      task: 'Revision task: from this release, separate the scheme’s new names (e.g. Pradhan Mantri Vridhavastha Pension Yojana for the old-age pension) from the standing constitutional basis above, and note the one changed eligibility figure — the disability pension’s benchmark-disability threshold, now 40% instead of 80%.',
+    },
+    hi: {
+      body: 'यह योजना भारतीय संविधान के अनुच्छेद 41 से जुड़ी है, जो भाग IV के राज्य के नीति-निदेशक तत्वों में आता है: ‘राज्य, अपनी आर्थिक क्षमता और विकास की सीमाओं के भीतर, बेरोज़गारी, वृद्धावस्था, बीमारी और निःशक्तता की स्थिति में तथा अन्य अनर्जित अभाव के मामलों में काम, शिक्षा और सार्वजनिक सहायता पाने के अधिकार को सुरक्षित करने के लिए प्रभावी प्रावधान करेगा।’ मौलिक अधिकारों के विपरीत, नीति-निदेशक तत्व (अनुच्छेद 37 के अनुसार) अदालत में लागू नहीं कराए जा सकते।',
+      refUrl: 'https://www.constitutionofindia.net/articles/article-41-right-to-work-to-education-and-to-public-assistance-in-certain-cases/',
+      refLabel: 'संदर्भ: भारतीय संविधान, अनुच्छेद 41 (राज्य के नीति-निदेशक तत्व)',
+      checkQ: 'खुद जाँचें: क्या कोई नागरिक अनुच्छेद 41 को सीधे अदालत में लागू करवा सकता है, जैसे किसी मौलिक अधिकार के लिए करता?',
+      checkA: 'नहीं — अनुच्छेद 37 के अनुसार नीति-निदेशक तत्व (जिनमें अनुच्छेद 41 भी शामिल है) किसी भी अदालत द्वारा लागू नहीं कराए जा सकते, भले ही उन्हें देश के शासन के लिए ‘मूलभूत’ बताया गया हो; NSAP उन्हीं योजनाओं में से एक है जिनके ज़रिए राज्य इस अनुच्छेद पर अमल करता है, यह कोई अदालती आदेश से मिला अधिकार नहीं है।',
+      task: 'अभ्यास: इस खबर से योजनाओं के नए नाम (जैसे वृद्धावस्था पेंशन योजना का नया नाम ‘प्रधानमंत्री वृद्धावस्था पेंशन योजना’) को ऊपर दिए संवैधानिक आधार से अलग करें, और पात्रता में बदला एक आंकड़ा नोट करें — दिव्यांगजन पेंशन की ‘बेंचमार्क दिव्यांगता’ सीमा, जो अब 80% के बजाय 40% है।',
+    },
+  },
+  {
+    match: /[?&]PRID=2323572(?:&|$)/i,
+    en: {
+      body: 'The Combined Maritime Forces (CMF) is a 47-nation multinational naval partnership headquartered in Bahrain, commanded by a US Navy Vice Admiral who also heads the US Navy’s Central Command and 5th Fleet, with a UK Royal Navy Commodore as Deputy Commander. Besides CTF 154 (maritime security training), CMF runs four other standing task forces: CTF 150, 151 (counter-piracy), 152 and 153 (Red Sea security).',
+      refUrl: 'https://combinedmaritimeforces.com/about/',
+      refLabel: 'Reference: Combined Maritime Forces’ own ‘About CMF’ page',
+      checkQ: 'Check yourself: does CTF 154 operate on its own, independent of the rest of CMF?',
+      checkA: 'No — CTF 154 is one of five standing Combined Task Forces under the single CMF structure (alongside CTF 150, 151, 152 and 153), all commanded through CMF Headquarters in Bahrain.',
+      task: 'Revision task: from this release, note the exact tenure India led CTF 154 (11 February to 14 October 2026, about eight months) and that this was the first time any Indian Navy contingent commanded a CMF task force, and keep that specific to this tenure, not CMF’s standing structure above.',
+    },
+    hi: {
+      body: 'कॉम्बाइंड मैरीटाइम फोर्सेज़ (CMF) बहरीन में मुख्यालय वाला 47 देशों का बहुराष्ट्रीय नौसैनिक गठबंधन है, जिसकी कमान एक अमेरिकी नौसेना वाइस एडमिरल के पास होती है (जो अमेरिकी नौसेना के सेंट्रल कमान और 5वें फ्लीट का भी प्रमुख होता है), और एक ब्रिटिश रॉयल नेवी कमोडोर इसका उप-कमांडर होता है। CTF 154 (समुद्री सुरक्षा प्रशिक्षण) के अलावा CMF चार अन्य स्थायी टास्क फोर्स भी चलाता है: CTF 150, 151 (समुद्री डकैती-रोधी), 152 और 153 (रेड सी सुरक्षा)।',
+      refUrl: 'https://combinedmaritimeforces.com/about/',
+      refLabel: 'संदर्भ: कॉम्बाइंड मैरीटाइम फोर्सेज़ का अपना ‘About CMF’ पृष्ठ',
+      checkQ: 'खुद जाँचें: क्या CTF 154 बाकी CMF से अलग, स्वतंत्र रूप से काम करता है?',
+      checkA: 'नहीं — CTF 154 एक ही CMF ढांचे के अंतर्गत पांच स्थायी कॉम्बाइंड टास्क फोर्स में से एक है (CTF 150, 151, 152 और 153 के साथ), और इन सभी की कमान बहरीन स्थित CMF मुख्यालय से होती है।',
+      task: 'अभ्यास: इस खबर से भारत के CTF 154 नेतृत्व की सटीक अवधि (11 फरवरी से 14 अक्टूबर 2026, लगभग आठ महीने) नोट करें और यह भी कि यह किसी भारतीय नौसेना दल द्वारा पहली बार किसी CMF टास्क फोर्स की कमान संभालने का मामला था, और इसे ऊपर दिए CMF के स्थायी ढांचे से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
