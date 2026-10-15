@@ -6,3 +6,10 @@ export const DAILY_PDF_EDITIONS = [
   { date: '2026-10-13', file: '/pdf/ParikshaSaathi_CA_2026-10-13.pdf', language: 'hi', items: 13, questions: 5, pages: 8, sizeKb: 439 },
   { date: '2026-10-12', file: '/pdf/ParikshaSaathi_CA_2026-10-12.pdf', language: 'hi', items: 26, questions: 5, pages: 14, sizeKb: 564 },
 ];
+
+// Monthly current-affairs capsules (English + Hindi), newest first. Written by
+// scripts/capsule-pdf/make_capsule.py - do not hand-edit the entries it writes.
+export const MONTHLY_CAPSULES = [
+  { period: '2026-09', label: 'September 2026 (12-30 September)', language: 'en', file: '/pdf/ParikshaSaathi_Capsule_2026-09_en.pdf', items: 51, questions: 30, pages: 6, sizeKb: 139 },
+  { period: '2026-09', label: 'सितंबर 2026 (12-30 सितंबर)', language: 'hi', file: '/pdf/ParikshaSaathi_Capsule_2026-09_hi.pdf', items: 51, questions: 30, pages: 5, sizeKb: 363 },
+];

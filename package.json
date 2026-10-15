@@ -10,7 +10,8 @@
     "check:public": "node scripts/check-public-pages.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
-    "pdf:daily": "python3 scripts/daily-pdf/make_pdf.py"
+    "pdf:daily": "python3 scripts/daily-pdf/make_pdf.py",
+    "pdf:capsule": "python3 scripts/capsule-pdf/make_capsule.py"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.103.1",
