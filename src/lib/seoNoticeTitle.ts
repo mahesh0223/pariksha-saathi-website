@@ -1,5 +1,6 @@
 import type { ExamUpdateType } from '../types/api';
 import { shortenTitle } from './seoTitle.mjs';
+import { EXAM_NAMES } from './examNames.mjs';
 
 // Real government/exam-body titles ("Corrigendum and updated vacancy count released") read well
 // but rarely match how an anxious candidate actually searches ("IBPS clerk vacancy 2026"). This
@@ -7,16 +8,6 @@ import { shortenTitle } from './seoTitle.mjs';
 // on-page H1 or the original title, which stay as the authentic wording - so the title visible
 // in search results leads with the exact long-tail phrase people type, without duplicating it
 // when the original title already contains it.
-export const EXAM_NAMES: Record<string, string> = {
-  ssc_cgl: 'SSC CGL',
-  ssc_chsl: 'SSC CHSL',
-  ssc_mts: 'SSC MTS',
-  ibps_po: 'IBPS PO',
-  ibps_clerk: 'IBPS Clerk',
-  sbi_po: 'SBI PO',
-  sbi_clerk: 'SBI Clerk',
-};
-
 export const TYPE_LABELS: Record<ExamUpdateType, string> = {
   ADMIT_CARD: 'Admit Card',
   RESULT: 'Result',

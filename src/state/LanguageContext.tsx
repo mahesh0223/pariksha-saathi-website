@@ -11,10 +11,18 @@ interface LanguageState {
 
 const LanguageContext = createContext<LanguageState | null>(null);
 
+// An explicit choice (stored by setLanguage) always wins. With none, a device whose first
+// preferred language is Hindi starts in Hindi; the detected default is deliberately not stored,
+// so it keeps following the device until the student picks a language themselves.
+function initialLanguage(): LanguageCode {
+  const stored = localStorage.getItem(KEY);
+  if (stored === 'en' || stored === 'hi') return stored;
+  const preferred = typeof navigator === 'undefined' ? '' : (navigator.languages?.[0] ?? navigator.language ?? '');
+  return preferred.toLowerCase().startsWith('hi') ? 'hi' : 'en';
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<LanguageCode>(
-    () => (localStorage.getItem(KEY) as LanguageCode | null) ?? 'en',
-  );
+  const [language, setLanguageState] = useState<LanguageCode>(initialLanguage);
 
   const value = useMemo<LanguageState>(
     () => ({

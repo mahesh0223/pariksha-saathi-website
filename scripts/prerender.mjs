@@ -27,6 +27,7 @@ import { PUBLIC_PAGES, publicPageBody, publicPageStructuredData } from '../src/d
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
+import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
@@ -213,11 +214,8 @@ function icon(name) {
 }
 
 // Mirrors src/lib/seoNoticeTitle.ts exactly - see that file for why this exists (a <title>-tag-only
-// prefix built from the structured examId/type fields, never touching the on-page <h1>).
-const EXAM_NAMES = {
-  ssc_cgl: 'SSC CGL', ssc_chsl: 'SSC CHSL', ssc_mts: 'SSC MTS',
-  ibps_po: 'IBPS PO', ibps_clerk: 'IBPS Clerk', sbi_po: 'SBI PO', sbi_clerk: 'SBI Clerk',
-};
+// prefix built from the structured examId/type fields, never touching the on-page <h1>). The exam
+// names themselves are shared with it via src/lib/examNames.mjs.
 const TYPE_LABELS = {
   ADMIT_CARD: 'Admit Card', RESULT: 'Result', ANSWER_KEY: 'Answer Key',
   NOTIFICATION: 'Notification', DEADLINE: 'Deadline',
@@ -263,7 +261,7 @@ const TRUST_STATS = [
   { value: '7', label: 'exams covered' },
   { value: '100%', label: 'free, no paywall' },
   { value: 'EN / HI', label: 'both languages' },
-  { value: 'Offline', label: 'after first visit' },
+  { value: 'Offline', label: 'in the Android app' },
 ];
 
 const HOW_IT_WORKS = [
@@ -285,7 +283,7 @@ const EXAM_COVERAGE = [
 const FAQS = [
   { q: 'Is Pariksha Saathi free?', a: 'Yes. Every lesson, practice quiz, mock test and current-affairs capsule is free, with no paywalled content.' },
   { q: 'Do I need to create an account?', a: 'No. You can study fully as a guest, with progress saved locally on your device. Create a free account only if you want that progress backed up across devices.' },
-  { q: 'Does it work offline?', a: 'Yes, after your first visit. Lessons, quizzes and practice keep working with patchy or no internet, and sync again once you’re back online.' },
+  { q: 'Does it work offline?', a: 'The Android app does: lessons, quizzes and practice are bundled with it, so they keep working with patchy or no internet and sync again once you’re back online. This website needs an internet connection, but it saves your progress on your device between visits.' },
   { q: 'Is content available in Hindi?', a: 'Yes. Switch between English and Hindi any time, for the same content, without reinstalling or visiting a separate site.' },
   { q: 'Where does the current-affairs content come from?', a: 'Every current-affairs item and exam notification links to its original official source — PIB or the exam body’s own site — so you can verify it yourself.' },
   { q: 'Is Pariksha Saathi affiliated with SSC, IBPS or SBI?', a: 'No. Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.' },
@@ -790,7 +788,7 @@ async function main() {
     // site had a title with zero keywords or value proposition in it. Mirrors
     // src/pages/HomePage.tsx's useDocumentMeta call.
     title: 'Free SSC, IBPS & SBI Exam Prep',
-    description: 'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice and take mock tests in your browser.',
+    description: 'Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice and take mock tests in your browser.',
     path: '/',
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),

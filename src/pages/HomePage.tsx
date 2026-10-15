@@ -96,7 +96,7 @@ const TRUST_STATS = [
   { value: '7', label: 'exams covered' },
   { value: '100%', label: 'free, no paywall' },
   { value: 'EN / HI', label: 'both languages' },
-  { value: 'Offline', label: 'after first visit' },
+  { value: 'Offline', label: 'in the Android app' },
 ];
 
 const HOW_IT_WORKS = [
@@ -159,7 +159,7 @@ const FAQS = [
   },
   {
     q: 'Does it work offline?',
-    a: 'Yes, after your first visit. Lessons, quizzes and practice keep working with patchy or no internet, and sync again once you’re back online.',
+    a: 'The Android app does: lessons, quizzes and practice are bundled with it, so they keep working with patchy or no internet and sync again once you’re back online. This website needs an internet connection, but it saves your progress on your device between visits.',
   },
   {
     q: 'Is content available in Hindi?',
@@ -188,7 +188,7 @@ export function HomePage() {
     // on the site had a title with zero keywords or value proposition in it.
     title: 'Free SSC, IBPS & SBI Exam Prep',
     description:
-      'Free, offline-first exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk. Study, practice and take mock tests in your browser.',
+      'Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice and take mock tests in your browser.',
     path: '/',
     structuredData: [
       {
