@@ -6,6 +6,8 @@ import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 import { TOPIC_SLUGS } from '../src/data/topicSlugs.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../src/data/examJobProfileSlugs.mjs';
+import { HUB_EXAM_IDS } from '../src/data/examHubExams.mjs';
+import { examHubPath } from '../src/lib/examHub.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 for (const entry of LESSON_CATALOG) {
@@ -71,3 +73,22 @@ assert(
   noNoteSinceGate.length === 0,
   `${noNoteSinceGate.length} current-affairs item(s) published on/after ${POLICY_EFFECTIVE_DATE} have no learning note, violating the standing policy: ${noNoteSinceGate.join(', ')}`,
 );
+
+// Exam hub pages: a number never appears without its official source and the date it was last checked,
+// so every hub page must carry linked, dated source lines, real tables, a language twin and a sitemap entry.
+for (const examId of HUB_EXAM_IDS) {
+  for (const lang of ['en', 'hi']) {
+    const urlPath = examHubPath(examId, lang);
+    const html = readFileSync(`dist${urlPath}index.html`, 'utf8');
+    const sourceLines = [...html.matchAll(/<p class="hub-source">([^]*?)<\/p>/g)].map((m) => m[1]);
+    assert(sourceLines.length >= 4, `${urlPath}: expected a source line under every block, found ${sourceLines.length}`);
+    for (const line of sourceLines) {
+      assert(/href="https?:\/\//.test(line), `${urlPath}: a source line has no link: ${line.slice(0, 80)}`);
+      assert(/\d{4}/.test(line), `${urlPath}: a source line has no verification date: ${line.slice(0, 80)}`);
+    }
+    assert(html.includes('<table class="hub-table">'), `${urlPath}: no pattern table`);
+    assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
+    assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+  }
+}
+console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);

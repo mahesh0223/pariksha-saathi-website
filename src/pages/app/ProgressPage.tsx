@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useLocalProgress } from '../../hooks/useLocalProgress';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
-import { useLanguage } from '../../state/LanguageContext';
 import { computeProgressSummary } from '../../domain/analytics';
 import { getCutoffs } from '../../api/cutoffs';
 import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
@@ -12,12 +11,11 @@ import './ProgressPage.css';
 export function ProgressPage() {
   const { attempts, completions, pendingSyncCount, loading } = useLocalProgress();
   const { selectedExamIds } = useSelectedTopics();
-  const { language } = useLanguage();
 
   const cutoffQueries = useQueries({
     queries: selectedExamIds.map((examId) => ({
-      queryKey: ['cutoffs', examId, language],
-      queryFn: () => getCutoffs(examId, language),
+      queryKey: ['cutoffs', examId],
+      queryFn: () => getCutoffs(examId),
     })),
   });
   const cutoffs = cutoffQueries.flatMap((q) => q.data ?? []);

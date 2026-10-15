@@ -28,12 +28,15 @@ import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
+import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData } from '../src/lib/examHub.mjs';
+import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
-const API_BASE = 'https://api.parikshasaathi.com';
+// PRERENDER_API_BASE points a local build at a local backend for routes not deployed to production yet.
+const API_BASE = process.env.PRERENDER_API_BASE ?? 'https://api.parikshasaathi.com';
 const SITE_NAME = 'Pariksha Saathi';
 // Real publish dates for static pages that have no per-entry date field of their own - taken from
 // the git commit that actually shipped them (489ecf6 and 9232611), not guessed.
@@ -177,6 +180,13 @@ async function fetchAllCurrentAffairs(lang = 'en') {
 // deliberately (temporarily allow-list the URL here with a comment explaining why), not slip
 // through silently the way the 100-item cap did.
 async function assertNoPublishedUrlWentMissing(newSitemapUrls) {
+  // A build pointed at a local backend (PRERENDER_API_BASE) has different item ids from production, so
+  // comparing it with the live sitemap would only ever report noise. The guard stays on for every build
+  // that reads the production API, which is the only kind that gets deployed.
+  if (process.env.PRERENDER_API_BASE) {
+    console.log('Skipping the published-URL check: this build reads a local backend, not production.');
+    return;
+  }
   let previousXml;
   try {
     previousXml = await fetch(`${SITE_URL}/sitemap.xml`).then((r) => (r.ok ? r.text() : ''));
@@ -572,6 +582,7 @@ function syllabusPageBody(entry, lang) {
           ${tableRows(c.subjects)}
         </div>
         <p class="compare-note">${escapeHtml(c.note)} <a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.noteLinkLabel)}</a>.</p>
+        ${hubExamIdForSlug(entry.slug) ? `<p class="compare-note"><a href="${examHubPath(hubExamIdForSlug(entry.slug), lang)}">${escapeHtml(HUB_LINK_LABEL[lang])} &rarr;</a></p>` : ''}
         <h2>${escapeHtml(c.recruitsHeading)}</h2>
         <p>${escapeHtml(c.recruitsBody)}</p>
         <h2>${escapeHtml(c.offerHeading)}</h2>
@@ -594,6 +605,32 @@ function syllabusPageBody(entry, lang) {
             </div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
+        </div>
+      </footer>
+    </div>`;
+}
+
+// Mirrors src/pages/exams/ExamHubPage.tsx's frame exactly (header, article, footer); the article's
+// content is built by src/lib/examHub.mjs, which both this script and the React page call.
+function examHubPageBody(innerHtml, lang) {
+  return `<div class="compare-page">
+      <header class="pub-header">
+        <div class="wrap pub-nav">
+          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <nav class="pub-nav-links">
+            <a href="/app/exam-notices">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
+          </nav>
+          <a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
+        </div>
+      </header>
+      <article class="wrap compare-article">${innerHtml}</article>
+      <footer class="pub-footer">
+        <div class="wrap pub-footer-links">
+          <a href="/about/">About &amp; editorial standards</a>
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/terms/">Terms of Use</a>
+          <a href="/contact/">Contact</a>
+          <a href="/downloads/">Daily PDF</a>
         </div>
       </footer>
     </div>`;
@@ -1014,6 +1051,49 @@ async function main() {
         ],
       }));
       sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: entry.publishedDate });
+    }
+  }
+
+  // --- Exam hub pages --- one per listed exam x language, built from the server's sourced exam facts
+  // and official cut-offs (src/lib/examHub.mjs). An exam listed in HUB_EXAM_IDS with no published fact
+  // sheet fails the build: a hub must never ship empty or fall back to unsourced numbers.
+  for (const examId of HUB_EXAM_IDS) {
+    const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
+    if (!Array.isArray(facts) || facts.length === 0) {
+      throw new Error(`Build check failed: ${examId} is listed in HUB_EXAM_IDS but the API has no published fact sheet for it`);
+    }
+    const cutoffs = await fetch(`${API_BASE}/v1/exams/${examId}/cutoffs`).then((r) => r.json());
+    const examName = EXAM_NAMES[examId] ?? examId;
+    const slug = examHubSlug(examId);
+    const enNotices = await fetch(`${API_BASE}/v1/exam-updates?examIds=${examId}&lang=en`).then((r) => r.json());
+    const hiNotices = await fetch(`${API_BASE}/v1/exam-updates?examIds=${examId}&lang=hi`).then((r) => r.json());
+    const hasSyllabus = EXAM_SYLLABI.some((e) => e.slug === slug);
+    const hasJobProfile = EXAM_JOB_PROFILES.some((e) => e.slug === slug);
+    for (const lang of ['en', 'hi']) {
+      const prefix = lang === 'hi' ? '/hi' : '';
+      const links = {
+        syllabusPath: hasSyllabus ? `${prefix}/compare/${slug}-syllabus/` : undefined,
+        jobProfilePath: hasJobProfile ? `${prefix}/compare/${slug}-job-profile/` : undefined,
+      };
+      const notices = lang === 'hi' && hiNotices.length > 0 ? hiNotices : enNotices;
+      const meta = examHubMeta({ examName, facts, cutoffs, lang });
+      const urlPath = examHubPath(examId, lang);
+      writePage(urlPath.replace(/^\/|\/$/g, ''), page({
+        title: meta.title,
+        description: meta.description,
+        path: urlPath,
+        assets,
+        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, lang, links }), lang),
+        type: 'article',
+        lang,
+        alternateLanguages: [
+          { lang: 'en', path: examHubPath(examId, 'en') },
+          { lang: 'hi', path: examHubPath(examId, 'hi') },
+          { lang: 'x-default', path: examHubPath(examId, 'en') },
+        ],
+        structuredData: examHubStructuredData({ examName, facts, cutoffs, lang, siteUrl: SITE_URL }),
+      }));
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: meta.lastVerified });
     }
   }
 

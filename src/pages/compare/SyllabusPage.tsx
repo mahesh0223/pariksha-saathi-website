@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { findSyllabusEntry } from '../../data/examSyllabi.mjs';
 import { EmptyState } from '../../components/ui/Primitives';
+import { HUB_LINK_LABEL, hubExamIdForSlug } from '../../data/examHubExams.mjs';
+import { examHubPath } from '../../lib/examHub.mjs';
 import './ComparePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
@@ -9,6 +11,7 @@ const SITE_URL = 'https://parikshasaathi.com';
 export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
   const entry = findSyllabusEntry(slug);
   const content = entry?.[lang];
+  const hubExamId = hubExamIdForSlug(slug);
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
   // and the prerendered HTML's canonical/sitemap already use it - this hook runs after hydration
@@ -126,6 +129,11 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
           </a>
           .
         </p>
+        {hubExamId && (
+          <p className="compare-note">
+            <a href={examHubPath(hubExamId, lang)}>{HUB_LINK_LABEL[lang]} &rarr;</a>
+          </p>
+        )}
 
         <h2>{content.recruitsHeading}</h2>
         <p>{content.recruitsBody}</p>

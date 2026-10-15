@@ -1,7 +1,10 @@
 import { apiRequest } from './client';
 import type { CutoffTarget } from '../types/api';
 
-/** Always returns [] today for every exam - see CutoffTarget's doc comment. */
-export function getCutoffs(examId: string, lang: string): Promise<CutoffTarget[]> {
-  return apiRequest<CutoffTarget[]>(`/v1/exams/${examId}/cutoffs?lang=${lang}`);
+/**
+ * Official cut-off marks, each with its source document. Language-neutral (a number per category per
+ * cycle), so there is no lang parameter. [] for an exam nobody has sourced a figure for yet.
+ */
+export function getCutoffs(examId: string): Promise<CutoffTarget[]> {
+  return apiRequest<CutoffTarget[]>(`/v1/exams/${examId}/cutoffs`);
 }

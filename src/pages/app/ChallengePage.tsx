@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useQueries } from '@tanstack/react-query';
 import { useLocalProgress } from '../../hooks/useLocalProgress';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
-import { useLanguage } from '../../state/LanguageContext';
 import { computeChallengeProgress, type ChallengeProgress } from '../../domain/streakChallenge';
 import { computeWeakTopics } from '../../domain/analytics';
 import { badges, MIN_ATTEMPTS_TO_JUDGE_SUBJECT, phaseFor, shouldShowNeverMissTwice, subjectAccuracy } from '../../domain/challengeBadges';
@@ -16,12 +15,11 @@ import './ChallengePage.css';
 export function ChallengePage() {
   const { exams, selectedExamIds, topics } = useSelectedTopics();
   const { completions, attempts, items, loading: progressLoading } = useLocalProgress();
-  const { language } = useLanguage();
 
   const cutoffQueries = useQueries({
     queries: selectedExamIds.map((examId) => ({
-      queryKey: ['cutoffs', examId, language],
-      queryFn: () => getCutoffs(examId, language),
+      queryKey: ['cutoffs', examId],
+      queryFn: () => getCutoffs(examId),
     })),
   });
   const cutoffsByExamId = new Map(selectedExamIds.map((examId, i) => [examId, cutoffQueries[i]?.data ?? []]));

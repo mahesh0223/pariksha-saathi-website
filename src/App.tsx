@@ -7,6 +7,9 @@ import { IbpsPoVsSbiPoPage } from './pages/compare/IbpsPoVsSbiPoPage';
 import { SyllabusPage } from './pages/compare/SyllabusPage';
 import { EXAM_SYLLABI } from './data/examSyllabi.mjs';
 import { JobProfilePage } from './pages/compare/JobProfilePage';
+import { ExamHubPage } from './pages/exams/ExamHubPage';
+import { HUB_EXAM_IDS } from './data/examHubExams.mjs';
+import { examHubSlug } from './lib/examHub.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from './data/examJobProfileSlugs.mjs';
 import { LessonArticlePage } from './pages/learn/LessonArticlePage';
 import { TOPIC_SLUGS } from './data/topicSlugs.mjs';
@@ -83,6 +86,12 @@ export function App() {
           path={`/hi/compare/${slug}-job-profile`}
           element={<JobProfilePage slug={slug} lang="hi" />}
         />
+      ))}
+      {HUB_EXAM_IDS.map((examId) => (
+        <Route key={`${examId}-hub-en`} path={`/exams/${examHubSlug(examId)}`} element={<ExamHubPage examId={examId} lang="en" />} />
+      ))}
+      {HUB_EXAM_IDS.map((examId) => (
+        <Route key={`${examId}-hub-hi`} path={`/hi/exams/${examHubSlug(examId)}`} element={<ExamHubPage examId={examId} lang="hi" />} />
       ))}
       {TOPIC_SLUGS.map((slug) => (
         <Route key={`${slug}-en`} path={`/learn/${slug}`} element={<LessonArticlePage slug={slug} lang="en" />} />

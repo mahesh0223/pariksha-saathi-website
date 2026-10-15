@@ -97,6 +97,67 @@ export interface CutoffTarget {
   isSample?: boolean;
 }
 
+export interface Bilingual {
+  en: string;
+  hi: string;
+}
+
+export interface ExamFactSection {
+  name: Bilingual;
+  questions: number;
+  marksPerQuestion: number;
+  marks: number;
+  minutes?: number;
+}
+
+export interface ExamFactPart {
+  key: string;
+  name: Bilingual;
+  kind?: 'written' | 'skill';
+  appliesTo?: Bilingual;
+  durationMinutes: number | null;
+  durationNote?: Bilingual;
+  qualifying: boolean;
+  negativeMarking: ({ perWrongAnswer: number } & Bilingual) | null;
+  sections: ExamFactSection[];
+  notes?: Bilingual[];
+}
+
+export interface ExamFactStage {
+  key: string;
+  name: Bilingual;
+  appliesTo?: Bilingual;
+  parts: ExamFactPart[];
+}
+
+export interface ExamFactDate {
+  label: Bilingual;
+  role?: string;
+  from?: string;
+  to?: string;
+  text?: Bilingual;
+  sourceUrl?: string;
+}
+
+/** An exam cycle's official facts - see pariksha-saathi-server's ExamFact model. */
+export interface ExamFact {
+  id: string;
+  examId: string;
+  cycleLabel: string;
+  noticeTitle: string;
+  sourceUrl: string;
+  verifiedAt: string;
+  stages: ExamFactStage[];
+  eligibility: {
+    ageReferenceDate: string;
+    ageNote: Bilingual;
+    qualification: { posts: Bilingual; requirement: Bilingual }[];
+    qualifyingMarks?: Bilingual;
+  };
+  dates: ExamFactDate[];
+  vacancies: { total: number; asOf: string; sourceUrl: string } | null;
+}
+
 export interface QuizAttemptItemPayload {
   questionId: string;
   topicKey: string;
