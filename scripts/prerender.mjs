@@ -157,14 +157,14 @@ function writePage(relPath, html) {
   writeFileSync(join(dir, 'index.html'), html, 'utf8');
 }
 
-// Pages through every published English current-affairs item via `offset`, not a single
+// Pages through every published current-affairs item in one language via `offset`, not a single
 // `?limit=100` call - see the 2026-10-13 incident note at this function's call site in main().
 // `limit=100` per page (the API's own hard cap) keeps this to one request per 100 items.
-async function fetchAllCurrentAffairs() {
+async function fetchAllCurrentAffairs(lang = 'en') {
   const PAGE_SIZE = 100;
   const all = [];
   for (let offset = 0; ; offset += PAGE_SIZE) {
-    const page = await fetch(`${API_BASE}/v1/current-affairs?lang=en&limit=${PAGE_SIZE}&offset=${offset}`).then((r) => r.json());
+    const page = await fetch(`${API_BASE}/v1/current-affairs?lang=${lang}&limit=${PAGE_SIZE}&offset=${offset}`).then((r) => r.json());
     all.push(...page);
     if (page.length < PAGE_SIZE) break;
   }
@@ -777,6 +777,7 @@ async function main() {
   // masked it for days by still serving the old cached 200. Page through `offset` instead so
   // every published item always gets prerendered, no matter how many there are.
   const affairs = await fetchAllCurrentAffairs();
+  const affairsHi = await fetchAllCurrentAffairs('hi');
   const notices = await fetch(`${API_BASE}/v1/exam-updates`).then((r) => r.json());
 
   // --- Homepage --- the SPA's own dist/index.html is otherwise just an empty <div id="root">
@@ -1034,48 +1035,76 @@ async function main() {
     },
   }));
 
-  for (const item of affairs) {
-    const detailBody = publicContentFrame(`
+  // Every item gets a static page in BOTH languages. English and Hindi rows of one event have
+  // different ids, so a Hindi item's URL (shared from the Hindi UI, or opened by a Hindi-locale
+  // reader) has no file - and 404s on a hard load - unless it is generated here too. The two
+  // rows of an event share one sourceUrl, which is how each page finds its hreflang twin.
+  const ITEM_TEXT = {
+    en: { back: 'Current Affairs', source: 'Official source', collection: 'Read the daily collection →', standards: 'Editorial standards &amp; corrections' },
+    hi: { back: 'समसामयिकी', source: 'आधिकारिक स्रोत', collection: 'दैनिक संग्रह पढ़ें →', standards: 'संपादकीय मानक और सुधार' },
+  };
+  const itemsByLanguage = [
+    { lang: 'en', items: affairs, twins: new Map(affairsHi.map((i) => [i.sourceUrl, i])) },
+    { lang: 'hi', items: affairsHi, twins: new Map(affairs.map((i) => [i.sourceUrl, i])) },
+  ];
+  for (const { lang, items, twins } of itemsByLanguage) {
+    const t = ITEM_TEXT[lang];
+    for (const item of items) {
+      const itemPath = `/app/current-affairs/${item.id}/`;
+      const twin = twins.get(item.sourceUrl);
+      const twinPath = twin ? `/app/current-affairs/${twin.id}/` : undefined;
+      const enPath = lang === 'en' ? itemPath : twinPath;
+      const detailBody = publicContentFrame(`
       <article class="detail-page">
-        <a href="/app/current-affairs/" class="detail-back">&larr; Current Affairs</a>
+        <a href="/app/current-affairs/" class="detail-back">&larr; ${t.back}</a>
         <div class="detail-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
         <h1>${escapeHtml(item.title)}</h1>
         <div class="detail-tags">${item.examTags.map(pill).join('')}</div>
         <p class="detail-body">${escapeHtml(item.summary)}</p>
-        <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">Official source: ${escapeHtml(item.sourceName)} &#8599;</a></div>
-        ${learningNote(item)}
-        <p><a href="/app/current-affairs/">Read the daily collection →</a> · <a href="/about/">Editorial standards &amp; corrections</a></p>
+        <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${t.source}: ${escapeHtml(item.sourceName)} &#8599;</a></div>
+        ${learningNote(item, lang)}
+        <p><a href="/app/current-affairs/">${t.collection}</a> · <a href="/about/">${t.standards}</a></p>
       </article>
     `);
-    writePage(`app/current-affairs/${item.id}`, page({
-      title: shortenTitle(item.title),
-      description: item.summary.slice(0, 155),
-      path: `/app/current-affairs/${item.id}/`,
-      assets,
-      bodyHtml: detailBody,
-      structuredData: [
-        {
-          '@context': 'https://schema.org',
-          '@type': 'NewsArticle',
-          headline: item.title,
-          description: item.summary,
-          datePublished: item.editionDate,
-          author: { '@type': 'Person', name: 'Mahesh Srivastava' },
-          publisher: { '@type': 'Organization', name: SITE_NAME },
-          about: item.examTags,
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: 'Current Affairs', item: `${SITE_URL}/app/current-affairs/` },
-            { '@type': 'ListItem', position: 3, name: item.title },
-          ],
-        },
-      ],
-    }));
-    sitemapUrls.push({ loc: `/app/current-affairs/${item.id}/`, priority: '0.7', lastmod: item.editionDate.slice(0, 10) });
+      writePage(`app/current-affairs/${item.id}`, page({
+        title: shortenTitle(item.title),
+        description: item.summary.slice(0, 155),
+        path: itemPath,
+        assets,
+        bodyHtml: detailBody,
+        lang,
+        alternateLanguages: twin
+          ? [
+              { lang, path: itemPath },
+              { lang: lang === 'en' ? 'hi' : 'en', path: twinPath },
+              { lang: 'x-default', path: enPath },
+            ]
+          : undefined,
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'NewsArticle',
+            headline: item.title,
+            description: item.summary,
+            datePublished: item.editionDate,
+            inLanguage: lang,
+            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            publisher: { '@type': 'Organization', name: SITE_NAME },
+            about: item.examTags,
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+              { '@type': 'ListItem', position: 2, name: 'Current Affairs', item: `${SITE_URL}/app/current-affairs/` },
+              { '@type': 'ListItem', position: 3, name: item.title },
+            ],
+          },
+        ],
+      }));
+      sitemapUrls.push({ loc: itemPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: item.editionDate.slice(0, 10) });
+    }
   }
 
   // --- Exam notices --- (fetched above, alongside `affairs`, for the homepage preview)
@@ -1173,7 +1202,7 @@ ${sitemapUrls
   writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8');
 
   console.log(
-    `Prerendered ${affairs.length} current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
 }
 

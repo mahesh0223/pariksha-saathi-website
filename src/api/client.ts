@@ -1,4 +1,6 @@
-const BASE_URL = 'https://api.parikshasaathi.com';
+// VITE_API_BASE_URL points a dev server at a local backend (e.g. http://localhost:4000) - needed
+// to try a feature against API routes that aren't deployed to production yet.
+const BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? 'https://api.parikshasaathi.com';
 
 export class ApiError extends Error {
   status: number;

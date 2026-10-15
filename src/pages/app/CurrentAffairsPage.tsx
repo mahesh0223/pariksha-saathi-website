@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCurrentAffairs } from '../../api/currentAffairs';
+import { getAllCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
@@ -12,7 +12,7 @@ export function CurrentAffairsPage() {
 
   const affairsQuery = useQuery({
     queryKey: ['current-affairs', language],
-    queryFn: () => getCurrentAffairs({ lang: language, limit: 100 }),
+    queryFn: () => getAllCurrentAffairs(language),
   });
 
   useDocumentMeta({

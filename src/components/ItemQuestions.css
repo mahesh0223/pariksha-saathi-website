@@ -1,0 +1,29 @@
+.item-quiz {
+  margin: 28px 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+}
+.item-quiz h2 {
+  font-size: 1.15rem;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.item-quiz-question + .item-quiz-question {
+  margin-top: 22px;
+}
+.item-quiz-text {
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.item-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.item-quiz-explanation {
+  margin-top: 12px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink);
+}

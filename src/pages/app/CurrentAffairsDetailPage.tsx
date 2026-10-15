@@ -1,43 +1,43 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getCurrentAffairs } from '../../api/currentAffairs';
-import { useLanguage, type LanguageCode } from '../../state/LanguageContext';
+import { getCounterpartItem, getCurrentAffairsItem } from '../../api/currentAffairs';
+import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Note, Pill, Spinner } from '../../components/ui/Primitives';
+import { ItemQuestions } from '../../components/ItemQuestions';
 import { learningNote } from '../../data/currentAffairsReading.mjs';
 import { shortenTitle } from '../../lib/seoTitle.mjs';
 import './DetailPage.css';
 
-const OTHER_LANGUAGE: Record<LanguageCode, LanguageCode> = { en: 'hi', hi: 'en' };
-
 export function CurrentAffairsDetailPage() {
   const { id = '' } = useParams();
   const { language } = useLanguage();
-  const otherLanguage = OTHER_LANGUAGE[language];
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['current-affairs', language],
-    queryFn: () => getCurrentAffairs({ lang: language, limit: 100 }),
+  const itemQuery = useQuery({
+    queryKey: ['current-affairs-item', id],
+    queryFn: () => getCurrentAffairsItem(id),
   });
-
-  const item = data?.find((i) => i.id === id);
+  const item = itemQuery.data ?? undefined;
 
   // English and Hindi rows for "the same" event have independent ids (there is no shared
   // cross-language key in the data model), so a link/bookmark/share made while reading in one
-  // language 404s if the reader's language differs on a later visit. Before giving up: check
-  // whether this id belongs to the OTHER language, and if so, find that event's counterpart in
-  // the CURRENT language via sourceUrl - both language rows of the same event cite the same PIB
-  // release URL, which is the only field they share. Only fetched when the primary lookup fails,
-  // so the common case (id matches the current language) pays no extra request.
-  const needsFallback = !isLoading && !item;
-  const { data: otherData, isLoading: otherLoading } = useQuery({
-    queryKey: ['current-affairs', otherLanguage],
-    queryFn: () => getCurrentAffairs({ lang: otherLanguage, limit: 100 }),
-    enabled: needsFallback,
+  // language lands on the other language's row if the reader's language differs on a later
+  // visit. Before showing it: look for that event's counterpart in the CURRENT language via
+  // sourceUrl - both rows cite the same PIB release URL, the only field they share. Only fetched
+  // when the loaded item is in the other language, so the common case pays no extra request.
+  const needsTwin = !!item && item.languageCode !== language;
+  const twinQuery = useQuery({
+    queryKey: ['current-affairs-twin', language, item?.sourceUrl],
+    queryFn: () => getCounterpartItem(language, item!.sourceUrl),
+    enabled: needsTwin,
   });
-  const otherItem = needsFallback ? otherData?.find((i) => i.id === id) : undefined;
-  const counterpart = otherItem ? data?.find((i) => i.sourceUrl === otherItem.sourceUrl) : undefined;
-  const display = item ?? otherItem;
+  const counterpart = needsTwin ? twinQuery.data : undefined;
+  const display = item;
+  const isLoading = itemQuery.isLoading || (needsTwin && twinQuery.isLoading);
+  // The language the item itself is written in - what its page chrome should follow, even when
+  // it is shown because no counterpart exists in the reader's language.
+  const itemLanguage = display?.languageCode === 'hi' ? 'hi' : 'en';
+  const hi = itemLanguage === 'hi';
 
   useDocumentMeta({
     title: display ? shortenTitle(display.title) : 'Current Affairs',
@@ -72,7 +72,7 @@ export function CurrentAffairsDetailPage() {
       : undefined,
   });
 
-  if (isLoading || (needsFallback && otherLoading)) return <Spinner />;
+  if (isLoading) return <Spinner />;
   // A same-event counterpart exists in the current language - send the reader to its own URL
   // rather than silently rendering the other language's content under this id.
   if (counterpart) return <Navigate to={`/app/current-affairs/${counterpart.id}/`} replace />;
@@ -81,10 +81,10 @@ export function CurrentAffairsDetailPage() {
   return (
     <article className="detail-page">
       <Link to="/app/current-affairs" className="detail-back">
-        &larr; Current Affairs
+        &larr; {hi ? 'समसामयिकी' : 'Current Affairs'}
       </Link>
 
-      {!item && (
+      {needsTwin && (
         <Note>
           {language === 'hi'
             ? 'यह आइटम हिंदी में उपलब्ध नहीं है — अंग्रेज़ी संस्करण नीचे दिखाया गया है।'
@@ -106,12 +106,16 @@ export function CurrentAffairsDetailPage() {
 
       <div className="detail-source">
         <a href={display.sourceUrl} target="_blank" rel="noreferrer">
-          Official source: {display.sourceName} &#8599;
+          {hi ? 'आधिकारिक स्रोत' : 'Official source'}: {display.sourceName} &#8599;
         </a>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: learningNote(display, language) }} />
-      <p><Link to="/app/current-affairs">Read the daily collection →</Link> · <Link to="/about/">Editorial standards & corrections</Link></p>
+      <div dangerouslySetInnerHTML={{ __html: learningNote(display, itemLanguage) }} />
+      <ItemQuestions itemId={display.id} language={itemLanguage} />
+      <p>
+        <Link to="/app/current-affairs">{hi ? 'दैनिक संग्रह पढ़ें →' : 'Read the daily collection →'}</Link> ·{' '}
+        <Link to="/about/">{hi ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link>
+      </p>
     </article>
   );
 }
