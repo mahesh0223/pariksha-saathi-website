@@ -3,7 +3,27 @@
 // prerender step fails the build if a listed exam has none, so a hub can never ship empty. The hub URL
 // slug is the server's exam id with dashes (ssc_cgl -> ssc-cgl), which is also the slug the existing
 // /compare/<slug>-syllabus pages already use.
-export const HUB_EXAM_IDS = ['ssc_cgl'];
+export const HUB_EXAM_IDS = [
+  'ssc_cgl',
+  'ssc_chsl',
+  'ssc_mts',
+  'ssc_gd',
+  'ibps_po',
+  'ibps_clerk',
+  'sbi_po',
+  'sbi_clerk',
+  'rrb_ntpc',
+  'rrb_group_d',
+  'rrb_alp',
+  'ctet',
+  'up_police',
+  'bihar_police',
+  'mp_police',
+  'rajasthan_police',
+  'bpsc',
+  'mppsc',
+  'rpsc',
+];
 
 export function hubExamIdForSlug(slug) {
   const examId = slug.replace(/-/g, '_');

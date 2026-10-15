@@ -24,15 +24,30 @@ const CATEGORY_ORDER = ['UR', 'OBC', 'EWS', 'SC', 'ST', 'ESM', 'OH', 'HH', 'VH',
 // stage/list each was published for is an English string in the data - translated here by exact match.
 const SECTION_HI = {
   'Tier-I, all posts except JSO and SI Grade-II': 'टियर-I, JSO और SI ग्रेड-II को छोड़कर सभी पद',
+  'Tier-I, LDC/JSA': 'टियर-I, LDC/JSA',
+  'Tier-I, DEO/DEO Grade A in the named Ministries (science stream)': 'टियर-I, अधिसूचना में बताए मंत्रालयों में DEO/DEO ग्रेड A (विज्ञान वर्ग)',
+  'Tier-I, DEO/DEO Grade A in other departments': 'टियर-I, अन्य विभागों में DEO/DEO ग्रेड A',
+  'Tier-I, DEO/DEO Grade A (single list, 2024)': 'टियर-I, DEO/DEO ग्रेड A (2024 की एकल सूची)',
+  'Final selection, Civil Police Constable (men and women)': 'अंतिम चयन, सिविल पुलिस आरक्षी (पुरुष और महिला)',
+  'Final selection, PAC / Armed Police Constable (men)': 'अंतिम चयन, पी.ए.सी. / सशस्त्र पुलिस आरक्षी (पुरुष)',
+  'Final selection, Special Security Force Constable (men)': 'अंतिम चयन, विशेष सुरक्षा बल आरक्षी (पुरुष)',
+  'Final selection, Women Battalion Constable (women)': 'अंतिम चयन, महिला बटालियन आरक्षी (महिला)',
+  'Final selection, Mounted Police Constable (men)': 'अंतिम चयन, घुड़सवार पुलिस आरक्षी (पुरुष)',
+  'Prelims Paper I, main part': 'प्रारंभिक परीक्षा पेपर I, मुख्य सूची',
+  'Prelims Paper I, provisional part': 'प्रारंभिक परीक्षा पेपर I, अनंतिम सूची',
+  'Prelims, male posts': 'प्रारंभिक परीक्षा, पुरुष पद',
+  'Prelims, female posts': 'प्रारंभिक परीक्षा, महिला पद',
 };
 
 const T = {
   en: {
     home: 'Home',
     switchLabel: 'हिंदी में पढ़ें',
-    h1: (name) => `${name}: exam pattern, marks, negative marking, age limit and cut-off`,
-    lede: (cycle, verified) =>
-      `Every figure on this page is copied from an official document linked next to it, with the date we last checked it. Pattern, age limit and dates are from the ${cycle} notification; cut-offs are from the official result write-ups of earlier years. Last verified: ${verified}.`,
+    h1: (name, hasCutoffs = true) => `${name}: exam pattern, marks, negative marking, age limit${hasCutoffs ? ' and cut-off' : ''}`,
+    lede: (cycle, verified, hasCutoffs = true) =>
+      `Every figure on this page is copied from an official document linked next to it, with the date we last checked it. Pattern, age limit and dates are from the ${cycle} notification${hasCutoffs ? '; cut-offs are from the official result write-ups of earlier years' : ''}. Last verified: ${verified}.`,
+    noNegative: 'No negative marking',
+    negativeNotStated: 'Not stated in the notice',
     glance: 'At a glance',
     stages: 'Selection stages',
     totalQuestions: 'Questions',
@@ -66,7 +81,15 @@ const T = {
     cutoffs: 'Cut-off marks by year and category',
     cutoffNote: (max) => `Marks are out of ${max}. Cut-offs change every cycle and are no promise for the next one; use them to see how competitive each category has been.`,
     category: 'Category',
-    cutoffLegend: 'UR: unreserved. OBC, EWS, SC, ST: reserved categories. ESM: ex-servicemen. OH, HH, VH: orthopaedic, hearing and visual disability. Other PwD: other persons with disabilities.',
+    legend: {
+      UR: 'unreserved',
+      reserved: 'reserved categories',
+      ESM: 'ex-servicemen',
+      disability: 'orthopaedic, hearing and visual disability',
+      'Other PwD': 'other persons with disabilities',
+      PwBD: 'persons with benchmark disabilities',
+      bracket: 'Labels in brackets, such as (SA), (TSP) or (Female), are the exam body\'s own sub-lists exactly as printed in its cut-off document.',
+    },
     notices: 'Latest notices',
     allNotices: 'All exam notices',
     prepare: 'Prepare',
@@ -85,9 +108,11 @@ const T = {
   hi: {
     home: 'होम',
     switchLabel: 'Read in English',
-    h1: (name) => `${name}: परीक्षा पैटर्न, अंक, नेगेटिव मार्किंग, आयु सीमा और कट-ऑफ`,
-    lede: (cycle, verified) =>
-      `इस पृष्ठ का हर आँकड़ा उस आधिकारिक दस्तावेज़ से लिया गया है जिसका लिंक उसके साथ दिया है, और उसके साथ वह तारीख भी जब हमने उसे अंतिम बार जाँचा। पैटर्न, आयु सीमा और तिथियाँ ${cycle} की अधिसूचना से हैं; कट-ऑफ पिछले वर्षों के आधिकारिक परिणाम-विवरणों से हैं। अंतिम सत्यापन: ${verified}।`,
+    h1: (name, hasCutoffs = true) => `${name}: परीक्षा पैटर्न, अंक, नेगेटिव मार्किंग, आयु सीमा${hasCutoffs ? ' और कट-ऑफ' : ''}`,
+    lede: (cycle, verified, hasCutoffs = true) =>
+      `इस पृष्ठ का हर आँकड़ा उस आधिकारिक दस्तावेज़ से लिया गया है जिसका लिंक उसके साथ दिया है, और उसके साथ वह तारीख भी जब हमने उसे अंतिम बार जाँचा। पैटर्न, आयु सीमा और तिथियाँ ${cycle} की अधिसूचना से हैं${hasCutoffs ? '; कट-ऑफ पिछले वर्षों के आधिकारिक परिणाम-विवरणों से हैं' : ''}। अंतिम सत्यापन: ${verified}।`,
+    noNegative: 'कोई नेगेटिव मार्किंग नहीं',
+    negativeNotStated: 'अधिसूचना में नहीं बताया गया',
     glance: 'एक नज़र में',
     stages: 'चयन के चरण',
     totalQuestions: 'प्रश्न',
@@ -121,7 +146,15 @@ const T = {
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
     cutoffNote: (max) => `अंक ${max} में से हैं। कट-ऑफ हर चक्र में बदलता है और अगले चक्र की गारंटी नहीं है; इससे बस यह समझें कि हर श्रेणी में प्रतिस्पर्धा कितनी रही है।`,
     category: 'श्रेणी',
-    cutoffLegend: 'UR: अनारक्षित। OBC, EWS, SC, ST: आरक्षित श्रेणियाँ। ESM: पूर्व सैनिक। OH, HH, VH: अस्थि, श्रवण और दृष्टि दिव्यांगता। Other PwD: अन्य दिव्यांगजन।',
+    legend: {
+      UR: 'अनारक्षित',
+      reserved: 'आरक्षित श्रेणियाँ',
+      ESM: 'पूर्व सैनिक',
+      disability: 'अस्थि, श्रवण और दृष्टि दिव्यांगता',
+      'Other PwD': 'अन्य दिव्यांगजन',
+      PwBD: 'बेंचमार्क दिव्यांगता वाले व्यक्ति',
+      bracket: 'कोष्ठक वाले लेबल, जैसे (SA), (TSP) या (Female), परीक्षा निकाय की अपनी उप-सूचियाँ हैं, ठीक वैसे ही जैसे उसके कट-ऑफ दस्तावेज़ में छपी हैं।',
+    },
     notices: 'ताज़ा सूचनाएं',
     allNotices: 'सभी परीक्षा सूचनाएं',
     prepare: 'तैयारी करें',
@@ -154,6 +187,9 @@ export function formatHubDate(iso, lang) {
 }
 
 const marksText = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
+// Some bodies print marks per test, not per question (IBPS PO Prelims: 35 questions for 30 marks). The per-question
+// figure is then not a clean number, and a rounded 0.86 on the page would read as something the notice says.
+const perQuestionText = (n) => (n == null ? '&mdash;' : Math.abs(n * 100 - Math.round(n * 100)) < 1e-6 ? marksText(Math.round(n * 100) / 100) : '&mdash;');
 const countText = (n) => n.toLocaleString('en-IN');
 const pick = (bilingual, lang) => bilingual?.[lang] ?? bilingual?.en ?? '';
 
@@ -164,13 +200,33 @@ export function examHubPath(examId, lang) {
   return `${lang === 'hi' ? '/hi' : ''}/exams/${examHubSlug(examId)}/`;
 }
 
+// The Railway portal answers a link opened cold with a "Request Rejected" page until its home page has been
+// visited once in that browser. The source stays a direct link (it is the document), with a hint for that case.
+const NEEDS_HOME_VISIT = { 'rrb.indianrailways.gov.in': 'https://rrb.indianrailways.gov.in/' };
+
+function homeVisitHint(url, lang) {
+  let host = '';
+  try {
+    host = new URL(url).host;
+  } catch {
+    return '';
+  }
+  const home = NEEDS_HOME_VISIT[host];
+  if (!home) return '';
+  return lang === 'hi'
+    ? ` (यदि “Request Rejected” दिखे तो पहले <a href="${home}" target="_blank" rel="noreferrer">${host}</a> खोलें, फिर लिंक दोबारा खोलें।)`
+    : ` (If it shows “Request Rejected”, open <a href="${home}" target="_blank" rel="noreferrer">${host}</a> first, then the link again.)`;
+}
+
 const sourceLine = (t, label, url, verifiedIso, lang) =>
-  `<p class="hub-source">${t.sourceWord}: <a href="${esc(url)}" target="_blank" rel="noreferrer">${esc(label)} &#8599;</a>${t.noteSep}${t.verifiedWord}: ${esc(formatHubDate(verifiedIso, lang))}</p>`;
+  `<p class="hub-source">${t.sourceWord}: <a href="${esc(url)}" target="_blank" rel="noreferrer">${esc(label)} &#8599;</a>${t.noteSep}${t.verifiedWord}: ${esc(formatHubDate(verifiedIso, lang))}${homeVisitHint(url, lang)}</p>`;
 
 function sectionTotals(part) {
   return {
     questions: part.sections.reduce((n, s) => n + s.questions, 0),
-    marks: part.sections.reduce((n, s) => n + s.marks, 0),
+    // A notice can print one total for the whole test and no marks per section (SBI PO Prelims): the part then
+    // carries that total and the section rows show a dash.
+    marks: part.sections.some((s) => s.marks == null) ? part.marks : part.sections.reduce((n, s) => n + s.marks, 0),
   };
 }
 
@@ -182,19 +238,38 @@ function partHtml(part, lang, t) {
     const rows = part.sections
       .map(
         (s) =>
-          `<tr><td>${esc(pick(s.name, lang))}</td><td>${s.questions}</td><td>${marksText(s.marksPerQuestion)}</td><td>${marksText(s.marks)}</td><td>${s.minutes ?? '&mdash;'}</td></tr>`,
+          `<tr><td>${esc(pick(s.name, lang))}</td><td>${s.questions}</td><td>${perQuestionText(s.marksPerQuestion)}</td><td>${s.marks == null ? '&mdash;' : marksText(s.marks)}</td><td>${s.minutes ?? '&mdash;'}</td></tr>`,
       )
       .join('');
     html += `<div class="hub-table-wrap"><table class="hub-table"><thead><tr><th>${t.section}</th><th>${t.questions}</th><th>${t.perQuestion}</th><th>${t.marks}</th><th>${t.minutes}</th></tr></thead><tbody>${rows}<tr class="hub-total"><td>${t.total}</td><td>${totals.questions}</td><td></td><td>${marksText(totals.marks)}</td><td>${part.durationMinutes ?? '&mdash;'}</td></tr></tbody></table></div>`;
   }
   const facts = [];
   if (part.durationMinutes) facts.push(t.duration(part.durationMinutes));
+  if (part.sections.length === 0 && part.marks) facts.push(`${t.marks}: ${marksText(part.marks)}.`);
   if (part.durationNote) facts.push(esc(pick(part.durationNote, lang)));
   if (part.negativeMarking) facts.push(`<strong>${t.negative}:</strong> ${esc(pick(part.negativeMarking, lang))}`);
+  else if (part.sections.length > 0) facts.push(`<strong>${t.negative}:</strong> ${t.negativeNotStated}.`);
   if (part.qualifying) facts.push(t.qualifyingOnly);
   if (facts.length) html += `<p class="hub-facts">${facts.join(' ')}</p>`;
   if (part.notes?.length) html += `<ul class="hub-notes">${part.notes.map((n) => `<li>${esc(pick(n, lang))}</li>`).join('')}</ul>`;
   return html;
+}
+
+// One line explaining only the categories that appear in the tables, so a bank page does not carry
+// "ESM" and "VH" definitions for columns it does not show.
+function legendText(categories, lang, t) {
+  const present = (names) => names.filter((n) => categories.includes(n));
+  const parts = [];
+  if (categories.includes('UR')) parts.push(`UR: ${t.legend.UR}`);
+  const reserved = present(['OBC', 'EWS', 'SC', 'ST']);
+  if (reserved.length) parts.push(`${reserved.join(', ')}: ${t.legend.reserved}`);
+  if (categories.includes('ESM')) parts.push(`ESM: ${t.legend.ESM}`);
+  const disability = present(['OH', 'HH', 'VH']);
+  if (disability.length) parts.push(`${disability.join(', ')}: ${t.legend.disability}`);
+  for (const key of ['Other PwD', 'PwBD']) if (categories.includes(key)) parts.push(`${key}: ${t.legend[key]}`);
+  let text = parts.length ? `${parts.join('. ')}.` : '';
+  if (categories.some((c) => c.includes('('))) text += `${text ? ' ' : ''}${t.legend.bracket}`;
+  return text;
 }
 
 function cutoffTablesHtml(cutoffs, lang, t) {
@@ -237,14 +312,31 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
   const lastVerified = verifiedDates.sort().at(-1);
   const otherPath = examHubPath(fact.examId, lang === 'hi' ? 'en' : 'hi');
 
-  const firstPart = fact.stages[0].parts[0];
-  const firstTotals = sectionTotals(firstPart);
+  // The first stage can be one paper (Tier-I) or several sessions on one day (MTS): count them together.
+  // CTET's Paper I and the two Paper II options are alternatives, not sessions: show one paper, not their sum.
+  const firstParts = fact.stages[0].partsAreAlternatives ? fact.stages[0].parts.slice(0, 1) : fact.stages[0].parts;
+  // An 'objective' part with no section table (BPSC Prelims: 150 marks, question count not printed) counts
+  // toward marks and time but contributes no question count.
+  const firstMcq = firstParts.filter((p) => p.sections.length > 0 || p.kind === 'objective');
+  const firstTotals = firstMcq.reduce(
+    (acc, p) => {
+      const part = p.sections.length > 0 ? sectionTotals(p) : { questions: 0, marks: p.marks ?? 0 };
+      return { questions: acc.questions + part.questions, marks: acc.marks + part.marks };
+    },
+    { questions: 0, marks: 0 },
+  );
+  const firstMinutes = firstParts.reduce((n, p) => n + (p.durationMinutes ?? 0), 0);
+  const negativeTexts = firstMcq.map((p) => (p.negativeMarking === null || p.negativeMarking === undefined ? t.negativeNotStated : p.negativeMarking.perWrongAnswer > 0 ? pick(p.negativeMarking, lang) : t.noNegative));
+  const negativeGlance =
+    new Set(negativeTexts).size <= 1
+      ? (negativeTexts[0] ?? '—')
+      : firstMcq.map((p, i) => `${pick(p.name, lang)}: ${negativeTexts[i]}`).join(' ');
   const firstDates = fact.dates.find((d) => d.role === 'firstStage' && d.from && d.to);
 
   const glance = [
     [t.stages, esc(fact.stages.map((s) => pick(s.name, lang)).join(' → '))],
-    [`${t.firstStage}: ${t.totalQuestions} / ${t.totalMarks} / ${t.time}`, `${firstTotals.questions} / ${marksText(firstTotals.marks)} / ${firstPart.durationMinutes} ${lang === 'hi' ? 'मिनट' : 'min'}`],
-    [t.negative, esc(firstPart.negativeMarking ? pick(firstPart.negativeMarking, lang) : '—')],
+    [`${t.firstStage}: ${t.totalQuestions} / ${t.totalMarks} / ${t.time}`, `${firstTotals.questions > 0 ? firstTotals.questions : '&mdash;'} / ${marksText(firstTotals.marks)} / ${firstMinutes} ${lang === 'hi' ? 'मिनट' : 'min'}`],
+    [t.negative, esc(negativeGlance)],
   ];
   if (firstDates) glance.push([t.firstStageDates, `${esc(formatHubDate(firstDates.from, lang))} ${t.dateTo} ${esc(formatHubDate(firstDates.to, lang))}`]);
   if (fact.vacancies) {
@@ -252,8 +344,9 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
   }
 
   let html = `<div class="compare-top-row"><a href="/" class="detail-back">&larr; ${t.home}</a><a href="${esc(otherPath)}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
-  html += `<h1>${esc(t.h1(examName))}</h1>`;
-  html += `<p class="compare-lede">${esc(t.lede(fact.cycleLabel, formatHubDate(lastVerified, lang)))}</p>`;
+  const hasCutoffs = cutoffs.length > 0;
+  html += `<h1>${esc(t.h1(examName, hasCutoffs))}</h1>`;
+  html += `<p class="compare-lede">${esc(t.lede(fact.cycleLabel, formatHubDate(lastVerified, lang), hasCutoffs))}</p>`;
 
   html += `<h2>${t.glance}</h2><dl class="hub-glance">${glance.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
 
@@ -266,7 +359,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
   html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang);
 
   const el = fact.eligibility;
-  html += `<h2>${t.eligibility}</h2><p>${esc(pick(el.ageNote, lang))} ${esc(t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)))}</p>`;
+  html += `<h2>${t.eligibility}</h2><p>${esc(pick(el.ageNote, lang))}${el.ageReferenceDate ? ` ${esc(t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)))}` : ''}</p>`;
   html += `<div class="hub-table-wrap"><table class="hub-table"><thead><tr><th>${t.posts}</th><th>${t.requirement}</th></tr></thead><tbody>${el.qualification
     .map((q) => `<tr><td>${esc(pick(q.posts, lang))}</td><td>${esc(pick(q.requirement, lang))}</td></tr>`)
     .join('')}</tbody></table></div>`;
@@ -287,7 +380,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
   if (fact.vacancies) html += sourceLine(t, `${t.vacancies}`, fact.vacancies.sourceUrl, fact.verifiedAt, lang);
 
   if (cutoffs.length > 0) {
-    html += `<h2>${t.cutoffs}</h2>${cutoffTablesHtml(cutoffs, lang, t)}<p class="hub-facts">${t.cutoffLegend}</p>`;
+    html += `<h2>${t.cutoffs}</h2>${cutoffTablesHtml(cutoffs, lang, t)}<p class="hub-facts">${esc(legendText([...new Set(cutoffs.map((c) => c.category))], lang, t))}</p>`;
   }
 
   if (notices.length > 0) {
@@ -313,12 +406,16 @@ export function examHubMeta({ examName, facts, cutoffs = [], lang = 'en' }) {
   const t = T[lang];
   const fact = facts[0];
   const lastVerified = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10)).sort().at(-1);
-  const title = lang === 'hi' ? `${examName} परीक्षा पैटर्न, अंक और कट-ऑफ` : `${examName} exam pattern, marks & cut-off`;
+  const hasCutoffs = cutoffs.length > 0;
+  const title =
+    lang === 'hi'
+      ? `${examName} परीक्षा पैटर्न, अंक${hasCutoffs ? ' और कट-ऑफ' : ' और आयु सीमा'}`
+      : `${examName} exam pattern, marks${hasCutoffs ? ' & cut-off' : ' & age limit'}`;
   const description =
     lang === 'hi'
-      ? `${examName} का आधिकारिक पैटर्न, नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ और कट-ऑफ, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
-      : `${examName} official pattern, negative marking, timing, age limit, dates and cut-offs, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
-  return { title, description, lastVerified, h1: t.h1(examName) };
+      ? `${examName} का आधिकारिक पैटर्न, नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ${hasCutoffs ? ' और कट-ऑफ' : ''}, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
+      : `${examName} official pattern, negative marking, timing, age limit, dates${hasCutoffs ? ' and cut-offs' : ''}, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
+  return { title, description, lastVerified, h1: t.h1(examName, hasCutoffs) };
 }
 
 export function examHubStructuredData({ examName, facts, cutoffs = [], lang = 'en', siteUrl }) {

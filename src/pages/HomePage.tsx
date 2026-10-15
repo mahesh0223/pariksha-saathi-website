@@ -7,6 +7,8 @@ import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
+import { LESSON_CATALOG } from '../data/lessonCatalog.mjs';
+import { subjectBlurb } from '../lib/lessonCredit.mjs';
 import {
   IconBook,
   IconTarget,
@@ -372,14 +374,14 @@ export function HomePage() {
         <div className="wrap">
           <div className="section-head">
             <div className="eyebrow">Topic lessons</div>
-            <h2>Worked examples, free to read</h2>
-            <p>The same topics the app teaches, as standalone lessons with fully worked solutions — no account needed to read these.</p>
+            <h2>Lessons, free to read</h2>
+            <p>The same topics the app teaches, as standalone lessons with worked solutions or key facts and practice questions — no account needed to read these.</p>
           </div>
           <div className="exam-coverage-grid">
-            {['Quantitative Aptitude', 'Reasoning', 'English'].map((subject) => (
+            {[...new Set(LESSON_CATALOG.map((c) => c.subject))].map((subject) => (
               <div className="exam-coverage-item" key={subject}>
                 <h3>{subject}</h3>
-                <p>Browse concepts, worked examples and practice by topic.</p>
+                <p>{subjectBlurb(subject)}</p>
                 <Link to={`/learn/#${subject.toLowerCase().replaceAll(' ', '-')}`}>Browse {subject} lessons →</Link>
               </div>
             ))}

@@ -17,6 +17,9 @@ export interface LessonContent {
   lede: string;
   conceptHeading: string;
   conceptBody: string[];
+  /** General Awareness lessons list one-glance facts instead of worked examples. */
+  keyFactsHeading?: string;
+  keyFacts?: string[];
   examplesHeading: string;
   examples: WorkedExample[];
   practiceHeading: string;
@@ -37,6 +40,9 @@ export interface TopicLessonEntry {
   slug: string;
   /** ISO date this lesson first went live - sourced from the commit that added it, not fabricated. */
   publishedDate: string;
+  /** 'ai-assisted' lessons show an AI-assistance credit instead of the founder's byline. */
+  credit?: 'ai-assisted';
+  topicKey?: string;
   en: LessonContent;
   hi: LessonContent;
 }

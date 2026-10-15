@@ -5,7 +5,9 @@
 // content genuinely is the same across exams - this mirrors the app's own shared topic pool
 // across SSC/IBPS/SBI rather than forking near-identical pages per exam.
 
-export const TOPIC_LESSONS = [
+import { GENERAL_AWARENESS_LESSONS } from './generalAwarenessLessons.mjs';
+
+const CORE_LESSONS = [
   {
     "slug": "percentages",
     publishedDate: '2026-10-01',
@@ -20511,6 +20513,9 @@ export const TOPIC_LESSONS = [
     },
   },
 ];
+
+// Reasoning/Quant/English lessons first (hand-written), then the AI-drafted General Awareness set.
+export const TOPIC_LESSONS = [...CORE_LESSONS, ...GENERAL_AWARENESS_LESSONS];
 
 export function findLessonEntry(slug) {
   return TOPIC_LESSONS.find((e) => e.slug === slug);

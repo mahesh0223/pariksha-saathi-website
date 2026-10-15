@@ -31,6 +31,7 @@ import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData } from '../src/lib/examHub.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
+import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -375,10 +376,10 @@ function homePageBody(affairsPreview, noticesPreview) {
         <div class="wrap">
           <div class="section-head">
             <div class="eyebrow">Topic lessons</div>
-            <h2>Worked examples, free to read</h2>
-            <p>The same topics the app teaches, as standalone lessons with fully worked solutions — no account needed to read these.</p>
+            <h2>Lessons, free to read</h2>
+            <p>The same topics the app teaches, as standalone lessons with worked solutions or key facts and practice questions — no account needed to read these.</p>
           </div>
-          <div class="exam-coverage-grid">${['Quantitative Aptitude', 'Reasoning', 'English'].map(subject => `<div class="exam-coverage-item"><h3>${subject}</h3><p>Browse concepts, worked examples and practice by topic.</p><a href="/learn/#${subject.toLowerCase().replaceAll(' ', '-')}">Browse ${subject} lessons →</a></div>`).join('')}</div>
+          <div class="exam-coverage-grid">${[...new Set(LESSON_CATALOG.map(c => c.subject))].map(subject => `<div class="exam-coverage-item"><h3>${subject}</h3><p>${subjectBlurb(subject)}</p><a href="/learn/#${subject.toLowerCase().replaceAll(' ', '-')}">Browse ${subject} lessons →</a></div>`).join('')}</div>
           <p><a href="/learn/">Browse the complete lesson library →</a></p>
         </div>
       </section>
@@ -675,14 +676,13 @@ function jobProfilePageBody(entry, lang) {
         <h2>${escapeHtml(c.profileHeading)}</h2>
         ${paragraphs(c.profileBody)}
         ${postsTable}
-        <h2>${escapeHtml(c.promotionHeading)}</h2>
-        ${paragraphs(c.promotionBody)}
+        ${c.promotionBody.length > 0 ? `<h2>${escapeHtml(c.promotionHeading)}</h2>\n        ${paragraphs(c.promotionBody)}` : ''}
         <h2>${escapeHtml(c.salaryHeading)}</h2>
         ${paragraphs(c.salaryBody)}
-        <h2>${escapeHtml(c.perksHeading)}</h2>
+        ${c.perks.length > 0 ? `<h2>${escapeHtml(c.perksHeading)}</h2>
         <ul class="lesson-concept-list">
           ${c.perks.map((perk) => `<li>${escapeHtml(perk)}</li>`).join('\n          ')}
-        </ul>
+        </ul>` : ''}
         <p class="compare-note">${escapeHtml(c.note)} <a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.noteLinkLabel)}</a>.</p>
         <h2>${escapeHtml(c.recruitsHeading)}</h2>
         <p>${escapeHtml(c.recruitsBody)}</p>
@@ -736,6 +736,12 @@ function lessonPageBody(entry, lang) {
         </div>`,
     )
     .join('\n        ');
+  const keyFacts = c.keyFacts?.length
+    ? `<h2>${escapeHtml(c.keyFactsHeading)}</h2>
+        <ul class="lesson-concept-list">
+          ${c.keyFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('\n          ')}
+        </ul>`
+    : '';
   const practice = c.practiceQuestions
     .map(
       (q, i) => `<details class="lesson-practice-item">
@@ -761,13 +767,14 @@ function lessonPageBody(entry, lang) {
         </div>
         <h1>${escapeHtml(c.pageTitle)}</h1>
         <p class="compare-lede">${escapeHtml(c.lede)}</p>
-        <p class="lesson-credit">${lang === 'hi' ? `लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक। प्रकाशित: ${entry.publishedDate}।` : `Written by Mahesh Srivastava, Founder of Pariksha Saathi. Published: ${entry.publishedDate}.`} <a href="/about/">${lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</a></p>
+        <p class="lesson-credit">${escapeHtml(lessonCredit(entry, lang).text)} <a href="/about/">${escapeHtml(lessonCredit(entry, lang).link)}</a></p>
         <p><a href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
         <h2>${escapeHtml(c.conceptHeading)}</h2>
         <ul class="lesson-concept-list">
           ${c.conceptBody.map((line) => `<li>${escapeHtml(line)}</li>`).join('\n          ')}
         </ul>
-        <h2>${escapeHtml(c.examplesHeading)}</h2>
+        ${keyFacts}
+        ${c.examples.length > 0 ? `<h2>${escapeHtml(c.examplesHeading)}</h2>` : ''}
         ${examples}
         <h2 id="practice">${escapeHtml(c.practiceHeading)}</h2>
         <p>${escapeHtml(c.practiceIntro)}</p>
@@ -777,7 +784,7 @@ function lessonPageBody(entry, lang) {
         <h2>${escapeHtml(c.relevantForHeading)}</h2>
         <p>${escapeHtml(c.relevantForBody)}</p>
         <h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
-        <p>${lang === 'hi' ? 'ऊपर के प्रश्न हल करें और उत्तर से अपनी विधि जाँचें।' : 'Solve the questions above before opening the answers. Explain each step in your own words, then revisit any mistakes.'}</p>
+        <p>${escapeHtml(lessonClosing(entry, lang))}</p>
         <a class="btn-primary-compare" href="${topicKey ? `/app/practice/topic/${topicKey}?lang=${lang}` : '#practice'}">${lang === 'hi' ? (topicKey ? 'इस विषय का क्विज़ शुरू करें' : 'अभ्यास प्रश्नों पर जाएँ') : (topicKey ? 'Start this topic’s quiz' : 'Go to practice questions')} →</a>
         <p><a href="/learn/">${lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</a></p>
       </article>
@@ -1037,7 +1044,7 @@ async function main() {
             inLanguage: lang,
             learningResourceType: 'lesson',
             datePublished: entry.publishedDate,
-            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            author: lessonAuthor(entry),
             publisher: { '@type': 'Organization', name: SITE_NAME },
           },
           {

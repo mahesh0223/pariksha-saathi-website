@@ -1,4 +1,6 @@
-export const LESSON_CATALOG = [
+import { GENERAL_AWARENESS_CATALOG } from './generalAwarenessCatalog.mjs';
+
+const CORE_CATALOG = [
   {
     "slug": "percentages",
     "title": "Percentages",
@@ -788,3 +790,5 @@ export const LESSON_CATALOG = [
     "subject": "English"
   }
 ];
+
+export const LESSON_CATALOG = [...CORE_CATALOG, ...GENERAL_AWARENESS_CATALOG];

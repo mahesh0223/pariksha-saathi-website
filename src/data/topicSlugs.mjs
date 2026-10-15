@@ -2,7 +2,9 @@
 // topicLessons.mjs, which carries the full bilingual lesson content (~1.6MB) and would otherwise
 // be pulled into every single page's bundle just to build the /learn/* route table, even though
 // only LessonArticlePage (loaded dynamically, per-topic) actually needs that content.
-export const TOPIC_SLUGS = [
+import { GENERAL_AWARENESS_CATALOG } from './generalAwarenessCatalog.mjs';
+
+const CORE_SLUGS = [
   "percentages",
   "profit-and-loss",
   "simple-compound-interest",
@@ -128,3 +130,6 @@ export const TOPIC_SLUGS = [
   "floor-and-flat-puzzle",
   "clauses-noun-adjective-adverb"
 ];
+
+// The General Awareness catalog is a few KB of titles - cheap to import here, unlike the lesson content.
+export const TOPIC_SLUGS = [...CORE_SLUGS, ...GENERAL_AWARENESS_CATALOG.map((entry) => entry.slug)];

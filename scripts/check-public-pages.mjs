@@ -44,7 +44,7 @@ const shell=readFileSync('dist/spa.html','utf8');
 assert(!shell.includes('Exam prep that works'));
 assert(readFileSync('dist/_redirects','utf8').includes('/spa  200'));
 assert(readFileSync('dist/app/current-affairs/index.html','utf8').includes('daily-reading'));
-console.log(`Verified ${files.length} HTML files, 124 bilingual lesson routes, catalog, sitemap, ad pause and practice links.`);
+console.log(`Verified ${files.length} HTML files, ${LESSON_CATALOG.length} bilingual lesson routes, catalog, sitemap, ad pause and practice links.`);
 
 assert(existsSync('dist/404.html'));
 assert(!readFileSync('dist/_redirects','utf8').includes('/*  /spa'));
@@ -81,7 +81,8 @@ for (const examId of HUB_EXAM_IDS) {
     const urlPath = examHubPath(examId, lang);
     const html = readFileSync(`dist${urlPath}index.html`, 'utf8');
     const sourceLines = [...html.matchAll(/<p class="hub-source">([^]*?)<\/p>/g)].map((m) => m[1]);
-    assert(sourceLines.length >= 4, `${urlPath}: expected a source line under every block, found ${sourceLines.length}`);
+    // pattern, eligibility and dates always carry one; vacancies and each cut-off table add more when present.
+    assert(sourceLines.length >= 3, `${urlPath}: expected a source line under every block, found ${sourceLines.length}`);
     for (const line of sourceLines) {
       assert(/href="https?:\/\//.test(line), `${urlPath}: a source line has no link: ${line.slice(0, 80)}`);
       assert(/\d{4}/.test(line), `${urlPath}: a source line has no verification date: ${line.slice(0, 80)}`);
@@ -92,3 +93,17 @@ for (const examId of HUB_EXAM_IDS) {
   }
 }
 console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
+
+// AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and
+// a visible key-facts list and practice questions on every page in both languages.
+const aiLessons = TOPIC_LESSONS.filter((entry) => entry.credit === 'ai-assisted');
+assert(aiLessons.length > 0, 'expected the General Awareness lessons to be present');
+for (const entry of aiLessons) {
+  for (const lang of ['', 'hi/']) {
+    const html = readFileSync(`dist/${lang}learn/${entry.slug}/index.html`, 'utf8');
+    assert(!/Written by Mahesh Srivastava|लेखक: महेश श्रीवास्तव/.test(html), `${lang}learn/${entry.slug}: human byline on an AI-drafted lesson`);
+    assert(/AI assistance|AI की सहायता/.test(html), `${lang}learn/${entry.slug}: missing the AI-assistance credit`);
+    assert(html.includes('lesson-concept-list') && html.includes('lesson-practice-item'), `${lang}learn/${entry.slug}: missing key facts or practice questions`);
+  }
+}
+console.log(`Verified ${aiLessons.length} AI-drafted lesson(s) in both languages: credit line present, no human byline.`);

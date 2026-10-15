@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
+import { lessonAuthor, lessonClosing, lessonCredit } from '../../lib/lessonCredit.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import '../compare/ComparePage.css';
 import './LessonArticlePage.css';
@@ -61,7 +62,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             inLanguage: lang,
             learningResourceType: 'lesson',
             datePublished: entry!.publishedDate,
-            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            author: lessonAuthor(entry!),
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
           },
           {
@@ -125,7 +126,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
-        <p className="lesson-credit">{lang === 'hi' ? `लेखक: महेश श्रीवास्तव, परीक्षा साथी के संस्थापक। प्रकाशित: ${entry.publishedDate}।` : `Written by Mahesh Srivastava, Founder of Pariksha Saathi. Published: ${entry.publishedDate}.`} <Link to="/about/">{lang === 'hi' ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link></p>
+        <p className="lesson-credit">{lessonCredit(entry, lang).text} <Link to="/about/">{lessonCredit(entry, lang).link}</Link></p>
         <p><a href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
 
         <h2>{content.conceptHeading}</h2>
@@ -135,7 +136,18 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
           ))}
         </ul>
 
-        <h2>{content.examplesHeading}</h2>
+        {content.keyFacts && content.keyFacts.length > 0 && (
+          <>
+            <h2>{content.keyFactsHeading}</h2>
+            <ul className="lesson-concept-list">
+              {content.keyFacts.map((fact, i) => (
+                <li key={i}>{fact}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {content.examples.length > 0 && <h2>{content.examplesHeading}</h2>}
         {content.examples.map((ex, i) => (
           <div className="lesson-example" key={i}>
             <p className="lesson-example-q">
@@ -174,7 +186,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         <p>{content.relevantForBody}</p>
 
         <h2>{lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
-        <p>{lang === 'hi' ? 'ऊपर के प्रश्न हल करें और उत्तर से अपनी विधि जाँचें।' : 'Solve the questions above before opening the answers. Explain each step in your own words, then revisit any mistakes.'}</p>
+        <p>{lessonClosing(entry, lang)}</p>
         {topicKey ? <Link className="btn-primary-compare" to={`/app/practice/topic/${topicKey}?lang=${lang}`}>
           {lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →
         </Link> : <a className="btn-primary-compare" href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →</a>}

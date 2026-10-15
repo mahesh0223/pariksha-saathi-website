@@ -142,22 +142,30 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
           </>
         )}
 
-        <h2>{content.promotionHeading}</h2>
-        {content.promotionBody.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+        {content.promotionBody.length > 0 && (
+          <>
+            <h2>{content.promotionHeading}</h2>
+            {content.promotionBody.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </>
+        )}
 
         <h2>{content.salaryHeading}</h2>
         {content.salaryBody.map((p, i) => (
           <p key={i}>{p}</p>
         ))}
 
-        <h2>{content.perksHeading}</h2>
-        <ul className="lesson-concept-list">
-          {content.perks.map((perk, i) => (
-            <li key={i}>{perk}</li>
-          ))}
-        </ul>
+        {content.perks.length > 0 && (
+          <>
+            <h2>{content.perksHeading}</h2>
+            <ul className="lesson-concept-list">
+              {content.perks.map((perk, i) => (
+                <li key={i}>{perk}</li>
+              ))}
+            </ul>
+          </>
+        )}
 
         <p className="compare-note">
           {content.note}{' '}
