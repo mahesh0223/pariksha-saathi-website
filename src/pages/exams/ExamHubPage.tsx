@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { useQuery } from '@tanstack/react-query';
 import { getExamFacts } from '../../api/examFacts';
 import { getCutoffs } from '../../api/cutoffs';
@@ -72,6 +73,9 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
           <nav className="pub-nav-links">
             <Link to="/app/exam-notices">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
           </nav>
+          <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
+            {EXAMS_LINK[lang].label}
+          </Link>
           <Link className="pub-cta" to="/onboarding">
             {lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}
           </Link>

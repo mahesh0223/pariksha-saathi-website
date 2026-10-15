@@ -23,6 +23,9 @@ export function PublicContentLayout() {
             <Link to="/app/current-affairs">Current affairs</Link>
             <Link to="/app/exam-notices">Exam Notices</Link>
           </nav>
+          <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
+            Exams
+          </Link>
           <Link className="pub-cta" to="/onboarding">
             Start studying
           </Link>

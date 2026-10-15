@@ -48,6 +48,9 @@ export function IbpsPoVsSbiPoPage() {
             <Link to="/#features">Features</Link>
             <Link to="/app/exam-notices">Exam Notices</Link>
           </nav>
+          <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
+            Exams
+          </Link>
           <Link className="pub-cta" to="/onboarding">
             Start studying
           </Link>

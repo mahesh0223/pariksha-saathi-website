@@ -8,6 +8,7 @@ import { SyllabusPage } from './pages/compare/SyllabusPage';
 import { EXAM_SYLLABI } from './data/examSyllabi.mjs';
 import { JobProfilePage } from './pages/compare/JobProfilePage';
 import { ExamHubPage } from './pages/exams/ExamHubPage';
+import { ExamDirectoryPage } from './pages/exams/ExamDirectoryPage';
 import { HUB_EXAM_IDS } from './data/examHubExams.mjs';
 import { examHubSlug } from './lib/examHub.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from './data/examJobProfileSlugs.mjs';
@@ -87,6 +88,8 @@ export function App() {
           element={<JobProfilePage slug={slug} lang="hi" />}
         />
       ))}
+      <Route path="/exams" element={<ExamDirectoryPage lang="en" />} />
+      <Route path="/hi/exams" element={<ExamDirectoryPage lang="hi" />} />
       {HUB_EXAM_IDS.map((examId) => (
         <Route key={`${examId}-hub-en`} path={`/exams/${examHubSlug(examId)}`} element={<ExamHubPage examId={examId} lang="en" />} />
       ))}

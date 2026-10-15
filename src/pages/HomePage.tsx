@@ -8,6 +8,9 @@ import { Card } from '../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
 import { LESSON_CATALOG } from '../data/lessonCatalog.mjs';
+import { dailyPdfBand } from '../lib/dailyPdf.mjs';
+import { DIRECTORY_EXAM_IDS } from '../lib/examDirectory.mjs';
+import { examHubPath } from '../lib/examHub.mjs';
 import { subjectBlurb } from '../lib/lessonCredit.mjs';
 import {
   IconBook,
@@ -95,7 +98,7 @@ const FEATURES = [
 ];
 
 const TRUST_STATS = [
-  { value: '7', label: 'exams covered' },
+  { value: String(DIRECTORY_EXAM_IDS.length), label: 'exams covered' },
   { value: '100%', label: 'free, no paywall' },
   { value: 'EN / HI', label: 'both languages' },
   { value: 'Offline', label: 'in the Android app' },
@@ -177,7 +180,19 @@ const FAQS = [
   },
 ];
 
+// The seven exams the page has always led with; each links to its exam page. The rest are one click away.
+const HERO_EXAMS: [string, string][] = [
+  ['ssc_cgl', 'SSC CGL'],
+  ['ssc_mts', 'SSC MTS'],
+  ['ssc_chsl', 'SSC CHSL'],
+  ['ibps_po', 'IBPS PO'],
+  ['ibps_clerk', 'IBPS Clerk'],
+  ['sbi_po', 'SBI PO'],
+  ['sbi_clerk', 'SBI Clerk'],
+];
+
 export function HomePage() {
+  const dailyPdf = dailyPdfBand();
   const navigate = useNavigate();
   const { selectedExamIds } = useExamSelection();
 
@@ -248,6 +263,9 @@ export function HomePage() {
             <a href="#faq">FAQ</a>
             <Link to="/privacy/">Privacy</Link>
           </nav>
+          <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
+            Exams
+          </Link>
           <button className="pub-cta" onClick={startStudying}>
             Start studying
           </button>
@@ -258,13 +276,13 @@ export function HomePage() {
         <div className="hero-rules" />
         <div className="wrap hero-grid">
           <div>
-            <div className="eyebrow">SSC &middot; IBPS &middot; SBI</div>
+            <div className="eyebrow">SSC &middot; Banking &middot; Railways &middot; Police &middot; PSC</div>
             <h1>
               Exam prep that works even where <em>the signal doesn't.</em>
             </h1>
             <p className="lede">
-              Lessons, practice quizzes, mock tests, and real dated current affairs for SSC CGL, SSC
-              MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — free, right in your browser.
+              Lessons, practice quizzes, mock tests, and real dated current affairs for SSC, banking,
+              railway, state police, CTET and state PSC exams — free, right in your browser.
             </p>
             <div className="cta-row">
               <button className="btn-primary-cream" onClick={startStudying}>
@@ -275,13 +293,14 @@ export function HomePage() {
               </a>
             </div>
             <div className="exam-pills">
-              <span>SSC CGL</span>
-              <span>SSC MTS</span>
-              <span>SSC CHSL</span>
-              <span>IBPS PO</span>
-              <span>IBPS Clerk</span>
-              <span>SBI PO</span>
-              <span>SBI Clerk</span>
+              {HERO_EXAMS.map(([id, name]) => (
+                <Link key={id} to={examHubPath(id, 'en')}>
+                  {name}
+                </Link>
+              ))}
+              <Link className="exam-pills-more" to="/exams/">
+                More exams &rarr;
+              </Link>
             </div>
             <div className="trust-bar">
               {TRUST_STATS.map((s) => (
@@ -303,6 +322,26 @@ export function HomePage() {
           </div>
         </div>
       </div>
+
+      {dailyPdf && (
+        <section id="daily-pdf" className="pub-section">
+          <div className="wrap">
+            <div className="daily-pdf-card">
+              <div>
+                <div className="eyebrow">{dailyPdf.eyebrow}</div>
+                <h2>{dailyPdf.title}</h2>
+                <p>{dailyPdf.body}</p>
+              </div>
+              <div className="daily-pdf-actions">
+                <a className="pub-cta" href={dailyPdf.file} download>
+                  {dailyPdf.buttonLabel}
+                </a>
+                <Link to={dailyPdf.allHref}>{dailyPdf.allLabel} &rarr;</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section id="features" className="pub-section">
         <div className="wrap">
@@ -366,6 +405,9 @@ export function HomePage() {
           <p className="exam-coverage-note">
             Not sure whether to go for a bank-wide posting or State Bank of India specifically?{' '}
             <Link to="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</Link>
+          </p>
+          <p>
+            <Link to="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</Link>
           </p>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { Link } from 'react-router-dom';
 import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
@@ -108,6 +109,9 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
           <nav className="pub-nav-links"><Link to="/learn/">{lang === 'hi' ? 'विषय सूची' : 'Lesson library'}</Link>
             <Link to="/app/exam-notices">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
           </nav>
+          <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
+            {EXAMS_LINK[lang].label}
+          </Link>
           <Link className="pub-cta" to="/onboarding">
             {lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}
           </Link>

@@ -8,6 +8,8 @@ import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../src/data/examJobProfileSlugs.mjs';
 import { HUB_EXAM_IDS } from '../src/data/examHubExams.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
+import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
+import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 for (const entry of LESSON_CATALOG) {
@@ -107,3 +109,28 @@ for (const entry of aiLessons) {
   }
 }
 console.log(`Verified ${aiLessons.length} AI-drafted lesson(s) in both languages: credit line present, no human byline.`);
+
+// Every public page reaches the exam chooser from its header (the nav links are hidden on phones, so the button
+// sits outside them), the chooser lists every exam and links only to pages that were built, and the home page
+// carries the latest daily current-affairs PDF.
+for (const file of files) {
+  const html = readFileSync(file, 'utf8');
+  if (html.includes('class="pub-header"')) assert(html.includes('class="pub-exams-link"'), `${file}: header has no Exams button`);
+}
+for (const lang of ['en', 'hi']) {
+  const dirPath = examDirectoryPath(lang);
+  const dirHtml = readFileSync(`dist${dirPath}index.html`, 'utf8');
+  assert(sitemap.includes(`<loc>https://parikshasaathi.com${dirPath}</loc>`), `${dirPath}: not in the sitemap`);
+  for (const examId of HUB_EXAM_IDS) assert(dirHtml.includes(`href="${examHubPath(examId, lang)}"`), `${dirPath}: missing the hub link for ${examId}`);
+  for (const [, href] of dirHtml.matchAll(/<a href="(\/[^"#]*)"/g)) {
+    if (/^\/(hi\/)?(exams|compare)\//.test(href)) assert(existsSync(`dist${href}index.html`), `${dirPath}: links to a page that was not built: ${href}`);
+  }
+  const names = [...dirHtml.matchAll(/<article class="exam-dir-card">/g)].length;
+  assert.equal(names, DIRECTORY_EXAM_IDS.length, `${dirPath}: expected ${DIRECTORY_EXAM_IDS.length} exams, found ${names}`);
+}
+const home = readFileSync('dist/index.html', 'utf8');
+const latestPdf = DAILY_PDF_EDITIONS[0];
+assert(home.includes(`href="${latestPdf.file}"`), 'home page is missing the latest daily PDF link');
+assert(existsSync(`dist${latestPdf.file}`), `the latest daily PDF is not in dist: ${latestPdf.file}`);
+assert(home.includes('href="/exams/"'), 'home page does not link to the exam chooser');
+console.log(`Verified the exam chooser (${DIRECTORY_EXAM_IDS.length} exams, both languages), the Exams button in every public header and the daily PDF link on the home page.`);

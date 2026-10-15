@@ -1,0 +1,52 @@
+.exam-dir-group {
+  margin: 28px 0 8px;
+}
+.exam-dir-group h2 {
+  margin: 0 0 12px;
+}
+.exam-dir-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.exam-dir-card {
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+}
+.exam-dir-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.exam-dir-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.92rem;
+}
+.exam-dir-soon {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.exam-dir-note {
+  margin: 20px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.exam-dir-start {
+  margin: 28px 0 8px;
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.exam-dir-start h2 {
+  margin: 0 0 6px;
+}
+.exam-dir-start p {
+  margin: 0 0 12px;
+}

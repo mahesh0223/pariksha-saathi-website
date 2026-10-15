@@ -32,6 +32,8 @@ import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredDa
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
+import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
+import { DIRECTORY_EXAM_IDS, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -78,7 +80,7 @@ function publicContentFrame(innerHtml) {
         <a href="/app/current-affairs">Current affairs</a>
         <a href="/app/exam-notices">Exam Notices</a>
       </nav>
-      <a class="pub-cta" href="/onboarding">Start studying</a>
+      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
     </div>
   </header>
   <main class="wrap public-content-main">${innerHtml}</main>
@@ -269,7 +271,7 @@ const HOME_FEATURES = [
 ];
 
 const TRUST_STATS = [
-  { value: '7', label: 'exams covered' },
+  { value: String(DIRECTORY_EXAM_IDS.length), label: 'exams covered' },
   { value: '100%', label: 'free, no paywall' },
   { value: 'EN / HI', label: 'both languages' },
   { value: 'Offline', label: 'in the Android app' },
@@ -312,21 +314,21 @@ function homePageBody(affairsPreview, noticesPreview) {
             <a href="#faq">FAQ</a>
             <a href="/privacy/">Privacy</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">Start studying</a>
+          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
         </div>
       </header>
       <div id="top" class="hero">
         <div class="hero-rules"></div>
         <div class="wrap hero-grid">
           <div>
-            <div class="eyebrow">SSC &middot; IBPS &middot; SBI</div>
+            <div class="eyebrow">SSC &middot; Banking &middot; Railways &middot; Police &middot; PSC</div>
             <h1>Exam prep that works even where <em>the signal doesn't.</em></h1>
-            <p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk — free, right in your browser.</p>
+            <p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC, banking, railway, state police, CTET and state PSC exams — free, right in your browser.</p>
             <div class="cta-row">
               <a class="btn-primary-cream" href="/onboarding">Start studying free</a>
               <a class="btn-ghost-cream" href="#features">See what's inside</a>
             </div>
-            <div class="exam-pills"><span>SSC CGL</span><span>SSC MTS</span><span>SSC CHSL</span><span>IBPS PO</span><span>IBPS Clerk</span><span>SBI PO</span><span>SBI Clerk</span></div>
+            <div class="exam-pills">${[['ssc_cgl', 'SSC CGL'], ['ssc_mts', 'SSC MTS'], ['ssc_chsl', 'SSC CHSL'], ['ibps_po', 'IBPS PO'], ['ibps_clerk', 'IBPS Clerk'], ['sbi_po', 'SBI PO'], ['sbi_clerk', 'SBI Clerk']].map(([id, name]) => `<a href="${examHubPath(id, 'en')}">${name}</a>`).join('')}<a class="exam-pills-more" href="/exams/">More exams &rarr;</a></div>
             <div class="trust-bar">
               ${TRUST_STATS.map((s) => `<div class="trust-stat"><div class="trust-value">${escapeHtml(s.value)}</div><div class="trust-label">${escapeHtml(s.label)}</div></div>`).join('\n              ')}
             </div>
@@ -337,6 +339,12 @@ function homePageBody(affairsPreview, noticesPreview) {
           </div>
         </div>
       </div>
+      ${(() => {
+        const b = dailyPdfBand();
+        return b
+          ? `<section id="daily-pdf" class="pub-section"><div class="wrap"><div class="daily-pdf-card"><div><div class="eyebrow">${escapeHtml(b.eyebrow)}</div><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.body)}</p></div><div class="daily-pdf-actions"><a class="pub-cta" href="${b.file}" download>${escapeHtml(b.buttonLabel)}</a><a href="${b.allHref}">${escapeHtml(b.allLabel)} &rarr;</a></div></div></div></section>`
+          : '';
+      })()}
       <section id="features" class="pub-section">
         <div class="wrap">
           <div class="section-head">
@@ -370,6 +378,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             ${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('\n            ')}
           </div>
           <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
+          <p><a href="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</a></p>
         </div>
       </section>
       <section id="topic-lessons" class="pub-section">
@@ -487,7 +496,7 @@ function comparePageBody() {
             <a href="/#features">Features</a>
             <a href="/app/exam-notices">Exam Notices</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">Start studying</a>
+          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -564,7 +573,7 @@ function syllabusPageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -621,7 +630,7 @@ function examHubPageBody(innerHtml, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
         </div>
       </header>
       <article class="wrap compare-article">${innerHtml}</article>
@@ -663,7 +672,7 @@ function jobProfilePageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -757,7 +766,7 @@ function lessonPageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
-          <a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -1102,6 +1111,36 @@ async function main() {
       }));
       sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: meta.lastVerified });
     }
+  }
+
+  // --- Exam directory (/exams/, /hi/exams/): the "choose your exam" page every header links to. ---
+  const directoryLastmod = sitemapUrls.filter((u) => u.loc.includes('/exams/')).map((u) => u.lastmod).filter(Boolean).sort().at(-1);
+  for (const lang of ['en', 'hi']) {
+    const meta = examDirectoryMeta(lang);
+    const urlPath = examDirectoryPath(lang);
+    writePage(urlPath.replace(/^\/|\/$/g, ''), page({
+      title: meta.title,
+      description: meta.description,
+      path: urlPath,
+      assets,
+      bodyHtml: examHubPageBody(
+        examDirectoryBody({
+          lang,
+          hubIds: HUB_EXAM_IDS,
+          syllabusSlugs: EXAM_SYLLABI.map((e) => e.slug),
+          jobProfileSlugs: EXAM_JOB_PROFILES.map((e) => e.slug),
+        }),
+        lang,
+      ),
+      type: 'website',
+      lang,
+      alternateLanguages: [
+        { lang: 'en', path: examDirectoryPath('en') },
+        { lang: 'hi', path: examDirectoryPath('hi') },
+        { lang: 'x-default', path: examDirectoryPath('en') },
+      ],
+    }));
+    sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.9' : '0.8', lastmod: directoryLastmod });
   }
 
   // --- Current affairs ---

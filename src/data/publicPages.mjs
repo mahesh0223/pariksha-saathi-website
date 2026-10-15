@@ -1,3 +1,4 @@
+import { examsLinkHtml } from '../lib/examDirectory.mjs';
 import { LESSON_CATALOG } from './lessonCatalog.mjs';
 import { DAILY_PDF_EDITIONS, MONTHLY_CAPSULES } from './downloads.mjs';
 export function escapeHtml(value) {
@@ -47,7 +48,7 @@ export function publicPageStructuredData(key) {
   return { ...base, '@type': 'CollectionPage', name: PUBLIC_PAGES.learn.title, description: PUBLIC_PAGES.learn.description };
 }
 export function publicFrame(body) {
-  return `<div class="compare-page"><header class="pub-header"><div class="wrap pub-nav"><a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a><nav class="pub-nav-links"><a href="/learn/">Lessons</a><a href="/app/current-affairs/">Current affairs</a><a href="/downloads/">Daily PDF</a></nav><a class="pub-cta" href="/onboarding">Start studying</a></div></header><main class="wrap compare-article">${body}</main><footer class="pub-footer"><div class="wrap pub-footer-links"><a href="/about/">About &amp; editorial standards</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a><a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a></div></footer></div>`;
+  return `<div class="compare-page"><header class="pub-header"><div class="wrap pub-nav"><a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a><nav class="pub-nav-links"><a href="/learn/">Lessons</a><a href="/app/current-affairs/">Current affairs</a><a href="/downloads/">Daily PDF</a></nav>${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a></div></header><main class="wrap compare-article">${body}</main><footer class="pub-footer"><div class="wrap pub-footer-links"><a href="/about/">About &amp; editorial standards</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a><a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a></div></footer></div>`;
 }
 export function libraryBody() {
   const subjects = [...new Set(LESSON_CATALOG.map((c) => c.subject))];
