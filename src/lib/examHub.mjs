@@ -92,6 +92,8 @@ const T = {
     },
     notices: 'Latest notices',
     allNotices: 'All exam notices',
+    currentAffairs: 'Recent current affairs for this exam',
+    allCurrentAffairs: 'All current affairs',
     prepare: 'Prepare',
     syllabus: 'Syllabus and subjects tested',
     jobProfile: 'Job profile and salary',
@@ -157,6 +159,8 @@ const T = {
     },
     notices: 'ताज़ा सूचनाएँ',
     allNotices: 'सभी परीक्षा सूचनाएँ',
+    currentAffairs: 'इस परीक्षा के लिए हाल के करेंट अफेयर्स',
+    allCurrentAffairs: 'सभी करेंट अफेयर्स',
     prepare: 'तैयारी करें',
     syllabus: 'पाठ्यक्रम और परीक्षित विषय',
     jobProfile: 'जॉब प्रोफ़ाइल और वेतन',
@@ -293,7 +297,7 @@ function cutoffTablesHtml(cutoffs, lang, t) {
 }
 
 // The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
-export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang = 'en', links = {} }) {
+export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {} }) {
   const t = T[lang];
   const fact = facts[0];
   const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
@@ -383,6 +387,14 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
       .join('')}</ul><p><a href="/app/exam-notices/">${t.allNotices} &rarr;</a></p>`;
   }
 
+  // The five most recent current-affairs items for this exam (see hubItems) - fresh, dated, linked
+  // content on the site's strongest pages, and the crawl path by which new items get found.
+  if (items.length > 0) {
+    html += `<h2>${t.currentAffairs}</h2><ul class="hub-notices hub-current-affairs">${items
+      .map((i) => `<li><a href="/app/current-affairs/${esc(i.id)}/">${esc(i.title)}</a><span>${esc(formatHubDate(i.editionDate, lang))}</span></li>`)
+      .join('')}</ul><p><a href="/app/current-affairs/">${t.allCurrentAffairs} &rarr;</a></p>`;
+  }
+
   html += `<h2>${t.prepare}</h2><ul class="compare-links">`;
   if (links.syllabusPath) html += `<li><a href="${esc(links.syllabusPath)}">${t.syllabus}</a></li>`;
   if (links.jobProfilePath) html += `<li><a href="${esc(links.jobProfilePath)}">${t.jobProfile}</a></li>`;
@@ -430,4 +442,19 @@ export function examHubStructuredData({ examName, facts, cutoffs = [], lang = 'e
       ],
     },
   ];
+}
+
+// Which current-affairs items belong on an exam's hub. The feed's exam tags are coarse (General,
+// SSC, Banking), so SSC exams show SSC-tagged items, the bank exams Banking-tagged ones, and every
+// other exam the whole feed - the newest `count` in the page's language, newest first.
+export function hubItemTag(examId) {
+  if (examId.startsWith('ssc_')) return 'SSC';
+  if (['ibps_po', 'ibps_clerk', 'sbi_po', 'sbi_clerk'].includes(examId)) return 'Banking';
+  return null;
+}
+
+export function hubItems(examId, items, count = 5) {
+  const tag = hubItemTag(examId);
+  const pool = tag ? items.filter((i) => Array.isArray(i.examTags) && i.examTags.includes(tag)) : items;
+  return [...pool].sort((a, b) => (a.editionDate < b.editionDate ? 1 : a.editionDate > b.editionDate ? -1 : 0)).slice(0, count);
 }

@@ -28,7 +28,8 @@ import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
-import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData } from '../src/lib/examHub.mjs';
+import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
+import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
@@ -1137,7 +1138,7 @@ async function main() {
         description: meta.description,
         path: urlPath,
         assets,
-        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, lang, links }), lang),
+        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, items: hubItems(examId, lang === 'hi' ? affairsHi : affairs), lang, links }), lang),
         type: 'article',
         lang,
         alternateLanguages: [
@@ -1227,6 +1228,7 @@ async function main() {
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${t.source}: ${escapeHtml(item.sourceName)} &#8599;</a></div>
         ${learningNote(item, lang)}
+        ${relatedItemsHtml(items, item, lang)}
         <p><a href="/app/current-affairs/">${t.collection}</a> · <a href="/about/">${t.standards}</a></p>
       </article>
     `);
@@ -1252,7 +1254,7 @@ async function main() {
             description: item.summary,
             datePublished: item.editionDate,
             inLanguage: lang,
-            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            author: { '@type': 'Organization', name: SITE_NAME },
             publisher: { '@type': 'Organization', name: SITE_NAME },
             about: item.examTags,
           },
@@ -1335,7 +1337,7 @@ async function main() {
           headline: item.title,
           description: item.summary,
           dateModified: item.lastVerifiedAt,
-          author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+          author: { '@type': 'Organization', name: SITE_NAME },
           publisher: { '@type': 'Organization', name: SITE_NAME },
         },
         {

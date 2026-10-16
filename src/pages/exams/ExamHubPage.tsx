@@ -4,10 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getExamFacts } from '../../api/examFacts';
 import { getCutoffs } from '../../api/cutoffs';
 import { getExamUpdates } from '../../api/examUpdates';
+import { getAllCurrentAffairs } from '../../api/currentAffairs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { EXAM_NAMES } from '../../lib/examNames.mjs';
-import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData } from '../../lib/examHub.mjs';
+import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../../lib/examHub.mjs';
 import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
@@ -29,6 +30,9 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
       return localised.length > 0 || lang === 'en' ? localised : getExamUpdates([examId], 'en');
     },
   });
+
+  // Same list the prerender uses for the "Recent current affairs" block - see hubItems in examHub.mjs.
+  const itemsQuery = useQuery({ queryKey: ['current-affairs-all', lang], queryFn: () => getAllCurrentAffairs(lang) });
 
   const facts = factsQuery.data ?? [];
   const cutoffs = cutoffsQuery.data ?? [];
@@ -92,7 +96,7 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
         <article
           className="wrap compare-article"
           dangerouslySetInnerHTML={{
-            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], lang, links }),
+            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], items: hubItems(examId, itemsQuery.data ?? []), lang, links }),
           }}
         />
       )}

@@ -80,3 +80,28 @@
 .detail-source a:hover {
   color: var(--navy);
 }
+
+/* "Current affairs from the surrounding days" (src/lib/relatedItems.mjs) - same list rhythm as the hub's notices. */
+.detail-related {
+  margin-top: 24px;
+}
+.detail-related h2 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+.detail-related ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+.detail-related li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.detail-related li span {
+  font-size: 0.78rem;
+  color: var(--muted);
+}

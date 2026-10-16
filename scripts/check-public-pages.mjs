@@ -112,6 +112,7 @@ for (const examId of HUB_EXAM_IDS) {
       assert(/\d{4}/.test(line), `${urlPath}: a source line has no verification date: ${line.slice(0, 80)}`);
     }
     assert(html.includes('<table class="hub-table">'), `${urlPath}: no pattern table`);
+    assert(html.includes('hub-current-affairs'), `${urlPath}: missing the recent current-affairs block`);
     assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
     assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
   }
@@ -133,6 +134,15 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
   }
   assert(offenders === 0, `${offenders} built page(s) link to a prerendered section without its trailing slash`);
   console.log('Verified that no built page links to a prerendered section without its trailing slash.');
+}
+
+// Every current-affairs item page links to its chronological neighbours (src/lib/relatedItems.mjs), so the
+// archive is one crawlable chain rather than 150 leaves off the listing page.
+{
+  const itemPages = files.filter((f) => /\/app\/current-affairs\/[a-z0-9]+\/index\.html$/.test(f));
+  assert(itemPages.length > 0, 'no current-affairs item pages were built');
+  for (const file of itemPages) assert(readFileSync(file, 'utf8').includes('class="detail-related"'), `${file}: missing the surrounding-days block`);
+  console.log(`Verified ${itemPages.length} current-affairs item page(s) link to their neighbouring items.`);
 }
 
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and

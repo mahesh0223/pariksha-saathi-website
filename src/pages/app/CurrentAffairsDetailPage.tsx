@@ -1,11 +1,12 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getCounterpartItem, getCurrentAffairsItem } from '../../api/currentAffairs';
+import { getCounterpartItem, getCurrentAffairsItem, getAllCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Note, Pill, Spinner } from '../../components/ui/Primitives';
 import { ItemQuestions } from '../../components/ItemQuestions';
 import { learningNote } from '../../data/currentAffairsReading.mjs';
+import { relatedItemsHtml } from '../../lib/relatedItems.mjs';
 import { shortenTitle } from '../../lib/seoTitle.mjs';
 import './DetailPage.css';
 
@@ -38,6 +39,8 @@ export function CurrentAffairsDetailPage() {
   // it is shown because no counterpart exists in the reader's language.
   const itemLanguage = display?.languageCode === 'hi' ? 'hi' : 'en';
   const hi = itemLanguage === 'hi';
+  // Neighbouring items for the "surrounding days" block (relatedItems.mjs) - the same markup the prerender emits.
+  const allQuery = useQuery({ queryKey: ['current-affairs-all', itemLanguage], queryFn: () => getAllCurrentAffairs(itemLanguage), enabled: !!display });
 
   useDocumentMeta({
     title: display ? shortenTitle(display.title) : 'Current Affairs',
@@ -55,7 +58,7 @@ export function CurrentAffairsDetailPage() {
             headline: display.title,
             description: display.summary,
             datePublished: display.editionDate,
-            author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+            author: { '@type': 'Organization', name: 'Pariksha Saathi' },
             publisher: { '@type': 'Organization', name: 'Pariksha Saathi' },
             about: display.examTags,
           },
@@ -112,6 +115,7 @@ export function CurrentAffairsDetailPage() {
 
       <div dangerouslySetInnerHTML={{ __html: learningNote(display, itemLanguage) }} />
       <ItemQuestions itemId={display.id} language={itemLanguage} />
+      <div dangerouslySetInnerHTML={{ __html: relatedItemsHtml(allQuery.data ?? [], display, itemLanguage) }} />
       <p>
         <Link to="/app/current-affairs/">{hi ? 'दैनिक संग्रह पढ़ें →' : 'Read the daily collection →'}</Link> ·{' '}
         <Link to="/about/">{hi ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link>

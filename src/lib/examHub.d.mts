@@ -1,4 +1,4 @@
-import type { CutoffTarget, ExamFact, ExamUpdateNotice } from '../types/api';
+import type { CurrentAffairsItem, CutoffTarget, ExamFact, ExamUpdateNotice } from '../types/api';
 
 export function formatHubDate(iso: string, lang: 'en' | 'hi'): string;
 export function examHubSlug(examId: string): string;
@@ -8,6 +8,7 @@ export function examHubBody(args: {
   facts: ExamFact[];
   cutoffs?: CutoffTarget[];
   notices?: ExamUpdateNotice[];
+  items?: CurrentAffairsItem[];
   lang?: 'en' | 'hi';
   links?: { syllabusPath?: string; jobProfilePath?: string };
 }): string;
@@ -24,3 +25,5 @@ export function examHubStructuredData(args: {
   lang?: 'en' | 'hi';
   siteUrl: string;
 }): object[];
+export function hubItemTag(examId: string): string | null;
+export function hubItems(examId: string, items: CurrentAffairsItem[], count?: number): CurrentAffairsItem[];
