@@ -651,171 +651,155 @@ function examHubPageBody(innerHtml, lang) {
     </div>`;
 }
 
-// Mirrors src/pages/compare/JobProfilePage.tsx exactly - driven by src/data/examJobProfiles.mjs,
-// same single-source-of-truth pattern as syllabusPageBody above.
-function jobProfilePageBody(entry, lang) {
-  const c = entry[lang];
-  const homeHref = '/';
-  const enPath = `/compare/${entry.slug}-job-profile`;
-  const hiPath = `/hi/compare/${entry.slug}-job-profile`;
-  const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus` : `/compare/${entry.slug}-syllabus`;
-  const otherLangHref = lang === 'hi' ? enPath : hiPath;
-  const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
-  const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
-  const startStudyingLabel = lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying';
-  const paragraphs = (items) => items.map((p) => `<p>${escapeHtml(p)}</p>`).join('\n        ');
-  const postsTable = c.posts
-    ? `<h2>${escapeHtml(c.postsHeading)}</h2>
-        <div class="compare-table">
-          ${c.posts.map((post) => `<div class="compare-row"><div class="compare-cell compare-label">${escapeHtml(post.name)}</div><div class="compare-cell compare-both">${escapeHtml(post.body)}</div></div>`).join('\n          ')}
-        </div>`
-    : '';
-  return `<div class="compare-page">
-      <header class="pub-header">
-        <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
-          <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${examNoticesLabel}</a>
-          </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
-        </div>
-      </header>
-      <article class="wrap compare-article">
-        <div class="compare-top-row">
-          <a href="${homeHref}" class="detail-back">&larr; ${escapeHtml(c.backLabel)}</a>
-          <a href="${otherLangHref}" class="compare-lang-switch">${otherLangLabel}</a>
-        </div>
-        <h1>${escapeHtml(c.pageTitle)}</h1>
-        <p class="compare-lede">${escapeHtml(c.lede)}</p>
-        <h2>${escapeHtml(c.profileHeading)}</h2>
-        ${paragraphs(c.profileBody)}
-        ${postsTable}
-        ${c.promotionBody.length > 0 ? `<h2>${escapeHtml(c.promotionHeading)}</h2>\n        ${paragraphs(c.promotionBody)}` : ''}
-        <h2>${escapeHtml(c.salaryHeading)}</h2>
-        ${paragraphs(c.salaryBody)}
-        ${c.perks.length > 0 ? `<h2>${escapeHtml(c.perksHeading)}</h2>
-        <ul class="lesson-concept-list">
-          ${c.perks.map((perk) => `<li>${escapeHtml(perk)}</li>`).join('\n          ')}
-        </ul>` : ''}
-        <p class="compare-note">${escapeHtml(c.note)} <a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.noteLinkLabel)}</a>.</p>
-        <h2>${escapeHtml(c.recruitsHeading)}</h2>
-        <p>${escapeHtml(c.recruitsBody)}</p>
-        <h2>${escapeHtml(c.offerHeading)}</h2>
-        <p>${escapeHtml(c.offerBody)}</p>
-        <h2>${escapeHtml(c.sourceHeading)}</h2>
-        <ul class="compare-links">
-          <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
-          <li><a href="${syllabusPath}">${escapeHtml(c.syllabusLinkLabel)} &rarr;</a></li>
-          <li><a href="/app/exam-notices">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
-        </ul>
-        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
-      </article>
-      <footer class="pub-footer">
-        <div class="wrap">
-          <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
-            <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
-              <a href="/privacy/">Privacy Policy</a>
-              <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
-          </div>
-          <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
-        </div>
-      </footer>
-    </div>`;
+// The lesson and job-profile pages are HYDRATED (src/main.tsx), like the home page: React attaches
+// to the DOM the browser already painted instead of rebuilding it, so the <h1> on screen at first
+// paint stays the LCP element. For that to work the two builders below must produce exactly the DOM
+// LessonArticlePage.tsx / JobProfilePage.tsx render - same elements in the same order, one text
+// node where the component renders one, no whitespace between elements (JSX drops it, so the
+// template literals are joined with nothing in between), <Link> as <a data-discover="true" href>.
+// React 19 answers any mismatch by throwing the tree away and client-rendering it, with an error in
+// the console; `npm run check:hydration` catches that in headless Chrome and `check:public` guards
+// the static rules. Edit the component and its builder together.
+//
+// Both routes render inside App.tsx's <Lazy> Suspense boundary. React's hydration expects a
+// server-rendered Suspense boundary to be delimited by the <!--$--> / <!--/$--> comments
+// renderToString emits, and treats anything else as a mismatch, so the body is wrapped in them.
+// React then hydrates the boundary's content in a follow-up pass at low priority (the page is
+// already on screen, so there is no rush) and the prerendered nodes are kept throughout.
+function suspenseBoundary(html) {
+  return `<!--$-->${html}<!--/$-->`;
+}
+// What react-router's <Link> renders for a relative "to": production React ignores attribute
+// differences, but the development build logs a hydration warning for a missing one.
+function link(href, text, attrs = '') {
+  return `<a${attrs} data-discover="true" href="${href}">${text}</a>`;
+}
+// The header and footer shared by LessonArticlePage.tsx and JobProfilePage.tsx. `navLinks` is the
+// content of <nav class="pub-nav-links">, which differs between the two pages.
+function hydratedPageHeader(lang, navLinks) {
+  const exams = EXAMS_LINK[lang];
+  return [
+    '<header class="pub-header"><div class="wrap pub-nav">',
+    link('/', `${BRAND_ICON}Pariksha Saathi`, ' class="pub-brand"'),
+    `<nav class="pub-nav-links">${navLinks}</nav>`,
+    link(exams.href, exams.label, ` class="pub-exams-link" aria-label="${exams.title}"`),
+    link('/onboarding', lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying', ' class="pub-cta"'),
+    '</div></header>',
+  ].join('');
+}
+function hydratedPageFooter(disclaimer) {
+  return [
+    '<footer class="pub-footer"><div class="wrap"><div class="pub-footer-top">',
+    `<div class="pub-footer-brand">${BRAND_ICON}Pariksha Saathi</div>`,
+    '<div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a><a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a></div>',
+    '</div>',
+    `<p class="disclaimer">${escapeHtml(disclaimer)}</p>`,
+    '</div></footer>',
+  ].join('');
 }
 
-// Mirrors src/pages/learn/LessonArticlePage.tsx exactly - driven by src/data/topicLessons.ts,
-// same single-source-of-truth pattern as syllabusPageBody above.
+// Mirrors src/pages/compare/JobProfilePage.tsx node for node (see the note above suspenseBoundary) -
+// driven by src/data/examJobProfiles.mjs, same single-source-of-truth pattern as syllabusPageBody.
+function jobProfilePageBody(entry, lang) {
+  const c = entry[lang];
+  // Trailing slashes as in the component: Cloudflare Pages 308-redirects the slash-less form.
+  const enPath = `/compare/${entry.slug}-job-profile/`;
+  const hiPath = `/hi/compare/${entry.slug}-job-profile/`;
+  const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus/` : `/compare/${entry.slug}-syllabus/`;
+  const paragraphs = (items) => items.map((p) => `<p>${escapeHtml(p)}</p>`).join('');
+  const official = (label) => `<a href="${escapeHtml(entry.officialUrl)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>`;
+  return suspenseBoundary([
+    '<div class="compare-page">',
+    hydratedPageHeader(lang, link('/app/exam-notices', lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices')),
+    '<article class="wrap compare-article">',
+    '<div class="compare-top-row">',
+    link('/', `← ${escapeHtml(c.backLabel)}`, ' class="detail-back"'),
+    link(lang === 'hi' ? enPath : hiPath, lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें', ' class="compare-lang-switch"'),
+    '</div>',
+    `<h1>${escapeHtml(c.pageTitle)}</h1>`,
+    `<p class="compare-lede">${escapeHtml(c.lede)}</p>`,
+    `<h2>${escapeHtml(c.profileHeading)}</h2>`,
+    paragraphs(c.profileBody),
+    c.posts
+      ? `<h2>${escapeHtml(c.postsHeading)}</h2><div class="compare-table">${c.posts.map((post) => `<div class="compare-row"><div class="compare-cell compare-label">${escapeHtml(post.name)}</div><div class="compare-cell compare-both">${escapeHtml(post.body)}</div></div>`).join('')}</div>`
+      : '',
+    c.promotionBody.length > 0 ? `<h2>${escapeHtml(c.promotionHeading)}</h2>${paragraphs(c.promotionBody)}` : '',
+    `<h2>${escapeHtml(c.salaryHeading)}</h2>`,
+    paragraphs(c.salaryBody),
+    c.perks.length > 0 ? `<h2>${escapeHtml(c.perksHeading)}</h2><ul class="lesson-concept-list">${c.perks.map((perk) => `<li>${escapeHtml(perk)}</li>`).join('')}</ul>` : '',
+    `<p class="compare-note">${escapeHtml(c.note)} ${official(c.noteLinkLabel)}.</p>`,
+    `<h2>${escapeHtml(c.recruitsHeading)}</h2><p>${escapeHtml(c.recruitsBody)}</p>`,
+    `<h2>${escapeHtml(c.offerHeading)}</h2><p>${escapeHtml(c.offerBody)}</p>`,
+    `<h2>${escapeHtml(c.sourceHeading)}</h2>`,
+    '<ul class="compare-links">',
+    `<li>${official(`${c.officialLinkLabel} ↗`)}</li>`,
+    `<li>${link(syllabusPath, `${escapeHtml(c.syllabusLinkLabel)} →`)}</li>`,
+    `<li>${link('/app/exam-notices', `${escapeHtml(c.examNoticesLinkLabel)} →`)}</li>`,
+    '</ul>',
+    link('/onboarding', `${escapeHtml(c.ctaLabel)} →`, ' class="btn-primary-compare"'),
+    '</article>',
+    hydratedPageFooter(c.disclaimer),
+    '</div>',
+  ].join(''));
+}
+
+// Mirrors src/pages/learn/LessonArticlePage.tsx node for node (see the note above suspenseBoundary) -
+// driven by src/data/topicLessons.mjs, same single-source-of-truth pattern as syllabusPageBody.
 function lessonPageBody(entry, lang) {
   const c = entry[lang];
-  const topicKey = LESSON_CATALOG.find(item => item.slug === entry.slug)?.topicKey;
-  const homeHref = '/';
-  const enPath = `/learn/${entry.slug}`;
-  const hiPath = `/hi/learn/${entry.slug}`;
-  const otherLangHref = lang === 'hi' ? enPath : hiPath;
-  const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
-  const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
-  const startStudyingLabel = lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying';
+  // The component reads topicKey from its generated chunk, which scripts/split-content.mjs copies
+  // from this same catalog.
+  const topicKey = LESSON_CATALOG.find((item) => item.slug === entry.slug)?.topicKey;
+  const enPath = `/learn/${entry.slug}/`;
+  const hiPath = `/hi/learn/${entry.slug}/`;
+  const credit = lessonCredit(entry, lang);
   const examples = c.examples
-    .map(
-      (ex, i) => `<div class="lesson-example">
-          <p class="lesson-example-q"><strong>${i + 1}. ${escapeHtml(ex.question)}</strong></p>
-          <p class="lesson-solution-label">${escapeHtml(c.solutionLabel)}</p>
-          <ol class="lesson-solution-steps">
-            ${ex.solution.map((step) => `<li>${escapeHtml(step)}</li>`).join('\n            ')}
-          </ol>
-          <p class="lesson-answer">${escapeHtml(c.answerLabel)}: ${escapeHtml(ex.answer)}</p>
-        </div>`,
-    )
-    .join('\n        ');
-  const keyFacts = c.keyFacts?.length
-    ? `<h2>${escapeHtml(c.keyFactsHeading)}</h2>
-        <ul class="lesson-concept-list">
-          ${c.keyFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('\n          ')}
-        </ul>`
-    : '';
+    .map((ex, i) => [
+      '<div class="lesson-example">',
+      `<p class="lesson-example-q"><strong>${i + 1}. ${escapeHtml(ex.question)}</strong></p>`,
+      `<p class="lesson-solution-label">${escapeHtml(c.solutionLabel)}</p>`,
+      `<ol class="lesson-solution-steps">${ex.solution.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}</ol>`,
+      `<p class="lesson-answer">${escapeHtml(c.answerLabel)}: ${escapeHtml(ex.answer)}</p>`,
+      '</div>',
+    ].join(''))
+    .join('');
   const practice = c.practiceQuestions
-    .map(
-      (q, i) => `<details class="lesson-practice-item">
-            <summary>${i + 1}. ${escapeHtml(q.question)}</summary>
-            <p>${escapeHtml(c.answerLabel)}: ${escapeHtml(q.answer)}</p>
-          </details>`,
-    )
-    .join('\n          ');
-  return `<div class="compare-page">
-      <header class="pub-header">
-        <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
-          <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${examNoticesLabel}</a>
-          </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
-        </div>
-      </header>
-      <article class="wrap compare-article">
-        <div class="compare-top-row">
-          <a href="${homeHref}" class="detail-back">&larr; ${escapeHtml(c.backLabel)}</a>
-          <a href="${otherLangHref}" class="compare-lang-switch">${otherLangLabel}</a>
-        </div>
-        <h1>${escapeHtml(c.pageTitle)}</h1>
-        <p class="compare-lede">${escapeHtml(c.lede)}</p>
-        <p class="lesson-credit">${escapeHtml(lessonCredit(entry, lang).text)} <a href="/about/">${escapeHtml(lessonCredit(entry, lang).link)}</a></p>
-        <p><a href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
-        <h2>${escapeHtml(c.conceptHeading)}</h2>
-        <ul class="lesson-concept-list">
-          ${c.conceptBody.map((line) => `<li>${escapeHtml(line)}</li>`).join('\n          ')}
-        </ul>
-        ${keyFacts}
-        ${c.examples.length > 0 ? `<h2>${escapeHtml(c.examplesHeading)}</h2>` : ''}
-        ${examples}
-        <h2 id="practice">${escapeHtml(c.practiceHeading)}</h2>
-        <p>${escapeHtml(c.practiceIntro)}</p>
-        <div class="lesson-practice-list">
-          ${practice}
-        </div>
-        <h2>${escapeHtml(c.relevantForHeading)}</h2>
-        <p>${escapeHtml(c.relevantForBody)}</p>
-        <h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
-        <p>${escapeHtml(lessonClosing(entry, lang))}</p>
-        <a class="btn-primary-compare" href="${topicKey ? `/app/practice/topic/${topicKey}?lang=${lang}` : '#practice'}">${lang === 'hi' ? (topicKey ? 'इस विषय का क्विज़ शुरू करें' : 'अभ्यास प्रश्नों पर जाएँ') : (topicKey ? 'Start this topic’s quiz' : 'Go to practice questions')} →</a>
-        <p><a href="/learn/">${lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</a></p>
-      </article>
-      <footer class="pub-footer">
-        <div class="wrap">
-          <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
-            <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
-              <a href="/privacy/">Privacy Policy</a>
-              <a href="/terms/">Terms of Use</a>
-              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
-          </div>
-          <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
-        </div>
-      </footer>
-    </div>`;
+    .map((q, i) => `<details class="lesson-practice-item"><summary>${i + 1}. ${escapeHtml(q.question)}</summary><p>${escapeHtml(c.answerLabel)}: ${escapeHtml(q.answer)}</p></details>`)
+    .join('');
+  return suspenseBoundary([
+    '<div class="compare-page">',
+    hydratedPageHeader(lang, link('/learn/', lang === 'hi' ? 'विषय सूची' : 'Lesson library') + link('/app/exam-notices', lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices')),
+    '<article class="wrap compare-article">',
+    '<div class="compare-top-row">',
+    link('/', `← ${escapeHtml(c.backLabel)}`, ' class="detail-back"'),
+    link(lang === 'hi' ? enPath : hiPath, lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें', ' class="compare-lang-switch"'),
+    '</div>',
+    `<h1>${escapeHtml(c.pageTitle)}</h1>`,
+    `<p class="compare-lede">${escapeHtml(c.lede)}</p>`,
+    `<p class="lesson-credit">${escapeHtml(credit.text)} ${link('/about/', escapeHtml(credit.link))}</p>`,
+    `<p><a href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>`,
+    `<h2>${escapeHtml(c.conceptHeading)}</h2>`,
+    `<ul class="lesson-concept-list">${c.conceptBody.map((line) => `<li>${escapeHtml(line)}</li>`).join('')}</ul>`,
+    c.keyFacts?.length
+      ? `<h2>${escapeHtml(c.keyFactsHeading)}</h2><ul class="lesson-concept-list">${c.keyFacts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul>`
+      : '',
+    c.examples.length > 0 ? `<h2>${escapeHtml(c.examplesHeading)}</h2>` : '',
+    examples,
+    `<h2 id="practice">${escapeHtml(c.practiceHeading)}</h2>`,
+    `<p>${escapeHtml(c.practiceIntro)}</p>`,
+    `<div class="lesson-practice-list">${practice}</div>`,
+    `<h2>${escapeHtml(c.relevantForHeading)}</h2>`,
+    `<p>${escapeHtml(c.relevantForBody)}</p>`,
+    `<h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>`,
+    `<p>${escapeHtml(lessonClosing(entry, lang))}</p>`,
+    topicKey
+      ? link(`/app/practice/topic/${topicKey}?lang=${lang}`, `${lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →`, ' class="btn-primary-compare"')
+      : `<a class="btn-primary-compare" href="#practice">${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →</a>`,
+    `<p>${link('/learn/', lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library')}</p>`,
+    '</article>',
+    hydratedPageFooter(c.disclaimer),
+    '</div>',
+  ].join(''));
 }
 
 async function main() {

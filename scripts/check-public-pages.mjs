@@ -217,4 +217,29 @@ assert(!homeRoot.includes('<button'), 'home page: a <button> inside #root; HomeP
 assert(homeRoot.includes('<a class="pub-cta" href="/onboarding">Start studying</a>') && homeRoot.includes('<a class="btn-primary-cream" href="/onboarding">Start studying free</a>'), 'home page: the Start studying CTAs are not the <a href="/onboarding"> links HomePage.tsx renders');
 assert(/<div class="card card-raised update-card">/.test(homeRoot), 'home page: preview cards must carry the same classes as the Card component (card card-raised update-card)');
 console.log('Verified the home page hydration contract statically (no whitespace text nodes in #root, anchors for CTAs, preview JSON outside #root).');
+// The lesson and job-profile pages are hydrated too (lessonPageBody / jobProfilePageBody mirror LessonArticlePage.tsx /
+// JobProfilePage.tsx). They render inside App.tsx's Suspense boundary, so #root must hold the <!--$--> / <!--/$--> markers
+// React expects around a server-rendered boundary, and nothing but the component's DOM in between.
+let hydratedPages = 0;
+for (const [entries, pagePath] of [
+  [TOPIC_LESSONS, (slug, lang) => `dist/${lang}learn/${slug}/index.html`],
+  [EXAM_JOB_PROFILES, (slug, lang) => `dist/${lang}compare/${slug}-job-profile/index.html`],
+]) {
+  for (const entry of entries) {
+    for (const lang of ['', 'hi/']) {
+      const file = pagePath(entry.slug, lang);
+      const html = readFileSync(file, 'utf8');
+      const rootStart = html.indexOf('<div id="root">') + '<div id="root">'.length;
+      const rootEnd = html.indexOf('</div>\n  </body>');
+      assert(rootStart > '<div id="root">'.length && rootEnd > rootStart, `${file}: #root is missing`);
+      const root = html.slice(rootStart, rootEnd);
+      assert(root.startsWith('<!--$--><div class="compare-page">') && root.endsWith('</div><!--/$-->'), `${file}: #root must hold exactly one Suspense boundary (<!--$-->...<!--/$-->) around the page`);
+      const strayNode = root.match(/>\s+</);
+      assert(!strayNode, `${file}: whitespace between elements inside #root breaks hydration (near "${root.slice(Math.max(0, strayNode?.index - 60), strayNode?.index + 20)}")`);
+      assert(root.includes('<h1>') && root.includes('<footer class="pub-footer">'), `${file}: not a full article page`);
+      hydratedPages++;
+    }
+  }
+}
+console.log(`Verified the hydration contract statically on ${hydratedPages} lesson and job-profile pages (Suspense markers, no whitespace text nodes in #root).`);
 console.log(`Verified the exam chooser (${DIRECTORY_EXAM_IDS.length} exams, both languages), the Exams button in every public header and the daily PDF link on the home page.`);

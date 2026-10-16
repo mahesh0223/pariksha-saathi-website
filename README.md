@@ -58,15 +58,23 @@ that together; `npm run check:public` fails the build if one of them regresses.
   `loading="lazy"`; the header icon is `icon-48.png`/`icon-96.png`, not the 512-px app icon. The
   other screenshots in `public/assets/screenshots/` are Play Store assets and are not shown on
   any page.
-- **The home page is hydrated, not re-rendered.** `src/main.tsx` calls `hydrateRoot` on `/` and
-  `createRoot().render()` everywhere else. `homePageBody()` in `scripts/prerender.mjs` therefore
-  mirrors `src/pages/HomePage.tsx` node for node: no whitespace between elements, CTAs as
-  `<a href="/onboarding">`, one text node where the component renders one, the preview JSON
-  after `#root` rather than inside it. The payoff is LCP: the hero `<h1>` painted at first
-  contentful paint stays the LCP element instead of being recreated when the bundle arrives
-  (LCP 2.4 s -> ~0.8 s on slow 4G). React 19 answers any mismatch by rebuilding the whole tree
-  with an error in the console, so when you change the home page change both files, then run
-  `npm run check:hydration` (loads the built page in headless Chrome and fails unless the parsed
+- **The home, lesson and job-profile pages are hydrated, not re-rendered.** `src/main.tsx` calls
+  `hydrateRoot` on `/`, `/learn/<slug>/`, `/compare/<slug>-job-profile/` and the `/hi/` variants,
+  and `createRoot().render()` everywhere else. `homePageBody()`, `lessonPageBody()` and
+  `jobProfilePageBody()` in `scripts/prerender.mjs` therefore mirror `HomePage.tsx`,
+  `LessonArticlePage.tsx` and `JobProfilePage.tsx` node for node: no whitespace between elements,
+  CTAs as `<a href="/onboarding">`, one text node where the component renders one (the components
+  build `{a}: {b}` as a single template string for that reason), `<Link>` as
+  `<a data-discover="true">`, the home preview JSON after `#root` rather than inside it. The
+  lesson and job-profile pages render inside a `<Suspense>` boundary (`App.tsx`'s `Lazy`), so
+  their `#root` content is wrapped in the `<!--$-->`/`<!--/$-->` comments React expects around a
+  server-rendered boundary; React hydrates that content in a low-priority follow-up pass and keeps
+  the prerendered nodes throughout. The payoff is LCP: the `<h1>` painted at first contentful
+  paint stays the LCP element instead of being recreated when the bundle arrives (LCP 2.4 s ->
+  ~0.8 s on the home page, 2.4 s -> ~1.6 s on a lesson page, slow 4G). React 19 answers any
+  mismatch by rebuilding the whole tree with an error in the console, so when you change one of
+  these pages change both files, then run `npm run check:hydration` (loads the built home page, an
+  English and a Hindi lesson and a job-profile page in headless Chrome and fails unless the parsed
   `<h1>` survives the mount with no hydration error); `check:public` guards the static rules.
 - **Home page preview data** (latest current affairs and notices) is baked into the HTML as JSON
   (`<script id="home-preview">`) and used as react-query `initialData`, so the first render
@@ -95,8 +103,12 @@ pessimistic. Measure the deployed site (`npx lighthouse https://parikshasaathi.c
 `npm run serve:dist` (brotli, `_headers`, directory index files, spa.html fallback; port 4173)
 and run `npx lighthouse http://localhost:4173/ --only-categories=performance
 --throttling-method=devtools` for applied rather than simulated throttling. Targets on slow 4G,
-mobile: FCP < 2.0 s, LCP < 2.5 s, CLS < 0.05; on the home page LCP should sit within ~0.1 s of
-FCP - if it jumps to the time the JS arrives, hydration has broken (`npm run check:hydration`).
+mobile: FCP < 2.0 s, LCP < 2.5 s, CLS < 0.05; on the home, lesson and job-profile pages LCP should
+sit within ~0.1 s of FCP - if it jumps to the time the JS arrives, hydration has broken
+(`npm run check:hydration`). Judge that with `--throttling-method=devtools` (or the
+`observedLargestContentfulPaint` value in the JSON report): Lighthouse's default simulated mode
+models a text LCP pessimistically against every script requested before it and reports LCP
+~0.6 s after FCP on these pages even though the trace shows them equal.
 
 ## Other scripts
 

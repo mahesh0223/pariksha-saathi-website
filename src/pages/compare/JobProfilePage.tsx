@@ -14,6 +14,10 @@ const SITE_URL = 'https://parikshasaathi.com';
 const jobProfiles = chunkStore(import.meta.glob<{ default: ExamJobProfileEntry }>('../../data/generated/job-profiles/*.mjs'));
 export const preloadJobProfile = jobProfiles.preload;
 
+// HYDRATED: src/main.tsx calls hydrateRoot on /compare/<slug>-job-profile/ and its /hi/ variant, so
+// the markup below must match jobProfilePageBody() in scripts/prerender.mjs node for node - hence
+// the single template strings where prose and a value meet (`{a} →` would be two text nodes where
+// the HTML has one). Change both files together and run `npm run check:hydration`.
 export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
   // Each exam's bilingual job profile is its own chunk, preloaded before React mounts on the
   // prerendered page so the article is never replaced by a spinner - see
@@ -128,9 +132,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
 
       <article className="wrap compare-article">
         <div className="compare-top-row">
-          <Link to={homeHref} className="detail-back">
-            &larr; {content.backLabel}
-          </Link>
+          <Link to={homeHref} className="detail-back">{`← ${content.backLabel}`}</Link>
           <Link to={lang === 'hi' ? enPath : hiPath} className="compare-lang-switch">
             {lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें'}
           </Link>
@@ -184,7 +186,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
         )}
 
         <p className="compare-note">
-          {content.note}{' '}
+          {`${content.note} `}
           <a href={entry.officialUrl} target="_blank" rel="noreferrer">
             {content.noteLinkLabel}
           </a>
@@ -201,19 +203,19 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
         <ul className="compare-links">
           <li>
             <a href={entry.officialUrl} target="_blank" rel="noreferrer">
-              {content.officialLinkLabel} &#8599;
+              {`${content.officialLinkLabel} ↗`}
             </a>
           </li>
           <li>
-            <Link to={syllabusPath}>{content.syllabusLinkLabel} &rarr;</Link>
+            <Link to={syllabusPath}>{`${content.syllabusLinkLabel} →`}</Link>
           </li>
           <li>
-            <Link to="/app/exam-notices">{content.examNoticesLinkLabel} &rarr;</Link>
+            <Link to="/app/exam-notices">{`${content.examNoticesLinkLabel} →`}</Link>
           </li>
         </ul>
 
         <Link className="btn-primary-compare" to="/onboarding">
-          {content.ctaLabel} &rarr;
+          {`${content.ctaLabel} →`}
         </Link>
       </article>
 
@@ -225,9 +227,11 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
               Pariksha Saathi
             </div>
             <div className="pub-footer-links">
+              <a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a>
+              <a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p className="disclaimer">{content.disclaimer}</p>

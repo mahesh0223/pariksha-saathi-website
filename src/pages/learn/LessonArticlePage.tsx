@@ -17,6 +17,11 @@ const SITE_URL = 'https://parikshasaathi.com';
 const lessons = chunkStore(import.meta.glob<{ default: TopicLessonEntry }>('../../data/generated/lessons/*.mjs'));
 export const preloadLesson = lessons.preload;
 
+// HYDRATED: src/main.tsx calls hydrateRoot on /learn/<slug>/ and /hi/learn/<slug>/, so the markup
+// below must match lessonPageBody() in scripts/prerender.mjs node for node (React 19 rebuilds the
+// whole tree on any mismatch). Hence the single template strings where prose and a value meet:
+// `{a}: {b}` would be three DOM text nodes where the HTML has one. Change both files together and
+// run `npm run check:hydration`. See README.md, "Performance and offline contract".
 export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
   // This page downloads ~5-10 KB brotli (its own lesson's chunk), not the whole catalog. On a
   // prerendered page the chunk was fetched before React mounted (App.tsx's preloadRoute), so the
@@ -134,9 +139,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
       <article className="wrap compare-article">
         <div className="compare-top-row">
-          <Link to={homeHref} className="detail-back">
-            &larr; {content.backLabel}
-          </Link>
+          <Link to={homeHref} className="detail-back">{`← ${content.backLabel}`}</Link>
           <Link to={lang === 'hi' ? enPath : hiPath} className="compare-lang-switch">
             {lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें'}
           </Link>
@@ -144,8 +147,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
 
         <h1>{content.pageTitle}</h1>
         <p className="compare-lede">{content.lede}</p>
-        <p className="lesson-credit">{lessonCredit(entry, lang).text} <Link to="/about/">{lessonCredit(entry, lang).link}</Link></p>
-        <p><a href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓</a></p>
+        <p className="lesson-credit">{`${lessonCredit(entry, lang).text} `}<Link to="/about/">{lessonCredit(entry, lang).link}</Link></p>
+        <p><a href="#practice">{`${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Jump to practice questions'} ↓`}</a></p>
 
         <h2>{content.conceptHeading}</h2>
         <ul className="lesson-concept-list">
@@ -169,9 +172,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         {content.examples.map((ex, i) => (
           <div className="lesson-example" key={i}>
             <p className="lesson-example-q">
-              <strong>
-                {i + 1}. {ex.question}
-              </strong>
+              <strong>{`${i + 1}. ${ex.question}`}</strong>
             </p>
             <p className="lesson-solution-label">{content.solutionLabel}</p>
             <ol className="lesson-solution-steps">
@@ -179,9 +180,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
                 <li key={j}>{step}</li>
               ))}
             </ol>
-            <p className="lesson-answer">
-              {content.answerLabel}: {ex.answer}
-            </p>
+            <p className="lesson-answer">{`${content.answerLabel}: ${ex.answer}`}</p>
           </div>
         ))}
 
@@ -190,12 +189,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         <div className="lesson-practice-list">
           {content.practiceQuestions.map((q, i) => (
             <details className="lesson-practice-item" key={i}>
-              <summary>
-                {i + 1}. {q.question}
-              </summary>
-              <p>
-                {content.answerLabel}: {q.answer}
-              </p>
+              <summary>{`${i + 1}. ${q.question}`}</summary>
+              <p>{`${content.answerLabel}: ${q.answer}`}</p>
             </details>
           ))}
         </div>
@@ -206,8 +201,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         <h2>{lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
         <p>{lessonClosing(entry, lang)}</p>
         {topicKey ? <Link className="btn-primary-compare" to={`/app/practice/topic/${topicKey}?lang=${lang}`}>
-          {lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →
-        </Link> : <a className="btn-primary-compare" href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →</a>}
+          {`${lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →`}
+        </Link> : <a className="btn-primary-compare" href="#practice">{`${lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →`}</a>}
         <p><Link to="/learn/">{lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</Link></p>
       </article>
 
@@ -219,9 +214,11 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
               Pariksha Saathi
             </div>
             <div className="pub-footer-links">
+              <a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a>
+              <a href="/downloads/">Daily PDF</a>
             </div>
           </div>
           <p className="disclaimer">{content.disclaimer}</p>

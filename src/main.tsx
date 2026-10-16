@@ -17,6 +17,9 @@ const queryClient = new QueryClient({
   },
 });
 
+// "/", /learn/<slug>/, /compare/<slug>-job-profile/ and the /hi/ variants of the last two.
+const HYDRATED_ROUTE = /^\/(?:(?:hi\/)?(?:learn\/[^/]+|compare\/[^/]+-job-profile)\/?)?$/;
+
 function mount() {
   const container = document.getElementById('root')!;
   const app = (
@@ -34,17 +37,19 @@ function mount() {
       </QueryClientProvider>
     </StrictMode>
   );
-  // The home page is HYDRATED: its prerendered markup (homePageBody in scripts/prerender.mjs) is
-  // kept node for node by HomePage.tsx, so React attaches to the DOM the browser already painted
-  // instead of replacing it. That matters for the largest-contentful-paint metric: with
-  // createRoot().render() the hero <h1> was recreated when this bundle arrived (~2.4 s on slow 4G)
-  // and Chrome reported that new element as the LCP, even though the identical <h1> had been on
-  // screen since first contentful paint (0.8 s). Every other prerendered page keeps the plain
+  // The home, lesson and job-profile pages are HYDRATED: their prerendered markup (homePageBody,
+  // lessonPageBody and jobProfilePageBody in scripts/prerender.mjs) is kept node for node by
+  // HomePage.tsx, LessonArticlePage.tsx and JobProfilePage.tsx, so React attaches to the DOM the
+  // browser already painted instead of replacing it. That matters for the largest-contentful-paint
+  // metric: with createRoot().render() the <h1> was recreated when this bundle arrived (~2.4 s on
+  // slow 4G) and Chrome reported that new element as the LCP, even though the identical <h1> had
+  // been on screen since first contentful paint. Every other prerendered page keeps the plain
   // render: their static HTML is hand-written article markup that is close to, but not identical
   // with, the component output, and React 19 answers any hydration mismatch by throwing the tree
   // away and client-rendering it anyway, with an error in the console. `vite dev` serves an empty
-  // #root for the home page too, so hydrate only when there is markup to hydrate.
-  if (window.location.pathname === '/' && container.firstElementChild) {
+  // #root for these routes too, so hydrate only when there is markup to hydrate. (The lesson and
+  // job-profile content chunk is awaited by preloadRoute below, so the first render has the entry.)
+  if (HYDRATED_ROUTE.test(window.location.pathname) && container.firstElementChild) {
     hydrateRoot(container, app);
   } else {
     createRoot(container).render(app);

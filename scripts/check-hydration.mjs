@@ -1,6 +1,7 @@
-// Loads the built home page in headless Chrome and fails unless React HYDRATED the prerendered
-// markup instead of rebuilding it (see src/main.tsx and homePageBody in scripts/prerender.mjs).
-// The check is direct: a script injected before the page's own records the parsed <h1> and every
+// Loads every kind of hydrated page (the home page, an English and a Hindi lesson, a job profile;
+// see PAGES) in headless Chrome and fails unless React HYDRATED the prerendered markup instead of
+// rebuilding it (see src/main.tsx and homePageBody / lessonPageBody / jobProfilePageBody in
+// scripts/prerender.mjs). The check is direct: a script injected before the page's own records the parsed <h1> and every
 // element under #root the moment parsing ends (readyState "interactive" fires before any deferred
 // module script runs), then after React has mounted it asserts those same nodes are still in the
 // document, that React's fiber is attached to them, and that no hydration error or exception was
@@ -19,6 +20,17 @@ const CHROME = process.env.CHROME_PATH ?? [
 ].find(existsSync);
 if (!CHROME) { console.error('check-hydration: Google Chrome not found; set CHROME_PATH'); process.exit(2); }
 if (!existsSync('dist/index.html')) { console.error('check-hydration: dist/index.html missing - run `npm run build` first'); process.exit(2); }
+
+// One page per hydrated route shape. The lesson and job-profile pages render inside App.tsx's
+// Suspense boundary, so their hydration happens in React's follow-up pass (prerender.mjs wraps
+// them in <!--$--> / <!--/$-->); the loop below waits for that pass like any other.
+// percentages = a worked-examples lesson, indian-polity-and-constitution = a key-facts lesson (the two shapes
+// lessonPageBody() has branches for); one job profile in each language.
+const PAGES = ['/', '/learn/percentages/', '/hi/learn/percentages/', '/learn/indian-polity-and-constitution/', '/compare/ssc-cgl-job-profile/', '/hi/compare/ssc-cgl-job-profile/'];
+for (const path of PAGES) {
+  const file = `dist${path}index.html`;
+  if (!existsSync(file)) { console.error(`check-hydration: ${file} missing - run \`npm run build\` first`); process.exit(2); }
+}
 
 const BEFORE_PAGE_SCRIPTS = `
   document.addEventListener('readystatechange', () => {
@@ -84,48 +96,53 @@ try {
   const ws = new WebSocket(wsUrl);
   await new Promise((resolve, reject) => { ws.addEventListener('open', resolve); ws.addEventListener('error', reject); });
   const cdp = new Cdp(ws);
-  const { targetId } = await cdp.send('Target.createTarget', { url: 'about:blank' });
-  const { sessionId } = await cdp.send('Target.attachToTarget', { targetId, flatten: true });
-  const s = (method, params) => cdp.send(method, params, sessionId);
-  const problems = [];
-  const notes = [];
-  let loaded = false;
-  cdp.on((msg) => {
-    if (msg.sessionId !== sessionId) return;
-    if (msg.method === 'Runtime.exceptionThrown') problems.push(`exception: ${msg.params.exceptionDetails.exception?.description ?? msg.params.exceptionDetails.text}`);
-    if (msg.method === 'Runtime.consoleAPICalled' && (msg.params.type === 'error' || msg.params.type === 'warning')) {
-      const text = msg.params.args.map((a) => a.value ?? a.description ?? '').join(' ');
-      const isHydration = /hydrat|Minified React error|did not match|server rendered HTML/i.test(text);
-      (isHydration ? problems : notes).push(`console.${msg.params.type}: ${text.slice(0, isHydration ? 4000 : 400)}`);
+  for (const path of PAGES) {
+    const { targetId } = await cdp.send('Target.createTarget', { url: 'about:blank' });
+    const { sessionId } = await cdp.send('Target.attachToTarget', { targetId, flatten: true });
+    const s = (method, params) => cdp.send(method, params, sessionId);
+    const problems = [];
+    const notes = [];
+    let loaded = false;
+    cdp.on((msg) => {
+      if (msg.sessionId !== sessionId) return;
+      if (msg.method === 'Runtime.exceptionThrown') problems.push(`exception: ${msg.params.exceptionDetails.exception?.description ?? msg.params.exceptionDetails.text}`);
+      if (msg.method === 'Runtime.consoleAPICalled' && (msg.params.type === 'error' || msg.params.type === 'warning')) {
+        const text = msg.params.args.map((a) => a.value ?? a.description ?? '').join(' ');
+        const isHydration = /hydrat|Minified React error|did not match|server rendered HTML/i.test(text);
+        (isHydration ? problems : notes).push(`console.${msg.params.type}: ${text.slice(0, isHydration ? 4000 : 400)}`);
+      }
+      if (msg.method === 'Page.loadEventFired') loaded = true;
+    });
+    await s('Runtime.enable');
+    await s('Page.enable');
+    await s('Page.addScriptToEvaluateOnNewDocument', { source: BEFORE_PAGE_SCRIPTS });
+    await s('Page.navigate', { url: `http://127.0.0.1:${site.port}${path}` });
+    const deadline = Date.now() + 15000;
+    let result;
+    // React mounts from a scheduled task after the module runs (and hydrates a Suspense boundary's
+    // content in a later, low-priority pass); wait until a fiber is attached to the <h1> or time runs out.
+    do {
+      await sleep(200);
+      result = (await s('Runtime.evaluate', { expression: INSPECT, returnByValue: true })).result.value;
+    } while (!(loaded && result?.reactAttached) && Date.now() < deadline);
+    await sleep(500); // let any recoverable error surface
+    if (!result || result.error) problems.push(`inspection failed: ${result?.error ?? 'no result'}`);
+    else {
+      if (!result.reactAttached) problems.push('React never attached to the prerendered <h1> (did it mount at all?)');
+      if (!result.h1Kept) problems.push('the <h1> in the document is not the prerendered one - React rebuilt the DOM instead of hydrating it');
+      if (!result.rootChildKept) problems.push('#root\'s first child was replaced - React rebuilt the DOM instead of hydrating it');
+      if (result.kept < result.prerenderedCount * 0.9) problems.push(`only ${result.kept} of ${result.prerenderedCount} prerendered elements survived the mount`);
     }
-    if (msg.method === 'Page.loadEventFired') loaded = true;
-  });
-  await s('Runtime.enable');
-  await s('Page.enable');
-  await s('Page.addScriptToEvaluateOnNewDocument', { source: BEFORE_PAGE_SCRIPTS });
-  await s('Page.navigate', { url: `http://127.0.0.1:${site.port}/` });
-  const deadline = Date.now() + 15000;
-  let result;
-  // React mounts from a scheduled task after the module runs; wait until a fiber is attached or time runs out.
-  do {
-    await sleep(200);
-    result = (await s('Runtime.evaluate', { expression: INSPECT, returnByValue: true })).result.value;
-  } while (!(loaded && result?.reactAttached) && Date.now() < deadline);
-  await sleep(500); // let any recoverable error surface
-  if (!result || result.error) problems.push(`inspection failed: ${result?.error ?? 'no result'}`);
-  else {
-    if (!result.reactAttached) problems.push('React never attached to the prerendered <h1> (did it mount at all?)');
-    if (!result.h1Kept) problems.push('the <h1> in the document is not the prerendered one - React rebuilt the DOM instead of hydrating it');
-    if (!result.rootChildKept) problems.push('#root\'s first child was replaced - React rebuilt the DOM instead of hydrating it');
-    if (result.kept < result.prerenderedCount * 0.9) problems.push(`only ${result.kept} of ${result.prerenderedCount} prerendered elements survived the mount`);
+    for (const n of notes) console.log(`  (note) ${n}`);
+    if (result && !result.error) console.log(`${path}: ${result.kept}/${result.prerenderedCount} prerendered elements kept (${result.nowCount} now), h1 kept: ${result.h1Kept}, React attached: ${result.reactAttached}, LCP: ${result.lcp ? `${result.lcp.element} at ${result.lcp.startTime} ms (prerendered: ${result.lcp.prerendered})` : 'no entry'}`);
+    if (problems.length) {
+      failed = true;
+      console.error(`check-hydration FAILED on ${path}:`);
+      for (const p of problems) console.error(`  - ${p}`);
+    }
+    await cdp.send('Target.closeTarget', { targetId }).catch(() => {});
   }
-  for (const n of notes) console.log(`  (note) ${n}`);
-  if (result && !result.error) console.log(`Home page: ${result.kept}/${result.prerenderedCount} prerendered elements kept (${result.nowCount} now), h1 kept: ${result.h1Kept}, React attached: ${result.reactAttached}, LCP: ${result.lcp ? `${result.lcp.element} at ${result.lcp.startTime} ms (prerendered: ${result.lcp.prerendered})` : 'no entry'}`);
-  if (problems.length) {
-    failed = true;
-    console.error('check-hydration FAILED:');
-    for (const p of problems) console.error(`  - ${p}`);
-  } else console.log('check-hydration OK: React hydrated the prerendered home page without a mismatch.');
+  if (!failed) console.log(`check-hydration OK: React hydrated all ${PAGES.length} prerendered pages without a mismatch.`);
   await cdp.send('Browser.close').catch(() => {});
 } catch (error) {
   failed = true;
