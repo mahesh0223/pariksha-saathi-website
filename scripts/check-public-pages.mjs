@@ -118,6 +118,23 @@ for (const examId of HUB_EXAM_IDS) {
 }
 console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
 
+// Every prerendered page lives at a trailing-slash URL and the host 308-redirects the slash-less form. An
+// internal link without the slash therefore costs each crawler a redirect hop (Search Console reported 31
+// "Page with redirect" URLs on 2026-10-16, all of this kind) - so no built page may carry one.
+{
+  const slashless = /href="\/(app\/exam-notices|app\/current-affairs|exams|learn|hi\/exams|hi\/learn|(?:hi\/)?compare\/[a-z0-9-]+)"/g;
+  let offenders = 0;
+  for (const file of files) {
+    const hits = readFileSync(file, 'utf8').match(slashless);
+    if (hits) {
+      offenders += 1;
+      if (offenders <= 5) console.error(`${file}: slash-less internal link(s): ${[...new Set(hits)].join(' ')}`);
+    }
+  }
+  assert(offenders === 0, `${offenders} built page(s) link to a prerendered section without its trailing slash`);
+  console.log('Verified that no built page links to a prerendered section without its trailing slash.');
+}
+
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and
 // a visible key-facts list and practice questions on every page in both languages.
 const aiLessons = TOPIC_LESSONS.filter((entry) => entry.credit === 'ai-assisted');

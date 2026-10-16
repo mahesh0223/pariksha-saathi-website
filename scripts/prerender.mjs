@@ -105,8 +105,8 @@ function publicContentFrame(innerHtml) {
       <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
       <nav class="pub-nav-links">
         <a href="/learn/">Lessons</a>
-        <a href="/app/current-affairs">Current affairs</a>
-        <a href="/app/exam-notices">Exam Notices</a>
+        <a href="/app/current-affairs/">Current affairs</a>
+        <a href="/app/exam-notices/">Exam Notices</a>
       </nav>
       ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
     </div>
@@ -530,7 +530,7 @@ function comparePageBody() {
           <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/#features">Features</a>
-            <a href="/app/exam-notices">Exam Notices</a>
+            <a href="/app/exam-notices/">Exam Notices</a>
           </nav>
           ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
         </div>
@@ -566,7 +566,7 @@ function comparePageBody() {
         <ul class="compare-links">
           <li><a href="https://www.ibps.in/index.php/management-trainees-xvi/" target="_blank" rel="noreferrer">IBPS PO/MT — official CRP page &#8599;</a></li>
           <li><a href="https://sbi.bank.in/web/careers/current-openings" target="_blank" rel="noreferrer">SBI PO — official SBI careers page &#8599;</a></li>
-          <li><a href="/app/exam-notices">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
+          <li><a href="/app/exam-notices/">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
         </ul>
         <a class="btn-primary-compare" href="/onboarding">Start studying free &rarr;</a>
       </article>
@@ -592,8 +592,8 @@ function comparePageBody() {
 function syllabusPageBody(entry, lang) {
   const c = entry[lang];
   const homeHref = '/';
-  const enPath = `/compare/${entry.slug}-syllabus`;
-  const hiPath = `/hi/compare/${entry.slug}-syllabus`;
+  const enPath = `/compare/${entry.slug}-syllabus/`;
+  const hiPath = `/hi/compare/${entry.slug}-syllabus/`;
   const otherLangHref = lang === 'hi' ? enPath : hiPath;
   const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
   const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
@@ -607,7 +607,7 @@ function syllabusPageBody(entry, lang) {
         <div class="wrap pub-nav">
           <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${examNoticesLabel}</a>
+            <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
           ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
@@ -636,7 +636,7 @@ function syllabusPageBody(entry, lang) {
         <h2>${escapeHtml(c.sourceHeading)}</h2>
         <ul class="compare-links">
           <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
-          <li><a href="/app/exam-notices">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
+          <li><a href="/app/exam-notices/">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
         </ul>
         <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
       </article>
@@ -664,7 +664,7 @@ function examHubPageBody(innerHtml, lang) {
         <div class="wrap pub-nav">
           <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
+            <a href="/app/exam-notices/">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
           </nav>
           ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
         </div>
@@ -687,9 +687,9 @@ function examHubPageBody(innerHtml, lang) {
 function jobProfilePageBody(entry, lang) {
   const c = entry[lang];
   const homeHref = '/';
-  const enPath = `/compare/${entry.slug}-job-profile`;
-  const hiPath = `/hi/compare/${entry.slug}-job-profile`;
-  const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus` : `/compare/${entry.slug}-syllabus`;
+  const enPath = `/compare/${entry.slug}-job-profile/`;
+  const hiPath = `/hi/compare/${entry.slug}-job-profile/`;
+  const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus/` : `/compare/${entry.slug}-syllabus/`;
   const otherLangHref = lang === 'hi' ? enPath : hiPath;
   const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
   const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';
@@ -706,7 +706,7 @@ function jobProfilePageBody(entry, lang) {
         <div class="wrap pub-nav">
           <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${examNoticesLabel}</a>
+            <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
           ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>
@@ -737,7 +737,7 @@ function jobProfilePageBody(entry, lang) {
         <ul class="compare-links">
           <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
           <li><a href="${syllabusPath}">${escapeHtml(c.syllabusLinkLabel)} &rarr;</a></li>
-          <li><a href="/app/exam-notices">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
+          <li><a href="/app/exam-notices/">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
         </ul>
         <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
       </article>
@@ -800,7 +800,7 @@ function lessonPageBody(entry, lang) {
         <div class="wrap pub-nav">
           <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
-            <a href="/app/exam-notices">${examNoticesLabel}</a>
+            <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
           ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
         </div>

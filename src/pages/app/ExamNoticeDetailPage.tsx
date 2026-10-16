@@ -94,7 +94,7 @@ export function ExamNoticeDetailPage() {
 
   return (
     <article className="detail-page">
-      <Link to="/app/exam-notices" className="detail-back">
+      <Link to="/app/exam-notices/" className="detail-back">
         &larr; Exam Notices &amp; Alerts
       </Link>
 

@@ -20,8 +20,8 @@ export function PublicContentLayout() {
           </Link>
           <nav className="pub-nav-links">
             <Link to="/learn/">Lessons</Link>
-            <Link to="/app/current-affairs">Current affairs</Link>
-            <Link to="/app/exam-notices">Exam Notices</Link>
+            <Link to="/app/current-affairs/">Current affairs</Link>
+            <Link to="/app/exam-notices/">Exam Notices</Link>
           </nav>
           <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
             Exams

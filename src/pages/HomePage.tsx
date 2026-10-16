@@ -484,7 +484,7 @@ export function HomePage() {
           {affairsQuery.data?.map((item) => (
             <CurrentAffairsItemCard key={item.id} item={item} />
           ))}
-          <Link to="/app/current-affairs" className="update-readmore">
+          <Link to="/app/current-affairs/" className="update-readmore">
             See all current affairs &rarr;
           </Link>
         </div>
@@ -510,7 +510,7 @@ export function HomePage() {
               </Card>
             </Link>
           ))}
-          <Link to="/app/exam-notices" className="update-readmore">
+          <Link to="/app/exam-notices/" className="update-readmore">
             See all exam notices &rarr;
           </Link>
         </div>

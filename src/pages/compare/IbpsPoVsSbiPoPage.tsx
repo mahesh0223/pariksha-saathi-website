@@ -46,7 +46,7 @@ export function IbpsPoVsSbiPoPage() {
           </Link>
           <nav className="pub-nav-links">
             <Link to="/#features">Features</Link>
-            <Link to="/app/exam-notices">Exam Notices</Link>
+            <Link to="/app/exam-notices/">Exam Notices</Link>
           </nav>
           <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
             Exams
@@ -142,7 +142,7 @@ export function IbpsPoVsSbiPoPage() {
             </a>
           </li>
           <li>
-            <Link to="/app/exam-notices">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</Link>
+            <Link to="/app/exam-notices/">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</Link>
           </li>
         </ul>
 

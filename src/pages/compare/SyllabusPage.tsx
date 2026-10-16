@@ -82,7 +82,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
             Pariksha Saathi
           </Link>
           <nav className="pub-nav-links">
-            <Link to="/app/exam-notices">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
+            <Link to="/app/exam-notices/">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
           </nav>
           <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
             {EXAMS_LINK[lang].label}
@@ -153,7 +153,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
             </a>
           </li>
           <li>
-            <Link to="/app/exam-notices">{content.examNoticesLinkLabel} &rarr;</Link>
+            <Link to="/app/exam-notices/">{content.examNoticesLinkLabel} &rarr;</Link>
           </li>
         </ul>
 

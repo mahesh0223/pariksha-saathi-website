@@ -15,8 +15,8 @@ const TABS = [
   { to: '/app/practice', label: 'Practice', icon: '📝' },
   { to: '/app/challenge', label: 'Goal', icon: '🏆' },
   { to: '/app/current-affairs-quiz', label: 'CA Quiz', icon: '🌍' },
-  { to: '/app/current-affairs', label: 'Affairs', icon: '📰' },
-  { to: '/app/exam-notices', label: 'Alerts', icon: '🔔' },
+  { to: '/app/current-affairs/', label: 'Affairs', icon: '📰' },
+  { to: '/app/exam-notices/', label: 'Alerts', icon: '🔔' },
   { to: '/app/progress', label: 'Progress', icon: '📊' },
 ];
 

@@ -80,7 +80,7 @@ export function CurrentAffairsDetailPage() {
 
   return (
     <article className="detail-page">
-      <Link to="/app/current-affairs" className="detail-back">
+      <Link to="/app/current-affairs/" className="detail-back">
         &larr; {hi ? 'समसामयिकी' : 'Current Affairs'}
       </Link>
 
@@ -113,7 +113,7 @@ export function CurrentAffairsDetailPage() {
       <div dangerouslySetInnerHTML={{ __html: learningNote(display, itemLanguage) }} />
       <ItemQuestions itemId={display.id} language={itemLanguage} />
       <p>
-        <Link to="/app/current-affairs">{hi ? 'दैनिक संग्रह पढ़ें →' : 'Read the daily collection →'}</Link> ·{' '}
+        <Link to="/app/current-affairs/">{hi ? 'दैनिक संग्रह पढ़ें →' : 'Read the daily collection →'}</Link> ·{' '}
         <Link to="/about/">{hi ? 'संपादकीय मानक और सुधार' : 'Editorial standards & corrections'}</Link>
       </p>
     </article>
