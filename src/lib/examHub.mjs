@@ -8,10 +8,10 @@
 // line built from the data's own sourceUrl/verifiedAt - the build check (scripts/check-public-pages.mjs)
 // fails if a hub page is missing them.
 
-const MONTHS = {
-  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-  hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
-};
+// Path/date helpers live in examHubPath.mjs (the entry bundle needs only those); re-exported here so
+// existing importers of this module keep working.
+import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
+export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
   en: { NOTIFICATION: 'notification', ADMIT_CARD: 'admit card', ANSWER_KEY: 'answer key', RESULT: 'result', DEADLINE: 'deadline' },
@@ -181,24 +181,12 @@ function esc(value) {
     .replaceAll("'", '&#39;');
 }
 
-export function formatHubDate(iso, lang) {
-  const [y, m, d] = String(iso).slice(0, 10).split('-').map(Number);
-  return `${d} ${MONTHS[lang][m - 1]} ${y}`;
-}
-
 const marksText = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
 // Some bodies print marks per test, not per question (IBPS PO Prelims: 35 questions for 30 marks). The per-question
 // figure is then not a clean number, and a rounded 0.86 on the page would read as something the notice says.
 const perQuestionText = (n) => (n == null ? '&mdash;' : Math.abs(n * 100 - Math.round(n * 100)) < 1e-6 ? marksText(Math.round(n * 100) / 100) : '&mdash;');
 const countText = (n) => n.toLocaleString('en-IN');
 const pick = (bilingual, lang) => bilingual?.[lang] ?? bilingual?.en ?? '';
-
-export function examHubSlug(examId) {
-  return examId.replace(/_/g, '-');
-}
-export function examHubPath(examId, lang) {
-  return `${lang === 'hi' ? '/hi' : ''}/exams/${examHubSlug(examId)}/`;
-}
 
 // The Railway portal answers a link opened cold with a "Request Rejected" page until its home page has been
 // visited once in that browser. The source stays a direct link (it is the document), with a hint for that case.

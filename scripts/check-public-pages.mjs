@@ -7,11 +7,18 @@ import { TOPIC_SLUGS } from '../src/data/topicSlugs.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../src/data/examJobProfileSlugs.mjs';
 import { HUB_EXAM_IDS } from '../src/data/examHubExams.mjs';
+import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
+import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
+import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
+// The entry bundle routes from these slim lists instead of the content modules (see App.tsx) -
+// a slug missing here is a page that prerenders fine but 404s once the SPA takes over.
+assert.deepEqual(EXAM_SYLLABI.map(x=>x.slug), EXAM_SYLLABUS_SLUGS, 'examSyllabusSlugs.mjs is out of sync with examSyllabi.mjs');
+assert.deepEqual([...new Set(LESSON_CATALOG.map(x=>x.subject))], LESSON_SUBJECTS, 'lessonSubjects.mjs is out of sync with lessonCatalog.mjs');
 for (const entry of LESSON_CATALOG) {
   assert(!/[<>{}]/.test(entry.title + entry.description), `Invalid catalog text: ${entry.slug}`);
   for (const lang of ['', 'hi/']) assert(existsSync(`dist/${lang}learn/${entry.slug}/index.html`));
@@ -38,7 +45,22 @@ for (const file of files) {
   assert(!html.includes('class="adsbygoogle'),`Unexpected ad unit: ${file}`);
   assert(html.includes('google-adsense-account'),`Missing verification: ${file}`);
   for (const [,src] of html.matchAll(/(?:src|href)="(\/assets\/[^"#]+)"/g)) assert(existsSync(`dist${src}`),`${file}: missing ${src}`);
+  for (const [,set] of html.matchAll(/srcset="([^"]+)"/g)) for (const src of set.split(',').map(s=>s.trim().split(/\s+/)[0])) assert(existsSync(`dist${src}`),`${file}: missing ${src} (srcset)`);
+  // Performance contract (2026-10-16): fonts self-hosted and declared inline, the entry CSS inlined
+  // rather than linked, and the PWA manifest on every page - see index.html's shared-head block.
+  assert(!html.includes('fonts.googleapis.com'),`Google Fonts request crept back in: ${file}`);
+  assert(html.includes('/fonts/fraunces-latin-v') && html.includes('@font-face'),`Missing inline @font-face: ${file}`);
+  assert(!/<link rel="stylesheet"[^>]*\/assets\//.test(html),`Entry stylesheet is linked instead of inlined: ${file}`);
+  assert(html.includes('rel="manifest"'),`Missing web manifest link: ${file}`);
 }
+for (const [,href] of readFileSync('dist/index.html','utf8').matchAll(/href="(\/fonts\/[^"]+)"/g)) assert(existsSync(`dist${href}`),`missing font ${href}`);
+assert(readFileSync('dist/index.html','utf8').includes('id="home-preview"'),'home page is missing its baked preview JSON');
+// Service worker: generated after prerendering (scripts/prerender.mjs), precaches the shell and never touches PDFs.
+assert(existsSync('dist/sw.js') && existsSync('dist/manifest.webmanifest'),'service worker or manifest missing');
+const sw=readFileSync('dist/sw.js','utf8');
+for (const url of ['index.html','spa.html','learn/index.html','exams/index.html','fonts/fraunces-latin-v']) assert(sw.includes(url),`sw.js does not precache ${url}`);
+assert(!/"pdf\//.test(sw) && !sw.includes('.pdf"'),'sw.js precaches a PDF');
+assert(existsSync('dist/_headers') && readFileSync('dist/_headers','utf8').includes('/assets/*'),'_headers missing the immutable /assets/* rule');
 const sitemap=readFileSync('dist/sitemap.xml','utf8');
 assert(!sitemap.includes('/onboarding'));
 for(const [,url] of sitemap.matchAll(/<loc>https:\/\/parikshasaathi.com([^<]+)<\/loc>/g))assert(existsSync(`dist${url}index.html`),`Missing sitemap target: ${url}`);
@@ -46,7 +68,7 @@ const shell=readFileSync('dist/spa.html','utf8');
 assert(!shell.includes('Exam prep that works'));
 assert(readFileSync('dist/_redirects','utf8').includes('/spa  200'));
 assert(readFileSync('dist/app/current-affairs/index.html','utf8').includes('daily-reading'));
-console.log(`Verified ${files.length} HTML files, ${LESSON_CATALOG.length} bilingual lesson routes, catalog, sitemap, ad pause and practice links.`);
+console.log(`Verified ${files.length} HTML files, ${LESSON_CATALOG.length} bilingual lesson routes, catalog, sitemap, ad pause, practice links, inline fonts/CSS, service worker and _headers.`);
 
 assert(existsSync('dist/404.html'));
 assert(!readFileSync('dist/_redirects','utf8').includes('/*  /spa'));

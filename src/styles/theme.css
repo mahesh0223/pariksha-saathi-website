@@ -1,5 +1,8 @@
-/* Fraunces + IBM Plex Sans are loaded via a <link> in index.html (and in each prerendered page's
-   own <head> - see scripts/prerender.mjs), not an @import here - see index.html's comment for why. */
+/* Fraunces + IBM Plex Sans are self-hosted (public/fonts/) and declared inline in index.html's
+   "shared-head" block, which scripts/prerender.mjs copies into every prerendered page - not an
+   @import or <link> here - see index.html's comment for why. Neither family has Devanagari glyphs,
+   so Hindi text falls through to IBM Plex Sans Devanagari (declared there too, fetched only on
+   pages that actually contain Devanagari). */
 
 :root {
   --navy: #1e3a52;
@@ -54,8 +57,10 @@
      model, which is blur-based and needed a standalone Modifier instead). */
   --shadow-flat: 0 2px 0 0 rgba(30, 58, 82, 0.08);
 
-  --serif: 'Fraunces', Georgia, serif;
-  --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* The "Fallback" families are metric-matched system fonts declared in index.html's shared-head
+     block (size-adjust etc.), so text drawn before the web font arrives takes up the same space. */
+  --serif: 'Fraunces', 'Fraunces Fallback Georgia', 'Fraunces Fallback Noto', 'IBM Plex Sans Devanagari', Georgia, serif;
+  --sans: 'IBM Plex Sans', 'IBM Plex Sans Fallback Arial', 'IBM Plex Sans Fallback Roboto', 'IBM Plex Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {

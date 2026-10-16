@@ -12,7 +12,7 @@
 // Consequence worth remembering: this bakes content in at BUILD time. A reseed on the backend
 // does not appear here until the site is rebuilt/redeployed too.
 
-import { readFileSync, writeFileSync, mkdirSync, cpSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 // Plain .mjs (not .ts) specifically so this works on whatever Node version Cloudflare Pages'
 // build image runs - an earlier version of this imported the .ts file directly, relying on
@@ -56,12 +56,40 @@ function escapeHtml(str) {
     .replaceAll("'", '&#39;');
 }
 
+// Pulls everything a prerendered page's <head> must share with Vite's own index.html out of the
+// built dist/index.html, so there is exactly one place (index.html) that decides fonts, PWA
+// metadata and the entry script:
+//   - sharedHead: the <!-- shared-head --> block (theme-color, font preloads, inline @font-face).
+//   - css: the entry stylesheet's TEXT, inlined into a <style> on every page instead of linked -
+//     at ~5 KB compressed, a separate render-blocking request costs more than it saves, and on a
+//     slow 4G phone the extra round trip was most of the gap between HTML arrival and first paint.
+//   - scriptTags: the entry <script type="module"> and the <link rel="modulepreload"> hints Vite
+//     emitted for its statically imported chunks.
+//   - manifestLink: the <link rel="manifest"> vite-plugin-pwa injected.
+//   - shellHtml: Vite's index.html with the stylesheet inlined - becomes dist/spa.html.
 function readBuiltAssets() {
   const html = readFileSync(join(DIST, 'index.html'), 'utf8');
-  const script = html.match(/<script type="module"[^>]*src="([^"]+)"[^>]*><\/script>/)?.[1];
-  const style = html.match(/<link rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/)?.[1];
-  if (!script || !style) throw new Error('Could not find built script/style tags in dist/index.html');
-  return { script, style };
+  const script = html.match(/<script type="module"[^>]*src="[^"]+"[^>]*><\/script>/)?.[0];
+  const styleTag = html.match(/<link rel="stylesheet"[^>]*href="([^"]+)"[^>]*>/);
+  // HTML comments inside the block are documentation for index.html's reader - dropped here rather
+  // than repeated in ~700 files.
+  const sharedHead = html.match(/<!-- shared-head -->([\s\S]*?)<!-- \/shared-head -->/)?.[1]?.replace(/<!--[\s\S]*?-->\s*/g, '').trim();
+  if (!script || !styleTag || !sharedHead) throw new Error('Could not find built script/style tags or the shared-head block in dist/index.html');
+  const stylePath = join(DIST, styleTag[1]);
+  const css = readFileSync(stylePath, 'utf8');
+  const styleInline = `<style>${css}</style>`;
+  const modulePreloads = [...html.matchAll(/<link rel="modulepreload"[^>]*>/g)].map((m) => m[0]);
+  const manifestLink = html.match(/<link rel="manifest"[^>]*>/)?.[0] ?? '';
+  // Nothing references the stylesheet file once it is inlined everywhere, so drop it rather than
+  // ship (and precache) a dead 24 KB file.
+  rmSync(stylePath);
+  return {
+    sharedHead,
+    styleInline,
+    scriptTags: [script, ...modulePreloads].join('\n    '),
+    manifestLink,
+    shellHtml: html.replace(styleTag[0], styleInline),
+  };
 }
 
 // Current affairs and exam notices are genuine crawlable editorial content - not the gated,
@@ -74,7 +102,7 @@ function publicContentFrame(innerHtml) {
   return `<div class="compare-page">
   <header class="pub-header">
     <div class="wrap pub-nav">
-      <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+      <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
       <nav class="pub-nav-links">
         <a href="/learn/">Lessons</a>
         <a href="/app/current-affairs">Current affairs</a>
@@ -107,10 +135,6 @@ function adSlot(_slot) { return ''; }
 // whether it was crawled from the prerendered HTML or visited client-side.
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
-const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" />`;
-
 function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
@@ -128,6 +152,7 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/assets/icon-512.png" />
+    <link rel="apple-touch-icon" href="/assets/icon-180.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="${robots}" />
     <title>${escapeHtml(fullTitle)}</title>
@@ -145,10 +170,11 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="${OG_IMAGE}" />
     ${ld}
-    ${FONT_LINKS}
+    ${assets.sharedHead}
+    ${assets.manifestLink}
     <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
-    <script type="module" crossorigin src="${assets.script}"></script>
-    <link rel="stylesheet" crossorigin href="${assets.style}">
+    ${assets.styleInline}
+    ${assets.scriptTags}
   </head>
   <body>
     <div id="root">${bodyHtml}</div>
@@ -306,7 +332,7 @@ function homePageBody(affairsPreview, noticesPreview) {
   return `<div>
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="#top"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="#top"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="#features">Features</a>
             <a href="/learn/">Learn</a>
@@ -335,7 +361,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           </div>
           <div class="phone-stack">
             <div class="phone-glow"></div>
-            <div class="phone"><img src="/assets/screenshots/1-home.jpg" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></div>
+            <div class="phone"><picture><source type="image/webp" srcset="/assets/screenshots/1-home-240.webp 240w, /assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w" sizes="240px" /><img src="/assets/screenshots/1-home-480.jpg" srcset="/assets/screenshots/1-home-240.jpg 240w, /assets/screenshots/1-home-480.jpg 480w, /assets/screenshots/1-home-720.jpg 720w" sizes="240px" width="240" height="427" loading="lazy" decoding="async" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></picture></div>
           </div>
         </div>
       </div>
@@ -453,7 +479,7 @@ function homePageBody(affairsPreview, noticesPreview) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -464,7 +490,17 @@ function homePageBody(affairsPreview, noticesPreview) {
           <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. For information about accounts, study progress and website data, see our <a href="/privacy/">Privacy Policy</a> for details.</p>
         </div>
       </footer>
+      ${homePreviewJson(affairsPreview, noticesPreview)}
     </div>`;
+}
+
+// The same four-and-four preview items as machine-readable JSON, for src/pages/HomePage.tsx to
+// seed react-query with (initialData) when React mounts over this markup - otherwise the two
+// sections would re-render as "Loading…" and push the FAQ around until the live fetch landed.
+// '<' is escaped so item text can never close the script element early.
+function homePreviewJson(affairs, notices) {
+  const json = JSON.stringify({ affairs, notices }).replaceAll('<', '\\u003c');
+  return `<script type="application/json" id="home-preview">${json}</script>`;
 }
 
 // Mirrors src/pages/compare/IbpsPoVsSbiPoPage.tsx exactly - see that component for why each
@@ -491,7 +527,7 @@ function comparePageBody() {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/#features">Features</a>
             <a href="/app/exam-notices">Exam Notices</a>
@@ -537,7 +573,7 @@ function comparePageBody() {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -569,7 +605,7 @@ function syllabusPageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -607,7 +643,7 @@ function syllabusPageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -626,7 +662,7 @@ function examHubPageBody(innerHtml, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
           </nav>
@@ -668,7 +704,7 @@ function jobProfilePageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -708,7 +744,7 @@ function jobProfilePageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -762,7 +798,7 @@ function lessonPageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -800,7 +836,7 @@ function lessonPageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -815,7 +851,9 @@ function lessonPageBody(entry, lang) {
 
 async function main() {
   const assets = readBuiltAssets();
-  cpSync(join(DIST, 'index.html'), join(DIST, 'spa.html'));
+  // The SPA shell for client-side-only routes (see public/_redirects): Vite's index.html with the
+  // stylesheet inlined, before index.html itself is overwritten with the prerendered home page.
+  writeFileSync(join(DIST, 'spa.html'), assets.shellHtml, 'utf8');
   writeFileSync(join(DIST, '404.html'), page({ title: 'Page not found', description: 'This page does not exist on Pariksha Saathi.', path: '/404', assets, type: 'website', robots: 'noindex,follow', bodyHtml: '<main class="wrap compare-article"><h1>Page not found</h1><p><a href="/learn/">Browse the lesson library</a> or <a href="/">return home</a>.</p></main>' }));
   writePage('onboarding', page({ title: 'Choose Your Exam', description: 'Choose your exams to personalise your study plan.', path: '/onboarding/', assets, type: 'website', robots: 'noindex,follow', bodyHtml: '<main class="wrap onboarding"><h1>Which exams are you preparing for?</h1><p>Choose your exams to personalise your study plan.</p><noscript>Enable JavaScript to select exams, or <a href="/learn/">read the public lessons</a>.</noscript></main>' }));
 
@@ -1327,9 +1365,26 @@ ${sitemapUrls
 `;
   writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8');
 
+  // --- Service worker --- regenerated now that every page exists. vite-plugin-pwa also writes one
+  // during `vite build`, but that copy predates everything this script produced: the precache
+  // entries for /learn/, /exams/ etc. would be missing and the home page's revision hash would be
+  // Vite's empty shell's, so a content-only rebuild (new current affairs, same JS) would never
+  // reach visitors who already had the old worker. Running the same plugin again here computes the
+  // manifest from the final files. See vite.config.ts for what is precached.
+  await regenerateServiceWorker();
+
   console.log(
     `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
+}
+
+async function regenerateServiceWorker() {
+  process.env.PWA_PRERENDERED = '1'; // tells vite.config.ts the prerendered pages now exist
+  const { resolveConfig } = await import('vite');
+  const config = await resolveConfig({ logLevel: 'warn' }, 'build');
+  const pwa = config.plugins.find((plugin) => plugin.name === 'vite-plugin-pwa')?.api;
+  if (!pwa) throw new Error('vite-plugin-pwa is not in vite.config.ts - the service worker would be stale');
+  await pwa.generateSW();
 }
 
 main().catch((err) => {

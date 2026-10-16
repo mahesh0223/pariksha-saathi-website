@@ -3,7 +3,7 @@
 // Every exam in the server catalog is listed; the links under it appear only for the pages that exist, so nothing
 // here points at a page that is not built.
 import { EXAM_NAMES } from './examNames.mjs';
-import { examHubPath, examHubSlug } from './examHub.mjs';
+import { examHubPath, examHubSlug } from './examHubPath.mjs';
 
 export const EXAMS_LINK = {
   en: { href: '/exams/', label: 'Exams', title: 'Choose your exam' },

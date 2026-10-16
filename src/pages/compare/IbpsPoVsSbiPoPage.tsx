@@ -41,7 +41,7 @@ export function IbpsPoVsSbiPoPage() {
       <header className="pub-header">
         <div className="wrap pub-nav">
           <Link className="pub-brand" to="/">
-            <img src="/assets/icon-512.png" alt="" />
+            <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
             Pariksha Saathi
           </Link>
           <nav className="pub-nav-links">
@@ -155,7 +155,7 @@ export function IbpsPoVsSbiPoPage() {
         <div className="wrap">
           <div className="pub-footer-top">
             <div className="pub-footer-brand">
-              <img src="/assets/icon-512.png" alt="" />
+              <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
               Pariksha Saathi
             </div>
             <div className="pub-footer-links">

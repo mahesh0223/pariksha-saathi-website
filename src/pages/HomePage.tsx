@@ -7,11 +7,12 @@ import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
-import { LESSON_CATALOG } from '../data/lessonCatalog.mjs';
+import { LESSON_SUBJECTS } from '../data/lessonSubjects.mjs';
 import { dailyPdfBand } from '../lib/dailyPdf.mjs';
 import { DIRECTORY_EXAM_IDS } from '../lib/examDirectory.mjs';
-import { examHubPath } from '../lib/examHub.mjs';
+import { examHubPath } from '../lib/examHubPath.mjs';
 import { subjectBlurb } from '../lib/lessonCredit.mjs';
+import type { CurrentAffairsItem, ExamUpdateNotice } from '../types/api';
 import {
   IconBook,
   IconTarget,
@@ -180,6 +181,24 @@ const FAQS = [
   },
 ];
 
+// scripts/prerender.mjs bakes the four newest current-affairs items and exam notices into the
+// static home page as a JSON <script id="home-preview"> as well as visible HTML. Read it once,
+// while the prerendered DOM still exists (React's first render replaces it), and hand it to
+// react-query as initialData: the sections then render populated on the very first paint instead
+// of flashing "Loading…" and shoving the FAQ down when the fetch lands (that swap was most of the
+// page's layout shift). initialDataUpdatedAt: 0 marks it stale, so the live list is still fetched
+// in the background and quietly replaces the build-time copy.
+function readPrerenderedPreview(): { affairs?: CurrentAffairsItem[]; notices?: ExamUpdateNotice[] } {
+  if (typeof document === 'undefined') return {};
+  try {
+    const raw = document.getElementById('home-preview')?.textContent;
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+const PRERENDERED_PREVIEW = readPrerenderedPreview();
+
 // The seven exams the page has always led with; each links to its exam page. The rest are one click away.
 const HERO_EXAMS: [string, string][] = [
   ['ssc_cgl', 'SSC CGL'],
@@ -240,11 +259,15 @@ export function HomePage() {
   const affairsQuery = useQuery({
     queryKey: ['current-affairs', 'en', 'home-preview'],
     queryFn: () => getCurrentAffairs({ lang: 'en', limit: 4 }),
+    initialData: PRERENDERED_PREVIEW.affairs,
+    initialDataUpdatedAt: 0,
   });
 
   const noticesQuery = useQuery({
     queryKey: ['exam-updates', 'en', 'home-preview'],
     queryFn: () => getExamUpdates([], 'en'),
+    initialData: PRERENDERED_PREVIEW.notices,
+    initialDataUpdatedAt: 0,
   });
   const latestNotices = noticesQuery.data?.slice(0, 4) ?? [];
 
@@ -253,7 +276,7 @@ export function HomePage() {
       <header className="pub-header">
         <div className="wrap pub-nav">
           <a className="pub-brand" href="#top">
-            <img src="/assets/icon-512.png" alt="" />
+            <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
             Pariksha Saathi
           </a>
           <nav className="pub-nav-links">
@@ -314,10 +337,28 @@ export function HomePage() {
           <div className="phone-stack">
             <div className="phone-glow" />
             <div className="phone">
-              <img
-                src="/assets/screenshots/1-home.jpg"
-                alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge"
-              />
+              {/* Shown at 240 CSS px, so the 1080x1920 Play Store screenshot (210 KB) is far more
+                  than any phone needs: these are 240/480/720-wide variants (WebP, JPEG fallback),
+                  picked by device pixel ratio. Not the LCP element (that's the <h1>), so it can be
+                  lazy; width/height reserve its slot so nothing shifts when it arrives. Keep in
+                  sync with homePageBody() in scripts/prerender.mjs. */}
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet="/assets/screenshots/1-home-240.webp 240w, /assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w"
+                  sizes="240px"
+                />
+                <img
+                  src="/assets/screenshots/1-home-480.jpg"
+                  srcSet="/assets/screenshots/1-home-240.jpg 240w, /assets/screenshots/1-home-480.jpg 480w, /assets/screenshots/1-home-720.jpg 720w"
+                  sizes="240px"
+                  width={240}
+                  height={427}
+                  loading="lazy"
+                  decoding="async"
+                  alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge"
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -420,7 +461,7 @@ export function HomePage() {
             <p>The same topics the app teaches, as standalone lessons with worked solutions or key facts and practice questions — no account needed to read these.</p>
           </div>
           <div className="exam-coverage-grid">
-            {[...new Set(LESSON_CATALOG.map((c) => c.subject))].map((subject) => (
+            {LESSON_SUBJECTS.map((subject) => (
               <div className="exam-coverage-item" key={subject}>
                 <h3>{subject}</h3>
                 <p>{subjectBlurb(subject)}</p>
@@ -500,7 +541,7 @@ export function HomePage() {
         <div className="wrap">
           <div className="pub-footer-top">
             <div className="pub-footer-brand">
-              <img src="/assets/icon-512.png" alt="" />
+              <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
               Pariksha Saathi
             </div>
             <div className="pub-footer-links"><Link to="/about/">About &amp; editorial standards</Link>

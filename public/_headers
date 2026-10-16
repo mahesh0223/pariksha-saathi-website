@@ -1,0 +1,48 @@
+# Cloudflare Pages response headers (https://developers.cloudflare.com/pages/configuration/headers/).
+#
+# Rules are additive: a request matching several rules gets all their headers, and a header set
+# twice is joined with a comma - so a narrower rule can only *remove* ("! Name") and then re-set a
+# header, never silently override it. Keep that in mind when adding rules below.
+#
+# Vite writes every built file as /assets/<name>-<content hash>.<ext>, so those URLs can be cached
+# forever: a new deploy produces new names. Before this file existed Cloudflare applied its default
+# max-age=14400 (4 h) to them and the edge cache frequently missed, so returning visitors re-fetched
+# the whole bundle - the service worker (sw.js) caches them too, but the HTTP cache is what every
+# first-party and third-party fetch sees.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The static images under public/assets/ are NOT content-hashed (icon-*.png, screenshots/*,
+# feature-graphic-*). Give them a day instead, so replacing one is picked up within 24 h.
+/assets/icon-:size.png
+  ! Cache-Control
+  Cache-Control: public, max-age=86400
+/assets/screenshots/*
+  ! Cache-Control
+  Cache-Control: public, max-age=86400
+/assets/feature-graphic-1024x500.png
+  ! Cache-Control
+  Cache-Control: public, max-age=86400
+
+# Self-hosted fonts carry the upstream version in the file name (fraunces-latin-v38.woff2), so a
+# font update is a new URL too.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML (prerendered pages, the SPA shell), the service worker and the web manifest must always be
+# revalidated: a stale sw.js would pin users to an old precache, and a stale HTML page can reference
+# hashed assets that no longer exist after a deploy.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*/
+  Cache-Control: public, max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+/manifest.webmanifest
+  Cache-Control: public, max-age=0, must-revalidate
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600
