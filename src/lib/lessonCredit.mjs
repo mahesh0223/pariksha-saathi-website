@@ -10,8 +10,11 @@ export function isAiAssisted(entry) {
 export function lessonCredit(entry, lang) {
   const date = entry.publishedDate;
   if (isAiAssisted(entry)) {
+    // The Hindi text of every GA lesson was read against its English twin and approved by the publisher on
+    // 16 October 2026 (pariksha-saathi/docs/HINDI_SIGNOFF.md, batch 7); the English has not had that reading,
+    // so only the Hindi line says so. Both keep the AI-assistance credit - the drafting did not change.
     return lang === 'hi'
-      ? { text: `AI की सहायता से तैयार किया गया और ${date} को तथ्यों की जाँच की गई; किसी संपादक ने इसे पंक्ति-दर-पंक्ति नहीं पढ़ा है। कोई गलती दिखे तो हमें बताइए।`, link: 'संपादकीय मानक और सुधार' }
+      ? { text: `AI की सहायता से तैयार किया गया और ${date} को तथ्यों की जाँच की गई; हिन्दी पाठ को प्रकाशक ने 16 अक्टूबर 2026 को पढ़कर स्वीकृत किया। कोई गलती दिखे तो हमें बताइए।`, link: 'संपादकीय मानक और सुधार' }
       : { text: `Drafted with AI assistance and fact-checked on ${date}; not yet read line by line by a human editor. Spotted a mistake? Tell us.`, link: 'Editorial standards & corrections' };
   }
   return lang === 'hi'
