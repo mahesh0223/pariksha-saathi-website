@@ -147,7 +147,16 @@ assert(
 
 // Exam hub pages: a number never appears without its official source and the date it was last checked,
 // so every hub page must carry linked, dated source lines, real tables, a language twin and a sitemap entry.
-for (const examId of HUB_EXAM_IDS) {
+// A hub the prerender skipped because the API had no fact sheet (see scripts/prerender.mjs) is allowed to
+// be absent - but only if the prerender said so; an unexplained missing hub page is still a failure.
+const prerenderReport = existsSync('dist/.prerender-report.json') ? JSON.parse(readFileSync('dist/.prerender-report.json', 'utf8')) : { skippedHubs: [] };
+const builtHubIds = HUB_EXAM_IDS.filter((id) => !prerenderReport.skippedHubs.includes(id));
+for (const examId of prerenderReport.skippedHubs) {
+  assert(HUB_EXAM_IDS.includes(examId), `prerender skipped an unknown hub ${examId}`);
+  for (const lang of ['en', 'hi']) assert(!existsSync(`dist${examHubPath(examId, lang)}index.html`), `${examId}: reported as skipped but a page was built`);
+  console.warn(`WARNING: exam hub "${examId}" was skipped - the API has no published fact sheet for it. Publish it and rebuild.`);
+}
+for (const examId of builtHubIds) {
   for (const lang of ['en', 'hi']) {
     const urlPath = examHubPath(examId, lang);
     const html = readFileSync(`dist${urlPath}index.html`, 'utf8');
@@ -163,7 +172,7 @@ for (const examId of HUB_EXAM_IDS) {
     assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
   }
 }
-console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
+console.log(`Verified ${builtHubIds.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
 
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and
 // a visible key-facts list and practice questions on every page in both languages.
@@ -190,7 +199,8 @@ for (const lang of ['en', 'hi']) {
   const dirPath = examDirectoryPath(lang);
   const dirHtml = readFileSync(`dist${dirPath}index.html`, 'utf8');
   assert(sitemap.includes(`<loc>https://parikshasaathi.com${dirPath}</loc>`), `${dirPath}: not in the sitemap`);
-  for (const examId of HUB_EXAM_IDS) assert(dirHtml.includes(`href="${examHubPath(examId, lang)}"`), `${dirPath}: missing the hub link for ${examId}`);
+  for (const examId of builtHubIds) assert(dirHtml.includes(`href="${examHubPath(examId, lang)}"`), `${dirPath}: missing the hub link for ${examId}`);
+  for (const examId of prerenderReport.skippedHubs) assert(!dirHtml.includes(`href="${examHubPath(examId, lang)}"`), `${dirPath}: links to the skipped hub ${examId}`);
   for (const [, href] of dirHtml.matchAll(/<a href="(\/[^"#]*)"/g)) {
     if (/^\/(hi\/)?(exams|compare)\//.test(href)) assert(existsSync(`dist${href}index.html`), `${dirPath}: links to a page that was not built: ${href}`);
   }

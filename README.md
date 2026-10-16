@@ -14,7 +14,10 @@ npm run preview        # serves dist/ (no brotli, no _headers - see "Measuring" 
 `scripts/prerender.mjs` runs after `vite build`. It fetches the live content API and writes a real,
 crawlable HTML file for every public URL (home, /learn/*, /compare/*, /exams/*, current affairs,
 notices), then regenerates the service worker so the precache manifest covers those files. A
-backend reseed does not reach these pages until the site is rebuilt.
+backend reseed does not reach these pages until the site is rebuilt. An exam listed in
+`HUB_EXAM_IDS` whose fact sheet the API has not published yet is skipped with a `[prerender]
+SKIPPED` log line (its hub URL is not built or linked until the sheet exists and the site is
+rebuilt); `check:public` reads `dist/.prerender-report.json` to tell a skipped hub from a broken one.
 
 ## Performance and offline contract (2026-10-16)
 

@@ -1066,11 +1066,19 @@ async function main() {
 
   // --- Exam hub pages --- one per listed exam x language, built from the server's sourced exam facts
   // and official cut-offs (src/lib/examHub.mjs). An exam listed in HUB_EXAM_IDS with no published fact
-  // sheet fails the build: a hub must never ship empty or fall back to unsourced numbers.
+  // sheet is SKIPPED, loudly: a hub must never ship empty or fall back to unsourced numbers, but one
+  // missing content item must not block the whole deploy either (2026-10-16: the Agniveer hub landed in
+  // the code before its fact sheet reached the API and the production build aborted). The directory
+  // below stops linking a skipped hub, its URL 404s until the sheet is published and the site rebuilt,
+  // and check-public-pages.mjs reads the list from dist/.prerender-report.json so it can tell a skipped
+  // hub from a broken one.
+  const skippedHubs = [];
   for (const examId of HUB_EXAM_IDS) {
     const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
     if (!Array.isArray(facts) || facts.length === 0) {
-      throw new Error(`Build check failed: ${examId} is listed in HUB_EXAM_IDS but the API has no published fact sheet for it`);
+      console.warn(`[prerender] SKIPPED exam hub "${examId}": the API has no published fact sheet for it. Its /exams/ page is not built and not linked; publish the fact sheet and rebuild.`);
+      skippedHubs.push(examId);
+      continue;
     }
     const cutoffs = await fetch(`${API_BASE}/v1/exams/${examId}/cutoffs`).then((r) => r.json());
     const examName = EXAM_NAMES[examId] ?? examId;
@@ -1120,7 +1128,7 @@ async function main() {
       bodyHtml: examHubPageBody(
         examDirectoryBody({
           lang,
-          hubIds: HUB_EXAM_IDS,
+          hubIds: HUB_EXAM_IDS.filter((id) => !skippedHubs.includes(id)),
           syllabusSlugs: EXAM_SYLLABI.map((e) => e.slug),
           jobProfileSlugs: EXAM_JOB_PROFILES.map((e) => e.slug),
         }),
@@ -1320,6 +1328,7 @@ ${sitemapUrls
 </urlset>
 `;
   writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8');
+  writeFileSync(join(DIST, '.prerender-report.json'), JSON.stringify({ skippedHubs }, null, 2), 'utf8');
 
   // --- Service worker --- regenerated now that every page exists. vite-plugin-pwa also writes one
   // during `vite build`, but that copy predates everything this script produced: the precache
@@ -1330,7 +1339,8 @@ ${sitemapUrls
   await regenerateServiceWorker();
 
   console.log(
-    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.` +
+      (skippedHubs.length ? ` SKIPPED ${skippedHubs.length} exam hub(s) with no published fact sheet: ${skippedHubs.join(', ')}.` : ''),
   );
 }
 
