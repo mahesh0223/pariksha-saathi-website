@@ -141,8 +141,12 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
 {
   const itemPages = files.filter((f) => /\/app\/current-affairs\/[a-z0-9]+\/index\.html$/.test(f));
   assert(itemPages.length > 0, 'no current-affairs item pages were built');
-  for (const file of itemPages) assert(readFileSync(file, 'utf8').includes('class="detail-related"'), `${file}: missing the surrounding-days block`);
-  console.log(`Verified ${itemPages.length} current-affairs item page(s) link to their neighbouring items.`);
+  for (const file of itemPages) {
+    const html = readFileSync(file, 'utf8');
+    assert(html.includes('class="detail-related"'), `${file}: missing the surrounding-days block`);
+    assert(html.includes('item-quiz-static'), `${file}: missing the static inline question`);
+  }
+  console.log(`Verified ${itemPages.length} current-affairs item page(s) carry their inline question and link to their neighbouring items.`);
 }
 
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and

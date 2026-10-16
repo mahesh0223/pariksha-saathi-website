@@ -1205,9 +1205,21 @@ async function main() {
   // reader) has no file - and 404s on a hard load - unless it is generated here too. The two
   // rows of an event share one sourceUrl, which is how each page finds its hreflang twin.
   const ITEM_TEXT = {
-    en: { back: 'Current Affairs', source: 'Official source', collection: 'Read the daily collection →', standards: 'Editorial standards &amp; corrections' },
-    hi: { back: 'समसामयिकी', source: 'आधिकारिक स्रोत', collection: 'दैनिक संग्रह पढ़ें →', standards: 'संपादकीय मानक और सुधार' },
+    en: { back: 'Current Affairs', source: 'Official source', collection: 'Read the daily collection →', standards: 'Editorial standards &amp; corrections', quiz: 'Test yourself', reveal: 'Show the answer', answer: 'Answer' },
+    hi: { back: 'समसामयिकी', source: 'आधिकारिक स्रोत', collection: 'दैनिक संग्रह पढ़ें →', standards: 'संपादकीय मानक और सुधार', quiz: 'खुद को परखें', reveal: 'उत्तर देखें', answer: 'उत्तर' },
   };
+  // The item's own MCQ, rendered statically so the question, options and explanation are part of the
+  // page a crawler sees (the React ItemQuestions widget replaces this with the interactive version on
+  // load). Every published item has one in both languages - the seed enforces it - so a missing
+  // question is a build error, not a silent omission.
+  async function itemQuizHtml(item, t) {
+    const questions = await fetch(`${API_BASE}/v1/current-affairs/${item.id}/questions`).then((r) => r.json());
+    if (!Array.isArray(questions) || questions.length === 0) throw new Error(`Build check failed: current-affairs item ${item.id} (${item.languageCode}) has no inline question`);
+    const q = questions[0];
+    return `<section class="item-quiz item-quiz-static"><h2>${t.quiz}</h2><p class="item-quiz-text">${escapeHtml(q.text)}</p><ol class="item-quiz-static-options">${q.options
+      .map((o) => `<li>${escapeHtml(o)}</li>`)
+      .join('')}</ol><details class="item-quiz-static-answer"><summary>${t.reveal}</summary><p><strong>${t.answer}:</strong> ${escapeHtml(q.options[q.correctOptionIndex])}</p><p>${escapeHtml(q.explanation)}</p></details></section>`;
+  }
   const itemsByLanguage = [
     { lang: 'en', items: affairs, twins: new Map(affairsHi.map((i) => [i.sourceUrl, i])) },
     { lang: 'hi', items: affairsHi, twins: new Map(affairs.map((i) => [i.sourceUrl, i])) },
@@ -1228,6 +1240,7 @@ async function main() {
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${t.source}: ${escapeHtml(item.sourceName)} &#8599;</a></div>
         ${learningNote(item, lang)}
+        ${await itemQuizHtml(item, t)}
         ${relatedItemsHtml(items, item, lang)}
         <p><a href="/app/current-affairs/">${t.collection}</a> · <a href="/about/">${t.standards}</a></p>
       </article>

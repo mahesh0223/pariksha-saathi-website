@@ -105,3 +105,16 @@
   font-size: 0.78rem;
   color: var(--muted);
 }
+
+/* Static (prerendered) version of the item quiz - replaced by the interactive ItemQuestions widget on load. */
+.item-quiz-static-options {
+  margin: 8px 0 8px 20px;
+  padding: 0;
+}
+.item-quiz-static-options li {
+  padding: 4px 0;
+}
+.item-quiz-static-answer summary {
+  cursor: pointer;
+  font-weight: 600;
+}
