@@ -131,7 +131,8 @@ mp = os.path.join(ROOT, "src", "data", "downloads.mjs"); s = open(mp).read()
 marker = "export const MONTHLY_CAPSULES = [\n"
 if marker not in s: s = s.rstrip("\n") + "\n\n// Monthly current-affairs capsules (English + Hindi), newest first. Written by\n// scripts/capsule-pdf/make_capsule.py - do not hand-edit the entries it writes.\n" + marker + "];\n"
 head, body = s.split(marker, 1)
-kept = [l for l in body.split("\n") if l.startswith("  { period:") and f"period: '{args.slug}'" not in l]
+array, rest = body.split("];\n", 1)  # keep anything after this array, same as make_pdf.py
+kept = [l for l in array.split("\n") if l.startswith("  { period:") and f"period: '{args.slug}'" not in l]
 allentries = sorted(sorted(kept + entries, key=lambda l: l.split("language: '")[1][:2]), key=lambda l: l.split("'")[1], reverse=True)  # newest period first, English before Hindi
-open(mp, "w").write(head + marker + "\n".join(allentries) + "\n];\n")
+open(mp, "w").write(head + marker + "\n".join(allentries) + "\n];\n" + rest)
 for e in entries: print(e.strip())

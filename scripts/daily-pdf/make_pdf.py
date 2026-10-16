@@ -84,10 +84,16 @@ os.remove(tmp); os.remove(raw)
 pages, size_kb = len(r.pages), round(os.path.getsize(final) / 1024)
 entry = f"  {{ date: '{date}', file: '/pdf/{name}', language: 'hi', items: {len(hi)}, questions: {len(quiz)}, pages: {pages}, sizeKb: {size_kb} }},"
 mp = os.path.join(ROOT, "src", "data", "downloads.mjs"); s = open(mp).read()
-head, body = s.split("export const DAILY_PDF_EDITIONS = [\n", 1)
-entries = [l for l in body.split("\n") if l.startswith("  { date:") and f"date: '{date}'" not in l] + [entry]
+marker = "export const DAILY_PDF_EDITIONS = [\n"
+head, body = s.split(marker, 1)
+# Only the daily array is ours to rewrite. Everything after its closing "];" (the MONTHLY_CAPSULES
+# export that scripts/capsule-pdf/make_capsule.py maintains) must survive untouched - an earlier
+# version of this split dropped it, which broke `vite build` (publicPages.mjs imports it) and
+# silently left Cloudflare serving the previous deploy.
+array, rest = body.split("];\n", 1)
+entries = [l for l in array.split("\n") if l.startswith("  { date:") and f"date: '{date}'" not in l] + [entry]
 entries.sort(key=lambda l: l.split("'")[1], reverse=True)  # newest first
-open(mp, "w").write(head + "export const DAILY_PDF_EDITIONS = [\n" + "\n".join(entries) + "\n];\n")
+open(mp, "w").write(head + marker + "\n".join(entries) + "\n];\n" + rest)
 import shutil
 newest = entries[0].split("file: '")[1].split("'")[0]
 shutil.copyfile(os.path.join(ROOT, "public", newest.lstrip("/")), os.path.join(outdir, "latest.pdf"))
