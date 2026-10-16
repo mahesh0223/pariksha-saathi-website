@@ -8,7 +8,7 @@ edition to src/data/downloads.mjs. Needs Google Chrome (for Devanagari-correct P
 import html, json, os, re, subprocess, sys, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HERE = os.path.dirname(os.path.abspath(__file__))
-API = "https://api.parikshasaathi.com/v1"
+API = os.environ.get("PDF_API", "https://api.parikshasaathi.com/v1")  # PDF_API points a run at a local backend
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 QUIZ_COUNT = 5
 
@@ -85,9 +85,11 @@ pages, size_kb = len(r.pages), round(os.path.getsize(final) / 1024)
 entry = f"  {{ date: '{date}', file: '/pdf/{name}', language: 'hi', items: {len(hi)}, questions: {len(quiz)}, pages: {pages}, sizeKb: {size_kb} }},"
 mp = os.path.join(ROOT, "src", "data", "downloads.mjs"); s = open(mp).read()
 head, body = s.split("export const DAILY_PDF_EDITIONS = [\n", 1)
-entries = [l for l in body.split("\n") if l.startswith("  { date:") and f"date: '{date}'" not in l] + [entry]
+# Only the daily array is rewritten; everything after its closing "];" (the monthly capsules) is kept as is.
+array, tail = body.split("];\n", 1)
+entries = [l for l in array.split("\n") if l.startswith("  { date:") and f"date: '{date}'" not in l] + [entry]
 entries.sort(key=lambda l: l.split("'")[1], reverse=True)  # newest first
-open(mp, "w").write(head + "export const DAILY_PDF_EDITIONS = [\n" + "\n".join(entries) + "\n];\n")
+open(mp, "w").write(head + "export const DAILY_PDF_EDITIONS = [\n" + "\n".join(entries) + "\n];\n" + tail)
 import shutil
 newest = entries[0].split("file: '")[1].split("'")[0]
 shutil.copyfile(os.path.join(ROOT, "public", newest.lstrip("/")), os.path.join(outdir, "latest.pdf"))
