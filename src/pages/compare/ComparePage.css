@@ -14,6 +14,12 @@
   gap: 10px;
 }
 .compare-lang-switch {
+  /* On an English page this link is the only Devanagari text ("हिंदी में पढ़ें"), and with the
+     page's normal stack it alone made every English lesson download the 79 KB Plex Devanagari
+     file at top priority ahead of the JavaScript (LCP 3.2 s -> 2.3 s on slow 4G without it). The
+     system Devanagari font is fine for one pill-sized link, so this stack leaves the web font out.
+     On a Hindi page the link reads "Read in English" and is unaffected. */
+  font-family: 'IBM Plex Sans', 'IBM Plex Sans Fallback Arial', 'IBM Plex Sans Fallback Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--terracotta);

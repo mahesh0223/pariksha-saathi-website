@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# One module per lesson / job profile, written by scripts/split-content.mjs (npm run generate)
+src/data/generated
 *.local
 
 # Editor directories and files

@@ -69,6 +69,13 @@ function escapeHtml(str) {
 //     emitted for its statically imported chunks.
 //   - manifestLink: the <link rel="manifest"> vite-plugin-pwa injected.
 //   - shellHtml: Vite's index.html with the stylesheet inlined - becomes dist/spa.html.
+//   - chunksFor(sourcePath): the hashed /assets/ URLs of a source module's chunk and its static
+//     imports, from Vite's build manifest (vite.config.ts sets build.manifest). Lesson and
+//     job-profile pages use it to add a <link rel="modulepreload"> for their page component (and
+//     what it imports) and their own content chunk (src/data/generated/*, see
+//     scripts/split-content.mjs), so those downloads start with the HTML rather than once the
+//     entry bundle has executed - main.tsx's preloadRoute() then finds them already in flight,
+//     and the article on screen is never swapped for a spinner.
 function readBuiltAssets() {
   const html = readFileSync(join(DIST, 'index.html'), 'utf8');
   const script = html.match(/<script type="module"[^>]*src="[^"]+"[^>]*><\/script>/)?.[0];
@@ -85,7 +92,24 @@ function readBuiltAssets() {
   // Nothing references the stylesheet file once it is inlined everywhere, so drop it rather than
   // ship (and precache) a dead 24 KB file.
   rmSync(stylePath);
+  const manifest = JSON.parse(readFileSync(join(DIST, '.vite/manifest.json'), 'utf8'));
+  // A module's chunk plus everything it statically imports (recursively), minus what the entry
+  // already preloads: one <link> per URL the browser would otherwise discover a round trip later.
+  const entryPreloaded = new Set(modulePreloads.map((tag) => tag.match(/href="([^"]+)"/)[1]));
+  const chunksFor = (sourcePath, seen = new Set()) => {
+    const chunk = manifest[sourcePath];
+    if (!chunk) throw new Error(`dist/.vite/manifest.json has no chunk for ${sourcePath}`);
+    const urls = [];
+    // The entry (manifest key "index.html") is already the page's <script type="module">.
+    if (!chunk.isEntry && !seen.has(chunk.file) && !entryPreloaded.has(`/${chunk.file}`)) {
+      seen.add(chunk.file);
+      urls.push(`/${chunk.file}`);
+      for (const dep of chunk.imports ?? []) urls.push(...chunksFor(dep, seen));
+    }
+    return urls;
+  };
   return {
+    chunksFor,
     sharedHead,
     styleInline,
     scriptTags: [script, ...modulePreloads].join('\n    '),
@@ -139,7 +163,7 @@ const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
 // bodyExtra: markup that belongs in <body> but outside #root - the home page's preview JSON. React
 // hydrates the home page's #root, so anything inside it must be a node HomePage.tsx renders.
-function page({ title, description, path, assets, bodyHtml, bodyExtra = '', structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
+function page({ title, description, path, assets, bodyHtml, bodyExtra = '', structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow', preload = [] }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
@@ -151,6 +175,8 @@ function page({ title, description, path, assets, bodyHtml, bodyExtra = '', stru
   const hreflangLinks = (alternateLanguages ?? [])
     .map((alt) => `<link rel="alternate" hreflang="${alt.lang}" href="${SITE_URL}${alt.path}" />`)
     .join('\n    ');
+  // Chunks this page is known to need (its lazy component, its content entry) - see chunksFor().
+  const preloadLinks = preload.map((href) => `<link rel="modulepreload" crossorigin href="${href}">`).join('\n    ');
   return `<!doctype html>
 <html lang="${lang}">
   <head>
@@ -179,6 +205,7 @@ function page({ title, description, path, assets, bodyHtml, bodyExtra = '', stru
     <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
     ${assets.styleInline}
     ${assets.scriptTags}
+    ${preloadLinks}
   </head>
   <body>
     <div id="root">${bodyHtml}</div>${bodyExtra}
@@ -968,6 +995,7 @@ async function main() {
         path: urlPath,
         assets,
         bodyHtml: jobProfilePageBody(entry, lang),
+        preload: [...assets.chunksFor('src/pages/compare/JobProfilePage.tsx'), ...assets.chunksFor(`src/data/generated/job-profiles/${entry.slug}.mjs`)],
         type: 'article',
         lang,
         alternateLanguages: [
@@ -1018,6 +1046,7 @@ async function main() {
         path: urlPath,
         assets,
         bodyHtml: lessonPageBody(entry, lang),
+        preload: [...assets.chunksFor('src/pages/learn/LessonArticlePage.tsx'), ...assets.chunksFor(`src/data/generated/lessons/${entry.slug}.mjs`)],
         type: 'article',
         lang,
         alternateLanguages: [

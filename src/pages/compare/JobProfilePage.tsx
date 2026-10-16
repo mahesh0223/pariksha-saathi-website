@@ -3,26 +3,38 @@ import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import type { ExamJobProfileEntry } from '../../data/examJobProfiles.mjs';
+import { chunkStore } from '../../lib/contentChunks';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './ComparePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
+// One chunk per exam (src/data/generated/job-profiles/, written by scripts/split-content.mjs from
+// examJobProfiles.mjs) - see lib/contentChunks.ts and the matching code in LessonArticlePage.tsx.
+const jobProfiles = chunkStore(import.meta.glob<{ default: ExamJobProfileEntry }>('../../data/generated/job-profiles/*.mjs'));
+export const preloadJobProfile = jobProfiles.preload;
+
 export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
-  // examJobProfiles.mjs carries all 6 exams' full bilingual content - loading it dynamically,
-  // only once an actual job-profile page mounts, keeps that weight out of every other page's
-  // bundle (including the homepage, which links to all 6 without needing their content). Mirrors
-  // src/pages/learn/LessonArticlePage.tsx's identical treatment of the much larger topicLessons.mjs.
-  const [entry, setEntry] = useState<ExamJobProfileEntry | undefined>(undefined);
-  const [loaded, setLoaded] = useState(false);
+  // Each exam's bilingual job profile is its own chunk, preloaded before React mounts on the
+  // prerendered page so the article is never replaced by a spinner - see
+  // src/pages/learn/LessonArticlePage.tsx and src/lib/contentChunks.ts for the full story.
+  const [state, setState] = useState<{ slug: string; entry: ExamJobProfileEntry | null } | undefined>(() => {
+    const entry = jobProfiles.peek(slug);
+    return entry === undefined ? undefined : { slug, entry };
+  });
+  const loaded = state?.slug === slug;
+  const entry = loaded ? state.entry ?? undefined : undefined;
 
   useEffect(() => {
-    setLoaded(false);
-    import('../../data/examJobProfiles.mjs').then(({ findJobProfileEntry }) => {
-      setEntry(findJobProfileEntry(slug));
-      setLoaded(true);
+    if (loaded) return;
+    let cancelled = false;
+    jobProfiles.preload(slug).then((e) => {
+      if (!cancelled) setState({ slug, entry: e });
     });
-  }, [slug]);
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, loaded]);
 
   const content = entry?.[lang];
 

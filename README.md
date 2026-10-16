@@ -33,6 +33,11 @@ that together; `npm run check:public` fails the build if one of them regresses.
   from the fonts' own metrics) that theme.css lists right after each web font, so text rendered
   before the font arrives already has the final width and line height: the swap changes glyphs,
   not layout. Recompute those values if a font file changes.
+  The rupee sign (U+20B9) is deliberately left out of every `unicode-range`, and the "read in
+  Hindi" pill link (`.compare-lang-switch`) has a stack without the Devanagari face: either one
+  used to make every English lesson page download the latin-ext and 79 KB Devanagari files at
+  top priority, ahead of the JavaScript. Both now render from the system font; `check:public`
+  guards this.
 - **The entry CSS is inlined.** The prerender step reads Vite's built stylesheet and puts it in a
   `<style>` on every page (and in `spa.html`), then deletes the file. Stylesheets a prerendered page
   needs must be imported from `src/main.tsx` so they end up in that entry CSS, not in a lazy chunk.
@@ -40,6 +45,15 @@ that together; `npm run check:public` fails the build if one of them regresses.
   `lessonSubjects.mjs` lists; the content modules load with their page. `src/main.tsx` awaits
   `preloadRoute()` before mounting so a prerendered article is never replaced by a spinner
   (`src/lib/lazyPage.ts`).
+- **One content chunk per lesson / job profile.** `scripts/split-content.mjs` (run by
+  `npm run generate`, and automatically before `build` and `dev`) writes one module per entry of
+  `topicLessons.mjs` and `examJobProfiles.mjs` into the gitignored `src/data/generated/`;
+  `src/lib/contentChunks.ts` globs them, so `/learn/percentages/` downloads ~6 KB of content
+  instead of the 560 KB whole-catalog chunk it used to. `preloadRoute()` fetches the entry
+  together with the page chunk, the page reads it synchronously on first render, and the
+  prerender step adds `<link rel="modulepreload">` for both (from `dist/.vite/manifest.json`) so
+  the downloads start with the HTML. Edit the source modules, never the generated files;
+  `check:public` fails if they drift.
 - **Hero image** ships as 240/480/720-px WebP + JPEG variants with `srcset`, `width`/`height` and
   `loading="lazy"`; the header icon is `icon-48.png`/`icon-96.png`, not the 512-px app icon. The
   other screenshots in `public/assets/screenshots/` are Play Store assets and are not shown on

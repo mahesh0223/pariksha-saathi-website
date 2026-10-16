@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { Link } from 'react-router-dom';
-import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
+import { chunkStore } from '../../lib/contentChunks';
 import { lessonAuthor, lessonClosing, lessonCredit } from '../../lib/lessonCredit.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import '../compare/ComparePage.css';
@@ -11,26 +11,40 @@ import './LessonArticlePage.css';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
+// One chunk per lesson (src/data/generated/lessons/, written by scripts/split-content.mjs from
+// topicLessons.mjs) - see lib/contentChunks.ts. App.tsx's preloadRoute() calls preloadLesson so
+// the entry is in hand before React mounts on a prerendered page.
+const lessons = chunkStore(import.meta.glob<{ default: TopicLessonEntry }>('../../data/generated/lessons/*.mjs'));
+export const preloadLesson = lessons.preload;
+
 export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }) {
-  // topicLessons.mjs carries every topic's full bilingual content (~1.6MB) - loading it
-  // dynamically, only once an actual lesson page mounts, keeps that weight out of every other
-  // page's bundle (including the homepage, which links to all 124 of these without needing their
-  // content). The prerendered static HTML this page replaces already has the real content baked
-  // in, so this brief loading gap only affects the client-side re-render, never what a crawler or
-  // no-JS visitor sees.
-  const [entry, setEntry] = useState<TopicLessonEntry | undefined>(undefined);
-  const [loaded, setLoaded] = useState(false);
+  // This page downloads ~5-10 KB brotli (its own lesson's chunk), not the whole catalog. On a
+  // prerendered page the chunk was fetched before React mounted (App.tsx's preloadRoute), so the
+  // initial state already holds the entry and the real article is never replaced by the spinner
+  // below - that only shows on a client-side navigation to another lesson, where nothing is on
+  // screen yet. `null` means the chunk arrived but no such lesson exists.
+  const [state, setState] = useState<{ slug: string; entry: TopicLessonEntry | null } | undefined>(() => {
+    const entry = lessons.peek(slug);
+    return entry === undefined ? undefined : { slug, entry };
+  });
+  const loaded = state?.slug === slug;
+  const entry = loaded ? state.entry ?? undefined : undefined;
 
   useEffect(() => {
-    setLoaded(false);
-    import('../../data/topicLessons.mjs').then(({ findLessonEntry }) => {
-      setEntry(findLessonEntry(slug));
-      setLoaded(true);
+    if (loaded) return;
+    let cancelled = false;
+    lessons.preload(slug).then((e) => {
+      if (!cancelled) setState({ slug, entry: e });
     });
-  }, [slug]);
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, loaded]);
 
   const content = entry?.[lang];
-  const topicKey = LESSON_CATALOG.find((item) => item.slug === slug)?.topicKey;
+  // The practice-quiz link's key: scripts/split-content.mjs copies it from the lesson catalog into
+  // the entry's own chunk, so this page does not need the whole catalog.
+  const topicKey = entry?.topicKey;
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
   // and the prerendered HTML's canonical/sitemap already use it - this hook runs after hydration

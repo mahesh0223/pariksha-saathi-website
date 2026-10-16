@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
@@ -13,6 +13,7 @@ import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
+import { GENERATED_DIR, lessonModuleEntry } from './split-content.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 // The entry bundle routes from these slim lists instead of the content modules (see App.tsx) -
@@ -37,6 +38,42 @@ for (const slug of ['percentages', 'cubes-and-dice']) {
     assert(html.includes(key ? `/app/practice/topic/${key}` : 'href="#practice"'));
   }
 }
+// Per-entry content chunks (2026-10-16): src/data/generated/ must mirror the two source modules
+// exactly (scripts/split-content.mjs; build and dev run it first, but a stale checkout must not
+// pass), no monolithic lesson / job-profile data chunk may be back in the build, and every
+// prerendered lesson and job-profile page must preload its own entry's chunk so the article is
+// never replaced by a spinner while the data downloads (see src/lib/contentChunks.ts).
+for (const [folder, entries, label, moduleEntry] of [['lessons', TOPIC_LESSONS, 'topicLessons.mjs', lessonModuleEntry], ['job-profiles', EXAM_JOB_PROFILES, 'examJobProfiles.mjs', (e) => e]]) {
+  const dir = join(GENERATED_DIR, folder);
+  assert(existsSync(dir), `${dir} is missing - run \`npm run generate\``);
+  assert.deepEqual(readdirSync(dir).sort(), entries.map((e) => `${e.slug}.mjs`).sort(), `src/data/generated/${folder} is out of sync with ${label} - run \`npm run generate\``);
+  for (const entry of entries) {
+    const generated = (await import(join(dir, `${entry.slug}.mjs`))).default;
+    assert.deepEqual(generated, JSON.parse(JSON.stringify(moduleEntry(entry))), `src/data/generated/${folder}/${entry.slug}.mjs differs from ${label} - run \`npm run generate\``);
+  }
+}
+const builtChunks = readdirSync('dist/assets');
+for (const monolith of ['topicLessons-', 'examJobProfiles-', 'generalAwarenessLessons-']) assert(!builtChunks.some((f) => f.startsWith(monolith)), `the whole-catalog ${monolith}*.js chunk is back in the build`);
+const manifest = JSON.parse(readFileSync('dist/.vite/manifest.json', 'utf8'));
+for (const [entries, folder, pagePath, pageSource] of [
+  [TOPIC_LESSONS, 'lessons', (slug, lang) => `dist/${lang}learn/${slug}/index.html`, 'src/pages/learn/LessonArticlePage.tsx'],
+  [EXAM_JOB_PROFILES, 'job-profiles', (slug, lang) => `dist/${lang}compare/${slug}-job-profile/index.html`, 'src/pages/compare/JobProfilePage.tsx'],
+]) {
+  for (const entry of entries) {
+    const chunk = manifest[`src/data/generated/${folder}/${entry.slug}.mjs`]?.file;
+    assert(chunk, `no built chunk for src/data/generated/${folder}/${entry.slug}.mjs`);
+    // One entry per chunk: a chunk carrying another slug's content would mean the split regressed into a shared chunk.
+    const js = readFileSync(`dist/${chunk}`, 'utf8');
+    assert(new RegExp(`slug["']?:\\s*["'\`]${entry.slug}["'\`]`).test(js), `dist/${chunk} does not carry ${entry.slug}`);
+    assert(statSync(`dist/${chunk}`).size < 120_000, `dist/${chunk} is ${statSync(`dist/${chunk}`).size} bytes - more than one entry's worth of content?`);
+    for (const lang of ['', 'hi/']) {
+      const html = readFileSync(pagePath(entry.slug, lang), 'utf8');
+      for (const source of [pageSource, `src/data/generated/${folder}/${entry.slug}.mjs`]) assert(html.includes(`<link rel="modulepreload" crossorigin href="/${manifest[source].file}">`), `${pagePath(entry.slug, lang)}: missing modulepreload for ${source}`);
+    }
+  }
+}
+console.log(`Verified ${TOPIC_LESSONS.length} lesson and ${EXAM_JOB_PROFILES.length} job-profile content chunks: generated modules in sync, one chunk per entry, preloaded by their pages.`);
+
 function htmlFiles(dir) { return readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?htmlFiles(join(dir,e.name)):e.name.endsWith('.html')?[join(dir,e.name)]:[]); }
 const files=htmlFiles('dist');
 for (const file of files) {
@@ -52,6 +89,16 @@ for (const file of files) {
   assert(html.includes('/fonts/fraunces-latin-v') && html.includes('@font-face'),`Missing inline @font-face: ${file}`);
   assert(!/<link rel="stylesheet"[^>]*\/assets\//.test(html),`Entry stylesheet is linked instead of inlined: ${file}`);
   assert(html.includes('rel="manifest"'),`Missing web manifest link: ${file}`);
+  // 2026-10-16: the rupee sign must come from the system font - U+20B9 in a web font's unicode-range made every
+  // lesson and job-profile page (English ones included) download the 24 KB latin-ext and 79 KB Devanagari files
+  // before the JavaScript could run. Same for the "read in Hindi" link, see ComparePage.css.
+  for (const [, range] of html.matchAll(/unicode-range:([^;}]+)/g)) {
+    for (const part of range.split(',')) {
+      const [lo, hi = lo] = part.trim().replace(/^U\+/i, '').split('-').map((h) => parseInt(h.replace(/\?/g, 'F'), 16));
+      assert(!(lo <= 0x20b9 && 0x20b9 <= hi), `${file}: a web font's unicode-range covers U+20B9 (₹) again: ${part.trim()}`);
+    }
+  }
+  assert(!/\.compare-lang-switch\{[^}]*Devanagari/.test(html), `${file}: the language-switch link is back on the Devanagari web font`);
 }
 for (const [,href] of readFileSync('dist/index.html','utf8').matchAll(/href="(\/fonts\/[^"]+)"/g)) assert(existsSync(`dist${href}`),`missing font ${href}`);
 assert(readFileSync('dist/index.html','utf8').includes('id="home-preview"'),'home page is missing its baked preview JSON');

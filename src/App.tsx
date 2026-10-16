@@ -24,26 +24,41 @@ import { lazyPage } from './lib/lazyPage';
 const PublicPage = lazyPage(() => import('./pages/PublicPage').then((m) => ({ default: m.PublicPage })));
 const IbpsPoVsSbiPoPage = lazyPage(() => import('./pages/compare/IbpsPoVsSbiPoPage').then((m) => ({ default: m.IbpsPoVsSbiPoPage })));
 const SyllabusPage = lazyPage(() => import('./pages/compare/SyllabusPage').then((m) => ({ default: m.SyllabusPage })));
-const JobProfilePage = lazyPage(() => import('./pages/compare/JobProfilePage').then((m) => ({ default: m.JobProfilePage })));
+// The lesson and job-profile page modules also export the loader for their per-entry content
+// chunks (lib/contentChunks.ts); preloadRoute() below reaches it through the same import, which
+// the module system caches, so it costs no extra request.
+const loadJobProfilePage = () => import('./pages/compare/JobProfilePage');
+const JobProfilePage = lazyPage(() => loadJobProfilePage().then((m) => ({ default: m.JobProfilePage })));
 const ExamHubPage = lazyPage(() => import('./pages/exams/ExamHubPage').then((m) => ({ default: m.ExamHubPage })));
 const ExamDirectoryPage = lazyPage(() => import('./pages/exams/ExamDirectoryPage').then((m) => ({ default: m.ExamDirectoryPage })));
-const LessonArticlePage = lazyPage(() => import('./pages/learn/LessonArticlePage').then((m) => ({ default: m.LessonArticlePage })));
+const loadLessonArticlePage = () => import('./pages/learn/LessonArticlePage');
+const LessonArticlePage = lazyPage(() => loadLessonArticlePage().then((m) => ({ default: m.LessonArticlePage })));
 
 /**
  * Starts downloading the chunk(s) the given URL renders, so main.tsx can wait for them before the
  * first render. Mirrors the route table below; anything unmatched (the home page, /app/*, 404)
  * resolves immediately. Never rejects - a failed preload just means the route suspends normally.
+ * Lesson and job-profile pages also need their own content chunk (lib/contentChunks.ts): it is
+ * fetched here too, so the page can render the entry synchronously. The prerendered HTML carries
+ * <link rel="modulepreload"> for both chunks (scripts/prerender.mjs), so neither wait starts late.
  */
 export function preloadRoute(pathname: string): Promise<unknown> {
   const path = pathname.replace(/^\/hi(?=\/|$)/, '').replace(/\/+$/, '') || '/';
   const loads: Promise<unknown>[] = [];
+  let m: RegExpMatchArray | null;
   if (/^\/(learn|about|privacy|contact|downloads|terms|account-deletion)$/.test(path)) loads.push(PublicPage.preload());
   else if (path === '/compare/ibps-po-vs-sbi-po') loads.push(IbpsPoVsSbiPoPage.preload());
   else if (/^\/compare\/[^/]+-syllabus$/.test(path)) loads.push(SyllabusPage.preload());
-  else if (/^\/compare\/[^/]+-job-profile$/.test(path)) loads.push(JobProfilePage.preload());
+  else if ((m = path.match(/^\/compare\/([^/]+)-job-profile$/))) {
+    const slug = m[1];
+    loads.push(JobProfilePage.preload(), loadJobProfilePage().then((mod) => mod.preloadJobProfile(slug)));
+  }
   else if (path === '/exams') loads.push(ExamDirectoryPage.preload());
   else if (/^\/exams\/[^/]+$/.test(path)) loads.push(ExamHubPage.preload());
-  else if (/^\/learn\/[^/]+$/.test(path)) loads.push(LessonArticlePage.preload());
+  else if ((m = path.match(/^\/learn\/([^/]+)$/))) {
+    const slug = m[1];
+    loads.push(LessonArticlePage.preload(), loadLessonArticlePage().then((mod) => mod.preloadLesson(slug)));
+  }
   return Promise.allSettled(loads);
 }
 
