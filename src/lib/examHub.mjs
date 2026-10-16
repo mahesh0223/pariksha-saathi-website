@@ -323,7 +323,9 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], lang 
 
   const glance = [
     [t.stages, esc(fact.stages.map((s) => pick(s.name, lang)).join(' → '))],
-    [`${t.firstStage}: ${t.totalQuestions} / ${t.totalMarks} / ${t.time}`, `${firstTotals.questions > 0 ? firstTotals.questions : '&mdash;'} / ${marksText(firstTotals.marks)} / ${firstMinutes} ${lang === 'hi' ? 'मिनट' : 'min'}`],
+    // A first stage whose duration depends on the category (Agniveer CEE: 1 hour or 2 hours) carries a
+    // durationNote and no minutes: show a dash rather than "0 min".
+    [`${t.firstStage}: ${t.totalQuestions} / ${t.totalMarks} / ${t.time}`, `${firstTotals.questions > 0 ? firstTotals.questions : '&mdash;'} / ${marksText(firstTotals.marks)} / ${firstMinutes > 0 ? `${firstMinutes} ${lang === 'hi' ? 'मिनट' : 'min'}` : '&mdash;'}`],
     [t.negative, esc(negativeGlance)],
   ];
   if (firstDates) glance.push([t.firstStageDates, `${esc(formatHubDate(firstDates.from, lang))} ${t.dateTo} ${esc(formatHubDate(firstDates.to, lang))}`]);
