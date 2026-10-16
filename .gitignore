@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python bytecode from scripts/daily-pdf and scripts/capsule-pdf
+__pycache__/

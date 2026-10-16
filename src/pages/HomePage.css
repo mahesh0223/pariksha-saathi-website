@@ -300,6 +300,8 @@
 .phone img {
   display: block;
   width: 100%;
+  /* Keep the HTML width/height attributes' aspect ratio when the CSS width overrides them. */
+  height: auto;
 }
 @media (max-width: 860px) {
   .hero-grid {

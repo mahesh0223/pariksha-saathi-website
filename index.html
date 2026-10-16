@@ -6,16 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice, and take mock tests right in your browser." />
     <title>Pariksha Saathi — SSC, IBPS &amp; SBI Exam Prep</title>
-    <!-- Loaded here (not via theme.css's old @import) so the browser can start fetching it while
-         still parsing the HTML, instead of waiting to parse the main stylesheet first, discover
-         the @import inside it, and only then start the font request - a fully serial chain that
-         delayed first text paint. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fonts are self-hosted (see src/styles/theme.css for the @font-face rules and why). These
+         preloads let the browser fetch the two latin files every page renders with in parallel
+         with the stylesheet instead of after it, so first text paint doesn't wait on a chain. -->
+    <link rel="preload" href="/fonts/fraunces-v38-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-sans-v23-latin.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Ownership verification remains available while ad serving is paused. -->
     <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
   </head>

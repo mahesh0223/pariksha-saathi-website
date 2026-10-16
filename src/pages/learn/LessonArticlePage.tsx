@@ -103,7 +103,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
       <header className="pub-header">
         <div className="wrap pub-nav">
           <Link className="pub-brand" to={homeHref}>
-            <img src="/assets/icon-512.png" alt="" />
+            <img src="/assets/icon-64.png" alt="" width={32} height={32} />
             Pariksha Saathi
           </Link>
           <nav className="pub-nav-links"><Link to="/learn/">{lang === 'hi' ? 'विषय सूची' : 'Lesson library'}</Link>
@@ -201,7 +201,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         <div className="wrap">
           <div className="pub-footer-top">
             <div className="pub-footer-brand">
-              <img src="/assets/icon-512.png" alt="" />
+              <img src="/assets/icon-64.png" alt="" width={32} height={32} />
               Pariksha Saathi
             </div>
             <div className="pub-footer-links">

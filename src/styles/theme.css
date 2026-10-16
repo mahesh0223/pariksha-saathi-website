@@ -1,5 +1,44 @@
-/* Fraunces + IBM Plex Sans are loaded via a <link> in index.html (and in each prerendered page's
-   own <head> - see scripts/prerender.mjs), not an @import here - see index.html's comment for why. */
+/* Fraunces + IBM Plex Sans are self-hosted from public/fonts/ (the exact latin + latin-ext
+   variable woff2 files Google Fonts served for the old css2 URL, Fraunces v38 / Plex Sans v23,
+   both SIL OFL). Self-hosting removes the render-blocking cross-origin stylesheet request and a
+   full DNS/TLS/CSS hop from the critical path that PageSpeed measured at ~1.4 s on slow 4G: the
+   browser now discovers these files from this stylesheet (and from the <link rel="preload"> in
+   index.html / scripts/prerender.mjs for the two latin files every page needs). Each file is a
+   variable font, so one @font-face covers every weight the site uses. Other scripts (Devanagari
+   for Hindi pages) were never in the old Google request either - they fall through to the system
+   font stack exactly as before. */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(/fonts/fraunces-v38-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(/fonts/fraunces-v38-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/fonts/ibm-plex-sans-v23-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(/fonts/ibm-plex-sans-v23-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 :root {
   --navy: #1e3a52;

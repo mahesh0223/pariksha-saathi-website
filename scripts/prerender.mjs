@@ -74,7 +74,7 @@ function publicContentFrame(innerHtml) {
   return `<div class="compare-page">
   <header class="pub-header">
     <div class="wrap pub-nav">
-      <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+      <a class="pub-brand" href="/"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
       <nav class="pub-nav-links">
         <a href="/learn/">Lessons</a>
         <a href="/app/current-affairs">Current affairs</a>
@@ -107,9 +107,10 @@ function adSlot(_slot) { return ''; }
 // whether it was crawled from the prerendered HTML or visited client-side.
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
-const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" />`;
+// Mirrors index.html exactly - fonts are self-hosted (src/styles/theme.css has the @font-face
+// rules and the reasoning); these preloads only start the two latin files early.
+const FONT_LINKS = `<link rel="preload" href="/fonts/fraunces-v38-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-sans-v23-latin.woff2" as="font" type="font/woff2" crossorigin />`;
 
 function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
@@ -306,7 +307,7 @@ function homePageBody(affairsPreview, noticesPreview) {
   return `<div>
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="#top"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="#top"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="#features">Features</a>
             <a href="/learn/">Learn</a>
@@ -335,7 +336,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           </div>
           <div class="phone-stack">
             <div class="phone-glow"></div>
-            <div class="phone"><img src="/assets/screenshots/1-home.jpg" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></div>
+            <div class="phone"><img src="/assets/screenshots/1-home-480.webp" srcset="/assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w" sizes="240px" width="480" height="853" fetchpriority="high" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></div>
           </div>
         </div>
       </div>
@@ -453,7 +454,7 @@ function homePageBody(affairsPreview, noticesPreview) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -491,7 +492,7 @@ function comparePageBody() {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="/"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/#features">Features</a>
             <a href="/app/exam-notices">Exam Notices</a>
@@ -537,7 +538,7 @@ function comparePageBody() {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -569,7 +570,7 @@ function syllabusPageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -607,7 +608,7 @@ function syllabusPageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -626,7 +627,7 @@ function examHubPageBody(innerHtml, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="/"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="/"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
           </nav>
@@ -668,7 +669,7 @@ function jobProfilePageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -708,7 +709,7 @@ function jobProfilePageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
@@ -762,7 +763,7 @@ function lessonPageBody(entry, lang) {
   return `<div class="compare-page">
       <header class="pub-header">
         <div class="wrap pub-nav">
-          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</a>
+          <a class="pub-brand" href="${homeHref}"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</a>
           <nav class="pub-nav-links">
             <a href="/app/exam-notices">${examNoticesLabel}</a>
           </nav>
@@ -800,7 +801,7 @@ function lessonPageBody(entry, lang) {
       <footer class="pub-footer">
         <div class="wrap">
           <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-512.png" alt="" />Pariksha Saathi</div>
+            <div class="pub-footer-brand"><img src="/assets/icon-64.png" alt="" width="32" height="32" />Pariksha Saathi</div>
             <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
