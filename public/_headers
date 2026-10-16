@@ -1,0 +1,14 @@
+# Cloudflare Pages per-path response headers. Pages' default is max-age=0, must-revalidate,
+# which makes every repeat visit re-validate every file - PageSpeed's "Use efficient cache
+# lifetimes". Hashed bundles and versioned font files can never change under the same URL, so
+# they get a year and `immutable`; the un-hashed images under /assets get a week, so a replaced
+# screenshot or icon still rolls out on its own within days.
+
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

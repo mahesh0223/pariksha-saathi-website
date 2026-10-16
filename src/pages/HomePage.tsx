@@ -253,7 +253,7 @@ export function HomePage() {
       <header className="pub-header">
         <div className="wrap pub-nav">
           <a className="pub-brand" href="#top">
-            <img src="/assets/icon-512.png" alt="" />
+            <img src="/assets/icon-64.png" alt="" width={32} height={32} />
             Pariksha Saathi
           </a>
           <nav className="pub-nav-links">
@@ -314,8 +314,16 @@ export function HomePage() {
           <div className="phone-stack">
             <div className="phone-glow" />
             <div className="phone">
+              {/* 1-home.jpg is the 1080x1920 Play Store screenshot; the phone frame is 240 CSS px
+                  wide, so serve a 480w/720w WebP (2x/3x) instead of the 210 KB original. The
+                  width/height pair reserves the box before the image arrives (no layout shift). */}
               <img
-                src="/assets/screenshots/1-home.jpg"
+                src="/assets/screenshots/1-home-480.webp"
+                srcSet="/assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w"
+                sizes="240px"
+                width={480}
+                height={853}
+                fetchPriority="high"
                 alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge"
               />
             </div>
@@ -500,7 +508,7 @@ export function HomePage() {
         <div className="wrap">
           <div className="pub-footer-top">
             <div className="pub-footer-brand">
-              <img src="/assets/icon-512.png" alt="" />
+              <img src="/assets/icon-64.png" alt="" width={32} height={32} />
               Pariksha Saathi
             </div>
             <div className="pub-footer-links"><Link to="/about/">About &amp; editorial standards</Link>

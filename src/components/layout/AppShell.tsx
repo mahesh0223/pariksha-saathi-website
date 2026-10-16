@@ -26,7 +26,7 @@ export function AppShell() {
       <header className="app-topbar">
         <div className="wrap app-topbar-inner">
           <NavLink to="/" className="app-brand">
-            <img src="/assets/icon-512.png" alt="" />
+            <img src="/assets/icon-64.png" alt="" width={32} height={32} />
             Pariksha Saathi
           </NavLink>
           <NavLink to="/app/account" className="app-account-link">
