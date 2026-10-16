@@ -44,9 +44,20 @@ that together; `npm run check:public` fails the build if one of them regresses.
   `loading="lazy"`; the header icon is `icon-48.png`/`icon-96.png`, not the 512-px app icon. The
   other screenshots in `public/assets/screenshots/` are Play Store assets and are not shown on
   any page.
+- **The home page is hydrated, not re-rendered.** `src/main.tsx` calls `hydrateRoot` on `/` and
+  `createRoot().render()` everywhere else. `homePageBody()` in `scripts/prerender.mjs` therefore
+  mirrors `src/pages/HomePage.tsx` node for node: no whitespace between elements, CTAs as
+  `<a href="/onboarding">`, one text node where the component renders one, the preview JSON
+  after `#root` rather than inside it. The payoff is LCP: the hero `<h1>` painted at first
+  contentful paint stays the LCP element instead of being recreated when the bundle arrives
+  (LCP 2.4 s -> ~0.8 s on slow 4G). React 19 answers any mismatch by rebuilding the whole tree
+  with an error in the console, so when you change the home page change both files, then run
+  `npm run check:hydration` (loads the built page in headless Chrome and fails unless the parsed
+  `<h1>` survives the mount with no hydration error); `check:public` guards the static rules.
 - **Home page preview data** (latest current affairs and notices) is baked into the HTML as JSON
-  (`<script id="home-preview">`) and used as react-query `initialData`, so the sections never
-  flash "Loading…" and shift the layout; the live list is refetched in the background.
+  (`<script id="home-preview">`) and used as react-query `initialData`, so the first render
+  already shows the four cards the HTML has (which is what lets those sections hydrate) and
+  nothing shifts; the live list is refetched in the background.
 - **Service worker + manifest** come from `vite-plugin-pwa` (`vite.config.ts`). Precached: home,
   SPA shell, top-level public pages, entry JS, latin fonts, icons, small hero variants. At runtime:
   navigations are network-first with the cached copy offline and `spa.html` as the last fallback;
@@ -66,9 +77,12 @@ that together; `npm run check:public` fails the build if one of them regresses.
 
 `vite preview` serves uncompressed files without `_headers`, so Lighthouse numbers from it are
 pessimistic. Measure the deployed site (`npx lighthouse https://parikshasaathi.com
---only-categories=performance` or PageSpeed Insights), or serve `dist/` through a small static
-server that brotli-compresses text and applies `_headers`. Targets on simulated slow 4G, mobile:
-FCP < 2.0 s, LCP < 2.5 s, CLS < 0.05.
+--only-categories=performance` or PageSpeed Insights), or serve `dist/` the way Pages does with
+`npm run serve:dist` (brotli, `_headers`, directory index files, spa.html fallback; port 4173)
+and run `npx lighthouse http://localhost:4173/ --only-categories=performance
+--throttling-method=devtools` for applied rather than simulated throttling. Targets on slow 4G,
+mobile: FCP < 2.0 s, LCP < 2.5 s, CLS < 0.05; on the home page LCP should sit within ~0.1 s of
+FCP - if it jumps to the time the JS arrives, hydration has broken (`npm run check:hydration`).
 
 ## Other scripts
 

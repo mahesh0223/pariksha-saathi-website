@@ -33,7 +33,9 @@ import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/exam
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
-import { DIRECTORY_EXAM_IDS, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
+import { HERO_EXAMS } from '../src/data/heroExams.mjs';
+import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
+import { DIRECTORY_EXAM_IDS, EXAMS_LINK, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -135,7 +137,9 @@ function adSlot(_slot) { return ''; }
 // whether it was crawled from the prerendered HTML or visited client-side.
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
-function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
+// bodyExtra: markup that belongs in <body> but outside #root - the home page's preview JSON. React
+// hydrates the home page's #root, so anything inside it must be a node HomePage.tsx renders.
+function page({ title, description, path, assets, bodyHtml, bodyExtra = '', structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
@@ -177,7 +181,7 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     ${assets.scriptTags}
   </head>
   <body>
-    <div id="root">${bodyHtml}</div>
+    <div id="root">${bodyHtml}</div>${bodyExtra}
   </body>
 </html>
 `;
@@ -328,176 +332,114 @@ const FAQS = [
   { q: 'Is Pariksha Saathi affiliated with SSC, IBPS or SBI?', a: 'No. Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body.' },
 ];
 
-function homePageBody(affairsPreview, noticesPreview) {
-  return `<div>
-      <header class="pub-header">
-        <div class="wrap pub-nav">
-          <a class="pub-brand" href="#top"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
-          <nav class="pub-nav-links">
-            <a href="#features">Features</a>
-            <a href="/learn/">Learn</a>
-            <a href="#current-affairs">Current Affairs</a>
-            <a href="#faq">FAQ</a>
-            <a href="/privacy/">Privacy</a>
-          </nav>
-          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
-        </div>
-      </header>
-      <div id="top" class="hero">
-        <div class="hero-rules"></div>
-        <div class="wrap hero-grid">
-          <div>
-            <div class="eyebrow">SSC &middot; Banking &middot; Railways &middot; Police &middot; PSC</div>
-            <h1>Exam prep that works even where <em>the signal doesn't.</em></h1>
-            <p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC, banking, railway, state police, CTET and state PSC exams — free, right in your browser.</p>
-            <div class="cta-row">
-              <a class="btn-primary-cream" href="/onboarding">Start studying free</a>
-              <a class="btn-ghost-cream" href="#features">See what's inside</a>
-            </div>
-            <div class="exam-pills">${[['ssc_cgl', 'SSC CGL'], ['ssc_mts', 'SSC MTS'], ['ssc_chsl', 'SSC CHSL'], ['ibps_po', 'IBPS PO'], ['ibps_clerk', 'IBPS Clerk'], ['sbi_po', 'SBI PO'], ['sbi_clerk', 'SBI Clerk']].map(([id, name]) => `<a href="${examHubPath(id, 'en')}">${name}</a>`).join('')}<a class="exam-pills-more" href="/exams/">More exams &rarr;</a></div>
-            <div class="trust-bar">
-              ${TRUST_STATS.map((s) => `<div class="trust-stat"><div class="trust-value">${escapeHtml(s.value)}</div><div class="trust-label">${escapeHtml(s.label)}</div></div>`).join('\n              ')}
-            </div>
-          </div>
-          <div class="phone-stack">
-            <div class="phone-glow"></div>
-            <div class="phone"><picture><source type="image/webp" srcset="/assets/screenshots/1-home-240.webp 240w, /assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w" sizes="240px" /><img src="/assets/screenshots/1-home-480.jpg" srcset="/assets/screenshots/1-home-240.jpg 240w, /assets/screenshots/1-home-480.jpg 480w, /assets/screenshots/1-home-720.jpg 720w" sizes="240px" width="240" height="427" loading="lazy" decoding="async" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge" /></picture></div>
-          </div>
-        </div>
-      </div>
-      ${(() => {
-        const b = dailyPdfBand();
-        return b
-          ? `<section id="daily-pdf" class="pub-section"><div class="wrap"><div class="daily-pdf-card"><div><div class="eyebrow">${escapeHtml(b.eyebrow)}</div><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.body)}</p></div><div class="daily-pdf-actions"><a class="pub-cta" href="${b.file}" download>${escapeHtml(b.buttonLabel)}</a><a href="${b.allHref}">${escapeHtml(b.allLabel)} &rarr;</a></div></div></div></section>`
-          : '';
-      })()}
-      <section id="features" class="pub-section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">What's inside</div>
-            <h2>Everything you need to get exam-ready</h2>
-            <p>Every feature below is built around one real constraint: aspirants studying on patchy connections, shared devices, and tight budgets.</p>
-          </div>
-          <div class="feature-grid">
-            ${HOME_FEATURES.map((f) => `<div class="feature"><div class="mark mark-${f.accent}">${icon(f.icon)}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.body)}</p></div>`).join('\n            ')}
-          </div>
-        </div>
-      </section>
-      <section class="pub-section pub-section-alt">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">How it works</div>
-            <h2>Three steps, no installs</h2>
-          </div>
-          <div class="steps-grid">
-            ${HOW_IT_WORKS.map((s) => `<div class="step"><div class="step-num">${s.n}</div><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.body)}</p></div>`).join('\n            ')}
-          </div>
-        </div>
-      </section>
-      <section class="pub-section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">Exam coverage</div>
-            <h2>What's covered for each exam</h2>
-          </div>
-          <div class="exam-coverage-grid">
-            ${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('\n            ')}
-          </div>
-          <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
-          <p><a href="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</a></p>
-        </div>
-      </section>
-      <section id="topic-lessons" class="pub-section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">Topic lessons</div>
-            <h2>Lessons, free to read</h2>
-            <p>The same topics the app teaches, as standalone lessons with worked solutions or key facts and practice questions — no account needed to read these.</p>
-          </div>
-          <div class="exam-coverage-grid">${[...new Set(LESSON_CATALOG.map(c => c.subject))].map(subject => `<div class="exam-coverage-item"><h3>${subject}</h3><p>${subjectBlurb(subject)}</p><a href="/learn/#${subject.toLowerCase().replaceAll(' ', '-')}">Browse ${subject} lessons →</a></div>`).join('')}</div>
-          <p><a href="/learn/">Browse the complete lesson library →</a></p>
-        </div>
-      </section>
+// Mirrors src/pages/HomePage.tsx's markup NODE FOR NODE. React HYDRATES this HTML (hydrateRoot in
+// src/main.tsx) instead of rendering over it - that is what keeps the hero <h1> painted at first
+// contentful paint as the page's largest-contentful-paint element, rather than a fresh <h1>
+// created when the entry JS arrives. Hydration compares the DOM the browser parsed from this
+// string with the tree the component builds, so beyond identical tags, attributes and text:
+//   - no whitespace between elements: JSX drops it, and a stray text node here is a mismatch
+//     (React 19 answers any mismatch by discarding the tree and client-rendering it, with an
+//     error in the console - exactly the DOM rebuild this avoids);
+//   - exactly one text node wherever the component renders one (HomePage.tsx builds mixed
+//     "{a} · {b}" strings as single template literals for that reason);
+//   - the CTAs are <a href="/onboarding"> in both (the component adds the onClick), and every
+//     anchor the component renders through react-router's <Link> carries data-discover="true",
+//     the attribute Link adds (React 19 reports attribute differences in development builds);
+//   - the preview JSON stays outside #root (homePreviewJson() goes to page() as bodyExtra).
+// If HomePage.tsx changes, change this too. check-public-pages.mjs guards the whitespace rule
+// statically; `npm run check:hydration` loads the built page in Chrome and fails unless the
+// prerendered <h1> survives React's mount with no hydration error.
+function previewText(text) {
+  // Mirrors previewText() in src/components/CurrentAffairsItemCard.tsx.
+  return text.length > 150 ? `${text.slice(0, 150).trimEnd()}…` : text;
+}
+const BRAND_ICON = '<img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="">';
+function updateCard(href, meta, item, tagsHtml = '') {
+  return `<a class="update-card-link" data-discover="true" href="${href}"><div class="card card-raised update-card"><div class="update-meta">${meta}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(previewText(item.summary))}</p>${tagsHtml}<span class="update-readmore">Read more &rarr;</span></div></a>`;
+}
 
-      <section id="current-affairs" class="pub-section pub-section-alt">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">Stay current</div>
-            <h2>Latest current affairs</h2>
-            <p>Dated, sourced capsules — updated regularly, each linking back to the original release.</p>
-          </div>
-          ${affairsPreview
-            .map(
-              (item) => `<a class="update-card-link" href="/app/current-affairs/${item.id}/">
-          <div class="card update-card">
-            <div class="update-meta">${escapeHtml(item.period)} &middot; ${item.editionDate.slice(0, 10)}</div>
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.summary.slice(0, 150))}${item.summary.length > 150 ? '…' : ''}</p>
-            <div class="update-tags">${item.examTags.map(pill).join('')}</div>
-            <span class="update-readmore">Read more &rarr;</span>
-          </div>
-        </a>`,
-            )
-            .join('\n          ')}
-          <a class="update-readmore" href="/app/current-affairs/">See all current affairs &rarr;</a>
-        </div>
-      </section>
-      <section class="pub-section">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">Don't miss a date</div>
-            <h2>Latest exam notices &amp; alerts</h2>
-            <p>Admit cards, results and deadlines, verified against each exam body's own site.</p>
-          </div>
-          ${noticesPreview
-            .map(
-              (item) => `<a class="update-card-link" href="/app/exam-notices/${item.id}/">
-          <div class="card update-card">
-            <div class="update-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.summary.slice(0, 150))}${item.summary.length > 150 ? '…' : ''}</p>
-            <span class="update-readmore">Read more &rarr;</span>
-          </div>
-        </a>`,
-            )
-            .join('\n          ')}
-          <a class="update-readmore" href="/app/exam-notices/">See all exam notices &rarr;</a>
-        </div>
-      </section>
-      <section id="faq" class="pub-section pub-section-alt">
-        <div class="wrap">
-          <div class="section-head">
-            <div class="eyebrow">FAQ</div>
-            <h2>Common questions</h2>
-          </div>
-          <div class="faq-list">
-            ${FAQS.map((f, i) => `<details class="faq-item"${i === 0 ? ' open' : ''}><summary>${escapeHtml(f.q)}</summary><p>${escapeHtml(f.a)}</p></details>`).join('\n            ')}
-          </div>
-        </div>
-      </section>
-      <div class="wrap">${adSlot('8737623533')}</div>
-      <footer class="pub-footer">
-        <div class="wrap">
-          <div class="pub-footer-top">
-            <div class="pub-footer-brand"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</div>
-            <div class="pub-footer-links"><a href="/about/">About &amp; editorial standards</a>
-              <a href="/privacy/">Privacy Policy</a>
-              <a href="/terms/">Terms of Use</a>
-              <a href="/account-deletion/">Delete Account</a>
-              <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
-          </div>
-          <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. For information about accounts, study progress and website data, see our <a href="/privacy/">Privacy Policy</a> for details.</p>
-        </div>
-      </footer>
-      ${homePreviewJson(affairsPreview, noticesPreview)}
-    </div>`;
+function homePageBody(affairsPreview, noticesPreview) {
+  const dailyPdf = dailyPdfBand();
+  return [
+    '<div>',
+    '<header class="pub-header"><div class="wrap pub-nav">',
+    `<a class="pub-brand" href="#top">${BRAND_ICON}Pariksha Saathi</a>`,
+    '<nav class="pub-nav-links"><a href="#features">Features</a><a data-discover="true" href="/learn/">Learn</a><a href="#current-affairs">Current Affairs</a><a href="#faq">FAQ</a><a data-discover="true" href="/privacy/">Privacy</a></nav>',
+    `<a class="pub-exams-link" data-discover="true" href="${EXAMS_LINK.en.href}" aria-label="${EXAMS_LINK.en.title}">${EXAMS_LINK.en.label}</a><a class="pub-cta" href="/onboarding">Start studying</a>`,
+    '</div></header>',
+
+    '<div id="top" class="hero"><div class="hero-rules"></div><div class="wrap hero-grid"><div>',
+    '<div class="eyebrow">SSC &middot; Banking &middot; Railways &middot; Police &middot; PSC</div>',
+    `<h1>Exam prep that works even where <em>the signal doesn't.</em></h1>`,
+    '<p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC, banking, railway, state police, CTET and state PSC exams — free, right in your browser.</p>',
+    `<div class="cta-row"><a class="btn-primary-cream" href="/onboarding">Start studying free</a><a class="btn-ghost-cream" href="#features">See what's inside</a></div>`,
+    `<div class="exam-pills">${HERO_EXAMS.map(([id, name]) => `<a data-discover="true" href="${examHubPath(id, 'en')}">${name}</a>`).join('')}<a class="exam-pills-more" data-discover="true" href="/exams/">More exams &rarr;</a></div>`,
+    `<div class="trust-bar">${TRUST_STATS.map((s) => `<div class="trust-stat"><div class="trust-value">${escapeHtml(s.value)}</div><div class="trust-label">${escapeHtml(s.label)}</div></div>`).join('')}</div>`,
+    '</div><div class="phone-stack"><div class="phone-glow"></div><div class="phone">',
+    // Keep in sync with the <picture> in HomePage.tsx (sizes, variants, dimensions, alt).
+    '<picture><source type="image/webp" srcset="/assets/screenshots/1-home-240.webp 240w, /assets/screenshots/1-home-480.webp 480w, /assets/screenshots/1-home-720.webp 720w" sizes="240px"><img src="/assets/screenshots/1-home-480.jpg" srcset="/assets/screenshots/1-home-240.jpg 240w, /assets/screenshots/1-home-480.jpg 480w, /assets/screenshots/1-home-720.jpg 720w" sizes="240px" width="240" height="427" loading="lazy" decoding="async" alt="Pariksha Saathi home screen showing streak, and a weak-topic nudge"></picture>',
+    '</div></div></div></div>',
+
+    dailyPdf
+      ? `<section id="daily-pdf" class="pub-section"><div class="wrap"><div class="daily-pdf-card"><div><div class="eyebrow">${escapeHtml(dailyPdf.eyebrow)}</div><h2>${escapeHtml(dailyPdf.title)}</h2><p>${escapeHtml(dailyPdf.body)}</p></div><div class="daily-pdf-actions"><a class="pub-cta" href="${dailyPdf.file}" download="">${escapeHtml(dailyPdf.buttonLabel)}</a><a data-discover="true" href="${dailyPdf.allHref}">${escapeHtml(dailyPdf.allLabel)} &rarr;</a></div></div></div></section>`
+      : '',
+
+    '<section id="features" class="pub-section"><div class="wrap">',
+    `<div class="section-head"><div class="eyebrow">What's inside</div><h2>Everything you need to get exam-ready</h2><p>Every feature below is built around one real constraint: aspirants studying on patchy connections, shared devices, and tight budgets.</p></div>`,
+    `<div class="feature-grid">${HOME_FEATURES.map((f) => `<div class="feature"><div class="mark mark-${f.accent}">${icon(f.icon)}</div><h3>${escapeHtml(f.title)}</h3><p>${escapeHtml(f.body)}</p></div>`).join('')}</div>`,
+    '</div></section>',
+
+    '<section class="pub-section pub-section-alt"><div class="wrap">',
+    '<div class="section-head"><div class="eyebrow">How it works</div><h2>Three steps, no installs</h2></div>',
+    `<div class="steps-grid">${HOW_IT_WORKS.map((s) => `<div class="step"><div class="step-num">${s.n}</div><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.body)}</p></div>`).join('')}</div>`,
+    '</div></section>',
+
+    '<section class="pub-section"><div class="wrap">',
+    `<div class="section-head"><div class="eyebrow">Exam coverage</div><h2>What's covered for each exam</h2></div>`,
+    `<div class="exam-coverage-grid">${EXAM_COVERAGE.map((e) => `<div class="exam-coverage-item"><h3>${escapeHtml(e.name)}</h3><p>${e.body}</p></div>`).join('')}</div>`,
+    '<p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a data-discover="true" href="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</a></p>',
+    '<p><a data-discover="true" href="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</a></p>',
+    '</div></section>',
+
+    '<section id="topic-lessons" class="pub-section"><div class="wrap">',
+    '<div class="section-head"><div class="eyebrow">Topic lessons</div><h2>Lessons, free to read</h2><p>The same topics the app teaches, as standalone lessons with worked solutions or key facts and practice questions — no account needed to read these.</p></div>',
+    `<div class="exam-coverage-grid">${LESSON_SUBJECTS.map((subject) => `<div class="exam-coverage-item"><h3>${escapeHtml(subject)}</h3><p>${escapeHtml(subjectBlurb(subject))}</p><a data-discover="true" href="/learn/#${subject.toLowerCase().replaceAll(' ', '-')}">Browse ${escapeHtml(subject)} lessons →</a></div>`).join('')}</div>`,
+    '<p><a data-discover="true" href="/learn/">Browse the complete lesson library →</a></p>',
+    '</div></section>',
+
+    '<section id="current-affairs" class="pub-section pub-section-alt"><div class="wrap">',
+    '<div class="section-head"><div class="eyebrow">Stay current</div><h2>Latest current affairs</h2><p>Dated, sourced capsules — updated regularly, each linking back to the original release.</p></div>',
+    affairsPreview.map((item) => updateCard(`/app/current-affairs/${item.id}/`, `${escapeHtml(item.period)} · ${item.editionDate.slice(0, 10)}`, item, `<div class="update-tags">${item.examTags.map(pill).join('')}</div>`)).join(''),
+    '<a class="update-readmore" data-discover="true" href="/app/current-affairs/">See all current affairs &rarr;</a>',
+    '</div></section>',
+
+    '<section class="pub-section"><div class="wrap">',
+    `<div class="section-head"><div class="eyebrow">Don't miss a date</div><h2>Latest exam notices &amp; alerts</h2><p>Admit cards, results and deadlines, verified against each exam body's own site.</p></div>`,
+    noticesPreview.map((item) => updateCard(`/app/exam-notices/${item.id}/`, `${escapeHtml(item.type)} · verified ${item.lastVerifiedAt.slice(0, 10)}`, item)).join(''),
+    '<a class="update-readmore" data-discover="true" href="/app/exam-notices/">See all exam notices &rarr;</a>',
+    '</div></section>',
+
+    '<section id="faq" class="pub-section pub-section-alt"><div class="wrap">',
+    '<div class="section-head"><div class="eyebrow">FAQ</div><h2>Common questions</h2></div>',
+    `<div class="faq-list">${FAQS.map((f, i) => `<details class="faq-item"${i === 0 ? ' open=""' : ''}><summary>${escapeHtml(f.q)}</summary><p>${escapeHtml(f.a)}</p></details>`).join('')}</div>`,
+    '</div></section>',
+
+    `<div class="wrap">${adSlot('8737623533')}</div>`,
+
+    '<footer class="pub-footer"><div class="wrap">',
+    `<div class="pub-footer-top"><div class="pub-footer-brand">${BRAND_ICON}Pariksha Saathi</div>`,
+    '<div class="pub-footer-links"><a data-discover="true" href="/about/">About &amp; editorial standards</a><a data-discover="true" href="/privacy/">Privacy Policy</a><a data-discover="true" href="/terms/">Terms of Use</a><a data-discover="true" href="/account-deletion/">Delete Account</a><a data-discover="true" href="/contact/">Contact</a><a data-discover="true" href="/downloads/">Daily PDF</a></div></div>',
+    '<p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. For information about accounts, study progress and website data, see our <a data-discover="true" href="/privacy/">Privacy Policy</a> for details.</p>',
+    '</div></footer>',
+    '</div>',
+  ].join('');
 }
 
 // The same four-and-four preview items as machine-readable JSON, for src/pages/HomePage.tsx to
-// seed react-query with (initialData) when React mounts over this markup - otherwise the two
-// sections would re-render as "Loading…" and push the FAQ around until the live fetch landed.
-// '<' is escaped so item text can never close the script element early.
+// seed react-query with (initialData): the component's first render then shows the same cards as
+// the HTML above, so React hydrates those sections too instead of rendering "Loading…" over them.
+// Emitted after #root (page()'s bodyExtra), never inside it - React would treat it as a node the
+// component failed to render. '<' is escaped so item text can never close the script element.
 function homePreviewJson(affairs, notices) {
   const json = JSON.stringify({ affairs, notices }).replaceAll('<', '\\u003c');
   return `<script type="application/json" id="home-preview">${json}</script>`;
@@ -884,6 +826,7 @@ async function main() {
     path: '/',
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
+    bodyExtra: homePreviewJson(affairs.slice(0, 4), notices.slice(0, 4)),
     type: 'website',
     // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
     structuredData: [

@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { ExamSelectionProvider } from './state/ExamSelectionContext';
@@ -18,7 +18,8 @@ const queryClient = new QueryClient({
 });
 
 function mount() {
-  createRoot(document.getElementById('root')!).render(
+  const container = document.getElementById('root')!;
+  const app = (
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
@@ -31,8 +32,23 @@ function mount() {
           </LanguageProvider>
         </AuthProvider>
       </QueryClientProvider>
-    </StrictMode>,
+    </StrictMode>
   );
+  // The home page is HYDRATED: its prerendered markup (homePageBody in scripts/prerender.mjs) is
+  // kept node for node by HomePage.tsx, so React attaches to the DOM the browser already painted
+  // instead of replacing it. That matters for the largest-contentful-paint metric: with
+  // createRoot().render() the hero <h1> was recreated when this bundle arrived (~2.4 s on slow 4G)
+  // and Chrome reported that new element as the LCP, even though the identical <h1> had been on
+  // screen since first contentful paint (0.8 s). Every other prerendered page keeps the plain
+  // render: their static HTML is hand-written article markup that is close to, but not identical
+  // with, the component output, and React 19 answers any hydration mismatch by throwing the tree
+  // away and client-rendering it anyway, with an error in the console. `vite dev` serves an empty
+  // #root for the home page too, so hydrate only when there is markup to hydrate.
+  if (window.location.pathname === '/' && container.firstElementChild) {
+    hydrateRoot(container, app);
+  } else {
+    createRoot(container).render(app);
+  }
 }
 
 // On a prerendered page (/learn/*, /compare/*, /exams/*...) real content is already on screen when

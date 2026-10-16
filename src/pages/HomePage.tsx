@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useExamSelection } from '../state/ExamSelectionContext';
@@ -5,11 +6,12 @@ import { useDocumentMeta } from '../hooks/useDocumentMeta';
 import { getCurrentAffairs } from '../api/currentAffairs';
 import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
-import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
+import { CurrentAffairsItemCard, previewText } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
 import { LESSON_SUBJECTS } from '../data/lessonSubjects.mjs';
 import { dailyPdfBand } from '../lib/dailyPdf.mjs';
 import { DIRECTORY_EXAM_IDS } from '../lib/examDirectory.mjs';
+import { HERO_EXAMS } from '../data/heroExams.mjs';
 import { examHubPath } from '../lib/examHubPath.mjs';
 import { subjectBlurb } from '../lib/lessonCredit.mjs';
 import type { CurrentAffairsItem, ExamUpdateNotice } from '../types/api';
@@ -88,7 +90,7 @@ const FEATURES = [
     icon: IconQuizBubble,
     accent: 'terracotta' as const,
     title: 'Weekly Current Affairs Quiz',
-    body: "A quiz built entirely from that week's real current-affairs items, so revision and current-affairs practice happen together.",
+    body: 'A quiz built entirely from that week’s real current-affairs items, so revision and current-affairs practice happen together.',
   },
   {
     icon: IconDigest,
@@ -182,12 +184,12 @@ const FAQS = [
 ];
 
 // scripts/prerender.mjs bakes the four newest current-affairs items and exam notices into the
-// static home page as a JSON <script id="home-preview"> as well as visible HTML. Read it once,
-// while the prerendered DOM still exists (React's first render replaces it), and hand it to
-// react-query as initialData: the sections then render populated on the very first paint instead
-// of flashing "Loading…" and shoving the FAQ down when the fetch lands (that swap was most of the
-// page's layout shift). initialDataUpdatedAt: 0 marks it stale, so the live list is still fetched
-// in the background and quietly replaces the build-time copy.
+// static home page as a JSON <script id="home-preview"> (placed after #root) as well as visible
+// HTML. Hand it to react-query as initialData so the first render already has the same four cards
+// the HTML shows: that is what lets React hydrate the prerendered sections instead of rendering
+// "Loading…" over them (see main.tsx), and it is why the FAQ never shifts when the fetch lands.
+// initialDataUpdatedAt: 0 marks it stale, so the live list is still fetched in the background and
+// quietly replaces the build-time copy.
 function readPrerenderedPreview(): { affairs?: CurrentAffairsItem[]; notices?: ExamUpdateNotice[] } {
   if (typeof document === 'undefined') return {};
   try {
@@ -199,23 +201,18 @@ function readPrerenderedPreview(): { affairs?: CurrentAffairsItem[]; notices?: E
 }
 const PRERENDERED_PREVIEW = readPrerenderedPreview();
 
-// The seven exams the page has always led with; each links to its exam page. The rest are one click away.
-const HERO_EXAMS: [string, string][] = [
-  ['ssc_cgl', 'SSC CGL'],
-  ['ssc_mts', 'SSC MTS'],
-  ['ssc_chsl', 'SSC CHSL'],
-  ['ibps_po', 'IBPS PO'],
-  ['ibps_clerk', 'IBPS Clerk'],
-  ['sbi_po', 'SBI PO'],
-  ['sbi_clerk', 'SBI Clerk'],
-];
-
 export function HomePage() {
   const dailyPdf = dailyPdfBand();
   const navigate = useNavigate();
   const { selectedExamIds } = useExamSelection();
 
-  function startStudying() {
+  // Rendered as <a href="/onboarding"> rather than a <button>, matching the prerendered HTML this
+  // page hydrates (and giving crawlers and no-JS visitors a real link). A plain click is routed
+  // client-side to the dashboard when exams are already chosen; modified clicks and middle clicks
+  // keep their native open-in-new-tab behaviour.
+  function startStudying(event: MouseEvent<HTMLAnchorElement>) {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
     navigate(selectedExamIds.length > 0 ? '/app/home' : '/onboarding');
   }
 
@@ -289,9 +286,9 @@ export function HomePage() {
           <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
             Exams
           </Link>
-          <button className="pub-cta" onClick={startStudying}>
+          <a className="pub-cta" href="/onboarding" onClick={startStudying}>
             Start studying
-          </button>
+          </a>
         </div>
       </header>
 
@@ -308,9 +305,9 @@ export function HomePage() {
               railway, state police, CTET and state PSC exams — free, right in your browser.
             </p>
             <div className="cta-row">
-              <button className="btn-primary-cream" onClick={startStudying}>
+              <a className="btn-primary-cream" href="/onboarding" onClick={startStudying}>
                 Start studying free
-              </button>
+              </a>
               <a className="btn-ghost-cream" href="#features">
                 See what's inside
               </a>
@@ -340,8 +337,7 @@ export function HomePage() {
               {/* Shown at 240 CSS px, so the 1080x1920 Play Store screenshot (210 KB) is far more
                   than any phone needs: these are 240/480/720-wide variants (WebP, JPEG fallback),
                   picked by device pixel ratio. Not the LCP element (that's the <h1>), so it can be
-                  lazy; width/height reserve its slot so nothing shifts when it arrives. Keep in
-                  sync with homePageBody() in scripts/prerender.mjs. */}
+                  lazy; width/height reserve its slot so nothing shifts when it arrives. */}
               <picture>
                 <source
                   type="image/webp"
@@ -377,7 +373,7 @@ export function HomePage() {
                 <a className="pub-cta" href={dailyPdf.file} download>
                   {dailyPdf.buttonLabel}
                 </a>
-                <Link to={dailyPdf.allHref}>{dailyPdf.allLabel} &rarr;</Link>
+                <Link to={dailyPdf.allHref}>{`${dailyPdf.allLabel} →`}</Link>
               </div>
             </div>
           </div>
@@ -444,8 +440,7 @@ export function HomePage() {
             ))}
           </div>
           <p className="exam-coverage-note">
-            Not sure whether to go for a bank-wide posting or State Bank of India specifically?{' '}
-            <Link to="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</Link>
+            Not sure whether to go for a bank-wide posting or State Bank of India specifically? <Link to="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</Link>
           </p>
           <p>
             <Link to="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</Link>
@@ -465,7 +460,7 @@ export function HomePage() {
               <div className="exam-coverage-item" key={subject}>
                 <h3>{subject}</h3>
                 <p>{subjectBlurb(subject)}</p>
-                <Link to={`/learn/#${subject.toLowerCase().replaceAll(' ', '-')}`}>Browse {subject} lessons →</Link>
+                <Link to={`/learn/#${subject.toLowerCase().replaceAll(' ', '-')}`}>{`Browse ${subject} lessons →`}</Link>
               </div>
             ))}
           </div>
@@ -484,7 +479,7 @@ export function HomePage() {
           {affairsQuery.data?.map((item) => (
             <CurrentAffairsItemCard key={item.id} item={item} />
           ))}
-          <Link to="/app/current-affairs" className="update-readmore">
+          <Link to="/app/current-affairs/" className="update-readmore">
             See all current affairs &rarr;
           </Link>
         </div>
@@ -499,18 +494,16 @@ export function HomePage() {
           </div>
           {noticesQuery.isLoading && <p>Loading…</p>}
           {latestNotices.map((item) => (
-            <Link key={item.id} to={`/app/exam-notices/${item.id}`} className="update-card-link">
+            <Link key={item.id} to={`/app/exam-notices/${item.id}/`} className="update-card-link">
               <Card className="update-card">
-                <div className="update-meta">
-                  {item.type} &middot; verified {item.lastVerifiedAt.slice(0, 10)}
-                </div>
+                <div className="update-meta">{`${item.type} · verified ${item.lastVerifiedAt.slice(0, 10)}`}</div>
                 <h3>{item.title}</h3>
-                <p>{item.summary.length > 150 ? `${item.summary.slice(0, 150).trimEnd()}…` : item.summary}</p>
+                <p>{previewText(item.summary)}</p>
                 <span className="update-readmore">Read more &rarr;</span>
               </Card>
             </Link>
           ))}
-          <Link to="/app/exam-notices" className="update-readmore">
+          <Link to="/app/exam-notices/" className="update-readmore">
             See all exam notices &rarr;
           </Link>
         </div>
@@ -556,8 +549,7 @@ export function HomePage() {
           </div>
           <p className="disclaimer">
             Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or
-            any government body. For information about accounts, study progress and website data, see our{' '}
-            <Link to="/privacy/">Privacy Policy</Link> for
+            any government body. For information about accounts, study progress and website data, see our <Link to="/privacy/">Privacy Policy</Link> for
             details.
           </p>
         </div>

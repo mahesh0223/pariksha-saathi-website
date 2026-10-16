@@ -155,4 +155,19 @@ const latestPdf = DAILY_PDF_EDITIONS[0];
 assert(home.includes(`href="${latestPdf.file}"`), 'home page is missing the latest daily PDF link');
 assert(existsSync(`dist${latestPdf.file}`), `the latest daily PDF is not in dist: ${latestPdf.file}`);
 assert(home.includes('href="/exams/"'), 'home page does not link to the exam chooser');
+// Hydration contract (2026-10-16): src/main.tsx HYDRATES the prerendered home page, so #root must hold exactly the
+// DOM HomePage.tsx renders - no whitespace-only text nodes between elements, CTAs as <a>, and nothing that is not a
+// component node (the preview JSON sits after #root). `npm run check:hydration` runs the real thing in Chrome; this is
+// the static guard that catches the common regressions without a browser.
+const homeRootStart = home.indexOf('<div id="root">') + '<div id="root">'.length;
+const homeRootEnd = home.indexOf('<script type="application/json" id="home-preview">');
+assert(homeRootStart > '<div id="root">'.length && homeRootEnd > homeRootStart, 'home page: #root or the preview JSON after it is missing');
+const homeRoot = home.slice(homeRootStart, homeRootEnd);
+assert(homeRoot.endsWith('</div>') && homeRoot.length > 5000, 'home page: the preview JSON must directly follow #root, outside it');
+const stray = homeRoot.match(/>\s+</);
+assert(!stray, `home page: whitespace between elements inside #root breaks hydration (near "${homeRoot.slice(Math.max(0, stray?.index - 60), stray?.index + 20)}")`);
+assert(!homeRoot.includes('<button'), 'home page: a <button> inside #root; HomePage.tsx renders its CTAs as <a href="/onboarding">');
+assert(homeRoot.includes('<a class="pub-cta" href="/onboarding">Start studying</a>') && homeRoot.includes('<a class="btn-primary-cream" href="/onboarding">Start studying free</a>'), 'home page: the Start studying CTAs are not the <a href="/onboarding"> links HomePage.tsx renders');
+assert(/<div class="card card-raised update-card">/.test(homeRoot), 'home page: preview cards must carry the same classes as the Card component (card card-raised update-card)');
+console.log('Verified the home page hydration contract statically (no whitespace text nodes in #root, anchors for CTAs, preview JSON outside #root).');
 console.log(`Verified the exam chooser (${DIRECTORY_EXAM_IDS.length} exams, both languages), the Exams button in every public header and the daily PDF link on the home page.`);

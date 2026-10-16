@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build && node scripts/prerender.mjs",
     "lint": "oxlint",
     "check:public": "node scripts/check-public-pages.mjs",
+    "check:hydration": "node scripts/check-hydration.mjs",
+    "serve:dist": "node scripts/serve-dist.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
     "pdf:daily": "python3 scripts/daily-pdf/make_pdf.py",
