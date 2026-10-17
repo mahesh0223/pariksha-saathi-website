@@ -764,8 +764,8 @@ function lessonPageBody(entry, lang) {
   const c = entry[lang];
   const topicKey = LESSON_CATALOG.find(item => item.slug === entry.slug)?.topicKey;
   const homeHref = '/';
-  const enPath = `/learn/${entry.slug}`;
-  const hiPath = `/hi/learn/${entry.slug}`;
+  const enPath = `/learn/${entry.slug}/`;
+  const hiPath = `/hi/learn/${entry.slug}/`;
   const otherLangHref = lang === 'hi' ? enPath : hiPath;
   const otherLangLabel = lang === 'hi' ? 'Read in English' : 'हिंदी में पढ़ें';
   const examNoticesLabel = lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices';

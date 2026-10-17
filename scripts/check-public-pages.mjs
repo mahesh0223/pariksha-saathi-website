@@ -123,7 +123,7 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
 // internal link without the slash therefore costs each crawler a redirect hop (Search Console reported 31
 // "Page with redirect" URLs on 2026-10-16, all of this kind) - so no built page may carry one.
 {
-  const slashless = /href="\/(app\/exam-notices|app\/current-affairs|exams|learn|hi\/exams|hi\/learn|(?:hi\/)?compare\/[a-z0-9-]+)"/g;
+  const slashless = /href="\/(app\/exam-notices|app\/current-affairs|(?:hi\/)?(?:exams|learn)|(?:hi\/)?(?:compare|learn|exams)\/[a-z0-9-]+)"/g;
   let offenders = 0;
   for (const file of files) {
     const hits = readFileSync(file, 'utf8').match(slashless);
@@ -147,6 +147,15 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
     assert(html.includes('item-quiz-static'), `${file}: missing the static inline question`);
   }
   console.log(`Verified ${itemPages.length} current-affairs item page(s) carry their inline question and link to their neighbouring items.`);
+}
+
+// Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a
+// notice page that only restates the official text is the thin page AdSense rejected on 10 Oct 2026.
+{
+  const noticePages = files.filter((f) => /\/app\/exam-notices\/[a-z0-9]+\/index\.html$/.test(f));
+  assert(noticePages.length > 0, 'no exam-notice pages were built');
+  for (const file of noticePages) assert(readFileSync(file, 'utf8').includes('class="news-learning"'), `${file}: notice page without guidance - add an entry to examNoticeGuidance.mjs`);
+  console.log(`Verified ${noticePages.length} exam-notice page(s) carry guidance beyond the official text.`);
 }
 
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and
