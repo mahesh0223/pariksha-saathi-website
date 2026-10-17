@@ -31,6 +31,7 @@ import { shortenTitle } from '../src/lib/seoTitle.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
+import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
@@ -1223,7 +1224,7 @@ async function main() {
     const q = questions[0];
     return `<section class="item-quiz item-quiz-static"><h2>${t.quiz}</h2><p class="item-quiz-text">${escapeHtml(q.text)}</p><ol class="item-quiz-static-options">${q.options
       .map((o) => `<li>${escapeHtml(o)}</li>`)
-      .join('')}</ol><details class="item-quiz-static-answer"><summary>${t.reveal}</summary><p><strong>${t.answer}:</strong> ${escapeHtml(q.options[q.correctOptionIndex])}</p><p>${escapeHtml(q.explanation)}</p></details></section>`;
+      .join('')}</ol><details class="item-quiz-static-answer"><summary>${t.reveal}</summary><p><strong>${t.answer}:</strong> ${escapeHtml(q.options[q.correctOptionIndex])}</p><p>${escapeHtml(q.explanation)}</p></details>${reportQuestionLinkHtml(q, item.languageCode === 'hi' ? 'hi' : 'en', `current affairs item ${item.id}`)}</section>`;
   }
   const itemsByLanguage = [
     { lang: 'en', items: affairs, twins: new Map(affairsHi.map((i) => [i.sourceUrl, i])) },

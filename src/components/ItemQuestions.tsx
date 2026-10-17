@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getItemQuestions } from '../api/currentAffairs';
+import { reportQuestionLabel, reportQuestionMailto } from '../lib/reportQuestion.mjs';
 import { QuizOption, type OptionState } from './ui/Primitives';
 import type { LanguageCode } from '../state/LanguageContext';
 import type { Question } from '../types/api';
@@ -63,6 +64,12 @@ function ItemQuestion({ question, language }: { question: Question; language: La
           {question.explanation}
         </p>
       )}
+      <a
+        className="report-question"
+        href={reportQuestionMailto({ id: question.id, topicKey: question.topicKey, languageCode: question.languageCode ?? language, page: 'current affairs item' })}
+      >
+        {reportQuestionLabel(language)}
+      </a>
     </div>
   );
 }

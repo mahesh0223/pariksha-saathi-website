@@ -27,3 +27,16 @@
   line-height: 1.6;
   color: var(--ink);
 }
+/* "Report this question" (src/lib/reportQuestion.mjs) - the same quiet link under the inline current-affairs
+   question, its prerendered static copy and every quiz-result card. */
+.report-question {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.report-question:hover {
+  color: var(--navy);
+}

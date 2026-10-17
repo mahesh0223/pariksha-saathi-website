@@ -81,3 +81,16 @@
 .ledger-wrong {
   color: var(--bad);
 }
+/* "Report this question" (src/lib/reportQuestion.mjs) - same rule as ItemQuestions.css; this page's
+   stylesheet loads on its own, so it carries its own copy. */
+.report-question {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.report-question:hover {
+  color: var(--navy);
+}

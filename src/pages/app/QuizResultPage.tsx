@@ -5,6 +5,7 @@ import { diagnose, markingLedger } from '../../domain/quizResultAnalysis';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
 import { getCutoffs } from '../../api/cutoffs';
 import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
+import { reportQuestionLabel, reportQuestionMailto } from '../../lib/reportQuestion.mjs';
 import type { Question } from '../../types/api';
 import { Button, Card, EmptyState, QuizOption } from '../../components/ui/Primitives';
 import './QuizResultPage.css';
@@ -121,6 +122,12 @@ export function QuizResultPage() {
                 <p className="result-explanation">{question.explanation}</p>
               </>
             )}
+            <a
+              className="report-question"
+              href={reportQuestionMailto({ id: question.id, topicKey: question.topicKey, languageCode: question.languageCode, page: 'quiz result' })}
+            >
+              {reportQuestionLabel('en')}
+            </a>
           </Card>
         );
       })}
