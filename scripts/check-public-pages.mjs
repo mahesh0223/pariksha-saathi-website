@@ -18,6 +18,7 @@ import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
 import { PUBLIC_PAGES, publicPageMeta, SITE_SHOWS_ADS } from '../src/data/publicPages.mjs';
 import { PUBLIC_PAGE_ROUTES } from '../src/data/publicPageRoutes.mjs';
 import { TRUST_LINES } from '../src/data/trustLines.mjs';
+import { NOTICE_GUIDANCE } from '../src/data/examNoticeGuidance.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 // The entry bundle routes from these slim lists instead of the content modules (see App.tsx) -
@@ -175,6 +176,19 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
   } else {
     for (const file of noticePages) assert(readFileSync(file, 'utf8').includes('class="news-learning"'), `${file}: notice page without guidance - add an entry to examNoticeGuidance.mjs`);
     console.log(`Verified ${noticePages.length} exam-notice page(s) carry guidance beyond the official text.`);
+    // Since 17 Oct 2026 the Hindi row of every notice gets its own static page too (the app's Hindi UI and the
+    // Hindi hub pages link to the Hindi id, which 404ed before). Both halves of every hand-verified pair must
+    // exist and point at each other with hreflang.
+    for (const { enId, hiId } of NOTICE_GUIDANCE) {
+      for (const [id, lang, twin] of [[enId, 'en', hiId], [hiId, 'hi', enId]]) {
+        const file = `dist/app/exam-notices/${id}/index.html`;
+        assert(existsSync(file), `${file}: ${lang} notice page not built`);
+        const html = readFileSync(file, 'utf8');
+        assert(html.includes(`<html lang="${lang}">`), `${file}: html lang is not ${lang}`);
+        assert(html.includes(`hreflang="${lang === 'en' ? 'hi' : 'en'}" href="https://parikshasaathi.com/app/exam-notices/${twin}/"`), `${file}: missing hreflang to its ${lang === 'en' ? 'Hindi' : 'English'} twin ${twin}`);
+      }
+    }
+    console.log(`Verified ${NOTICE_GUIDANCE.length} notice pair(s): English and Hindi pages built, hreflang both ways.`);
   }
 }
 

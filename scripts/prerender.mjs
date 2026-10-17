@@ -22,7 +22,7 @@ import { join } from 'node:path';
 // syllabus/lesson pages' EN/HI content either way, shared with the React components under
 // src/pages/ - just without compile-time typing on the data shape.
 import { currentAffairsDigest, learningNote } from '../src/data/currentAffairsReading.mjs';
-import { noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
+import { knownCounterpartId, noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
 import { PUBLIC_PAGES, publicPageBody, publicPageMeta, publicPageStructuredData } from '../src/data/publicPages.mjs';
 import { trustLinesHtml, trustStatsHtml } from '../src/data/trustLines.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
@@ -895,6 +895,10 @@ async function main() {
   const affairs = await fetchAllCurrentAffairs();
   const affairsHi = await fetchAllCurrentAffairs('hi');
   const notices = await fetch(`${API_BASE}/v1/exam-updates`).then((r) => r.json());
+  // Hindi rows have their own ids, and the app's Hindi UI shares/opens /app/exam-notices/<hindi id>/ - which
+  // 404ed on a hard load until 17 Oct 2026 because only the English rows got a static page (the Hindi hub
+  // pages' "recent notices" linked to those ids too). Prerendered below alongside the English pages.
+  const noticesHi = await fetch(`${API_BASE}/v1/exam-updates?lang=hi`).then((r) => r.json());
 
   // --- Homepage --- the SPA's own dist/index.html is otherwise just an empty <div id="root">
   // until React mounts - the single most important page to have real content in, since it's what
@@ -1356,28 +1360,46 @@ async function main() {
     },
   }));
 
-  for (const item of notices) {
+  const NOTICE_TEXT = {
+    en: { back: 'Exam Notices &amp; Alerts', verified: 'verified', dates: 'Important dates', guidance: 'What this means for you', official: 'Official notification', crumb: 'Exam Notices & Alerts' },
+    hi: { back: 'परीक्षा सूचनाएं', verified: 'सत्यापित', dates: 'महत्वपूर्ण तिथियाँ', guidance: 'आपके लिए इसका क्या मतलब है', official: 'आधिकारिक अधिसूचना', crumb: 'परीक्षा सूचनाएं' },
+  };
+  for (const [lang, list] of [['en', notices], ['hi', noticesHi]]) for (const item of list) {
+    const t = NOTICE_TEXT[lang];
+    // The hand-verified pairing table (examNoticeGuidance.mjs) is the only safe way to find the twin - see its
+    // comment on why officialUrl cannot identify one notice. No known twin: no hreflang, same as before.
+    const twinId = knownCounterpartId(item.id);
+    const itemPath = `/app/exam-notices/${item.id}/`;
+    const twinPath = twinId ? `/app/exam-notices/${twinId}/` : undefined;
     const dateRows = Object.entries(item.importantDates ?? {})
       .map(([label, value]) => `<div class="detail-date-row"><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`)
       .join('');
     const detailBody = publicContentFrame(`
       <article class="detail-page">
-        <a href="/app/exam-notices/" class="detail-back">&larr; Exam Notices &amp; Alerts</a>
-        <div class="detail-meta">${escapeHtml(item.type)} &middot; verified ${item.lastVerifiedAt.slice(0, 10)}</div>
+        <a href="/app/exam-notices/" class="detail-back">&larr; ${t.back}</a>
+        <div class="detail-meta">${escapeHtml(item.type)} &middot; ${t.verified} ${item.lastVerifiedAt.slice(0, 10)}</div>
         <h1>${escapeHtml(item.title)}</h1>
         <p class="detail-body">${escapeHtml(item.summary)}</p>
-        ${dateRows ? `<div class="detail-dates"><h2>Important dates</h2><dl>${dateRows}</dl></div>` : ''}
-        ${noticeGuidance(item.id, 'en') ? `<section class="news-learning"><h2>What this means for you</h2><p>${escapeHtml(noticeGuidance(item.id, 'en'))}</p></section>` : ''}
-        <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">Official notification &#8599;</a></div>
+        ${dateRows ? `<div class="detail-dates"><h2>${t.dates}</h2><dl>${dateRows}</dl></div>` : ''}
+        ${noticeGuidance(item.id, lang) ? `<section class="news-learning"><h2>${t.guidance}</h2><p>${escapeHtml(noticeGuidance(item.id, lang))}</p></section>` : ''}
+        <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">${t.official} &#8599;</a></div>
         ${adSlot('5664651910')}
       </article>
     `);
     writePage(`app/exam-notices/${item.id}`, page({
-      title: seoNoticeTitle(item.examId, item.type, item.title, item.lastVerifiedAt.slice(0, 4)),
+      title: lang === 'hi' ? shortenTitle(item.title) : seoNoticeTitle(item.examId, item.type, item.title, item.lastVerifiedAt.slice(0, 4)),
       description: item.summary.slice(0, 155),
-      path: `/app/exam-notices/${item.id}/`,
+      path: itemPath,
       assets,
       bodyHtml: detailBody,
+      lang,
+      alternateLanguages: twinPath
+        ? [
+            { lang, path: itemPath },
+            { lang: lang === 'en' ? 'hi' : 'en', path: twinPath },
+            { lang: 'x-default', path: lang === 'en' ? itemPath : twinPath },
+          ]
+        : undefined,
       structuredData: [
         {
           '@context': 'https://schema.org',
@@ -1385,6 +1407,7 @@ async function main() {
           headline: item.title,
           description: item.summary,
           dateModified: item.lastVerifiedAt,
+          inLanguage: lang,
           author: { '@type': 'Organization', name: SITE_NAME },
           publisher: { '@type': 'Organization', name: SITE_NAME },
         },
@@ -1393,13 +1416,13 @@ async function main() {
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: 'Exam Notices & Alerts', item: `${SITE_URL}/app/exam-notices/` },
+            { '@type': 'ListItem', position: 2, name: t.crumb, item: `${SITE_URL}/app/exam-notices/` },
             { '@type': 'ListItem', position: 3, name: item.title },
           ],
         },
       ],
     }));
-    sitemapUrls.push({ loc: `/app/exam-notices/${item.id}/`, priority: '0.7', lastmod: item.lastVerifiedAt.slice(0, 10) });
+    sitemapUrls.push({ loc: itemPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: item.lastVerifiedAt.slice(0, 10) });
   }
 
   // --- sitemap.xml ---
@@ -1424,7 +1447,7 @@ ${sitemapUrls
   await regenerateServiceWorker();
 
   console.log(
-    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} English + ${noticesHi.length} Hindi exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
 }
 
