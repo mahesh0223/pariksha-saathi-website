@@ -45,6 +45,35 @@ const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
 // PRERENDER_API_BASE points a local build at a local backend for routes not deployed to production yet.
 const API_BASE = process.env.PRERENDER_API_BASE ?? 'https://api.parikshasaathi.com';
+
+// Every API call in this script goes through fetch(). A server deploy restarts the API for ~80-100 s, and a
+// Cloudflare build that lands in that window used to die on an empty 502 body ("Unexpected end of JSON input" -
+// it happened twice on 17 Oct 2026, the second time silently leaving the live site one commit behind). So API
+// requests are retried on a network error, a timeout or a 5xx, every 20 s for up to ~2 minutes, before the
+// build is allowed to fail. Non-API requests and 4xx answers pass straight through.
+{
+  const realFetch = globalThis.fetch;
+  const ATTEMPTS = 7;
+  const WAIT_MS = 20_000;
+  globalThis.fetch = async (url, init = {}) => {
+    if (!String(url).startsWith(API_BASE)) return realFetch(url, init);
+    let lastError;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      try {
+        const response = await realFetch(url, { ...init, signal: init.signal ?? AbortSignal.timeout(30_000) });
+        if (response.status < 500) return response;
+        lastError = new Error(`HTTP ${response.status}`);
+      } catch (error) {
+        lastError = error;
+      }
+      if (attempt < ATTEMPTS) {
+        console.warn(`API ${url} failed (${lastError.message}); retrying in ${WAIT_MS / 1000}s (${attempt}/${ATTEMPTS - 1})`);
+        await new Promise((resolve) => setTimeout(resolve, WAIT_MS));
+      }
+    }
+    throw new Error(`API ${url} still failing after ${ATTEMPTS} attempts: ${lastError.message}`);
+  };
+}
 const SITE_NAME = 'Pariksha Saathi';
 // Real publish dates for static pages that have no per-entry date field of their own - taken from
 // the git commit that actually shipped them (489ecf6 and 9232611), not guessed.
