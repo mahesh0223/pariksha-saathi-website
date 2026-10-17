@@ -10,6 +10,16 @@ Decision document for the owner. Everything marked "verified" was checked agains
 4. **Waiting costs almost nothing:** at today's traffic (about 530 Search impressions a day, double-digit clicks) AdSense would pay well under 2,000 rupees a month by any published Indian RPM benchmark; a second rejection costs a lockout of unknown length.
 5. **The six-month India rule is not a current published Google rule.** It is absent from Google's eligibility page in every snapshot from 2020 to 2026 and only survives in 2009-era forum quotes and, as generic "at least six months" advice, in a 2017 Google blog FAQ. Site age is still the weakest signal we have, but it is not a hard gate, so November is worth one attempt if the gates are met.
 
+## 0. Status after the overnight fixes (17 Oct 2026, 01:30 IST)
+
+Of the three gates in section 4 for a mid-November attempt:
+
+- **Notices fixed and gated - done.** All 27 live exam-notice pages now carry a "What this means for you" paragraph (EN + HI), and `check:public` fails the production build if a notice page lacks one (commits `080aca3`, `e4ef8ea`).
+- **Hindi navigation - half done.** The 288 lesson pages' language-switch link now carries its trailing slash (no more 308 hop), and the slash guard covers slug-level learn / exams / compare links. `/hi/learn/` and `/hi/` still return 404 - scheduled as part of tomorrow's T1 in `pariksha-saathi/docs/plans/2026-10-17-working-plan.md`.
+- **Indexing targets - wait and watch.** Every item page now carries its MCQ statically and links to its neighbours (419-667 words, was ~360); hubs list recent items; IndexNow re-pinged. The owner still has to resubmit the sitemap and click "Validate fix" on the redirect / alternate-canonical reasons in Search Console. Re-check the coverage report around 1 November.
+
+Nothing above changes the verdict: do not request a review before the week of 16 November 2026.
+
 ## 1. Our numbers against each requirement
 
 Google publishes very few numbers. Where a row says "no published threshold", the comparison is against the wording of Google's page, not a figure.
