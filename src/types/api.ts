@@ -41,6 +41,12 @@ export interface Question {
   sourceType: string;
   isSample: boolean;
   year?: number | null;
+  /** Previous-year questions only (sourceType PYQ): the official paper the question was asked in. Null elsewhere. */
+  pyqExamId?: string | null;
+  pyqPaper?: string | null;
+  pyqDate?: string | null;
+  pyqShift?: string | null;
+  pyqSourceUrl?: string | null;
   status: string;
   version: number;
 }

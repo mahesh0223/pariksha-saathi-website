@@ -129,6 +129,13 @@ for (const examId of HUB_EXAM_IDS) {
     assert(html.includes('hub-current-affairs'), `${urlPath}: missing the recent current-affairs block`);
     assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
     assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+    // Previous-year questions, when a hub has any: every paper row links to the official paper/key it came from.
+    const pyqBlock = html.match(/<ul class="hub-notices hub-pyq">([^]*?)<\/ul>/);
+    if (pyqBlock) {
+      for (const li of pyqBlock[1].matchAll(/<li>([^]*?)<\/li>/g)) {
+        assert(/href="https?:\/\//.test(li[1]), `${urlPath}: a previous-year paper row has no official source link: ${li[1].slice(0, 80)}`);
+      }
+    }
   }
 }
 console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);

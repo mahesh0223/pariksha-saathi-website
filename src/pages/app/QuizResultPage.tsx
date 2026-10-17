@@ -5,6 +5,7 @@ import { diagnose, markingLedger } from '../../domain/quizResultAnalysis';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
 import { getCutoffs } from '../../api/cutoffs';
 import { CutoffComparisonCard } from '../../components/CutoffComparisonCard';
+import { PyqBadge } from '../../components/PyqBadge';
 import { reportQuestionLabel, reportQuestionMailto } from '../../lib/reportQuestion.mjs';
 import type { Question } from '../../types/api';
 import { Button, Card, EmptyState, QuizOption } from '../../components/ui/Primitives';
@@ -98,6 +99,7 @@ export function QuizResultPage() {
         if (!question) return null;
         return (
           <Card key={answer.questionId} className="result-question">
+            <PyqBadge question={question} />
             <p className="result-question-text">{question.text}</p>
             <div className="result-options">
               {question.options.map((option, i) => {

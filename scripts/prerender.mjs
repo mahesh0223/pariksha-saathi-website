@@ -1157,6 +1157,10 @@ async function main() {
       throw new Error(`Build check failed: ${examId} is listed in HUB_EXAM_IDS but the API has no published fact sheet for it`);
     }
     const cutoffs = await fetch(`${API_BASE}/v1/exams/${examId}/cutoffs`).then((r) => r.json());
+    // Previous-year question counts per official paper - zero for every exam until the owner supplies a
+    // paper (server docs/PYQ.md). A server that does not have the route yet answers 404; that must not
+    // fail the build, it just renders no block.
+    const pyq = await fetch(`${API_BASE}/v1/exams/${examId}/pyq-summary`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
     const examName = EXAM_NAMES[examId] ?? examId;
     const slug = examHubSlug(examId);
     const enNotices = await fetch(`${API_BASE}/v1/exam-updates?examIds=${examId}&lang=en`).then((r) => r.json());
@@ -1177,7 +1181,7 @@ async function main() {
         description: meta.description,
         path: urlPath,
         assets,
-        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, items: hubItems(examId, lang === 'hi' ? affairsHi : affairs), lang, links }), lang),
+        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, items: hubItems(examId, lang === 'hi' ? affairsHi : affairs), lang, links, pyq }), lang),
         type: 'article',
         lang,
         alternateLanguages: [

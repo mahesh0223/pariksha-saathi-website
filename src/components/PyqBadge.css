@@ -1,0 +1,11 @@
+.pyq-badge {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-accent, #1f3a5f);
+  background: var(--color-accent-soft, rgba(31, 58, 95, 0.1));
+}

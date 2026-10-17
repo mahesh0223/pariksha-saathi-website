@@ -78,6 +78,9 @@ const T = {
     dateSource: 'Source',
     dateTo: 'to',
     officialNotice: 'official notice',
+    pyq: 'Previous-year questions',
+    pyqIntro: (n, papers) => `${n} question${n === 1 ? '' : 's'} transcribed from ${papers} official paper${papers === 1 ? '' : 's'} and checked against the official answer keys; cancelled questions left out. Practise them in the app with "Previous-year questions only".`,
+    pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
     cutoffs: 'Cut-off marks by year and category',
     cutoffNote: (max) => `Marks are out of ${max}. Cut-offs change every cycle and are no promise for the next one; use them to see how competitive each category has been.`,
     category: 'Category',
@@ -145,6 +148,9 @@ const T = {
     dateSource: 'स्रोत',
     dateTo: 'से',
     officialNotice: 'आधिकारिक सूचना',
+    pyq: 'पिछले वर्षों के प्रश्न',
+    pyqIntro: (n, papers) => `${papers} आधिकारिक पेपर से ${n} प्रश्न, आधिकारिक उत्तर कुंजी से जाँचे हुए; रद्द प्रश्न शामिल नहीं। ऐप में "सिर्फ़ पिछले वर्षों के प्रश्न" टॉगल से अभ्यास करें।`,
+    pyqCount: (n) => `${n} प्रश्न`,
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
     cutoffNote: (max) => `अंक ${max} में से हैं। कट-ऑफ हर चक्र में बदलता है और अगले चक्र की गारंटी नहीं है; इससे बस यह समझें कि हर श्रेणी में प्रतिस्पर्धा कितनी रही है।`,
     category: 'श्रेणी',
@@ -297,7 +303,7 @@ function cutoffTablesHtml(cutoffs, lang, t) {
 }
 
 // The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
-export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {} }) {
+export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null }) {
   const t = T[lang];
   const fact = facts[0];
   const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
@@ -375,6 +381,18 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
 
   if (cutoffs.length > 0) {
     html += `<h2>${t.cutoffs}</h2>${cutoffTablesHtml(cutoffs, lang, t)}<p class="hub-facts">${esc(legendText([...new Set(cutoffs.map((c) => c.category))], lang, t))}</p>`;
+  }
+
+  // Previous-year questions: one row per official paper and shift, each linked to the official paper/key it
+  // was transcribed from (GET /v1/exams/:id/pyq-summary). Rendered only once at least one paper exists - which,
+  // until the owner supplies the first paper and answer key, is no exam (server docs/PYQ.md).
+  if (pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
+    html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length))}</p><ul class="hub-notices hub-pyq">${pyq.papers
+      .map(
+        (p) =>
+          `<li><a href="${esc(p.sourceUrl)}" rel="noopener">${esc(p.paper)}${p.shift ? ` · ${esc(p.shift)}` : ''}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}</span></li>`,
+      )
+      .join('')}</ul>`;
   }
 
   if (notices.length > 0) {

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQueries } from '@tanstack/react-query';
 import { useLanguage } from '../../state/LanguageContext';
+import { PyqBadge } from '../../components/PyqBadge';
 import { useAuth } from '../../state/AuthContext';
 import { useSelectedTopics } from '../../hooks/useSelectedTopics';
 import { groupBySubject, speedDrillPool } from '../../domain/topicGrouping';
@@ -184,6 +185,7 @@ export function QuizPage({ quizType }: { quizType: QuizType }) {
       {anyFallback && <Note>{ENGLISH_FALLBACK_NOTE}</Note>}
 
       <div className="quiz-question-card">
+        <PyqBadge question={current} />
         <p className="quiz-question-text">{current.text}</p>
         <div className="quiz-options">
           {current.options.map((option, i) => (
