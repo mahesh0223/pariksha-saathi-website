@@ -37,6 +37,7 @@ import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
 import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
+import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -429,6 +430,7 @@ function homePageBody(affairsPreview, noticesPreview) {
           </div>
           <p class="exam-coverage-note">Not sure whether to go for a bank-wide posting or State Bank of India specifically? <a href="/compare/ibps-po-vs-sbi-po/">See how IBPS PO and SBI PO actually differ &rarr;</a></p>
           <p><a href="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</a></p>
+          <p><a href="/exams/calendar/">Exam calendar: every official date across these exams, this month onwards &rarr;</a></p>
         </div>
       </section>
       <section id="topic-lessons" class="pub-section">
@@ -1151,11 +1153,15 @@ async function main() {
   // --- Exam hub pages --- one per listed exam x language, built from the server's sourced exam facts
   // and official cut-offs (src/lib/examHub.mjs). An exam listed in HUB_EXAM_IDS with no published fact
   // sheet fails the build: a hub must never ship empty or fall back to unsourced numbers.
+  // Collected across the hub loop for the exam calendar (src/lib/examCalendar.mjs) below.
+  const calendarFacts = {};
+  const calendarNotices = { en: {}, hi: {} };
   for (const examId of HUB_EXAM_IDS) {
     const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
     if (!Array.isArray(facts) || facts.length === 0) {
       throw new Error(`Build check failed: ${examId} is listed in HUB_EXAM_IDS but the API has no published fact sheet for it`);
     }
+    calendarFacts[examId] = facts;
     const cutoffs = await fetch(`${API_BASE}/v1/exams/${examId}/cutoffs`).then((r) => r.json());
     // Previous-year question counts per official paper - zero for every exam until the owner supplies a
     // paper (server docs/PYQ.md). A server that does not have the route yet answers 404; that must not
@@ -1165,6 +1171,8 @@ async function main() {
     const slug = examHubSlug(examId);
     const enNotices = await fetch(`${API_BASE}/v1/exam-updates?examIds=${examId}&lang=en`).then((r) => r.json());
     const hiNotices = await fetch(`${API_BASE}/v1/exam-updates?examIds=${examId}&lang=hi`).then((r) => r.json());
+    calendarNotices.en[examId] = enNotices;
+    calendarNotices.hi[examId] = hiNotices.length > 0 ? hiNotices : enNotices;
     const hasSyllabus = EXAM_SYLLABI.some((e) => e.slug === slug);
     const hasJobProfile = EXAM_JOB_PROFILES.some((e) => e.slug === slug);
     for (const lang of ['en', 'hi']) {
@@ -1223,6 +1231,32 @@ async function main() {
       ],
     }));
     sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.9' : '0.8', lastmod: directoryLastmod });
+  }
+
+  // --- Exam calendar (/exams/calendar/, /hi/exams/calendar/): every fixed date across the hub exams, this
+  // month onwards, from the fact sheets and notices fetched above - nothing tentative, every row sourced
+  // (src/lib/examCalendar.mjs; check-public-pages.mjs verifies each row). "Today" is the IST build date.
+  const calendarToday = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+  for (const lang of ['en', 'hi']) {
+    const groups = calendarRows({ factsByExam: calendarFacts, noticesByExam: calendarNotices[lang], lang, today: calendarToday });
+    const summary = calendarSummary(groups);
+    const meta = examCalendarMeta(lang, summary);
+    const urlPath = examCalendarPath(lang);
+    writePage(urlPath.replace(/^\/|\/$/g, ''), page({
+      title: meta.title,
+      description: meta.description,
+      path: urlPath,
+      assets,
+      bodyHtml: examHubPageBody(examCalendarBody({ groups, lang }), lang),
+      type: 'website',
+      lang,
+      alternateLanguages: [
+        { lang: 'en', path: examCalendarPath('en') },
+        { lang: 'hi', path: examCalendarPath('hi') },
+        { lang: 'x-default', path: examCalendarPath('en') },
+      ],
+    }));
+    sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: summary.lastVerified ?? calendarToday });
   }
 
   // --- Current affairs ---

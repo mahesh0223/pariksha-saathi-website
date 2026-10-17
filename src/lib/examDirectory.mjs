@@ -46,6 +46,7 @@ const T = {
     jobProfile: 'Job profile and pay',
     soon: 'Page coming soon',
     practise: 'Practise in the app',
+    calendar: 'Exam calendar: every official date across these exams, this month onwards',
     startTitle: 'Ready to practise?',
     startBody: 'Pick your exam and start with a free topic quiz. No account needed.',
     start: 'Start studying free',
@@ -62,6 +63,7 @@ const T = {
     jobProfile: 'जॉब प्रोफ़ाइल और वेतन',
     soon: 'पृष्ठ जल्द आ रहा है',
     practise: 'ऐप में अभ्यास करें',
+    calendar: 'परीक्षा कैलेंडर: इन परीक्षाओं की हर आधिकारिक तिथि, इस महीने से आगे',
     startTitle: 'अभ्यास शुरू करने के लिए तैयार?',
     startBody: 'अपनी परीक्षा चुनें और मुफ़्त टॉपिक क्विज़ से शुरुआत करें। खाते की ज़रूरत नहीं।',
     start: 'मुफ़्त पढ़ाई शुरू करें',
@@ -80,6 +82,7 @@ export function examDirectoryBody({ lang = 'en', hubIds = [], syllabusSlugs = []
   const otherPath = examDirectoryPath(lang === 'hi' ? 'en' : 'hi');
   let html = `<div class="compare-top-row"><a href="${lang === 'hi' ? '/hi/' : '/'}" class="detail-back">&larr; ${t.home}</a><a href="${otherPath}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
   html += `<h1>${t.h1}</h1><p class="compare-lede">${esc(t.lede(DIRECTORY_EXAM_IDS.length))}</p>`;
+  html += `<p class="exam-dir-calendar"><a href="${prefix}/exams/calendar/">${t.calendar} &rarr;</a></p>`;
   for (const group of GROUPS) {
     html += `<section class="exam-dir-group" id="${group.key}"><h2>${esc(group.title[lang] ?? group.title.en)}</h2><div class="exam-dir-grid">`;
     for (const examId of group.exams) {

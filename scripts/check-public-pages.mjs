@@ -12,6 +12,7 @@ import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
+import { examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
 import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
@@ -139,6 +140,30 @@ for (const examId of HUB_EXAM_IDS) {
   }
 }
 console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
+
+// Exam calendar: a date never appears without the official document it was read from and the day it was
+// checked, and nothing tentative gets in (src/lib/examCalendar.mjs filters; this proves the output).
+for (const lang of ['en', 'hi']) {
+  const urlPath = examCalendarPath(lang);
+  const file = `dist${urlPath}index.html`;
+  assert(existsSync(file), `${urlPath}: calendar page not built`);
+  const html = readFileSync(file, 'utf8');
+  const rows = [...html.matchAll(/<tr><td class="cal-date">([^]*?)<\/tr>/g)].map((m) => m[1]);
+  assert(rows.length > 0, `${urlPath}: the calendar has no rows`);
+  for (const row of rows) {
+    assert(/<td class="cal-source"><a href="https?:\/\//.test(row), `${urlPath}: a calendar row has no official source link: ${row.slice(0, 100)}`);
+    assert(/\d{4}-\d{2}-\d{2}<\/span>/.test(row), `${urlPath}: a calendar row has no checked date: ${row.slice(0, 100)}`);
+    assert(!/tentative|proposed|अनुमानित|प्रस्तावित/i.test(row), `${urlPath}: a tentative/proposed date slipped into the calendar: ${row.slice(0, 100)}`);
+  }
+  assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
+  assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+  // Every hub links to the calendar and the calendar links back to every exam it lists.
+  for (const examId of HUB_EXAM_IDS) {
+    const hub = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8');
+    assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the exam-calendar link`);
+  }
+  console.log(`Verified the ${lang} exam calendar: ${rows.length} row(s), each with an official source and a checked date; linked from every hub.`);
+}
 
 // Every prerendered page lives at a trailing-slash URL and the host 308-redirects the slash-less form. An
 // internal link without the slash therefore costs each crawler a redirect hop (Search Console reported 31

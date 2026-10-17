@@ -37,6 +37,21 @@
   font-size: 0.9rem;
   color: var(--muted);
 }
+.exam-dir-calendar {
+  margin: 4px 0 8px;
+  font-weight: 600;
+}
+.calendar-month {
+  margin: 28px 0 6px;
+}
+.calendar-table td.cal-date {
+  white-space: nowrap;
+  font-weight: 600;
+}
+.calendar-table td.cal-source span {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
 .exam-dir-start {
   margin: 28px 0 8px;
   padding: 18px 20px;

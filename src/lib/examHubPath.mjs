@@ -4,7 +4,7 @@
 // ExamHubPage and the prerender script need. examHub.mjs re-exports these, so existing imports
 // keep working; import from here when the importer ships in the entry chunk.
 
-const MONTHS = {
+export const MONTHS = {
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्टूबर', 'नवंबर', 'दिसंबर'],
 };

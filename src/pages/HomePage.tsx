@@ -457,6 +457,9 @@ export function HomePage() {
           <p>
             <Link to="/exams/">Browse all exams: SSC, banking, railways, state police, CTET and state PSC &rarr;</Link>
           </p>
+          <p>
+            <Link to="/exams/calendar/">Exam calendar: every official date across these exams, this month onwards &rarr;</Link>
+          </p>
         </div>
       </section>
 
