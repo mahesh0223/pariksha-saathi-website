@@ -1,0 +1,201 @@
+/* SSC typing / data-entry practice. Built on the site tokens (src/styles/theme.css); the passage and the input share
+   one type size and line height so a student's eye can move between them without re-adjusting. */
+.typing-test {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 28px;
+  padding: 18px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.typing-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: end;
+}
+.typing-field {
+  display: grid;
+  gap: 4px;
+  flex: 1 1 280px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.typing-field select {
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink);
+  padding: 9px 10px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  min-width: 0;
+}
+.typing-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.typing-passage,
+.typing-input {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.typing-passage {
+  max-height: 15rem;
+  overflow-y: auto;
+  padding: 12px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  user-select: none;
+}
+.typing-hindi {
+  /* The exam requires Mangal; where the student's system has it, they see that face. */
+  font-family: Mangal, 'IBM Plex Sans Devanagari', 'Noto Sans Devanagari', var(--sans);
+}
+.typing-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.typing-clock {
+  font-weight: 700;
+  color: var(--navy);
+}
+.typing-clock-low {
+  color: var(--bad);
+}
+.typing-input {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  padding: 12px 14px;
+  border: 1px solid var(--tan);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.typing-input:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 1px;
+}
+.typing-input:disabled {
+  background: var(--paper);
+  color: var(--muted);
+}
+.typing-actions {
+  display: flex;
+  gap: 10px;
+}
+.typing-actions:empty {
+  display: none;
+}
+.typing-primary,
+.typing-secondary {
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.typing-primary {
+  border: 0;
+  background: var(--navy);
+  color: #fff;
+}
+.typing-secondary {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+}
+.typing-primary:focus-visible,
+.typing-secondary:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+}
+.typing-secondary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.typing-result h2 {
+  margin: 8px 0 10px;
+}
+.typing-figures {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.typing-figures > div {
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+}
+.typing-figures dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.typing-figures dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.typing-figures small {
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.typing-standard {
+  margin: 4px 0 12px;
+  padding-left: 20px;
+  line-height: 1.6;
+}
+.typing-ok {
+  color: var(--good);
+  font-weight: 600;
+}
+.typing-short {
+  color: var(--bad);
+  font-weight: 600;
+}
+.typing-mistakes td:first-child,
+.typing-mistakes td:nth-child(2) {
+  font-family: var(--sans);
+}
+.typing-modes {
+  padding-left: 20px;
+  line-height: 1.6;
+}
+.typing-modes > li {
+  margin-bottom: 8px;
+}
+.typing-modes ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.92rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .typing-passage {
+    scroll-behavior: auto;
+  }
+}

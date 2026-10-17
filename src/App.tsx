@@ -29,6 +29,7 @@ const JobProfilePage = lazyPage(() => import('./pages/compare/JobProfilePage').t
 const ExamHubPage = lazyPage(() => import('./pages/exams/ExamHubPage').then((m) => ({ default: m.ExamHubPage })));
 const ExamDirectoryPage = lazyPage(() => import('./pages/exams/ExamDirectoryPage').then((m) => ({ default: m.ExamDirectoryPage })));
 const ExamCalendarPage = lazyPage(() => import('./pages/exams/ExamCalendarPage').then((m) => ({ default: m.ExamCalendarPage })));
+const TypingTestPage = lazyPage(() => import('./pages/typing/TypingTestPage').then((m) => ({ default: m.TypingTestPage })));
 const LessonArticlePage = lazyPage(() => import('./pages/learn/LessonArticlePage').then((m) => ({ default: m.LessonArticlePage })));
 
 /**
@@ -54,6 +55,7 @@ export function preloadRoute(pathname: string): Promise<unknown> {
   else if (/^\/compare\/[^/]+-job-profile$/.test(path)) loads.push(JobProfilePage.preload());
   else if (path === '/exams') loads.push(ExamDirectoryPage.preload());
   else if (path === '/exams/calendar') loads.push(ExamCalendarPage.preload());
+  else if (path === '/typing-test') loads.push(TypingTestPage.preload());
   else if (/^\/exams\/[^/]+$/.test(path)) loads.push(ExamHubPage.preload());
   else if (/^\/learn\/[^/]+$/.test(path)) loads.push(LessonArticlePage.preload());
   return Promise.allSettled(loads);
@@ -132,6 +134,8 @@ export function App() {
       <Route path="/hi/exams" element={<Lazy><ExamDirectoryPage lang="hi" /></Lazy>} />
       <Route path="/exams/calendar" element={<Lazy><ExamCalendarPage lang="en" /></Lazy>} />
       <Route path="/hi/exams/calendar" element={<Lazy><ExamCalendarPage lang="hi" /></Lazy>} />
+      <Route path="/typing-test" element={<Lazy><TypingTestPage lang="en" /></Lazy>} />
+      <Route path="/hi/typing-test" element={<Lazy><TypingTestPage lang="hi" /></Lazy>} />
       {HUB_EXAM_IDS.map((examId) => (
         <Route key={`${examId}-hub-en`} path={`/exams/${examHubSlug(examId)}`} element={<Lazy><ExamHubPage examId={examId} lang="en" /></Lazy>} />
       ))}

@@ -39,6 +39,10 @@ import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
 import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
+import { typingTestMeta, typingTestPath, typingTestStaticHtml } from '../src/lib/typingPage.mjs';
+import { TYPING_CHECKED } from '../src/data/typingTest.mjs';
+// The exams whose pages link to the typing / data-entry practice (their notices prescribe a skill test).
+const TYPING_TEST_EXAMS = ['ssc_cgl', 'ssc_chsl'];
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -1212,6 +1216,7 @@ async function main() {
       const links = {
         syllabusPath: hasSyllabus ? `${prefix}/compare/${slug}-syllabus/` : undefined,
         jobProfilePath: hasJobProfile ? `${prefix}/compare/${slug}-job-profile/` : undefined,
+        typingTestPath: TYPING_TEST_EXAMS.includes(examId) ? typingTestPath(lang) : undefined,
       };
       const notices = lang === 'hi' && hiNotices.length > 0 ? hiNotices : enNotices;
       const meta = examHubMeta({ examName, facts, cutoffs, lang });
@@ -1263,6 +1268,45 @@ async function main() {
       ],
     }));
     sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.9' : '0.8', lastmod: directoryLastmod });
+  }
+
+  // --- SSC typing / data-entry practice (/typing-test/, /hi/typing-test/). Its standards are typed into
+  // src/data/typingTest.mjs from the notices; before writing the page, prove they still match the published fact
+  // sheets, so a new notice with different numbers fails the build instead of leaving the page wrong.
+  {
+    const skillNotes = (examId) =>
+      (calendarFacts[examId]?.[0]?.stages ?? []).flatMap((st) => st.parts).filter((p) => p.kind === 'skill').flatMap((p) => p.notes ?? []).map((n) => n.en).join(' ');
+    const expectations = [
+      ['ssc_cgl', 'about 2,000 key depressions'],
+      ['ssc_cgl', '20% (UR), 25% (OBC/EWS) and 30%'],
+      ['ssc_chsl', '15,000 key depressions per hour'],
+      ['ssc_chsl', '8,000 key depressions per hour'],
+      ['ssc_chsl', '35 words per minute in English or 30 words per minute in Hindi'],
+    ];
+    for (const [examId, phrase] of expectations) {
+      if (!skillNotes(examId).includes(phrase)) {
+        throw new Error(`Build check failed: the ${examId} fact sheet no longer says "${phrase}" - update src/data/typingTest.mjs from the new notice`);
+      }
+    }
+    for (const lang of ['en', 'hi']) {
+      const meta = typingTestMeta(lang);
+      const urlPath = typingTestPath(lang);
+      writePage(urlPath.replace(/^\/|\/$/g, ''), page({
+        title: meta.title,
+        description: meta.description,
+        path: urlPath,
+        assets,
+        bodyHtml: examHubPageBody(typingTestStaticHtml(lang), lang),
+        type: 'website',
+        lang,
+        alternateLanguages: [
+          { lang: 'en', path: typingTestPath('en') },
+          { lang: 'hi', path: typingTestPath('hi') },
+          { lang: 'x-default', path: typingTestPath('en') },
+        ],
+      }));
+      sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: TYPING_CHECKED });
+    }
   }
 
   // --- Exam calendar (/exams/calendar/, /hi/exams/calendar/): every fixed date across the hub exams, this

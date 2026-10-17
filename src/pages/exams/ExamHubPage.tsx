@@ -13,6 +13,7 @@ import { EXAM_NAMES } from '../../lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../../lib/examHub.mjs';
 import type { LiveMockSummary } from '../../lib/examHub.mjs';
 import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
+import { typingTestPath } from '../../lib/typingPage.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
 import './ExamHub.css';
@@ -73,6 +74,8 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
   const links = {
     syllabusPath: hasSyllabus ? `${lang === 'hi' ? '/hi' : ''}/compare/${slug}-syllabus/` : undefined,
     jobProfilePath: hasJobProfile ? `${lang === 'hi' ? '/hi' : ''}/compare/${slug}-job-profile/` : undefined,
+    // Same exams as TYPING_TEST_EXAMS in scripts/prerender.mjs - their notices prescribe a typing / data-entry test.
+    typingTestPath: examId === 'ssc_cgl' || examId === 'ssc_chsl' ? typingTestPath(lang) : undefined,
   };
 
   return (

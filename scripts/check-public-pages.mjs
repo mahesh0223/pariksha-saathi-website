@@ -14,6 +14,8 @@ import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
+import { typingTestPath } from '../src/lib/typingPage.mjs';
+import { TYPING_MODES, TYPING_SOURCES } from '../src/data/typingTest.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
 import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
@@ -168,6 +170,24 @@ for (const lang of ['en', 'hi']) {
     assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the exam-calendar link`);
   }
   console.log(`Verified the ${lang} exam calendar: ${rows.length} row(s), each with an official source and a checked date; linked from every hub.`);
+}
+
+// SSC typing / data-entry practice: both pages built, every official standard and source on them, linked from the
+// CGL and CHSL exam pages (src/lib/typingPage.mjs, src/data/typingTest.mjs).
+for (const lang of ['en', 'hi']) {
+  const urlPath = typingTestPath(lang);
+  const file = `dist${urlPath}index.html`;
+  assert(existsSync(file), `${urlPath}: typing practice page not built`);
+  const html = readFileSync(file, 'utf8');
+  assert(html.includes('id="typing-test-app"'), `${urlPath}: no mount point for the live test`);
+  for (const source of Object.values(TYPING_SOURCES)) assert(html.includes(`href="${source.url}"`), `${urlPath}: source ${source.url} not linked`);
+  for (const mode of TYPING_MODES) for (const rule of mode.rules[lang]) assert(html.includes(rule.replaceAll('&', '&amp;').replaceAll('"', '&quot;')), `${urlPath}: official standard missing: ${rule.slice(0, 60)}`);
+  assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
+  assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+  for (const examId of ['ssc_cgl', 'ssc_chsl']) {
+    assert(readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8').includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the typing practice link`);
+  }
+  console.log(`Verified the ${lang} typing practice page: ${TYPING_MODES.length} tests with their official standards and sources, linked from the CGL and CHSL pages.`);
 }
 
 // Every prerendered page lives at a trailing-slash URL and the host 308-redirects the slash-less form. An

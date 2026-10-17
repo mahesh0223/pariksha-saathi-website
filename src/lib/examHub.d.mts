@@ -10,7 +10,7 @@ export function examHubBody(args: {
   notices?: ExamUpdateNotice[];
   items?: CurrentAffairsItem[];
   lang?: 'en' | 'hi';
-  links?: { syllabusPath?: string; jobProfilePath?: string };
+  links?: { syllabusPath?: string; jobProfilePath?: string; typingTestPath?: string };
   pyq?: { total: number; papers: { paper: string; year: number; date: string; shift: string; sourceUrl: string; count: number }[] } | null;
   liveMock?: LiveMockSummary | null;
   playStoreUrl?: string;

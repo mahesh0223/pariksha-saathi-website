@@ -100,6 +100,7 @@ const T = {
     allCurrentAffairs: 'All current affairs',
     prepare: 'Prepare',
     calendar: 'Exam calendar: official dates across every exam',
+    typing: 'Typing and data entry practice with the official time limits',
     syllabus: 'Syllabus and subjects tested',
     jobProfile: 'Job profile and salary',
     lessons: 'Free lessons',
@@ -171,6 +172,7 @@ const T = {
     allCurrentAffairs: 'सभी करेंट अफेयर्स',
     prepare: 'तैयारी करें',
     calendar: 'परीक्षा कैलेंडर: सभी परीक्षाओं की आधिकारिक तिथियाँ',
+    typing: 'आधिकारिक समय-सीमा के साथ टाइपिंग और डेटा एंट्री अभ्यास',
     syllabus: 'पाठ्यक्रम और परीक्षित विषय',
     jobProfile: 'जॉब प्रोफ़ाइल और वेतन',
     lessons: 'मुफ़्त पाठ',
@@ -453,6 +455,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   html += `<h2>${t.prepare}</h2><ul class="compare-links">`;
   html += `<li><a href="${lang === 'hi' ? '/hi' : ''}/exams/calendar/">${t.calendar}</a></li>`;
   if (links.syllabusPath) html += `<li><a href="${esc(links.syllabusPath)}">${t.syllabus}</a></li>`;
+  if (links.typingTestPath) html += `<li><a href="${esc(links.typingTestPath)}">${t.typing}</a></li>`;
   if (links.jobProfilePath) html += `<li><a href="${esc(links.jobProfilePath)}">${t.jobProfile}</a></li>`;
   html += `<li><a href="/learn/">${t.lessons}</a></li><li><a href="/onboarding">${t.practice}</a></li></ul>`;
 
