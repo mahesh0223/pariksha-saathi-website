@@ -5,10 +5,13 @@ import { getExamFacts } from '../../api/examFacts';
 import { getCutoffs } from '../../api/cutoffs';
 import { getExamUpdates } from '../../api/examUpdates';
 import { getAllCurrentAffairs } from '../../api/currentAffairs';
+import { apiRequest } from '../../api/client';
+import { PLAY_STORE_URL } from '../../data/siteLinks.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { EXAM_NAMES } from '../../lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../../lib/examHub.mjs';
+import type { LiveMockSummary } from '../../lib/examHub.mjs';
 import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
@@ -33,6 +36,12 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
 
   // Same list the prerender uses for the "Recent current affairs" block - see hubItems in examHub.mjs.
   const itemsQuery = useQuery({ queryKey: ['current-affairs-all', lang], queryFn: () => getAllCurrentAffairs(lang) });
+  // Only asked for once there is a public listing to send readers to (see liveMockLineHtml in examHub.mjs).
+  const liveMockQuery = useQuery({
+    queryKey: ['live-mock-next'],
+    queryFn: () => apiRequest<{ mock: LiveMockSummary | null }>('/v1/live-mocks/next'),
+    enabled: PLAY_STORE_URL !== '',
+  });
 
   const facts = factsQuery.data ?? [];
   const cutoffs = cutoffsQuery.data ?? [];
@@ -96,7 +105,7 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
         <article
           className="wrap compare-article"
           dangerouslySetInnerHTML={{
-            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], items: hubItems(examId, itemsQuery.data ?? []), lang, links }),
+            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], items: hubItems(examId, itemsQuery.data ?? []), lang, links, liveMock: liveMockQuery.data?.mock ?? null, playStoreUrl: PLAY_STORE_URL }),
           }}
         />
       )}

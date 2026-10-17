@@ -11,7 +11,19 @@ export function examHubBody(args: {
   items?: CurrentAffairsItem[];
   lang?: 'en' | 'hi';
   links?: { syllabusPath?: string; jobProfilePath?: string };
+  pyq?: { total: number; papers: { paper: string; year: number; date: string; shift: string; sourceUrl: string; count: number }[] } | null;
+  liveMock?: LiveMockSummary | null;
+  playStoreUrl?: string;
+  now?: Date;
 }): string;
+export interface LiveMockSummary {
+  startsAt: string;
+  endsAt: string;
+  questionCount: number;
+  durationMinutes: number;
+}
+export function liveMockLineHtml(liveMock: LiveMockSummary | null, playStoreUrl: string, lang?: 'en' | 'hi', now?: Date): string;
+export function hubReportMailto(args: { examName: string; block: string; page: string; sourceUrl: string; verifiedIso: string }): string;
 export function examHubMeta(args: { examName: string; facts: ExamFact[]; cutoffs?: CutoffTarget[]; lang?: 'en' | 'hi' }): {
   title: string;
   description: string;

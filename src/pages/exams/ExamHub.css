@@ -86,3 +86,22 @@
   color: var(--muted);
   text-transform: capitalize;
 }
+
+/* "Report an error" at the end of each source line - quiet, but a real link (underlined) so it reads as one. */
+.hub-source .hub-report {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.hub-source .hub-report:hover,
+.hub-source .hub-report:focus-visible {
+  color: var(--ink);
+}
+.hub-live-mock {
+  margin: 4px 0 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+  font-size: 0.92rem;
+}

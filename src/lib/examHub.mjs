@@ -11,6 +11,7 @@
 // Path/date helpers live in examHubPath.mjs (the entry bundle needs only those); re-exported here so
 // existing importers of this module keep working.
 import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
+import { CONTACT_EMAIL } from './reportQuestion.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -218,8 +219,19 @@ function homeVisitHint(url, lang) {
     : ` (If it shows “Request Rejected”, open <a href="${home}" target="_blank" rel="noreferrer">${host}</a> first, then the link again.)`;
 }
 
-const sourceLine = (t, label, url, verifiedIso, lang) =>
-  `<p class="hub-source">${t.sourceWord}: <a href="${esc(url)}" target="_blank" rel="noreferrer">${esc(label)} &#8599;</a>${t.noteSep}${t.verifiedWord}: ${esc(formatHubDate(verifiedIso, lang))}${homeVisitHint(url, lang)}</p>`;
+// Every source line ends in "Report an error": a mailto with the exam, the block, the page and the document
+// already filled in, so a reader who spots a figure that differs from the official notice can say so in one tap
+// (same arrangement as "Report this question", src/lib/reportQuestion.mjs).
+const REPORT_LABEL = { en: 'Report an error', hi: 'गलती बताएँ' };
+export function hubReportMailto({ examName, block, page, sourceUrl, verifiedIso }) {
+  const subject = `Exam page error: ${examName} - ${block}`;
+  const lines = [`Page: ${page}`, `Block: ${block}`, `Source document: ${sourceUrl}`, `Last checked: ${String(verifiedIso ?? '').slice(0, 10)}`, '', 'What is wrong, and what does the official document say instead?', ''];
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
+const sourceLine = (t, label, url, verifiedIso, lang, report) =>
+  `<p class="hub-source">${t.sourceWord}: <a href="${esc(url)}" target="_blank" rel="noreferrer">${esc(label)} &#8599;</a>${t.noteSep}${t.verifiedWord}: ${esc(formatHubDate(verifiedIso, lang))}${homeVisitHint(url, lang)}${
+    report ? `${t.noteSep}<a class="hub-report" href="${esc(hubReportMailto({ ...report, sourceUrl: url, verifiedIso }))}">${REPORT_LABEL[lang] ?? REPORT_LABEL.en}</a>` : ''
+  }</p>`;
 
 function sectionTotals(part) {
   return {
@@ -272,7 +284,28 @@ function legendText(categories, lang, t) {
   return text;
 }
 
-function cutoffTablesHtml(cutoffs, lang, t) {
+// "Next live mock" (GET /v1/live-mocks/next): the weekly all-India mock lives in the Android app only, so the line
+// renders only once the public Play listing exists (PLAY_STORE_URL in src/data/siteLinks.mjs - the plan's rule that
+// no app call-to-action ships before a production URL does), and only for a mock that has not started yet at build
+// time. Times are IST, the slot's own clock.
+const LIVE_MOCK_T = {
+  en: { label: 'Weekly live mock', shape: (q, m) => `${q} questions in ${m} minutes, one paper for everyone`, cta: 'Sit it in the Android app' },
+  hi: { label: 'साप्ताहिक लाइव मॉक', shape: (q, m) => `${m} मिनट में ${q} प्रश्न, सबके लिए एक ही पेपर`, cta: 'Android ऐप में दें' },
+};
+export function liveMockLineHtml(liveMock, playStoreUrl, lang = 'en', now = new Date()) {
+  if (!liveMock || !playStoreUrl) return '';
+  const starts = new Date(liveMock.startsAt);
+  const ends = new Date(liveMock.endsAt);
+  if (Number.isNaN(starts.getTime()) || starts.getTime() <= now.getTime()) return '';
+  const tz = { timeZone: 'Asia/Kolkata' };
+  const day = new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', { ...tz, weekday: 'long' }).format(starts);
+  const date = formatHubDate(starts.toLocaleDateString('en-CA', tz), lang);
+  const clock = (d) => d.toLocaleTimeString('en-GB', { ...tz, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const lt = LIVE_MOCK_T[lang] ?? LIVE_MOCK_T.en;
+  return `<p class="hub-live-mock"><strong>${lt.label}:</strong> ${esc(day)}, ${esc(date)}, ${clock(starts)}&ndash;${clock(ends)} IST &middot; ${esc(lt.shape(liveMock.questionCount, liveMock.durationMinutes))} &middot; <a href="${esc(playStoreUrl)}" rel="noopener">${lt.cta} &rarr;</a></p>`;
+}
+
+function cutoffTablesHtml(cutoffs, lang, t, report) {
   const bySection = new Map();
   for (const row of cutoffs) {
     if (!bySection.has(row.section)) bySection.set(row.section, []);
@@ -298,19 +331,20 @@ function cutoffTablesHtml(cutoffs, lang, t) {
       .join('')}</tbody></table></div>`;
     for (const cycle of cycles) {
       const first = rows.find((r) => r.cycleLabel === cycle);
-      html += sourceLine(t, `${cycle} ${lang === 'hi' ? 'परिणाम-विवरण' : 'result write-up'}`, first.sourceUrl, first.verifiedAt, lang);
+      html += sourceLine(t, `${cycle} ${lang === 'hi' ? 'परिणाम-विवरण' : 'result write-up'}`, first.sourceUrl, first.verifiedAt, lang, report && { ...report, block: `${t.cutoffs} (${section}, ${cycle})` });
     }
   }
   return html;
 }
 
 // The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
-export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null }) {
+export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null, liveMock = null, playStoreUrl = '', now = new Date() }) {
   const t = T[lang];
   const fact = facts[0];
   const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
   const lastVerified = verifiedDates.sort().at(-1);
   const otherPath = examHubPath(fact.examId, lang === 'hi' ? 'en' : 'hi');
+  const report = { examName, page: `https://parikshasaathi.com${examHubPath(fact.examId, lang)}` };
 
   // The first stage can be one paper (Tier-I) or several sessions on one day (MTS): count them together.
   // CTET's Paper I and the two Paper II options are alternatives, not sessions: show one paper, not their sum.
@@ -351,6 +385,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   html += `<p class="compare-lede">${esc(t.lede(fact.cycleLabel, formatHubDate(lastVerified, lang), hasCutoffs))}</p>`;
 
   html += `<h2>${t.glance}</h2><dl class="hub-glance">${glance.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+  html += liveMockLineHtml(liveMock, playStoreUrl, lang, now);
 
   html += `<h2>${t.pattern}</h2>`;
   for (const stage of fact.stages) {
@@ -358,7 +393,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     if (stage.appliesTo) html += `<p class="hub-applies"><strong>${t.appliesTo}:</strong> ${esc(pick(stage.appliesTo, lang))}</p>`;
     html += stage.parts.map((p) => partHtml(p, lang, t)).join('');
   }
-  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang);
+  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.pattern });
 
   const el = fact.eligibility;
   html += `<h2>${t.eligibility}</h2><p>${esc(pick(el.ageNote, lang))}${el.ageReferenceDate ? ` ${esc(t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)))}` : ''}</p>`;
@@ -366,7 +401,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     .map((q) => `<tr><td>${esc(pick(q.posts, lang))}</td><td>${esc(pick(q.requirement, lang))}</td></tr>`)
     .join('')}</tbody></table></div>`;
   if (el.qualifyingMarks) html += `<p class="hub-facts">${esc(pick(el.qualifyingMarks, lang))}</p>`;
-  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang);
+  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.eligibility });
 
   html += `<h2>${t.dates}</h2><div class="hub-table-wrap"><table class="hub-table"><thead><tr><th>${t.event}</th><th>${t.date}</th><th>${t.dateSource}</th></tr></thead><tbody>${fact.dates
     .map((d) => {
@@ -378,11 +413,11 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
       return `<tr><td>${esc(pick(d.label, lang))}</td><td>${when}</td><td><a href="${esc(d.sourceUrl ?? fact.sourceUrl)}" target="_blank" rel="noreferrer">${t.officialNotice} &#8599;</a></td></tr>`;
     })
     .join('')}</tbody></table></div>`;
-  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang);
-  if (fact.vacancies) html += sourceLine(t, `${t.vacancies}`, fact.vacancies.sourceUrl, fact.verifiedAt, lang);
+  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.dates });
+  if (fact.vacancies) html += sourceLine(t, `${t.vacancies}`, fact.vacancies.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.vacancies });
 
   if (cutoffs.length > 0) {
-    html += `<h2>${t.cutoffs}</h2>${cutoffTablesHtml(cutoffs, lang, t)}<p class="hub-facts">${esc(legendText([...new Set(cutoffs.map((c) => c.category))], lang, t))}</p>`;
+    html += `<h2>${t.cutoffs}</h2>${cutoffTablesHtml(cutoffs, lang, t, report)}<p class="hub-facts">${esc(legendText([...new Set(cutoffs.map((c) => c.category))], lang, t))}</p>`;
   }
 
   // Previous-year questions: one row per official paper and shift, each linked to the official paper/key it

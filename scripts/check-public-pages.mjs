@@ -13,6 +13,7 @@ import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
+import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
 import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
@@ -125,7 +126,11 @@ for (const examId of HUB_EXAM_IDS) {
     for (const line of sourceLines) {
       assert(/href="https?:\/\//.test(line), `${urlPath}: a source line has no link: ${line.slice(0, 80)}`);
       assert(/\d{4}/.test(line), `${urlPath}: a source line has no verification date: ${line.slice(0, 80)}`);
+      // Every sourced block can be challenged in one tap (src/lib/examHub.mjs hubReportMailto).
+      assert(/class="hub-report" href="mailto:[^"]*subject=Exam%20page%20error/.test(line), `${urlPath}: a source line has no "Report an error" link: ${line.slice(0, 80)}`);
     }
+    // The live-mock line is an app call-to-action: it may only appear once a public Play listing exists.
+    if (!PLAY_STORE_URL) assert(!html.includes('class="hub-live-mock"'), `${urlPath}: live-mock line rendered without a public Play Store URL`);
     assert(html.includes('<table class="hub-table">'), `${urlPath}: no pattern table`);
     assert(html.includes('hub-current-affairs'), `${urlPath}: missing the recent current-affairs block`);
     assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);

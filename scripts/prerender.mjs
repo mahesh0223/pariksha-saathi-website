@@ -38,6 +38,7 @@ import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
 import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
+import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -1153,6 +1154,8 @@ async function main() {
   // --- Exam hub pages --- one per listed exam x language, built from the server's sourced exam facts
   // and official cut-offs (src/lib/examHub.mjs). An exam listed in HUB_EXAM_IDS with no published fact
   // sheet fails the build: a hub must never ship empty or fall back to unsourced numbers.
+  // The next weekly live mock, once for every hub (rendered only when PLAY_STORE_URL is set - see liveMockLineHtml).
+  const liveMockNext = await fetch(`${API_BASE}/v1/live-mocks/next`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   // Collected across the hub loop for the exam calendar (src/lib/examCalendar.mjs) below.
   const calendarFacts = {};
   const calendarNotices = { en: {}, hi: {} };
@@ -1189,7 +1192,7 @@ async function main() {
         description: meta.description,
         path: urlPath,
         assets,
-        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, items: hubItems(examId, lang === 'hi' ? affairsHi : affairs), lang, links, pyq }), lang),
+        bodyHtml: examHubPageBody(examHubBody({ examName, facts, cutoffs, notices, items: hubItems(examId, lang === 'hi' ? affairsHi : affairs), lang, links, pyq, liveMock: liveMockNext?.mock ?? null, playStoreUrl: PLAY_STORE_URL }), lang),
         type: 'article',
         lang,
         alternateLanguages: [
