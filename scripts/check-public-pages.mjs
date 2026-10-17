@@ -154,8 +154,15 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
 {
   const noticePages = files.filter((f) => /\/app\/exam-notices\/[a-z0-9]+\/index\.html$/.test(f));
   assert(noticePages.length > 0, 'no exam-notice pages were built');
-  for (const file of noticePages) assert(readFileSync(file, 'utf8').includes('class="news-learning"'), `${file}: notice page without guidance - add an entry to examNoticeGuidance.mjs`);
-  console.log(`Verified ${noticePages.length} exam-notice page(s) carry guidance beyond the official text.`);
+  // Guidance is keyed by the production row ids, so a build against a local API (whose ids differ) cannot
+  // satisfy this gate - skip it there, the same way the live-sitemap regression guard is skipped.
+  const localApi = /localhost|127\.0\.0\.1/.test(process.env.PRERENDER_API_BASE ?? '');
+  if (localApi) {
+    console.log(`Skipped the notice-guidance gate for ${noticePages.length} notice page(s): local API ids do not match the production ids guidance is keyed by.`);
+  } else {
+    for (const file of noticePages) assert(readFileSync(file, 'utf8').includes('class="news-learning"'), `${file}: notice page without guidance - add an entry to examNoticeGuidance.mjs`);
+    console.log(`Verified ${noticePages.length} exam-notice page(s) carry guidance beyond the official text.`);
+  }
 }
 
 // AI-drafted General Awareness lessons must say so: no human byline on text a human has not line-edited, and
