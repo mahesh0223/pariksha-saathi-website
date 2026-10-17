@@ -37,9 +37,13 @@ that together; `npm run check:public` fails the build if one of them regresses.
   `<style>` on every page (and in `spa.html`), then deletes the file. Stylesheets a prerendered page
   needs must be imported from `src/main.tsx` so they end up in that entry CSS, not in a lazy chunk.
 - **Public pages are lazy chunks.** `src/App.tsx` routes from the slim `*Slugs.mjs` /
-  `lessonSubjects.mjs` lists; the content modules load with their page. `src/main.tsx` awaits
-  `preloadRoute()` before mounting so a prerendered article is never replaced by a spinner
-  (`src/lib/lazyPage.ts`).
+  `lessonSubjects.mjs` / `publicPageRoutes.mjs` lists; the content modules load with their page.
+  `src/main.tsx` awaits `preloadRoute()` before mounting so a prerendered article is never
+  replaced by a spinner (`src/lib/lazyPage.ts`); the static pages' route table and that preload
+  come from the one `PUBLIC_PAGE_ROUTES` map, which `check:public` keeps in step with
+  `publicPages.mjs`. The prerender reads Vite's build manifest (`dist/.vite/manifest.json`) and
+  adds a `<link rel="modulepreload">` for the page chunk to every static page, so the download
+  starts with the HTML instead of after the entry bundle has run.
 - **Hero image** ships as 240/480/720-px WebP + JPEG variants with `srcset`, `width`/`height` and
   `loading="lazy"`; the header icon is `icon-48.png`/`icon-96.png`, not the 512-px app icon. The
   other screenshots in `public/assets/screenshots/` are Play Store assets and are not shown on

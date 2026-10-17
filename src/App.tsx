@@ -7,6 +7,7 @@ import { HUB_EXAM_IDS } from './data/examHubExams.mjs';
 import { examHubSlug } from './lib/examHubPath.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from './data/examJobProfileSlugs.mjs';
 import { TOPIC_SLUGS } from './data/topicSlugs.mjs';
+import { PUBLIC_PAGE_ROUTES } from './data/publicPageRoutes.mjs';
 import { ExamSelectionPage } from './pages/onboarding/ExamSelectionPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PublicContentLayout } from './components/layout/PublicContentLayout';
@@ -33,12 +34,21 @@ const LessonArticlePage = lazyPage(() => import('./pages/learn/LessonArticlePage
  * Starts downloading the chunk(s) the given URL renders, so main.tsx can wait for them before the
  * first render. Mirrors the route table below; anything unmatched (the home page, /app/*, 404)
  * resolves immediately. Never rejects - a failed preload just means the route suspends normally.
+ * The prerendered HTML of every page that has a chunk here also carries a <link rel="modulepreload">
+ * for it (scripts/prerender.mjs), so the download is already in flight when this runs.
  */
 export function preloadRoute(pathname: string): Promise<unknown> {
-  const path = pathname.replace(/^\/hi(?=\/|$)/, '').replace(/\/+$/, '') || '/';
+  const full = pathname.replace(/\/+$/, '') || '/';
   const loads: Promise<unknown>[] = [];
-  if (/^\/(learn|about|privacy|contact|downloads|terms|account-deletion)$/.test(path)) loads.push(PublicPage.preload());
-  else if (path === '/compare/ibps-po-vs-sbi-po') loads.push(IbpsPoVsSbiPoPage.preload());
+  // The static pages and the two Hindi index pages are matched on the full path: /hi itself is one
+  // of them, so stripping the language prefix first (as the routes below need) would turn it into
+  // the home page and preload nothing. PUBLIC_PAGE_ROUTES is the same map the route table renders.
+  if (Object.hasOwn(PUBLIC_PAGE_ROUTES, full)) {
+    loads.push(PublicPage.preload());
+    return Promise.allSettled(loads);
+  }
+  const path = full.replace(/^\/hi(?=\/|$)/, '') || '/';
+  if (path === '/compare/ibps-po-vs-sbi-po') loads.push(IbpsPoVsSbiPoPage.preload());
   else if (/^\/compare\/[^/]+-syllabus$/.test(path)) loads.push(SyllabusPage.preload());
   else if (/^\/compare\/[^/]+-job-profile$/.test(path)) loads.push(JobProfilePage.preload());
   else if (path === '/exams') loads.push(ExamDirectoryPage.preload());
@@ -84,15 +94,9 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/learn" element={<Lazy><PublicPage page="learn" /></Lazy>} />
-      <Route path="/hi" element={<Lazy><PublicPage page="hi" /></Lazy>} />
-      <Route path="/hi/learn" element={<Lazy><PublicPage page="hi-learn" /></Lazy>} />
-      <Route path="/about" element={<Lazy><PublicPage page="about" /></Lazy>} />
-      <Route path="/privacy" element={<Lazy><PublicPage page="privacy" /></Lazy>} />
-      <Route path="/contact" element={<Lazy><PublicPage page="contact" /></Lazy>} />
-      <Route path="/downloads" element={<Lazy><PublicPage page="downloads" /></Lazy>} />
-      <Route path="/terms" element={<Lazy><PublicPage page="terms" /></Lazy>} />
-      <Route path="/account-deletion" element={<Lazy><PublicPage page="account-deletion" /></Lazy>} />
+      {Object.entries(PUBLIC_PAGE_ROUTES).map(([path, page]) => (
+        <Route key={path} path={path} element={<Lazy><PublicPage page={page} /></Lazy>} />
+      ))}
       <Route path="/compare/ibps-po-vs-sbi-po" element={<Lazy><IbpsPoVsSbiPoPage /></Lazy>} />
       {EXAM_SYLLABUS_SLUGS.map((slug) => (
         <Route

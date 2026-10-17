@@ -70,6 +70,12 @@ function escapeHtml(str) {
 //     emitted for its statically imported chunks.
 //   - manifestLink: the <link rel="manifest"> vite-plugin-pwa injected.
 //   - shellHtml: Vite's index.html with the stylesheet inlined - becomes dist/spa.html.
+//   - chunksFor(sourcePath): the hashed /assets/ URLs of a source module's chunk and its static
+//     imports, from Vite's build manifest (vite.config.ts sets build.manifest). The static pages use
+//     it to add a <link rel="modulepreload"> for their page component (and what it imports), so
+//     those downloads start with the HTML rather than once the entry bundle has executed -
+//     main.tsx's preloadRoute() then finds them already in flight, and React mounts that much sooner
+//     over the markup already on screen.
 function readBuiltAssets() {
   const html = readFileSync(join(DIST, 'index.html'), 'utf8');
   const script = html.match(/<script type="module"[^>]*src="[^"]+"[^>]*><\/script>/)?.[0];
@@ -86,7 +92,24 @@ function readBuiltAssets() {
   // Nothing references the stylesheet file once it is inlined everywhere, so drop it rather than
   // ship (and precache) a dead 24 KB file.
   rmSync(stylePath);
+  const manifest = JSON.parse(readFileSync(join(DIST, '.vite/manifest.json'), 'utf8'));
+  // A module's chunk plus everything it statically imports (recursively), minus what the entry
+  // already preloads: one <link> per URL the browser would otherwise discover a round trip later.
+  const entryPreloaded = new Set(modulePreloads.map((tag) => tag.match(/href="([^"]+)"/)[1]));
+  const chunksFor = (sourcePath, seen = new Set()) => {
+    const chunk = manifest[sourcePath];
+    if (!chunk) throw new Error(`dist/.vite/manifest.json has no chunk for ${sourcePath}`);
+    const urls = [];
+    // The entry (manifest key "index.html") is already the page's <script type="module">.
+    if (!chunk.isEntry && !seen.has(chunk.file) && !entryPreloaded.has(`/${chunk.file}`)) {
+      seen.add(chunk.file);
+      urls.push(`/${chunk.file}`);
+      for (const dep of chunk.imports ?? []) urls.push(...chunksFor(dep, seen));
+    }
+    return urls;
+  };
   return {
+    chunksFor,
     sharedHead,
     styleInline,
     scriptTags: [script, ...modulePreloads].join('\n    '),
@@ -138,7 +161,7 @@ function adSlot(_slot) { return ''; }
 // whether it was crawled from the prerendered HTML or visited client-side.
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
-function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow' }) {
+function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow', preload = [] }) {
   const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
@@ -150,6 +173,9 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
   const hreflangLinks = (alternateLanguages ?? [])
     .map((alt) => `<link rel="alternate" hreflang="${alt.lang}" href="${SITE_URL}${alt.path}" />`)
     .join('\n    ');
+  // Chunks this page is known to need (its lazy route component) - see chunksFor(). `crossorigin`
+  // matches Vite's own module tags, so the preload and the later import() share one cache entry.
+  const preloadLinks = preload.map((href) => `<link rel="modulepreload" crossorigin href="${href}">`).join('\n    ');
   return `<!doctype html>
 <html lang="${lang}">
   <head>
@@ -178,6 +204,7 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
     ${assets.styleInline}
     ${assets.scriptTags}
+    ${preloadLinks}
   </head>
   <body>
     <div id="root">${bodyHtml}</div>
@@ -959,9 +986,11 @@ async function main() {
 
   // Every key in PUBLIC_PAGES, including the Hindi landing page (/hi/) and Hindi lesson library (/hi/learn/);
   // publicPageMeta supplies the path, lang and hreflang pair for each.
+  // Every one of them renders through src/pages/PublicPage.tsx, so each page preloads that chunk.
+  const publicPageChunks = assets.chunksFor('src/pages/PublicPage.tsx');
   for (const key of Object.keys(PUBLIC_PAGES)) {
     const meta = publicPageMeta(key);
-    writePage(meta.path.slice(1, -1), page({ ...meta, assets, bodyHtml: publicPageBody(key), type: 'website', structuredData: publicPageStructuredData(key) }));
+    writePage(meta.path.slice(1, -1), page({ ...meta, assets, bodyHtml: publicPageBody(key), preload: publicPageChunks, type: 'website', structuredData: publicPageStructuredData(key) }));
     sitemapUrls.push({ loc: meta.path, priority: key === 'hi' ? '0.9' : '0.7' });
   }
 

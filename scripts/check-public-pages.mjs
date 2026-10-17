@@ -15,7 +15,8 @@ import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
 import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
-import { publicPageMeta, SITE_SHOWS_ADS } from '../src/data/publicPages.mjs';
+import { PUBLIC_PAGES, publicPageMeta, SITE_SHOWS_ADS } from '../src/data/publicPages.mjs';
+import { PUBLIC_PAGE_ROUTES } from '../src/data/publicPageRoutes.mjs';
 import { TRUST_LINES } from '../src/data/trustLines.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
@@ -23,6 +24,14 @@ assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'exam
 // a slug missing here is a page that prerenders fine but 404s once the SPA takes over.
 assert.deepEqual(EXAM_SYLLABI.map(x=>x.slug), EXAM_SYLLABUS_SLUGS, 'examSyllabusSlugs.mjs is out of sync with examSyllabi.mjs');
 assert.deepEqual([...new Set(LESSON_CATALOG.map(x=>x.subject))], LESSON_SUBJECTS, 'lessonSubjects.mjs is out of sync with lessonCatalog.mjs');
+// The route table and preloadRoute() in App.tsx both come from this map (2026-10-17: /hi/ was in the route table
+// but not in the preload list, so the prerendered Hindi landing page was swapped for a spinner while its chunk
+// downloaded). A key here must be a page publicPages.mjs builds, at the path it builds it.
+assert.deepEqual(
+  PUBLIC_PAGE_ROUTES,
+  Object.fromEntries(Object.keys(PUBLIC_PAGES).map((key) => [publicPageMeta(key).path.replace(/\/$/, ''), key])),
+  'publicPageRoutes.mjs is out of sync with publicPages.mjs',
+);
 for (const entry of LESSON_CATALOG) {
   assert(!/[<>{}]/.test(entry.title + entry.description), `Invalid catalog text: ${entry.slug}`);
   for (const lang of ['', 'hi/']) assert(existsSync(`dist/${lang}learn/${entry.slug}/index.html`));
@@ -268,3 +277,26 @@ for (const key of ['hi', 'hi-learn']) {
   assert(home.includes('href="/hi/"'), 'home page has no link to the Hindi landing page');
 }
 console.log(`Verified the Hindi landing page and lesson library: built, in the sitemap, hreflang both ways, ${LESSON_CATALOG.length} Hindi lesson links.`);
+
+// Every static page preloads PublicPage's chunk and the chunks it imports (scripts/prerender.mjs reads
+// dist/.vite/manifest.json), so the download starts with the HTML, not after the entry bundle has run; and the
+// home page, which renders from the entry bundle, must not pay for it.
+{
+  const manifest = JSON.parse(readFileSync('dist/.vite/manifest.json', 'utf8'));
+  const chunkUrls = (sourcePath, seen = new Set()) => {
+    const chunk = manifest[sourcePath];
+    assert(chunk, `dist/.vite/manifest.json has no chunk for ${sourcePath}`);
+    if (chunk.isEntry || seen.has(chunk.file)) return [];
+    seen.add(chunk.file);
+    return [`/${chunk.file}`, ...(chunk.imports ?? []).flatMap((dep) => chunkUrls(dep, seen))];
+  };
+  const expected = chunkUrls('src/pages/PublicPage.tsx');
+  assert(expected.length >= 2, `expected PublicPage's chunk to import the static-page data chunk, got ${expected.join(', ')}`);
+  for (const key of Object.keys(PUBLIC_PAGES)) {
+    const path = publicPageMeta(key).path;
+    const html = readFileSync(`dist${path}index.html`, 'utf8');
+    for (const url of expected) assert(new RegExp(`<link rel="modulepreload"[^>]* href="${url}"`).test(html), `${path}: does not preload ${url}`);
+  }
+  assert(!home.includes(expected[0]), `home page preloads PublicPage's chunk ${expected[0]}`);
+  console.log(`Verified that all ${Object.keys(PUBLIC_PAGES).length} static pages preload PublicPage's ${expected.length} chunk(s) and the home page does not.`);
+}
