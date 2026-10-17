@@ -48,6 +48,7 @@ export default defineConfig({
                 'spa.html',
                 '404.html',
                 '{learn,exams,about,privacy,terms,contact,downloads,account-deletion,onboarding}/index.html',
+                'hi/index.html',
                 'hi/{learn,exams}/index.html',
               ]
             : []),

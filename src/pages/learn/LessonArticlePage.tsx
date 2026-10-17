@@ -38,7 +38,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
   const enPath = `/learn/${slug}/`;
   const hiPath = `/hi/learn/${slug}/`;
   const path = lang === 'hi' ? hiPath : enPath;
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
+  const libraryHref = lang === 'hi' ? '/hi/learn/' : '/learn/';
 
   useDocumentMeta({
     title: content?.pageTitle ?? 'Topic Lesson',
@@ -106,7 +107,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
             Pariksha Saathi
           </Link>
-          <nav className="pub-nav-links"><Link to="/learn/">{lang === 'hi' ? 'विषय सूची' : 'Lesson library'}</Link>
+          <nav className="pub-nav-links"><Link to={libraryHref}>{lang === 'hi' ? 'विषय सूची' : 'Lesson library'}</Link>
             <Link to="/app/exam-notices/">{lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</Link>
           </nav>
           <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
@@ -194,7 +195,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         {topicKey ? <Link className="btn-primary-compare" to={`/app/practice/topic/${topicKey}?lang=${lang}`}>
           {lang === 'hi' ? 'इस विषय का क्विज़ शुरू करें' : 'Start this topic’s quiz'} →
         </Link> : <a className="btn-primary-compare" href="#practice">{lang === 'hi' ? 'अभ्यास प्रश्नों पर जाएँ' : 'Go to practice questions'} →</a>}
-        <p><Link to="/learn/">{lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</Link></p>
+        <p><Link to={libraryHref}>{lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</Link></p>
       </article>
 
       <footer className="pub-footer">

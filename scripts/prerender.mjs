@@ -23,7 +23,8 @@ import { join } from 'node:path';
 // src/pages/ - just without compile-time typing on the data shape.
 import { currentAffairsDigest, learningNote } from '../src/data/currentAffairsReading.mjs';
 import { noticeGuidance } from '../src/data/examNoticeGuidance.mjs';
-import { PUBLIC_PAGES, publicPageBody, publicPageStructuredData } from '../src/data/publicPages.mjs';
+import { PUBLIC_PAGES, publicPageBody, publicPageMeta, publicPageStructuredData } from '../src/data/publicPages.mjs';
+import { trustLinesHtml, trustStatsHtml } from '../src/data/trustLines.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
@@ -34,7 +35,7 @@ import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/exam
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
-import { DIRECTORY_EXAM_IDS, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
+import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 
 const DIST = join(process.cwd(), 'dist');
@@ -297,13 +298,6 @@ const HOME_FEATURES = [
   { icon: 'digest', accent: 'sage', title: 'Daily Digest', body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.' },
 ];
 
-const TRUST_STATS = [
-  { value: String(DIRECTORY_EXAM_IDS.length), label: 'exams covered' },
-  { value: '100%', label: 'free, no paywall' },
-  { value: 'EN / HI', label: 'both languages' },
-  { value: 'Offline', label: 'in the Android app' },
-];
-
 const HOW_IT_WORKS = [
   { n: '1', title: 'Pick your exam(s)', body: 'Choose one or more of SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO or SBI Clerk. Add or change exams any time.' },
   { n: '2', title: 'Study, then practice', body: 'Work through topic-wise lessons, then practice the same topics as quizzes in the real exam pattern, negative marking included.' },
@@ -340,6 +334,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             <a href="#current-affairs">Current Affairs</a>
             <a href="#faq">FAQ</a>
             <a href="/privacy/">Privacy</a>
+            <a href="/hi/" lang="hi">हिंदी</a>
           </nav>
           ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
         </div>
@@ -355,10 +350,10 @@ function homePageBody(affairsPreview, noticesPreview) {
               <a class="btn-primary-cream" href="/onboarding">Start studying free</a>
               <a class="btn-ghost-cream" href="#features">See what's inside</a>
             </div>
+            <a class="hero-lang-switch" href="/hi/" lang="hi">यह पेज हिंदी में पढ़ें &rarr;</a>
             <div class="exam-pills">${[['ssc_cgl', 'SSC CGL'], ['ssc_mts', 'SSC MTS'], ['ssc_chsl', 'SSC CHSL'], ['ibps_po', 'IBPS PO'], ['ibps_clerk', 'IBPS Clerk'], ['sbi_po', 'SBI PO'], ['sbi_clerk', 'SBI Clerk']].map(([id, name]) => `<a href="${examHubPath(id, 'en')}">${name}</a>`).join('')}<a class="exam-pills-more" href="/exams/">More exams &rarr;</a></div>
-            <div class="trust-bar">
-              ${TRUST_STATS.map((s) => `<div class="trust-stat"><div class="trust-value">${escapeHtml(s.value)}</div><div class="trust-label">${escapeHtml(s.label)}</div></div>`).join('\n              ')}
-            </div>
+            ${trustStatsHtml('en')}
+            ${trustLinesHtml('en')}
           </div>
           <div class="phone-stack">
             <div class="phone-glow"></div>
@@ -592,7 +587,7 @@ function comparePageBody() {
 // source of truth, no hand-duplicated content to drift out of sync).
 function syllabusPageBody(entry, lang) {
   const c = entry[lang];
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
   const enPath = `/compare/${entry.slug}-syllabus/`;
   const hiPath = `/hi/compare/${entry.slug}-syllabus/`;
   const otherLangHref = lang === 'hi' ? enPath : hiPath;
@@ -687,7 +682,7 @@ function examHubPageBody(innerHtml, lang) {
 // same single-source-of-truth pattern as syllabusPageBody above.
 function jobProfilePageBody(entry, lang) {
   const c = entry[lang];
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
   const enPath = `/compare/${entry.slug}-job-profile/`;
   const hiPath = `/hi/compare/${entry.slug}-job-profile/`;
   const syllabusPath = lang === 'hi' ? `/hi/compare/${entry.slug}-syllabus/` : `/compare/${entry.slug}-syllabus/`;
@@ -763,7 +758,8 @@ function jobProfilePageBody(entry, lang) {
 function lessonPageBody(entry, lang) {
   const c = entry[lang];
   const topicKey = LESSON_CATALOG.find(item => item.slug === entry.slug)?.topicKey;
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
+  const libraryHref = lang === 'hi' ? '/hi/learn/' : '/learn/';
   const enPath = `/learn/${entry.slug}/`;
   const hiPath = `/hi/learn/${entry.slug}/`;
   const otherLangHref = lang === 'hi' ? enPath : hiPath;
@@ -832,7 +828,7 @@ function lessonPageBody(entry, lang) {
         <h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
         <p>${escapeHtml(lessonClosing(entry, lang))}</p>
         <a class="btn-primary-compare" href="${topicKey ? `/app/practice/topic/${topicKey}?lang=${lang}` : '#practice'}">${lang === 'hi' ? (topicKey ? 'इस विषय का क्विज़ शुरू करें' : 'अभ्यास प्रश्नों पर जाएँ') : (topicKey ? 'Start this topic’s quiz' : 'Go to practice questions')} →</a>
-        <p><a href="/learn/">${lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</a></p>
+        <p><a href="${libraryHref}">${lang === 'hi' ? 'सभी विषय देखें' : 'Explore the lesson library'}</a></p>
       </article>
       <footer class="pub-footer">
         <div class="wrap">
@@ -886,6 +882,12 @@ async function main() {
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
     type: 'website',
+    // Mirrors src/pages/HomePage.tsx's useDocumentMeta call: the Hindi landing page is /hi/ (publicPages.mjs).
+    alternateLanguages: [
+      { lang: 'en', path: '/' },
+      { lang: 'hi', path: '/hi/' },
+      { lang: 'x-default', path: '/' },
+    ],
     // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
     structuredData: [
       { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
@@ -954,9 +956,12 @@ async function main() {
     { loc: '/app/exam-notices/', priority: '0.9', lastmod: BUILD_DATE },
   ];
 
-  for (const key of ['learn', 'about', 'privacy', 'contact', 'downloads', 'terms', 'account-deletion']) {
-    writePage(key, page({ ...PUBLIC_PAGES[key], path: `/${key}/`, assets, bodyHtml: publicPageBody(key), type: 'website', structuredData: publicPageStructuredData(key) }));
-    sitemapUrls.push({ loc: `/${key}/`, priority: '0.7' });
+  // Every key in PUBLIC_PAGES, including the Hindi landing page (/hi/) and Hindi lesson library (/hi/learn/);
+  // publicPageMeta supplies the path, lang and hreflang pair for each.
+  for (const key of Object.keys(PUBLIC_PAGES)) {
+    const meta = publicPageMeta(key);
+    writePage(meta.path.slice(1, -1), page({ ...meta, assets, bodyHtml: publicPageBody(key), type: 'website', structuredData: publicPageStructuredData(key) }));
+    sitemapUrls.push({ loc: meta.path, priority: key === 'hi' ? '0.9' : '0.7' });
   }
 
   // --- Syllabus & exam pattern pages --- one per exam x language (14 total), all driven by
@@ -1389,7 +1394,7 @@ ${sitemapUrls
   await regenerateServiceWorker();
 
   console.log(
-    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus 6 static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
 }
 

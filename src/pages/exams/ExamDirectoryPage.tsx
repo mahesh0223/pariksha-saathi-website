@@ -33,7 +33,7 @@ export function ExamDirectoryPage({ lang }: { lang: 'en' | 'hi' }) {
     <div className="compare-page">
       <header className="pub-header">
         <div className="wrap pub-nav">
-          <Link className="pub-brand" to="/">
+          <Link className="pub-brand" to={lang === 'hi' ? '/hi/' : '/'}>
             <img src="/assets/icon-48.png" srcSet="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />
             Pariksha Saathi
           </Link>

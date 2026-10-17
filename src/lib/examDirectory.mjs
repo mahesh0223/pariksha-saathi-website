@@ -78,7 +78,7 @@ export function examDirectoryBody({ lang = 'en', hubIds = [], syllabusSlugs = []
   const t = T[lang] ?? T.en;
   const prefix = lang === 'hi' ? '/hi' : '';
   const otherPath = examDirectoryPath(lang === 'hi' ? 'en' : 'hi');
-  let html = `<div class="compare-top-row"><a href="/" class="detail-back">&larr; ${t.home}</a><a href="${otherPath}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
+  let html = `<div class="compare-top-row"><a href="${lang === 'hi' ? '/hi/' : '/'}" class="detail-back">&larr; ${t.home}</a><a href="${otherPath}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
   html += `<h1>${t.h1}</h1><p class="compare-lede">${esc(t.lede(DIRECTORY_EXAM_IDS.length))}</p>`;
   for (const group of GROUPS) {
     html += `<section class="exam-dir-group" id="${group.key}"><h2>${esc(group.title[lang] ?? group.title.en)}</h2><div class="exam-dir-grid">`;

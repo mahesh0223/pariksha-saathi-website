@@ -13,6 +13,10 @@ import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { DAILY_PDF_EDITIONS } from '../src/data/downloads.mjs';
+import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
+import { deriveHindiCatalogEntry } from '../src/lib/lessonCatalogHi.mjs';
+import { publicPageMeta, SITE_SHOWS_ADS } from '../src/data/publicPages.mjs';
+import { TRUST_LINES } from '../src/data/trustLines.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 // The entry bundle routes from these slim lists instead of the content modules (see App.tsx) -
@@ -123,7 +127,7 @@ console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages:
 // internal link without the slash therefore costs each crawler a redirect hop (Search Console reported 31
 // "Page with redirect" URLs on 2026-10-16, all of this kind) - so no built page may carry one.
 {
-  const slashless = /href="\/(app\/exam-notices|app\/current-affairs|(?:hi\/)?(?:exams|learn)|(?:hi\/)?(?:compare|learn|exams)\/[a-z0-9-]+)"/g;
+  const slashless = /href="\/(hi|app\/exam-notices|app\/current-affairs|(?:hi\/)?(?:exams|learn)|(?:hi\/)?(?:compare|learn|exams)\/[a-z0-9-]+)"/g;
   let offenders = 0;
   for (const file of files) {
     const hits = readFileSync(file, 'utf8').match(slashless);
@@ -203,3 +207,64 @@ assert(home.includes(`href="${latestPdf.file}"`), 'home page is missing the late
 assert(existsSync(`dist${latestPdf.file}`), `the latest daily PDF is not in dist: ${latestPdf.file}`);
 assert(home.includes('href="/exams/"'), 'home page does not link to the exam chooser');
 console.log(`Verified the exam chooser (${DIRECTORY_EXAM_IDS.length} exams, both languages), the Exams button in every public header and the daily PDF link on the home page.`);
+
+// Trust copy (2026-10-17). Two public lines were false on 16 Oct 2026: /downloads/ said the items were "written
+// and reviewed by" the founder (they are AI-drafted from official releases and not reviewed by a subject-matter
+// editor), and /terms/ and /privacy/ said the website "shows ads" while ad serving was paused. From now on no
+// built page may claim human review it did not get, and the legal pages' ads wording must follow
+// SITE_SHOWS_ADS (publicPages.mjs). "not reviewed by ..." (the honest fact-level attribution) stays allowed.
+for (const file of files) {
+  const html = readFileSync(file, 'utf8');
+  // Narrow on purpose: a news item may legitimately say a parade was "reviewed by" an Air Chief Marshal. What
+  // may never appear is the founder named as reviewer or editor of content no human line-edited.
+  const claim = html.match(/written and reviewed by|reviewed by (?:<strong>)?Mahesh|लेखक\/संपादक|समीक्षक: महेश/i);
+  assert(!claim, `${file}: names the founder as reviewer or editor of AI-drafted content: "${html.slice(Math.max(0, claim?.index - 60), (claim?.index ?? 0) + 60)}"`);
+}
+{
+  const legal = { terms: readFileSync('dist/terms/index.html', 'utf8'), privacy: readFileSync('dist/privacy/index.html', 'utf8') };
+  for (const [name, html] of Object.entries(legal)) {
+    if (SITE_SHOWS_ADS) {
+      assert(/shows ads served by/.test(html), `${name}: SITE_SHOWS_ADS is true but the page does not describe the ads`);
+    } else {
+      assert(html.includes('shows no ads'), `${name}: SITE_SHOWS_ADS is false but the page does not say the website shows no ads`);
+      assert(!/shows ads served by|does show ads|serves ads on this website/.test(html), `${name}: still says the website shows ads`);
+    }
+  }
+}
+// The trust strip (src/data/trustLines.mjs) is on both landing pages and /about/, verbatim, and never promises
+// "no ads" - AdSense/AdMob/Premium remain open options (docs/marketing-plan-2026-10.md), so that claim is not ours
+// to make (decision of 2026-10-15).
+for (const [file, lang] of [['dist/index.html', 'en'], ['dist/hi/index.html', 'hi'], ['dist/about/index.html', 'en']]) {
+  const html = readFileSync(file, 'utf8');
+  for (const line of TRUST_LINES[lang]) assert(html.includes(line), `${file}: trust line missing: ${line}`);
+  assert(!/\bno ads\b|ad-free|कोई विज्ञापन नहीं|विज्ञापन-मुक्त/i.test(html), `${file}: promises "no ads" - see trustLines.mjs`);
+  if (file !== 'dist/about/index.html') assert(html.includes('class="trust-lines"'), `${file}: hero is missing the trust strip`);
+}
+console.log('Verified the trust copy: no human-review claim anywhere, legal ads wording matches SITE_SHOWS_ADS, trust strip on both landing pages.');
+
+// Hindi index pages (2026-10-17): /hi/ and /hi/learn/ returned 404 until now although 165 Hindi lesson pages
+// linked to them as "home" and "library". Both must exist, sit in the sitemap, carry hreflang both ways and,
+// for the library, link every lesson's Hindi page from a catalog derived from topicLessons.mjs.
+for (const key of ['hi', 'hi-learn']) {
+  const meta = publicPageMeta(key);
+  const file = `dist${meta.path}index.html`;
+  assert(existsSync(file), `${meta.path}: not built`);
+  const html = readFileSync(file, 'utf8');
+  assert(html.includes('<html lang="hi">'), `${meta.path}: html lang is not hi`);
+  const twin = meta.alternateLanguages.find((a) => a.lang === 'en').path;
+  assert(html.includes(`hreflang="en" href="https://parikshasaathi.com${twin}"`), `${meta.path}: missing hreflang to ${twin}`);
+  assert(readFileSync(`dist${twin}index.html`, 'utf8').includes(`hreflang="hi" href="https://parikshasaathi.com${meta.path}"`), `${twin}: missing hreflang to ${meta.path}`);
+  assert(sitemap.includes(`<loc>https://parikshasaathi.com${meta.path}</loc>`), `${meta.path}: not in the sitemap`);
+  assert(html.includes('class="pub-exams-link"') && html.includes('href="/hi/exams/"'), `${meta.path}: no Hindi Exams button`);
+}
+{
+  const libraryHi = readFileSync('dist/hi/learn/index.html', 'utf8');
+  for (const entry of LESSON_CATALOG) assert(libraryHi.includes(`href="/hi/learn/${entry.slug}/"`), `/hi/learn/: missing ${entry.slug}`);
+  assert.deepEqual(LESSON_CATALOG_HI, TOPIC_LESSONS.map(deriveHindiCatalogEntry), 'lessonCatalogHi.mjs is stale - run: node scripts/gen-lesson-catalog-hi.mjs');
+  for (const slug of ['percentages', 'cubes-and-dice']) {
+    const html = readFileSync(`dist/hi/learn/${slug}/index.html`, 'utf8');
+    assert(html.includes('href="/hi/learn/"') && html.includes('href="/hi/"'), `hi/learn/${slug}: does not lead back to the Hindi library and home`);
+  }
+  assert(home.includes('href="/hi/"'), 'home page has no link to the Hindi landing page');
+}
+console.log(`Verified the Hindi landing page and lesson library: built, in the sitemap, hreflang both ways, ${LESSON_CATALOG.length} Hindi lesson links.`);

@@ -85,6 +85,8 @@ export function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/learn" element={<Lazy><PublicPage page="learn" /></Lazy>} />
+      <Route path="/hi" element={<Lazy><PublicPage page="hi" /></Lazy>} />
+      <Route path="/hi/learn" element={<Lazy><PublicPage page="hi-learn" /></Lazy>} />
       <Route path="/about" element={<Lazy><PublicPage page="about" /></Lazy>} />
       <Route path="/privacy" element={<Lazy><PublicPage page="privacy" /></Lazy>} />
       <Route path="/contact" element={<Lazy><PublicPage page="contact" /></Lazy>} />

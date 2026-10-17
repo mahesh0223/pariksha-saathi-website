@@ -8,8 +8,8 @@ import { Card } from '../components/ui/Primitives';
 import { CurrentAffairsItemCard } from '../components/CurrentAffairsItemCard';
 import { AdSlot } from '../components/ads/AdSlot';
 import { LESSON_SUBJECTS } from '../data/lessonSubjects.mjs';
+import { TRUST_LINES, TRUST_LINES_LABEL, TRUST_STATS } from '../data/trustLines.mjs';
 import { dailyPdfBand } from '../lib/dailyPdf.mjs';
-import { DIRECTORY_EXAM_IDS } from '../lib/examDirectory.mjs';
 import { examHubPath } from '../lib/examHubPath.mjs';
 import { subjectBlurb } from '../lib/lessonCredit.mjs';
 import type { CurrentAffairsItem, ExamUpdateNotice } from '../types/api';
@@ -96,13 +96,6 @@ const FEATURES = [
     title: 'Daily Digest',
     body: 'A short daily reading list pulled from the latest current affairs and exam notices, with an estimated read time.',
   },
-];
-
-const TRUST_STATS = [
-  { value: String(DIRECTORY_EXAM_IDS.length), label: 'exams covered' },
-  { value: '100%', label: 'free, no paywall' },
-  { value: 'EN / HI', label: 'both languages' },
-  { value: 'Offline', label: 'in the Android app' },
 ];
 
 const HOW_IT_WORKS = [
@@ -226,6 +219,11 @@ export function HomePage() {
     description:
       'Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice and take mock tests in your browser.',
     path: '/',
+    alternateLanguages: [
+      { lang: 'en', path: '/' },
+      { lang: 'hi', path: '/hi/' },
+      { lang: 'x-default', path: '/' },
+    ],
     structuredData: [
       {
         '@context': 'https://schema.org',
@@ -285,6 +283,7 @@ export function HomePage() {
             <a href="#current-affairs">Current Affairs</a>
             <a href="#faq">FAQ</a>
             <Link to="/privacy/">Privacy</Link>
+            <a href="/hi/" lang="hi">हिंदी</a>
           </nav>
           <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
             Exams
@@ -315,6 +314,9 @@ export function HomePage() {
                 See what's inside
               </a>
             </div>
+            <a className="hero-lang-switch" href="/hi/" lang="hi">
+              यह पेज हिंदी में पढ़ें &rarr;
+            </a>
             <div className="exam-pills">
               {HERO_EXAMS.map(([id, name]) => (
                 <Link key={id} to={examHubPath(id, 'en')}>
@@ -326,13 +328,18 @@ export function HomePage() {
               </Link>
             </div>
             <div className="trust-bar">
-              {TRUST_STATS.map((s) => (
+              {TRUST_STATS.en.map((s) => (
                 <div className="trust-stat" key={s.label}>
                   <div className="trust-value">{s.value}</div>
                   <div className="trust-label">{s.label}</div>
                 </div>
               ))}
             </div>
+            <ul className="trust-lines" aria-label={TRUST_LINES_LABEL.en}>
+              {TRUST_LINES.en.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
           </div>
           <div className="phone-stack">
             <div className="phone-glow" />

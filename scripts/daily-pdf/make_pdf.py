@@ -69,7 +69,7 @@ h1.sec{{font-size:16pt;color:#1e3a8a;border-bottom:2px solid #1e3a8a;padding-bot
 {items}{quiz_html}
 <div class="foot"><b>रोज़ का PDF: parikshasaathi.com/daily-pdf — सभी संस्करण: parikshasaathi.com/downloads/</b><br>
 वेबसाइट: parikshasaathi.com (हिंदी + English में 248 पाठ, रोज़ का करंट अफेयर्स, परीक्षा नोटिस)<br>
-ऐप: Pariksha Saathi — Free, Offline, SSC/Bank की पूरी तैयारी। लेखक/संपादक: Mahesh Srivastava, Founder.</div>
+ऐप: Pariksha Saathi — Free, Offline, SSC/Bank की पूरी तैयारी। प्रकाशक: Mahesh Srivastava, Founder. सामग्री आधिकारिक विज्ञप्तियों से AI की सहायता से तैयार; किसी विषय-विशेषज्ञ संपादक द्वारा समीक्षित नहीं। ग़लती दिखे तो parikshasaathi.com/contact/ पर बताएँ।</div>
 </body></html>"""
 tmp = os.path.join(HERE, "_edition.html"); open(tmp, "w").write(page)
 name = f"ParikshaSaathi_CA_{date}.pdf"; outdir = os.path.join(ROOT, "public", "pdf"); os.makedirs(outdir, exist_ok=True)

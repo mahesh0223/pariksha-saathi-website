@@ -10,3 +10,14 @@ export const LESSON_SUBJECTS = [
   'State GK',
   'Teaching (CTET)',
 ];
+
+// Hindi names for the same subjects, as the Hindi landing page and /hi/learn/ show them. The spellings
+// follow the Hindi syllabus pages (examSyllabi.mjs) so a reader sees one name for a subject everywhere.
+export const LESSON_SUBJECTS_HI = {
+  'Quantitative Aptitude': 'मात्रात्मक अभियोग्यता',
+  Reasoning: 'तर्कशक्ति',
+  English: 'अंग्रेज़ी (English)',
+  'General Awareness': 'सामान्य जागरूकता',
+  'State GK': 'राज्य सामान्य ज्ञान',
+  'Teaching (CTET)': 'शिक्षण (CTET)',
+};

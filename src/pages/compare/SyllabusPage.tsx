@@ -20,9 +20,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
   const enPath = `/compare/${slug}-syllabus/`;
   const hiPath = `/hi/compare/${slug}-syllabus/`;
   const path = lang === 'hi' ? hiPath : enPath;
-  // There's no Hindi homepage (out of scope here) - both languages link back to the one real
-  // homepage rather than a dead /hi route.
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
 
   useDocumentMeta({
     title: content?.pageTitle ?? 'Syllabus & Exam Pattern',

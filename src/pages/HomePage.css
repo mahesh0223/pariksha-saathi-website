@@ -283,6 +283,52 @@
   color: var(--tan);
   margin-top: 2px;
 }
+/* The four promises under the stats (src/data/trustLines.mjs) - every line a claim that is true today. */
+.trust-lines {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 24px;
+  font-size: 0.9rem;
+  color: var(--tan);
+}
+.trust-lines li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.45;
+}
+.trust-lines li::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 0.42em;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid var(--terracotta-light);
+  border-bottom: 2px solid var(--terracotta-light);
+  transform: rotate(-45deg);
+}
+@media (max-width: 560px) {
+  .trust-lines {
+    grid-template-columns: 1fr;
+  }
+}
+/* "Read this page in Hindi / English" under the hero buttons - the only language switch that stays visible
+   on phones, where the header nav is hidden. */
+.hero-lang-switch {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--cream);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .phone-stack {
   position: relative;
   z-index: 1;

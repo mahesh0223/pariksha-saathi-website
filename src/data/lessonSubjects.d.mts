@@ -2,3 +2,4 @@
 // the data file itself.
 
 export const LESSON_SUBJECTS: string[];
+export const LESSON_SUBJECTS_HI: Record<string, string>;

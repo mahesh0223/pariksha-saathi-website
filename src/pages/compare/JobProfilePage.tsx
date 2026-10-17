@@ -33,7 +33,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
   const hiPath = `/hi/compare/${slug}-job-profile/`;
   const syllabusPath = lang === 'hi' ? `/hi/compare/${slug}-syllabus/` : `/compare/${slug}-syllabus/`;
   const path = lang === 'hi' ? hiPath : enPath;
-  const homeHref = '/';
+  const homeHref = lang === 'hi' ? '/hi/' : '/';
 
   useDocumentMeta({
     title: content?.pageTitle ?? 'Job Profile & Salary',
