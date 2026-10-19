@@ -18,7 +18,7 @@ export const QUESTION_TOPICS = {
   "ALGEBRAIC_IDENTITIES": {
     "slug": "algebraic-identities",
     "lessonSlug": "algebraic-identities",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Algebraic Identities",
       "count": 14
@@ -31,7 +31,7 @@ export const QUESTION_TOPICS = {
   "ALPHABET_SERIES": {
     "slug": "alphabet-series",
     "lessonSlug": "alphabet-series",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Alphabet Series",
       "count": 11
@@ -44,7 +44,7 @@ export const QUESTION_TOPICS = {
   "ALPHANUMERIC_SERIES": {
     "slug": "alphanumeric-series",
     "lessonSlug": "alphanumeric-series",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Alphanumeric Series",
       "count": 11
@@ -83,7 +83,7 @@ export const QUESTION_TOPICS = {
   "APPROXIMATION": {
     "slug": "approximation",
     "lessonSlug": "approximation",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Approximation",
       "count": 14
@@ -109,7 +109,7 @@ export const QUESTION_TOPICS = {
   "ARTICLES": {
     "slug": "articles",
     "lessonSlug": "articles",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Articles",
       "count": 11
@@ -135,7 +135,7 @@ export const QUESTION_TOPICS = {
   "BANKERS_DISCOUNT_TRUE_DISCOUNT": {
     "slug": "bankers-discount-true-discount",
     "lessonSlug": "bankers-discount-true-discount",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Banker’s Discount and True Discount",
       "count": 14
@@ -160,7 +160,7 @@ export const QUESTION_TOPICS = {
   "BAR_GRAPH": {
     "slug": "bar-graph",
     "lessonSlug": "bar-graph",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Bar Graph",
       "count": 14
@@ -225,7 +225,7 @@ export const QUESTION_TOPICS = {
   "CAUSE_AND_EFFECT": {
     "slug": "cause-and-effect",
     "lessonSlug": "cause-and-effect",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Cause and Effect",
       "count": 11
@@ -264,7 +264,7 @@ export const QUESTION_TOPICS = {
   "CIRCULAR_PERMUTATIONS": {
     "slug": "circular-permutations",
     "lessonSlug": "circular-permutations",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Circular Permutations",
       "count": 14
@@ -277,7 +277,7 @@ export const QUESTION_TOPICS = {
   "CIRCULAR_SEATING_ARRANGEMENT": {
     "slug": "circular-seating-arrangement",
     "lessonSlug": "circular-seating-arrangement",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Circular Seating Arrangement",
       "count": 11
@@ -303,7 +303,7 @@ export const QUESTION_TOPICS = {
   "CLAUSES_NOUN_ADJECTIVE_ADVERB": {
     "slug": "clauses-noun-adjective-adverb",
     "lessonSlug": "clauses-noun-adjective-adverb",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Clauses (Noun, Adjective, Adverb)",
       "count": 11
@@ -342,7 +342,7 @@ export const QUESTION_TOPICS = {
   "CODED_RELATIONSHIPS": {
     "slug": "coded-relationships",
     "lessonSlug": "coded-relationships",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Coded Relationships",
       "count": 11
@@ -368,7 +368,7 @@ export const QUESTION_TOPICS = {
   "COLLECTIVE_NOUNS": {
     "slug": "collective-nouns",
     "lessonSlug": "collective-nouns",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Collective Nouns",
       "count": 11
@@ -381,7 +381,7 @@ export const QUESTION_TOPICS = {
   "COMMONLY_CONFUSED_WORDS": {
     "slug": "commonly-confused-words",
     "lessonSlug": "commonly-confused-words",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Commonly Confused Words",
       "count": 11
@@ -394,7 +394,7 @@ export const QUESTION_TOPICS = {
   "COMPARISON_PUZZLES": {
     "slug": "comparison-puzzles",
     "lessonSlug": "comparison-puzzles",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Comparison Puzzles",
       "count": 11
@@ -407,7 +407,7 @@ export const QUESTION_TOPICS = {
   "COMPOUND_INTEREST_HALF_YEARLY_QUARTERLY": {
     "slug": "compound-interest-half-yearly-quarterly",
     "lessonSlug": "compound-interest-half-yearly-quarterly",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Compound Interest: Half-Yearly & Quarterly",
       "count": 14
@@ -432,7 +432,7 @@ export const QUESTION_TOPICS = {
   "CONDITIONAL_SENTENCES": {
     "slug": "conditional-sentences",
     "lessonSlug": "conditional-sentences",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Conditional Sentences",
       "count": 11
@@ -445,7 +445,7 @@ export const QUESTION_TOPICS = {
   "CONFUSABLE_VERBS": {
     "slug": "confusable-verbs",
     "lessonSlug": "confusable-verbs",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Confusable Verbs",
       "count": 11
@@ -458,7 +458,7 @@ export const QUESTION_TOPICS = {
   "CONNECTORS_AND_CONJUNCTIONS": {
     "slug": "connectors-and-conjunctions",
     "lessonSlug": "connectors-and-conjunctions",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Connectors and Conjunctions",
       "count": 11
@@ -471,7 +471,7 @@ export const QUESTION_TOPICS = {
   "CORRELATIVE_CONJUNCTIONS": {
     "slug": "correlative-conjunctions",
     "lessonSlug": "correlative-conjunctions",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Correlative Conjunctions",
       "count": 11
@@ -484,7 +484,7 @@ export const QUESTION_TOPICS = {
   "COUNTABLE_AND_UNCOUNTABLE_NOUNS": {
     "slug": "countable-and-uncountable-nouns",
     "lessonSlug": "countable-and-uncountable-nouns",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Countable and Uncountable Nouns",
       "count": 11
@@ -497,7 +497,7 @@ export const QUESTION_TOPICS = {
   "COURSE_OF_ACTION": {
     "slug": "course-of-action",
     "lessonSlug": "course-of-action",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Course of Action",
       "count": 11
@@ -562,7 +562,7 @@ export const QUESTION_TOPICS = {
   "DETERMINERS": {
     "slug": "determiners",
     "lessonSlug": "determiners",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Determiners",
       "count": 11
@@ -601,7 +601,7 @@ export const QUESTION_TOPICS = {
   "DOUBLE_ROW_SEATING": {
     "slug": "double-row-seating",
     "lessonSlug": "double-row-seating",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Double Row Seating",
       "count": 11
@@ -653,7 +653,7 @@ export const QUESTION_TOPICS = {
   "FAMILY_TREE_BLOOD_RELATIONS": {
     "slug": "family-tree-blood-relations",
     "lessonSlug": "family-tree-blood-relations",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Family Tree (Blood Relations)",
       "count": 11
@@ -679,7 +679,7 @@ export const QUESTION_TOPICS = {
   "FLOOR_AND_FLAT_PUZZLE": {
     "slug": "floor-and-flat-puzzle",
     "lessonSlug": "floor-and-flat-puzzle",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Floor and Flat Puzzle",
       "count": 11
@@ -692,7 +692,7 @@ export const QUESTION_TOPICS = {
   "FLOOR_PUZZLE": {
     "slug": "floor-puzzle",
     "lessonSlug": "floor-puzzle",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Floor-Based Puzzles",
       "count": 11
@@ -731,7 +731,7 @@ export const QUESTION_TOPICS = {
   "HCF_LCM_OF_FRACTIONS": {
     "slug": "hcf-lcm-of-fractions",
     "lessonSlug": "hcf-lcm-of-fractions",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "HCF and LCM of Fractions",
       "count": 14
@@ -757,7 +757,7 @@ export const QUESTION_TOPICS = {
   "HOMOPHONES": {
     "slug": "homophones",
     "lessonSlug": "homophones",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Homophones",
       "count": 11
@@ -848,7 +848,7 @@ export const QUESTION_TOPICS = {
   "INFINITIVES_AND_GERUNDS": {
     "slug": "infinitives-and-gerunds",
     "lessonSlug": "infinitives-and-gerunds",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Infinitives and Gerunds",
       "count": 11
@@ -900,7 +900,7 @@ export const QUESTION_TOPICS = {
   "LETTER_GROUP_CLASSIFICATION": {
     "slug": "letter-group-classification",
     "lessonSlug": "letter-group-classification",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Letter Group Classification",
       "count": 11
@@ -913,7 +913,7 @@ export const QUESTION_TOPICS = {
   "LETTER_PAIRS_ALPHABET_GAP": {
     "slug": "letter-pairs-alphabet-gap",
     "lessonSlug": "letter-pairs-alphabet-gap",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Letter Pairs with Equal Alphabet Gap",
       "count": 11
@@ -926,7 +926,7 @@ export const QUESTION_TOPICS = {
   "LINE_GRAPH": {
     "slug": "line-graph",
     "lessonSlug": "line-graph",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Line Graph",
       "count": 14
@@ -939,7 +939,7 @@ export const QUESTION_TOPICS = {
   "LOGICAL_SEQUENCE_OF_WORDS": {
     "slug": "logical-sequence-of-words",
     "lessonSlug": "logical-sequence-of-words",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Logical Sequence of Words",
       "count": 11
@@ -978,7 +978,7 @@ export const QUESTION_TOPICS = {
   "MATRIX_PUZZLE": {
     "slug": "matrix-puzzle",
     "lessonSlug": "matrix-puzzle",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Matrix Puzzle",
       "count": 11
@@ -991,7 +991,7 @@ export const QUESTION_TOPICS = {
   "MEAN_THIRD_FOURTH_PROPORTIONAL": {
     "slug": "mean-third-fourth-proportional",
     "lessonSlug": "mean-third-fourth-proportional",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Mean, Third and Fourth Proportional",
       "count": 14
@@ -1030,7 +1030,7 @@ export const QUESTION_TOPICS = {
   "MODAL_VERBS": {
     "slug": "modal-verbs",
     "lessonSlug": "modal-verbs",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Modal Verbs",
       "count": 11
@@ -1082,7 +1082,7 @@ export const QUESTION_TOPICS = {
   "ODD_PAIR_OUT": {
     "slug": "odd-pair-out",
     "lessonSlug": "odd-pair-out",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Odd Pair Out",
       "count": 11
@@ -1108,7 +1108,7 @@ export const QUESTION_TOPICS = {
   "PARA_COMPLETION": {
     "slug": "para-completion",
     "lessonSlug": "para-completion",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Para Completion",
       "count": 11
@@ -1147,7 +1147,7 @@ export const QUESTION_TOPICS = {
   "PASSIVE_VOICE_QUESTIONS_NEGATIVES": {
     "slug": "passive-voice-questions-negatives",
     "lessonSlug": "passive-voice-questions-negatives",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Passive Voice: Questions and Negatives",
       "count": 11
@@ -1173,7 +1173,7 @@ export const QUESTION_TOPICS = {
   "PERMUTATION_AND_COMBINATION": {
     "slug": "permutation-and-combination",
     "lessonSlug": "permutation-and-combination",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Permutation and Combination",
       "count": 15
@@ -1199,7 +1199,7 @@ export const QUESTION_TOPICS = {
   "PIE_CHART": {
     "slug": "pie-chart",
     "lessonSlug": "pie-chart",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Pie Chart",
       "count": 14
@@ -1212,7 +1212,7 @@ export const QUESTION_TOPICS = {
   "PIPES_AND_CISTERNS": {
     "slug": "pipes-and-cisterns",
     "lessonSlug": "pipes-and-cisterns",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Pipes and Cisterns",
       "count": 14
@@ -1225,7 +1225,7 @@ export const QUESTION_TOPICS = {
   "PREFIXES_AND_SUFFIXES": {
     "slug": "prefixes-and-suffixes",
     "lessonSlug": "prefixes-and-suffixes",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Prefixes and Suffixes",
       "count": 11
@@ -1277,7 +1277,7 @@ export const QUESTION_TOPICS = {
   "PROBLEMS_ON_TRAINS": {
     "slug": "problems-on-trains",
     "lessonSlug": "problems-on-trains",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Problems on Trains",
       "count": 14
@@ -1303,7 +1303,7 @@ export const QUESTION_TOPICS = {
   "PUNCTUATION": {
     "slug": "punctuation",
     "lessonSlug": "punctuation",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Punctuation",
       "count": 11
@@ -1316,7 +1316,7 @@ export const QUESTION_TOPICS = {
   "QUADRATIC_EQUATIONS": {
     "slug": "quadratic-equations",
     "lessonSlug": "quadratic-equations",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Quadratic Equations",
       "count": 14
@@ -1329,7 +1329,7 @@ export const QUESTION_TOPICS = {
   "RACES_AND_GAMES": {
     "slug": "races-and-games",
     "lessonSlug": "races-and-games",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Races and Games",
       "count": 14
@@ -1394,7 +1394,7 @@ export const QUESTION_TOPICS = {
   "REDUNDANCY": {
     "slug": "redundancy",
     "lessonSlug": "redundancy",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Redundancy",
       "count": 11
@@ -1407,7 +1407,7 @@ export const QUESTION_TOPICS = {
   "RELATIVE_PRONOUNS": {
     "slug": "relative-pronouns",
     "lessonSlug": "relative-pronouns",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Relative Pronouns",
       "count": 11
@@ -1420,7 +1420,7 @@ export const QUESTION_TOPICS = {
   "SCHEDULING_PUZZLE": {
     "slug": "scheduling-puzzle",
     "lessonSlug": "scheduling-puzzle",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Scheduling Puzzle",
       "count": 11
@@ -1433,7 +1433,7 @@ export const QUESTION_TOPICS = {
   "SCHEDULING_PUZZLE_MONTH_DATE": {
     "slug": "scheduling-puzzle-month-date",
     "lessonSlug": "scheduling-puzzle-month-date",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Scheduling Puzzle: Month and Date",
       "count": 11
@@ -1472,7 +1472,7 @@ export const QUESTION_TOPICS = {
   "SEATING_ARRANGEMENT_MIXED_DIRECTIONS": {
     "slug": "seating-arrangement-mixed-directions",
     "lessonSlug": "seating-arrangement-mixed-directions",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Seating Arrangement (Mixed Directions)",
       "count": 11
@@ -1498,7 +1498,7 @@ export const QUESTION_TOPICS = {
   "SENTENCE_REARRANGEMENT": {
     "slug": "sentence-rearrangement",
     "lessonSlug": "sentence-rearrangement",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Sentence Rearrangement",
       "count": 11
@@ -1511,7 +1511,7 @@ export const QUESTION_TOPICS = {
   "SENTENCE_TRANSFORMATION": {
     "slug": "sentence-transformation",
     "lessonSlug": "sentence-transformation",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Sentence Transformation",
       "count": 11
@@ -1537,7 +1537,7 @@ export const QUESTION_TOPICS = {
   "SET_THEORY": {
     "slug": "set-theory",
     "lessonSlug": "set-theory",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Set Theory",
       "count": 14
@@ -1563,7 +1563,7 @@ export const QUESTION_TOPICS = {
   "SIMPLE_EQUATIONS": {
     "slug": "simple-equations",
     "lessonSlug": "simple-equations",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Simple Equations",
       "count": 14
@@ -1602,7 +1602,7 @@ export const QUESTION_TOPICS = {
   "STATEMENT_AND_ARGUMENT": {
     "slug": "statement-and-argument",
     "lessonSlug": "statement-and-argument",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Statement and Argument",
       "count": 11
@@ -1615,7 +1615,7 @@ export const QUESTION_TOPICS = {
   "STATEMENT_AND_ASSUMPTION": {
     "slug": "statement-and-assumption",
     "lessonSlug": "statement-and-assumption",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Statement and Assumption",
       "count": 11
@@ -1628,7 +1628,7 @@ export const QUESTION_TOPICS = {
   "STATEMENT_AND_CONCLUSION": {
     "slug": "statement-and-conclusion",
     "lessonSlug": "statement-and-conclusion",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Statement and Conclusion",
       "count": 11
@@ -1680,7 +1680,7 @@ export const QUESTION_TOPICS = {
   "SUBJECT_VERB_AGREEMENT": {
     "slug": "subject-verb-agreement",
     "lessonSlug": "subject-verb-agreement",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Subject-Verb Agreement",
       "count": 11
@@ -1693,7 +1693,7 @@ export const QUESTION_TOPICS = {
   "SUCCESSIVE_DISCOUNT": {
     "slug": "successive-discount",
     "lessonSlug": "successive-discount",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Successive Discount",
       "count": 14
@@ -1706,7 +1706,7 @@ export const QUESTION_TOPICS = {
   "SURDS_AND_INDICES": {
     "slug": "surds-and-indices",
     "lessonSlug": "surds-and-indices",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Surds and Indices",
       "count": 15
@@ -1732,7 +1732,7 @@ export const QUESTION_TOPICS = {
   "SYLLOGISM_POSSIBILITY_CASES": {
     "slug": "syllogism-possibility-cases",
     "lessonSlug": "syllogism-possibility-cases",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Syllogism: Possibility Cases",
       "count": 11
@@ -1758,7 +1758,7 @@ export const QUESTION_TOPICS = {
   "TAG_QUESTIONS": {
     "slug": "tag-questions",
     "lessonSlug": "tag-questions",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Tag Questions",
       "count": 11
@@ -1771,7 +1771,7 @@ export const QUESTION_TOPICS = {
   "TENSES": {
     "slug": "tenses",
     "lessonSlug": "tenses",
-    "subject": null,
+    "subject": "English",
     "en": {
       "name": "Tenses",
       "count": 11
@@ -1849,7 +1849,7 @@ export const QUESTION_TOPICS = {
   "WORD_FORMATION": {
     "slug": "word-formation",
     "lessonSlug": "word-formation",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Word Formation",
       "count": 11
@@ -1862,7 +1862,7 @@ export const QUESTION_TOPICS = {
   "WORK_AND_WAGES": {
     "slug": "work-and-wages",
     "lessonSlug": "work-and-wages",
-    "subject": null,
+    "subject": "Quantitative Aptitude",
     "en": {
       "name": "Work and Wages",
       "count": 14
@@ -1888,7 +1888,7 @@ export const QUESTION_TOPICS = {
   "WRONG_NUMBER_SERIES": {
     "slug": "wrong-number-series",
     "lessonSlug": "wrong-number-series",
-    "subject": null,
+    "subject": "Reasoning",
     "en": {
       "name": "Wrong Number Series",
       "count": 11

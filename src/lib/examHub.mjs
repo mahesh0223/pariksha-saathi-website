@@ -12,6 +12,9 @@
 // existing importers of this module keep working.
 import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
 import { CONTACT_EMAIL } from './reportQuestion.mjs';
+import { questionIndexPath, topicListPath } from './questionPage.mjs';
+import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
+import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -105,6 +108,25 @@ const T = {
     jobProfile: 'Job profile and salary',
     lessons: 'Free lessons',
     practice: 'Start practising',
+    syllabusHeading: 'Syllabus: subjects tested',
+    syllabusIntro: 'The subjects in short, as the official syllabus lists them. The exam body\'s own notification is final.',
+    syllabusMore: 'Full syllabus, stage by stage',
+    officialSite: 'Official website',
+    practiceHeading: 'Practice questions by section',
+    practiceIntro: 'Free questions, each with its answer, in the subjects this exam tests. Every topic opens a list of question pages.',
+    questionCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
+    allQuestions: 'All practice questions by topic',
+    faq: 'Frequently asked questions',
+    faqStages: { q: (name) => `What are the selection stages of ${name}?`, a: (cycle, stages) => `${stages}, as per the ${cycle} notification.` },
+    faqSize: {
+      q: (name) => `How many questions are in the ${name} first stage?`,
+      a: (cycle, label, questions, marks, minutes) => `${label}: ${questions} questions for ${marks} marks in ${minutes} minutes, as per the ${cycle} notification.`,
+    },
+    faqNegative: { q: (name) => `Is there negative marking in ${name}?`, a: (cycle, label, text) => `${label}, as per the ${cycle} notification: ${text}` },
+    faqAge: { q: (name) => `What is the age limit for ${name}?` },
+    faqQualification: { q: (name) => `What qualification do I need for ${name}?` },
+    faqDates: { q: (name) => `What are the ${name} first-stage exam dates?`, a: (cycle, label, from, to) => `${label}: ${from} to ${to}, as per the ${cycle} notification.` },
+    faqSubjects: { q: (name) => `Which subjects does the ${name} exam test?`, a: (subjects) => `The official syllabus lists: ${subjects}.` },
     sourceWord: 'Source',
     verifiedWord: 'Last verified',
     howMade: 'How this page is made',
@@ -177,6 +199,25 @@ const T = {
     jobProfile: 'जॉब प्रोफ़ाइल और वेतन',
     lessons: 'मुफ़्त पाठ',
     practice: 'अभ्यास शुरू करें',
+    syllabusHeading: 'सिलेबस: परीक्षा के विषय',
+    syllabusIntro: 'विषय संक्षेप में, जैसे आधिकारिक पाठ्यक्रम में दिए हैं। परीक्षा निकाय की अपनी अधिसूचना ही अंतिम है।',
+    syllabusMore: 'पूरा सिलेबस, चरण के अनुसार',
+    officialSite: 'आधिकारिक वेबसाइट',
+    practiceHeading: 'खंड के अनुसार अभ्यास प्रश्न',
+    practiceIntro: 'इस परीक्षा के विषयों के मुफ़्त प्रश्न, हर प्रश्न उत्तर सहित। हर टॉपिक पर क्लिक करने से उसके प्रश्नों की सूची खुलती है।',
+    questionCount: (n) => `${n} प्रश्न`,
+    allQuestions: 'टॉपिक के अनुसार सभी अभ्यास प्रश्न',
+    faq: 'अक्सर पूछे जाने वाले प्रश्न',
+    faqStages: { q: (name) => `${name} में चयन के चरण कौन-से हैं?`, a: (cycle, stages) => `${cycle} की अधिसूचना के अनुसार: ${stages}।` },
+    faqSize: {
+      q: (name) => `${name} के पहले चरण में कितने प्रश्न होते हैं?`,
+      a: (cycle, label, questions, marks, minutes) => `${label}: ${minutes} मिनट में ${marks} अंकों के ${questions} प्रश्न, ${cycle} की अधिसूचना के अनुसार।`,
+    },
+    faqNegative: { q: (name) => `क्या ${name} में नेगेटिव मार्किंग है?`, a: (cycle, label, text) => `${label}, ${cycle} की अधिसूचना के अनुसार: ${text}` },
+    faqAge: { q: (name) => `${name} की आयु सीमा क्या है?` },
+    faqQualification: { q: (name) => `${name} के लिए कौन-सी योग्यता चाहिए?` },
+    faqDates: { q: (name) => `${name} के पहले चरण की परीक्षा तिथियाँ क्या हैं?`, a: (cycle, label, from, to) => `${label}: ${from} से ${to} तक, ${cycle} की अधिसूचना के अनुसार।` },
+    faqSubjects: { q: (name) => `${name} परीक्षा में कौन-से विषय आते हैं?`, a: (subjects) => `आधिकारिक पाठ्यक्रम में ये विषय हैं: ${subjects}।` },
     sourceWord: 'स्रोत',
     verifiedWord: 'अंतिम सत्यापन',
     howMade: 'यह पृष्ठ कैसे बना है',
@@ -339,15 +380,8 @@ function cutoffTablesHtml(cutoffs, lang, t, report) {
   return html;
 }
 
-// The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
-export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null, liveMock = null, playStoreUrl = '', now = new Date() }) {
-  const t = T[lang];
-  const fact = facts[0];
-  const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
-  const lastVerified = verifiedDates.sort().at(-1);
-  const otherPath = examHubPath(fact.examId, lang === 'hi' ? 'en' : 'hi');
-  const report = { examName, page: `https://parikshasaathi.com${examHubPath(fact.examId, lang)}` };
-
+// The first stage's size, time, negative marking and dates - shared by the "At a glance" block and the FAQ.
+function firstStageSummary(fact, lang, t) {
   // The first stage can be one paper (Tier-I) or several sessions on one day (MTS): count them together.
   // CTET's Paper I and the two Paper II options are alternatives, not sessions: show one paper, not their sum.
   const firstParts = fact.stages[0].partsAreAlternatives ? fact.stages[0].parts.slice(0, 1) : fact.stages[0].parts;
@@ -368,6 +402,60 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
       ? (negativeTexts[0] ?? '—')
       : firstMcq.map((p, i) => `${pick(p.name, lang)}: ${negativeTexts[i]}`).join(' ');
   const firstDates = fact.dates.find((d) => d.role === 'firstStage' && d.from && d.to);
+  // What the FAQ calls the first stage: its own name, or for alternative papers (CTET) the first paper's.
+  const label = pick(fact.stages[0].partsAreAlternatives ? fact.stages[0].parts[0].name : fact.stages[0].name, lang);
+  return { firstMcq, negativeTexts, firstTotals, firstMinutes, negativeGlance, firstDates, label };
+}
+
+const MAX_FAQ_QUALIFICATION = 360;
+const sentence = (text, lang) => {
+  const trimmed = String(text ?? '').trim();
+  return /[.।?!)]$/.test(trimmed) ? trimmed : `${trimmed}${lang === 'hi' ? '।' : '.'}`;
+};
+
+// Questions and answers built only from the fact sheet - every answer restates a figure shown, with its source, in
+// the blocks above - plus the syllabus subject names. Shown at the foot of the page and given as FAQPage data.
+export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null }) {
+  const t = T[lang];
+  const fact = facts[0];
+  const first = firstStageSummary(fact, lang, t);
+  const faq = [{ q: t.faqStages.q(examName), a: t.faqStages.a(fact.cycleLabel, fact.stages.map((s) => pick(s.name, lang)).join(' → ')) }];
+  if (first.firstTotals.questions > 0 && first.firstMinutes > 0) {
+    faq.push({ q: t.faqSize.q(examName), a: t.faqSize.a(fact.cycleLabel, first.label, first.firstTotals.questions, marksText(first.firstTotals.marks), first.firstMinutes) });
+  }
+  if (first.firstMcq.length > 0) {
+    const negative =
+      new Set(first.negativeTexts).size <= 1
+        ? sentence(first.negativeTexts[0], lang)
+        : first.firstMcq.map((p, i) => `${pick(p.name, lang)}: ${sentence(first.negativeTexts[i], lang)}`).join(' ');
+    faq.push({ q: t.faqNegative.q(examName), a: t.faqNegative.a(fact.cycleLabel, first.label, negative) });
+  }
+  const el = fact.eligibility;
+  faq.push({ q: t.faqAge.q(examName), a: [sentence(pick(el.ageNote, lang), lang), el.ageReferenceDate ? t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)) : ''].filter(Boolean).join(' ') });
+  // A long post-by-post table does not fit an answer; the eligibility block above has it.
+  const qualification = el.qualification.map((row) => `${pick(row.posts, lang)}: ${sentence(pick(row.requirement, lang), lang)}`).join(' ');
+  if (el.qualification.length > 0 && el.qualification.length <= 3 && qualification.length <= MAX_FAQ_QUALIFICATION) {
+    faq.push({ q: t.faqQualification.q(examName), a: qualification });
+  }
+  if (first.firstDates) {
+    // The dates belong to the whole stage, not to one of its alternative papers.
+    faq.push({ q: t.faqDates.q(examName), a: t.faqDates.a(fact.cycleLabel, pick(fact.stages[0].name, lang), formatHubDate(first.firstDates.from, lang), formatHubDate(first.firstDates.to, lang)) });
+  }
+  if (extras?.syllabus) faq.push({ q: t.faqSubjects.q(examName), a: t.faqSubjects.a(extras.syllabus[lang].map((s) => s.name).join('; ')) });
+  return faq;
+}
+
+// The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
+// `extras` (src/data/examHubExtras.mjs) adds the syllabus summary and practice links; it defaults to the exam's own entry.
+export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null, liveMock = null, playStoreUrl = '', now = new Date(), extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null }) {
+  const t = T[lang];
+  const fact = facts[0];
+  const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
+  const lastVerified = verifiedDates.sort().at(-1);
+  const otherPath = examHubPath(fact.examId, lang === 'hi' ? 'en' : 'hi');
+  const report = { examName, page: `https://parikshasaathi.com${examHubPath(fact.examId, lang)}` };
+
+  const { firstTotals, firstMinutes, negativeGlance, firstDates } = firstStageSummary(fact, lang, t);
 
   const glance = [
     [t.stages, esc(fact.stages.map((s) => pick(s.name, lang)).join(' → '))],
@@ -396,6 +484,14 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     html += stage.parts.map((p) => partHtml(p, lang, t)).join('');
   }
   html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.pattern });
+
+  // The subjects as the syllabus page gives them (no exam figures - those stay in the sourced blocks), linked to that
+  // page and to the exam body's site.
+  if (extras?.syllabus) {
+    html += `<h2>${t.syllabusHeading}</h2><p class="hub-facts">${t.syllabusIntro}</p><dl class="hub-syllabus">${extras.syllabus[lang]
+      .map((s) => `<div><dt>${esc(s.name)}</dt><dd>${esc([].concat(s.body).join(' '))}</dd></div>`)
+      .join('')}</dl><p class="hub-facts">${links.syllabusPath ? `<a href="${esc(links.syllabusPath)}">${t.syllabusMore} &rarr;</a>${t.noteSep}` : ''}<a href="${esc(extras.syllabus.officialUrl)}" target="_blank" rel="noreferrer">${t.officialSite} &#8599;</a></p>`;
+  }
 
   const el = fact.eligibility;
   html += `<h2>${t.eligibility}</h2><p>${esc(pick(el.ageNote, lang))}${el.ageReferenceDate ? ` ${esc(t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)))}` : ''}</p>`;
@@ -434,6 +530,20 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
       .join('')}</ul>`;
   }
 
+  // Practice: the /q/ topic lists for each subject the syllabus tests, largest topics first.
+  const practice = (extras?.practice ?? [])
+    .map(({ group, keys }) => ({ group, topics: keys.map((key) => EXAM_HUB_TOPICS[key]).filter((topic) => topic && topic[lang].count > 0) }))
+    .filter((g) => g.topics.length > 0);
+  if (practice.length > 0) {
+    html += `<h2>${t.practiceHeading}</h2><p class="hub-facts">${t.practiceIntro}</p>`;
+    for (const { group, topics } of practice) {
+      html += `<h3>${esc(lang === 'hi' ? (QUESTION_SUBJECTS_HI[group] ?? group) : group)}</h3><ul class="hub-topic-links">${topics
+        .map((topic) => `<li><a href="${topicListPath(topic, lang)}">${esc(topic[lang].name)} <span>${esc(t.questionCount(topic[lang].count))}</span></a></li>`)
+        .join('')}</ul>`;
+    }
+    html += `<p><a href="${questionIndexPath(lang)}">${t.allQuestions} &rarr;</a></p>`;
+  }
+
   if (notices.length > 0) {
     html += `<h2>${t.notices}</h2><ul class="hub-notices">${notices
       .slice(0, 8)
@@ -459,6 +569,11 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   if (links.jobProfilePath) html += `<li><a href="${esc(links.jobProfilePath)}">${t.jobProfile}</a></li>`;
   html += `<li><a href="/learn/">${t.lessons}</a></li><li><a href="/onboarding">${t.practice}</a></li></ul>`;
 
+  html += `<h2>${t.faq}</h2><div class="hub-faq">${examHubFaq({ examName, facts, lang, extras })
+    .map(({ q, a }) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`)
+    .join('')}</div>`;
+  html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.faq });
+
   html += `<h2>${t.howMade}</h2><p>${t.howMadeBody} <a href="/contact/">${t.contact}</a> &middot; <a href="/about/">${t.standards}</a></p>`;
   return html;
 }
@@ -468,14 +583,15 @@ export function examHubMeta({ examName, facts, cutoffs = [], lang = 'en' }) {
   const fact = facts[0];
   const lastVerified = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10)).sort().at(-1);
   const hasCutoffs = cutoffs.length > 0;
+  const syllabus = EXAM_HUB_EXTRAS[fact.examId]?.syllabus ? (lang === 'hi' ? ' सिलेबस,' : ' syllabus,') : '';
   const title =
     lang === 'hi'
       ? `${examName} परीक्षा पैटर्न, अंक${hasCutoffs ? ' और कट-ऑफ' : ' और आयु सीमा'}`
       : `${examName} exam pattern, marks${hasCutoffs ? ' & cut-off' : ' & age limit'}`;
   const description =
     lang === 'hi'
-      ? `${examName} का आधिकारिक पैटर्न, नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ${hasCutoffs ? ' और कट-ऑफ' : ''}, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
-      : `${examName} official pattern, negative marking, timing, age limit, dates${hasCutoffs ? ' and cut-offs' : ''}, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
+      ? `${examName} का आधिकारिक पैटर्न,${syllabus} नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ${hasCutoffs ? ' और कट-ऑफ' : ''}, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
+      : `${examName} official pattern,${syllabus} negative marking, timing, age limit, dates${hasCutoffs ? ' and cut-offs' : ''}, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
   return { title, description, lastVerified, h1: t.h1(examName, hasCutoffs) };
 }
 
@@ -499,6 +615,12 @@ export function examHubStructuredData({ examName, facts, cutoffs = [], lang = 'e
         { '@type': 'ListItem', position: 1, name: t.home, item: `${siteUrl}/` },
         { '@type': 'ListItem', position: 2, name: examName },
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      inLanguage: lang,
+      mainEntity: examHubFaq({ examName, facts, lang }).map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
     },
   ];
 }

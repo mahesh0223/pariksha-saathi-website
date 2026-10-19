@@ -129,7 +129,7 @@ for (const lang of ['en', 'hi']) {
     const t = (topics[q.topicKey] ??= {
       slug: topicSlug(q.topicKey),
       lessonSlug: lessonByTopic.get(q.topicKey)?.slug ?? TOPIC_LESSONS.find((l) => l.slug === q.lessonSlug)?.slug,
-      subject: enName.get(q.topicKey)?.subject ?? lessonByTopic.get(q.topicKey)?.subject ?? null,
+      subject: enName.get(q.topicKey)?.subject ?? lessonByTopic.get(q.topicKey)?.subject ?? LESSON_CATALOG.find((c) => c.slug === q.lessonSlug)?.subject ?? null,
       en: { name: enName.get(q.topicKey)?.name ?? LESSON_CATALOG.find((c) => c.slug === q.lessonSlug)?.title ?? q.topicKey, count: 0 },
       hi: { name: hiName(q.topicKey), count: 0 },
     });

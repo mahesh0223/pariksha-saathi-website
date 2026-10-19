@@ -32,7 +32,7 @@ import { PAGE_META, SITE_ALT_NAMES, lessonSeoTitle, metaDescription, withSiteNam
 import { linkExamNames } from '../src/lib/examLinks.mjs';
 import { lessonQuestionListLink } from '../src/lib/questionTopicLink.mjs';
 import { QUESTION_PAGES_GENERATED, QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
-import { LESSON_SUBJECTS_HI } from '../src/data/lessonSubjects.mjs';
+import { QUESTION_SUBJECTS_HI } from '../src/data/lessonSubjects.mjs';
 import { TOPIC_PAGE_SIZE, questionIndexBody, questionIndexMeta, questionIndexPath, questionPageBody, questionPageMeta, questionPageStructuredData, questionPath, topicListBody, topicListMeta, topicListPath } from '../src/lib/questionPage.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
@@ -1548,10 +1548,9 @@ async function main() {
   // --- Practice-question pages (/q/, /hi/q/) --- one page per distinct question (src/lib/questionEligibility.mjs)
   // from src/data/question-pages/*.json (scripts/gen-question-pages.mjs), plus a list per topic and an index.
   // Plain HTML: the stylesheet is linked rather than inlined and no app JavaScript loads.
-  const SUBJECT_HI = { ...LESSON_SUBJECTS_HI, 'Computer Knowledge': 'कंप्यूटर ज्ञान', 'General Studies': 'सामान्य अध्ययन', Pedagogy: 'शिक्षाशास्त्र' };
   const topicFor = (key, lang) => {
     const topic = QUESTION_TOPICS[key];
-    return { ...topic, subject: lang === 'hi' ? (SUBJECT_HI[topic.subject] ?? topic.subject) : topic.subject };
+    return { ...topic, subject: lang === 'hi' ? (QUESTION_SUBJECTS_HI[topic.subject] ?? topic.subject) : topic.subject };
   };
   let questionPageCount = 0;
   for (const lang of ['en', 'hi']) {

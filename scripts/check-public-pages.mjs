@@ -11,6 +11,8 @@ import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
+import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
+import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
@@ -140,6 +142,12 @@ assert(
   `${noNoteSinceGate.length} current-affairs item(s) published on/after ${POLICY_EFFECTIVE_DATE} have no learning note, violating the standing policy: ${noNoteSinceGate.join(', ')}`,
 );
 
+// The hub's syllabus summary and practice links come from a generated module; it must match its sources.
+assert(
+  readFileSync('src/data/examHubExtras.mjs', 'utf8') === examHubExtrasSource(),
+  'src/data/examHubExtras.mjs is stale (the syllabus pages or question topics changed): run node scripts/gen-exam-hub-extras.mjs and commit it',
+);
+
 // Exam hub pages: a number never appears without its official source and the date it was last checked,
 // so every hub page must carry linked, dated source lines, real tables, a language twin and a sitemap entry.
 for (const examId of HUB_EXAM_IDS) {
@@ -161,6 +169,13 @@ for (const examId of HUB_EXAM_IDS) {
     assert(html.includes('hub-current-affairs'), `${urlPath}: missing the recent current-affairs block`);
     assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
     assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+    // Syllabus summary, practice links and FAQ (src/lib/examHub.mjs): practice links must land on built /q/ lists, and
+    // the FAQ must be on the page as well as in the FAQPage data.
+    if (EXAM_HUB_EXTRAS[examId]?.syllabus) assert(html.includes('<dl class="hub-syllabus">'), `${urlPath}: no syllabus summary`);
+    const topicLinks = [...html.matchAll(/<ul class="hub-topic-links">([^]*?)<\/ul>/g)].flatMap((m) => [...m[1].matchAll(/href="([^"]+)"/g)].map((h) => h[1]));
+    if (EXAM_HUB_EXTRAS[examId]?.practice.length) assert(topicLinks.length > 0, `${urlPath}: no practice links`);
+    for (const href of topicLinks) assert(existsSync(`dist${href}index.html`), `${urlPath}: practice link ${href} has no built page`);
+    assert(html.includes('<div class="hub-faq">') && html.includes('"@type":"FAQPage"'), `${urlPath}: FAQ block or FAQPage data missing`);
     // Previous-year questions, when a hub has any: every paper row links to the official paper/key it came from.
     const pyqBlock = html.match(/<ul class="hub-notices hub-pyq">([^]*?)<\/ul>/);
     if (pyqBlock) {

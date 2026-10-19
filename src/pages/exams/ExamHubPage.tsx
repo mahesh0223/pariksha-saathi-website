@@ -12,7 +12,7 @@ import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { EXAM_NAMES } from '../../lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../../lib/examHub.mjs';
 import type { LiveMockSummary } from '../../lib/examHub.mjs';
-import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
+import { EXAM_HUB_EXTRAS } from '../../data/examHubExtras.mjs';
 import { typingTestPath } from '../../lib/typingPage.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
@@ -70,7 +70,8 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
     structuredData: ready ? examHubStructuredData({ examName, facts, cutoffs, lang, siteUrl: SITE_URL }) : undefined,
   });
 
-  const hasSyllabus = EXAM_SYLLABI.some((e: { slug: string }) => e.slug === slug);
+  // From the hub's own extras module, so this page does not pull in the 250 KB syllabus data.
+  const hasSyllabus = Boolean(EXAM_HUB_EXTRAS[examId]?.syllabus);
   const hasJobProfile = (EXAM_JOB_PROFILE_SLUGS as string[]).includes(slug);
   const links = {
     syllabusPath: hasSyllabus ? `${lang === 'hi' ? '/hi' : ''}/compare/${slug}-syllabus/` : undefined,

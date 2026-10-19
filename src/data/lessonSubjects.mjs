@@ -21,3 +21,12 @@ export const LESSON_SUBJECTS_HI = {
   'State GK': 'राज्य सामान्य ज्ञान',
   'Teaching (CTET)': 'शिक्षण (CTET)',
 };
+
+// Hindi names for the subjects the /q/ practice-question pages group topics under (QUESTION_TOPICS[*].subject):
+// the lesson subjects plus the server's subject names for topics that have no website lesson.
+export const QUESTION_SUBJECTS_HI = {
+  ...LESSON_SUBJECTS_HI,
+  'Computer Knowledge': 'कंप्यूटर ज्ञान',
+  'General Studies': 'सामान्य अध्ययन',
+  Pedagogy: 'शिक्षाशास्त्र',
+};

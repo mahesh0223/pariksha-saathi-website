@@ -5,7 +5,7 @@
 // each item to its neighbours turns the archive into one crawlable chain and gives every page a
 // few more words that are specific to it. Shared by the prerender and the React page so both
 // render the same markup.
-import { formatHubDate } from './examHub.mjs';
+import { formatHubDate } from './examHubPath.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

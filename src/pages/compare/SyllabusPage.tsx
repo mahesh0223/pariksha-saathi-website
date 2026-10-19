@@ -5,7 +5,7 @@ import { metaDescription } from '../../lib/seoMeta.mjs';
 import { findSyllabusEntry } from '../../data/examSyllabi.mjs';
 import { EmptyState } from '../../components/ui/Primitives';
 import { HUB_LINK_LABEL, hubExamIdForSlug } from '../../data/examHubExams.mjs';
-import { examHubPath } from '../../lib/examHub.mjs';
+import { examHubPath } from '../../lib/examHubPath.mjs';
 import './ComparePage.css';
 import { SocialLinks } from '../../components/layout/SocialLinks';
 

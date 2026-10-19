@@ -105,3 +105,62 @@
   background: var(--surface);
   font-size: 0.92rem;
 }
+
+/* Syllabus in short: subject name over its topic list. */
+.hub-syllabus {
+  margin: 8px 0 6px;
+  display: grid;
+  gap: 12px;
+}
+.hub-syllabus dt {
+  font-weight: 700;
+  color: var(--ink);
+}
+.hub-syllabus dd {
+  margin: 2px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* Practice topics: one chip per /q/ topic list, with its question count. */
+.hub-topic-links {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hub-topic-links a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.hub-topic-links a:hover,
+.hub-topic-links a:focus-visible {
+  border-color: var(--navy);
+}
+.hub-topic-links span {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.hub-faq h3 {
+  font-size: 1rem;
+  margin: 16px 0 4px;
+}
+.hub-faq p {
+  margin: 0;
+  line-height: 1.6;
+}

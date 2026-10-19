@@ -15,7 +15,13 @@ export function examHubBody(args: {
   liveMock?: LiveMockSummary | null;
   playStoreUrl?: string;
   now?: Date;
+  extras?: ExamHubExtras | null;
 }): string;
+export interface ExamHubExtras {
+  syllabus: ({ officialUrl: string } & Record<'en' | 'hi', { name: string; body: string | string[] }[]>) | null;
+  practice: { group: string; keys: string[] }[];
+}
+export function examHubFaq(args: { examName: string; facts: ExamFact[]; lang?: 'en' | 'hi'; extras?: ExamHubExtras | null }): { q: string; a: string }[];
 export interface LiveMockSummary {
   startsAt: string;
   endsAt: string;

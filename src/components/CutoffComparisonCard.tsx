@@ -1,6 +1,6 @@
 import { Card } from './ui/Primitives';
 import { HUB_EXAM_IDS } from '../data/examHubExams.mjs';
-import { examHubPath } from '../lib/examHub.mjs';
+import { examHubPath } from '../lib/examHubPath.mjs';
 import type { CutoffTarget } from '../types/api';
 
 // The categories most students look for first; the full table (every category, every year, with
