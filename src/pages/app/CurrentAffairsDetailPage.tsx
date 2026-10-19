@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getCounterpartItem, getCurrentAffairsItem, getAllCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { metaDescription } from '../../lib/seoMeta.mjs';
 import { EmptyState, Note, Pill, Spinner } from '../../components/ui/Primitives';
 import { ItemQuestions } from '../../components/ItemQuestions';
 import { learningNote } from '../../data/currentAffairsReading.mjs';
@@ -45,7 +46,7 @@ export function CurrentAffairsDetailPage() {
   useDocumentMeta({
     title: display ? shortenTitle(display.title) : 'Current Affairs',
     description: display
-      ? display.summary.slice(0, 155)
+      ? metaDescription(display.summary)
       : 'Dated current-affairs capsules for SSC, IBPS and SBI exam prep, each with a verifiable source.',
     // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
     path: `/app/current-affairs/${id}/`,

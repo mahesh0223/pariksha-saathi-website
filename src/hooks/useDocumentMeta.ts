@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { withSiteName } from '../lib/seoMeta.mjs';
 
 const SITE_NAME = 'Pariksha Saathi';
 const SITE_URL = 'https://parikshasaathi.com';
@@ -86,7 +87,7 @@ export function useDocumentMeta({
   alternateLanguages,
 }: DocumentMetaOptions) {
   useEffect(() => {
-    const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+    const fullTitle = withSiteName(title);
     const url = `${SITE_URL}${path}`;
 
     document.title = fullTitle;

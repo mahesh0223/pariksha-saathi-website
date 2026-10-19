@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useExamSelection } from '../state/ExamSelectionContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
+import { PAGE_META, SITE_ALT_NAMES } from '../lib/seoMeta.mjs';
 import { getCurrentAffairs } from '../api/currentAffairs';
 import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
@@ -215,9 +216,8 @@ export function HomePage() {
   useDocumentMeta({
     // Was literally 'Pariksha Saathi' (the bare brand name) - the single highest-authority page
     // on the site had a title with zero keywords or value proposition in it.
-    title: 'Free SSC, IBPS & SBI Exam Prep',
-    description:
-      'Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice and take mock tests in your browser.',
+    title: PAGE_META.home.title,
+    description: PAGE_META.home.description,
     path: '/',
     alternateLanguages: [
       { lang: 'en', path: '/' },
@@ -229,12 +229,14 @@ export function HomePage() {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Pariksha Saathi',
+        alternateName: SITE_ALT_NAMES,
         url: 'https://parikshasaathi.com',
       },
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Pariksha Saathi',
+        alternateName: SITE_ALT_NAMES,
         url: 'https://parikshasaathi.com',
         logo: 'https://parikshasaathi.com/assets/icon-512.png',
         sameAs: [

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllCurrentAffairs } from '../../api/currentAffairs';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { PAGE_META } from '../../lib/seoMeta.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import { currentAffairsDigest } from '../../data/currentAffairsReading.mjs';
 
@@ -16,9 +17,8 @@ export function CurrentAffairsPage() {
   });
 
   useDocumentMeta({
-    title: 'Current Affairs',
-    description:
-      'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+    title: PAGE_META.currentAffairs.title,
+    description: PAGE_META.currentAffairs.description,
     // Trailing slash: this page is prerendered to app/current-affairs/index.html, and Cloudflare
     // Pages 308-redirects the slash-less URL to this exact form - matching it here means the
     // canonical/OG/sitemap URL is the one that actually resolves with no extra hop.
@@ -26,8 +26,8 @@ export function CurrentAffairsPage() {
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Current Affairs',
-      description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+      name: PAGE_META.currentAffairs.title,
+      description: PAGE_META.currentAffairs.description,
       publisher: { '@type': 'Organization', name: 'Pariksha Saathi', url: 'https://parikshasaathi.com' },
     },
   });

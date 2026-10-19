@@ -28,6 +28,8 @@ import { trustLinesHtml, trustStatsHtml } from '../src/data/trustLines.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
+import { PAGE_META, SITE_ALT_NAMES, lessonSeoTitle, metaDescription, withSiteName } from '../src/lib/seoMeta.mjs';
+import { linkExamNames } from '../src/lib/examLinks.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
@@ -197,7 +199,7 @@ function adSlot(_slot) { return ''; }
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
 function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow', preload = [] }) {
-  const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`;
+  const fullTitle = withSiteName(title);
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
   const ld = ldEntries
@@ -888,7 +890,7 @@ function lessonPageBody(entry, lang) {
           ${practice}
         </div>
         <h2>${escapeHtml(c.relevantForHeading)}</h2>
-        <p>${escapeHtml(c.relevantForBody)}</p>
+        <p>${linkExamNames(c.relevantForBody, lang)}</p>
         <h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
         <p>${escapeHtml(lessonClosing(entry, lang))}</p>
         <a class="btn-primary-compare" href="${topicKey ? `/app/practice/topic/${topicKey}?lang=${lang}` : '#practice'}">${lang === 'hi' ? (topicKey ? 'इस विषय का क्विज़ शुरू करें' : 'अभ्यास प्रश्नों पर जाएँ') : (topicKey ? 'Start this topic’s quiz' : 'Go to practice questions')} →</a>
@@ -944,8 +946,8 @@ async function main() {
     // case that skips the "| Pariksha Saathi" suffix) - the single highest-authority page on the
     // site had a title with zero keywords or value proposition in it. Mirrors
     // src/pages/HomePage.tsx's useDocumentMeta call.
-    title: 'Free SSC, IBPS & SBI Exam Prep',
-    description: 'Free exam prep for SSC CGL, SSC MTS, SSC CHSL, IBPS PO, IBPS Clerk, SBI PO and SBI Clerk, with an offline-capable Android app. Study, practice and take mock tests in your browser.',
+    title: PAGE_META.home.title,
+    description: PAGE_META.home.description,
     path: '/',
     assets,
     bodyHtml: homePageBody(affairs.slice(0, 4), notices.slice(0, 4)),
@@ -958,11 +960,12 @@ async function main() {
     ],
     // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
     structuredData: [
-      { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL },
+      { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_ALT_NAMES, url: SITE_URL },
       {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: SITE_NAME,
+        alternateName: SITE_ALT_NAMES,
         url: SITE_URL,
         logo: `${SITE_URL}/assets/icon-512.png`,
         sameAs: [
@@ -1047,7 +1050,7 @@ async function main() {
       const hiPath = `/hi/compare/${entry.slug}-syllabus/`;
       writePage(relPath, page({
         title: c.pageTitle,
-        description: c.lede.slice(0, 155),
+        description: metaDescription(c.lede),
         path: urlPath,
         assets,
         bodyHtml: syllabusPageBody(entry, lang),
@@ -1097,7 +1100,7 @@ async function main() {
       const hiPath = `/hi/compare/${entry.slug}-job-profile/`;
       writePage(relPath, page({
         title: c.pageTitle,
-        description: c.lede.slice(0, 155),
+        description: metaDescription(c.lede),
         path: urlPath,
         assets,
         bodyHtml: jobProfilePageBody(entry, lang),
@@ -1146,8 +1149,8 @@ async function main() {
       const enPath = `/learn/${entry.slug}/`;
       const hiPath = `/hi/learn/${entry.slug}/`;
       writePage(relPath, page({
-        title: c.pageTitle,
-        description: c.lede.slice(0, 155),
+        title: lessonSeoTitle(entry.slug, lang, c.pageTitle),
+        description: metaDescription(c.lede),
         path: urlPath,
         assets,
         bodyHtml: lessonPageBody(entry, lang),
@@ -1338,8 +1341,8 @@ async function main() {
   // --- Current affairs ---
   const affairsListBody = publicContentFrame(currentAffairsDigest(affairs));
   writePage('app/current-affairs', page({
-    title: 'Current Affairs',
-    description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+    title: PAGE_META.currentAffairs.title,
+    description: PAGE_META.currentAffairs.description,
     path: '/app/current-affairs/',
     assets,
     bodyHtml: affairsListBody,
@@ -1347,8 +1350,8 @@ async function main() {
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Current Affairs',
-      description: 'Daily current-affairs capsules for SSC, IBPS and SBI exam prep, each dated and sourced so you can verify it yourself.',
+      name: PAGE_META.currentAffairs.title,
+      description: PAGE_META.currentAffairs.description,
       publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
     },
   }));
@@ -1400,7 +1403,7 @@ async function main() {
     `);
       writePage(`app/current-affairs/${item.id}`, page({
         title: shortenTitle(item.title),
-        description: item.summary.slice(0, 155),
+        description: metaDescription(item.summary),
         path: itemPath,
         assets,
         bodyHtml: detailBody,
@@ -1459,8 +1462,8 @@ async function main() {
     </div>
   `);
   writePage('app/exam-notices', page({
-    title: 'SSC, IBPS & SBI Admit Card & Result Alerts',
-    description: "Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body's own site.",
+    title: PAGE_META.examNotices.title,
+    description: PAGE_META.examNotices.description,
     path: '/app/exam-notices/',
     assets,
     bodyHtml: noticesListBody,
@@ -1468,8 +1471,8 @@ async function main() {
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'SSC, IBPS & SBI Admit Card & Result Alerts',
-      description: "Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body's own site.",
+      name: PAGE_META.examNotices.title,
+      description: PAGE_META.examNotices.description,
       publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
     },
   }));
@@ -1502,7 +1505,7 @@ async function main() {
     `);
     writePage(`app/exam-notices/${item.id}`, page({
       title: lang === 'hi' ? shortenTitle(item.title) : seoNoticeTitle(item.examId, item.type, item.title, item.lastVerifiedAt.slice(0, 4)),
-      description: item.summary.slice(0, 155),
+      description: metaDescription(item.summary),
       path: itemPath,
       assets,
       bodyHtml: detailBody,

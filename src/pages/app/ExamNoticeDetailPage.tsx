@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
 import { useLanguage, type LanguageCode } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { metaDescription } from '../../lib/seoMeta.mjs';
 import { seoNoticeTitle } from '../../lib/seoNoticeTitle';
 import { EmptyState, Note, Spinner } from '../../components/ui/Primitives';
 import { AdSlot } from '../../components/ads/AdSlot';
@@ -59,7 +60,7 @@ export function ExamNoticeDetailPage() {
       ? seoNoticeTitle(display.examId, display.type, display.title, display.lastVerifiedAt.slice(0, 4))
       : 'Exam Notices & Alerts',
     description: display
-      ? display.summary.slice(0, 155)
+      ? metaDescription(display.summary)
       : 'Official exam notifications and alerts for SSC, IBPS and SBI recruitment.',
     // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
     path: `/app/exam-notices/${id}/`,

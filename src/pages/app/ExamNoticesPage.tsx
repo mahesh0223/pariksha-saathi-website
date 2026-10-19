@@ -4,6 +4,7 @@ import { getExamUpdates } from '../../api/examUpdates';
 import { useExamSelection } from '../../state/ExamSelectionContext';
 import { useLanguage } from '../../state/LanguageContext';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { PAGE_META } from '../../lib/seoMeta.mjs';
 import { EmptyState, Card, Spinner } from '../../components/ui/Primitives';
 import { AdSlot } from '../../components/ads/AdSlot';
 import './UpdatesPage.css';
@@ -24,16 +25,15 @@ export function ExamNoticesPage() {
   });
 
   useDocumentMeta({
-    title: 'SSC, IBPS & SBI Admit Card & Result Alerts',
-    description:
-      'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
+    title: PAGE_META.examNotices.title,
+    description: PAGE_META.examNotices.description,
     // Trailing slash - see the matching comment in CurrentAffairsPage.tsx.
     path: '/app/exam-notices/',
     structuredData: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'SSC, IBPS & SBI Admit Card & Result Alerts',
-      description: 'Official SSC, IBPS and SBI exam notifications, admit card and result alerts, verified against each exam body\'s own site.',
+      name: PAGE_META.examNotices.title,
+      description: PAGE_META.examNotices.description,
       publisher: { '@type': 'Organization', name: 'Pariksha Saathi', url: 'https://parikshasaathi.com' },
     },
   });

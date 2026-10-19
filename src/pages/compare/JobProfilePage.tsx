@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { metaDescription } from '../../lib/seoMeta.mjs';
 import type { ExamJobProfileEntry } from '../../data/examJobProfiles.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './ComparePage.css';
@@ -37,7 +38,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
 
   useDocumentMeta({
     title: content?.pageTitle ?? 'Job Profile & Salary',
-    description: content?.lede.slice(0, 155) ?? '',
+    description: metaDescription(content?.lede),
     path,
     type: 'article',
     lang,

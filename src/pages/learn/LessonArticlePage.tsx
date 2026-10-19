@@ -3,6 +3,8 @@ import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { Link } from 'react-router-dom';
 import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { lessonSeoTitle, metaDescription } from '../../lib/seoMeta.mjs';
+import { linkExamNames } from '../../lib/examLinks.mjs';
 import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit } from '../../lib/lessonCredit.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
@@ -42,8 +44,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
   const libraryHref = lang === 'hi' ? '/hi/learn/' : '/learn/';
 
   useDocumentMeta({
-    title: content?.pageTitle ?? 'Topic Lesson',
-    description: content?.lede.slice(0, 155) ?? '',
+    title: content ? lessonSeoTitle(slug, lang, content.pageTitle) : 'Topic Lesson',
+    description: metaDescription(content?.lede),
     path,
     type: 'article',
     lang,
@@ -188,7 +190,8 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
         </div>
 
         <h2>{content.relevantForHeading}</h2>
-        <p>{content.relevantForBody}</p>
+        {/* Escaped by linkExamNames; only exam-page links are added. */}
+        <p dangerouslySetInnerHTML={{ __html: linkExamNames(content.relevantForBody, lang) }} />
 
         <h2>{lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
         <p>{lessonClosing(entry, lang)}</p>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
+import { metaDescription } from '../../lib/seoMeta.mjs';
 import { findSyllabusEntry } from '../../data/examSyllabi.mjs';
 import { EmptyState } from '../../components/ui/Primitives';
 import { HUB_LINK_LABEL, hubExamIdForSlug } from '../../data/examHubExams.mjs';
@@ -24,7 +25,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
 
   useDocumentMeta({
     title: content?.pageTitle ?? 'Syllabus & Exam Pattern',
-    description: content?.lede.slice(0, 155) ?? '',
+    description: metaDescription(content?.lede),
     path,
     type: 'article',
     lang,
