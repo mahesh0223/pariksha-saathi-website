@@ -5,6 +5,7 @@ import { LESSON_SUBJECTS_HI } from './lessonSubjects.mjs';
 import { DAILY_PDF_EDITIONS, MONTHLY_CAPSULES } from './downloads.mjs';
 import { TRUST_LINES } from './trustLines.mjs';
 import { HINDI_HOME_FAQS, HINDI_HOME_META, hindiHomeBody } from './hindiHome.mjs';
+import { socialLinksHtml } from './socialLinks.mjs';
 export function escapeHtml(value) {
   return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 }
@@ -93,7 +94,7 @@ const FRAME = {
 };
 export function publicFrame(body, lang = 'en') {
   const t = FRAME[lang] ?? FRAME.en;
-  return `<div class="compare-page"><header class="pub-header"><div class="wrap pub-nav"><a class="pub-brand" href="${t.home}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a><nav class="pub-nav-links"><a href="${t.lessons}">${t.lessonsLabel}</a><a href="/app/current-affairs/">${t.affairs}</a><a href="/downloads/">${t.pdf}</a></nav>${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${t.cta}</a></div></header><main class="wrap compare-article">${body}</main><footer class="pub-footer"><div class="wrap pub-footer-links"><a href="/about/">${t.about}</a><a href="/privacy/">${t.privacy}</a><a href="/terms/">${t.terms}</a><a href="/contact/">${t.contact}</a><a href="/downloads/">${t.pdf}</a></div></footer></div>`;
+  return `<div class="compare-page"><header class="pub-header"><div class="wrap pub-nav"><a class="pub-brand" href="${t.home}"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a><nav class="pub-nav-links"><a href="${t.lessons}">${t.lessonsLabel}</a><a href="/app/current-affairs/">${t.affairs}</a><a href="/downloads/">${t.pdf}</a></nav>${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${t.cta}</a></div></header><main class="wrap compare-article">${body}</main><footer class="pub-footer"><div class="wrap pub-footer-links"><a href="/about/">${t.about}</a><a href="/privacy/">${t.privacy}</a><a href="/terms/">${t.terms}</a><a href="/contact/">${t.contact}</a><a href="/downloads/">${t.pdf}</a>${socialLinksHtml()}</div></footer></div>`;
 }
 const subjectId = (subject) => subject.toLowerCase().replaceAll(' ', '-');
 export function libraryBody(lang = 'en') {

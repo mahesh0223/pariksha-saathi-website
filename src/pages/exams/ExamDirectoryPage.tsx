@@ -6,6 +6,7 @@ import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
 import './ExamDirectory.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 export function ExamDirectoryPage({ lang }: { lang: 'en' | 'hi' }) {
   const meta = examDirectoryMeta(lang);
@@ -56,7 +57,7 @@ export function ExamDirectoryPage({ lang }: { lang: 'en' | 'hi' }) {
           <Link to="/terms/">Terms of Use</Link>
           <Link to="/contact/">Contact</Link>
           <Link to="/downloads/">Daily PDF</Link>
-        </div>
+        <SocialLinks /></div>
       </footer>
     </div>
   );

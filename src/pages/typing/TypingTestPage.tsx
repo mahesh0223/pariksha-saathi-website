@@ -8,6 +8,7 @@ import { scoreTyping, typingSpeeds } from '../../lib/typingScore.mjs';
 import '../compare/ComparePage.css';
 import '../exams/ExamHub.css';
 import './TypingTest.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 type Lang = 'en' | 'hi';
 type Phase = 'ready' | 'running' | 'done';
@@ -349,7 +350,7 @@ export function TypingTestPage({ lang }: { lang: Lang }) {
           <Link to="/terms/">Terms of Use</Link>
           <Link to="/contact/">Contact</Link>
           <Link to="/downloads/">Daily PDF</Link>
-        </div>
+        <SocialLinks /></div>
       </footer>
     </div>
   );

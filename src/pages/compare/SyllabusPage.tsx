@@ -7,6 +7,7 @@ import { EmptyState } from '../../components/ui/Primitives';
 import { HUB_LINK_LABEL, hubExamIdForSlug } from '../../data/examHubExams.mjs';
 import { examHubPath } from '../../lib/examHub.mjs';
 import './ComparePage.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
@@ -172,7 +173,7 @@ export function SyllabusPage({ slug, lang }: { slug: string; lang: 'en' | 'hi' }
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a>
-            </div>
+            <SocialLinks /></div>
           </div>
           <p className="disclaimer">{content.disclaimer}</p>
         </div>

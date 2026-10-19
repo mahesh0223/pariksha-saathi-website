@@ -11,6 +11,7 @@ import type { ExamFact, ExamUpdateNotice } from '../../types/api';
 import '../compare/ComparePage.css';
 import './ExamHub.css';
 import './ExamDirectory.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 /**
  * The exam calendar, client-side: the same builder the prerender uses (src/lib/examCalendar.mjs) over the
@@ -100,7 +101,7 @@ export function ExamCalendarPage({ lang }: { lang: 'en' | 'hi' }) {
           <Link to="/terms/">Terms of Use</Link>
           <Link to="/contact/">Contact</Link>
           <Link to="/downloads/">Daily PDF</Link>
-        </div>
+        <SocialLinks /></div>
       </footer>
     </div>
   );

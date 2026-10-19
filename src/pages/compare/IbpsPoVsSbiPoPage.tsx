@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import './ComparePage.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
@@ -162,7 +163,7 @@ export function IbpsPoVsSbiPoPage() {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a>
-            </div>
+            <SocialLinks /></div>
           </div>
           <p className="disclaimer">
             Pariksha Saathi is an independent project and is not affiliated with IBPS, SBI, or any

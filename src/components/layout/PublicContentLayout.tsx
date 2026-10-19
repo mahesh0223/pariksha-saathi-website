@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import '../../pages/compare/ComparePage.css';
 import './PublicContentLayout.css';
+import { SocialLinks } from './SocialLinks';
 
 // Current affairs and exam notices are genuine editorial content - crawlable, sitemapped,
 // linked from other public pages - so they get the same plain-article chrome as /learn/,
@@ -41,7 +42,7 @@ export function PublicContentLayout() {
           <Link to="/about/">About &amp; editorial standards</Link>
           <Link to="/privacy/">Privacy Policy</Link>
           <a href="mailto:sriwastava2@gmail.com">Contact</a>
-        </div>
+        <SocialLinks /></div>
       </footer>
     </div>
   );

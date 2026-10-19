@@ -7,6 +7,7 @@ import { LESSON_SUBJECTS, LESSON_SUBJECTS_HI } from './lessonSubjects.mjs';
 import { trustLinesHtml, trustStatsHtml } from './trustLines.mjs';
 import { examsLinkHtml } from '../lib/examDirectory.mjs';
 import { examHubPath, formatHubDate } from '../lib/examHubPath.mjs';
+import { socialLinksHtml } from './socialLinks.mjs';
 
 function esc(value) {
   return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -170,7 +171,7 @@ export function hindiHomeBody() {
               <a href="/terms/">उपयोग की शर्तें</a>
               <a href="/account-deletion/">खाता हटाना</a>
               <a href="/contact/">संपर्क</a><a href="/downloads/">दैनिक PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">Pariksha Saathi एक स्वतंत्र परियोजना है और SSC, IBPS, SBI या किसी सरकारी संस्था से संबद्ध नहीं है। खातों, अध्ययन-प्रगति और वेबसाइट डेटा की जानकारी के लिए हमारी <a href="/privacy/">गोपनीयता नीति</a> (अंग्रेज़ी में) देखें।</p>
         </div>

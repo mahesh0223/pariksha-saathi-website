@@ -29,6 +29,8 @@ import {
 } from '../components/HomeIcons';
 import '../pages/app/UpdatesPage.css';
 import './HomePage.css';
+import { SocialLinks } from '../components/layout/SocialLinks';
+import { SOCIAL_HREFS } from '../data/socialLinks.mjs';
 
 const FEATURES = [
   {
@@ -239,10 +241,7 @@ export function HomePage() {
         alternateName: SITE_ALT_NAMES,
         url: 'https://parikshasaathi.com',
         logo: 'https://parikshasaathi.com/assets/icon-512.png',
-        sameAs: [
-          'https://www.youtube.com/@ParikshaSathiApp',
-          'https://www.instagram.com/parkishasathi/',
-        ],
+        sameAs: SOCIAL_HREFS,
       },
       {
         '@context': 'https://schema.org',
@@ -564,7 +563,7 @@ export function HomePage() {
               </Link>
               <Link to="/contact/">Contact</Link>
               <Link to="/downloads/">Daily PDF</Link>
-            </div>
+            <SocialLinks /></div>
           </div>
           <p className="disclaimer">
             Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or

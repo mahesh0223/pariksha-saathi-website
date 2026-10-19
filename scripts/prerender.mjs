@@ -46,6 +46,7 @@ import { TYPING_CHECKED } from '../src/data/typingTest.mjs';
 // The exams whose pages link to the typing / data-entry practice (their notices prescribe a skill test).
 const TYPING_TEST_EXAMS = ['ssc_cgl', 'ssc_chsl'];
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
+import { SOCIAL_HREFS, socialLinksHtml } from '../src/data/socialLinks.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
@@ -181,7 +182,7 @@ function publicContentFrame(innerHtml) {
       <a href="/privacy/">Privacy Policy</a>
       <a href="/terms/">Terms of Use</a>
       <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-    </div>
+    ${socialLinksHtml()}</div>
   </footer>
 </div>`;
 }
@@ -547,7 +548,7 @@ function homePageBody(affairsPreview, noticesPreview) {
               <a href="/terms/">Terms of Use</a>
               <a href="/account-deletion/">Delete Account</a>
               <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with SSC, IBPS, SBI, or any government body. For information about accounts, study progress and website data, see our <a href="/privacy/">Privacy Policy</a> for details.</p>
         </div>
@@ -640,7 +641,7 @@ function comparePageBody() {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">Pariksha Saathi is an independent project and is not affiliated with IBPS, SBI, or any government body. Figures and process details above are general and may change — always confirm against the official notification linked above.</p>
         </div>
@@ -710,7 +711,7 @@ function syllabusPageBody(entry, lang) {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
         </div>
@@ -739,7 +740,7 @@ function examHubPageBody(innerHtml, lang) {
           <a href="/terms/">Terms of Use</a>
           <a href="/contact/">Contact</a>
           <a href="/downloads/">Daily PDF</a>
-        </div>
+        ${socialLinksHtml()}</div>
       </footer>
     </div>`;
 }
@@ -811,7 +812,7 @@ function jobProfilePageBody(entry, lang) {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
         </div>
@@ -904,7 +905,7 @@ function lessonPageBody(entry, lang) {
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
-            </div>
+            ${socialLinksHtml()}</div>
           </div>
           <p class="disclaimer">${escapeHtml(c.disclaimer)}</p>
         </div>
@@ -968,10 +969,7 @@ async function main() {
         alternateName: SITE_ALT_NAMES,
         url: SITE_URL,
         logo: `${SITE_URL}/assets/icon-512.png`,
-        sameAs: [
-          'https://www.youtube.com/@ParikshaSathiApp',
-          'https://www.instagram.com/parkishasathi/',
-        ],
+        sameAs: SOCIAL_HREFS,
       },
       {
         '@context': 'https://schema.org',

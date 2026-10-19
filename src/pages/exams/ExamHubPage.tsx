@@ -17,6 +17,7 @@ import { typingTestPath } from '../../lib/typingPage.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
 import '../compare/ComparePage.css';
 import './ExamHub.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
@@ -120,7 +121,7 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
           <Link to="/terms/">Terms of Use</Link>
           <Link to="/contact/">Contact</Link>
           <Link to="/downloads/">Daily PDF</Link>
-        </div>
+        <SocialLinks /></div>
       </footer>
     </div>
   );

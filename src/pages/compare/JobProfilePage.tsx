@@ -6,6 +6,7 @@ import { metaDescription } from '../../lib/seoMeta.mjs';
 import type { ExamJobProfileEntry } from '../../data/examJobProfiles.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
 import './ComparePage.css';
+import { SocialLinks } from '../../components/layout/SocialLinks';
 
 const SITE_URL = 'https://parikshasaathi.com';
 
@@ -217,7 +218,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
               <a href="/privacy/">Privacy Policy</a>
               <a href="/terms/">Terms of Use</a>
               <a href="/contact/">Contact</a>
-            </div>
+            <SocialLinks /></div>
           </div>
           <p className="disclaimer">{content.disclaimer}</p>
         </div>
