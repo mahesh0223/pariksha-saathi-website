@@ -68,8 +68,32 @@ for (const file of files) {
   // rather than linked, and the PWA manifest on every page - see index.html's shared-head block.
   assert(!html.includes('fonts.googleapis.com'),`Google Fonts request crept back in: ${file}`);
   assert(html.includes('/fonts/fraunces-latin-v') && html.includes('@font-face'),`Missing inline @font-face: ${file}`);
-  assert(!/<link rel="stylesheet"[^>]*\/assets\//.test(html),`Entry stylesheet is linked instead of inlined: ${file}`);
+  // Exception: the ~8,000 /q/ practice-question pages link the stylesheet (inlining 28 KB into each would add
+  // ~200 MB to the deploy) and load no app JavaScript - checked in the /q/ block below.
+  const isQuestionPage = /dist\/(hi\/)?q\//.test(file);
+  if (!isQuestionPage) assert(!/<link rel="stylesheet"[^>]*\/assets\//.test(html),`Entry stylesheet is linked instead of inlined: ${file}`);
   assert(html.includes('rel="manifest"'),`Missing web manifest link: ${file}`);
+}
+// /q/ practice-question pages (src/lib/questionPage.mjs): plain HTML with a linked stylesheet, no app JavaScript,
+// a canonical, an answer section and a credit line on every question page, and one page per entry in the data.
+{
+  const qFiles = files.filter((f) => /dist\/(hi\/)?q\//.test(f));
+  for (const file of qFiles) {
+    const html = readFileSync(file, 'utf8');
+    assert(/<link rel="stylesheet"[^>]*\/assets\//.test(html), `Question page has no stylesheet: ${file}`);
+    assert(!/<script type="module"/.test(html), `Question page loads app JavaScript: ${file}`);
+    assert(/<link rel="canonical" href="https:\/\/parikshasaathi\.com\/(hi\/)?q\//.test(html), `Question page without a /q/ canonical: ${file}`);
+  }
+  for (const lang of ['en', 'hi']) {
+    const data = JSON.parse(readFileSync(`src/data/question-pages/${lang}.json`, 'utf8'));
+    for (const q of data) {
+      const file = `dist/${lang === 'hi' ? 'hi/' : ''}q/${q.slug}/index.html`;
+      assert(existsSync(file), `Missing question page ${file}`);
+      const html = readFileSync(file, 'utf8');
+      assert(html.includes('class="news-learning"') && html.includes('class="lesson-credit"'), `Question page without its answer section or credit: ${file}`);
+    }
+  }
+  console.log(`Verified ${qFiles.length} /q/ pages: linked stylesheet, no app JavaScript, canonical, answer section and credit line.`);
 }
 for (const [,href] of readFileSync('dist/index.html','utf8').matchAll(/href="(\/fonts\/[^"]+)"/g)) assert(existsSync(`dist${href}`),`missing font ${href}`);
 assert(readFileSync('dist/index.html','utf8').includes('id="home-preview"'),'home page is missing its baked preview JSON');

@@ -5,6 +5,7 @@ import { LESSON_CATALOG } from '../../data/lessonCatalog.mjs';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
 import { lessonSeoTitle, metaDescription } from '../../lib/seoMeta.mjs';
 import { linkExamNames } from '../../lib/examLinks.mjs';
+import { lessonQuestionListLink } from '../../lib/questionTopicLink.mjs';
 import type { TopicLessonEntry } from '../../data/topicLessons.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit } from '../../lib/lessonCredit.mjs';
 import { EmptyState, Spinner } from '../../components/ui/Primitives';
@@ -33,6 +34,7 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
   }, [slug]);
 
   const content = entry?.[lang];
+  const questionList = lessonQuestionListLink(slug, lang);
   const topicKey = LESSON_CATALOG.find((item) => item.slug === slug)?.topicKey;
 
   // Trailing slash matters here: Cloudflare Pages 308-redirects the slash-less form to this one,
@@ -189,6 +191,11 @@ export function LessonArticlePage({ slug, lang }: { slug: string; lang: 'en' | '
             </details>
           ))}
         </div>
+        {questionList && (
+          <p>
+            <a href={questionList.href}>{questionList.label}</a>
+          </p>
+        )}
 
         <h2>{content.relevantForHeading}</h2>
         {/* Escaped by linkExamNames; only exam-page links are added. */}

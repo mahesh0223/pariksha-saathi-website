@@ -12,7 +12,7 @@
 // Consequence worth remembering: this bakes content in at BUILD time. A reseed on the backend
 // does not appear here until the site is rebuilt/redeployed too.
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 // Plain .mjs (not .ts) specifically so this works on whatever Node version Cloudflare Pages'
 // build image runs - an earlier version of this imported the .ts file directly, relying on
@@ -30,6 +30,10 @@ import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
 import { PAGE_META, SITE_ALT_NAMES, lessonSeoTitle, metaDescription, withSiteName } from '../src/lib/seoMeta.mjs';
 import { linkExamNames } from '../src/lib/examLinks.mjs';
+import { lessonQuestionListLink } from '../src/lib/questionTopicLink.mjs';
+import { QUESTION_PAGES_GENERATED, QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
+import { LESSON_SUBJECTS_HI } from '../src/data/lessonSubjects.mjs';
+import { TOPIC_PAGE_SIZE, questionIndexBody, questionIndexMeta, questionIndexPath, questionPageBody, questionPageMeta, questionPageStructuredData, questionPath, topicListBody, topicListMeta, topicListPath } from '../src/lib/questionPage.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
@@ -127,9 +131,8 @@ function readBuiltAssets() {
   const styleInline = `<style>${css}</style>`;
   const modulePreloads = [...html.matchAll(/<link rel="modulepreload"[^>]*>/g)].map((m) => m[0]);
   const manifestLink = html.match(/<link rel="manifest"[^>]*>/)?.[0] ?? '';
-  // Nothing references the stylesheet file once it is inlined everywhere, so drop it rather than
-  // ship (and precache) a dead 24 KB file.
-  rmSync(stylePath);
+  // Kept on disk: the ~8,000 /q/ practice-question pages link it instead of inlining it (inlining 28 KB into
+  // each would add ~200 MB to the deploy); every other page still inlines it for first paint.
   const manifest = JSON.parse(readFileSync(join(DIST, '.vite/manifest.json'), 'utf8'));
   // A module's chunk plus everything it statically imports (recursively), minus what the entry
   // already preloads: one <link> per URL the browser would otherwise discover a round trip later.
@@ -150,6 +153,7 @@ function readBuiltAssets() {
     chunksFor,
     sharedHead,
     styleInline,
+    styleLink: styleTag[0],
     scriptTags: [script, ...modulePreloads].join('\n    '),
     manifestLink,
     shellHtml: html.replace(styleTag[0], styleInline),
@@ -199,7 +203,7 @@ function adSlot(_slot) { return ''; }
 // whether it was crawled from the prerendered HTML or visited client-side.
 const OG_IMAGE = `${SITE_URL}/assets/feature-graphic-1024x500.png`;
 
-function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow', preload = [] }) {
+function page({ title, description, path, assets, bodyHtml, structuredData, type = 'article', lang = 'en', alternateLanguages, robots = 'index,follow', preload = [], inlineStyle = true, scripts = true }) {
   const fullTitle = withSiteName(title);
   const url = `${SITE_URL}${path}`;
   const ldEntries = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
@@ -240,8 +244,8 @@ function page({ title, description, path, assets, bodyHtml, structuredData, type
     ${assets.sharedHead}
     ${assets.manifestLink}
     <meta name="google-adsense-account" content="ca-pub-6818930282969815" />
-    ${assets.styleInline}
-    ${assets.scriptTags}
+    ${inlineStyle ? assets.styleInline : assets.styleLink}
+    ${scripts ? assets.scriptTags : ''}
     ${preloadLinks}
   </head>
   <body>
@@ -890,6 +894,7 @@ function lessonPageBody(entry, lang) {
         <div class="lesson-practice-list">
           ${practice}
         </div>
+        ${(() => { const link = lessonQuestionListLink(entry.slug, lang); return link ? `<p><a href="${link.href}">${escapeHtml(link.label)}</a></p>` : ''; })()}
         <h2>${escapeHtml(c.relevantForHeading)}</h2>
         <p>${linkExamNames(c.relevantForBody, lang)}</p>
         <h2>${lang === 'hi' ? 'अगला कदम' : 'Keep practising'}</h2>
@@ -1540,6 +1545,84 @@ async function main() {
     sitemapUrls.push({ loc: itemPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: item.lastVerifiedAt.slice(0, 10) });
   }
 
+  // --- Practice-question pages (/q/, /hi/q/) --- one page per distinct question (src/lib/questionEligibility.mjs)
+  // from src/data/question-pages/*.json (scripts/gen-question-pages.mjs), plus a list per topic and an index.
+  // Plain HTML: the stylesheet is linked rather than inlined and no app JavaScript loads.
+  const SUBJECT_HI = { ...LESSON_SUBJECTS_HI, 'Computer Knowledge': 'कंप्यूटर ज्ञान', 'General Studies': 'सामान्य अध्ययन', Pedagogy: 'शिक्षाशास्त्र' };
+  const topicFor = (key, lang) => {
+    const topic = QUESTION_TOPICS[key];
+    return { ...topic, subject: lang === 'hi' ? (SUBJECT_HI[topic.subject] ?? topic.subject) : topic.subject };
+  };
+  let questionPageCount = 0;
+  for (const lang of ['en', 'hi']) {
+    const otherLang = lang === 'hi' ? 'en' : 'hi';
+    const questions = JSON.parse(readFileSync(new URL(`../src/data/question-pages/${lang}.json`, import.meta.url), 'utf8'));
+    const byTopic = new Map();
+    for (const q of questions) {
+      if (!byTopic.has(q.topicKey)) byTopic.set(q.topicKey, []);
+      byTopic.get(q.topicKey).push(q);
+    }
+    for (const [topicKey, list] of byTopic) {
+      const topic = topicFor(topicKey, lang);
+      list.forEach((q, index) => {
+        const related = [];
+        for (let step = 1; related.length < 5 && step < list.length; step++) related.push(list[(index + step) % list.length]);
+        const lesson = q.lessonSlug ? TOPIC_LESSONS.find((entry) => entry.slug === q.lessonSlug) : null;
+        const credit = q.kind === 'bank' ? q.attribution : lessonCredit(lesson, lang).text;
+        const twinPath = q.twinSlug ? questionPath({ slug: q.twinSlug }, otherLang) : null;
+        const path = questionPath(q, lang);
+        const ctx = { topic, related, credit, twinPath };
+        writePage(path.slice(1, -1), page({
+          ...questionPageMeta(q, lang),
+          path,
+          assets,
+          lang,
+          inlineStyle: false,
+          scripts: false,
+          bodyHtml: questionPageBody(q, lang, ctx),
+          structuredData: questionPageStructuredData(q, lang, ctx),
+          alternateLanguages: twinPath
+            ? [{ lang, path }, { lang: otherLang, path: twinPath }, { lang: 'x-default', path: lang === 'en' ? path : twinPath }]
+            : undefined,
+        }));
+        sitemapUrls.push({ loc: path, priority: '0.5', lastmod: QUESTION_PAGES_GENERATED });
+        questionPageCount += 1;
+      });
+      const pages = Math.ceil(list.length / TOPIC_PAGE_SIZE);
+      for (let p = 1; p <= pages; p++) {
+        const path = topicListPath(topic, lang, p);
+        const otherHasList = (QUESTION_TOPICS[topicKey][otherLang]?.count ?? 0) > 0;
+        writePage(path.slice(1, -1), page({
+          ...topicListMeta(topic, lang, p, pages),
+          path,
+          assets,
+          lang,
+          type: 'website',
+          inlineStyle: false,
+          scripts: false,
+          bodyHtml: topicListBody(topic, lang, list.slice((p - 1) * TOPIC_PAGE_SIZE, p * TOPIC_PAGE_SIZE), p, pages),
+          alternateLanguages: p === 1 && otherHasList
+            ? [{ lang, path }, { lang: otherLang, path: topicListPath(topic, otherLang) }, { lang: 'x-default', path: topicListPath(topic, 'en') }]
+            : undefined,
+        }));
+        sitemapUrls.push({ loc: path, priority: '0.6', lastmod: QUESTION_PAGES_GENERATED });
+      }
+    }
+    const indexTopics = Object.keys(QUESTION_TOPICS).filter((key) => QUESTION_TOPICS[key][lang].count > 0).map((key) => topicFor(key, lang));
+    writePage(questionIndexPath(lang).slice(1, -1), page({
+      ...questionIndexMeta(lang),
+      path: questionIndexPath(lang),
+      assets,
+      lang,
+      type: 'website',
+      inlineStyle: false,
+      scripts: false,
+      bodyHtml: questionIndexBody(indexTopics, lang),
+      alternateLanguages: [{ lang: 'en', path: questionIndexPath('en') }, { lang: 'hi', path: questionIndexPath('hi') }, { lang: 'x-default', path: questionIndexPath('en') }],
+    }));
+    sitemapUrls.push({ loc: questionIndexPath(lang), priority: '0.7', lastmod: QUESTION_PAGES_GENERATED });
+  }
+
   // --- sitemap.xml ---
   await assertNoPublishedUrlWentMissing(sitemapUrls);
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -1562,7 +1645,7 @@ ${sitemapUrls
   await regenerateServiceWorker();
 
   console.log(
-    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} English + ${noticesHi.length} Hindi exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} English + ${noticesHi.length} Hindi exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages, ${questionPageCount} practice-question pages and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
 }
 
