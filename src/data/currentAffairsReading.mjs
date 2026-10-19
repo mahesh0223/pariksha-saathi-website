@@ -3271,6 +3271,25 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से लागू किए गए क़ानून, पदार्थ, सातों प्लेटफ़ॉर्म, 3,940 का आँकड़ा, जुर्माने और हेल्पलाइन नंबर नोट करें, और इन्हें CCPA के बारे में ऊपर दिए स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325129(?:&|$)/i,
+    en: {
+      body: 'The Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) is a Central Sector Scheme under which Rs 6,000 a year is transferred to farmer families in three four-monthly instalments of Rs 2,000, directly into their bank accounts, subject to exclusion criteria for higher-income groups. It was formally launched by the Prime Minister at Gorakhpur, Uttar Pradesh, on 24 February 2019 and is effective from 1 December 2018. It first covered small and marginal farmer families holding up to 2 hectares of cultivable land and was extended from 1 June 2019 to all farmer families, whatever the size of their holdings; identifying beneficiaries is the responsibility of the State and UT governments.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1604017',
+      refLabel: 'Reference: PIB release of 22 February 2020, PM-KISAN completes one year',
+      checkQ: 'Check yourself: through which institutions will the special training campaign on using the portal be run?',
+      checkA: 'Through Krishi Vigyan Kendras across the country.',
+      task: 'Revision task: from this release, note the portal\'s name, the three initiatives it links, the two MeitY standards it follows and the KVK training campaign, and keep them apart from PM-KISAN\'s standing facts above.',
+    },
+    hi: {
+      body: 'प्रधानमंत्री किसान सम्मान निधि (PM-KISAN) एक केंद्रीय क्षेत्र योजना है, जिसके तहत किसान परिवारों को हर वर्ष 6,000 रुपये, 2,000 रुपये की तीन चार-मासिक किस्तों में, सीधे उनके बैंक खातों में भेजे जाते हैं; उच्च आय वर्ग के लिए अपवर्जन मानदंड लागू हैं। प्रधानमंत्री ने 24 फ़रवरी 2019 को गोरखपुर, उत्तर प्रदेश में इसका औपचारिक शुभारंभ किया, और यह 1 दिसंबर 2018 से प्रभावी है। शुरुआत में इसमें 2 हेक्टेयर तक कृषि योग्य भूमि वाले लघु और सीमांत किसान परिवार शामिल थे, और 1 जून 2019 से इसे जोत के आकार की परवाह किए बिना सभी किसान परिवारों तक बढ़ा दिया गया; लाभार्थियों की पहचान की ज़िम्मेदारी राज्य और केंद्रशासित प्रदेश सरकारों की है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1604017',
+      refLabel: 'संदर्भ: PM-KISAN के एक वर्ष पूरे होने पर 22 फ़रवरी 2020 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: पोर्टल के उपयोग पर विशेष प्रशिक्षण अभियान किन संस्थानों के माध्यम से चलाया जाएगा?',
+      checkA: 'देश भर के कृषि विज्ञान केंद्रों (KVK) के माध्यम से।',
+      task: 'अभ्यास: इस रिलीज़ से पोर्टल का नाम, उससे जुड़ी तीनों पहलें, MeitY के वे दो मानक जिनके अनुरूप यह बना है और KVK प्रशिक्षण अभियान नोट करें, और इन्हें PM-KISAN के ऊपर दिए स्थायी तथ्यों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {

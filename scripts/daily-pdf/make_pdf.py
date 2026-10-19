@@ -5,7 +5,7 @@ Usage: python3 scripts/daily-pdf/make_pdf.py [YYYY-MM-DD]   (default: newest edi
 Writes public/pdf/ParikshaSaathi_CA_<date>.pdf, overwrites public/pdf/latest.pdf, and prepends the
 edition to src/data/downloads.mjs. Needs Google Chrome (for Devanagari-correct PDF rendering) and pypdf.
 """
-import html, json, os, re, subprocess, sys, urllib.request
+import hashlib, html, json, os, re, subprocess, sys, urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HERE = os.path.dirname(os.path.abspath(__file__))
 API = os.environ.get("PDF_API", "https://api.parikshasaathi.com/v1")  # PDF_API points a run at a local backend
@@ -38,6 +38,14 @@ try:
         quiz = get(f"/topics/{topics[0]}/questions?lang=hi&limit={QUIZ_COUNT}")[:QUIZ_COUNT]
 except Exception as e:
     print("quiz skipped:", e)
+
+# Current-affairs questions are stored with the correct option first and the app shuffles them on screen
+# (src/domain/quizEngine.ts). Paper has no shuffle, so print each question's options in a fixed order derived
+# from its text - the same every run, and an answer key that is not all (A).
+def print_order(q):
+    order = sorted(range(len(q["options"])), key=lambda k: hashlib.sha1(f"{q['text']}|{k}".encode()).hexdigest())
+    return dict(q, options=[q["options"][k] for k in order], correctOptionIndex=order.index(q["correctOptionIndex"]))
+quiz = [print_order(q) for q in quiz]
 
 def fmt_date(iso):
     months = ["जनवरी","फ़रवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"]
