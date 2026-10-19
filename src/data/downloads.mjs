@@ -2,6 +2,7 @@
 // scripts/daily-pdf/make_pdf.py (npm run pdf:daily) - do not hand-edit the entries it writes.
 // /daily-pdf redirects (public/_redirects) to /pdf/latest.pdf, which the script overwrites.
 export const DAILY_PDF_EDITIONS = [
+  { date: '2026-10-19', file: '/pdf/ParikshaSaathi_CA_2026-10-19.pdf', language: 'hi', items: 3, questions: 3, pages: 3, sizeKb: 300 },
   { date: '2026-10-18', file: '/pdf/ParikshaSaathi_CA_2026-10-18.pdf', language: 'hi', items: 3, questions: 5, pages: 3, sizeKb: 304 },
   { date: '2026-10-17', file: '/pdf/ParikshaSaathi_CA_2026-10-17.pdf', language: 'hi', items: 6, questions: 5, pages: 4, sizeKb: 351 },
   { date: '2026-10-16', file: '/pdf/ParikshaSaathi_CA_2026-10-16.pdf', language: 'hi', items: 11, questions: 5, pages: 7, sizeKb: 418 },

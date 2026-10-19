@@ -3176,6 +3176,63 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से कॉरिडोर की लंबाई, मुख्य तारीख़ें, सवारी के आँकड़े और प्रस्तावित कॉरिडोर नोट करें, और इन्हें NCRTC के ऊपर दिए स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2324992(?:&|$)/i,
+    en: {
+      body: 'In the Ministry of New and Renewable Energy’s capacity table, pumped storage is counted under large hydro. As on 30 September 2026, large hydro stood at 52,064.67 MW, including 7,425.6 MW of pumped storage; total renewable capacity was 2,99,246.53 MW, led by solar (1,71,051.46 MW) and wind (59,201.07 MW); and total non-fossil capacity, including 8,780 MW of nuclear, was 3,08,026.53 MW.',
+      refUrl: 'https://mnre.gov.in/en/physical-progress/',
+      refLabel: 'Reference: MNRE, physical progress (as on 30 September 2026)',
+      checkQ: 'Check yourself: in which type of pumped storage scheme is neither reservoir on a river or perennial stream?',
+      checkA: 'The off-stream closed-loop scheme. On-stream schemes have both reservoirs on a river, stream or nallah, and off-stream open-loop schemes have one.',
+      task: 'Revision task: from this backgrounder, note the operational, under-construction and identified capacities, the 2035-36 figure, India’s global rank and the support measures, and keep them apart from MNRE’s capacity figures above.',
+    },
+    hi: {
+      body: 'नवीन और नवीकरणीय ऊर्जा मंत्रालय (MNRE) की क्षमता तालिका में पंप भंडारण को बड़ी जलविद्युत में गिना जाता है। 30 सितंबर 2026 तक बड़ी जलविद्युत 52,064.67 मेगावाट थी, जिसमें 7,425.6 मेगावाट पंप भंडारण शामिल है; कुल नवीकरणीय क्षमता 2,99,246.53 मेगावाट थी, जिसमें सौर (1,71,051.46 मेगावाट) और पवन (59,201.07 मेगावाट) सबसे आगे हैं; और 8,780 मेगावाट परमाणु क्षमता सहित कुल गैर-जीवाश्म क्षमता 3,08,026.53 मेगावाट थी।',
+      refUrl: 'https://mnre.gov.in/en/physical-progress/',
+      refLabel: 'संदर्भ: MNRE, भौतिक प्रगति (30 सितंबर 2026 तक)',
+      checkQ: 'खुद जाँचें: किस प्रकार की पंप भंडारण योजना में कोई भी जलाशय नदी या बारहमासी धारा पर नहीं होता?',
+      checkA: 'ऑफ़-स्ट्रीम क्लोज़्ड-लूप योजना में। ऑन-स्ट्रीम योजना में दोनों जलाशय नदी, धारा या नाले पर होते हैं, और ऑफ़-स्ट्रीम ओपन-लूप योजना में एक।',
+      task: 'अभ्यास: इस पृष्ठभूमि रिपोर्ट से चालू, निर्माणाधीन और चिह्नित क्षमताएँ, 2035-36 का आँकड़ा, भारत का वैश्विक स्थान और सहायक उपाय नोट करें, और इन्हें MNRE के ऊपर दिए क्षमता आँकड़ों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2324997(?:&|$)/i,
+    en: {
+      body: 'The International Organization of Legal Metrology (OIML) is an intergovernmental treaty organisation that has worked towards a global legal metrology system since 1955. It issues International Recommendations, model regulations for categories of measuring instruments that its Member States are morally obliged to implement as far as possible, and International Documents for guidance. The OIML is an “international standard-setting body” under the World Trade Organization’s Technical Barriers to Trade Agreement, and its office, the BIML, is in Paris.',
+      refUrl: 'https://www.oiml.org/en/about/about-oiml',
+      refLabel: 'Reference: OIML, What is the OIML?',
+      checkQ: 'Check yourself: which two events accompany the 61st CIML meeting, and on which days?',
+      checkA: 'An international seminar on “Evolutions in Legal Metrology” on 26 October and an OIML Strategy Workshop on 27 October 2026.',
+      task: 'Revision task: from this release, note the meeting number, dates and venue, the organisers, the side events and where the 60th meeting was held, and keep them apart from the standing facts about the OIML above.',
+    },
+    hi: {
+      body: 'अंतरराष्ट्रीय विधिक माप-विज्ञान संगठन (OIML) एक अंतर-सरकारी संधि संगठन है, जो 1955 से वैश्विक विधिक माप-विज्ञान व्यवस्था की दिशा में काम कर रहा है। यह अंतरराष्ट्रीय अनुशंसाएँ जारी करता है, जो मापक उपकरणों की श्रेणियों के लिए आदर्श विनियम हैं और जिन्हें यथासंभव लागू करना इसके सदस्य देशों का नैतिक दायित्व है, और मार्गदर्शन के लिए अंतरराष्ट्रीय दस्तावेज़ भी जारी करता है। विश्व व्यापार संगठन के व्यापार में तकनीकी बाधाएँ (TBT) समझौते के अर्थ में OIML एक “अंतरराष्ट्रीय मानक-निर्धारक निकाय” है, और इसका कार्यालय, BIML, पेरिस में है।',
+      refUrl: 'https://www.oiml.org/en/about/about-oiml',
+      refLabel: 'संदर्भ: OIML, OIML क्या है? (अंग्रेज़ी पृष्ठ)',
+      checkQ: 'खुद जाँचें: 61वीं CIML बैठक के साथ कौन-से दो आयोजन होंगे, और किन दिनों?',
+      checkA: '26 अक्टूबर को \'विधिक माप-विज्ञान में विकास\' पर अंतरराष्ट्रीय संगोष्ठी और 27 अक्टूबर 2026 को OIML रणनीति कार्यशाला।',
+      task: 'अभ्यास: इस रिलीज़ से बैठक की संख्या, तारीख़ें और स्थान, आयोजक, साथ के आयोजन और 60वीं बैठक का स्थान नोट करें, और इन्हें OIML के बारे में ऊपर दिए स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2324987(?:&|$)/i,
+    en: {
+      body: 'The Academy of Scientific and Innovative Research (AcSIR) was set up by the Council of Scientific and Industrial Research (CSIR) through an Act of Parliament, the Academy of Scientific and Innovative Research Act, 2011, which came into force on 3 April 2012. AcSIR is an institution of national importance that imparts instruction and awards degrees in frontier areas of cross- and trans-disciplinary science and technology.',
+      refUrl: 'https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=111911&reg=48&lang=2',
+      refLabel: 'Reference: PIB release of 26 November 2014 on AcSIR (Lok Sabha reply)',
+      checkQ: 'Check yourself: which body awards the PhD, and what does the degree certificate show?',
+      checkA: 'AcSIR awards the degree, and the certificate explicitly names the MoES host institute where the student did the research.',
+      task: 'Revision task: from this release, note the dates the MoU was executed and declared, the signatories, the number of institutes and the research fields, and keep them apart from the standing facts about AcSIR above.',
+    },
+    hi: {
+      body: 'वैज्ञानिक एवं नवाचार अनुसंधान अकादमी (AcSIR) की स्थापना वैज्ञानिक तथा औद्योगिक अनुसंधान परिषद (CSIR) ने संसद के एक अधिनियम, वैज्ञानिक एवं नवाचार अनुसंधान अकादमी अधिनियम, 2011 के ज़रिए की, जो 3 अप्रैल 2012 से लागू हुआ। AcSIR राष्ट्रीय महत्व का संस्थान है, जो विज्ञान और प्रौद्योगिकी के अंतर-विषयी और पार-विषयी अग्रणी क्षेत्रों में शिक्षा देता है और डिग्रियाँ प्रदान करता है।',
+      refUrl: 'https://www.pib.gov.in/newsite/PrintRelease.aspx?relid=111911&reg=48&lang=2',
+      refLabel: 'संदर्भ: AcSIR पर 26 नवंबर 2014 की PIB रिलीज़ (लोकसभा में उत्तर)',
+      checkQ: 'खुद जाँचें: PhD डिग्री कौन देगा, और डिग्री प्रमाण-पत्र पर क्या दिखेगा?',
+      checkA: 'डिग्री AcSIR देगा, और प्रमाण-पत्र पर उस MoES मेज़बान संस्थान का नाम स्पष्ट रूप से होगा जहाँ छात्र ने शोध किया।',
+      task: 'अभ्यास: इस रिलीज़ से MoU के निष्पादन और घोषणा की तारीख़ें, हस्ताक्षरकर्ता, संस्थानों की संख्या और शोध क्षेत्र नोट करें, और इन्हें AcSIR के बारे में ऊपर दिए स्थायी तथ्यों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
