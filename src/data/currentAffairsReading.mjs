@@ -3233,6 +3233,44 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से MoU के निष्पादन और घोषणा की तारीख़ें, हस्ताक्षरकर्ता, संस्थानों की संख्या और शोध क्षेत्र नोट करें, और इन्हें AcSIR के बारे में ऊपर दिए स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325058(?:&|$)/i,
+    en: {
+      body: 'The Union Cabinet approved the Pradhan Mantri Matsya Sampada Yojana (PMMSY) on 20 May 2020 with an investment of Rs 20,050 crore, described as the highest ever in the fisheries sector: a Central share of Rs 9,407 crore, a State share of Rs 4,880 crore and beneficiaries’ contribution of Rs 5,763 crore. It was to run for five years, FY 2020-21 to FY 2024-25, in all States and UTs, as an umbrella scheme with a Central Sector Scheme component and a Centrally Sponsored Scheme component.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1625535',
+      refLabel: 'Reference: PIB release of 20 May 2020, Cabinet approves PMMSY',
+      checkQ: 'Check yourself: which institute did the Secretary credit with introducing rainbow trout to Munsiyari?',
+      checkA: 'ICAR-DCFR, Bhimtal, which he also credited with supporting Uttarakhand’s export of 5 MT of trout to Nepal in June 2026.',
+      task: 'Revision task: from this release, note the four notified clusters, the six hilly states and UTs, the PMMSY investment and sanction figures, trout output and the Nepal export, and keep them apart from the scheme’s standing facts above.',
+    },
+    hi: {
+      body: 'केंद्रीय मंत्रिमंडल ने 20 मई 2020 को प्रधानमंत्री मत्स्य संपदा योजना (PMMSY) को 20,050 करोड़ रुपये के निवेश के साथ मंज़ूरी दी, जिसे मत्स्यपालन क्षेत्र में अब तक का सबसे बड़ा निवेश बताया गया: केंद्र का हिस्सा 9,407 करोड़ रुपये, राज्यों का हिस्सा 4,880 करोड़ रुपये और लाभार्थियों का अंशदान 5,763 करोड़ रुपये। इसे पाँच वर्षों, वित्त वर्ष 2020-21 से 2024-25, तक सभी राज्यों और केंद्रशासित प्रदेशों में एक अम्ब्रेला योजना के रूप में चलाया जाना था, जिसके दो घटक हैं: केंद्रीय क्षेत्र योजना और केंद्र प्रायोजित योजना।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1625535',
+      refLabel: 'संदर्भ: PMMSY को मंत्रिमंडल की मंज़ूरी पर 20 मई 2020 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: सचिव ने मुनस्यारी में रेनबो ट्राउट लाने का श्रेय किस संस्थान को दिया?',
+      checkA: 'ICAR-DCFR, भीमताल को, जिसे उन्होंने जून 2026 में उत्तराखंड के नेपाल को 5 मीट्रिक टन ट्राउट निर्यात में सहयोग का श्रेय भी दिया।',
+      task: 'अभ्यास: इस रिलीज़ से चारों अधिसूचित क्लस्टर, छह पर्वतीय राज्य व केंद्रशासित प्रदेश, PMMSY के निवेश और स्वीकृति के आँकड़े, ट्राउट उत्पादन और नेपाल निर्यात नोट करें, और इन्हें योजना के ऊपर दिए स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325128(?:&|$)/i,
+    en: {
+      body: 'The Consumer Protection Act, 2019 came into force on 20 July 2020, and the Central Consumer Protection Authority (CCPA) was established under section 10 of the Act with effect from 24 July 2020. It began functioning from the premises of the Indian Institute of Public Administration (IIPA), with support staff from IIPA’s Centre for Consumer Studies and the National Consumer Helpline.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1642422',
+      refLabel: 'Reference: PIB release of 30 July 2020 on the CCPA’s establishment',
+      checkQ: 'Check yourself: which body heard Dial4Trade’s appeal against the CCPA penalty, and with what result?',
+      checkA: 'The National Consumer Disputes Redressal Commission (NCDRC), under Section 24 of the Act; it dismissed the appeal after hearing the parties on 9 October 2026.',
+      task: 'Revision task: from this release, note the laws invoked, the substances, the seven platforms, the 3,940 figure, the penalties and the helpline number, and keep them apart from the standing facts about the CCPA above.',
+    },
+    hi: {
+      body: 'उपभोक्ता संरक्षण अधिनियम, 2019 20 जुलाई 2020 से लागू हुआ, और इसकी धारा 10 के तहत केंद्रीय उपभोक्ता संरक्षण प्राधिकरण (CCPA) 24 जुलाई 2020 से स्थापित हुआ। इसने भारतीय लोक प्रशासन संस्थान (IIPA) के परिसर से काम शुरू किया, जिसमें सहायक कर्मचारी IIPA के उपभोक्ता अध्ययन केंद्र और राष्ट्रीय उपभोक्ता हेल्पलाइन से लिए गए।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1642422',
+      refLabel: 'संदर्भ: CCPA की स्थापना पर 30 जुलाई 2020 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: CCPA के जुर्माने के ख़िलाफ़ Dial4Trade की अपील किसने सुनी और उसका क्या नतीजा रहा?',
+      checkA: 'राष्ट्रीय उपभोक्ता विवाद निवारण आयोग (NCDRC) ने, अधिनियम की धारा 24 के तहत; उसने 9 अक्टूबर 2026 को पक्षों को सुनने के बाद अपील ख़ारिज कर दी।',
+      task: 'अभ्यास: इस रिलीज़ से लागू किए गए क़ानून, पदार्थ, सातों प्लेटफ़ॉर्म, 3,940 का आँकड़ा, जुर्माने और हेल्पलाइन नंबर नोट करें, और इन्हें CCPA के बारे में ऊपर दिए स्थायी तथ्यों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
