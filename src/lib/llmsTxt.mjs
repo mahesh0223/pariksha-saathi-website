@@ -56,7 +56,9 @@ ${link('Exam calendar', examCalendarPath('en'), 'upcoming exam dates, each taken
 
 ## Solved previous-year papers
 
-${paperSets.join(', ')}: ${papers.length} shifts, ${paperQuestions.toLocaleString('en-IN')} questions as the exam body printed them, each with the answer from the official answer key and a worked explanation. Questions that cannot be reproduced faithfully as text (figures, tables, images) are left out.
+${paperSets.map((name) => { const set = papers.filter((p) => p.displayName === name); return `- ${name}: ${set.length} shifts, ${set.reduce((sum, p) => sum + p.questions, 0).toLocaleString('en-IN')} questions`; }).join('\n')}
+
+${papers.length} shifts and ${paperQuestions.toLocaleString('en-IN')} questions in all, as the exam body printed them, each with the answer from the official answer key and a worked explanation. Questions that cannot be reproduced faithfully as text (figures, tables, images) are left out.
 
 ${sortedPapers.map((p) => link(`${p.displayName}, ${shortDate(p.date)}, ${p.shift}`, pyqPaperPath(p), `${p.questions} questions with answers`)).join('\n')}
 

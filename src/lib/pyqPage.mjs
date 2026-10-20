@@ -81,7 +81,7 @@ export function pyqPaperBody(paper) {
   <article class="wrap compare-article pyq-paper">
     <div class="compare-top-row"><a href="${hub}" class="detail-back">&larr; ${esc(paper.displayName.replace(/\s+\d{4}.*$/, ''))} exam page</a></div>
     <h1>${esc(meta.h1)}</h1>
-    <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.${leftOut} Try each question before opening its answer.</p>
+    <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
     ${body}

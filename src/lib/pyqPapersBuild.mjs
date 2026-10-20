@@ -30,6 +30,8 @@ export function buildPyqPapers(files, topicNames = {}) {
       sourceUrl: f.sourceUrl,
       marksPerQuestion: f.marksPerQuestion ?? 1,
       negativeMarksPerWrong: f.negativeMarksPerWrong ?? 0.25,
+      // Set when marking differs by section (SSC MTS: none in Session-I, -1 in Session-II); the page prints it instead.
+      ...(f.markingNote ? { markingNote: f.markingNote } : {}),
       questionsInPaper: f.questionsInPaper ?? null,
       slug: pyqPaperSlug(f),
       questions: f.questions
