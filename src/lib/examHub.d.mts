@@ -45,3 +45,5 @@ export function examHubStructuredData(args: {
 }): object[];
 export function hubItemTag(examId: string): string | null;
 export function hubItems(examId: string, items: CurrentAffairsItem[], count?: number): CurrentAffairsItem[];
+export const NEXT_STEP_PILOT_HUBS: string[];
+export function nextStepLineHtml(examId: string, lang?: 'en' | 'hi'): string;

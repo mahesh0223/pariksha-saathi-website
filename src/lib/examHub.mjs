@@ -130,7 +130,7 @@ const T = {
     faqNegative: { q: (name) => `Is there negative marking in ${name}?`, a: (cycle, label, text) => `${label}, as per the ${cycle} notification: ${text}` },
     faqAge: { q: (name) => `What is the age limit for ${name}?` },
     faqQualification: { q: (name) => `What qualification do I need for ${name}?` },
-    faqDates: { q: (name) => `What are the ${name} first-stage exam dates?`, a: (cycle, label, from, to) => `${label}: ${from} to ${to}, as per the ${cycle} notification.` },
+    faqDates: { q: (name) => `What are the ${name} first-stage exam dates?`, a: (cycle, label, from, to) => `${label}: ${to ? `${from} to ${to}` : from}, as per the ${cycle} notification.` },
     faqSubjects: { q: (name) => `Which subjects does the ${name} exam test?`, a: (subjects) => `The official syllabus lists: ${subjects}.` },
     sourceWord: 'Source',
     verifiedWord: 'Last verified',
@@ -224,7 +224,7 @@ const T = {
     faqNegative: { q: (name) => `क्या ${name} में नेगेटिव मार्किंग है?`, a: (cycle, label, text) => `${label}, ${cycle} की अधिसूचना के अनुसार: ${text}` },
     faqAge: { q: (name) => `${name} की आयु सीमा क्या है?` },
     faqQualification: { q: (name) => `${name} के लिए कौन-सी योग्यता चाहिए?` },
-    faqDates: { q: (name) => `${name} के पहले चरण की परीक्षा तिथियाँ क्या हैं?`, a: (cycle, label, from, to) => `${label}: ${from} से ${to} तक, ${cycle} की अधिसूचना के अनुसार।` },
+    faqDates: { q: (name) => `${name} के पहले चरण की परीक्षा तिथियाँ क्या हैं?`, a: (cycle, label, from, to) => `${label}: ${to ? `${from} से ${to} तक` : from}, ${cycle} की अधिसूचना के अनुसार।` },
     faqSubjects: { q: (name) => `${name} परीक्षा में कौन-से विषय आते हैं?`, a: (subjects) => `आधिकारिक पाठ्यक्रम में ये विषय हैं: ${subjects}।` },
     sourceWord: 'स्रोत',
     verifiedWord: 'अंतिम सत्यापन',
@@ -343,6 +343,27 @@ const LIVE_MOCK_T = {
   en: { label: 'Weekly live mock', shape: (q, m) => `${q} questions in ${m} minutes, one paper for everyone`, cta: 'Sit it in the Android app' },
   hi: { label: 'साप्ताहिक लाइव मॉक', shape: (q, m) => `${m} मिनट में ${q} प्रश्न, सबके लिए एक ही पेपर`, cta: 'Android ऐप में दें' },
 };
+// "26 April 2026 to 26 April 2026" read as a typo on a one-day exam: a range whose ends are the same day prints once.
+function dateSpan(from, to, lang, t) {
+  const start = formatHubDate(from, lang);
+  return to && String(to).slice(0, 10) !== String(from).slice(0, 10) ? `${start} ${t.dateTo} ${formatHubDate(to, lang)}` : start;
+}
+
+// EXPERIMENT from 20 Oct 2026 (review 3 Nov; plan G1 in the Android repo's docs/plans/2026-10-17-working-plan.md): one
+// quiet line under "At a glance" on four hubs only, pointing to the daily PDF and the Telegram channel through /go/
+// redirects (public/_redirects) so Cloudflare's HTTP analytics counts the clicks. Compare with the other hubs' Telegram
+// box and Referral Traffic; drop the line if it does not move them. Not exam-specific: the PDF is national current affairs.
+export const NEXT_STEP_PILOT_HUBS = ['ssc_cgl', 'ssc_chsl', 'sbi_po', 'mppsc'];
+const NEXT_STEP_T = {
+  en: { lead: 'Current affairs free every morning:', pdf: "today's PDF", pdfNote: '(in Hindi)', telegram: 'on Telegram' },
+  hi: { lead: 'हर सुबह मुफ़्त करेंट अफेयर्स:', pdf: 'आज का PDF', pdfNote: '', telegram: 'Telegram पर' },
+};
+export function nextStepLineHtml(examId, lang = 'en') {
+  if (!NEXT_STEP_PILOT_HUBS.includes(examId)) return '';
+  const n = NEXT_STEP_T[lang] ?? NEXT_STEP_T.en;
+  return `<p class="hub-next">${n.lead} <a href="/go/hub-pdf" rel="nofollow">${n.pdf}</a>${n.pdfNote ? ` ${n.pdfNote}` : ''} &middot; <a href="/go/hub-telegram" rel="nofollow noopener" target="_blank">${n.telegram}</a></p>`;
+}
+
 export function liveMockLineHtml(liveMock, playStoreUrl, lang = 'en', now = new Date()) {
   if (!liveMock || !playStoreUrl) return '';
   const starts = new Date(liveMock.startsAt);
@@ -447,7 +468,9 @@ export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXT
   }
   if (first.firstDates) {
     // The dates belong to the whole stage, not to one of its alternative papers.
-    faq.push({ q: t.faqDates.q(examName), a: t.faqDates.a(fact.cycleLabel, pick(fact.stages[0].name, lang), formatHubDate(first.firstDates.from, lang), formatHubDate(first.firstDates.to, lang)) });
+    const { from, to } = first.firstDates;
+    const sameDay = !to || String(to).slice(0, 10) === String(from).slice(0, 10);
+    faq.push({ q: t.faqDates.q(examName), a: t.faqDates.a(fact.cycleLabel, pick(fact.stages[0].name, lang), formatHubDate(from, lang), sameDay ? null : formatHubDate(to, lang)) });
   }
   if (extras?.syllabus) faq.push({ q: t.faqSubjects.q(examName), a: t.faqSubjects.a(extras.syllabus[lang].map((s) => s.name).join('; ')) });
   return faq;
@@ -472,7 +495,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     [`${t.firstStage}: ${t.totalQuestions} / ${t.totalMarks} / ${t.time}`, `${firstTotals.questions > 0 ? firstTotals.questions : '&mdash;'} / ${marksText(firstTotals.marks)} / ${firstMinutes > 0 ? `${firstMinutes} ${lang === 'hi' ? 'मिनट' : 'min'}` : '&mdash;'}`],
     [t.negative, esc(negativeGlance)],
   ];
-  if (firstDates) glance.push([t.firstStageDates, `${esc(formatHubDate(firstDates.from, lang))} ${t.dateTo} ${esc(formatHubDate(firstDates.to, lang))}`]);
+  if (firstDates) glance.push([t.firstStageDates, esc(dateSpan(firstDates.from, firstDates.to, lang, t))]);
   if (fact.vacancies) {
     glance.push([t.vacancies, `${countText(fact.vacancies.total)} (${t.vacanciesAsOf(esc(formatHubDate(fact.vacancies.asOf, lang)))})`]);
   }
@@ -483,6 +506,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   html += `<p class="compare-lede">${esc(t.lede(fact.cycleLabel, formatHubDate(lastVerified, lang), hasCutoffs))}</p>`;
 
   html += `<h2>${t.glance}</h2><dl class="hub-glance">${glance.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+  html += nextStepLineHtml(fact.examId, lang);
   html += liveMockLineHtml(liveMock, playStoreUrl, lang, now);
 
   html += `<h2>${t.pattern}</h2>`;
@@ -513,9 +537,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     .map((d) => {
       const when = d.text
         ? esc(pick(d.text, lang))
-        : d.to
-          ? `${esc(formatHubDate(d.from, lang))} ${t.dateTo} ${esc(formatHubDate(d.to, lang))}`
-          : esc(formatHubDate(d.from, lang));
+        : esc(dateSpan(d.from, d.to, lang, t));
       return `<tr><td>${esc(pick(d.label, lang))}</td><td>${when}</td><td><a href="${esc(d.sourceUrl ?? fact.sourceUrl)}" target="_blank" rel="noreferrer">${t.officialNotice} &#8599;</a></td></tr>`;
     })
     .join('')}</tbody></table></div>`;

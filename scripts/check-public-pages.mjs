@@ -10,7 +10,7 @@ import { HUB_EXAM_IDS } from '../src/data/examHubExams.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
-import { examHubPath } from '../src/lib/examHub.mjs';
+import { examHubPath, NEXT_STEP_PILOT_HUBS } from '../src/lib/examHub.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
@@ -480,4 +480,24 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   const redirects = readFileSync('dist/_redirects', 'utf8');
   for (const from of ['/app/', '/compare/', '/hi/compare/', '/exams/:exam/question-papers/']) assert(new RegExp(`^${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s`, 'm').test(redirects), `_redirects lost the ${from} rule`);
   console.log(`Verified GEO: /llms.txt lists ${HUB_EXAM_IDS.length} exam hubs and ${papers.length} solved papers, all ${internal.length} links built; home Organization and exam-directory ItemList in place.`);
+}
+
+// G1 experiment (20 Oct 2026): the next-step line appears on the four pilot hubs only, in both languages, and links
+// through the click-counting redirects; no hub prints a one-day range as "X to X" any more.
+{
+  const redirects = readFileSync('dist/_redirects', 'utf8');
+  assert(/^\/go\/hub-pdf\s/m.test(redirects) && /^\/go\/hub-telegram\s/m.test(redirects), '_redirects lost the /go/ experiment rules');
+  assert(/^Disallow: \/go\/$/m.test(readFileSync('dist/robots.txt', 'utf8')), 'robots.txt must keep crawlers out of /go/');
+  for (const id of HUB_EXAM_IDS) {
+    for (const lang of ['en', 'hi']) {
+      const html = readFileSync(`dist${examHubPath(id, lang)}index.html`, 'utf8');
+      const has = html.includes('class="hub-next"');
+      assert.equal(has, NEXT_STEP_PILOT_HUBS.includes(id), `${examHubPath(id, lang)}: the next-step line is ${has ? 'on a non-pilot hub' : 'missing'}`);
+      if (has) assert(html.includes('href="/go/hub-pdf"') && html.includes('href="/go/hub-telegram"'), `${examHubPath(id, lang)}: pilot line does not use the /go/ links`);
+      const text = html.replace(/<[^>]+>/g, ' ');
+      const repeat = text.match(/(\d{1,2} [^\s\d<]+ \d{4}) (?:to|से) \1(?!\d)/);
+      assert(!repeat, `${examHubPath(id, lang)}: one-day range printed twice ("${repeat?.[0]}")`);
+    }
+  }
+  console.log(`Verified the G1 experiment: next-step line on ${NEXT_STEP_PILOT_HUBS.length} pilot hubs x 2 languages only, /go/ redirects and robots rule in place; no "X to X" date ranges on any hub.`);
 }
