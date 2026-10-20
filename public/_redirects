@@ -23,3 +23,19 @@
 # Unmatched paths use the generated 404.html (Cloudflare returns HTTP 404).
 
 /daily-pdf /pdf/latest.pdf 302
+
+# Parent folders of real pages, which crawlers reach by trimming a URL - all four returned 404 until 2026-10-20
+# (Cloudflare AI Crawl Control showed bursts of 4xx from Googlebot, ClaudeBot, PerplexityBot and others). Both
+# spellings, because a rule matches the path exactly and these have no file on disk for Pages to normalise.
+/app                                   /app/home                 302
+/app/                                  /app/home                 302
+/compare                               /exams/                   301
+/compare/                              /exams/                   301
+/hi/compare                            /hi/exams/                301
+/hi/compare/                           /hi/exams/                301
+/exams/:exam/question-papers           /exams/:exam/             301
+/exams/:exam/question-papers/          /exams/:exam/             301
+
+# Names other sites use, which crawlers request by habit.
+/manifest.json                         /manifest.webmanifest     301
+/llms-full.txt                         /llms.txt                 302

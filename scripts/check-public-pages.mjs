@@ -476,5 +476,8 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
     const list = ldOf(readFileSync(`dist${examDirectoryPath(lang)}index.html`, 'utf8')).find((x) => x['@type'] === 'CollectionPage')?.mainEntity;
     assert.equal(list?.itemListElement?.length, HUB_EXAM_IDS.length, `${examDirectoryPath(lang)}: the ItemList does not list every hub`);
   }
+  for (const file of ['favicon.ico', 'apple-touch-icon.png', 'apple-touch-icon-precomposed.png']) assert(existsSync(`dist/${file}`), `/${file} was not built`);
+  const redirects = readFileSync('dist/_redirects', 'utf8');
+  for (const from of ['/app/', '/compare/', '/hi/compare/', '/exams/:exam/question-papers/']) assert(new RegExp(`^${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s`, 'm').test(redirects), `_redirects lost the ${from} rule`);
   console.log(`Verified GEO: /llms.txt lists ${HUB_EXAM_IDS.length} exam hubs and ${papers.length} solved papers, all ${internal.length} links built; home Organization and exam-directory ItemList in place.`);
 }
