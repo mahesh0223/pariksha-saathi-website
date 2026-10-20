@@ -39,6 +39,8 @@ import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredDa
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
 import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
 import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/lib/telegramPage.mjs';
+import { pyqPaperBody, pyqPaperMeta, pyqPaperStructuredData } from '../src/lib/pyqPage.mjs';
+import { pyqPaperPath } from '../src/lib/pyqPath.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -1641,6 +1643,25 @@ async function main() {
       bodyHtml: telegramPageBody(latest),
     }));
     sitemapUrls.push({ loc: TELEGRAM_PAGE_PATH, priority: '0.5', lastmod: newest });
+  }
+
+  // --- Solved previous-year papers (/exams/<exam>/question-papers/<paper>/): src/lib/pyqPage.mjs, data from
+  // scripts/gen-pyq-pages.mjs. Plain HTML, English (the papers' language), no app script.
+  for (const paper of JSON.parse(readFileSync(new URL('../src/data/pyqPapers.json', import.meta.url), 'utf8'))) {
+    const path = pyqPaperPath(paper);
+    const meta = pyqPaperMeta(paper);
+    writePage(path.slice(1, -1), page({
+      title: meta.title,
+      description: meta.description,
+      path,
+      assets,
+      lang: 'en',
+      type: 'article',
+      scripts: false,
+      bodyHtml: pyqPaperBody(paper),
+      structuredData: pyqPaperStructuredData(paper, SITE_URL),
+    }));
+    sitemapUrls.push({ loc: path, priority: '0.7' });
   }
 
   // --- sitemap.xml ---

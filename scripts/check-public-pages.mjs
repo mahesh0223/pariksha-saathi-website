@@ -13,6 +13,8 @@ import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
+import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
+import { pyqPaperPath } from '../src/lib/pyqPath.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -278,6 +280,23 @@ for (const lang of ['en', 'hi']) {
   assert(!/<script[^>]+src="\/assets\//.test(landing), '/telegram/: loads the app script; it must stay plain HTML');
   assert(sitemap.includes('<loc>https://parikshasaathi.com/telegram/</loc>'), '/telegram/: not in the sitemap');
   console.log('Verified /telegram/: plain HTML, Join button, latest headlines, in the sitemap.');
+}
+
+// Solved previous-year papers (src/lib/pyqPage.mjs): every published question of each paper is on its page with an
+// answer, the exam body's notice is linked, the page is in the sitemap, and the small hub index matches the data.
+{
+  const papers = JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'));
+  assert(readFileSync('src/data/pyqPaperIndex.mjs', 'utf8') === pyqIndexSource(papers), 'src/data/pyqPaperIndex.mjs does not match pyqPapers.json: re-run node scripts/gen-pyq-pages.mjs');
+  for (const paper of papers) {
+    const path = pyqPaperPath(paper);
+    const html = readFileSync(`dist${path}index.html`, 'utf8');
+    assert((html.match(/<li class="pyq-q"/g) ?? []).length === paper.questions.length, `${path}: expected ${paper.questions.length} questions`);
+    assert((html.match(/class="pyq-correct"/g) ?? []).length === paper.questions.length, `${path}: a question has no answer`);
+    assert(html.includes(`href="${paper.sourceUrl}"`), `${path}: the exam body's notice is not linked`);
+    assert(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), `${path}: not in the sitemap`);
+    assert(!/<script[^>]+src="\/assets\//.test(html), `${path}: loads the app script; it must stay plain HTML`);
+  }
+  console.log(`Verified ${papers.length} solved previous-year paper page(s): every question with its answer, the official notice linked, in the sitemap.`);
 }
 
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a

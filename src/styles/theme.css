@@ -277,3 +277,82 @@ button {
 .tg-foot a {
   color: var(--muted);
 }
+
+/* Solved previous-year paper (src/lib/pyqPage.mjs). */
+.pyq-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 12px 0 8px;
+}
+.pyq-jump a {
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.pyq-section h2 span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.pyq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.pyq-q {
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.pyq-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  margin-bottom: 4px;
+}
+.pyq-text p {
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+.pyq-opts {
+  list-style: none;
+  margin: 6px 0 10px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.pyq-opts li {
+  line-height: 1.5;
+}
+.pyq-opts b {
+  display: inline-block;
+  min-width: 1.6em;
+  color: var(--muted);
+}
+.pyq-answer summary {
+  cursor: pointer;
+  color: var(--navy);
+  font-weight: 600;
+}
+.pyq-answer p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+.pyq-correct {
+  color: var(--good);
+  font-weight: 700;
+}
+.pyq-topic {
+  font-size: 0.85rem;
+  color: var(--muted);
+}

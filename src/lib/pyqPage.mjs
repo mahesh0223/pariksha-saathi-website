@@ -1,0 +1,114 @@
+// The solved previous-year paper page (/exams/<exam>/question-papers/<paper>/): every published question of one official
+// paper, in the paper's own sections and numbering, each with the official answer and our explanation behind a
+// "show answer" toggle. Plain HTML - no app script - like the /q/ pages. Data: src/data/pyqPapers.json
+// (scripts/gen-pyq-pages.mjs, from the server's PYQ seed files).
+import { examsLinkHtml } from './examDirectory.mjs';
+import { examHubPath } from './examHubPath.mjs';
+import { socialLinksHtml } from '../data/socialLinks.mjs';
+import { telegramCtaHtml } from './telegramCta.mjs';
+import { metaDescription } from './seoMeta.mjs';
+import { pyqPaperPath } from './pyqPath.mjs';
+import { QUESTION_TOPICS } from '../data/questionTopics.mjs';
+import { topicListPath } from './questionPage.mjs';
+
+const LETTERS = ['A', 'B', 'C', 'D', 'E'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const longDate = (iso) => `${Number(iso.slice(8, 10))} ${MONTHS[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`;
+const shortDate = (iso) => `${Number(iso.slice(8, 10))} ${MONTHS[Number(iso.slice(5, 7)) - 1].slice(0, 3)} ${iso.slice(0, 4)}`;
+const marks = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
+
+function esc(value) {
+  return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
+const paragraphs = (text) => String(text).split(/\n{2,}/).map((p) => `<p>${esc(p)}</p>`).join('');
+
+export function pyqPaperMeta(paper) {
+  const title = `${paper.displayName} Question Paper (${shortDate(paper.date)}, ${paper.shift}) with Answers`;
+  const sections = [...new Set(paper.questions.map((q) => q.section).filter(Boolean))];
+  return {
+    title,
+    h1: `${paper.displayName} question paper: ${longDate(paper.date)}, ${paper.shift}, with answers`,
+    description: metaDescription(`${paper.questions.length} questions from the ${paper.displayName} paper of ${longDate(paper.date)} (${paper.shift}), as the exam body printed them, each with the official answer and a worked explanation${sections.length ? `: ${sections.join(', ')}` : ''}.`),
+  };
+}
+
+function topicLink(q) {
+  const topic = QUESTION_TOPICS[q.topicKey];
+  return topic && topic.en.count > 0 ? `<a href="${topicListPath(topic, 'en')}">${esc(q.topicName)}</a>` : esc(q.topicName);
+}
+
+export function pyqPaperBody(paper) {
+  const meta = pyqPaperMeta(paper);
+  const total = paper.questionsInPaper;
+  const n = paper.questions.length;
+  const sections = [];
+  for (const q of paper.questions) {
+    const key = q.section ?? 'Questions';
+    let s = sections.find((x) => x.name === key);
+    if (!s) sections.push((s = { name: key, questions: [] }));
+    s.questions.push(q);
+  }
+  const anchor = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const leftOut = total && total > n
+    ? ` The other ${total - n} of the paper's ${total} questions are not reproduced: they need a figure or are printed as an image, or ask about formatting the source does not keep.`
+    : '';
+  const body = sections.map((s) => `
+    <section class="pyq-section" id="${anchor(s.name)}">
+      <h2>${esc(s.name)} <span>${s.questions.length} question${s.questions.length === 1 ? '' : 's'}</span></h2>
+      <ol class="pyq-list">${s.questions.map((q) => `
+        <li class="pyq-q" id="${anchor(s.name)}-q${q.number ?? ''}">
+          <div class="pyq-num">Q.${q.number ?? ''}</div>
+          <div class="pyq-text">${paragraphs(q.text)}</div>
+          <ol class="pyq-opts">${q.options.map((o, i) => `<li><b>${LETTERS[i]}</b> ${esc(o)}</li>`).join('')}</ol>
+          <details class="pyq-answer"><summary>Show answer and explanation</summary>
+            <p class="pyq-correct">Answer: (${LETTERS[q.correctOptionIndex]}) ${esc(q.options[q.correctOptionIndex])}</p>
+            <p>${esc(q.explanation)}</p>
+            <p class="pyq-topic">Topic: ${topicLink(q)}</p>
+          </details>
+        </li>`).join('')}
+      </ol>
+    </section>`).join('');
+  const hub = examHubPath(paper.examId, 'en');
+  return `<div class="compare-page">
+  <header class="pub-header">
+    <div class="wrap pub-nav">
+      <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
+      <nav class="pub-nav-links"><a href="/q/">Practice questions</a><a href="/app/current-affairs/">Current affairs</a></nav>
+      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
+    </div>
+  </header>
+  <article class="wrap compare-article pyq-paper">
+    <div class="compare-top-row"><a href="${hub}" class="detail-back">&larr; ${esc(paper.displayName.replace(/\s+\d{4}.*$/, ''))} exam page</a></div>
+    <h1>${esc(meta.h1)}</h1>
+    <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.${leftOut} Try each question before opening its answer.</p>
+    <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
+    <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
+    ${body}
+    ${telegramCtaHtml('en')}
+    <p><a href="${hub}">More on the ${esc(paper.displayName.replace(/\s+\d{4}.*$/, ''))} exam: pattern, syllabus, cut-offs and notices &rarr;</a></p>
+  </article>
+  <footer class="pub-footer">
+    <div class="wrap pub-footer-links">
+      <a href="/about/">About &amp; editorial standards</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Use</a><a href="/contact/">Contact</a><a href="/downloads/">Daily PDF</a>
+    ${socialLinksHtml()}</div>
+  </footer>
+</div>`;
+}
+
+export function pyqPaperStructuredData(paper, siteUrl) {
+  const meta = pyqPaperMeta(paper);
+  const path = pyqPaperPath(paper);
+  return [
+    { '@context': 'https://schema.org', '@type': 'Article', headline: meta.h1, description: meta.description, inLanguage: 'en', about: paper.displayName, publisher: { '@type': 'Organization', name: 'Pariksha Saathi' } },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: paper.displayName.replace(/\s+\d{4}.*$/, ''), item: `${siteUrl}${examHubPath(paper.examId, 'en')}` },
+        { '@type': 'ListItem', position: 3, name: `${shortDate(paper.date)}, ${paper.shift}`, item: `${siteUrl}${path}` },
+      ],
+    },
+  ];
+}

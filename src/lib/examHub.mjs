@@ -16,6 +16,7 @@ import { questionIndexPath, topicListPath } from './questionPage.mjs';
 import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
+import { pyqPaperPathFor } from './pyqPath.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -87,6 +88,8 @@ const T = {
     pyqIntro: (n, papers) => `${n} question${n === 1 ? '' : 's'} from ${papers} official paper${papers === 1 ? '' : 's'}, each with the answer from the official key; questions that need a figure, and any the key cancelled, are left out. Each paper links to the exam body's own notice.`,
     pyqLanguage: { en: ' The questions are in English.', hi: ' The questions are in Hindi.' },
     pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
+    pyqSolved: 'solved paper with answers',
+    pyqNotice: 'official notice',
     cutoffs: 'Cut-off marks by year and category',
     cutoffNote: (max) => `Marks are out of ${max}. Cut-offs change every cycle and are no promise for the next one; use them to see how competitive each category has been.`,
     category: 'Category',
@@ -179,6 +182,8 @@ const T = {
     pyqIntro: (n, papers) => `${papers} आधिकारिक पेपर से ${n} प्रश्न, हर प्रश्न आधिकारिक उत्तर कुंजी के उत्तर के साथ; चित्र वाले प्रश्न और कुंजी में रद्द प्रश्न शामिल नहीं। हर पेपर परीक्षा निकाय की अपनी सूचना से जुड़ा है।`,
     pyqLanguage: { en: ' प्रश्न अंग्रेज़ी में हैं।', hi: ' प्रश्न हिंदी में हैं।' },
     pyqCount: (n) => `${n} प्रश्न`,
+    pyqSolved: 'उत्तर सहित हल प्रश्नपत्र (अंग्रेज़ी)',
+    pyqNotice: 'आधिकारिक सूचना',
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
     cutoffNote: (max) => `अंक ${max} में से हैं। कट-ऑफ हर चक्र में बदलता है और अगले चक्र की गारंटी नहीं है; इससे बस यह समझें कि हर श्रेणी में प्रतिस्पर्धा कितनी रही है।`,
     category: 'श्रेणी',
@@ -530,7 +535,15 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length) + pyqLanguage)}</p><ul class="hub-notices hub-pyq">${pyq.papers
       .map(
         (p) =>
-          `<li><a href="${esc(p.sourceUrl)}" rel="noopener">${esc(p.paper)}${p.shift ? ` · ${esc(p.shift)}` : ''}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}</span></li>`,
+          // The paper links to its solved-paper page when there is one; the exam body's notice is always linked.
+          (() => {
+            const solved = pyqPaperPathFor(fact.examId, p);
+            const name = `${esc(p.paper)}${p.shift ? ` · ${esc(p.shift)}` : ''}`;
+            const notice = `<a href="${esc(p.sourceUrl)}" rel="noopener">${t.pyqNotice} &#8599;</a>`;
+            return solved
+              ? `<li><a href="${solved}">${name} · ${t.pyqSolved}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}${t.noteSep}${notice}</span></li>`
+              : `<li><a href="${esc(p.sourceUrl)}" rel="noopener">${name}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}</span></li>`;
+          })(),
       )
       .join('')}</ul>`;
   }
