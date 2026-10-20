@@ -37,6 +37,7 @@ import { TOPIC_PAGE_SIZE, questionIndexBody, questionIndexMeta, questionIndexPat
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
+import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -1400,6 +1401,7 @@ async function main() {
         <div class="detail-source"><a href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noreferrer">${t.source}: ${escapeHtml(item.sourceName)} &#8599;</a></div>
         ${learningNote(item, lang)}
         ${await itemQuizHtml(item, t)}
+        ${telegramCtaHtml(lang)}
         ${relatedItemsHtml(items, item, lang)}
         <p><a href="/app/current-affairs/">${t.collection}</a> · <a href="/about/">${t.standards}</a></p>
       </article>
@@ -1503,6 +1505,7 @@ async function main() {
         ${dateRows ? `<div class="detail-dates"><h2>${t.dates}</h2><dl>${dateRows}</dl></div>` : ''}
         ${noticeGuidance(item.id, lang) ? `<section class="news-learning"><h2>${t.guidance}</h2><p>${escapeHtml(noticeGuidance(item.id, lang))}</p></section>` : ''}
         <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">${t.official} &#8599;</a></div>
+        ${telegramCtaHtml(lang)}
         ${adSlot('5664651910')}
       </article>
     `);

@@ -12,6 +12,7 @@ import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
+import { TELEGRAM_CHANNEL_URL } from '../src/data/socialLinks.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -255,8 +256,21 @@ for (const lang of ['en', 'hi']) {
     const html = readFileSync(file, 'utf8');
     assert(html.includes('class="detail-related"'), `${file}: missing the surrounding-days block`);
     assert(html.includes('item-quiz-static'), `${file}: missing the static inline question`);
+    assert(html.includes('<aside class="tg-cta">'), `${file}: missing the Telegram box`);
   }
   console.log(`Verified ${itemPages.length} current-affairs item page(s) carry their inline question and link to their neighbouring items.`);
+}
+
+// The Telegram box (src/lib/telegramCta.mjs) on the pages people read for current affairs and notices, linking the
+// channel the server's 07:00 digest posts to.
+{
+  const tgPages = files.filter((f) => /\/app\/exam-notices\/[a-z0-9]+\/index\.html$/.test(f) || f === 'dist/downloads/index.html');
+  for (const examId of HUB_EXAM_IDS) for (const lang of ['en', 'hi']) tgPages.push(`dist${examHubPath(examId, lang)}index.html`);
+  for (const file of tgPages) {
+    const html = readFileSync(file, 'utf8');
+    assert(html.includes('<aside class="tg-cta">') && html.includes(`href="${TELEGRAM_CHANNEL_URL}"`), `${file}: missing the Telegram box`);
+  }
+  console.log(`Verified the Telegram box on ${tgPages.length} notice, exam and downloads page(s) (and every current-affairs item page above).`);
 }
 
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a

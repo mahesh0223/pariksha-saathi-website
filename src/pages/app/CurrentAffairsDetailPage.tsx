@@ -8,6 +8,7 @@ import { EmptyState, Note, Pill, Spinner } from '../../components/ui/Primitives'
 import { ItemQuestions } from '../../components/ItemQuestions';
 import { learningNote } from '../../data/currentAffairsReading.mjs';
 import { relatedItemsHtml } from '../../lib/relatedItems.mjs';
+import { telegramCtaHtml } from '../../lib/telegramCta.mjs';
 import { shortenTitle } from '../../lib/seoTitle.mjs';
 import './DetailPage.css';
 
@@ -116,6 +117,7 @@ export function CurrentAffairsDetailPage() {
 
       <div dangerouslySetInnerHTML={{ __html: learningNote(display, itemLanguage) }} />
       <ItemQuestions itemId={display.id} language={itemLanguage} />
+      <div dangerouslySetInnerHTML={{ __html: telegramCtaHtml(itemLanguage) }} />
       <div dangerouslySetInnerHTML={{ __html: relatedItemsHtml(allQuery.data ?? [], display, itemLanguage) }} />
       <p>
         <Link to="/app/current-affairs/">{hi ? 'दैनिक संग्रह पढ़ें →' : 'Read the daily collection →'}</Link> ·{' '}

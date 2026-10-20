@@ -15,6 +15,7 @@ import { CONTACT_EMAIL } from './reportQuestion.mjs';
 import { questionIndexPath, topicListPath } from './questionPage.mjs';
 import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
+import { telegramCtaHtml } from './telegramCta.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -561,6 +562,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
       .map((i) => `<li><a href="/app/current-affairs/${esc(i.id)}/">${esc(i.title)}</a><span>${esc(formatHubDate(i.editionDate, lang))}</span></li>`)
       .join('')}</ul><p><a href="/app/current-affairs/">${t.allCurrentAffairs} &rarr;</a></p>`;
   }
+  html += telegramCtaHtml(lang);
 
   html += `<h2>${t.prepare}</h2><ul class="compare-links">`;
   html += `<li><a href="${lang === 'hi' ? '/hi' : ''}/exams/calendar/">${t.calendar}</a></li>`;

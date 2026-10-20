@@ -116,3 +116,40 @@ button {
   padding-left: 24px;
   padding-right: 24px;
 }
+
+/* "Join on Telegram" box (src/lib/telegramCta.mjs) on item, notice, exam and downloads pages. */
+.tg-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: 24px 0;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.tg-cta p {
+  flex: 1 1 260px;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.tg-cta-join {
+  flex: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.tg-cta-join:hover,
+.tg-cta-join:focus-visible {
+  background: var(--navy-deep);
+  color: #fff;
+}

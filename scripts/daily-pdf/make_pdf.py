@@ -71,11 +71,12 @@ h1.sec{{font-size:16pt;color:#1e3a8a;border-bottom:2px solid #1e3a8a;padding-bot
 .q{{margin:0 0 12px;page-break-inside:avoid}} .opts{{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;margin:4px 0 0 18px}}
 .ans{{background:#ecfdf5;border:1px solid #22c55e;padding:8px 12px;border-radius:8px;margin-top:20px;font-weight:700}}
 .foot{{margin-top:22px;padding:12px;background:#fff7ed;border-radius:10px;font-size:10.5pt}} .foot b{{color:#1e3a8a}}
+.tg{{font-size:12pt;font-weight:700;color:#1e3a8a;margin-bottom:6px}} .tg a{{color:#1e3a8a}}
 </style><body>
 <div class="hdr"><img src="icon.png"><div><h1>Pariksha Saathi — दैनिक करंट अफेयर्स</h1><div class="d">{fmt_date(date)} • हिंदी</div></div></div>
 <div class="strip">SSC CGL • CHSL • MTS • IBPS PO/Clerk • SBI PO/Clerk • RRB — {len(hi)} खबरें{f' + {len(quiz)} प्रश्न' if quiz else ''} • स्रोत: PIB (सभी खबरें आधिकारिक प्रेस विज्ञप्तियों से)</div>
 {items}{quiz_html}
-<div class="foot"><b>रोज़ का PDF: parikshasaathi.com/daily-pdf — सभी संस्करण: parikshasaathi.com/downloads/</b><br>
+<div class="foot"><div class="tg">रोज़ सुबह 7 बजे यही PDF Telegram पर: <a href="https://t.me/parikshasaathiapp">t.me/parikshasaathiapp</a> — चैनल से जुड़ें और दोस्तों को भेजें</div><b>रोज़ का PDF: parikshasaathi.com/daily-pdf — सभी संस्करण: parikshasaathi.com/downloads/</b><br>
 वेबसाइट: parikshasaathi.com (हिंदी + English में 248 पाठ, रोज़ का करंट अफेयर्स, परीक्षा नोटिस)<br>
 ऐप: Pariksha Saathi — Free, Offline, SSC/Bank की पूरी तैयारी। प्रकाशक: Mahesh Srivastava, Founder. सामग्री आधिकारिक विज्ञप्तियों से AI की सहायता से तैयार; किसी विषय-विशेषज्ञ संपादक द्वारा समीक्षित नहीं। ग़लती दिखे तो parikshasaathi.com/contact/ पर बताएँ।</div>
 </body></html>"""

@@ -11,6 +11,7 @@ import { noticeGuidance, knownCounterpartId } from '../../data/examNoticeGuidanc
 import type { ExamUpdateNotice } from '../../types/api';
 import './DetailPage.css';
 import './UpdatesPage.css';
+import { telegramCtaHtml } from '../../lib/telegramCta.mjs';
 
 const OTHER_LANGUAGE: Record<LanguageCode, LanguageCode> = { en: 'hi', hi: 'en' };
 
@@ -140,6 +141,8 @@ export function ExamNoticeDetailPage() {
           Official notification &#8599;
         </a>
       </div>
+
+      <div dangerouslySetInnerHTML={{ __html: telegramCtaHtml(language === 'hi' ? 'hi' : 'en') }} />
 
       <AdSlot slot="5664651910" />
     </article>
