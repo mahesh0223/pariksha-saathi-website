@@ -3366,6 +3366,25 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस पृष्ठभूमि रिपोर्ट से दशक के मार्ग, हवाई अड्डे, उड़ानें और यात्री के आँकड़े तथा अगले चरण का परिव्यय और घटक नोट करें, और इन्हें ऊपर दी 2017 की योजना-शर्तों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325428(?:&|$)/i,
+    en: {
+      body: 'The Shanghai Cooperation Organisation was established on 15 June 2001 in Shanghai by the leaders of China, Kazakhstan, Kyrgyzstan, Russia, Tajikistan and Uzbekistan; all except Uzbekistan had been members of the Shanghai Five, formed on 26 April 1996. Its two permanent bodies are the SCO Secretariat in Beijing and the Executive Committee of the Regional Anti-Terrorist Structure (RATS) in Tashkent. India was granted observer status at the July 2005 Astana Summit and, with Pakistan, joined as a full member on 9 June 2017 at the Astana summit.',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/SCO_Brief_September_2022.pdf',
+      refLabel: 'Reference: Ministry of External Affairs brief on the SCO, September 2022',
+      checkQ: 'Check yourself: which two bodies did the SCO Summit in Bishkek decide to establish as permanent bodies, and where?',
+      checkA: 'The Universal Centre in Tashkent and the Anti-Drug Centre in Dushanbe.',
+      task: 'Revision task: from this release, note the meeting\'s venue and number, the action plan\'s period, the new permanent bodies, the connectivity projects and the documents adopted, and keep them apart from the SCO\'s standing facts above.',
+    },
+    hi: {
+      body: 'शंघाई सहयोग संगठन की स्थापना 15 जून 2001 को शंघाई में चीन, कज़ाख़स्तान, किर्गिज़स्तान, रूस, ताजिकिस्तान और उज़्बेकिस्तान के नेताओं ने की थी; उज़्बेकिस्तान को छोड़कर ये सभी 26 अप्रैल 1996 को बने शंघाई फ़ाइव के सदस्य रह चुके थे। इसके दो स्थायी निकाय हैं: बीजिंग में SCO सचिवालय और ताशकंद में क्षेत्रीय आतंकवाद-रोधी ढाँचे (RATS) की कार्यकारी समिति। जुलाई 2005 के अस्ताना शिखर सम्मेलन में भारत को पर्यवेक्षक का दर्जा मिला, और 9 जून 2017 को अस्ताना शिखर सम्मेलन में भारत, पाकिस्तान के साथ, पूर्ण सदस्य बना।',
+      refUrl: 'https://www.mea.gov.in/Portal/ForeignRelation/SCO_Brief_September_2022.pdf',
+      refLabel: 'संदर्भ: SCO पर विदेश मंत्रालय का ब्रीफ़, सितंबर 2022',
+      checkQ: 'खुद जाँचें: बिश्केक SCO शिखर सम्मेलन ने किन दो निकायों को कहाँ स्थायी निकाय के रूप में स्थापित करने का निर्णय लिया?',
+      checkA: 'ताशकंद में यूनिवर्सल सेंटर और दुशांबे में मादक पदार्थ-रोधी केंद्र।',
+      task: 'अभ्यास: इस रिलीज़ से बैठक का स्थान और क्रम, कार्य योजना की अवधि, नए स्थायी निकाय, कनेक्टिविटी परियोजनाएँ और अपनाए गए दस्तावेज़ नोट करें, और इन्हें ऊपर दिए SCO के स्थायी तथ्यों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
