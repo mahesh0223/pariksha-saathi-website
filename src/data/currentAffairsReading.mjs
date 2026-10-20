@@ -3385,6 +3385,44 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से बैठक का स्थान और क्रम, कार्य योजना की अवधि, नए स्थायी निकाय, कनेक्टिविटी परियोजनाएँ और अपनाए गए दस्तावेज़ नोट करें, और इन्हें ऊपर दिए SCO के स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325496(?:&|$)/i,
+    en: {
+      body: 'Every Para athletics event carries a sport class made of a letter and a number. The letter names the discipline: T for track and jump events, F for field (throwing) events. The number identifies the class within it, and class 20 is the class for athletes with an intellectual impairment. So T20 events, such as the 400m won here, are running or jumping events for athletes with an intellectual impairment.',
+      refUrl: 'https://www.paralympic.org/athletics/classification',
+      refLabel: 'Reference: International Paralympic Committee, Para athletics classification',
+      checkQ: 'Check yourself: in a Para athletics sport class, what do the prefixes T and F stand for, and which impairment does class 20 cover?',
+      checkA: 'T is for track and jump events and F for field (throwing) events; class 20 is for athletes with an intellectual impairment.',
+      task: 'Revision task: from this release, note the athlete, the event and its class, the medal and the record, and keep them apart from the classification facts above.',
+    },
+    hi: {
+      body: 'पैरा एथलेटिक्स की हर स्पर्धा का एक खेल वर्ग (स्पोर्ट क्लास) होता है, जो एक अक्षर और एक संख्या से बनता है। अक्षर विधा बताता है: T ट्रैक और कूद स्पर्धाओं के लिए, और F फ़ील्ड (थ्रो) स्पर्धाओं के लिए। संख्या उस विधा के भीतर वर्ग बताती है, और वर्ग 20 बौद्धिक दिव्यांगता वाले खिलाड़ियों का वर्ग है। इसलिए T20 स्पर्धाएँ, जैसे यहाँ जीती गई 400 मीटर दौड़, बौद्धिक दिव्यांगता वाले खिलाड़ियों की दौड़ या कूद की स्पर्धाएँ हैं।',
+      refUrl: 'https://www.paralympic.org/athletics/classification',
+      refLabel: 'संदर्भ: अंतरराष्ट्रीय पैरालंपिक समिति, पैरा एथलेटिक्स वर्गीकरण',
+      checkQ: 'खुद जाँचें: पैरा एथलेटिक्स के खेल वर्ग में T और F उपसर्ग किसके लिए हैं, और वर्ग 20 किस दिव्यांगता के लिए है?',
+      checkA: 'T ट्रैक और कूद स्पर्धाओं के लिए और F फ़ील्ड (थ्रो) स्पर्धाओं के लिए; वर्ग 20 बौद्धिक दिव्यांगता वाले खिलाड़ियों के लिए है।',
+      task: 'अभ्यास: इस रिलीज़ से खिलाड़ी, स्पर्धा और उसका वर्ग, पदक और रिकॉर्ड नोट करें, और इन्हें ऊपर दिए वर्गीकरण के तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325436(?:&|$)/i,
+    en: {
+      body: 'India\'s nuclear power programme follows the three-stage plan conceived by Dr Homi J. Bhabha to make the most of the country\'s limited uranium and large thorium reserves. Stage 1 burns natural uranium in pressurised heavy water reactors (PHWRs), whose spent fuel yields plutonium; stage 2 uses that plutonium in fast breeder reactors, which generate more fuel than they consume and are to breed uranium-233 from thorium; stage 3 is to run reactors on thorium with that uranium-233. The 500 MWe Prototype Fast Breeder Reactor at Kalpakkam, Tamil Nadu, built by BHAVINI, attained first criticality on 6 April 2026, taking India into the second stage. The Nuclear Energy Mission, outlined in the Union Budget 2025-26, aims at 100 GW of nuclear power capacity by 2047.',
+      refUrl: 'https://www.pib.gov.in/FactsheetDetails.aspx?Id=150617',
+      refLabel: 'Reference: PIB factsheet "Indigenously built 500 MWe fast breeder reactor attains first criticality", 7 April 2026',
+      checkQ: 'Check yourself: which reactor took India into the second stage of its nuclear power programme, and what fuel does that stage burn?',
+      checkA: 'The 500 MWe Prototype Fast Breeder Reactor at Kalpakkam (first criticality on 6 April 2026); the second stage burns plutonium recovered from the first stage\'s spent fuel.',
+      task: 'Revision task: from this release, note the nuclear capacity target and its year, the Net Zero year and the forum where the minister spoke, and keep them apart from the programme\'s standing facts above.',
+    },
+    hi: {
+      body: 'भारत का परमाणु ऊर्जा कार्यक्रम डॉ. होमी जे. भाभा की बनाई तीन-चरणीय योजना पर चलता है, ताकि देश के सीमित यूरेनियम और विशाल थोरियम भंडार का पूरा उपयोग हो सके। पहले चरण में दाबित भारी जल रिएक्टरों (PHWR) में प्राकृतिक यूरेनियम जलता है, जिनके प्रयुक्त ईंधन से प्लूटोनियम मिलता है; दूसरे चरण में वही प्लूटोनियम फ़ास्ट ब्रीडर रिएक्टरों में ईंधन बनता है, जो जितना ईंधन खपाते हैं उससे अधिक बनाते हैं और थोरियम से यूरेनियम-233 तैयार करेंगे; तीसरे चरण में उसी यूरेनियम-233 के साथ थोरियम पर रिएक्टर चलाए जाने हैं। तमिलनाडु के कलपक्कम में BHAVINI द्वारा बनाए गए 500 मेगावाट (विद्युत) के प्रोटोटाइप फ़ास्ट ब्रीडर रिएक्टर ने 6 अप्रैल 2026 को पहली क्रांतिकता प्राप्त की, जिससे भारत दूसरे चरण में पहुँचा। केंद्रीय बजट 2025-26 में घोषित परमाणु ऊर्जा मिशन का लक्ष्य 2047 तक 100 गीगावाट परमाणु बिजली क्षमता है।',
+      refUrl: 'https://www.pib.gov.in/FactsheetDetails.aspx?Id=150617',
+      refLabel: 'संदर्भ: PIB फ़ैक्टशीट, "स्वदेशी 500 मेगावाट फ़ास्ट ब्रीडर रिएक्टर ने पहली क्रांतिकता प्राप्त की", 7 अप्रैल 2026',
+      checkQ: 'खुद जाँचें: किस रिएक्टर के साथ भारत अपने परमाणु ऊर्जा कार्यक्रम के दूसरे चरण में पहुँचा, और उस चरण में कौन-सा ईंधन जलता है?',
+      checkA: 'कलपक्कम का 500 मेगावाट प्रोटोटाइप फ़ास्ट ब्रीडर रिएक्टर (पहली क्रांतिकता 6 अप्रैल 2026); दूसरे चरण में पहले चरण के प्रयुक्त ईंधन से निकाला गया प्लूटोनियम जलता है।',
+      task: 'अभ्यास: इस रिलीज़ से परमाणु क्षमता का लक्ष्य और उसका वर्ष, नेट ज़ीरो का वर्ष और वह मंच जहाँ मंत्री ने बात की, नोट करें, और इन्हें ऊपर दिए कार्यक्रम के स्थायी तथ्यों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
