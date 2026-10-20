@@ -3,6 +3,7 @@
 
 Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_psi]
        npm run reel:daily -- [YYYY-MM-DD] --voice-samples     one video with each voice reading the same headlines
+       npm run reel:daily -- [YYYY-MM-DD] --text-only         rewrite only the upload text (titles, captions, tags)
 (default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
@@ -300,41 +301,83 @@ def main(date=None, voice_name=VOICE):
     base = os.path.join(OUT_DIR, f"ParikshaSaathi_CA_{date}")
     total = assemble(segments, base + ".mp4", cover=base + "_cover.png")
 
-    lines = [f"{k + 1}. {i['title']}" for k, i in enumerate(items)]
-    q_line = f"\nआज का प्रश्न: {question['text']} — जवाब वीडियो के अंत में।\n" if question else ""
-    tags = "#currentaffairs #करेंटअफेयर्स #dailycurrentaffairs #ssc #railway #bankexam #sarkarinaukri #hindi"
-    upload = f"""YOUTUBE SHORTS
-Title:
-{date_hi} करेंट अफेयर्स | {n} ज़रूरी खबरें | SSC, Bank, Railway #shorts
-
-Description:
-{date_hi} के करेंट अफेयर्स, {source_line}:
-{chr(10).join(lines)}
-{q_line}
-📥 रोज़ सुबह 7 बजे पूरा PDF और क्विज़: https://t.me/{TELEGRAM}
-🌐 हर खबर उसके आधिकारिक स्रोत के लिंक के साथ: https://parikshasaathi.com/app/current-affairs/
-स्रोत:
-{chr(10).join(i['sourceUrl'] for i in items)}
-
-आवाज़ AI (Kokoro TTS) से बनी है; खबरें आधिकारिक विज्ञप्तियों से AI की सहायता से तैयार की गई हैं।
-{tags} #shorts
-
-
-INSTAGRAM REEL
-Caption:
-{date_hi} के {n} ज़रूरी करेंट अफेयर्स ✅ {source_line}।
-{chr(10).join(lines)}
-{q_line}
-📥 रोज़ सुबह 7 बजे पूरा PDF और क्विज़ — Telegram पर खोजें: {TELEGRAM}
-🌐 parikshasaathi.com
-आवाज़ AI (Kokoro TTS) से; खबरें आधिकारिक विज्ञप्तियों से AI की सहायता से तैयार।
-{tags} #reels
-"""
-    open(base + "_upload.txt", "w", encoding="utf-8").write(upload)
+    write_upload_text(base + "_upload.txt", date, items, question, source_line)
     print(f"{base}.mp4: {n} items{' + 1 question' if question else ''}, {total:.1f} s")
     print(f"{base}_cover.png, {base}_upload.txt")
     if total > 90: print(f"note: {total:.0f} s is long for a Short/Reel; consider MAX_ITEMS = 4")
 
+
+
+EN_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+def write_upload_text(path, date, items, question, source_line):
+    """Titles, descriptions, tags and captions for YouTube Shorts and Instagram Reels, written for search: the date in
+    English and Hindi up front (how people search: "19 October current affairs", "करेंट अफेयर्स 19 अक्टूबर"), the
+    items' English headlines too, and the exams. Every line about the news is a published title or its lead."""
+    y, m, d = date.split("-")
+    date_en, date_hi = f"{int(d)} {EN_MONTHS[int(m) - 1]} {y}", fmt_date(date)
+    en_by_url = {i["sourceUrl"]: i for i in fetch_all("en")}
+    english = [spoken_title(en_by_url[i["sourceUrl"]]["title"]) for i in items if i["sourceUrl"] in en_by_url]
+    numbered = "\n".join(f"{k + 1}. {i['title']}" for k, i in enumerate(items))
+    leads = "\n".join(f"{k + 1}️⃣ {spoken_title(i['title'])}" for k, i in enumerate(items))
+    quiz = f"🧠 आज का प्रश्न: {question['text']}\nपहले कमेंट में अपना जवाब लिखें, फिर वीडियो के आखिर में मिलाएँ! 👇" if question else ""
+    sources = "\n".join(i["sourceUrl"] for i in items)
+    disclosure = "आवाज़ AI (Kokoro TTS) से बनी है; खबरें आधिकारिक PIB विज्ञप्तियों से AI की सहायता से तैयार की गई हैं।"
+    day_tag = f"#{int(d)}{EN_MONTHS[int(m) - 1]}CurrentAffairs"
+    tags = ", ".join([f"{date_en} current affairs", f"{int(d)} {EN_MONTHS[int(m) - 1].lower()} current affairs", f"करेंट अफेयर्स {date_hi}",
+                      "current affairs in hindi", "daily current affairs", "करेंट अफेयर्स", "aaj ka current affairs", "ssc current affairs",
+                      "railway current affairs", "bank current affairs", "pib current affairs", "current affairs quiz", "gk in hindi"])
+    text = f"""YOUTUBE SHORTS
+========================================
+Title:
+{date_en} Current Affairs in Hindi | करेंट अफेयर्स | SSC Railway Bank #shorts
+
+Description:
+{date_en} Current Affairs in Hindi: {date_hi} की {len(items)} ज़रूरी खबरें, {source_line}। SSC, Railway, Bank और राज्य परीक्षाओं के लिए Daily Current Affairs।
+
+📌 आज की खबरें ({date_hi}):
+{numbered}
+
+{quiz}
+
+In English: {" • ".join(english)}
+
+📥 रोज़ सुबह 7 बजे पूरा PDF + क्विज़ (Telegram): https://t.me/{TELEGRAM}
+🌐 हर खबर उसके आधिकारिक स्रोत के लिंक के साथ: https://parikshasaathi.com/app/current-affairs/
+📝 मुफ़्त अभ्यास प्रश्न, उत्तर सहित: https://parikshasaathi.com/hi/q/
+
+स्रोत (PIB):
+{sources}
+
+{disclosure}
+
+#currentaffairs #करेंटअफेयर्स {day_tag}
+#dailycurrentaffairs #currentaffairsinhindi #sscexam #railwayexam #bankexam #gk #pib #shorts
+
+Tags (YouTube Studio → Tags box):
+{tags}
+
+
+INSTAGRAM REEL
+========================================
+Caption:
+{date_en} Current Affairs in Hindi 📰 | SSC • Railway • Bank
+
+{date_hi} की {len(items)} ज़रूरी खबरें, {source_line}:
+{leads}
+
+{quiz}
+
+📌 Save करें, रिवीज़न में काम आएगा
+📤 परीक्षा की तैयारी करने वाले दोस्तों को भेजें
+📥 रोज़ सुबह 7 बजे पूरा PDF + क्विज़: Telegram पर खोजें @{TELEGRAM}
+🌐 parikshasaathi.com
+
+{disclosure}
+
+#currentaffairs #dailycurrentaffairs #currentaffairsinhindi #करेंटअफेयर्स #sscexam #railwayexam #bankexam #gk {day_tag.lower()}
+"""
+    open(path, "w", encoding="utf-8").write(text)
 
 
 def voice_samples(date=None):
@@ -357,4 +400,11 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
     if "--voice-samples" in args: voice_samples(date)
+    elif "--text-only" in args:
+        date, items = edition(date)
+        sources = sorted({i["sourceName"] for i in items})
+        line = "सिर्फ़ आधिकारिक PIB स्रोतों से" if sources == ["PIB"] else f"आधिकारिक स्रोतों ({', '.join(sources)}) से"
+        out = os.path.join(OUT_DIR, f"ParikshaSaathi_CA_{date}_upload.txt")
+        write_upload_text(out, date, items, item_question(items), line)
+        print(out)
     else: main(date, args[args.index("--voice") + 1] if "--voice" in args else VOICE)
