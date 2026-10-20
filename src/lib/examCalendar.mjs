@@ -18,7 +18,8 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 // A date the body itself calls tentative, proposed or expected is a plan, not a fixture. We do not
 // publish guesses - such rows stay out until the body fixes the date (working plan T10).
-export const UNCERTAIN_DATE = /\b(tentative(?:ly)?|proposed|expected|likely|probable|indicative)\b|अनुमानित|प्रस्तावित|संभावित|सम्भावित/i;
+// A date the body has postponed is not a fixture either, whatever else its label says.
+export const UNCERTAIN_DATE = /\b(tentative(?:ly)?|proposed|expected|likely|probable|indicative|postponed)\b|अनुमानित|प्रस्तावित|संभावित|सम्भावित|स्थगित/i;
 
 const T = {
   en: {

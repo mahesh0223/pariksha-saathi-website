@@ -3290,6 +3290,82 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से पोर्टल का नाम, उससे जुड़ी तीनों पहलें, MeitY के वे दो मानक जिनके अनुरूप यह बना है और KVK प्रशिक्षण अभियान नोट करें, और इन्हें PM-KISAN के ऊपर दिए स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325235(?:&|$)/i,
+    en: {
+      body: 'The India–New Zealand Free Trade Agreement was signed on 27 April 2026 at Bharat Mandapam, New Delhi, by Commerce and Industry Minister Piyush Goyal and New Zealand\'s Minister for Trade and Investment Todd McClay. India offered market access in 70% of its tariff lines, covering 95% of New Zealand\'s bilateral trade, while keeping out dairy and key agricultural products such as milk, cream, cheese, yoghurts, whey, caseins, onions, sugar, spices, edible oils, coffee and rubber.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2255914',
+      refLabel: 'Reference: PIB release of 27 April 2026 on the signing of the India–New Zealand FTA',
+      checkQ: 'Check yourself: where have the Phase I sites under the Kiwifruit Action Plan been identified?',
+      checkA: 'Pfutsero in Nagaland and Magra in Uttarakhand.',
+      task: 'Revision task: from this release, note the entry-into-force date, the services and visa numbers, the investment commitment and the agricultural action plans, and keep them apart from the signing facts above.',
+    },
+    hi: {
+      body: 'भारत–न्यूज़ीलैंड मुक्त व्यापार समझौते पर 27 अप्रैल 2026 को भारत मंडपम, नई दिल्ली में वाणिज्य एवं उद्योग मंत्री पीयूष गोयल और न्यूज़ीलैंड के व्यापार एवं निवेश मंत्री टॉड मैक्ले ने हस्ताक्षर किए। भारत ने अपनी 70% टैरिफ़ लाइनों में बाज़ार पहुँच दी, जो न्यूज़ीलैंड के द्विपक्षीय व्यापार का 95% कवर करती हैं, जबकि डेयरी और प्रमुख कृषि उत्पादों, जैसे दूध, क्रीम, पनीर, दही, व्हे, केसीन, प्याज़, चीनी, मसाले, खाद्य तेल, कॉफ़ी और रबर, को इससे बाहर रखा।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2255914',
+      refLabel: 'संदर्भ: भारत–न्यूज़ीलैंड FTA पर हस्ताक्षर की 27 अप्रैल 2026 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: कीवी फल कार्य योजना के पहले चरण के स्थल कहाँ चिह्नित किए गए हैं?',
+      checkA: 'नागालैंड में फ़ुत्सेरो और उत्तराखंड में मगरा।',
+      task: 'अभ्यास: इस रिलीज़ से लागू होने की तिथि, सेवाओं और वीज़ा के आँकड़े, निवेश की प्रतिबद्धता और कृषि कार्य योजनाएँ नोट करें, और इन्हें ऊपर दिए हस्ताक्षर से जुड़े तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325246(?:&|$)/i,
+    en: {
+      body: 'AUSTRA HIND 22 was held at Mahajan Field Firing Ranges in Rajasthan from 28 November to 11 December 2022; the Ministry of Defence described it as the first exercise in the series with an all-arms-and-services contingent from both armies, with troops of the Dogra Regiment for the Indian Army and soldiers of the 13th Brigade of the 2nd Division for the Australian Army. It was announced as a yearly exercise, held alternately in India and Australia.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1879269',
+      refLabel: 'Reference: PIB release of 27 November 2022 on AUSTRA HIND 22',
+      checkQ: 'Check yourself: which regiment\'s troops form the Indian Army contingent in AUSTRAHIND 2026?',
+      checkA: 'The Garhwal Rifles, along with personnel from other arms and services.',
+      task: 'Revision task: from this release, note the venue, dates, strength, contingents, theme and the New Zealand observers, and keep them apart from the 2022 facts above.',
+    },
+    hi: {
+      body: 'AUSTRA HIND 22 का आयोजन 28 नवंबर से 11 दिसंबर 2022 तक राजस्थान की महाजन फ़ील्ड फ़ायरिंग रेंज में हुआ था; रक्षा मंत्रालय ने इसे इस शृंखला का पहला अभ्यास बताया जिसमें दोनों सेनाओं की सभी शाखाओं और सेवाओं के दल शामिल हुए, भारतीय सेना की ओर से डोगरा रेजिमेंट के जवान और ऑस्ट्रेलियाई सेना की ओर से उसकी दूसरी डिवीज़न की 13वीं ब्रिगेड के सैनिक। इसे हर वर्ष, बारी-बारी से भारत और ऑस्ट्रेलिया में, आयोजित होने वाले अभ्यास के रूप में घोषित किया गया था।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1879269',
+      refLabel: 'संदर्भ: AUSTRA HIND 22 पर 27 नवंबर 2022 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: AUSTRAHIND 2026 में भारतीय सेना के दल में किस रेजिमेंट के जवान हैं?',
+      checkA: 'गढ़वाल राइफ़ल्स के, साथ में अन्य शाखाओं और सेवाओं के कर्मी।',
+      task: 'अभ्यास: इस रिलीज़ से स्थान, तिथियाँ, संख्या, दल, विषय और न्यूज़ीलैंड के पर्यवेक्षक नोट करें, और इन्हें ऊपर दिए 2022 के तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325230(?:&|$)/i,
+    en: {
+      body: 'The three Jan Suraksha schemes were launched by Prime Minister Narendra Modi on 9 May 2015. PMJJBY gives a one-year, renewable life cover of Rs 2 lakh on death from any cause to bank or post-office account holders aged 18 to 50, at a premium of Rs 436 a year; PMSBY gives accidental death and disability cover of up to Rs 2 lakh to those aged 18 to 70, at Rs 20 a year; and APY, open to account holders aged 18 to 40 who are not income-tax payers, guarantees a minimum monthly pension of Rs 1,000, 2,000, 3,000, 4,000 or 5,000 after the age of 60, depending on the contributions made.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2127981',
+      refLabel: 'Reference: PIB release of 9 May 2025, the Jan Suraksha schemes complete 10 years',
+      checkQ: 'Check yourself: which awareness initiative on unclaimed financial assets will the camps cover?',
+      checkA: '\'Aapki Poonji, Aapka Adhikar\'.',
+      task: 'Revision task: from this release, note the campaign dates, its coverage and the activities in the camps, and keep them apart from the schemes\' standing facts above.',
+    },
+    hi: {
+      body: 'तीनों जन सुरक्षा योजनाएँ प्रधानमंत्री नरेंद्र मोदी ने 9 मई 2015 को शुरू की थीं। PMJJBY 18 से 50 वर्ष के बैंक या डाकघर खाताधारकों को किसी भी कारण से मृत्यु पर 2 लाख रुपये का एक वर्षीय, नवीकरणीय जीवन बीमा देती है, जिसका प्रीमियम 436 रुपये प्रति वर्ष है; PMSBY 18 से 70 वर्ष के लोगों को 20 रुपये प्रति वर्ष पर 2 लाख रुपये तक का दुर्घटना मृत्यु और विकलांगता बीमा देती है; और APY, जो 18 से 40 वर्ष के ऐसे खाताधारकों के लिए है जो आयकरदाता नहीं हैं, अंशदान के अनुसार 60 वर्ष की आयु के बाद 1,000, 2,000, 3,000, 4,000 या 5,000 रुपये की गारंटीशुदा न्यूनतम मासिक पेंशन देती है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2127981',
+      refLabel: 'संदर्भ: जन सुरक्षा योजनाओं के 10 वर्ष पूरे होने पर 9 मई 2025 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: शिविरों में लावारिस वित्तीय परिसंपत्तियों पर कौन-सा जागरूकता अभियान शामिल होगा?',
+      checkA: '\'आपकी पूँजी, आपका अधिकार\'।',
+      task: 'अभ्यास: इस रिलीज़ से अभियान की तिथियाँ, उसका दायरा और शिविरों की गतिविधियाँ नोट करें, और इन्हें ऊपर दिए योजनाओं के स्थायी तथ्यों से अलग रखें।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325359(?:&|$)/i,
+    en: {
+      body: 'When the first UDAN flight, on the Shimla–Delhi sector, was flagged off on 27 April 2017, along with inaugural flights on Kadapa–Hyderabad and Nanded–Hyderabad, the Ministry of Civil Aviation set out the scheme\'s key terms: the airfare for a one-hour journey of about 500 km on a fixed-wing aircraft, or a 30-minute journey on a helicopter, would be capped at Rs 2,500; the selected airline would offer 50% of a fixed-wing flight\'s capacity (at least 9 and at most 40 seats) as RCS seats; and it would get three years\' exclusivity of operations. UDAN is a key component of the National Civil Aviation Policy, released on 15 June 2016.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1488670',
+      refLabel: 'Reference: PIB release of 26 April 2017 on the first UDAN flight',
+      checkQ: 'Check yourself: how many of the aerodromes identified in the North-Eastern region have been operationalised under UDAN?',
+      checkA: '12 of the 52 identified, which include heliports and water aerodromes.',
+      task: 'Revision task: from this backgrounder, note the decade\'s route, aerodrome, flight and passenger figures and the next phase\'s outlay and components, and keep them apart from the 2017 scheme terms above.',
+    },
+    hi: {
+      body: 'जब 27 अप्रैल 2017 को शिमला–दिल्ली सेक्टर पर पहली उड़ान फ़्लाइट को, कडप्पा–हैदराबाद और नांदेड़–हैदराबाद की उद्घाटन उड़ानों के साथ, हरी झंडी दिखाई गई, तब नागर विमानन मंत्रालय ने योजना की प्रमुख शर्तें बताईं: फ़िक्स्ड-विंग विमान से लगभग 500 किमी की एक घंटे की यात्रा, या हेलीकॉप्टर से 30 मिनट की यात्रा, का किराया 2,500 रुपये पर सीमित होगा; चयनित एयरलाइन फ़िक्स्ड-विंग उड़ान की 50% क्षमता (कम से कम 9 और अधिकतम 40 सीटें) RCS सीटों के रूप में देगी; और उसे तीन वर्ष तक संचालन की विशिष्टता मिलेगी। उड़ान 15 जून 2016 को जारी राष्ट्रीय नागर विमानन नीति का प्रमुख घटक है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1488670',
+      refLabel: 'संदर्भ: पहली उड़ान फ़्लाइट पर 26 अप्रैल 2017 की PIB रिलीज़',
+      checkQ: 'खुद जाँचें: पूर्वोत्तर क्षेत्र में चिह्नित हवाई अड्डों में से उड़ान के तहत कितने चालू हुए हैं?',
+      checkA: 'चिह्नित 52 में से 12, जिनमें हेलीपोर्ट और वाटर एयरोड्रोम भी शामिल हैं।',
+      task: 'अभ्यास: इस पृष्ठभूमि रिपोर्ट से दशक के मार्ग, हवाई अड्डे, उड़ानें और यात्री के आँकड़े तथा अगले चरण का परिव्यय और घटक नोट करें, और इन्हें ऊपर दी 2017 की योजना-शर्तों से अलग रखें।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
