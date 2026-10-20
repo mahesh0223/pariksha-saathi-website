@@ -39,6 +39,12 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
   // Same list the prerender uses for the "Recent current affairs" block - see hubItems in examHub.mjs.
   const itemsQuery = useQuery({ queryKey: ['current-affairs-all', lang], queryFn: () => getAllCurrentAffairs(lang) });
   // Only asked for once there is a public listing to send readers to (see liveMockLineHtml in examHub.mjs).
+  // Previous-year papers for this exam - the same summary the prerender renders (examHub.mjs), so the block does not
+  // disappear when this page replaces the prerendered HTML.
+  const pyqQuery = useQuery({
+    queryKey: ['exam-pyq', examId],
+    queryFn: () => apiRequest<NonNullable<Parameters<typeof examHubBody>[0]['pyq']>>(`/v1/exams/${examId}/pyq-summary`),
+  });
   const liveMockQuery = useQuery({
     queryKey: ['live-mock-next'],
     queryFn: () => apiRequest<{ mock: LiveMockSummary | null }>('/v1/live-mocks/next'),
@@ -110,7 +116,7 @@ export function ExamHubPage({ examId, lang }: { examId: string; lang: 'en' | 'hi
         <article
           className="wrap compare-article"
           dangerouslySetInnerHTML={{
-            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], items: hubItems(examId, itemsQuery.data ?? []), lang, links, liveMock: liveMockQuery.data?.mock ?? null, playStoreUrl: PLAY_STORE_URL }),
+            __html: examHubBody({ examName, facts, cutoffs, notices: noticesQuery.data ?? [], items: hubItems(examId, itemsQuery.data ?? []), lang, links, pyq: pyqQuery.data ?? null, liveMock: liveMockQuery.data?.mock ?? null, playStoreUrl: PLAY_STORE_URL }),
           }}
         />
       )}

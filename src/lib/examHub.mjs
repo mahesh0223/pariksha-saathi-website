@@ -84,7 +84,8 @@ const T = {
     dateTo: 'to',
     officialNotice: 'official notice',
     pyq: 'Previous-year questions',
-    pyqIntro: (n, papers) => `${n} question${n === 1 ? '' : 's'} transcribed from ${papers} official paper${papers === 1 ? '' : 's'} and checked against the official answer keys; cancelled questions left out. Practise them in the app with "Previous-year questions only".`,
+    pyqIntro: (n, papers) => `${n} question${n === 1 ? '' : 's'} from ${papers} official paper${papers === 1 ? '' : 's'}, each with the answer from the official key; questions that need a figure, and any the key cancelled, are left out. Each paper links to the exam body's own notice.`,
+    pyqLanguage: { en: ' The questions are in English.', hi: ' The questions are in Hindi.' },
     pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
     cutoffs: 'Cut-off marks by year and category',
     cutoffNote: (max) => `Marks are out of ${max}. Cut-offs change every cycle and are no promise for the next one; use them to see how competitive each category has been.`,
@@ -175,7 +176,8 @@ const T = {
     dateTo: 'से',
     officialNotice: 'आधिकारिक सूचना',
     pyq: 'पिछले वर्षों के प्रश्न',
-    pyqIntro: (n, papers) => `${papers} आधिकारिक पेपर से ${n} प्रश्न, आधिकारिक उत्तर कुंजी से जाँचे हुए; रद्द प्रश्न शामिल नहीं। ऐप में "सिर्फ़ पिछले वर्षों के प्रश्न" टॉगल से अभ्यास करें।`,
+    pyqIntro: (n, papers) => `${papers} आधिकारिक पेपर से ${n} प्रश्न, हर प्रश्न आधिकारिक उत्तर कुंजी के उत्तर के साथ; चित्र वाले प्रश्न और कुंजी में रद्द प्रश्न शामिल नहीं। हर पेपर परीक्षा निकाय की अपनी सूचना से जुड़ा है।`,
+    pyqLanguage: { en: ' प्रश्न अंग्रेज़ी में हैं।', hi: ' प्रश्न हिंदी में हैं।' },
     pyqCount: (n) => `${n} प्रश्न`,
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
     cutoffNote: (max) => `अंक ${max} में से हैं। कट-ऑफ हर चक्र में बदलता है और अगले चक्र की गारंटी नहीं है; इससे बस यह समझें कि हर श्रेणी में प्रतिस्पर्धा कितनी रही है।`,
@@ -523,7 +525,9 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   // was transcribed from (GET /v1/exams/:id/pyq-summary). Rendered only once at least one paper exists - which,
   // until the owner supplies the first paper and answer key, is no exam (server docs/PYQ.md).
   if (pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
-    html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length))}</p><ul class="hub-notices hub-pyq">${pyq.papers
+    // The summary counts one language (the server's default is English); say so when it is not the page's.
+    const pyqLanguage = pyq.languageCode && pyq.languageCode !== lang ? (t.pyqLanguage[pyq.languageCode] ?? '') : '';
+    html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length) + pyqLanguage)}</p><ul class="hub-notices hub-pyq">${pyq.papers
       .map(
         (p) =>
           `<li><a href="${esc(p.sourceUrl)}" rel="noopener">${esc(p.paper)}${p.shift ? ` · ${esc(p.shift)}` : ''}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}</span></li>`,
