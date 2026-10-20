@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useExamSelection } from '../state/ExamSelectionContext';
 import { useDocumentMeta } from '../hooks/useDocumentMeta';
-import { PAGE_META, SITE_ALT_NAMES } from '../lib/seoMeta.mjs';
+import { PAGE_META } from '../lib/seoMeta.mjs';
+import { homeEntityJsonLd } from '../lib/siteEntity.mjs';
 import { getCurrentAffairs } from '../api/currentAffairs';
 import { getExamUpdates } from '../api/examUpdates';
 import { Card } from '../components/ui/Primitives';
@@ -30,7 +31,6 @@ import {
 import '../pages/app/UpdatesPage.css';
 import './HomePage.css';
 import { SocialLinks } from '../components/layout/SocialLinks';
-import { SOCIAL_HREFS } from '../data/socialLinks.mjs';
 
 const FEATURES = [
   {
@@ -227,22 +227,8 @@ export function HomePage() {
       { lang: 'x-default', path: '/' },
     ],
     structuredData: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: 'Pariksha Saathi',
-        alternateName: SITE_ALT_NAMES,
-        url: 'https://parikshasaathi.com',
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Pariksha Saathi',
-        alternateName: SITE_ALT_NAMES,
-        url: 'https://parikshasaathi.com',
-        logo: 'https://parikshasaathi.com/assets/icon-512.png',
-        sameAs: SOCIAL_HREFS,
-      },
+      // WebSite + Organization (+ the app once it is public): the same objects scripts/prerender.mjs writes.
+      ...homeEntityJsonLd(),
       {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',

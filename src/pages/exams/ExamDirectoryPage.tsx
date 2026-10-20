@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useDocumentMeta } from '../../hooks/useDocumentMeta';
-import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, EXAMS_LINK } from '../../lib/examDirectory.mjs';
+import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, EXAMS_LINK } from '../../lib/examDirectory.mjs';
 import { HUB_EXAM_IDS } from '../../data/examHubExams.mjs';
 import { EXAM_SYLLABI } from '../../data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILE_SLUGS } from '../../data/examJobProfileSlugs.mjs';
@@ -16,6 +16,7 @@ export function ExamDirectoryPage({ lang }: { lang: 'en' | 'hi' }) {
     path: examDirectoryPath(lang),
     type: 'website',
     lang,
+    structuredData: examDirectoryStructuredData({ lang, hubIds: HUB_EXAM_IDS as string[], siteUrl: 'https://parikshasaathi.com' }),
     alternateLanguages: [
       { lang: 'en', path: examDirectoryPath('en') },
       { lang: 'hi', path: examDirectoryPath('hi') },

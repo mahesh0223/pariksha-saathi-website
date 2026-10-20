@@ -28,7 +28,7 @@ import { trustLinesHtml, trustStatsHtml } from '../src/data/trustLines.mjs';
 import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_JOB_PROFILES } from '../src/data/examJobProfiles.mjs';
 import { shortenTitle } from '../src/lib/seoTitle.mjs';
-import { PAGE_META, SITE_ALT_NAMES, lessonSeoTitle, metaDescription, withSiteName } from '../src/lib/seoMeta.mjs';
+import { PAGE_META, lessonSeoTitle, metaDescription, withSiteName } from '../src/lib/seoMeta.mjs';
 import { linkExamNames } from '../src/lib/examLinks.mjs';
 import { lessonQuestionListLink } from '../src/lib/questionTopicLink.mjs';
 import { QUESTION_PAGES_GENERATED, QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
@@ -46,7 +46,7 @@ import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/exam
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
-import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examsLinkHtml } from '../src/lib/examDirectory.mjs';
+import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { typingTestMeta, typingTestPath, typingTestStaticHtml } from '../src/lib/typingPage.mjs';
@@ -54,7 +54,9 @@ import { TYPING_CHECKED } from '../src/data/typingTest.mjs';
 // The exams whose pages link to the typing / data-entry practice (their notices prescribe a skill test).
 const TYPING_TEST_EXAMS = ['ssc_cgl', 'ssc_chsl'];
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
-import { SOCIAL_HREFS, socialLinksHtml } from '../src/data/socialLinks.mjs';
+import { socialLinksHtml } from '../src/data/socialLinks.mjs';
+import { homeEntityJsonLd } from '../src/lib/siteEntity.mjs';
+import { llmsTxt } from '../src/lib/llmsTxt.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
@@ -970,16 +972,7 @@ async function main() {
     ],
     // Mirrors src/pages/HomePage.tsx's useDocumentMeta call exactly.
     structuredData: [
-      { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_ALT_NAMES, url: SITE_URL },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: SITE_NAME,
-        alternateName: SITE_ALT_NAMES,
-        url: SITE_URL,
-        logo: `${SITE_URL}/assets/icon-512.png`,
-        sameAs: SOCIAL_HREFS,
-      },
+      ...homeEntityJsonLd(), // WebSite + Organization (+ the app once it is public), shared with HomePage.tsx
       {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
@@ -1202,6 +1195,7 @@ async function main() {
   // Collected across the hub loop for the exam calendar (src/lib/examCalendar.mjs) below.
   const calendarFacts = {};
   const calendarNotices = { en: {}, hi: {} };
+  const hubSummaries = {}; // per hub, for /llms.txt: whether it shows cut-offs, and when its facts were last verified
   for (const examId of HUB_EXAM_IDS) {
     const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
     if (!Array.isArray(facts) || facts.length === 0) {
@@ -1221,6 +1215,7 @@ async function main() {
     calendarNotices.hi[examId] = hiNotices.length > 0 ? hiNotices : enNotices;
     const hasSyllabus = EXAM_SYLLABI.some((e) => e.slug === slug);
     const hasJobProfile = EXAM_JOB_PROFILES.some((e) => e.slug === slug);
+    hubSummaries[examId] = { hasCutoffs: cutoffs.length > 0, lastVerified: examHubMeta({ examName, facts, cutoffs, lang: 'en' }).lastVerified };
     for (const lang of ['en', 'hi']) {
       const prefix = lang === 'hi' ? '/hi' : '';
       const links = {
@@ -1271,6 +1266,7 @@ async function main() {
       ),
       type: 'website',
       lang,
+      structuredData: examDirectoryStructuredData({ lang, hubIds: HUB_EXAM_IDS, siteUrl: SITE_URL }),
       alternateLanguages: [
         { lang: 'en', path: examDirectoryPath('en') },
         { lang: 'hi', path: examDirectoryPath('hi') },
@@ -1647,7 +1643,8 @@ async function main() {
 
   // --- Solved previous-year papers (/exams/<exam>/question-papers/<paper>/): src/lib/pyqPage.mjs, data from
   // scripts/gen-pyq-pages.mjs. Plain HTML, English (the papers' language), no app script.
-  for (const paper of JSON.parse(readFileSync(new URL('../src/data/pyqPapers.json', import.meta.url), 'utf8'))) {
+  const pyqPapers = JSON.parse(readFileSync(new URL('../src/data/pyqPapers.json', import.meta.url), 'utf8'));
+  for (const paper of pyqPapers) {
     const path = pyqPaperPath(paper);
     const meta = pyqPaperMeta(paper);
     writePage(path.slice(1, -1), page({
@@ -1663,6 +1660,20 @@ async function main() {
     }));
     sitemapUrls.push({ loc: path, priority: '0.7' });
   }
+
+  // --- /llms.txt: the Markdown map of the site for AI answer engines (src/lib/llmsTxt.mjs), from this build's data.
+  writeFileSync(
+    join(DIST, 'llms.txt'),
+    llmsTxt({
+      hubs: hubSummaries,
+      papers: pyqPapers.map((paper) => ({ ...paper, questions: paper.questions.length })),
+      affairsCount: affairs.length,
+      noticesCount: notices.length,
+      lessonCount: LESSON_CATALOG.length,
+      questionPageCount,
+    }),
+    'utf8',
+  );
 
   // --- sitemap.xml ---
   await assertNoPublishedUrlWentMissing(sitemapUrls);

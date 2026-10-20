@@ -100,7 +100,21 @@ export function pyqPaperStructuredData(paper, siteUrl) {
   const meta = pyqPaperMeta(paper);
   const path = pyqPaperPath(paper);
   return [
-    { '@context': 'https://schema.org', '@type': 'Article', headline: meta.h1, description: meta.description, inLanguage: 'en', about: paper.displayName, publisher: { '@type': 'Organization', name: 'Pariksha Saathi' } },
+    {
+      '@context': 'https://schema.org',
+      // A solved paper is a study resource as well as an article; isBasedOn names the exam body's own answer-key
+      // notice, so an answer engine quoting a question here can see where its answer comes from.
+      '@type': ['Article', 'LearningResource'],
+      headline: meta.h1,
+      description: meta.description,
+      url: `${siteUrl}${path}`,
+      inLanguage: 'en',
+      about: { '@type': 'Thing', name: paper.displayName },
+      learningResourceType: 'Solved previous-year question paper',
+      educationalUse: 'Exam preparation',
+      isBasedOn: { '@type': 'CreativeWork', name: `${paper.displayName} official answer key`, url: paper.sourceUrl },
+      publisher: { '@type': 'Organization', name: 'Pariksha Saathi', url: siteUrl },
+    },
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',

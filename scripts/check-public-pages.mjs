@@ -450,3 +450,31 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   assert(!home.includes(expected[0]), `home page preloads PublicPage's chunk ${expected[0]}`);
   console.log(`Verified that all ${Object.keys(PUBLIC_PAGES).length} static pages preload PublicPage's ${expected.length} chunk(s) and the home page does not.`);
 }
+
+// GEO (2026-10-20): what AI answer engines read about the site. /llms.txt must exist, list every exam hub and
+// every solved paper, link only to pages this build produced, and make no human-review claim (the same rule as
+// the HTML above). The home page's Organization must carry the shared description (src/lib/siteEntity.mjs), and the
+// exam directory must list every hub as an ItemList.
+{
+  assert(existsSync('dist/llms.txt'), '/llms.txt was not built');
+  const llms = readFileSync('dist/llms.txt', 'utf8');
+  assert(llms.startsWith('# Pariksha Saathi'), '/llms.txt must open with the site name as its H1');
+  assert(/^> /m.test(llms), '/llms.txt has no blockquote summary');
+  assert(!/written and reviewed by|reviewed by Mahesh|expert-reviewed|human-reviewed by/i.test(llms), '/llms.txt claims a human review');
+  for (const id of HUB_EXAM_IDS) assert(llms.includes(`https://parikshasaathi.com${examHubPath(id, 'en')})`), `/llms.txt does not list the ${id} hub`);
+  const papers = JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'));
+  for (const paper of papers) assert(llms.includes(`https://parikshasaathi.com${pyqPaperPath(paper)})`), `/llms.txt does not list ${paper.slug}`);
+  const internal = [...llms.matchAll(/\]\(https:\/\/parikshasaathi\.com(\/[^)]*)\)/g)].map((m) => m[1]);
+  for (const path of internal) {
+    const file = path.endsWith('/') ? `dist${path}index.html` : `dist${path}`;
+    assert(existsSync(file), `/llms.txt links to ${path}, which this build did not produce`);
+  }
+  const ldOf = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => [].concat(JSON.parse(m[1])));
+  const org = ldOf(home).find((x) => x['@type'] === 'Organization');
+  assert(org?.description && org.knowsAbout?.length === HUB_EXAM_IDS.length, 'home page Organization lacks the shared description or the exam list');
+  for (const lang of ['en', 'hi']) {
+    const list = ldOf(readFileSync(`dist${examDirectoryPath(lang)}index.html`, 'utf8')).find((x) => x['@type'] === 'CollectionPage')?.mainEntity;
+    assert.equal(list?.itemListElement?.length, HUB_EXAM_IDS.length, `${examDirectoryPath(lang)}: the ItemList does not list every hub`);
+  }
+  console.log(`Verified GEO: /llms.txt lists ${HUB_EXAM_IDS.length} exam hubs and ${papers.length} solved papers, all ${internal.length} links built; home Organization and exam-directory ItemList in place.`);
+}

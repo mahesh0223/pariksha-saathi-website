@@ -4,3 +4,4 @@ export function examsLinkHtml(lang?: 'en' | 'hi'): string;
 export function examDirectoryPath(lang: 'en' | 'hi'): string;
 export function examDirectoryBody(args: { lang?: 'en' | 'hi'; hubIds?: string[]; syllabusSlugs?: string[]; jobProfileSlugs?: string[] }): string;
 export function examDirectoryMeta(lang?: 'en' | 'hi'): { title: string; description: string };
+export function examDirectoryStructuredData(args: { lang?: 'en' | 'hi'; hubIds?: string[]; siteUrl: string }): Record<string, unknown>[];

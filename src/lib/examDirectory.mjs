@@ -114,3 +114,26 @@ export function examDirectoryMeta(lang = 'en') {
         description: `${DIRECTORY_EXAM_IDS.length} exams across SSC, banking, railways, state police, CTET and state PSC: official pattern, dates, eligibility, syllabus and job profile, each figure linked to its source.`,
       };
 }
+
+// schema.org for the directory: every exam with a hub page, as one ItemList. An answer engine asked "which exams
+// does Pariksha Saathi cover?" then reads the list instead of inferring it from the page layout. Shared by
+// scripts/prerender.mjs and ExamDirectoryPage.tsx, like the body.
+export function examDirectoryStructuredData({ lang = 'en', hubIds = [], siteUrl }) {
+  const meta = examDirectoryMeta(lang);
+  const ids = DIRECTORY_EXAM_IDS.filter((id) => hubIds.includes(id));
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: meta.title,
+      description: meta.description,
+      url: `${siteUrl}${examDirectoryPath(lang)}`,
+      inLanguage: lang,
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: ids.length,
+        itemListElement: ids.map((id, index) => ({ '@type': 'ListItem', position: index + 1, name: EXAM_NAMES[id], url: `${siteUrl}${examHubPath(id, lang)}` })),
+      },
+    },
+  ];
+}
