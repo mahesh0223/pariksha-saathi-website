@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Daily reels (npm run reel:daily) - uploaded by hand, not part of the site
+/reels

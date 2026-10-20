@@ -12,7 +12,8 @@
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "preview": "vite preview",
     "pdf:daily": "python3 scripts/daily-pdf/make_pdf.py",
-    "pdf:capsule": "python3 scripts/capsule-pdf/make_capsule.py"
+    "pdf:capsule": "python3 scripts/capsule-pdf/make_capsule.py",
+    "reel:daily": "sh scripts/daily-reel/make_reel.sh"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.103.1",
