@@ -4,6 +4,7 @@
 Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_psi]
        npm run reel:daily -- [YYYY-MM-DD] --voice-samples     one video with each voice reading the same headlines
        npm run reel:daily -- [YYYY-MM-DD] --text-only         rewrite only the upload text (titles, captions, tags)
+       npm run reel:daily -- --promo                          the timeless Telegram ad reel (for boosting)
 (default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
@@ -380,6 +381,41 @@ Caption:
     open(path, "w", encoding="utf-8").write(text)
 
 
+def promo():
+    """A timeless 15-20 s ad reel for the Telegram channel - for boosting, where a dated news reel would go stale. Every
+    claim is something the channel does today: the 07:00 PDF from official sources with practice questions, the
+    18:00 quiz poll and new exam notices. Shows page 1 of the newest daily PDF as the proof."""
+    pdf = os.path.join(ROOT, "public", "pdf", "latest.pdf")
+    os.makedirs(OUT_DIR, exist_ok=True)
+    with tempfile.TemporaryDirectory() as work:
+        subprocess.run(["pdftoppm", "-png", "-r", "110", "-f", "1", "-l", "1", "-singlefile", pdf, os.path.join(work, "pdfpage")], check=True)
+        shot = "file://" + os.path.join(work, "pdfpage.png")
+        top = "मुफ़्त · हर सुबह 7 बजे · Telegram"
+        voice = Voice()
+        pdf_img = f'<img src="{shot}" style="width:500px;align-self:center;border-radius:18px;box-shadow:0 18px 50px rgba(20,41,58,.35);transform:rotate(-2deg)">'
+        segments = [
+            segment(page(top, '<div class="big" style="font-size:96px">SSC · Railway · Bank<br>की तैयारी?</div>', "center", cta=False),
+                    voice.say("एसएससी, रेलवे या बैंक की तैयारी कर रहे हैं?"), after=0.3),
+            segment(page(top, f'<div class="badge">हर सुबह 7 बजे</div><div class="headline" style="font-size:76px">करेंट अफेयर्स का PDF,<br>बिल्कुल मुफ़्त</div>{pdf_img}', cta=False),
+                    voice.say("रोज़ सुबह सात बजे करेंट अफेयर्स का पीडीएफ़, बिल्कुल मुफ़्त।"), after=0.4),
+            segment(page(top, '<div class="headline" style="font-size:62px;line-height:1.6">✅ हर खबर आधिकारिक PIB स्रोत से<br>✅ अभ्यास प्रश्न, उत्तर सहित<br>✅ शाम 6 बजे क्विज़<br>✅ नई परीक्षा सूचनाएँ</div>', cta=False),
+                    voice.say("हर खबर आधिकारिक स्रोत से, अभ्यास प्रश्नों के साथ। शाम को क्विज़, और नई परीक्षा सूचनाएँ भी।"), after=0.4),
+            segment(page(top, f'<div class="lead" style="font-size:76px;font-weight:700">Telegram पर जुड़ें</div><div class="handle" style="font-size:92px">@{TELEGRAM}</div>'
+                              '<div class="lead">👇 नीचे बटन दबाएँ</div>', "center", cta=False),
+                    voice.say("अभी टेलीग्राम पर जुड़ें!"), after=1.5),
+        ]
+        out = os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo.mp4")
+        total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo_cover.png"))
+    open(os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo_caption.txt"), "w", encoding="utf-8").write(
+        f"""SSC, Railway, Bank की तैयारी? 📚
+रोज़ सुबह 7 बजे करेंट अफेयर्स का PDF — बिल्कुल मुफ़्त, हर खबर आधिकारिक PIB स्रोत से, अभ्यास प्रश्नों के साथ।
+शाम 6 बजे क्विज़ और नई परीक्षा सूचनाएँ भी।
+👉 Telegram पर जुड़ें: @{TELEGRAM}
+
+#currentaffairs #sscexam #railwayexam #bankexam #currentaffairsinhindi #करेंटअफेयर्स
+""")
+    print(f"{out}: {total:.1f} s")
+
 def voice_samples(date=None):
     """One short video with the same two headlines read by each Kokoro Hindi voice, to choose REEL_VOICE by ear."""
     date, items = edition(date)
@@ -400,6 +436,7 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
     if "--voice-samples" in args: voice_samples(date)
+    elif "--promo" in args: promo()
     elif "--text-only" in args:
         date, items = edition(date)
         sources = sorted({i["sourceName"] for i in items})
