@@ -5,6 +5,7 @@ Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_
        npm run reel:daily -- [YYYY-MM-DD] --voice-samples     one video with each voice reading the same headlines
        npm run reel:daily -- [YYYY-MM-DD] --text-only         rewrite only the upload text (titles, captions, tags)
        npm run reel:daily -- --promo                          the timeless Telegram ad reel (for boosting)
+       npm run reel:daily -- --promo30                        the 30-second hook-and-pitch Telegram ad
 (default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
@@ -206,6 +207,10 @@ def ding():
     t = np.arange(int(0.9 * SR)) / SR
     return (0.4 * (np.sin(2 * np.pi * 1318.5 * t) + 0.6 * np.sin(2 * np.pi * 1975.5 * t)) * np.exp(-t * 5) * np.minimum(1, t / 0.003)).astype(np.float32)
 
+def thud():
+    t = np.arange(int(0.5 * SR)) / SR
+    return (0.9 * np.sin(2 * np.pi * np.cumsum(70 * np.exp(-t * 6)) / SR) * np.exp(-t * 7)).astype(np.float32)
+
 def tick():
     t = np.arange(int(0.03 * SR)) / SR
     return (0.4 * np.sin(2 * np.pi * 1800 * t) * np.exp(-t * 180)).astype(np.float32)
@@ -215,13 +220,13 @@ LEAD_IN = 0.25  # seconds of room before each line, where the slide's whoosh pla
 def segment(html_doc, voice_audio, after=0.6, sfx="whoosh", ticks=0):
     """One slide: its HTML, its audio (lead-in, voice, pause) and its effects (offsets within the slide)."""
     audio = np.concatenate([silence(LEAD_IN), voice_audio, silence(after)])
-    effects = [(0.0, whoosh() if sfx == "whoosh" else ding())] if sfx else []
+    effects = [(0.0, {"whoosh": whoosh, "ding": ding, "thud": thud}[sfx]())] if sfx else []
     effects += [(LEAD_IN + len(voice_audio) / SR + k, tick()) for k in range(ticks)]
     return {"html": html_doc, "audio": audio, "effects": effects}
 
 VOICE_FX = "highpass=f=90,equalizer=f=250:t=q:w=1:g=-2,equalizer=f=3500:t=q:w=1.2:g=4,acompressor=threshold=-20dB:ratio=3:attack=5:release=120:makeup=2"
 
-def assemble(segments, out_mp4, cover=None):
+def assemble(segments, out_mp4, cover=None, bpm=104):
     with tempfile.TemporaryDirectory() as work:
         pngs = render([seg["html"] for seg in segments], work)
         durations = [len(seg["audio"]) / SR for seg in segments]
@@ -234,7 +239,7 @@ def assemble(segments, out_mp4, cover=None):
                 i = int((at + offset) * SR); fx[i:i + len(sound)] += sound[: len(fx) - i]
             at += seconds
         sf.write(os.path.join(work, "voice.wav"), voice, SR)
-        sf.write(os.path.join(work, "music.wav"), music_bed(total), SR)
+        sf.write(os.path.join(work, "music.wav"), music_bed(total, bpm), SR)
         sf.write(os.path.join(work, "fx.wav"), fx[: len(voice)], SR)
         with open(os.path.join(work, "slides.txt"), "w") as f:
             for png, seconds in zip(pngs, durations):
@@ -416,6 +421,84 @@ def promo():
 """)
     print(f"{out}: {total:.1f} s")
 
+def promo30():
+    """The 30-second Telegram ad: a hook (missing selection by 1-2 marks), why it happens (no revision, no practice
+    in the exam's pattern), then what the channel gives - every claim true today: the 07:00 PDF with practice
+    questions, the 18:00 quiz, new exam notices with dates and official links, every item from an official source,
+    free. Shows real content: page 1 of the newest daily PDF, the newest Hindi quiz question with its answer, and the
+    newest Hindi notice as the channel posts it. No previous-year papers, memory-based questions or "instant" alerts
+    are promised - the channel has none of those."""
+    pdf = os.path.join(ROOT, "public", "pdf", "latest.pdf")
+    hi_items = fetch_all("hi")
+    newest = max(i["editionDate"][:10] for i in hi_items)
+    question = item_question([i for i in hi_items if i["editionDate"].startswith(newest)])
+    notices = get("/exam-updates?lang=hi")
+    notices = notices if isinstance(notices, list) else notices.get("items") or []
+    # The newest notice, preferring an admit card or notification (of wider interest than a date change) on a tie.
+    rank = {"ADMIT_CARD": 0, "NOTIFICATION": 1, "RESULT": 2, "ANSWER_KEY": 3, "DEADLINE": 4}
+    notice = min(notices, key=lambda n: (-int((n.get("lastVerifiedAt") or "0000-00-00")[:10].replace("-", "")), rank.get(n["type"], 9))) if notices else None
+    os.makedirs(OUT_DIR, exist_ok=True)
+    with tempfile.TemporaryDirectory() as work:
+        subprocess.run(["pdftoppm", "-png", "-r", "110", "-f", "1", "-l", "1", "-singlefile", pdf, os.path.join(work, "pdfpage")], check=True)
+        shot = "file://" + os.path.join(work, "pdfpage.png")
+        top = "मुफ़्त Telegram चैनल · @" + TELEGRAM
+        voice = Voice(speed=1.3)  # an ad reads brisker than the daily news reel
+        line = lambda text, size=76, color="#2a2620": f'<div class="headline" style="font-size:{size}px;color:{color}">{text}</div>'
+        card = "background:#fff;border:3px solid #e4dcd0;border-radius:28px;padding:34px 38px;box-shadow:0 18px 50px rgba(20,41,58,.18)"
+        stamp = ('<div style="position:relative;' + card + ';height:420px;display:flex;flex-direction:column;gap:22px;justify-content:center">'
+                 '<div style="height:26px;width:60%;background:#e4dcd0;border-radius:8px"></div><div style="height:26px;width:85%;background:#efe9df;border-radius:8px"></div>'
+                 '<div style="height:26px;width:45%;background:#efe9df;border-radius:8px"></div>'
+                 '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><div style="transform:rotate(-12deg);border:10px solid #c0392b;color:#c0392b;font-size:96px;font-weight:800;padding:6px 34px;border-radius:18px;letter-spacing:.04em;background:rgba(255,255,255,.85)">NOT QUALIFIED</div></div></div>')
+        pdf_img = f'<img src="{shot}" style="width:470px;align-self:center;border-radius:18px;box-shadow:0 18px 50px rgba(20,41,58,.35);transform:rotate(-2deg)">'
+        quiz_card = ""
+        if question:
+            options, right = print_order(question)
+            quiz_card = ('<div style="' + card + ';display:flex;flex-direction:column;gap:16px"><div style="font-size:30px;color:#6b6558;font-weight:600">Quiz · Pariksha Saathi</div>'
+                         f'<div style="font-size:40px;font-weight:700;line-height:1.4">{html.escape(question["text"])}</div>'
+                         + "".join(f'<div class="opt{" right" if j == right else ""}" style="font-size:38px;padding:14px 24px"><b style="width:56px;height:56px;font-size:30px">{"✓" if j == right else LETTERS[j]}</b>{html.escape(o)}</div>' for j, o in enumerate(options))
+                         + '</div>')
+        notice_card = ""
+        if notice:
+            type_hi = {"NOTIFICATION": "अधिसूचना", "ADMIT_CARD": "प्रवेश पत्र", "ANSWER_KEY": "उत्तर कुंजी", "RESULT": "परिणाम", "DEADLINE": "तिथि अपडेट"}.get(notice["type"], notice["type"])
+            notice_card = ('<div style="' + card + ';display:flex;flex-direction:column;gap:18px"><div style="font-size:36px;font-weight:700;color:#a6431f">📢 नई परीक्षा सूचना · ' + html.escape(type_hi) + '</div>'
+                           f'<div style="font-size:44px;font-weight:700;line-height:1.4">{html.escape(notice["title"])}</div>'
+                           '<div style="font-size:34px;color:#1e3a52;font-weight:600">🔗 आधिकारिक सूचना · 📅 महत्वपूर्ण तिथियाँ</div></div>')
+        icon = "file://" + os.path.join(HERE, "..", "daily-pdf", "icon.png")
+        segments = [
+            segment(page(top, f'{stamp}{line("1-2 मार्क से selection छूट गया? 😓", 82)}', cta=False),
+                    voice.say("एक-दो मार्क से सिलेक्शन छूट गया?"), after=0.2, sfx="thud"),
+            segment(page(top, line("❌ पढ़ा बहुत,<br>पर revise नहीं किया", 92, "#c0392b"), "center", cta=False),
+                    voice.say("दिन भर पढ़ाई… पर करंट अफेयर्स रिवाइज़ नहीं होते।"), after=0.2),
+            segment(page(top, line("❌ Exam pattern में<br>practice नहीं", 92, "#c0392b"), "center", cta=False),
+                    voice.say("और प्रैक्टिस एग्ज़ाम पैटर्न में नहीं होती।"), after=0.2),
+            segment(page(top, f'<img src="{icon}" style="width:260px;height:260px;border-radius:56px;align-self:center">'
+                              + line("Pariksha Saathi", 100, "#1e3a52") + line("आपका FREE Telegram साथी", 70, "#a6431f"), "center", cta=False),
+                    voice.say("इसीलिए है परीक्षा साथी, आपका फ़्री टेलीग्राम साथी!"), after=0.2),
+            segment(page(top, line("☀️ रोज़ सुबह 7 बजे:<br>Current Affairs PDF<br>+ practice questions", 70) + pdf_img, cta=False),
+                    voice.say("हर सुबह सात बजे करंट अफेयर्स का पीडीएफ़, प्रैक्टिस प्रश्नों के साथ।"), after=0.2),
+            segment(page(top, line("🧠 रोज़ शाम 6 बजे: Quiz", 76) + quiz_card, cta=False),
+                    voice.say("शाम छह बजे क्विज़।"), after=0.3),
+            segment(page(top, line("📢 नई exam notices:<br>dates + official link", 76) + notice_card, cta=False),
+                    voice.say("और नई एग्ज़ाम नोटिस, तारीख़ों और ऑफ़िशियल लिंक के साथ।"), after=0.2),
+            segment(page(top, line("✅ हर खबर<br>official source से", 80) + line("100% FREE", 130, "#3f7a4e"), "center", cta=False),
+                    voice.say("हर खबर ऑफ़िशियल सोर्स से, बिल्कुल फ़्री!"), after=0.2),
+            segment(page(top, line("अभी join करें 👇", 92) + f'<div class="handle" style="font-size:96px">@{TELEGRAM}</div>'
+                              + line("Telegram पर search करें · Link bio में", 54, "#6b6558"), "center", cta=False),
+                    voice.say("अभी जॉइन करो! टेलीग्राम पर सर्च करो परीक्षा साथी ऐप, लिंक बायो में।"), after=1.2),
+        ]
+        out = os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo30.mp4")
+        total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo30_cover.png"), bpm=118)
+    open(os.path.join(OUT_DIR, "ParikshaSaathi_Telegram_promo30_caption.txt"), "w", encoding="utf-8").write(
+        f"""1-2 मार्क से selection छूट जाता है? 😓 रोज़ थोड़ा, सही तरीके से revise करो 👇
+☀️ हर सुबह 7 बजे Current Affairs PDF + practice questions
+🧠 शाम 6 बजे Quiz · 📢 नई exam notices, official link के साथ
+✅ हर खबर official source से · बिल्कुल FREE
+Telegram पर join करें: @{TELEGRAM} (link bio में)
+आवाज़ AI (Kokoro TTS) से बनी है।
+#sscexam #railwayexam #bankexam #currentaffairs #करेंटअफेयर्स
+""")
+    print(f"{out}: {total:.1f} s")
+
 def voice_samples(date=None):
     """One short video with the same two headlines read by each Kokoro Hindi voice, to choose REEL_VOICE by ear."""
     date, items = edition(date)
@@ -436,6 +519,7 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
     if "--voice-samples" in args: voice_samples(date)
+    elif "--promo30" in args: promo30()
     elif "--promo" in args: promo()
     elif "--text-only" in args:
         date, items = edition(date)
