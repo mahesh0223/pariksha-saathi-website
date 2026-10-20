@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Make the daily current-affairs reel (YouTube Shorts / Instagram Reels): 1080x1920, Hindi voice, about a minute.
 
-Usage: npm run reel:daily -- [YYYY-MM-DD]   (default: the newest editionDate with Hindi items in the API)
+Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_psi]
+       npm run reel:daily -- [YYYY-MM-DD] --voice-samples     one video with each voice reading the same headlines
+(default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
 What is on screen and in the voice is the published edition and nothing more: the day's Hindi item titles as published
 (the first five, in the daily PDF's order), their source, and one published question linked to one of them, with its
 answer. To keep the reel near a minute the voice reads each title's lead - its own words up to the first colon - while
 the slide shows the whole title with its figures. Slides are HTML drawn by Google Chrome (Devanagari-correct, as for the daily PDF); the voice is Kokoro
-(hexgrad/Kokoro-82M, Hindi narrator hf_alpha); ffmpeg joins them.
+(hexgrad/Kokoro-82M, one of its four Hindi voices) with news-style EQ and compression over a synthesised music bed and
+sound effects; ffmpeg joins them.
 
 Needs: Google Chrome; a Python with kokoro, numpy and soundfile (REEL_PYTHON in make_reel.sh, default the toddler-shorts
 venv); an ffmpeg with libx264 (FFMPEG, default the imageio_ffmpeg binary).
@@ -26,7 +29,7 @@ FFMPEG = os.environ.get("FFMPEG", os.path.expanduser("~/Library/Python/3.9/lib/p
 OUT_DIR = os.path.join(ROOT, "reels")
 TELEGRAM = "parikshasaathiapp"
 MAX_ITEMS = 5
-VOICE, SPEED, SR = "hf_alpha", 1.15, 44100
+VOICE, SPEED, SR = os.environ.get("REEL_VOICE", "hf_alpha"), 1.2, 44100
 W, H, FPS = 1080, 1920, 30
 MONTHS = ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितंबर", "अक्टूबर", "नवंबर", "दिसंबर"]
 ORDINALS = ["पहली", "दूसरी", "तीसरी", "चौथी", "पाँचवीं"]
@@ -87,13 +90,15 @@ def speech(text):
     text = re.sub(r"(?<![A-Za-z])[A-Z][a-z]?[A-Z]{1,4}(?![A-Za-z])", spell, text)  # CCPA, MoES, AcSIR, PMMSY
     return text.replace("…", "।")
 
+VOICES = {"hf_alpha": "महिला आवाज़ 1", "hf_beta": "महिला आवाज़ 2", "hm_omega": "पुरुष आवाज़ 1", "hm_psi": "पुरुष आवाज़ 2"}
+
 class Voice:
-    def __init__(self):
+    def __init__(self, voice=VOICE, speed=SPEED):
         from kokoro import KPipeline
-        self.pipe = KPipeline(lang_code="h", repo_id="hexgrad/Kokoro-82M")
+        self.pipe, self.voice, self.speed = KPipeline(lang_code="h", repo_id="hexgrad/Kokoro-82M"), voice, speed
 
     def say(self, text):
-        audio = np.concatenate([np.asarray(seg, dtype=np.float32) for _, _, seg in self.pipe(speech(text), voice=VOICE, speed=SPEED)])
+        audio = np.concatenate([np.asarray(seg, dtype=np.float32) for _, _, seg in self.pipe(speech(text), voice=self.voice, speed=self.speed)])
         idx = np.where(np.abs(audio) > 0.01)[0]
         if len(idx): audio = audio[max(0, idx[0] - 600): idx[-1] + 1200]
         audio = np.interp(np.linspace(0, len(audio) - 1, int(len(audio) * SR / 24000)), np.arange(len(audio)), audio).astype(np.float32)
@@ -156,62 +161,144 @@ def render(slides, work):
     return pngs
 
 
-# --- Build ----------------------------------------------------------------------------------------------------------
-def main():
-    hi_all = fetch_all("hi")
-    date = sys.argv[1] if len(sys.argv) > 1 else max(i["editionDate"][:10] for i in hi_all)
-    items = [i for i in hi_all if i["editionDate"].startswith(date)][:MAX_ITEMS]
-    if not items: sys.exit(f"no Hindi current-affairs items dated {date}")
-    question = item_question(items)
-    date_hi, n = fmt_date(date), len(items)
-    sources = sorted({i["sourceName"] for i in items})
-    source_line = "सिर्फ़ आधिकारिक PIB स्रोतों से" if sources == ["PIB"] else f"आधिकारिक स्रोतों ({', '.join(sources)}) से"
-    top_sub = f"दैनिक करंट अफेयर्स · {date_hi}"
+# --- Sound: music bed, effects, mix ---------------------------------------------------------------------------------
+# Everything is synthesised here (nothing downloaded): a soft beat that the mix ducks under the voice, a whoosh on each
+# new slide, clock ticks while the quiz waits, a ding on the answer. The voice gets news-style EQ and compression, and
+# the whole mix is normalised to -14 LUFS, the loudness YouTube and Instagram play at.
+def _env(n, attack, decay):
+    t = np.arange(n) / SR
+    return np.minimum(1, t / max(attack, 1e-4)) * np.exp(-t / decay)
 
-    voice = Voice()
-    segments = []  # (slide html, audio)
-    segments.append((page(top_sub, f'<div class="big">आज के {n} करेंट अफेयर्स</div><div class="date">{date_hi}</div>'
-                                   f'<div class="lead">SSC · Bank · Railway के लिए<br>{source_line}</div>', "center"),
-                     np.concatenate([voice.say(f"{date_hi} के {n} ज़रूरी करेंट अफेयर्स।"), silence(0.4)])))
-    for k, item in enumerate(items):
-        tags = " · ".join(item.get("examTags") or [])
-        body = (f'<div class="badge">खबर {k + 1} / {n}</div>'
-                f'<div class="headline" style="font-size:{headline_size(item["title"])}px">{html.escape(item["title"])}</div>'
-                f'<div class="meta">{html.escape(tags)}<br>स्रोत: {html.escape(item["sourceName"])} — आधिकारिक प्रेस विज्ञप्ति</div>')
-        segments.append((page(top_sub, body), np.concatenate([voice.say(f"{ORDINALS[k]} खबर। {spoken_title(item['title'])}"), silence(0.9)])))
-    if question:
-        options, right = print_order(question)
-        opts = lambda reveal: "".join(
-            f'<div class="opt{(" right" if j == right else " dim") if reveal else ""}"><b>{LETTERS[j]}</b>{html.escape(o)}</div>' for j, o in enumerate(options))
-        ask = f'<div class="badge">🧠 आज का प्रश्न</div><div class="q">{html.escape(question["text"])}</div><div class="opts">{opts(False)}</div><div class="meta">सोचिए… जवाब 3 सेकंड में</div>'
-        reveal = f'<div class="badge">🧠 आज का प्रश्न</div><div class="q">{html.escape(question["text"])}</div><div class="opts">{opts(True)}</div><div class="meta" style="color:#3f7a4e;font-weight:700">सही जवाब: ({LETTERS[right]}) {html.escape(options[right])}</div>'
-        segments.append((page(top_sub, ask), np.concatenate([voice.say(f"अब आज का प्रश्न। {question['text']}"), silence(3.0)])))
-        segments.append((page(top_sub, reveal), np.concatenate([voice.say(f"सही जवाब है {LETTERS_HI[right]}, {options[right]}।"), silence(0.8)])))
-    segments.append((page(top_sub, '<div class="lead" style="font-size:60px;font-weight:700">रोज़ सुबह 7 बजे<br>पूरा PDF और क्विज़</div>'
-                                   f'<div class="lead">Telegram पर खोजें</div><div class="handle">@{TELEGRAM}</div>'
-                                   '<div class="lead">🌐 parikshasaathi.com<br>हर खबर उसके आधिकारिक स्रोत के लिंक के साथ</div>'
-                                   '<div class="date" style="font-size:52px">फ़ॉलो करें 🔔</div>', "center", cta=False),
-                     np.concatenate([voice.say("रोज़ का पूरा पीडीएफ़ टेलीग्राम पर। फ़ॉलो करें!"), silence(1.2)])))
+def music_bed(seconds, bpm=104):
+    """Kick on every beat, an off-beat hat, a bass note and a soft chord pluck per beat (Am - F - C - G)."""
+    n = int(seconds * SR)
+    out = np.zeros(n + SR, np.float32)
+    beat = 60 / bpm
+    chords = [(220.0, 261.63, 329.63), (174.61, 220.0, 261.63), (196.0, 261.63, 329.63), (196.0, 246.94, 293.66)]
+    bass = (110.0, 87.31, 130.81, 98.0)
+    rng = np.random.default_rng(7)
+    def add(at, sig):
+        i = int(at * SR); j = min(len(out), i + len(sig)); out[i:j] += sig[: j - i]
+    for b in range(int(seconds / beat) + 1):
+        t0, bar = b * beat, (b // 4) % 4
+        t = np.arange(int(0.25 * SR)) / SR
+        add(t0, 0.8 * np.sin(2 * np.pi * np.cumsum(48 + 90 * np.exp(-t * 35)) / SR) * np.exp(-t * 16))
+        lh = int(0.05 * SR)
+        add(t0 + beat / 2, 0.12 * np.diff(rng.standard_normal(lh), prepend=0) * _env(lh, 0.001, 0.012))
+        tb = np.arange(int(beat * 0.9 * SR)) / SR
+        add(t0, 0.28 * np.sin(2 * np.pi * bass[bar] * tb) * _env(len(tb), 0.005, 0.35))
+        tc = np.arange(int(beat * 0.8 * SR)) / SR
+        chord = sum(np.sin(2 * np.pi * f * tc) + 0.3 * np.sin(4 * np.pi * f * tc) for f in chords[bar]) / 3
+        add(t0, 0.10 * chord * _env(len(tc), 0.004, 0.18))
+    out = out[:n]
+    fade = int(1.5 * SR)
+    out[:fade] *= np.linspace(0, 1, fade); out[-fade:] *= np.linspace(1, 0, fade)
+    return (out / max(1e-6, np.max(np.abs(out))) * 0.8).astype(np.float32)
 
-    os.makedirs(OUT_DIR, exist_ok=True)
-    base = os.path.join(OUT_DIR, f"ParikshaSaathi_CA_{date}")
+def whoosh():
+    n = int(0.4 * SR); noise = np.random.default_rng(3).standard_normal(n)
+    bright, dark, sweep = np.diff(noise, prepend=0), np.convolve(noise, np.ones(24) / 24, mode="same"), np.linspace(0, 1, n)
+    return (0.3 * (bright * (1 - sweep) + 2 * dark * sweep) * np.sin(np.pi * sweep) ** 2).astype(np.float32)
+
+def ding():
+    t = np.arange(int(0.9 * SR)) / SR
+    return (0.4 * (np.sin(2 * np.pi * 1318.5 * t) + 0.6 * np.sin(2 * np.pi * 1975.5 * t)) * np.exp(-t * 5) * np.minimum(1, t / 0.003)).astype(np.float32)
+
+def tick():
+    t = np.arange(int(0.03 * SR)) / SR
+    return (0.4 * np.sin(2 * np.pi * 1800 * t) * np.exp(-t * 180)).astype(np.float32)
+
+LEAD_IN = 0.25  # seconds of room before each line, where the slide's whoosh plays
+
+def segment(html_doc, voice_audio, after=0.6, sfx="whoosh", ticks=0):
+    """One slide: its HTML, its audio (lead-in, voice, pause) and its effects (offsets within the slide)."""
+    audio = np.concatenate([silence(LEAD_IN), voice_audio, silence(after)])
+    effects = [(0.0, whoosh() if sfx == "whoosh" else ding())] if sfx else []
+    effects += [(LEAD_IN + len(voice_audio) / SR + k, tick()) for k in range(ticks)]
+    return {"html": html_doc, "audio": audio, "effects": effects}
+
+VOICE_FX = "highpass=f=90,equalizer=f=250:t=q:w=1:g=-2,equalizer=f=3500:t=q:w=1.2:g=4,acompressor=threshold=-20dB:ratio=3:attack=5:release=120:makeup=2"
+
+def assemble(segments, out_mp4, cover=None):
     with tempfile.TemporaryDirectory() as work:
-        pngs = render([doc for doc, _ in segments], work)
-        durations = [len(audio) / SR for _, audio in segments]
+        pngs = render([seg["html"] for seg in segments], work)
+        durations = [len(seg["audio"]) / SR for seg in segments]
         total = sum(durations)
-        sf.write(os.path.join(work, "voice.wav"), np.concatenate([audio for _, audio in segments]), SR)
+        voice = np.concatenate([seg["audio"] for seg in segments])
+        fx = np.zeros(len(voice) + SR, np.float32)
+        at = 0.0
+        for seg, seconds in zip(segments, durations):
+            for offset, sound in seg["effects"]:
+                i = int((at + offset) * SR); fx[i:i + len(sound)] += sound[: len(fx) - i]
+            at += seconds
+        sf.write(os.path.join(work, "voice.wav"), voice, SR)
+        sf.write(os.path.join(work, "music.wav"), music_bed(total), SR)
+        sf.write(os.path.join(work, "fx.wav"), fx[: len(voice)], SR)
         with open(os.path.join(work, "slides.txt"), "w") as f:
             for png, seconds in zip(pngs, durations):
                 f.write(f"file '{png}'\nduration {seconds:.3f}\n")
             f.write(f"file '{pngs[-1]}'\n")  # the concat demuxer needs the last image twice
         # A thin progress bar along the top edge (over the header band) so viewers see how long is left.
         bar = f"color=c=0xa6431f:s={W}x12:r={FPS}:d={total:.3f}"
+        graph = (f"[0:v]fps={FPS},scale={W}:{H},format=yuv420p[v];[v][2:v]overlay=x='-w+w*t/{total:.3f}':y=0:shortest=1,format=yuv420p[vout];"
+                 f"[1:a]{VOICE_FX},asplit=2[vo][key];[3:a]volume=0.3[mus];"
+                 "[mus][key]sidechaincompress=threshold=0.02:ratio=12:attack=10:release=400[duck];"
+                 "[vo][duck][4:a]amix=inputs=3:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=44100[aout]")
         subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(work, "slides.txt"),
                         "-i", os.path.join(work, "voice.wav"), "-f", "lavfi", "-i", bar,
-                        "-filter_complex", f"[0:v]fps={FPS},scale={W}:{H},format=yuv420p[v];[v][2:v]overlay=x='-w+w*t/{total:.3f}':y=0:shortest=1,format=yuv420p[out]",
-                        "-map", "[out]", "-map", "1:a", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "160k",
-                        "-t", f"{total:.3f}", "-movflags", "+faststart", base + ".mp4"], check=True)
-        subprocess.run(["cp", pngs[0], base + "_cover.png"], check=True)
+                        "-i", os.path.join(work, "music.wav"), "-i", os.path.join(work, "fx.wav"),
+                        "-filter_complex", graph, "-map", "[vout]", "-map", "[aout]",
+                        "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "160k",
+                        "-t", f"{total:.3f}", "-movflags", "+faststart", out_mp4], check=True)
+        if cover: subprocess.run(["cp", pngs[0], cover], check=True)
+    return total
+
+
+# --- Build ----------------------------------------------------------------------------------------------------------
+def edition(date=None):
+    hi_all = fetch_all("hi")
+    date = date or max(i["editionDate"][:10] for i in hi_all)
+    items = [i for i in hi_all if i["editionDate"].startswith(date)][:MAX_ITEMS]
+    if not items: sys.exit(f"no Hindi current-affairs items dated {date}")
+    return date, items
+
+def item_slide(top_sub, item, k, n):
+    tags = " · ".join(item.get("examTags") or [])
+    return page(top_sub, f'<div class="badge">खबर {k + 1} / {n}</div>'
+                         f'<div class="headline" style="font-size:{headline_size(item["title"])}px">{html.escape(item["title"])}</div>'
+                         f'<div class="meta">{html.escape(tags)}<br>स्रोत: {html.escape(item["sourceName"])} — आधिकारिक प्रेस विज्ञप्ति</div>')
+
+def main(date=None, voice_name=VOICE):
+    date, items = edition(date)
+    question = item_question(items)
+    date_hi, n = fmt_date(date), len(items)
+    sources = sorted({i["sourceName"] for i in items})
+    source_line = "सिर्फ़ आधिकारिक PIB स्रोतों से" if sources == ["PIB"] else f"आधिकारिक स्रोतों ({', '.join(sources)}) से"
+    top_sub = f"दैनिक करंट अफेयर्स · {date_hi}"
+
+    voice = Voice(voice_name)
+    segments = [segment(page(top_sub, f'<div class="big">आज के {n} करेंट अफेयर्स</div><div class="date">{date_hi}</div>'
+                                      f'<div class="lead">SSC · Bank · Railway के लिए<br>{source_line}</div>', "center"),
+                        voice.say(f"{date_hi} के {n} ज़रूरी करेंट अफेयर्स।"), after=0.4)]
+    for k, item in enumerate(items):
+        segments.append(segment(item_slide(top_sub, item, k, n), voice.say(f"{ORDINALS[k]} खबर। {spoken_title(item['title'])}"), after=0.7))
+    if question:
+        options, right = print_order(question)
+        opts = lambda reveal: "".join(
+            f'<div class="opt{(" right" if j == right else " dim") if reveal else ""}"><b>{LETTERS[j]}</b>{html.escape(o)}</div>' for j, o in enumerate(options))
+        ask = f'<div class="badge">🧠 आज का प्रश्न</div><div class="q">{html.escape(question["text"])}</div><div class="opts">{opts(False)}</div><div class="meta">सोचिए… जवाब 3 सेकंड में</div>'
+        reveal = f'<div class="badge">🧠 आज का प्रश्न</div><div class="q">{html.escape(question["text"])}</div><div class="opts">{opts(True)}</div><div class="meta" style="color:#3f7a4e;font-weight:700">सही जवाब: ({LETTERS[right]}) {html.escape(options[right])}</div>'
+        segments.append(segment(page(top_sub, ask), voice.say(f"अब आज का प्रश्न। {question['text']}"), after=3.0, ticks=3))
+        segments.append(segment(page(top_sub, reveal), voice.say(f"सही जवाब है {LETTERS_HI[right]}, {options[right]}।"), after=0.8, sfx="ding"))
+    segments.append(segment(page(top_sub, '<div class="lead" style="font-size:60px;font-weight:700">रोज़ सुबह 7 बजे<br>पूरा PDF और क्विज़</div>'
+                                          f'<div class="lead">Telegram पर खोजें</div><div class="handle">@{TELEGRAM}</div>'
+                                          '<div class="lead">🌐 parikshasaathi.com<br>हर खबर उसके आधिकारिक स्रोत के लिंक के साथ</div>'
+                                          '<div class="date" style="font-size:52px">फ़ॉलो करें 🔔</div>', "center", cta=False),
+                            voice.say("रोज़ का पूरा पीडीएफ़ टेलीग्राम पर। फ़ॉलो करें!"), after=1.2))
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    base = os.path.join(OUT_DIR, f"ParikshaSaathi_CA_{date}")
+    total = assemble(segments, base + ".mp4", cover=base + "_cover.png")
 
     lines = [f"{k + 1}. {i['title']}" for k, i in enumerate(items)]
     q_line = f"\nआज का प्रश्न: {question['text']} — जवाब वीडियो के अंत में।\n" if question else ""
@@ -248,5 +335,26 @@ Caption:
     print(f"{base}_cover.png, {base}_upload.txt")
     if total > 90: print(f"note: {total:.0f} s is long for a Short/Reel; consider MAX_ITEMS = 4")
 
+
+
+def voice_samples(date=None):
+    """One short video with the same two headlines read by each Kokoro Hindi voice, to choose REEL_VOICE by ear."""
+    date, items = edition(date)
+    top_sub = f"आवाज़ चुनें · {fmt_date(date)}"
+    segments = []
+    for k, (name, label) in enumerate(VOICES.items(), 1):
+        voice = Voice(name)
+        segments.append(segment(page(top_sub, f'<div class="big">आवाज़ {k}</div><div class="date">{label}</div><div class="lead">{name}</div>', "center"),
+                                voice.say(f"यह आवाज़ नंबर {k} है।"), after=0.3))
+        for j, item in enumerate(items[:2]):
+            segments.append(segment(item_slide(top_sub, item, j, len(items)), voice.say(f"{ORDINALS[j]} खबर। {spoken_title(item['title'])}"), after=0.6))
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out = os.path.join(OUT_DIR, f"voice_samples_{date}.mp4")
+    total = assemble(segments, out)
+    print(f"{out}: {len(VOICES)} voices, {total:.1f} s")
+
 if __name__ == "__main__":
-    main()
+    args = sys.argv[1:]
+    date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
+    if "--voice-samples" in args: voice_samples(date)
+    else: main(date, args[args.index("--voice") + 1] if "--voice" in args else VOICE)
