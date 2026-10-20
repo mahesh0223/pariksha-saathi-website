@@ -12,7 +12,7 @@ import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath } from '../src/lib/examHub.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
-import { TELEGRAM_CHANNEL_URL } from '../src/data/socialLinks.mjs';
+import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -271,6 +271,13 @@ for (const lang of ['en', 'hi']) {
     assert(html.includes('<aside class="tg-cta">') && html.includes(`href="${TELEGRAM_CHANNEL_URL}"`), `${file}: missing the Telegram box`);
   }
   console.log(`Verified the Telegram box on ${tgPages.length} notice, exam and downloads page(s) (and every current-affairs item page above).`);
+  // The paid-promotion landing page: built, fast (no app script), the Join button, the newest headlines, in the sitemap.
+  const landing = readFileSync('dist/telegram/index.html', 'utf8');
+  assert(landing.includes(`class="tg-join" href="${TELEGRAM_JOIN_URL}"`), '/telegram/: no Join button to the channel');
+  assert(landing.includes('class="tg-latest"'), '/telegram/: no latest-edition headlines');
+  assert(!/<script[^>]+src="\/assets\//.test(landing), '/telegram/: loads the app script; it must stay plain HTML');
+  assert(sitemap.includes('<loc>https://parikshasaathi.com/telegram/</loc>'), '/telegram/: not in the sitemap');
+  console.log('Verified /telegram/: plain HTML, Join button, latest headlines, in the sitemap.');
 }
 
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a

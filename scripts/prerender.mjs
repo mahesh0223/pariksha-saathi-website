@@ -38,6 +38,7 @@ import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
 import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
+import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/lib/telegramPage.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -1623,6 +1624,23 @@ async function main() {
       alternateLanguages: [{ lang: 'en', path: questionIndexPath('en') }, { lang: 'hi', path: questionIndexPath('hi') }, { lang: 'x-default', path: questionIndexPath('en') }],
     }));
     sitemapUrls.push({ loc: questionIndexPath(lang), priority: '0.7', lastmod: QUESTION_PAGES_GENERATED });
+  }
+
+  // --- /telegram/: the landing page for paid promotion of the Telegram channel (src/lib/telegramPage.mjs). Plain HTML,
+  // no app script, with the newest edition's first headlines (in the order the daily PDF uses) as proof it is live.
+  {
+    const newest = affairsHi.reduce((max, item) => (item.editionDate > max ? item.editionDate : max), '').slice(0, 10);
+    const latest = affairsHi.filter((item) => item.editionDate.startsWith(newest));
+    writePage(TELEGRAM_PAGE_PATH.slice(1, -1), page({
+      ...telegramPageMeta(),
+      path: TELEGRAM_PAGE_PATH,
+      assets,
+      lang: 'hi',
+      type: 'website',
+      scripts: false,
+      bodyHtml: telegramPageBody(latest),
+    }));
+    sitemapUrls.push({ loc: TELEGRAM_PAGE_PATH, priority: '0.5', lastmod: newest });
   }
 
   // --- sitemap.xml ---
