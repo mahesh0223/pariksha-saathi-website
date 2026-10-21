@@ -3423,6 +3423,82 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से परमाणु क्षमता का लक्ष्य और उसका वर्ष, नेट ज़ीरो का वर्ष और वह मंच जहाँ मंत्री ने बात की, नोट करें, और इन्हें ऊपर दिए कार्यक्रम के स्थायी तथ्यों से अलग रखें।',
     },
   },
+  {
+    match: /[?&]PRID=2325853(?:&|$)/i,
+    en: {
+      body: 'Prime Minister Narendra Modi dedicated the National Police Memorial to the nation on Police Commemoration Day, 21 October 2018. It consists of a Central Sculpture, a Wall of Valour engraved with the names of police personnel who laid down their lives in the line of duty, and a museum dedicated to their memory. At the dedication he honoured the three surviving members of the Hot Springs incident and announced an award, to be given every year, in the name of Netaji Subhas Chandra Bose for those involved in disaster response operations.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1550130',
+      refLabel: 'Reference: PIB, \'Prime Minister dedicates National Police Memorial to the Nation\', 21 October 2018',
+      checkQ: 'Check yourself: whose name does the award announced at the memorial\'s dedication bear, and whom does it honour?',
+      checkA: 'Netaji Subhas Chandra Bose; those involved in disaster response operations.',
+      task: 'Revision task: from this release, note the date and place of the Hot Springs incident, how many personnel were killed, the drug-free target date and the rally\'s destination; from the note, the memorial\'s three parts.',
+    },
+    hi: {
+      body: 'प्रधानमंत्री नरेंद्र मोदी ने 21 अक्टूबर 2018 को पुलिस स्मृति दिवस पर राष्ट्रीय पुलिस स्मारक राष्ट्र को समर्पित किया। इसमें एक केंद्रीय मूर्तिकला, कर्तव्य पालन में प्राण न्योछावर करने वाले पुलिसकर्मियों के नामों से अंकित \'वीरता की दीवार\' और उनकी स्मृति को समर्पित एक संग्रहालय है। समर्पण के अवसर पर उन्होंने हॉट स्प्रिंग्स घटना के तीन जीवित सदस्यों को सम्मानित किया और आपदा राहत कार्यों में लगे लोगों के लिए नेताजी सुभाष चंद्र बोस के नाम पर हर वर्ष दिए जाने वाले एक पुरस्कार की घोषणा की।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1550130',
+      refLabel: 'संदर्भ: PIB, \'प्रधानमंत्री ने राष्ट्रीय पुलिस स्मारक राष्ट्र को समर्पित किया\', 21 अक्टूबर 2018',
+      checkQ: 'खुद जाँचें: स्मारक के समर्पण पर घोषित पुरस्कार किसके नाम पर है, और यह किन्हें सम्मानित करता है?',
+      checkA: 'नेताजी सुभाष चंद्र बोस; आपदा राहत कार्यों में लगे लोगों को।',
+      task: 'अभ्यास: इस रिलीज़ से हॉट स्प्रिंग्स घटना की तारीख़ और स्थान, शहीद जवानों की संख्या, नशामुक्ति लक्ष्य की तारीख़ और रैली का गंतव्य लिखें; नोट से स्मारक के तीन हिस्से।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325711(?:&|$)/i,
+    en: {
+      body: 'DAY-NRLM, the Ministry of Rural Development\'s poverty alleviation programme, was launched in June 2011 and is implemented across the country except Delhi and Chandigarh. It organises rural poor households into Self Help Groups (SHGs) and keeps supporting them until their incomes rise appreciably. By July 2025 it had reached 7,145 blocks in 745 districts and had brought 10.05 crore rural poor women households into 90.90 lakh SHGs.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2146872',
+      refLabel: 'Reference: PIB, Ministry of Rural Development, \'Self-Help Groups under NRLM\', 22 July 2025',
+      checkQ: 'Check yourself: in which month and year was DAY-NRLM launched, and which two places does it not cover?',
+      checkA: 'June 2011; Delhi and Chandigarh.',
+      task: 'Revision task: from this release, note the Mela\'s venue and dates, the numbers of entrepreneurs, States and stalls, the first Mela\'s year, and the Lakhpati Didi income threshold and target; from the note, DAY-NRLM\'s launch and reach.',
+    },
+    hi: {
+      body: 'ग्रामीण विकास मंत्रालय का गरीबी उन्मूलन कार्यक्रम DAY-NRLM जून 2011 में शुरू हुआ और दिल्ली व चंडीगढ़ को छोड़कर पूरे देश में लागू है। यह ग्रामीण गरीब परिवारों को स्वयं सहायता समूहों (SHG) में संगठित करता है और उनकी आय में उल्लेखनीय वृद्धि होने तक उनका साथ देता है। जुलाई 2025 तक यह 745 ज़िलों के 7,145 प्रखंडों तक पहुँच चुका था और 10.05 करोड़ ग्रामीण गरीब महिला परिवारों को 90.90 लाख स्वयं सहायता समूहों से जोड़ चुका था।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2146872',
+      refLabel: 'संदर्भ: PIB, ग्रामीण विकास मंत्रालय, \'NRLM के तहत स्वयं सहायता समूह\', 22 जुलाई 2025',
+      checkQ: 'खुद जाँचें: DAY-NRLM किस महीने और वर्ष में शुरू हुआ, और यह किन दो जगहों पर लागू नहीं है?',
+      checkA: 'जून 2011; दिल्ली और चंडीगढ़।',
+      task: 'अभ्यास: इस रिलीज़ से मेले का स्थान और तारीख़ें, उद्यमियों, राज्यों और स्टॉलों की संख्या, पहले मेले का वर्ष और लखपति दीदी की आय-सीमा व लक्ष्य लिखें; नोट से DAY-NRLM की शुरुआत और पहुँच।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325915(?:&|$)/i,
+    en: {
+      body: 'The Lalit Kala Akademi (National Academy of Art), New Delhi, was inaugurated on 5 August 1954 by the then Education Minister, Maulana Abul Kalam Azad, and was registered under the Societies Registration Act, 1860 on 11 March 1957. It holds the National Exhibition of Art and the Print Biennale India, and has regional centres including Bhubaneswar, Chennai, Kolkata and Lucknow.',
+      refUrl: 'https://lalitkala.gov.in/',
+      refLabel: 'Reference: Lalit Kala Akademi, \'Welcome to LKA\' (lalitkala.gov.in)',
+      checkQ: 'Check yourself: when was the Lalit Kala Akademi inaugurated, and by whom?',
+      checkA: 'On 5 August 1954, by the then Education Minister Maulana Abul Kalam Azad.',
+      task: 'Revision task: from this release, note the editions of the National Exhibition of Art and of the Print Biennale India; from the note, when and by whom the Akademi was inaugurated and when it was registered.',
+    },
+    hi: {
+      body: 'ललित कला अकादमी (राष्ट्रीय कला अकादमी), नई दिल्ली का उद्घाटन 5 अगस्त 1954 को तत्कालीन शिक्षा मंत्री मौलाना अबुल कलाम आज़ाद ने किया था, और 11 मार्च 1957 को इसका पंजीकरण सोसाइटी पंजीकरण अधिनियम, 1860 के तहत हुआ। यह राष्ट्रीय कला प्रदर्शनी और प्रिंट बिएनाले इंडिया आयोजित करती है, और भुवनेश्वर, चेन्नई, कोलकाता और लखनऊ सहित कई जगह इसके क्षेत्रीय केंद्र हैं।',
+      refUrl: 'https://lalitkala.gov.in/',
+      refLabel: 'संदर्भ: ललित कला अकादमी, \'Welcome to LKA\' (lalitkala.gov.in)',
+      checkQ: 'खुद जाँचें: ललित कला अकादमी का उद्घाटन कब और किसने किया था?',
+      checkA: '5 अगस्त 1954 को, तत्कालीन शिक्षा मंत्री मौलाना अबुल कलाम आज़ाद ने।',
+      task: 'अभ्यास: इस रिलीज़ से राष्ट्रीय कला प्रदर्शनी और प्रिंट बिएनाले इंडिया के संस्करण लिखें; नोट से अकादमी का उद्घाटन कब और किसने किया तथा पंजीकरण कब हुआ।',
+    },
+  },
+  {
+    match: /[?&]PRID=2325933(?:&|$)/i,
+    en: {
+      body: 'On 29 December 2025 the Defence Acquisition Council (DAC), chaired by Defence Minister Rajnath Singh, accorded Acceptance of Necessity (AoN) to proposals of the three Services worth about ₹79,000 crore. Among them were Low Level Light Weight Radars for the Army, which detect and track small, low-flying unmanned aerial systems, and the Integrated Drone Detection & Interdiction System Mk-II. An AoN approves the need for a purchase; the contract is signed later.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2209422',
+      refLabel: 'Reference: PIB, Ministry of Defence, \'DAC clears proposals worth Rs 79,000 crore\', 29 December 2025',
+      checkQ: 'Check yourself: which body accords Acceptance of Necessity for defence purchases, and who chairs it?',
+      checkA: 'The Defence Acquisition Council, chaired by the Defence Minister.',
+      task: 'Revision task: from this release, note the contract\'s value, the company, the radar\'s targets and the date; from the note, the date and total value of the DAC\'s AoN.',
+    },
+    hi: {
+      body: '29 दिसंबर 2025 को रक्षा मंत्री राजनाथ सिंह की अध्यक्षता में रक्षा अधिग्रहण परिषद (DAC) ने तीनों सेनाओं के लगभग ₹79,000 करोड़ के प्रस्तावों को आवश्यकता की स्वीकृति (AoN) दी। इनमें सेना के लिए लो लेवल लाइट वेट रडार, जो छोटे और नीची उड़ान वाले मानवरहित हवाई सिस्टम का पता लगाकर उन्हें ट्रैक करते हैं, और इंटीग्रेटेड ड्रोन डिटेक्शन एंड इंटरडिक्शन सिस्टम Mk-II शामिल थे। AoN किसी ख़रीद की ज़रूरत को मंज़ूरी देती है; अनुबंध बाद में होता है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2209422',
+      refLabel: 'संदर्भ: PIB, रक्षा मंत्रालय, \'DAC ने ₹79,000 करोड़ के प्रस्तावों को मंज़ूरी दी\', 29 दिसंबर 2025',
+      checkQ: 'खुद जाँचें: रक्षा ख़रीद के लिए आवश्यकता की स्वीकृति कौन-सी संस्था देती है, और इसकी अध्यक्षता कौन करता है?',
+      checkA: 'रक्षा अधिग्रहण परिषद, जिसकी अध्यक्षता रक्षा मंत्री करते हैं।',
+      task: 'अभ्यास: इस रिलीज़ से अनुबंध का मूल्य, कंपनी, रडार के लक्ष्य और तारीख़ लिखें; नोट से DAC की AoN की तारीख़ और कुल मूल्य।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
