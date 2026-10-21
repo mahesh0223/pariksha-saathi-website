@@ -202,7 +202,10 @@ for (const lang of ['en', 'hi']) {
   for (const row of rows) {
     assert(/<td class="cal-source"><a href="https?:\/\//.test(row), `${urlPath}: a calendar row has no official source link: ${row.slice(0, 100)}`);
     assert(/\d{4}-\d{2}-\d{2}<\/span>/.test(row), `${urlPath}: a calendar row has no checked date: ${row.slice(0, 100)}`);
-    assert(!/tentative|proposed|अनुमानित|प्रस्तावित/i.test(row), `${urlPath}: a tentative/proposed date slipped into the calendar: ${row.slice(0, 100)}`);
+    // The words are judged in what the reader sees, not in link targets: an official PDF's own file name can say
+    // "Tentative_dates" (RRB ALP CEN 01/2025) while the row it backs is a fixed date.
+    const visible = row.replace(/\s(?:href|title)="[^"]*"/g, '');
+    assert(!/tentative|proposed|अनुमानित|प्रस्तावित/i.test(visible), `${urlPath}: a tentative/proposed date slipped into the calendar: ${row.slice(0, 100)}`);
   }
   assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
   assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
