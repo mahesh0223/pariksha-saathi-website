@@ -11,7 +11,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "SSC CGL",
     "officialUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
     "en": {
-      "pageTitle": "SSC CGL Job Profile & Salary",
+      "pageTitle": "SSC CGL Salary 2026: Official Pay Scale and Job Profile",
       "lede": "SSC CGL fills Group ‘B’ and Group ‘C’ posts in central government ministries, departments and offices, and in constitutional and statutory bodies and tribunals. The 2026 notice lists 40 posts (the same post in different departments counts separately) at five pay levels, from Level 4 to Level 8. This page sticks to what the notice says about the posts, their pay and how posts are allotted. It does not describe daily duties or estimate take-home pay, because the notice does neither.",
       "profileHeading": "One exam, five pay levels",
       "profileBody": [
@@ -69,7 +69,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. The posts, pay levels and conditions above are taken from the SSC CGL 2026 notice and may change with each cycle — always confirm against the official notice linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "SSC CGL जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "SSC CGL सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "SSC CGL केंद्र सरकार के मंत्रालयों, विभागों और कार्यालयों तथा संवैधानिक और वैधानिक निकायों और अधिकरणों में ग्रुप ‘B’ और ग्रुप ‘C’ पद भरता है। 2026 की अधिसूचना में 40 पद हैं (एक ही पद अलग-अलग विभागों में हो तो अलग गिना गया है), जो लेवल 4 से लेवल 8 तक पाँच पे लेवल पर हैं। यह पृष्ठ केवल वही बताता है जो अधिसूचना पदों, उनके वेतन और पद आवंटन के बारे में कहती है। इसमें रोज़ के कामकाज का ब्योरा या हाथ में आने वाले वेतन का अनुमान नहीं है, क्योंकि अधिसूचना में ये दोनों नहीं हैं।",
       "profileHeading": "एक परीक्षा, पाँच पे लेवल",
       "profileBody": [
@@ -217,7 +217,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "IBPS PO",
     "officialUrl": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
     "en": {
-      "pageTitle": "IBPS PO Job Profile & Salary",
+      "pageTitle": "IBPS PO Salary 2026: Official Pay Scale and Job Profile",
       "lede": "IBPS PO is a common recruitment process for Probationary Officers / Management Trainees in eleven public sector banks. The CRP PO/MT-XVI notification (vacancies of 2027-28) gives one pay scale and leaves allowances, duties and promotion to the bank you are allotted. This page sticks to what the notification says, and does not estimate take-home pay.",
       "profileHeading": "One process, eleven banks",
       "profileBody": [
@@ -251,7 +251,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. The pay scale and allotment details above are taken from the IBPS notification and may change with each cycle — always confirm against the official notification linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "IBPS PO जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "IBPS PO सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "IBPS PO ग्यारह सार्वजनिक क्षेत्र के बैंकों में प्रोबेशनरी ऑफिसर / मैनेजमेंट ट्रेनी की एक साझा भर्ती प्रक्रिया है। CRP PO/MT-XVI की अधिसूचना (2027-28 की रिक्तियाँ) एक वेतनमान देती है और भत्ते, कामकाज और पदोन्नति आवंटित बैंक पर छोड़ती है। यह पृष्ठ केवल वही बताता है जो अधिसूचना कहती है, और हाथ में आने वाले वेतन का अनुमान नहीं देता।",
       "profileHeading": "एक प्रक्रिया, ग्यारह बैंक",
       "profileBody": [
@@ -290,7 +290,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "IBPS Clerk",
     "officialUrl": "https://www.ibps.in/wp-content/uploads/Notification_CRP_CSA_XVI-Final.pdf",
     "en": {
-      "pageTitle": "IBPS Clerk Job Profile & Salary",
+      "pageTitle": "IBPS Clerk Salary 2026: Official Pay Scale and Job Profile",
       "lede": "IBPS Clerk is a common recruitment process for Customer Service Associates (clerical cadre) in eleven public sector banks. The CRP CSA-XVI notification (vacancies of 2027-28) gives one pay scale and leaves allowances, duties and promotion to the bank you are allotted. This page sticks to what the notification says, and does not estimate take-home pay.",
       "profileHeading": "State-wise recruitment, eleven banks",
       "profileBody": [
@@ -325,7 +325,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. The pay scale and allotment details above are taken from the IBPS notification and may change with each cycle — always confirm against the official notification linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "IBPS क्लर्क जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "IBPS क्लर्क सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "IBPS क्लर्क ग्यारह सार्वजनिक क्षेत्र के बैंकों में कस्टमर सर्विस एसोसिएट (लिपिक संवर्ग) की एक साझा भर्ती प्रक्रिया है। CRP CSA-XVI की अधिसूचना (2027-28 की रिक्तियाँ) एक वेतनमान देती है और भत्ते, कामकाज और पदोन्नति आवंटित बैंक पर छोड़ती है। यह पृष्ठ केवल वही बताता है जो अधिसूचना कहती है, और हाथ में आने वाले वेतन का अनुमान नहीं देता।",
       "profileHeading": "राज्यवार भर्ती, ग्यारह बैंक",
       "profileBody": [
@@ -365,7 +365,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "SBI PO",
     "officialUrl": "https://sbi.bank.in/documents/77530/57941/18062026_1_Detailed_Adv.2026.pdf/1f1a9532-8a2f-6e59-08a0-616d62a497b1?t=1781759726353",
     "en": {
-      "pageTitle": "SBI PO Job Profile & Salary",
+      "pageTitle": "SBI PO Salary 2026: Official Pay Scale and Job Profile",
       "lede": "SBI recruits its own Probationary Officers, separately from IBPS, into Junior Management Grade Scale-I at the State Bank of India. The 2026 advertisement (CRPD/PO/2026-27/09, 1,500 vacancies) is specific about pay, the joining bond, probation and transfers, and this page sticks to what it says.",
       "profileHeading": "What the advertisement says about the job",
       "profileBody": [
@@ -407,7 +407,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. The pay, emoluments and service conditions above are taken from SBI’s advertisement and may change with each cycle — always confirm against the official advertisement linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "SBI PO जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "SBI PO सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "SBI अपने प्रोबेशनरी ऑफिसर की भर्ती IBPS से अलग, खुद करता है, भारतीय स्टेट बैंक में जूनियर मैनेजमेंट ग्रेड स्केल-I में। 2026 का विज्ञापन (CRPD/PO/2026-27/09, 1,500 रिक्तियाँ) वेतन, ज्वाइनिंग बॉन्ड, परिवीक्षा और तबादलों के बारे में साफ़ बताता है, और यह पृष्ठ केवल वही बताता है जो उसमें लिखा है।",
       "profileHeading": "विज्ञापन नौकरी के बारे में क्या कहता है",
       "profileBody": [
@@ -454,7 +454,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "SBI Clerk",
     "officialUrl": "https://sbi.bank.in/webfiles/uploads/files_2627/08/JA_2026_Detailed_Advt_Eng.pdf",
     "en": {
-      "pageTitle": "SBI Clerk Job Profile & Salary",
+      "pageTitle": "SBI Clerk Salary 2026: Official Pay Scale and Job Profile",
       "lede": "SBI recruits its own clerical staff, separately from IBPS, as Junior Associates (Customer Support & Sales). The 2026 advertisement (CRPD/CR/2026-27/17, 7,680 vacancies) is specific about pay, starting emoluments, probation and transfers, and this page sticks to what it says. It does not estimate take-home pay.",
       "profileHeading": "What the advertisement says about the job",
       "profileBody": [
@@ -496,7 +496,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. The pay, emoluments and service conditions above are taken from SBI’s advertisement and may change with each cycle — always confirm against the official advertisement linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "SBI क्लर्क जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "SBI क्लर्क सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "SBI अपने लिपिक कर्मचारियों की भर्ती IBPS से अलग, खुद करता है, जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स) के रूप में। 2026 का विज्ञापन (CRPD/CR/2026-27/17, 7,680 रिक्तियाँ) वेतन, शुरुआती परिलब्धियों, परिवीक्षा और तबादलों के बारे में साफ़ बताता है, और यह पृष्ठ केवल वही बताता है जो उसमें लिखा है। इसमें हाथ में आने वाले वेतन का अनुमान नहीं है।",
       "profileHeading": "विज्ञापन नौकरी के बारे में क्या कहता है",
       "profileBody": [
