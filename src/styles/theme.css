@@ -366,3 +366,10 @@ button {
 .pyq-cutoff h2 {
   margin-top: 0;
 }
+.pyq-pdf a {
+  font-weight: 600;
+}
+.pyq-pdf-size {
+  font-size: 0.8rem;
+  color: var(--muted);
+}

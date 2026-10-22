@@ -352,6 +352,27 @@ for (const lang of ['en', 'hi']) {
     withCutoff++;
   }
   console.log(`Verified the official cut-off beside ${withCutoff} solved paper(s) whose own cycle has one, and on no other paper.`);
+  // Printable PDFs (scripts/paper-pdf/make_paper_pdfs.py -> src/data/pyqPdfs.json), made one exam at a time: each listed
+  // PDF is built and really a PDF, linked from its paper's page and from its exam's list in both languages; an exam is
+  // either done in full or not started, so a list never mixes papers with and without a PDF.
+  const pdfs = existsSync('src/data/pyqPdfs.json') ? JSON.parse(readFileSync('src/data/pyqPdfs.json', 'utf8')) : {};
+  const paperBySlug = new Map(papers.map((p) => [p.slug, p]));
+  for (const [slug, pdf] of Object.entries(pdfs)) {
+    const paper = paperBySlug.get(slug);
+    assert(paper, `src/data/pyqPdfs.json lists ${slug}, which is not a published paper`);
+    const file = `dist${pdf.path}`;
+    assert(existsSync(file) && readFileSync(file).subarray(0, 5).toString() === '%PDF-', `${pdf.path}: missing from the build or not a PDF`);
+    assert(readFileSync(file).length < 2 * 1024 * 1024, `${pdf.path}: over 2 MB - too heavy for a phone on mobile data`);
+    const link = `href="${pdf.path}" download`;
+    assert(readFileSync(`dist${pyqPaperPath(paper)}index.html`, 'utf8').includes(link), `${pyqPaperPath(paper)}: does not link its PDF`);
+    for (const lang of ['en', 'hi']) assert(readFileSync(`dist${pyqIndexPath(paper.examId, lang)}index.html`, 'utf8').includes(link), `${pyqIndexPath(paper.examId, lang)}: does not link ${pdf.path}`);
+  }
+  const pdfExams = [...new Set(Object.keys(pdfs).map((slug) => paperBySlug.get(slug).examId))];
+  for (const examId of pdfExams) {
+    const without = papers.filter((p) => p.examId === examId && !pdfs[p.slug]);
+    assert.equal(without.length, 0, `${examId}: ${without.length} paper(s) without a PDF, e.g. ${without[0]?.slug} - run python3 scripts/paper-pdf/make_paper_pdfs.py ${examId}`);
+  }
+  console.log(`Verified ${Object.keys(pdfs).length} solved-paper PDF(s) for ${pdfExams.join(', ') || 'no exam yet'}: built, linked from each paper page and its list, every paper of those exams covered.`);
   for (const paper of papers) {
     const path = pyqPaperPath(paper);
     const html = readFileSync(`dist${path}index.html`, 'utf8');

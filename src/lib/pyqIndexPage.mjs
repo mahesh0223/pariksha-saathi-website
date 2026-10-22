@@ -49,6 +49,8 @@ function summary(examId, papers) {
     examName: EXAM_NAMES[examId] ?? examId,
     groups,
     shifts: papers.length,
+    // Every paper of the exam has a printable PDF (scripts/paper-pdf/make_paper_pdfs.py): only then does the title say "PDF".
+    pdf: papers.length > 0 && papers.every((p) => p.pdf),
     questions: papers.reduce((n, p) => n + p.questions.length, 0),
     range: min === max ? String(min) : `${min}–${max}`,
   };
@@ -58,7 +60,7 @@ const anchor = (paper) => paper.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
 const T = {
   en: {
-    title: (s) => `${s.examName} Previous Year Question Papers with Answers (${s.range}, ${s.shifts} Shifts)`,
+    title: (s) => `${s.examName} Previous Year Question Papers${s.pdf ? ' PDF' : ''} with Answers (${s.range}, ${s.shifts} Shifts)`,
     h1: (s) => `${s.examName} previous year question papers with answers`,
     description: (s) => `${s.shifts} solved ${s.examName} shifts from ${s.range}, ${num(s.questions)} questions in all, each with the official answer and a worked explanation, listed by paper and date. Free to read online.`,
     lede: (s, body) => `${s.shifts} shifts from ${s.groups.length} official ${s.examName} paper${s.groups.length === 1 ? '' : 's'}, ${num(s.questions)} questions in all. Every question is given as ${body ?? 'the exam body'} printed it, with the answer from ${body ? `${body}'s` : 'the'} official answer key and a worked explanation. Free to read online; no sign-up.`,
@@ -67,6 +69,8 @@ const T = {
     notice: 'official answer-key notice',
     thPaper: 'Date and shift',
     thQuestions: 'Questions with answers',
+    thPdf: 'PDF',
+    pdf: 'Download',
     count: (p) => (p.questionsInPaper && p.questionsInPaper > p.questions.length ? `${p.questions.length} of ${p.questionsInPaper}` : String(p.questions.length)),
     howTitle: 'How these papers are made',
     how: (body) => `Questions, options and answers come from ${body ? `${body}'s` : 'the exam body\'s'} own answer-key documents, linked for each paper above. A question is left out when it needs a figure, is printed as an image, or was cancelled in the final key, so some shifts show fewer questions than the paper had. The explanations are drafted with AI assistance by Pariksha Saathi and checked against the official answers.`,
@@ -85,7 +89,7 @@ const T = {
     exams: 'Exams',
   },
   hi: {
-    title: (s) => `${s.examName} पिछले वर्ष के प्रश्न पत्र, उत्तर सहित (${s.range}, ${s.shifts} शिफ़्ट)`,
+    title: (s) => `${s.examName} पिछले वर्ष के प्रश्न पत्र${s.pdf ? ' PDF' : ''}, उत्तर सहित (${s.range}, ${s.shifts} शिफ़्ट)`,
     h1: (s) => `${s.examName} पिछले वर्ष के प्रश्न पत्र, उत्तर सहित`,
     description: (s) => `${s.range} के ${s.examName} की ${s.shifts} हल की हुई शिफ़्टें, कुल ${num(s.questions)} प्रश्न, हर प्रश्न आधिकारिक उत्तर और समझाए गए हल के साथ, पेपर और तारीख़ के क्रम में। ऑनलाइन मुफ़्त पढ़ें।`,
     lede: (s, body) => `${s.examName} के ${s.groups.length} आधिकारिक पेपर की ${s.shifts} शिफ़्टें, कुल ${num(s.questions)} प्रश्न। हर प्रश्न वैसे ही दिया गया है जैसे ${body ?? 'परीक्षा निकाय'} ने छापा, ${body ?? 'परीक्षा निकाय'} की आधिकारिक उत्तर कुंजी के उत्तर और समझाए गए हल के साथ। प्रश्न अंग्रेज़ी में हैं। ऑनलाइन मुफ़्त पढ़ें; साइन-अप की ज़रूरत नहीं।`,
@@ -94,6 +98,8 @@ const T = {
     notice: 'आधिकारिक उत्तर-कुंजी सूचना',
     thPaper: 'तारीख़ और शिफ़्ट',
     thQuestions: 'उत्तर सहित प्रश्न',
+    thPdf: 'PDF',
+    pdf: 'डाउनलोड',
     count: (p) => (p.questionsInPaper && p.questionsInPaper > p.questions.length ? `${p.questionsInPaper} में से ${p.questions.length}` : String(p.questions.length)),
     howTitle: 'ये प्रश्न पत्र कैसे तैयार किए गए',
     how: (body) => `प्रश्न, विकल्प और उत्तर ${body ?? 'परीक्षा निकाय'} के अपने उत्तर-कुंजी दस्तावेज़ों से लिए गए हैं, जिनका लिंक ऊपर हर पेपर के साथ है। जिस प्रश्न में चित्र चाहिए, जो छवि के रूप में छपा है या जो अंतिम कुंजी में रद्द हुआ, वह शामिल नहीं है, इसलिए कुछ शिफ़्टों में पेपर से कम प्रश्न दिखते हैं। हल Pariksha Saathi ने AI की सहायता से तैयार किए हैं और आधिकारिक उत्तरों से मिलाकर जाँचे हैं।`,
@@ -135,8 +141,8 @@ export function pyqIndexBody(examId, papers, lang = 'en') {
       <h2>${esc(g.displayName)}</h2>
       <p class="hub-source">${esc(t.groupLine(g))} · <a href="${esc(g.sourceUrl)}" target="_blank" rel="noreferrer">${t.notice} &#8599;</a></p>
       <div class="hub-table-wrap"><table class="hub-table pyq-index">
-        <thead><tr><th>${t.thPaper}</th><th>${t.thQuestions}</th></tr></thead>
-        <tbody>${g.shifts.map((p) => `<tr><td><a href="${pyqPaperPath(p)}">${esc(day(p.date, lang))}, ${esc(lang === 'hi' ? p.shift.replace('Shift', 'शिफ़्ट') : p.shift)}</a></td><td>${esc(t.count(p))}</td></tr>`).join('')}</tbody>
+        <thead><tr><th>${t.thPaper}</th><th>${t.thQuestions}</th>${g.shifts.some((p) => p.pdf) ? `<th>${t.thPdf}</th>` : ''}</tr></thead>
+        <tbody>${g.shifts.map((p) => `<tr><td><a href="${pyqPaperPath(p)}">${esc(day(p.date, lang))}, ${esc(lang === 'hi' ? p.shift.replace('Shift', 'शिफ़्ट') : p.shift)}</a></td><td>${esc(t.count(p))}</td>${g.shifts.some((x) => x.pdf) ? `<td>${p.pdf ? `<a href="${esc(p.pdf.path)}" download>${t.pdf}</a> <span class="pyq-pdf-size">${p.pdf.sizeKb} KB</span>` : ''}</td>` : ''}</tr>`).join('')}</tbody>
       </table></div>
     </section>`).join('');
   return `<div class="compare-page">

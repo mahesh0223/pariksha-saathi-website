@@ -24,7 +24,8 @@ function esc(value) {
 const paragraphs = (text) => String(text).split(/\n{2,}/).map((p) => `<p>${esc(p)}</p>`).join('');
 
 export function pyqPaperMeta(paper) {
-  const title = `${paper.displayName} Question Paper (${shortDate(paper.date)}, ${paper.shift}) with Answers`;
+  // "PDF" only where the printable PDF exists (paper.pdf) - the phrase aspirants search with, and true on this page.
+  const title = `${paper.displayName} Question Paper${paper.pdf ? ' PDF' : ''} (${shortDate(paper.date)}, ${paper.shift}) with Answers`;
   const sections = [...new Set(paper.questions.map((q) => q.section).filter(Boolean))];
   return {
     title,
@@ -120,6 +121,7 @@ export function pyqPaperBody(paper, cutoffRows = []) {
     <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
+    ${paper.pdf ? `<p class="pyq-pdf"><a href="${esc(paper.pdf.path)}" download>Download this paper as a PDF</a> (${paper.pdf.pages} pages, ${paper.pdf.sizeKb} KB): the questions as printed, then the answer key and the explanations, to print or share.</p>` : ''}
     ${pyqCutoffHtml(paper, cutoffRows)}
     ${body}
     ${telegramCtaHtml('en')}
@@ -151,6 +153,7 @@ export function pyqPaperStructuredData(paper, siteUrl) {
       learningResourceType: 'Solved previous-year question paper',
       educationalUse: 'Exam preparation',
       isBasedOn: { '@type': 'CreativeWork', name: `${paper.displayName} official answer key`, url: paper.sourceUrl },
+      ...(paper.pdf ? { associatedMedia: { '@type': 'MediaObject', contentUrl: `${siteUrl}${paper.pdf.path}`, encodingFormat: 'application/pdf' } } : {}),
       publisher: { '@type': 'Organization', name: 'Pariksha Saathi', url: siteUrl },
     },
     {

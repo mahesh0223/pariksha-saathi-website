@@ -1700,7 +1700,12 @@ async function main() {
 
   // --- Solved previous-year papers (/exams/<exam>/question-papers/<paper>/): src/lib/pyqPage.mjs, data from
   // scripts/gen-pyq-pages.mjs. Plain HTML, English (the papers' language), no app script.
-  const pyqPapers = JSON.parse(readFileSync(new URL('../src/data/pyqPapers.json', import.meta.url), 'utf8'));
+  // Each paper with a printable PDF (scripts/paper-pdf/make_paper_pdfs.py, one exam at a time) carries it as `pdf`:
+  // { path, pages, sizeKb }, so its page and its exam's list link it.
+  const pyqPdfsFile = new URL('../src/data/pyqPdfs.json', import.meta.url);
+  const pyqPdfs = existsSync(pyqPdfsFile) ? JSON.parse(readFileSync(pyqPdfsFile, 'utf8')) : {};
+  const pyqPapers = JSON.parse(readFileSync(new URL('../src/data/pyqPapers.json', import.meta.url), 'utf8'))
+    .map((paper) => (pyqPdfs[paper.slug] ? { ...paper, pdf: pyqPdfs[paper.slug] } : paper));
   for (const paper of pyqPapers) {
     const path = pyqPaperPath(paper);
     const meta = pyqPaperMeta(paper);
