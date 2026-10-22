@@ -88,7 +88,7 @@ their own URLs, and posts/pay that match the current notice (several competitors
 
 ## Opportunities, in priority order
 
-Status: 1 built 22 Oct 2026 (2fa5a9b); 2 built 22 Oct 2026 (hub titles and H1s, src/lib/examHub.mjs HUB_TITLE_NAME). 3-7 not built.
+Status: 1 built 22 Oct 2026 (2fa5a9b); 2 built 22 Oct 2026 (hub titles and H1s, src/lib/examHub.mjs HUB_TITLE_NAME). 3 built 22 Oct 2026 (downloads page title, description and H1). 4-7 not built.
 
 1. **A previous-year-papers page per exam** - "SSC CGL Previous Year Question Papers with Answers (Tier-I, shift-wise)"
    listing every solved shift by year, for CGL, CHSL, MTS and GD, in English and Hindi. This is the most contested
