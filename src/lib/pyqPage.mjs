@@ -7,7 +7,7 @@ import { examHubPath } from './examHubPath.mjs';
 import { socialLinksHtml } from '../data/socialLinks.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { metaDescription } from './seoMeta.mjs';
-import { pyqPaperPath } from './pyqPath.mjs';
+import { pyqIndexPath, pyqPaperPath } from './pyqPath.mjs';
 import { QUESTION_TOPICS } from '../data/questionTopics.mjs';
 import { topicListPath } from './questionPage.mjs';
 
@@ -70,6 +70,8 @@ export function pyqPaperBody(paper) {
       </ol>
     </section>`).join('');
   const hub = examHubPath(paper.examId, 'en');
+  const index = pyqIndexPath(paper.examId, 'en');
+  const examName = paper.displayName.replace(/\s+\d{4}.*$/, '');
   return `<div class="compare-page">
   <header class="pub-header">
     <div class="wrap pub-nav">
@@ -79,14 +81,15 @@ export function pyqPaperBody(paper) {
     </div>
   </header>
   <article class="wrap compare-article pyq-paper">
-    <div class="compare-top-row"><a href="${hub}" class="detail-back">&larr; ${esc(paper.displayName.replace(/\s+\d{4}.*$/, ''))} exam page</a></div>
+    <div class="compare-top-row"><a href="${hub}" class="detail-back">&larr; ${esc(examName)} exam page</a><a href="${index}" class="detail-back">All ${esc(examName)} previous year papers</a></div>
     <h1>${esc(meta.h1)}</h1>
     <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
     ${body}
     ${telegramCtaHtml('en')}
-    <p><a href="${hub}">More on the ${esc(paper.displayName.replace(/\s+\d{4}.*$/, ''))} exam: pattern, syllabus, cut-offs and notices &rarr;</a></p>
+    <p><a href="${index}">All ${esc(examName)} previous year question papers with answers &rarr;</a></p>
+    <p><a href="${hub}">More on the ${esc(examName)} exam: pattern, syllabus, cut-offs and notices &rarr;</a></p>
   </article>
   <footer class="pub-footer">
     <div class="wrap pub-footer-links">
@@ -121,7 +124,8 @@ export function pyqPaperStructuredData(paper, siteUrl) {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
         { '@type': 'ListItem', position: 2, name: paper.displayName.replace(/\s+\d{4}.*$/, ''), item: `${siteUrl}${examHubPath(paper.examId, 'en')}` },
-        { '@type': 'ListItem', position: 3, name: `${shortDate(paper.date)}, ${paper.shift}`, item: `${siteUrl}${path}` },
+        { '@type': 'ListItem', position: 3, name: 'Previous year question papers', item: `${siteUrl}${pyqIndexPath(paper.examId, 'en')}` },
+        { '@type': 'ListItem', position: 4, name: `${shortDate(paper.date)}, ${paper.shift}`, item: `${siteUrl}${path}` },
       ],
     },
   ];

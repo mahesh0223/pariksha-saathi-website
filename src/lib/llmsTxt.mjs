@@ -10,7 +10,7 @@ import { DIRECTORY_EXAM_IDS, examDirectoryPath } from './examDirectory.mjs';
 import { examCalendarPath } from './examCalendar.mjs';
 import { questionIndexPath } from './questionPage.mjs';
 import { typingTestPath } from './typingPage.mjs';
-import { pyqPaperPath } from './pyqPath.mjs';
+import { pyqIndexPath, pyqPaperPath } from './pyqPath.mjs';
 import { TRUST_LINES } from '../data/trustLines.mjs';
 import { TELEGRAM_CHANNEL_URL } from '../data/socialLinks.mjs';
 import { PLAY_STORE_URL } from '../data/siteLinks.mjs';
@@ -55,6 +55,8 @@ ${hubs.map((id) => link(EXAM_NAMES[id], examHubPath(id, 'en'), hubNote(id))).joi
 ${link('Exam calendar', examCalendarPath('en'), 'upcoming exam dates, each taken from an official notice')}
 
 ## Solved previous-year papers
+
+${[...new Set(papers.map((p) => p.examId))].map((id) => link(`${EXAM_NAMES[id]} previous year question papers with answers`, pyqIndexPath(id, 'en'), `every solved ${EXAM_NAMES[id]} shift on one page, by paper and date`)).join('\n')}
 
 ${paperSets.map((name) => { const set = papers.filter((p) => p.displayName === name); return `- ${name}: ${set.length} shifts, ${set.reduce((sum, p) => sum + p.questions, 0).toLocaleString('en-IN')} questions`; }).join('\n')}
 

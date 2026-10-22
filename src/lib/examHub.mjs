@@ -17,7 +17,7 @@ import { questionIndexPath, topicListPath } from './questionPage.mjs';
 import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
-import { pyqPaperPathFor } from './pyqPath.mjs';
+import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPathFor } from './pyqPath.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -90,6 +90,7 @@ const T = {
     pyqLanguage: { en: ' The questions are in English.', hi: ' The questions are in Hindi.' },
     pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
     pyqSolved: 'solved paper with answers',
+    pyqAll: (exam) => `All ${exam} previous year question papers with answers, by year`,
     pyqNotice: 'official notice',
     cutoffs: 'Cut-off marks by year and category',
     cutoffNote: (max) => `Marks are out of ${max}. Cut-offs change every cycle and are no promise for the next one; use them to see how competitive each category has been.`,
@@ -184,6 +185,7 @@ const T = {
     pyqLanguage: { en: ' प्रश्न अंग्रेज़ी में हैं।', hi: ' प्रश्न हिंदी में हैं।' },
     pyqCount: (n) => `${n} प्रश्न`,
     pyqSolved: 'उत्तर सहित हल प्रश्नपत्र (अंग्रेज़ी)',
+    pyqAll: (exam) => `${exam} के सभी पिछले वर्ष के प्रश्न पत्र, उत्तर सहित, वर्ष के क्रम में`,
     pyqNotice: 'आधिकारिक सूचना',
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
     cutoffNote: (max) => `अंक ${max} में से हैं। कट-ऑफ हर चक्र में बदलता है और अगले चक्र की गारंटी नहीं है; इससे बस यह समझें कि हर श्रेणी में प्रतिस्पर्धा कितनी रही है।`,
@@ -555,7 +557,9 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   if (pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
     // The summary counts one language (the server's default is English); say so when it is not the page's.
     const pyqLanguage = pyq.languageCode && pyq.languageCode !== lang ? (t.pyqLanguage[pyq.languageCode] ?? '') : '';
-    html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length) + pyqLanguage)}</p><ul class="hub-notices hub-pyq">${pyq.papers
+    html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length) + pyqLanguage)}</p>`;
+    if (PYQ_INDEX_EXAMS.includes(fact.examId)) html += `<p><a href="${pyqIndexPath(fact.examId, lang)}">${esc(t.pyqAll(examName))} &rarr;</a></p>`;
+    html += `<ul class="hub-notices hub-pyq">${pyq.papers
       .map(
         (p) =>
           // The paper links to its solved-paper page when there is one; the exam body's notice is always linked.

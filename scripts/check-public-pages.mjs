@@ -14,7 +14,7 @@ import { examHubPath, NEXT_STEP_PILOT_HUBS } from '../src/lib/examHub.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
-import { pyqPaperPath } from '../src/lib/pyqPath.mjs';
+import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -326,6 +326,33 @@ for (const lang of ['en', 'hi']) {
   console.log(`Verified ${papers.length} solved previous-year paper page(s): every question with its answer, the official notice linked, in the sitemap.`);
 }
 
+// One list of solved papers per exam (src/lib/pyqIndexPage.mjs, from 22 Oct 2026): it links every shift and every
+// paper's answer-key notice, pairs EN/HI by hreflang, is in the sitemap, stays plain HTML, and is linked from each
+// shift page and from the exam hub. No _redirects rule may shadow it (one sent these URLs to the hub until then).
+{
+  const papers = JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'));
+  assert(!/^\/exams\/[^\s]*question-papers/m.test(readFileSync('dist/_redirects', 'utf8')), '_redirects has a rule for /exams/.../question-papers - it would hide the list pages');
+  for (const examId of PYQ_INDEX_EXAMS) {
+    const own = papers.filter((p) => p.examId === examId);
+    for (const lang of ['en', 'hi']) {
+      const path = pyqIndexPath(examId, lang);
+      const html = readFileSync(`dist${path}index.html`, 'utf8');
+      const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
+      assert(title.includes(lang === 'hi' ? 'पिछले वर्ष के प्रश्न पत्र' : 'Previous Year Question Papers'), `${path}: title "${title}" lacks the search phrase`);
+      for (const p of own) assert(html.includes(`href="${pyqPaperPath(p)}"`), `${path}: does not link ${p.slug}`);
+      for (const url of new Set(own.map((p) => p.sourceUrl))) assert(html.includes(`href="${url}"`), `${path}: an answer-key notice is not linked`);
+      assert((html.match(/<tr><td><a href="\/exams\//g) ?? []).length === own.length, `${path}: expected one row per shift (${own.length})`);
+      for (const alt of ['en', 'hi']) assert(html.includes(`hreflang="${alt}" href="https://parikshasaathi.com${pyqIndexPath(examId, alt)}"`), `${path}: hreflang ${alt} missing`);
+      assert(html.includes('"@type":"FAQPage"') && html.includes(`"numberOfItems":${own.length}`), `${path}: FAQPage or ItemList data missing`);
+      assert(!/<script[^>]+src="\/assets\//.test(html), `${path}: loads the app script; it must stay plain HTML`);
+      assert(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), `${path}: not in the sitemap`);
+      assert(readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8').includes(`href="${path}"`), `${examHubPath(examId, lang)}: does not link ${path}`);
+    }
+    for (const p of own) assert(readFileSync(`dist${pyqPaperPath(p)}index.html`, 'utf8').includes(`href="${pyqIndexPath(examId, 'en')}"`), `${pyqPaperPath(p)}: does not link its exam's list of papers`);
+  }
+  console.log(`Verified ${PYQ_INDEX_EXAMS.length} solved-paper list page(s) x 2 languages: every shift and answer-key notice linked, hreflang, sitemap, linked from each shift page and hub.`);
+}
+
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a
 // notice page that only restates the official text is the thin page AdSense rejected on 10 Oct 2026.
 {
@@ -505,7 +532,7 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   }
   for (const file of ['favicon.ico', 'apple-touch-icon.png', 'apple-touch-icon-precomposed.png']) assert(existsSync(`dist/${file}`), `/${file} was not built`);
   const redirects = readFileSync('dist/_redirects', 'utf8');
-  for (const from of ['/app/', '/compare/', '/hi/compare/', '/exams/:exam/question-papers/']) assert(new RegExp(`^${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s`, 'm').test(redirects), `_redirects lost the ${from} rule`);
+  for (const from of ['/app/', '/compare/', '/hi/compare/']) assert(new RegExp(`^${from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s`, 'm').test(redirects), `_redirects lost the ${from} rule`);
   console.log(`Verified GEO: /llms.txt lists ${HUB_EXAM_IDS.length} exam hubs and ${papers.length} solved papers, all ${internal.length} links built; home Organization and exam-directory ItemList in place.`);
 }
 

@@ -40,7 +40,8 @@ import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
 import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
 import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/lib/telegramPage.mjs';
 import { pyqPaperBody, pyqPaperMeta, pyqPaperStructuredData } from '../src/lib/pyqPage.mjs';
-import { pyqPaperPath } from '../src/lib/pyqPath.mjs';
+import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.mjs';
+import { pyqIndexBody, pyqIndexMeta, pyqIndexStructuredData } from '../src/lib/pyqIndexPage.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -1693,6 +1694,32 @@ async function main() {
       structuredData: pyqPaperStructuredData(paper, SITE_URL),
     }));
     sitemapUrls.push({ loc: path, priority: '0.7' });
+  }
+
+  // --- One list of solved papers per exam (/exams/<exam>/question-papers/ and /hi/...): src/lib/pyqIndexPage.mjs.
+  for (const examId of PYQ_INDEX_EXAMS) {
+    const papers = pyqPapers.filter((p) => p.examId === examId);
+    for (const lang of ['en', 'hi']) {
+      const path = pyqIndexPath(examId, lang);
+      const meta = pyqIndexMeta(examId, papers, lang);
+      writePage(path.slice(1, -1), page({
+        title: meta.title,
+        description: meta.description,
+        path,
+        assets,
+        lang,
+        type: 'website',
+        scripts: false,
+        alternateLanguages: [
+          { lang: 'en', path: pyqIndexPath(examId, 'en') },
+          { lang: 'hi', path: pyqIndexPath(examId, 'hi') },
+          { lang: 'x-default', path: pyqIndexPath(examId, 'en') },
+        ],
+        bodyHtml: pyqIndexBody(examId, papers, lang),
+        structuredData: pyqIndexStructuredData(examId, papers, lang, SITE_URL),
+      }));
+      sitemapUrls.push({ loc: path, priority: lang === 'en' ? '0.8' : '0.7' });
+    }
   }
 
   // --- /llms.txt: the Markdown map of the site for AI answer engines (src/lib/llmsTxt.mjs), from this build's data.

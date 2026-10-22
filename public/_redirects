@@ -25,17 +25,17 @@
 /daily-pdf /pdf/latest.pdf 302
 /daily-pdf/ /pdf/latest.pdf 302
 
-# Parent folders of real pages, which crawlers reach by trimming a URL - all four returned 404 until 2026-10-20
+# Parent folders of real pages, which crawlers reach by trimming a URL - these returned 404 until 2026-10-20
 # (Cloudflare AI Crawl Control showed bursts of 4xx from Googlebot, ClaudeBot, PerplexityBot and others). Both
 # spellings, because a rule matches the path exactly and these have no file on disk for Pages to normalise.
+# (/exams/<exam>/question-papers/ was redirected to the hub here until 22 Oct 2026; it is now a real page, the list of
+# that exam's solved papers, so it must not be redirected.)
 /app                                   /app/home                 302
 /app/                                  /app/home                 302
 /compare                               /exams/                   301
 /compare/                              /exams/                   301
 /hi/compare                            /hi/exams/                301
 /hi/compare/                           /hi/exams/                301
-/exams/:exam/question-papers           /exams/:exam/             301
-/exams/:exam/question-papers/          /exams/:exam/             301
 
 # Names other sites use, which crawlers request by habit.
 /manifest.json                         /manifest.webmanifest     301
