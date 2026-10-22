@@ -23,6 +23,7 @@
 # Unmatched paths use the generated 404.html (Cloudflare returns HTTP 404).
 
 /daily-pdf /pdf/latest.pdf 302
+/daily-pdf/ /pdf/latest.pdf 302
 
 # Parent folders of real pages, which crawlers reach by trimming a URL - all four returned 404 until 2026-10-20
 # (Cloudflare AI Crawl Control showed bursts of 4xx from Googlebot, ClaudeBot, PerplexityBot and others). Both
