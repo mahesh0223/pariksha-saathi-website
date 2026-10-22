@@ -4,5 +4,5 @@ export function llmsTxt(args: {
   affairsCount: number;
   noticesCount: number;
   lessonCount: number;
-  questionPageCount: number;
+  questionCount: number;
 }): string;

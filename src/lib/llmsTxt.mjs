@@ -24,9 +24,9 @@ const link = (name, path, note) => `- [${name}](${SITE_URL}${path})${note ? `: $
 
 /**
  * @param {{ hubs: Record<string, {hasCutoffs: boolean, lastVerified: string}>, papers: {examId: string, displayName: string, date: string, shift: string, slug: string, questions: number}[],
- *           affairsCount: number, noticesCount: number, lessonCount: number, questionPageCount: number }} args
+ *           affairsCount: number, noticesCount: number, lessonCount: number, questionCount: number }} args
  */
-export function llmsTxt({ hubs: hubSummaries, papers, affairsCount, noticesCount, lessonCount, questionPageCount }) {
+export function llmsTxt({ hubs: hubSummaries, papers, affairsCount, noticesCount, lessonCount, questionCount }) {
   const hubs = DIRECTORY_EXAM_IDS.filter((id) => hubSummaries[id]);
   // Only what that hub page shows: cut-offs appear on a hub only where the exam body published a clean table.
   const hubNote = (id) =>
@@ -73,7 +73,7 @@ ${link('Exam notices', '/app/exam-notices/', `${noticesCount} recruitment notice
 ## Learn and practise
 
 ${link('Lessons', '/learn/', `${lessonCount} topic lessons in Quantitative Aptitude, Reasoning, English, General Awareness, State GK and CTET pedagogy`)}
-${link('Practice questions', questionIndexPath('en'), `multiple-choice questions with answers and explanations, by topic, in English and Hindi (${questionPageCount.toLocaleString('en-IN')} question pages across the two languages)`)}
+${link('Practice questions', questionIndexPath('en'), `multiple-choice questions with answers and explanations, by topic, in English and Hindi (${questionCount.toLocaleString('en-IN')} questions across the two languages, listed in full by topic)`)}
 ${link('Typing and data-entry test', typingTestPath('en'), 'practice for the SSC CGL and CHSL skill tests, with the speed standards from the official notices')}
 
 ## About

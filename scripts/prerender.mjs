@@ -33,7 +33,9 @@ import { linkExamNames } from '../src/lib/examLinks.mjs';
 import { lessonQuestionListLink } from '../src/lib/questionTopicLink.mjs';
 import { QUESTION_PAGES_GENERATED, QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
 import { QUESTION_SUBJECTS_HI } from '../src/data/lessonSubjects.mjs';
-import { TOPIC_PAGE_SIZE, questionIndexBody, questionIndexMeta, questionIndexPath, questionPageBody, questionPageMeta, questionPageStructuredData, questionPath, topicListBody, topicListMeta, topicListPath } from '../src/lib/questionPage.mjs';
+import { TOPIC_PAGE_SIZE, groupByTopic, questionIndexBody, questionIndexMeta, questionIndexPath, topicListBody, topicListMeta, topicListPath, topicListStructuredData } from '../src/lib/questionPage.mjs';
+import { questionRedirectTarget } from '../src/lib/questionRedirects.mjs';
+import { QUESTION_REDIRECTS } from '../src/data/questionRedirects.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
@@ -308,7 +310,9 @@ async function assertNoPublishedUrlWentMissing(newSitemapUrls) {
   }
   const previousUrls = new Set([...previousXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE_URL, '')));
   const newUrls = new Set(newSitemapUrls.map((u) => u.loc));
-  const missing = [...previousUrls].filter((u) => !newUrls.has(u));
+  // An old one-question page (/q/<slug>/) folded into its topic list on 22 Oct 2026 is not missing: functions/q/
+  // answers it with a 301 to the same question (src/lib/questionRedirects.mjs).
+  const missing = [...previousUrls].filter((u) => !newUrls.has(u) && !questionRedirectTarget(QUESTION_REDIRECTS, u));
   if (missing.length > 0) {
     throw new Error(
       `Build check failed: ${missing.length} previously-published URL(s) are missing from the new sitemap - ` +
@@ -1611,51 +1615,30 @@ async function main() {
     sitemapUrls.push({ loc: itemPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: item.lastVerifiedAt.slice(0, 10) });
   }
 
-  // --- Practice-question pages (/q/, /hi/q/) --- one page per distinct question (src/lib/questionEligibility.mjs)
-  // from src/data/question-pages/*.json (scripts/gen-question-pages.mjs), plus a list per topic and an index.
+  // --- Practice questions (/q/, /hi/q/) --- every question in full on its topic's list (50 a page, answers behind
+  // "Show answer"), from src/data/question-pages/*.json (scripts/gen-question-pages.mjs), plus an index. Until 22 Oct
+  // 2026 each question also had its own page; functions/q/ now 301s those addresses to the question's anchor here.
   // Plain HTML: the stylesheet is linked rather than inlined and no app JavaScript loads.
   const topicFor = (key, lang) => {
     const topic = QUESTION_TOPICS[key];
     return { ...topic, subject: lang === 'hi' ? (QUESTION_SUBJECTS_HI[topic.subject] ?? topic.subject) : topic.subject };
   };
-  let questionPageCount = 0;
+  let questionCount = 0;
   for (const lang of ['en', 'hi']) {
     const otherLang = lang === 'hi' ? 'en' : 'hi';
     const questions = JSON.parse(readFileSync(new URL(`../src/data/question-pages/${lang}.json`, import.meta.url), 'utf8'));
-    const byTopic = new Map();
-    for (const q of questions) {
-      if (!byTopic.has(q.topicKey)) byTopic.set(q.topicKey, []);
-      byTopic.get(q.topicKey).push(q);
-    }
-    for (const [topicKey, list] of byTopic) {
+    questionCount += questions.length;
+    const creditFor = (q) => {
+      if (q.kind === 'bank') return q.attribution;
+      const lesson = q.lessonSlug ? TOPIC_LESSONS.find((entry) => entry.slug === q.lessonSlug) : null;
+      return lessonCredit(lesson, lang).text;
+    };
+    for (const [topicKey, list] of groupByTopic(questions)) {
       const topic = topicFor(topicKey, lang);
-      list.forEach((q, index) => {
-        const related = [];
-        for (let step = 1; related.length < 5 && step < list.length; step++) related.push(list[(index + step) % list.length]);
-        const lesson = q.lessonSlug ? TOPIC_LESSONS.find((entry) => entry.slug === q.lessonSlug) : null;
-        const credit = q.kind === 'bank' ? q.attribution : lessonCredit(lesson, lang).text;
-        const twinPath = q.twinSlug ? questionPath({ slug: q.twinSlug }, otherLang) : null;
-        const path = questionPath(q, lang);
-        const ctx = { topic, related, credit, twinPath };
-        writePage(path.slice(1, -1), page({
-          ...questionPageMeta(q, lang),
-          path,
-          assets,
-          lang,
-          inlineStyle: false,
-          scripts: false,
-          bodyHtml: questionPageBody(q, lang, ctx),
-          structuredData: questionPageStructuredData(q, lang, ctx),
-          alternateLanguages: twinPath
-            ? [{ lang, path }, { lang: otherLang, path: twinPath }, { lang: 'x-default', path: lang === 'en' ? path : twinPath }]
-            : undefined,
-        }));
-        sitemapUrls.push({ loc: path, priority: '0.5', lastmod: QUESTION_PAGES_GENERATED });
-        questionPageCount += 1;
-      });
       const pages = Math.ceil(list.length / TOPIC_PAGE_SIZE);
       for (let p = 1; p <= pages; p++) {
         const path = topicListPath(topic, lang, p);
+        const items = list.slice((p - 1) * TOPIC_PAGE_SIZE, p * TOPIC_PAGE_SIZE);
         const otherHasList = (QUESTION_TOPICS[topicKey][otherLang]?.count ?? 0) > 0;
         writePage(path.slice(1, -1), page({
           ...topicListMeta(topic, lang, p, pages),
@@ -1665,7 +1648,8 @@ async function main() {
           type: 'website',
           inlineStyle: false,
           scripts: false,
-          bodyHtml: topicListBody(topic, lang, list.slice((p - 1) * TOPIC_PAGE_SIZE, p * TOPIC_PAGE_SIZE), p, pages),
+          bodyHtml: topicListBody(topic, lang, items, p, pages, creditFor),
+          structuredData: topicListStructuredData(topic, lang, items, p, pages),
           alternateLanguages: p === 1 && otherHasList
             ? [{ lang, path }, { lang: otherLang, path: topicListPath(topic, otherLang) }, { lang: 'x-default', path: topicListPath(topic, 'en') }]
             : undefined,
@@ -1760,7 +1744,7 @@ async function main() {
       affairsCount: affairs.length,
       noticesCount: notices.length,
       lessonCount: LESSON_CATALOG.length,
-      questionPageCount,
+      questionCount,
     }),
     'utf8',
   );
@@ -1793,7 +1777,7 @@ ${sitemapUrls
   await regenerateServiceWorker();
 
   console.log(
-    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} English + ${noticesHi.length} Hindi exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages, ${questionPageCount} practice-question pages and a ${sitemapUrls.length}-url sitemap.xml.`,
+    `Prerendered ${affairs.length} English + ${affairsHi.length} Hindi current-affairs pages and ${notices.length} English + ${noticesHi.length} Hindi exam-notice pages, plus ${Object.keys(PUBLIC_PAGES).length} static pages, ${questionCount} practice questions on their topic lists and a ${sitemapUrls.length}-url sitemap.xml.`,
   );
 }
 

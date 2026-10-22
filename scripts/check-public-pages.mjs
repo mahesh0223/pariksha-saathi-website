@@ -15,6 +15,9 @@ import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.mjs';
+import { questionRedirectTarget } from '../src/lib/questionRedirects.mjs';
+import { questionRedirectsSource } from '../src/lib/questionRedirectsBuild.mjs';
+import { QUESTION_REDIRECTS } from '../src/data/questionRedirects.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -76,14 +79,17 @@ for (const file of files) {
   // rather than linked, and the PWA manifest on every page - see index.html's shared-head block.
   assert(!html.includes('fonts.googleapis.com'),`Google Fonts request crept back in: ${file}`);
   assert(html.includes('/fonts/fraunces-latin-v') && html.includes('@font-face'),`Missing inline @font-face: ${file}`);
-  // Exception: the ~8,000 /q/ practice-question pages link the stylesheet (inlining 28 KB into each would add
-  // ~200 MB to the deploy) and load no app JavaScript - checked in the /q/ block below.
+  // Exception: the /q/ practice-question lists link the stylesheet (they were ~8,000 one-question pages until 22 Oct
+  // 2026, when inlining 28 KB into each would have added ~200 MB) and load no app JavaScript - see the /q/ block below.
   const isQuestionPage = /dist\/(hi\/)?q\//.test(file);
   if (!isQuestionPage) assert(!/<link rel="stylesheet"[^>]*\/assets\//.test(html),`Entry stylesheet is linked instead of inlined: ${file}`);
   assert(html.includes('rel="manifest"'),`Missing web manifest link: ${file}`);
 }
-// /q/ practice-question pages (src/lib/questionPage.mjs): plain HTML with a linked stylesheet, no app JavaScript,
-// a canonical, an answer section and a credit line on every question page, and one page per entry in the data.
+// /q/ practice questions (src/lib/questionPage.mjs): plain HTML with a linked stylesheet, no app JavaScript and a /q/
+// canonical. Every question in the data is shown in full, with its answer, on the topic-list page that
+// src/data/questionRedirects.mjs names, and every list says how its questions were made. The one-question pages were
+// folded into the lists on 22 Oct 2026: none may be built or sitemapped again, the redirect map must match the data,
+// and the Pages Functions that answer the old addresses must be there.
 {
   const qFiles = files.filter((f) => /dist\/(hi\/)?q\//.test(f));
   for (const file of qFiles) {
@@ -91,17 +97,33 @@ for (const file of files) {
     assert(/<link rel="stylesheet"[^>]*\/assets\//.test(html), `Question page has no stylesheet: ${file}`);
     assert(!/<script type="module"/.test(html), `Question page loads app JavaScript: ${file}`);
     assert(/<link rel="canonical" href="https:\/\/parikshasaathi\.com\/(hi\/)?q\//.test(html), `Question page without a /q/ canonical: ${file}`);
+    if (!/dist\/(hi\/)?q\/index\.html$/.test(file)) assert(/class="question-credits"[\s\S]*?class="lesson-credit"/.test(html), `Topic list without its credit section: ${file}`);
   }
+  assert(readFileSync('src/data/questionRedirects.mjs', 'utf8') === questionRedirectsSource(), 'src/data/questionRedirects.mjs does not match the question data: re-run node scripts/gen-question-redirects.mjs');
+  for (const fn of ['functions/q/[[path]].js', 'functions/hi/q/[[path]].js']) assert(existsSync(fn) && readFileSync(fn, 'utf8').includes('QUESTION_REDIRECTS'), `${fn} is missing: old question addresses would 404`);
+  const listHtml = new Map();
+  let placed = 0;
   for (const lang of ['en', 'hi']) {
-    const data = JSON.parse(readFileSync(`src/data/question-pages/${lang}.json`, 'utf8'));
-    for (const q of data) {
-      const file = `dist/${lang === 'hi' ? 'hi/' : ''}q/${q.slug}/index.html`;
-      assert(existsSync(file), `Missing question page ${file}`);
-      const html = readFileSync(file, 'utf8');
-      assert(html.includes('class="news-learning"') && html.includes('class="lesson-credit"'), `Question page without its answer section or credit: ${file}`);
+    const prefix = lang === 'hi' ? '/hi' : '';
+    for (const q of JSON.parse(readFileSync(`src/data/question-pages/${lang}.json`, 'utf8'))) {
+      assert(!existsSync(`dist${prefix}/q/${q.slug}/index.html`), `A one-question page was built again: ${prefix}/q/${q.slug}/`);
+      const target = questionRedirectTarget(QUESTION_REDIRECTS, `${prefix}/q/${q.slug}/`);
+      assert(target, `No redirect for ${prefix}/q/${q.slug}/`);
+      const [path, anchor] = target.split('#');
+      if (!listHtml.has(path)) listHtml.set(path, readFileSync(`dist${path}index.html`, 'utf8'));
+      const html = listHtml.get(path);
+      const at = html.indexOf(`<li class="pyq-q" id="${anchor}">`);
+      assert(at >= 0, `${q.slug} is not on ${path}, where its redirect points`);
+      const next = html.indexOf('<li class="pyq-q"', at + 1);
+      const item = html.slice(at, next === -1 ? undefined : next);
+      assert(item.includes('class="pyq-answer"') && item.includes('class="pyq-correct"'), `${q.slug} on ${path} has no answer`);
+      placed += 1;
     }
   }
-  console.log(`Verified ${qFiles.length} /q/ pages: linked stylesheet, no app JavaScript, canonical, answer section and credit line.`);
+  const sitemapLocs = [...readFileSync('dist/sitemap.xml', 'utf8').matchAll(/<loc>https:\/\/parikshasaathi\.com([^<]+)<\/loc>/g)].map((m) => m[1]);
+  const stale = sitemapLocs.filter((loc) => questionRedirectTarget(QUESTION_REDIRECTS, loc));
+  assert.equal(stale.length, 0, `The sitemap still lists one-question pages, e.g. ${stale[0]}`);
+  console.log(`Verified ${qFiles.length} /q/ pages: ${placed} questions each on the list page its old address redirects to, with an answer; credit sections, linked stylesheet, no app JavaScript, canonical; no one-question pages built or sitemapped.`);
 }
 for (const [,href] of readFileSync('dist/index.html','utf8').matchAll(/href="(\/fonts\/[^"]+)"/g)) assert(existsSync(`dist${href}`),`missing font ${href}`);
 assert(readFileSync('dist/index.html','utf8').includes('id="home-preview"'),'home page is missing its baked preview JSON');
