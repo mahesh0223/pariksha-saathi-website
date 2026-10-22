@@ -1,7 +1,8 @@
 // Official-document links that need help to open. The Railway portal answers a document link opened cold with a
 // "Request Rejected" page until its home page has been visited once in that browser (checked again 22 Oct 2026: a
 // fresh session gets the rejection, the same session after one home-page visit gets the PDF). The link stays direct -
-// it is the document - and every page that shows one carries a hint (check-public-pages.mjs enforces it).
+// it is the document - and every page that shows one carries a hint (check-public-pages.mjs enforces it). The Android
+// app does the same (OfficialLinks.kt in the app repo); keep the two host lists in step.
 export const NEEDS_HOME_VISIT = { 'rrb.indianrailways.gov.in': 'https://rrb.indianrailways.gov.in/' };
 
 /** { host, home } when this link only opens after a home-page visit, else null. */
