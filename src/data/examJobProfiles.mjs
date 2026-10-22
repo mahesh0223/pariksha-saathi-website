@@ -132,7 +132,7 @@ export const EXAM_JOB_PROFILES = [
     examName: 'SSC CHSL',
     officialUrl: 'https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_chsl_2026.pdf',
     en: {
-      pageTitle: 'SSC CHSL Job Profile & Salary',
+      pageTitle: 'SSC CHSL Salary 2026: Official Pay Scale and Job Profile',
       lede: 'SSC CHSL fills two kinds of Group C posts in central government ministries, departments and offices, and in constitutional and statutory bodies and tribunals: Lower Division Clerk / Junior Secretariat Assistant (LDC/JSA), and Data Entry Operator (DEO and DEO Grade ‘A’). This page sticks to what the CHSL 2026 notice says about the posts, their pay levels and how posts are allotted. It does not describe daily duties or estimate take-home pay, because the notice does neither.',
       profileHeading: 'Two kinds of post under one exam',
       profileBody: [
@@ -172,7 +172,7 @@ export const EXAM_JOB_PROFILES = [
       disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. The posts, pay levels and skill-test details above are taken from the SSC CHSL 2026 notice and may change with each cycle — always confirm against the official notice linked above before making any decision.',
     },
     hi: {
-      pageTitle: 'SSC CHSL जॉब प्रोफाइल और सैलरी',
+      pageTitle: 'SSC CHSL सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल',
       lede: 'SSC CHSL केंद्र सरकार के मंत्रालयों, विभागों और कार्यालयों तथा संवैधानिक और वैधानिक निकायों और अधिकरणों में दो तरह के ग्रुप C पद भरता है: लोअर डिवीजन क्लर्क / जूनियर सचिवालय सहायक (LDC/JSA), और डेटा एंट्री ऑपरेटर (DEO और DEO ग्रेड ‘A’)। यह पृष्ठ केवल वही बताता है जो CHSL 2026 की अधिसूचना पदों, उनके पे लेवल और पद आवंटन के बारे में कहती है। इसमें रोज़ के कामकाज का ब्योरा या हाथ में आने वाले वेतन का अनुमान नहीं है, क्योंकि अधिसूचना में ये दोनों नहीं हैं।',
       profileHeading: 'एक परीक्षा, दो तरह के पद',
       profileBody: [
