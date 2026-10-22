@@ -505,7 +505,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
 
   let html = `<div class="compare-top-row"><a href="/" class="detail-back">&larr; ${t.home}</a><a href="${esc(otherPath)}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
   const hasCutoffs = cutoffs.length > 0;
-  html += `<h1>${esc(t.h1(examName, hasCutoffs))}</h1>`;
+  html += `<h1>${esc(t.h1(hubTitleName(examName, fact, lang), hasCutoffs))}</h1>`;
   html += `<p class="compare-lede">${esc(t.lede(fact.cycleLabel, formatHubDate(lastVerified, lang), hasCutoffs))}</p>`;
 
   html += `<h2>${t.glance}</h2><dl class="hub-glance">${glance.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
@@ -626,21 +626,69 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   return html;
 }
 
+// What a hub's title and H1 call the exam: its name plus the cycle the fact sheet covers, the way people search for it
+// ("SSC CGL 2026"). Keyed by the fact sheet's own cycle label, so a hub whose sheet moves to a new cycle drops back to
+// the bare name - never a stale year - until a row is added here. The year is not always the one in the label: the IBPS
+// cycle labelled "vacancies of 2027-28" was notified and is being examined in 2026, and SBI's "2026-27" adverts in 2026.
+const HUB_TITLE_NAME = {
+  ssc_cgl: { 'CGL 2026': { en: 'SSC CGL 2026' } },
+  ssc_chsl: { 'CHSL 2026': { en: 'SSC CHSL 2026' } },
+  ssc_mts: { 'MTS 2025': { en: 'SSC MTS 2025' } },
+  ssc_gd: { 'Constable (GD) 2026': { en: 'SSC GD 2026' } },
+  ibps_po: { 'CRP PO/MT-XVI (vacancies of 2027-28)': { en: 'IBPS PO 2026' } },
+  ibps_clerk: { 'CRP CSA-XVI (Clerk, vacancies of 2027-28)': { en: 'IBPS Clerk 2026' } },
+  sbi_po: { 'PO 2026-27': { en: 'SBI PO 2026' } },
+  sbi_clerk: { 'JA 2026-27': { en: 'SBI Clerk 2026' } },
+  rrb_ntpc: { 'CEN 06/2026 and CEN 07/2026': { en: 'RRB NTPC 2026' } },
+  rrb_alp: { 'CEN 01/2026': { en: 'RRB ALP 2026' } },
+  rrb_group_d: { 'CEN 09/2025 (Level 1)': { en: 'RRB Group D 2025' } },
+  agniveer_army: { 'Recruiting Year 2025-26': { en: 'Agniveer 2025-26' } },
+  ctet: { 'CTET 22nd edition (Dec 2026)': { en: 'CTET December 2026', hi: 'CTET दिसंबर 2026' } },
+  up_police: { 'Constable Recruitment 2025': { en: 'UP Police Constable 2025', hi: 'UP Police कांस्टेबल 2025' } },
+  bihar_police: { 'Advt. No. 01/2025 (Constable, Bihar Police and Bihar Special Armed Police)': { en: 'Bihar Police Constable 2025', hi: 'Bihar Police कांस्टेबल 2025' } },
+  mp_police: { 'Police Constable (G.D.) Recruitment Test 2026': { en: 'MP Police Constable 2026', hi: 'MP Police कांस्टेबल 2026' } },
+  rajasthan_police: { 'Constable Recruitment 2025': { en: 'Rajasthan Police Constable 2025', hi: 'Rajasthan Police कांस्टेबल 2025' } },
+  bpsc: { '72nd CCE 2026': { en: 'BPSC 72nd CCE 2026', hi: 'BPSC 72वीं CCE 2026' } },
+  mppsc: { 'State Service Exam 2026': { en: 'MPPSC 2026' } },
+  rpsc: { 'RAS 2026': { en: 'RPSC RAS 2026' } },
+  uppsc: { 'PCS 2026': { en: 'UPPSC PCS 2026' } },
+};
+
+/** The hub's exam name with its cycle ("SSC CGL 2026"), or the bare name when this cycle has no row above. */
+export function hubTitleName(examName, fact, lang = 'en') {
+  const row = HUB_TITLE_NAME[fact.examId]?.[fact.cycleLabel];
+  return row ? (row[lang] ?? row.en) : examName;
+}
+
+// "Tier 1 & 2" / "CBT 1 & 2" / "Prelims & Mains", read from the fact sheet's own stage names - the way searches
+// qualify a pattern. Nothing for single-stage exams.
+function stageLabel(fact, lang) {
+  const names = (fact.stages ?? []).map((s) => s.name?.en ?? '').join(' | ');
+  const hi = lang === 'hi';
+  if (/Tier-I\b/.test(names) && /Tier-II\b/.test(names)) return hi ? 'टियर 1 और 2' : 'Tier 1 & 2';
+  if (/CBT-1\b/.test(names) && /CBT-2\b/.test(names)) return hi ? 'CBT 1 और 2' : 'CBT 1 & 2';
+  if (/Preliminary/.test(names) && /Main/.test(names)) return hi ? 'प्रीलिम्स और मेन्स' : 'Prelims & Mains';
+  return '';
+}
+
 export function examHubMeta({ examName, facts, cutoffs = [], lang = 'en' }) {
   const t = T[lang];
   const fact = facts[0];
   const lastVerified = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10)).sort().at(-1);
   const hasCutoffs = cutoffs.length > 0;
-  const syllabus = EXAM_HUB_EXTRAS[fact.examId]?.syllabus ? (lang === 'hi' ? ' सिलेबस,' : ' syllabus,') : '';
+  const hasSyllabus = Boolean(EXAM_HUB_EXTRAS[fact.examId]?.syllabus);
+  const syllabus = hasSyllabus ? (lang === 'hi' ? ' सिलेबस,' : ' syllabus,') : '';
+  const name = hubTitleName(examName, fact, lang);
+  const stage = stageLabel(fact, lang);
   const title =
     lang === 'hi'
-      ? `${examName} परीक्षा पैटर्न, अंक${hasCutoffs ? ' और कट-ऑफ' : ' और आयु सीमा'}`
-      : `${examName} exam pattern, marks${hasCutoffs ? ' & cut-off' : ' & age limit'}`;
+      ? `${name}: ${stage ? `${stage} ` : ''}परीक्षा पैटर्न${hasSyllabus ? ', सिलेबस' : ''} और ${hasCutoffs ? 'कट-ऑफ' : 'आयु सीमा'}`
+      : `${name}: ${stage ? `${stage} ` : ''}Exam Pattern${hasSyllabus ? ', Syllabus' : ''} & ${hasCutoffs ? 'Cut-off' : 'Age Limit'}`;
   const description =
     lang === 'hi'
-      ? `${examName} का आधिकारिक पैटर्न,${syllabus} नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ${hasCutoffs ? ' और कट-ऑफ' : ''}, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
-      : `${examName} official pattern,${syllabus} negative marking, timing, age limit, dates${hasCutoffs ? ' and cut-offs' : ''}, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
-  return { title, description, lastVerified, h1: t.h1(examName, hasCutoffs) };
+      ? `${name} का आधिकारिक पैटर्न,${syllabus} नेगेटिव मार्किंग, समय, आयु सीमा, तिथियाँ${hasCutoffs ? ' और कट-ऑफ' : ''}, हर आँकड़े के साथ उसका स्रोत और ${formatHubDate(lastVerified, lang)} का सत्यापन।`
+      : `${name} official pattern,${syllabus} negative marking, timing, age limit, dates${hasCutoffs ? ' and cut-offs' : ''}, each figure linked to its source and last verified on ${formatHubDate(lastVerified, lang)}.`;
+  return { title, description, lastVerified, h1: t.h1(name, hasCutoffs) };
 }
 
 export function examHubStructuredData({ examName, facts, cutoffs = [], lang = 'en', siteUrl }) {

@@ -578,3 +578,17 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   assert.equal(bare.size, 0, `internal links to a bare path that redirects to its slash form: ${[...bare].slice(0, 5).map(([href, page]) => `${href} (in ${page})`).join(', ')}`);
   console.log(`Verified that no internal link on ${pages} built pages points at a bare path that redirects to its slash form.`);
 }
+
+// Hub titles name the cycle their facts cover ("SSC CGL 2026", src/lib/examHub.mjs HUB_TITLE_NAME). A fact sheet that
+// moves to a new cycle drops its hub back to the bare name - safe, but worth a row: say which ones, without failing.
+{
+  const bare = [];
+  for (const examId of HUB_EXAM_IDS) {
+    for (const lang of ['en', 'hi']) {
+      const title = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8').match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
+      if (!/\b20\d\d\b/.test(title)) bare.push(`${examHubPath(examId, lang)} "${title}"`);
+    }
+  }
+  if (bare.length) console.log(`Note: ${bare.length} hub title(s) name no cycle year - add the fact sheet's new cycleLabel to HUB_TITLE_NAME: ${bare.join('; ')}`);
+  else console.log(`Verified all ${HUB_EXAM_IDS.length * 2} hub titles name their cycle year.`);
+}

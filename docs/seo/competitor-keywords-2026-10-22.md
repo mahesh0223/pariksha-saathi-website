@@ -86,7 +86,9 @@ What we have that they mostly don't: 347 solved papers as text pages (CGL 42, CH
 measured GK data page (7,925 questions), every fact linked to its official notice, daily Hindi PDF, Hindi pages at
 their own URLs, and posts/pay that match the current notice (several competitors' CHSL pages are out of date).
 
-## Opportunities, in priority order (to decide; nothing here is built)
+## Opportunities, in priority order
+
+Status: 1 built 22 Oct 2026 (2fa5a9b); 2 built 22 Oct 2026 (hub titles and H1s, src/lib/examHub.mjs HUB_TITLE_NAME). 3-7 not built.
 
 1. **A previous-year-papers page per exam** - "SSC CGL Previous Year Question Papers with Answers (Tier-I, shift-wise)"
    listing every solved shift by year, for CGL, CHSL, MTS and GD, in English and Hindi. This is the most contested
