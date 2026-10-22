@@ -135,6 +135,19 @@ const T = {
     faqQualification: { q: (name) => `What qualification do I need for ${name}?` },
     faqDates: { q: (name) => `What are the ${name} first-stage exam dates?`, a: (cycle, label, from, to) => `${label}: ${to ? `${from} to ${to}` : from}, as per the ${cycle} notification.` },
     faqSubjects: { q: (name) => `Which subjects does the ${name} exam test?`, a: (subjects) => `The official syllabus lists: ${subjects}.` },
+    faqNegativeStage: { q: (name, stage) => `Is there negative marking in ${name} ${stage}?` },
+    faqQualifying: { q: (name) => `Which parts of the ${name} exam are qualifying?`, a: (cycle, list) => `As per the ${cycle} notification, these are qualifying: ${list}.` },
+    faqFinalYear: {
+      q: (name, degree) => (degree ? `Can final-year students apply for ${name}?` : `Can students awaiting their result apply for ${name}?`),
+      a: (cycle, text) => `As per the ${cycle} notification: ${text}`,
+    },
+    faqQualifyingMarks: { q: (name) => `What are the minimum qualifying marks in ${name}?` },
+    faqApply: {
+      q: (name) => `When is the last date to apply for ${name}?`,
+      row: (label, from, to, closed) => `${label}: ${from} to ${to}${closed ? ' (now closed)' : ''}.`,
+      src: (cycle) => `As per the ${cycle} notification.`,
+    },
+    faqVacancies: { q: (name) => `How many vacancies are there in ${name}?`, a: (cycle, total, asOf) => `${total} tentative vacancies for ${cycle}${asOf ? `, as officially published on ${asOf}` : ''}.` },
     sourceWord: 'Source',
     verifiedWord: 'Last verified',
     howMade: 'How this page is made',
@@ -230,6 +243,19 @@ const T = {
     faqQualification: { q: (name) => `${name} के लिए कौन-सी योग्यता चाहिए?` },
     faqDates: { q: (name) => `${name} के पहले चरण की परीक्षा तिथियाँ क्या हैं?`, a: (cycle, label, from, to) => `${label}: ${to ? `${from} से ${to} तक` : from}, ${cycle} की अधिसूचना के अनुसार।` },
     faqSubjects: { q: (name) => `${name} परीक्षा में कौन-से विषय आते हैं?`, a: (subjects) => `आधिकारिक पाठ्यक्रम में ये विषय हैं: ${subjects}।` },
+    faqNegativeStage: { q: (name, stage) => `क्या ${name} ${stage} में नेगेटिव मार्किंग है?` },
+    faqQualifying: { q: (name) => `${name} परीक्षा के कौन-से हिस्से अर्हक (क्वालिफाइंग) हैं?`, a: (cycle, list) => `${cycle} की अधिसूचना के अनुसार ये अर्हक हैं: ${list}।` },
+    faqFinalYear: {
+      q: (name, degree) => (degree ? `क्या अंतिम वर्ष के छात्र ${name} के लिए आवेदन कर सकते हैं?` : `क्या परिणाम की प्रतीक्षा कर रहे छात्र ${name} के लिए आवेदन कर सकते हैं?`),
+      a: (cycle, text) => `${cycle} की अधिसूचना के अनुसार: ${text}`,
+    },
+    faqQualifyingMarks: { q: (name) => `${name} में न्यूनतम अर्हक अंक कितने हैं?` },
+    faqApply: {
+      q: (name) => `${name} के लिए आवेदन की अंतिम तिथि क्या है?`,
+      row: (label, from, to, closed) => `${label}: ${from} से ${to} तक${closed ? ' (अब बंद)' : ''}।`,
+      src: (cycle) => `${cycle} की अधिसूचना के अनुसार।`,
+    },
+    faqVacancies: { q: (name) => `${name} में कितनी रिक्तियाँ हैं?`, a: (cycle, total, asOf) => `${cycle} के लिए ${total} अनंतिम रिक्तियाँ${asOf ? `, ${asOf} को आधिकारिक रूप से प्रकाशित` : ''}।` },
     sourceWord: 'स्रोत',
     verifiedWord: 'अंतिम सत्यापन',
     howMade: 'यह पृष्ठ कैसे बना है',
@@ -430,7 +456,17 @@ const sentence = (text, lang) => {
 
 // Questions and answers built only from the fact sheet - every answer restates a figure shown, with its source, in
 // the blocks above - plus the syllabus subject names. Shown at the foot of the page and given as FAQPage data.
-export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null }) {
+// A qualification row that speaks to applying before the final result (final-year students, results awaited).
+const FINAL_YEAR = /final[- ](year|semester)|appearing|awaiting|result must have been declared/i;
+// ...and whether it is a degree or course qualification, which decides how the question is put.
+const DEGREE_LEVEL = /degree|graduat|bachelor|qualifying course/i;
+// An application window among the dates (not a correction, modification or fee date).
+const APPLY = /applications?\b/i;
+const NOT_APPLY = /correction|modif|edit|fee|status/i;
+
+const negativeText = (p, lang, t) => (p.negativeMarking === null || p.negativeMarking === undefined ? t.negativeNotStated : p.negativeMarking.perWrongAnswer > 0 ? pick(p.negativeMarking, lang) : t.noNegative);
+
+export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null, now = new Date() }) {
   const t = T[lang];
   const fact = facts[0];
   const first = firstStageSummary(fact, lang, t);
@@ -445,12 +481,44 @@ export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXT
         : first.firstMcq.map((p, i) => `${pick(p.name, lang)}: ${sentence(first.negativeTexts[i], lang)}`).join(' ');
     faq.push({ q: t.faqNegative.q(examName), a: t.faqNegative.a(fact.cycleLabel, first.label, negative) });
   }
+  // The same for each later stage that has objective papers (CGL Tier-II, IBPS Mains, NTPC CBT-2).
+  for (const stage of fact.stages.slice(1)) {
+    const mcq = (stage.parts ?? []).filter((p) => (p.sections?.length ?? 0) > 0 || p.kind === 'objective');
+    // Asked only where the notice says something: "Not stated" for every paper answers nothing.
+    if (mcq.length === 0 || mcq.every((p) => p.negativeMarking === null || p.negativeMarking === undefined)) continue;
+    const texts = mcq.map((p) => negativeText(p, lang, t));
+    const text = new Set(texts).size <= 1 ? sentence(texts[0], lang) : mcq.map((p, i) => `${pick(p.name, lang)}: ${sentence(texts[i], lang)}`).join(' ');
+    const stageName = pick(stage.name, lang);
+    faq.push({ q: t.faqNegativeStage.q(examName, stageName.replace(/\s*\([^)]*\)\s*$/, '')), a: t.faqNegative.a(fact.cycleLabel, stageName, text) });
+  }
+  // The parts the notification marks as qualifying.
+  const qualifying = fact.stages.flatMap((s) =>
+    (s.parts ?? []).filter((p) => p.qualifying).map((p) => (pick(s.name, lang) === pick(p.name, lang) ? pick(s.name, lang) : `${pick(s.name, lang)}: ${pick(p.name, lang)}`)),
+  );
+  if (qualifying.length > 0 && qualifying.length <= 6) faq.push({ q: t.faqQualifying.q(examName), a: t.faqQualifying.a(fact.cycleLabel, qualifying.join('; ')) });
   const el = fact.eligibility;
   faq.push({ q: t.faqAge.q(examName), a: [sentence(pick(el.ageNote, lang), lang), el.ageReferenceDate ? t.ageAsOn(formatHubDate(el.ageReferenceDate, lang)) : ''].filter(Boolean).join(' ') });
   // A long post-by-post table does not fit an answer; the eligibility block above has it.
   const qualification = el.qualification.map((row) => `${pick(row.posts, lang)}: ${sentence(pick(row.requirement, lang), lang)}`).join(' ');
   if (el.qualification.length > 0 && el.qualification.length <= 3 && qualification.length <= MAX_FAQ_QUALIFICATION) {
     faq.push({ q: t.faqQualification.q(examName), a: qualification });
+  }
+  // Applying before the final result - only where the notice's own qualification text says something about it.
+  const finalYear = el.qualification.filter((row) => FINAL_YEAR.test(row.requirement?.en ?? ''));
+  if (finalYear.length > 0) {
+    const text = finalYear.map((row) => `${el.qualification.length > 1 ? `${pick(row.posts, lang)}: ` : ''}${sentence(pick(row.requirement, lang), lang)}`).join(' ');
+    faq.push({ q: t.faqFinalYear.q(examName, finalYear.some((row) => DEGREE_LEVEL.test(row.requirement?.en ?? ''))), a: t.faqFinalYear.a(fact.cycleLabel, text) });
+  }
+  if (el.qualifyingMarks) faq.push({ q: t.faqQualifyingMarks.q(examName), a: sentence(pick(el.qualifyingMarks, lang), lang) });
+  if (fact.vacancies?.total) {
+    faq.push({ q: t.faqVacancies.q(examName), a: t.faqVacancies.a(fact.cycleLabel, countText(fact.vacancies.total), fact.vacancies.asOf ? formatHubDate(fact.vacancies.asOf, lang) : '') });
+  }
+  // The application window(s), saying so once a window has closed.
+  const apply = (fact.dates ?? []).filter((d) => d.from && d.to && APPLY.test(d.label?.en ?? '') && !NOT_APPLY.test(d.label?.en ?? ''));
+  if (apply.length > 0) {
+    const today = now.toISOString().slice(0, 10);
+    const rows = apply.map((d) => t.faqApply.row(pick(d.label, lang), formatHubDate(d.from, lang), formatHubDate(d.to, lang), String(d.to).slice(0, 10) < today));
+    faq.push({ q: t.faqApply.q(examName), a: `${rows.join(' ')} ${t.faqApply.src(fact.cycleLabel)}` });
   }
   if (first.firstDates) {
     // The dates belong to the whole stage, not to one of its alternative papers.
@@ -600,7 +668,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   if (links.jobProfilePath) html += `<li><a href="${esc(links.jobProfilePath)}">${t.jobProfile}</a></li>`;
   html += `<li><a href="/learn/">${t.lessons}</a></li><li><a href="/onboarding/">${t.practice}</a></li></ul>`;
 
-  html += `<h2>${t.faq}</h2><div class="hub-faq">${examHubFaq({ examName, facts, lang, extras })
+  html += `<h2>${t.faq}</h2><div class="hub-faq">${examHubFaq({ examName, facts, lang, extras, now })
     .map(({ q, a }) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`)
     .join('')}</div>`;
   html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.faq });
