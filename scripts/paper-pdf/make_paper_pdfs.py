@@ -109,7 +109,7 @@ def page_html(paper, rows):
   @bottom-left {{ content: "parikshasaathi.com \\00B7  free solved papers \\00B7  Telegram: {TELEGRAM}"; font: 8pt 'Helvetica Neue', Arial, sans-serif; color: #64748b; }}
   @bottom-right {{ content: "Page " counter(page) " of " counter(pages); font: 8pt 'Helvetica Neue', Arial, sans-serif; color: #64748b; }} }}
 body {{ font-family: 'Helvetica Neue', Arial, 'Kohinoor Devanagari', sans-serif; color: #111827; font-size: 10.5pt; line-height: 1.45; margin: 0; font-variant-ligatures: none; font-feature-settings: 'liga' 0, 'clig' 0; }}
-a {{ color: #1e3a8a; }}
+a {{ color: #1e3a8a; overflow-wrap: anywhere; }}  .small {{ overflow-wrap: anywhere; }}
 .hdr {{ display: flex; align-items: center; gap: 12px; border-bottom: 3px solid #f59e0b; padding-bottom: 8px; }}
 .hdr img {{ width: 46px; height: 46px; border-radius: 11px; }}
 .hdr h1 {{ margin: 0; font-size: 17pt; color: #1e3a8a; }} .hdr .d {{ color: #b45309; font-weight: 700; font-size: 11pt; }}
