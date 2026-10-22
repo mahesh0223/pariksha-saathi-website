@@ -3594,6 +3594,82 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से दोनों मत्स्य उत्पाद, संस्थान और उसका शहर, प्रशासन का मुख्यालय और नाव डिज़ाइनों की संख्या लिखें; नोट से GI अधिनियम का वर्ष, पहला GI उत्पाद, रजिस्ट्री का स्थान और पंजीकरण की अवधि।',
     },
   },
+  {
+    match: /[?&]PRID=2326568(?:&|$)/i,
+    en: {
+      body: 'Prime Minister Narendra Modi paid an official visit to Poland on 21-22 August 2024, at the invitation of Prime Minister Donald Tusk, as the two countries marked the 70th anniversary of their diplomatic relations. The two leaders elevated India-Poland relations to a Strategic Partnership and agreed to a five-year Joint Action Plan for 2024-2028 to implement it.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2047821',
+      refLabel: 'Reference: PIB, \'India-Poland Joint Statement: Establishment of Strategic Partnership\', 22 August 2024',
+      checkQ: 'Check yourself: when did India and Poland become strategic partners, and which anniversary did that visit mark?',
+      checkA: 'During PM Modi\'s visit to Poland on 21-22 August 2024; the 70th anniversary of diplomatic relations.',
+      task: 'Revision task: from this release, note the visit dates, the trade target year, the four outcomes (trade target, CDRI, Defence Industry Dialogue, counter-terrorism dialogue) and the UNSC seat Poland backs; from the note, the Strategic Partnership\'s year and Action Plan period.',
+    },
+    hi: {
+      body: 'प्रधानमंत्री डोनाल्ड टस्क के निमंत्रण पर प्रधानमंत्री नरेंद्र मोदी ने 21-22 अगस्त 2024 को पोलैंड की आधिकारिक यात्रा की, जब दोनों देश अपने राजनयिक संबंधों की 70वीं वर्षगांठ मना रहे थे। दोनों नेताओं ने भारत-पोलैंड संबंधों को रणनीतिक साझेदारी के स्तर तक ऊँचा किया और इसे लागू करने के लिए 2024-2028 की पाँच वर्षीय संयुक्त कार्य योजना पर सहमति दी।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2047821',
+      refLabel: 'संदर्भ: PIB, \'भारत-पोलैंड संयुक्त वक्तव्य: रणनीतिक साझेदारी की स्थापना\', 22 अगस्त 2024',
+      checkQ: 'खुद जाँचें: भारत और पोलैंड रणनीतिक साझेदार कब बने, और वह यात्रा किस वर्षगांठ पर हुई थी?',
+      checkA: '21-22 अगस्त 2024 को प्रधानमंत्री मोदी की पोलैंड यात्रा के दौरान; राजनयिक संबंधों की 70वीं वर्षगांठ।',
+      task: 'अभ्यास: इस रिलीज़ से यात्रा की तारीख़ें, व्यापार लक्ष्य का वर्ष, चार परिणाम (व्यापार लक्ष्य, CDRI, रक्षा उद्योग संवाद, आतंकवाद-रोधी संवाद) और पोलैंड जिस UNSC सीट का समर्थन करता है, लिखें; नोट से रणनीतिक साझेदारी का वर्ष और कार्य योजना की अवधि।',
+    },
+  },
+  {
+    match: /[?&]PRID=2326629(?:&|$)/i,
+    en: {
+      body: 'BRIC was formally established in 2006 as a political cooperation forum of Brazil, Russia, India and China; South Africa joined as a full member in 2011, making it BRICS. Egypt, Ethiopia, Iran, Saudi Arabia and the UAE became full members in January 2024, and Indonesia joined as the eleventh full member in January 2025. India assumed its fourth BRICS Chairship on 1 January 2026, with the theme \'Building for Resilience, Innovation, Cooperation and Sustainability\', and set the 18th BRICS Summit for New Delhi on 12-13 September 2026.',
+      refUrl: 'https://www.pib.gov.in/PressNoteDetails.aspx?NoteId=159946&ModuleId=3',
+      refLabel: 'Reference: PIB, \'BRICS: Evolution, Cooperation and India\'s Leadership\', 10 September 2026',
+      checkQ: 'Check yourself: which country joined BRICS as its eleventh full member, and when?',
+      checkA: 'Indonesia, in January 2025.',
+      task: 'Revision task: from this release, note the Forum\'s number, venue, dates and theme, the four session themes and the numbers of member and partner countries; from the note, BRICS\'s founding year, the 2011, 2024 and 2025 members and India\'s chairship theme.',
+    },
+    hi: {
+      body: 'BRIC की औपचारिक स्थापना 2006 में ब्राज़ील, रूस, भारत और चीन के राजनीतिक सहयोग मंच के रूप में हुई; 2011 में दक्षिण अफ्रीका पूर्ण सदस्य बना और यह BRICS बना। जनवरी 2024 में मिस्र, इथियोपिया, ईरान, सऊदी अरब और UAE पूर्ण सदस्य बने, और जनवरी 2025 में इंडोनेशिया ग्यारहवें पूर्ण सदस्य के रूप में जुड़ा। भारत ने 1 जनवरी 2026 को चौथी बार BRICS की अध्यक्षता संभाली, जिसका विषय \'लचीलापन, नवाचार, सहयोग और स्थिरता के लिए निर्माण\' है, और 18वाँ BRICS शिखर सम्मेलन 12-13 सितंबर 2026 को नई दिल्ली में तय किया।',
+      refUrl: 'https://www.pib.gov.in/PressNoteDetails.aspx?NoteId=159946&ModuleId=3',
+      refLabel: 'संदर्भ: PIB, \'ब्रिक्स: विकास, सहयोग और भारत का नेतृत्व\', 10 सितंबर 2026',
+      checkQ: 'खुद जाँचें: कौन-सा देश BRICS का ग्यारहवाँ पूर्ण सदस्य बना, और कब?',
+      checkA: 'इंडोनेशिया, जनवरी 2025 में।',
+      task: 'अभ्यास: इस रिलीज़ से फोरम की संख्या, स्थान, तारीख़ें और विषय, चार सत्रों के विषय और सदस्य व भागीदार देशों की संख्या लिखें; नोट से BRICS की स्थापना का वर्ष, 2011, 2024 और 2025 के सदस्य और भारत की अध्यक्षता का विषय।',
+    },
+  },
+  {
+    match: /[?&]PRID=2326535(?:&|$)/i,
+    en: {
+      body: 'Prime Minister Narendra Modi inaugurated the first Kashi Tamil Sangamam, a month-long programme in Varanasi, on 19 November 2022, to celebrate, reaffirm and rediscover the age-old links between Tamil Nadu and Kashi, two ancient seats of learning. More than 2,500 delegates from Tamil Nadu were to visit Kashi, and the Prime Minister released the \'Tirukkural\' along with its translation into 13 languages.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1877338',
+      refLabel: 'Reference: PIB, Prime Minister\'s Office, \'PM inaugurates Kashi Tamil Sangamam in Varanasi\', 19 November 2022',
+      checkQ: 'Check yourself: when was the first Kashi Tamil Sangamam inaugurated, and into how many languages was the Tirukkural released in translation?',
+      checkA: '19 November 2022; 13 languages.',
+      task: 'Revision task: from this release, note the edition, dates, theme, number of participants and groups, the three cities visited, the registration deadline and the number of institutions; from the note, the first edition\'s inauguration date and its purpose.',
+    },
+    hi: {
+      body: 'प्रधानमंत्री नरेंद्र मोदी ने 19 नवंबर 2022 को वाराणसी में एक महीने के पहले काशी तमिल संगमम का उद्घाटन किया, जिसका उद्देश्य तमिलनाडु और काशी, शिक्षा के दो प्राचीन केंद्रों, के सदियों पुराने संबंधों का उत्सव मनाना और उन्हें फिर से खोजना था। तमिलनाडु के 2,500 से अधिक प्रतिनिधियों को काशी आना था, और प्रधानमंत्री ने \'तिरुक्कुरल\' का 13 भाषाओं में अनुवाद सहित विमोचन किया।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1877338',
+      refLabel: 'संदर्भ: PIB, प्रधानमंत्री कार्यालय, \'प्रधानमंत्री ने वाराणसी में काशी तमिल संगमम का उद्घाटन किया\', 19 नवंबर 2022',
+      checkQ: 'खुद जाँचें: पहले काशी तमिल संगमम का उद्घाटन कब हुआ, और तिरुक्कुरल का कितनी भाषाओं में अनुवाद जारी हुआ?',
+      checkA: '19 नवंबर 2022; 13 भाषाएँ।',
+      task: 'अभ्यास: इस रिलीज़ से संस्करण, तारीख़ें, विषय, प्रतिभागियों और समूहों की संख्या, तीनों शहर, पंजीकरण की अंतिम तिथि और संस्थानों की संख्या लिखें; नोट से पहले संस्करण के उद्घाटन की तारीख़ और उसका उद्देश्य।',
+    },
+  },
+  {
+    match: /[?&]PRID=2326567(?:&|$)/i,
+    en: {
+      body: 'Indian coins, including commemorative coins, are minted by the Security Printing and Minting Corporation of India Limited (SPMCIL), a Miniratna Category-I central public sector enterprise under the Department of Economic Affairs, Ministry of Finance. Across its nine units it also produces bank notes, security paper, postal stamps, passports and medallions, and it has minted a \'Visually Impaired Friendly\' coin series.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2006374',
+      refLabel: 'Reference: PIB, Ministry of Finance, \'19th Foundation Day of SPMCIL\', 15 February 2024',
+      checkQ: 'Check yourself: which company mints India\'s coins, and under which department is it?',
+      checkA: 'Security Printing and Minting Corporation of India Limited (SPMCIL), under the Department of Economic Affairs, Ministry of Finance.',
+      task: 'Revision task: from this release, note the coin\'s denomination, the anniversary it marks, the place of release, its diameter, weight and alloy; from the note, who mints India\'s coins and what else SPMCIL produces.',
+    },
+    hi: {
+      body: 'भारतीय सिक्के, स्मारक सिक्कों सहित, सिक्योरिटी प्रिंटिंग एंड मिंटिंग कॉरपोरेशन ऑफ इंडिया लिमिटेड (SPMCIL) ढालता है, जो वित्त मंत्रालय के आर्थिक कार्य विभाग के अधीन एक मिनीरत्न श्रेणी-I केंद्रीय सार्वजनिक क्षेत्र उद्यम है। अपनी नौ इकाइयों में यह बैंक नोट, सुरक्षा कागज़, डाक टिकट, पासपोर्ट और पदक भी बनाता है, और इसने \'दृष्टिबाधित-अनुकूल\' सिक्का शृंखला भी ढाली है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2006374',
+      refLabel: 'संदर्भ: PIB, वित्त मंत्रालय, \'SPMCIL का 19वाँ स्थापना दिवस\', 15 फ़रवरी 2024',
+      checkQ: 'खुद जाँचें: भारत के सिक्के कौन-सी कंपनी ढालती है, और वह किस विभाग के अधीन है?',
+      checkA: 'सिक्योरिटी प्रिंटिंग एंड मिंटिंग कॉरपोरेशन ऑफ इंडिया लिमिटेड (SPMCIL), वित्त मंत्रालय के आर्थिक कार्य विभाग के अधीन।',
+      task: 'अभ्यास: इस रिलीज़ से सिक्के का मूल्यवर्ग, जिस जयंती पर यह जारी हुआ, जारी करने का स्थान, व्यास, वज़न और मिश्रधातु लिखें; नोट से भारत के सिक्के कौन ढालता है और SPMCIL और क्या बनाता है।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
