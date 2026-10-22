@@ -543,7 +543,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "SSC GD Constable",
     "officialUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_CTGD_2026.pdf",
     "en": {
-      "pageTitle": "SSC GD Constable Job Profile & Pay",
+      "pageTitle": "SSC GD Constable Salary 2026: Official Pay Scale and Job Profile",
       "lede": "SSC GD is one exam that recruits Constables (General Duty) for several central forces and Riflemen (General Duty) for Assam Rifles. This page sticks to what the SSC notice itself says about the posts, the pay level and how you are allotted to a force. It does not describe duties or estimate take-home pay, because the notice does neither.",
       "profileHeading": "One exam, several forces",
       "profileBody": [
@@ -591,7 +591,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. The pay level and post details above are taken from the SSC notice and may change with each cycle — always confirm against the official notice linked above before making any decision."
     },
     "hi": {
-      "pageTitle": "SSC GD कांस्टेबल जॉब प्रोफाइल और वेतन",
+      "pageTitle": "SSC GD कांस्टेबल सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "SSC GD एक ऐसी परीक्षा है जो कई केंद्रीय बलों में कांस्टेबल (जनरल ड्यूटी) और असम राइफल्स में राइफलमैन (जनरल ड्यूटी) की भर्ती करती है। यह पृष्ठ केवल वही बताता है जो SSC की अधिसूचना पदों, पे लेवल और बल के आवंटन के बारे में कहती है। इसमें कामकाज का ब्योरा या हाथ में आने वाले वेतन का अनुमान नहीं दिया गया है, क्योंकि अधिसूचना में ये दोनों नहीं हैं।",
       "profileHeading": "एक परीक्षा, कई बल",
       "profileBody": [
@@ -743,7 +743,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "RRB NTPC",
     "officialUrl": "https://rrb.indianrailways.gov.in/",
     "en": {
-      "pageTitle": "RRB NTPC Job Profile & Salary",
+      "pageTitle": "RRB NTPC Salary 2026: Official Pay Level and Job Profile",
       "lede": "RRB NTPC fills non-technical posts across Indian Railways. The October 2026 notifications list eight posts in two groups: graduate-level posts in CEN 06/2026 and 12th-level posts in CEN 07/2026. This page gives only what those notifications print: post names, 7th CPC pay level, initial pay, qualification and medical standard. The notifications do not describe each post’s day-to-day duties.",
       "profileHeading": "Two groups of posts, two notifications",
       "profileBody": [
@@ -811,7 +811,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Railway Recruitment Boards or any government body. The pay and post details above are copied from the notifications named on this page, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "RRB NTPC जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "RRB NTPC सैलरी 2026: आधिकारिक पे लेवल और जॉब प्रोफाइल",
       "lede": "RRB NTPC भारतीय रेलवे में नॉन-टेक्निकल पद भरता है। अक्टूबर 2026 की अधिसूचनाओं में आठ पद दो समूहों में दिए गए हैं: CEN 06/2026 में स्नातक स्तर के पद और CEN 07/2026 में 12वीं स्तर के पद। यह पेज केवल वही बताता है जो अधिसूचनाओं में छपा है: पदों के नाम, 7वें वेतन आयोग का पे लेवल, प्रारंभिक वेतन, योग्यता और चिकित्सा मानक। अधिसूचनाओं में हर पद के रोज़मर्रा के काम का वर्णन नहीं है।",
       "profileHeading": "पदों के दो समूह, दो अधिसूचनाएं",
       "profileBody": [
@@ -884,7 +884,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "RRB Group D",
     "officialUrl": "https://rrb.indianrailways.gov.in/",
     "en": {
-      "pageTitle": "RRB Group D Job Profile & Salary",
+      "pageTitle": "RRB Group D Salary 2025: Official Pay Level and Job Profile",
       "lede": "RRB Group D recruits into Level 1 of the 7th CPC pay matrix across Indian Railways. CEN 09/2025 lists 14 post categories in several departments, all at one pay level and one qualification. This page gives only what that notification prints: the posts and their departments, pay level, initial pay, qualification and medical standard. The notification does not describe each post’s day-to-day duties.",
       "profileHeading": "One pay level, many posts",
       "profileBody": [
@@ -974,7 +974,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Railway Recruitment Boards or any government body. The pay and post details above are copied from the notification named on this page, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "RRB ग्रुप D जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "RRB ग्रुप D सैलरी 2025: आधिकारिक पे लेवल और जॉब प्रोफाइल",
       "lede": "RRB ग्रुप D भारतीय रेलवे में 7वें वेतन आयोग के मैट्रिक्स के लेवल 1 पर भर्ती करता है। CEN 09/2025 में कई विभागों की 14 पद श्रेणियां हैं, सभी एक ही पे लेवल और एक ही योग्यता वाली। यह पेज केवल वही बताता है जो उस अधिसूचना में छपा है: पद और उनके विभाग, पे लेवल, प्रारंभिक वेतन, योग्यता और चिकित्सा मानक। अधिसूचना में हर पद के रोज़मर्रा के काम का वर्णन नहीं है।",
       "profileHeading": "एक पे लेवल, कई पद",
       "profileBody": [
@@ -1069,7 +1069,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "RRB ALP",
     "officialUrl": "https://rrb.indianrailways.gov.in/",
     "en": {
-      "pageTitle": "RRB ALP Job Profile & Salary",
+      "pageTitle": "RRB ALP Salary 2026: Official Pay Level and Job Profile",
       "lede": "RRB ALP recruits Assistant Loco Pilots. CEN 01/2026 notifies this single post, so “what does ALP pay” has one answer on paper: the 7th CPC pay level and initial pay below. The notification does not describe the post’s day-to-day duties, so this page does not either.",
       "profileHeading": "One post, with strict medical standards",
       "profileBody": [
@@ -1101,7 +1101,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Railway Recruitment Boards or any government body. The pay and post details above are copied from the notification named on this page, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "RRB ALP जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "RRB ALP सैलरी 2026: आधिकारिक पे लेवल और जॉब प्रोफाइल",
       "lede": "RRB ALP असिस्टेंट लोको पायलट की भर्ती करता है। CEN 01/2026 में यही एक पद अधिसूचित है, इसलिए “ALP कितना देता है” का कागज़ पर एक ही उत्तर है: नीचे दिया गया 7वें वेतन आयोग का पे लेवल और प्रारंभिक वेतन। अधिसूचना में पद के रोज़मर्रा के काम का वर्णन नहीं है, इसलिए यह पेज भी नहीं देता।",
       "profileHeading": "एक पद, कड़े चिकित्सा मानकों के साथ",
       "profileBody": [
@@ -1138,7 +1138,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "UP Police Constable",
     "officialUrl": "https://uppbpb.gov.in/",
     "en": {
-      "pageTitle": "UP Police Constable Job Profile & Salary",
+      "pageTitle": "UP Police Constable Salary 2025: Official Pay Scale and Job Profile",
       "lede": "One UP Police recruitment fills several constable posts and the jail warder post through a single written test. Here is what the Board’s 2025 recruitment notification says about the posts and their pay, with a link to the official source.",
       "profileHeading": "One recruitment, several posts",
       "profileBody": [
@@ -1195,7 +1195,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the UP Police Recruitment and Promotion Board or any government body. The pay details above are copied from the Board’s 2025 recruitment notification and are not a guarantee of any particular figure — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "यूपी पुलिस कांस्टेबल जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "यूपी पुलिस कांस्टेबल सैलरी 2025: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "यूपी पुलिस की एक ही भर्ती एक साझा लिखित परीक्षा के ज़रिए कई आरक्षी पदों और जेल वार्डर के पद को भरती है। यहां बोर्ड की 2025 भर्ती अधिसूचना के अनुसार इन पदों और उनके वेतन की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी।",
       "profileHeading": "एक भर्ती, कई पद",
       "profileBody": [
@@ -1257,7 +1257,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "Bihar Police Constable",
     "officialUrl": "https://csbc.bihar.gov.in/Default.htm",
     "en": {
-      "pageTitle": "Bihar Police Constable Job Profile & Salary",
+      "pageTitle": "Bihar Police Constable Salary 2025: Official Pay Scale and Job Profile",
       "lede": "Bihar Police Constable (Sipahi) recruitment fills a single post, in two services: the district police and the battalions of the Bihar Special Armed Police. Here is what the Central Selection Board of Constable’s 2025 notification says about it, with a link to the official source.",
       "profileHeading": "One post, two services",
       "profileBody": [
@@ -1288,7 +1288,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Central Selection Board of Constable, Bihar, or any government body. The pay detail above is copied from the Board’s 2025 notification and is not a guarantee of any particular figure — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "बिहार पुलिस सिपाही जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "बिहार पुलिस सिपाही सैलरी 2025: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "बिहार पुलिस सिपाही भर्ती एक ही पद भरती है, जो दो सेवाओं में है: जिला पुलिस और बिहार विशेष सशस्त्र पुलिस की वाहिनियां। यहां केंद्रीय चयन पर्षद (सिपाही भर्ती) की 2025 की अधिसूचना के अनुसार इस पद की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी।",
       "profileHeading": "एक पद, दो सेवाएं",
       "profileBody": [
@@ -1324,7 +1324,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "MP Police Constable",
     "officialUrl": "https://esb.mp.gov.in/Rulebooks/rule_books.htm",
     "en": {
-      "pageTitle": "MP Police Constable Job Profile & Salary",
+      "pageTitle": "MP Police Constable Salary 2026: Official Pay Scale and Job Profile",
       "lede": "MP Police Constable (G.D.) recruitment fills Class III executive posts in Madhya Pradesh Police. Here is what the MP Employees Selection Board’s 2026 rule book says about the post, its postings and its pay, with a link to the official source.",
       "profileHeading": "Constable (G.D.) in Madhya Pradesh Police",
       "profileBody": [
@@ -1367,7 +1367,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the MP Employees Selection Board, the Madhya Pradesh Police or any government body. The pay details above are copied from the Board’s 2026 rule book and are not a guarantee of any particular figure — always confirm current numbers against the official rule book linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "एमपी पुलिस आरक्षक जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "एमपी पुलिस आरक्षक सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "एमपी पुलिस आरक्षक (जी.डी.) भर्ती मध्यप्रदेश पुलिस में तृतीय श्रेणी के कार्यपालिक पद भरती है। यहां मध्यप्रदेश कर्मचारी चयन मण्डल की 2026 की नियम पुस्तिका के अनुसार इस पद, पदस्थापना और वेतन की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी।",
       "profileHeading": "मध्यप्रदेश पुलिस में आरक्षक (जी.डी.)",
       "profileBody": [
@@ -1415,7 +1415,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "Rajasthan Police Constable",
     "officialUrl": "https://police.rajasthan.gov.in/portal/RecruitmentsResults",
     "en": {
-      "pageTitle": "Rajasthan Police Constable Job Profile & Salary",
+      "pageTitle": "Rajasthan Police Constable Salary 2025: Official Pay and Job Profile",
       "lede": "Rajasthan Police’s constable recruitment fills three kinds of constable post in its districts, units and battalions. Here is what the 2025 notification says about the posts and their pay, with a link to the official source.",
       "profileHeading": "Constable posts in Rajasthan Police",
       "profileBody": [
@@ -1460,7 +1460,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with Rajasthan Police or any government body. The pay details above are copied from the 2025 constable notification and are not a guarantee of any particular figure — always confirm current numbers against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "राजस्थान पुलिस कांस्टेबल जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "राजस्थान पुलिस कांस्टेबल सैलरी 2025: आधिकारिक वेतन और जॉब प्रोफाइल",
       "lede": "राजस्थान पुलिस की कांस्टेबल भर्ती अपने जिलों, इकाइयों और बटालियनों में तीन तरह के कॉन्स्टेबल पद भरती है। यहां 2025 की अधिसूचना के अनुसार इन पदों और उनके वेतन की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी।",
       "profileHeading": "राजस्थान पुलिस में कॉन्स्टेबल के पद",
       "profileBody": [
@@ -1510,7 +1510,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "BPSC CCE",
     "officialUrl": "https://bpsc.bihar.gov.in/",
     "en": {
-      "pageTitle": "BPSC CCE Job Profile & Salary",
+      "pageTitle": "BPSC CCE Salary 2026: Official Pay Levels and Job Profile",
       "lede": "The BPSC Combined Competitive Examination fills a wide range of Bihar government posts from one exam. The notice lists each post with its department and pay level, so what the job is and what it pays depends on which post you are allotted.",
       "profileHeading": "Many posts under one exam",
       "profileBody": [
@@ -1559,7 +1559,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with BPSC or any government body. The pay levels above are as printed in the notice, not a guarantee of any specific figure or timeline — always confirm against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "BPSC CCE जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "BPSC CCE सैलरी 2026: आधिकारिक पे लेवल और जॉब प्रोफाइल",
       "lede": "BPSC की संयुक्त प्रतियोगिता परीक्षा एक ही परीक्षा से बिहार सरकार के कई तरह के पद भरती है। अधिसूचना में हर पद के साथ उसका विभाग और पे लेवल दिया गया है, इसलिए नौकरी का स्वरूप और वेतन इस पर निर्भर करता है कि आपको कौन-सा पद मिला।",
       "profileHeading": "एक परीक्षा, कई पद",
       "profileBody": [
@@ -1613,7 +1613,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "MPPSC State Service",
     "officialUrl": "https://mppsc.mp.gov.in/",
     "en": {
-      "pageTitle": "MPPSC State Service Job Profile & Salary",
+      "pageTitle": "MPPSC State Service Salary 2026: Official Pay Scales and Job Profile",
       "lede": "The MPPSC State Service Examination fills Madhya Pradesh government posts in the Class II gazetted and Class III executive grades from one exam. The notice lists each post with its department and pay scale, so what the job is and what it pays depends on which post you are allotted.",
       "profileHeading": "Many posts under one exam",
       "profileBody": [
@@ -1674,7 +1674,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with MPPSC or any government body. The pay scales above are as printed in the notice, not a guarantee of any specific figure or timeline — always confirm against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "MPPSC राज्य सेवा जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "MPPSC राज्य सेवा सैलरी 2026: आधिकारिक वेतनमान और जॉब प्रोफाइल",
       "lede": "MPPSC की राज्य सेवा परीक्षा एक ही परीक्षा से मध्य प्रदेश सरकार के द्वितीय श्रेणी राजपत्रित और तृतीय श्रेणी कार्यपालिक पद भरती है। अधिसूचना में हर पद के साथ उसका विभाग और वेतनमान दिया गया है, इसलिए नौकरी का स्वरूप और वेतन इस पर निर्भर करता है कि आपको कौन-सा पद मिला।",
       "profileHeading": "एक परीक्षा, कई पद",
       "profileBody": [
@@ -1740,7 +1740,7 @@ export const EXAM_JOB_PROFILES = [
     "examName": "RPSC RAS",
     "officialUrl": "https://rpsc.rajasthan.gov.in/",
     "en": {
-      "pageTitle": "RPSC RAS Job Profile & Salary",
+      "pageTitle": "RPSC RAS Salary 2026: Official Pay Levels and Job Profile",
       "lede": "The RAS exam fills posts in Rajasthan’s State Services and Subordinate Services from one exam. The notice lists each service with its Pay Matrix level, so what the job is and what it pays depends on which service you are allotted.",
       "profileHeading": "Many services under one exam",
       "profileBody": [
@@ -1793,7 +1793,7 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with RPSC or any government body. The pay levels above are as printed in the notice, not a guarantee of any specific figure or timeline — always confirm against the official notification linked above before making a financial decision."
     },
     "hi": {
-      "pageTitle": "RPSC RAS जॉब प्रोफाइल और सैलरी",
+      "pageTitle": "RPSC RAS सैलरी 2026: आधिकारिक पे लेवल और जॉब प्रोफाइल",
       "lede": "RAS परीक्षा एक ही परीक्षा से राजस्थान की राज्य सेवाओं और अधीनस्थ सेवाओं के पद भरती है। अधिसूचना में हर सेवा के साथ उसका पे मैट्रिक्स लेवल दिया गया है, इसलिए नौकरी का स्वरूप और वेतन इस पर निर्भर करता है कि आपको कौन-सी सेवा मिली।",
       "profileHeading": "एक परीक्षा, कई सेवाएँ",
       "profileBody": [
