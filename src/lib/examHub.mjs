@@ -18,6 +18,7 @@ import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPathFor } from './pyqPath.mjs';
+import { homeVisitHint } from './officialLink.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -254,24 +255,6 @@ const marksText = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
 const perQuestionText = (n) => (n == null ? '&mdash;' : Math.abs(n * 100 - Math.round(n * 100)) < 1e-6 ? marksText(Math.round(n * 100) / 100) : '&mdash;');
 const countText = (n) => n.toLocaleString('en-IN');
 const pick = (bilingual, lang) => bilingual?.[lang] ?? bilingual?.en ?? '';
-
-// The Railway portal answers a link opened cold with a "Request Rejected" page until its home page has been
-// visited once in that browser. The source stays a direct link (it is the document), with a hint for that case.
-const NEEDS_HOME_VISIT = { 'rrb.indianrailways.gov.in': 'https://rrb.indianrailways.gov.in/' };
-
-function homeVisitHint(url, lang) {
-  let host = '';
-  try {
-    host = new URL(url).host;
-  } catch {
-    return '';
-  }
-  const home = NEEDS_HOME_VISIT[host];
-  if (!home) return '';
-  return lang === 'hi'
-    ? ` (यदि “Request Rejected” दिखे तो पहले <a href="${home}" target="_blank" rel="noreferrer">${host}</a> खोलें, फिर लिंक दोबारा खोलें।)`
-    : ` (If it shows “Request Rejected”, open <a href="${home}" target="_blank" rel="noreferrer">${host}</a> first, then the link again.)`;
-}
 
 // Every source line ends in "Report an error": a mailto with the exam, the block, the page and the document
 // already filled in, so a reader who spots a figure that differs from the official notice can say so in one tap

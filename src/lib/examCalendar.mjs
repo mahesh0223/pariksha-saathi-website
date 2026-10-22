@@ -2,6 +2,7 @@
 // built ONLY from dates the exam bodies themselves fixed - ExamFact.dates (from the notification) and the
 // importantDates of published notices - each row linked to the document it was read from. Plain .mjs so
 // scripts/prerender.mjs and the React page share one builder (same arrangement as examDirectory.mjs).
+import { homeVisitNote } from './officialLink.mjs';
 import { EXAM_NAMES } from './examNames.mjs';
 import { MONTHS, examHubPath, formatHubDate } from './examHubPath.mjs';
 
@@ -146,6 +147,8 @@ export function examCalendarBody({ groups, lang = 'en' }) {
     }
     html += `</tbody></table></div>`;
   }
+  const visit = homeVisitNote(groups.flatMap((g) => g.rows.map((row) => row.sourceUrl)), lang);
+  if (visit) html += `<p class="exam-dir-note">${visit}</p>`;
   html += `<p class="exam-dir-note">${esc(t.note)}</p>`;
   return html;
 }

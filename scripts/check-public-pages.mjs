@@ -592,3 +592,25 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   if (bare.length) console.log(`Note: ${bare.length} hub title(s) name no cycle year - add the fact sheet's new cycleLabel to HUB_TITLE_NAME: ${bare.join('; ')}`);
   else console.log(`Verified all ${HUB_EXAM_IDS.length * 2} hub titles name their cycle year.`);
 }
+
+// Railway documents open only after the portal's home page has been visited once (src/lib/officialLink.mjs): every
+// built page that links one must say so and link the home page, or a reader just meets "Request Rejected".
+{
+  const pages = [];
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (entry.name === 'index.html') pages.push(path);
+    }
+  };
+  walk('dist');
+  let linking = 0;
+  for (const path of pages) {
+    const html = readFileSync(path, 'utf8');
+    if (!/href="https:\/\/rrb\.indianrailways\.gov\.in\/-\//.test(html)) continue;
+    linking++;
+    assert(html.includes('href="https://rrb.indianrailways.gov.in/"') && /Request Rejected/.test(html), `${path}: links a Railway document without the "open the home page first" hint`);
+  }
+  console.log(`Verified the home-page hint on all ${linking} page(s) that link a Railway (RRB) document.`);
+}

@@ -1,3 +1,4 @@
+import { homeVisitFor } from '../../lib/officialLink.mjs';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
@@ -140,6 +141,21 @@ export function ExamNoticeDetailPage() {
         <a href={display.officialUrl} target="_blank" rel="noreferrer">
           Official notification &#8599;
         </a>
+        {(() => {
+          // The Railway portal rejects a document link opened cold (src/lib/officialLink.mjs): say how to open it.
+          const visit = homeVisitFor(display.officialUrl);
+          if (!visit) return null;
+          const home = (
+            <a href={visit.home} target="_blank" rel="noreferrer">
+              {visit.host}
+            </a>
+          );
+          return language === 'hi' ? (
+            <> (यदि “Request Rejected” दिखे तो पहले {home} खोलें, फिर लिंक दोबारा खोलें।)</>
+          ) : (
+            <> (If it shows “Request Rejected”, open {home} first, then the link again.)</>
+          );
+        })()}
       </div>
 
       <div dangerouslySetInnerHTML={{ __html: telegramCtaHtml(language === 'hi' ? 'hi' : 'en') }} />

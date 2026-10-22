@@ -41,6 +41,7 @@ import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
 import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/lib/telegramPage.mjs';
 import { pyqPaperBody, pyqPaperMeta, pyqPaperStructuredData } from '../src/lib/pyqPage.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.mjs';
+import { homeVisitHint } from '../src/lib/officialLink.mjs';
 import { pyqIndexBody, pyqIndexMeta, pyqIndexStructuredData } from '../src/lib/pyqIndexPage.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
@@ -1538,7 +1539,7 @@ async function main() {
         <p class="detail-body">${escapeHtml(item.summary)}</p>
         ${dateRows ? `<div class="detail-dates"><h2>${t.dates}</h2><dl>${dateRows}</dl></div>` : ''}
         ${noticeGuidance(item.id, lang) ? `<section class="news-learning"><h2>${t.guidance}</h2><p>${escapeHtml(noticeGuidance(item.id, lang))}</p></section>` : ''}
-        <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">${t.official} &#8599;</a></div>
+        <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">${t.official} &#8599;</a>${homeVisitHint(item.officialUrl, lang)}</div>
         ${telegramCtaHtml(lang)}
         ${adSlot('5664651910')}
       </article>
