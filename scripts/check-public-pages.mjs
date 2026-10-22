@@ -438,6 +438,8 @@ for (const file of files) {
   for (const [name, html] of Object.entries(legal)) {
     if (SITE_SHOWS_ADS) {
       assert(/shows ads served by/.test(html), `${name}: SITE_SHOWS_ADS is true but the page does not describe the ads`);
+      // The website's ad wording must never vouch for the app: app ads are decided (O10) and change on their own release.
+      assert(!/app (?:remains|is) (?:completely )?free of ads|app does not show ads|not the Android app/i.test(html), `${name}: the website's ad wording vouches for the app being ad-free`);
     } else {
       assert(html.includes('shows no ads'), `${name}: SITE_SHOWS_ADS is false but the page does not say the website shows no ads`);
       assert(!/shows ads served by|does show ads|serves ads on this website/.test(html), `${name}: still says the website shows ads`);
@@ -445,8 +447,7 @@ for (const file of files) {
   }
 }
 // The trust strip (src/data/trustLines.mjs) is on both landing pages and /about/, verbatim, and never promises
-// "no ads" - AdSense/AdMob/Premium remain open options (docs/marketing-plan-2026-10.md), so that claim is not ours
-// to make (decision of 2026-10-15).
+// "no ads": the app and website will carry ads (publisher's decision O10, 22 Oct 2026).
 for (const [file, lang] of [['dist/index.html', 'en'], ['dist/hi/index.html', 'hi'], ['dist/about/index.html', 'en']]) {
   const html = readFileSync(file, 'utf8');
   for (const line of TRUST_LINES[lang]) assert(html.includes(line), `${file}: trust line missing: ${line}`);

@@ -3,9 +3,10 @@
 // /about/, so the copies cannot drift (the stats used to live in both HomePage.tsx and prerender.mjs).
 //
 // Every line is a claim that is true today and nothing more (decision of 2026-10-15, recorded in the
-// roadmap): we do NOT promise "no ads" or "no upsell" while AdSense, AdMob and a Premium tier remain
-// options in docs/marketing-plan-2026-10.md. scripts/check-public-pages.mjs fails the build if an
-// ads promise appears in the strip. Change the wording here only with the publisher's sign-off.
+// roadmap). We never promise "no ads": the publisher decided on 22 Oct 2026 (O10) that the app and the
+// website will carry ads. "100% free, no paywall" stays true with ads; it must change in the release
+// that puts anything behind a paid tier. scripts/check-public-pages.mjs fails the build if an ads
+// promise appears in the strip. Change the wording here only with the publisher's sign-off.
 import { DIRECTORY_EXAM_IDS } from '../lib/examDirectory.mjs';
 
 export const TRUST_STATS = {
