@@ -86,6 +86,7 @@ ${app ? `${app}\n` : ''}
 
 ${link('हिंदी होम', '/hi/', 'the Hindi landing page')}
 ${link('परीक्षाएँ (Hindi exam pages)', examDirectoryPath('hi'), 'the same exam pages in Hindi')}
+${link('Exam facts in full', '/llms-full.txt', 'every exam page\'s official facts in one plain-text file: stages, marks, negative marking, eligibility, dates, vacancies, cut-offs and pay, each with its source')}
 ${link('Sitemap', '/sitemap.xml', 'every public URL')}
 `;
 }

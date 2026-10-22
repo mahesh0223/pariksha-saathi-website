@@ -523,6 +523,28 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
     const file = path.endsWith('/') ? `dist${path}index.html` : `dist${path}`;
     assert(existsSync(file), `/llms.txt links to ${path}, which this build did not produce`);
   }
+  // G8 (22 Oct 2026): /llms-full.txt is a real file now, not a redirect to /llms.txt. Every hub exam has a block
+  // with its official source and checked date, every site link in it was built, no human-review claim, and a block
+  // that cites a cold-link portal (src/lib/officialLink.mjs) says how to open its documents.
+  assert(existsSync('dist/llms-full.txt'), '/llms-full.txt was not built');
+  const full = readFileSync('dist/llms-full.txt', 'utf8');
+  assert(full.startsWith('# Pariksha Saathi') && /^> /m.test(full), '/llms-full.txt lacks its H1 or blockquote summary');
+  assert(!/written and reviewed by|reviewed by Mahesh|expert-reviewed|human-reviewed by/i.test(full), '/llms-full.txt claims a human review');
+  const blocks = full.split(/^## /m).slice(1);
+  assert.equal(blocks.length, HUB_EXAM_IDS.length, '/llms-full.txt does not have one block per exam hub');
+  for (const id of HUB_EXAM_IDS) {
+    const block = blocks.find((b) => b.includes(`Exam page: https://parikshasaathi.com${examHubPath(id, 'en')}\n`));
+    assert(block, `/llms-full.txt has no block for the ${id} hub`);
+    assert(/^Official source: .+: https:\/\/\S+ \(last checked \d{1,2} [A-Z][a-z]+ \d{4}\)$/m.test(block), `/llms-full.txt: the ${id} block lacks a linked, dated official source`);
+    if (block.includes('rrb.indianrailways.gov.in')) assert(block.includes('Request Rejected'), `/llms-full.txt: the ${id} block cites RRB documents without the home-page note`);
+  }
+  const fullLinks = [...new Set([...full.matchAll(/https:\/\/parikshasaathi\.com(\/[^\s);]*?)[.;]?(?=[\s);]|$)/g)].map((m) => m[1]))];
+  for (const path of fullLinks) {
+    const file = path.endsWith('/') ? `dist${path}index.html` : `dist${path}`;
+    assert(existsSync(file), `/llms-full.txt links to ${path}, which this build did not produce`);
+  }
+  assert(!/^\/llms-full\.txt\s/m.test(readFileSync('dist/_redirects', 'utf8')), '_redirects still sends /llms-full.txt elsewhere');
+  console.log(`Verified /llms-full.txt: ${blocks.length} exam blocks, each with a dated official source; all ${fullLinks.length} site links built.`);
   const ldOf = (html) => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => [].concat(JSON.parse(m[1])));
   const org = ldOf(home).find((x) => x['@type'] === 'Organization');
   assert(org?.description && org.knowsAbout?.length === HUB_EXAM_IDS.length, 'home page Organization lacks the shared description or the exam list');

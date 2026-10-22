@@ -50,7 +50,7 @@ import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/exam
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/lib/lessonCredit.mjs';
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
-import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, examsLinkHtml } from '../src/lib/examDirectory.mjs';
+import { DIRECTORY_EXAM_IDS, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { GK_INSIGHTS_PUBLISHED, gkInsightsBody, gkInsightsMeta, gkInsightsPath } from '../src/lib/gkInsights.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
@@ -62,6 +62,7 @@ import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 import { socialLinksHtml } from '../src/data/socialLinks.mjs';
 import { homeEntityJsonLd } from '../src/lib/siteEntity.mjs';
 import { llmsTxt } from '../src/lib/llmsTxt.mjs';
+import { llmsFullTxt } from '../src/lib/llmsFullTxt.mjs';
 
 const DIST = join(process.cwd(), 'dist');
 const SITE_URL = 'https://parikshasaathi.com';
@@ -1201,6 +1202,7 @@ async function main() {
   const calendarFacts = {};
   const calendarNotices = { en: {}, hi: {} };
   const hubSummaries = {}; // per hub, for /llms.txt: whether it shows cut-offs, and when its facts were last verified
+  const fullFacts = []; // per hub, for /llms-full.txt: the fact sheet and cut-offs the page shows
   for (const examId of HUB_EXAM_IDS) {
     const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
     if (!Array.isArray(facts) || facts.length === 0) {
@@ -1221,6 +1223,7 @@ async function main() {
     const hasSyllabus = EXAM_SYLLABI.some((e) => e.slug === slug);
     const hasJobProfile = EXAM_JOB_PROFILES.some((e) => e.slug === slug);
     hubSummaries[examId] = { hasCutoffs: cutoffs.length > 0, lastVerified: examHubMeta({ examName, facts, cutoffs, lang: 'en' }).lastVerified };
+    fullFacts.push({ examId, examName, facts, cutoffs });
     for (const lang of ['en', 'hi']) {
       const prefix = lang === 'hi' ? '/hi' : '';
       const links = {
@@ -1759,6 +1762,12 @@ async function main() {
       lessonCount: LESSON_CATALOG.length,
       questionPageCount,
     }),
+    'utf8',
+  );
+  // --- /llms-full.txt: every exam page's facts in one file (src/lib/llmsFullTxt.mjs), in directory order.
+  writeFileSync(
+    join(DIST, 'llms-full.txt'),
+    llmsFullTxt({ exams: DIRECTORY_EXAM_IDS.map((id) => fullFacts.find((x) => x.examId === id)).filter(Boolean), generated: new Date().toISOString().slice(0, 10) }),
     'utf8',
   );
 

@@ -488,7 +488,7 @@ export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXT
   for (const stage of fact.stages.slice(1)) {
     const mcq = (stage.parts ?? []).filter((p) => (p.sections?.length ?? 0) > 0 || p.kind === 'objective');
     // Asked only where the notice says something: "Not stated" for every paper answers nothing.
-    if (mcq.length === 0 || mcq.every((p) => p.negativeMarking === null || p.negativeMarking === undefined)) continue;
+    if (mcq.every((p) => p.negativeMarking === null || p.negativeMarking === undefined)) continue;
     const texts = mcq.map((p) => negativeText(p, lang, t));
     const text = new Set(texts).size <= 1 ? sentence(texts[0], lang) : mcq.map((p, i) => `${pick(p.name, lang)}: ${sentence(texts[i], lang)}`).join(' ');
     const stageName = pick(stage.name, lang);

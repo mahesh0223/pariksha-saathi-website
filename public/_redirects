@@ -39,7 +39,6 @@
 
 # Names other sites use, which crawlers request by habit.
 /manifest.json                         /manifest.webmanifest     301
-/llms-full.txt                         /llms.txt                 302
 
 # G1 experiment (from 20 Oct 2026, review 3 Nov): the pilot line on four exam hubs links through these, so the clicks show
 # up in Cloudflare Analytics > HTTP Traffic as requests to /go/hub-pdf and /go/hub-telegram (robots.txt keeps crawlers out).
