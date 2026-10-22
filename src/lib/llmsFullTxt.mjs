@@ -60,7 +60,7 @@ function cutoffLines(cutoffs) {
   return out;
 }
 
-function examBlock({ examId, examName, facts, cutoffs }) {
+function examBlock({ examId, examName, facts, cutoffs, hasNotices = true }) {
   const fact = facts[0];
   const slug = examId.replace(/_/g, '-');
   const job = EXAM_JOB_PROFILES.find((e) => e.slug === slug);
@@ -104,7 +104,7 @@ function examBlock({ examId, examName, facts, cutoffs }) {
   const related = [
     syllabus ? `syllabus ${SITE_URL}/compare/${slug}-syllabus/` : null,
     PYQ_INDEX_EXAMS.includes(examId) ? `previous-year papers with answers ${SITE_URL}${pyqIndexPath(examId, 'en')}` : null,
-    `admit card, result and answer-key notices ${SITE_URL}${examUpdatesPath(examId, 'en')}`,
+    hasNotices ? `admit card, result and answer-key notices ${SITE_URL}${examUpdatesPath(examId, 'en')}` : null,
     `Hindi exam page ${SITE_URL}${examHubPath(examId, 'hi')}`,
   ].filter(Boolean);
   out.push('', `Related pages: ${related.join('; ')}.`, '');
@@ -114,7 +114,7 @@ function examBlock({ examId, examName, facts, cutoffs }) {
   return out.join('\n');
 }
 
-/** @param {{ exams: {examId: string, examName?: string, facts: any[], cutoffs: any[]}[], generated: string }} args */
+/** @param {{ exams: {examId: string, examName?: string, facts: any[], cutoffs: any[], hasNotices?: boolean}[], generated: string }} args */
 export function llmsFullTxt({ exams, generated }) {
   const blocks = exams.map((x) => examBlock({ ...x, examName: x.examName ?? EXAM_NAMES[x.examId] ?? x.examId }));
   return `# ${SITE_NAME}: exam facts in full

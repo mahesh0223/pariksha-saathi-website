@@ -12,7 +12,7 @@
 // Consequence worth remembering: this bakes content in at BUILD time. A reseed on the backend
 // does not appear here until the site is rebuilt/redeployed too.
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 // Plain .mjs (not .ts) specifically so this works on whatever Node version Cloudflare Pages'
 // build image runs - an earlier version of this imported the .ts file directly, relying on
@@ -312,7 +312,10 @@ async function assertNoPublishedUrlWentMissing(newSitemapUrls) {
   const newUrls = new Set(newSitemapUrls.map((u) => u.loc));
   // An old one-question page (/q/<slug>/) folded into its topic list on 22 Oct 2026 is not missing: functions/q/
   // answers it with a 301 to the same question (src/lib/questionRedirects.mjs).
-  const missing = [...previousUrls].filter((u) => !newUrls.has(u) && !questionRedirectTarget(QUESTION_REDIRECTS, u));
+  // Nor is a page that is still built but left out of the sitemap on purpose (a noindexed page, e.g. an admit-card
+  // page with no notice yet): it does not 404.
+  const stillBuilt = (u) => u.endsWith('/') && existsSync(join(DIST, u, 'index.html'));
+  const missing = [...previousUrls].filter((u) => !newUrls.has(u) && !questionRedirectTarget(QUESTION_REDIRECTS, u) && !stillBuilt(u));
   if (missing.length > 0) {
     throw new Error(
       `Build check failed: ${missing.length} previously-published URL(s) are missing from the new sitemap - ` +
@@ -1227,7 +1230,7 @@ async function main() {
     const hasSyllabus = EXAM_SYLLABI.some((e) => e.slug === slug);
     const hasJobProfile = EXAM_JOB_PROFILES.some((e) => e.slug === slug);
     hubSummaries[examId] = { hasCutoffs: cutoffs.length > 0, lastVerified: examHubMeta({ examName, facts, cutoffs, lang: 'en' }).lastVerified };
-    fullFacts.push({ examId, examName, facts, cutoffs });
+    fullFacts.push({ examId, examName, facts, cutoffs, hasNotices: enNotices.length > 0 });
     for (const lang of ['en', 'hi']) {
       const prefix = lang === 'hi' ? '/hi' : '';
       const links = {
@@ -1255,9 +1258,12 @@ async function main() {
       }));
       sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: meta.lastVerified });
 
-      // The exam's admit card, result and answer-key page (src/lib/examUpdatesPage.mjs), from the same notices.
+      // The exam's admit card, result and answer-key page (src/lib/examUpdatesPage.mjs), from the same notices. With no
+      // notice yet it would only repeat the hub's dates and FAQ, so it is built (the hub links it) but kept out of
+      // search and the sitemap until the first notice arrives (22 Oct 2026).
       const updatesPath = examUpdatesPath(examId, lang);
       const updatesArgs = { examName, facts, notices, lang };
+      const updatesIndexable = notices.length > 0;
       const updatesMeta = examUpdatesMeta(updatesArgs);
       writePage(updatesPath.replace(/^\/|\/$/g, ''), page({
         title: updatesMeta.title,
@@ -1267,6 +1273,7 @@ async function main() {
         lang,
         type: 'website',
         scripts: false,
+        robots: updatesIndexable ? 'index,follow' : 'noindex,follow',
         alternateLanguages: [
           { lang: 'en', path: examUpdatesPath(examId, 'en') },
           { lang: 'hi', path: examUpdatesPath(examId, 'hi') },
@@ -1275,7 +1282,7 @@ async function main() {
         bodyHtml: examUpdatesBody(updatesArgs),
         structuredData: examUpdatesStructuredData({ ...updatesArgs, siteUrl: SITE_URL }),
       }));
-      sitemapUrls.push({ loc: updatesPath, priority: lang === 'en' ? '0.7' : '0.6' });
+      if (updatesIndexable) sitemapUrls.push({ loc: updatesPath, priority: lang === 'en' ? '0.7' : '0.6' });
     }
   }
 

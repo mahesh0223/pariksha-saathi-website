@@ -661,10 +661,12 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
 }
 
 // Admit card, result and answer-key page per exam (src/lib/examUpdatesPage.mjs, from 22 Oct 2026): built for every hub
-// exam in both languages, listing every notice its hub lists, with hreflang, FAQPage data, a sitemap entry and plain
-// HTML, and linked from its hub.
+// exam in both languages, listing every notice its hub lists, with hreflang, FAQPage data and plain HTML, and linked
+// from its hub. A page with at least one notice is indexable and in the sitemap; one with none is noindex and out of
+// the sitemap (it would only repeat the hub's dates and FAQ).
 {
   let built = 0;
+  const held = [];
   for (const examId of HUB_EXAM_IDS) {
     for (const lang of ['en', 'hi']) {
       const path = `${examHubPath(examId, lang)}admit-card-result/`;
@@ -678,10 +680,13 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
       for (const alt of ['en', 'hi']) assert(html.includes(`hreflang="${alt}" href="https://parikshasaathi.com${examHubPath(examId, alt)}admit-card-result/"`), `${path}: hreflang ${alt} missing`);
       assert(html.includes('"@type":"FAQPage"') && html.includes('<div class="hub-faq">'), `${path}: FAQ or FAQPage data missing`);
       assert(!/<script[^>]+src="\/assets\//.test(html), `${path}: loads the app script; it must stay plain HTML`);
-      assert(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), `${path}: not in the sitemap`);
+      const hasNotice = /href="\/(?:hi\/)?app\/exam-notices\/[a-z0-9]+\/"/.test(html);
+      assert.equal(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), hasNotice, `${path}: ${hasNotice ? 'has notices but is not in the sitemap' : 'has no notice but is in the sitemap'}`);
+      assert(html.includes(`<meta name="robots" content="${hasNotice ? 'index,follow' : 'noindex,follow'}" />`), `${path}: robots tag does not match whether it has notices`);
+      if (!hasNotice) held.push(path);
       assert(hub.includes(`href="${path}"`), `${examHubPath(examId, lang)}: does not link ${path}`);
       built++;
     }
   }
-  console.log(`Verified ${built} admit card, result and answer-key pages: each lists every notice its hub lists, hreflang, FAQ, sitemap, linked from the hub.`);
+  console.log(`Verified ${built} admit card, result and answer-key pages: each lists every notice its hub lists, hreflang, FAQ, linked from the hub; ${held.length} with no notice yet are noindex and out of the sitemap (${held.join(', ') || 'none'}).`);
 }
