@@ -52,7 +52,7 @@ export function IbpsPoVsSbiPoPage() {
           <Link className="pub-exams-link" to="/exams/" aria-label="Choose your exam">
             Exams
           </Link>
-          <Link className="pub-cta" to="/onboarding">
+          <Link className="pub-cta" to="/onboarding/">
             Start studying
           </Link>
         </div>
@@ -147,7 +147,7 @@ export function IbpsPoVsSbiPoPage() {
           </li>
         </ul>
 
-        <Link className="btn-primary-compare" to="/onboarding">
+        <Link className="btn-primary-compare" to="/onboarding/">
           Start studying free &rarr;
         </Link>
       </article>

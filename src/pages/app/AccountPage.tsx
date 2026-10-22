@@ -304,7 +304,7 @@ export function AccountPage() {
       <Card className="account-card">
         <h2>Your exams</h2>
         <p className="account-body">{selectedExamIds.length} exam(s) selected.</p>
-        <Link to="/onboarding" className="account-link">
+        <Link to="/onboarding/" className="account-link">
           Change exams &rarr;
         </Link>
       </Card>

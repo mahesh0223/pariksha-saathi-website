@@ -528,3 +528,26 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   }
   console.log(`Verified the G1 experiment: next-step line on ${NEXT_STEP_PILOT_HUBS.length} pilot hubs x 2 languages only, /go/ redirects and robots rule in place; no "X to X" date ranges on any hub.`);
 }
+
+// Search Console (22 Oct 2026) listed 107 "Page with redirect" URLs. Cloudflare Pages answers a bare path whose folder
+// has an index.html with a 308 to the slash form, so an internal link to the bare form costs crawlers (and visitors) a
+// redirect and keeps the redirecting URL in Google's list. Every internal link to a built page must use the slash form.
+{
+  const bare = new Map();
+  let pages = 0;
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (entry.name.endsWith('.html')) {
+        pages++;
+        for (const [, href] of readFileSync(path, 'utf8').matchAll(/href="(\/[^"#?]*[^/"#?])(?:[?#][^"]*)?"/g)) {
+          if (existsSync(`dist${href}/index.html`) && !bare.has(href)) bare.set(href, path);
+        }
+      }
+    }
+  };
+  walk('dist');
+  assert.equal(bare.size, 0, `internal links to a bare path that redirects to its slash form: ${[...bare].slice(0, 5).map(([href, page]) => `${href} (in ${page})`).join(', ')}`);
+  console.log(`Verified that no internal link on ${pages} built pages points at a bare path that redirects to its slash form.`);
+}

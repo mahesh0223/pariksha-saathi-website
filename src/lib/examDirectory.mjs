@@ -99,7 +99,7 @@ export function examDirectoryBody({ lang = 'en', hubIds = [], syllabusSlugs = []
     html += `</div></section>`;
   }
   html += `<p class="exam-dir-note">${t.more}</p>`;
-  html += `<section class="exam-dir-start"><h2>${t.startTitle}</h2><p>${t.startBody}</p><a class="btn-primary-compare" href="/onboarding">${t.start} &rarr;</a></section>`;
+  html += `<section class="exam-dir-start"><h2>${t.startTitle}</h2><p>${t.startBody}</p><a class="btn-primary-compare" href="/onboarding/">${t.start} &rarr;</a></section>`;
   return html;
 }
 

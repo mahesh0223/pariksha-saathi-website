@@ -75,7 +75,7 @@ export function pyqPaperBody(paper) {
     <div class="wrap pub-nav">
       <a class="pub-brand" href="/"><img src="/assets/icon-48.png" srcset="/assets/icon-48.png 1x, /assets/icon-96.png 2x" width="32" height="32" alt="" />Pariksha Saathi</a>
       <nav class="pub-nav-links"><a href="/q/">Practice questions</a><a href="/app/current-affairs/">Current affairs</a></nav>
-      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
+      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding/">Start studying</a>
     </div>
   </header>
   <article class="wrap compare-article pyq-paper">

@@ -183,7 +183,7 @@ function publicContentFrame(innerHtml) {
         <a href="/app/current-affairs/">Current affairs</a>
         <a href="/app/exam-notices/">Exam Notices</a>
       </nav>
-      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
+      ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding/">Start studying</a>
     </div>
   </header>
   <main class="wrap public-content-main">${innerHtml}</main>
@@ -413,7 +413,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             <a href="/privacy/">Privacy</a>
             <a href="/hi/" lang="hi">हिंदी</a>
           </nav>
-          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
+          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding/">Start studying</a>
         </div>
       </header>
       <div id="top" class="hero">
@@ -424,7 +424,7 @@ function homePageBody(affairsPreview, noticesPreview) {
             <h1>Exam prep that works even where <em>the signal doesn't.</em></h1>
             <p class="lede">Lessons, practice quizzes, mock tests, and real dated current affairs for SSC, banking, railway, state police, CTET and state PSC exams — free, right in your browser.</p>
             <div class="cta-row">
-              <a class="btn-primary-cream" href="/onboarding">Start studying free</a>
+              <a class="btn-primary-cream" href="/onboarding/">Start studying free</a>
               <a class="btn-ghost-cream" href="#features">See what's inside</a>
             </div>
             <a class="hero-lang-switch" href="/hi/" lang="hi">यह पेज हिंदी में पढ़ें &rarr;</a>
@@ -606,7 +606,7 @@ function comparePageBody() {
             <a href="/#features">Features</a>
             <a href="/app/exam-notices/">Exam Notices</a>
           </nav>
-          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding">Start studying</a>
+          ${examsLinkHtml('en')}<a class="pub-cta" href="/onboarding/">Start studying</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -642,7 +642,7 @@ function comparePageBody() {
           <li><a href="https://sbi.bank.in/web/careers/current-openings" target="_blank" rel="noreferrer">SBI PO — official SBI careers page &#8599;</a></li>
           <li><a href="/app/exam-notices/">Latest admit card, result and deadline alerts on Pariksha Saathi &rarr;</a></li>
         </ul>
-        <a class="btn-primary-compare" href="/onboarding">Start studying free &rarr;</a>
+        <a class="btn-primary-compare" href="/onboarding/">Start studying free &rarr;</a>
       </article>
       <footer class="pub-footer">
         <div class="wrap">
@@ -683,7 +683,7 @@ function syllabusPageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding/">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -712,7 +712,7 @@ function syllabusPageBody(entry, lang) {
           <li><a href="${entry.officialUrl}" target="_blank" rel="noreferrer">${escapeHtml(c.officialLinkLabel)} &#8599;</a></li>
           <li><a href="/app/exam-notices/">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
         </ul>
-        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
+        <a class="btn-primary-compare" href="/onboarding/">${escapeHtml(c.ctaLabel)} &rarr;</a>
       </article>
       <footer class="pub-footer">
         <div class="wrap">
@@ -740,7 +740,7 @@ function examHubPageBody(innerHtml, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices/">${lang === 'hi' ? 'परीक्षा सूचनाएं' : 'Exam Notices'}</a>
           </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding/">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
         </div>
       </header>
       <article class="wrap compare-article">${innerHtml}</article>
@@ -782,7 +782,7 @@ function jobProfilePageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding/">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">
@@ -813,7 +813,7 @@ function jobProfilePageBody(entry, lang) {
           <li><a href="${syllabusPath}">${escapeHtml(c.syllabusLinkLabel)} &rarr;</a></li>
           <li><a href="/app/exam-notices/">${escapeHtml(c.examNoticesLinkLabel)} &rarr;</a></li>
         </ul>
-        <a class="btn-primary-compare" href="/onboarding">${escapeHtml(c.ctaLabel)} &rarr;</a>
+        <a class="btn-primary-compare" href="/onboarding/">${escapeHtml(c.ctaLabel)} &rarr;</a>
       </article>
       <footer class="pub-footer">
         <div class="wrap">
@@ -877,7 +877,7 @@ function lessonPageBody(entry, lang) {
           <nav class="pub-nav-links">
             <a href="/app/exam-notices/">${examNoticesLabel}</a>
           </nav>
-          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${startStudyingLabel}</a>
+          ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding/">${startStudyingLabel}</a>
         </div>
       </header>
       <article class="wrap compare-article">

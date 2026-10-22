@@ -110,7 +110,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
           <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
             {EXAMS_LINK[lang].label}
           </Link>
-          <Link className="pub-cta" to="/onboarding">
+          <Link className="pub-cta" to="/onboarding/">
             {lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}
           </Link>
         </div>
@@ -202,7 +202,7 @@ export function JobProfilePage({ slug, lang }: { slug: string; lang: 'en' | 'hi'
           </li>
         </ul>
 
-        <Link className="btn-primary-compare" to="/onboarding">
+        <Link className="btn-primary-compare" to="/onboarding/">
           {content.ctaLabel} &rarr;
         </Link>
       </article>

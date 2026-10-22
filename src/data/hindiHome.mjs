@@ -77,7 +77,7 @@ export function hindiHomeBody() {
             <a href="#faq">सवाल-जवाब</a>
             <a href="/" lang="en">English</a>
           </nav>
-          ${examsLinkHtml('hi')}<a class="pub-cta" href="/onboarding">पढ़ाई शुरू करें</a>
+          ${examsLinkHtml('hi')}<a class="pub-cta" href="/onboarding/">पढ़ाई शुरू करें</a>
         </div>
       </header>
       <div id="top" class="hero">
@@ -88,7 +88,7 @@ export function hindiHomeBody() {
             <h1>परीक्षा की तैयारी जो वहाँ भी चले, <em>जहाँ नेटवर्क न चले।</em></h1>
             <p class="lede">SSC, बैंकिंग, रेलवे, राज्य पुलिस, CTET और राज्य PSC परीक्षाओं के लिए पाठ, अभ्यास क्विज़, मॉक टेस्ट और तारीख़ के साथ असली करेंट अफेयर्स — मुफ़्त, सीधे आपके ब्राउज़र में।</p>
             <div class="cta-row">
-              <a class="btn-primary-cream" href="/onboarding">मुफ़्त पढ़ाई शुरू करें</a>
+              <a class="btn-primary-cream" href="/onboarding/">मुफ़्त पढ़ाई शुरू करें</a>
               <a class="btn-ghost-cream" href="#features">अंदर क्या है, देखें</a>
             </div>
             <a class="hero-lang-switch" href="/" lang="en">Read this page in English &rarr;</a>

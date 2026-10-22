@@ -22,7 +22,7 @@ export function StudyPage() {
   if (selectedExamIds.length === 0) {
     return (
       <EmptyState>
-        Pick an exam first. <Link to="/onboarding">Choose your exams</Link>
+        Pick an exam first. <Link to="/onboarding/">Choose your exams</Link>
       </EmptyState>
     );
   }

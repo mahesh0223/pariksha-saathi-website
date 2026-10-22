@@ -333,7 +333,7 @@ export function TypingTestPage({ lang }: { lang: Lang }) {
           <Link className="pub-exams-link" to={EXAMS_LINK[lang].href} aria-label={EXAMS_LINK[lang].title}>
             {EXAMS_LINK[lang].label}
           </Link>
-          <Link className="pub-cta" to="/onboarding">
+          <Link className="pub-cta" to="/onboarding/">
             {lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}
           </Link>
         </div>

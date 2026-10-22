@@ -611,7 +611,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   if (links.syllabusPath) html += `<li><a href="${esc(links.syllabusPath)}">${t.syllabus}</a></li>`;
   if (links.typingTestPath) html += `<li><a href="${esc(links.typingTestPath)}">${t.typing}</a></li>`;
   if (links.jobProfilePath) html += `<li><a href="${esc(links.jobProfilePath)}">${t.jobProfile}</a></li>`;
-  html += `<li><a href="/learn/">${t.lessons}</a></li><li><a href="/onboarding">${t.practice}</a></li></ul>`;
+  html += `<li><a href="/learn/">${t.lessons}</a></li><li><a href="/onboarding/">${t.practice}</a></li></ul>`;
 
   html += `<h2>${t.faq}</h2><div class="hub-faq">${examHubFaq({ examName, facts, lang, extras })
     .map(({ q, a }) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`)

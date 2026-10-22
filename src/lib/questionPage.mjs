@@ -54,7 +54,7 @@ function frame(lang, inner) {
         <a href="${questionIndexPath(lang)}">${esc(L[lang].index)}</a>
         <a href="/app/current-affairs/">${lang === 'hi' ? 'करेंट अफेयर्स' : 'Current affairs'}</a>
       </nav>
-      ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
+      ${examsLinkHtml(lang)}<a class="pub-cta" href="/onboarding/">${lang === 'hi' ? 'पढ़ाई शुरू करें' : 'Start studying'}</a>
     </div>
   </header>
   ${inner}
