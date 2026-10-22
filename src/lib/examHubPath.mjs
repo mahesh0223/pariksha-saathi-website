@@ -20,3 +20,8 @@ export function examHubSlug(examId) {
 export function examHubPath(examId, lang) {
   return `${lang === 'hi' ? '/hi' : ''}/exams/${examHubSlug(examId)}/`;
 }
+
+/** The exam's admit card, result and answer-key page (src/lib/examUpdatesPage.mjs). */
+export function examUpdatesPath(examId, lang) {
+  return `${examHubPath(examId, lang)}admit-card-result/`;
+}

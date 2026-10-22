@@ -19,6 +19,7 @@ import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPathFor } from './pyqPath.mjs';
 import { homeVisitHint } from './officialLink.mjs';
+import { examUpdatesPath } from './examHubPath.mjs';
 export { examHubSlug, examHubPath, formatHubDate };
 
 const TYPE_LABEL = {
@@ -106,6 +107,7 @@ const T = {
       bracket: 'Labels in brackets, such as (SA), (TSP) or (Female), are the exam body\'s own sub-lists exactly as printed in its cut-off document.',
     },
     notices: 'Latest notices',
+    updatesLink: (exam) => `${exam} admit card, result and answer key: every notice`,
     allNotices: 'All exam notices',
     currentAffairs: 'Recent current affairs for this exam',
     allCurrentAffairs: 'All current affairs',
@@ -214,6 +216,7 @@ const T = {
       bracket: 'कोष्ठक वाले लेबल, जैसे (SA), (TSP) या (Female), परीक्षा निकाय की अपनी उप-सूचियाँ हैं, ठीक वैसे ही जैसे उसके कट-ऑफ दस्तावेज़ में छपी हैं।',
     },
     notices: 'ताज़ा सूचनाएँ',
+    updatesLink: (exam) => `${exam} एडमिट कार्ड, रिज़ल्ट और आंसर की: हर सूचना`,
     allNotices: 'सभी परीक्षा सूचनाएँ',
     currentAffairs: 'इस परीक्षा के लिए हाल के करेंट अफेयर्स',
     allCurrentAffairs: 'सभी करेंट अफेयर्स',
@@ -651,6 +654,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
       )
       .join('')}</ul><p><a href="/app/exam-notices/">${t.allNotices} &rarr;</a></p>`;
   }
+  html += `<p><a href="${examUpdatesPath(fact.examId, lang)}">${esc(t.updatesLink(examName))} &rarr;</a></p>`;
 
   // The five most recent current-affairs items for this exam (see hubItems) - fresh, dated, linked
   // content on the site's strongest pages, and the crawl path by which new items get found.

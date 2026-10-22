@@ -614,3 +614,29 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
   }
   console.log(`Verified the home-page hint on all ${linking} page(s) that link a Railway (RRB) document.`);
 }
+
+// Admit card, result and answer-key page per exam (src/lib/examUpdatesPage.mjs, from 22 Oct 2026): built for every hub
+// exam in both languages, listing every notice its hub lists, with hreflang, FAQPage data, a sitemap entry and plain
+// HTML, and linked from its hub.
+{
+  let built = 0;
+  for (const examId of HUB_EXAM_IDS) {
+    for (const lang of ['en', 'hi']) {
+      const path = `${examHubPath(examId, lang)}admit-card-result/`;
+      const file = `dist${path}index.html`;
+      assert(existsSync(file), `${path}: not built`);
+      const html = readFileSync(file, 'utf8');
+      const hub = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8');
+      const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
+      assert(title.includes(lang === 'hi' ? 'एडमिट कार्ड' : 'Admit Card'), `${path}: title "${title}" lacks the search phrase`);
+      for (const [, id] of hub.matchAll(/href="\/app\/exam-notices\/([a-z0-9]+)\/"/g)) assert(html.includes(`href="/app/exam-notices/${id}/"`), `${path}: does not list notice ${id} that its hub lists`);
+      for (const alt of ['en', 'hi']) assert(html.includes(`hreflang="${alt}" href="https://parikshasaathi.com${examHubPath(examId, alt)}admit-card-result/"`), `${path}: hreflang ${alt} missing`);
+      assert(html.includes('"@type":"FAQPage"') && html.includes('<div class="hub-faq">'), `${path}: FAQ or FAQPage data missing`);
+      assert(!/<script[^>]+src="\/assets\//.test(html), `${path}: loads the app script; it must stay plain HTML`);
+      assert(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), `${path}: not in the sitemap`);
+      assert(hub.includes(`href="${path}"`), `${examHubPath(examId, lang)}: does not link ${path}`);
+      built++;
+    }
+  }
+  console.log(`Verified ${built} admit card, result and answer-key pages: each lists every notice its hub lists, hreflang, FAQ, sitemap, linked from the hub.`);
+}

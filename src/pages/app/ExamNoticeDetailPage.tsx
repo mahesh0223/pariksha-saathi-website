@@ -1,4 +1,7 @@
 import { homeVisitFor } from '../../lib/officialLink.mjs';
+import { examUpdatesPath } from '../../lib/examHubPath.mjs';
+import { EXAM_NAMES } from '../../lib/examNames.mjs';
+import { HUB_EXAM_IDS } from '../../data/examHubExams.mjs';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getExamUpdates } from '../../api/examUpdates';
@@ -157,6 +160,17 @@ export function ExamNoticeDetailPage() {
           );
         })()}
       </div>
+
+      {HUB_EXAM_IDS.includes(display.examId) && (
+        <p>
+          <a href={examUpdatesPath(display.examId, language === 'hi' ? 'hi' : 'en')}>
+            {language === 'hi'
+              ? `${EXAM_NAMES[display.examId] ?? display.examId} की सभी एडमिट कार्ड, रिज़ल्ट और आंसर की सूचनाएँ`
+              : `All ${EXAM_NAMES[display.examId] ?? display.examId} admit card, result and answer-key notices`}{' '}
+            &rarr;
+          </a>
+        </p>
+      )}
 
       <div dangerouslySetInnerHTML={{ __html: telegramCtaHtml(language === 'hi' ? 'hi' : 'en') }} />
 

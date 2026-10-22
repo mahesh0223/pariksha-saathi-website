@@ -42,6 +42,8 @@ import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/l
 import { pyqPaperBody, pyqPaperMeta, pyqPaperStructuredData } from '../src/lib/pyqPage.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.mjs';
 import { homeVisitHint } from '../src/lib/officialLink.mjs';
+import { examUpdatesBody, examUpdatesMeta, examUpdatesStructuredData } from '../src/lib/examUpdatesPage.mjs';
+import { examUpdatesPath } from '../src/lib/examHubPath.mjs';
 import { pyqIndexBody, pyqIndexMeta, pyqIndexStructuredData } from '../src/lib/pyqIndexPage.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
@@ -1245,6 +1247,28 @@ async function main() {
         structuredData: examHubStructuredData({ examName, facts, cutoffs, lang, siteUrl: SITE_URL }),
       }));
       sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: meta.lastVerified });
+
+      // The exam's admit card, result and answer-key page (src/lib/examUpdatesPage.mjs), from the same notices.
+      const updatesPath = examUpdatesPath(examId, lang);
+      const updatesArgs = { examName, facts, notices, lang };
+      const updatesMeta = examUpdatesMeta(updatesArgs);
+      writePage(updatesPath.replace(/^\/|\/$/g, ''), page({
+        title: updatesMeta.title,
+        description: updatesMeta.description,
+        path: updatesPath,
+        assets,
+        lang,
+        type: 'website',
+        scripts: false,
+        alternateLanguages: [
+          { lang: 'en', path: examUpdatesPath(examId, 'en') },
+          { lang: 'hi', path: examUpdatesPath(examId, 'hi') },
+          { lang: 'x-default', path: examUpdatesPath(examId, 'en') },
+        ],
+        bodyHtml: examUpdatesBody(updatesArgs),
+        structuredData: examUpdatesStructuredData({ ...updatesArgs, siteUrl: SITE_URL }),
+      }));
+      sitemapUrls.push({ loc: updatesPath, priority: lang === 'en' ? '0.7' : '0.6' });
     }
   }
 
@@ -1518,8 +1542,8 @@ async function main() {
   }));
 
   const NOTICE_TEXT = {
-    en: { back: 'Exam Notices &amp; Alerts', verified: 'verified', dates: 'Important dates', guidance: 'What this means for you', official: 'Official notification', crumb: 'Exam Notices & Alerts' },
-    hi: { back: 'परीक्षा सूचनाएं', verified: 'सत्यापित', dates: 'महत्वपूर्ण तिथियाँ', guidance: 'आपके लिए इसका क्या मतलब है', official: 'आधिकारिक अधिसूचना', crumb: 'परीक्षा सूचनाएं' },
+    en: { back: 'Exam Notices &amp; Alerts', verified: 'verified', dates: 'Important dates', guidance: 'What this means for you', official: 'Official notification', crumb: 'Exam Notices & Alerts', updates: (exam) => `All ${exam} admit card, result and answer-key notices` },
+    hi: { back: 'परीक्षा सूचनाएं', verified: 'सत्यापित', dates: 'महत्वपूर्ण तिथियाँ', guidance: 'आपके लिए इसका क्या मतलब है', official: 'आधिकारिक अधिसूचना', crumb: 'परीक्षा सूचनाएं', updates: (exam) => `${exam} की सभी एडमिट कार्ड, रिज़ल्ट और आंसर की सूचनाएँ` },
   };
   for (const [lang, list] of [['en', notices], ['hi', noticesHi]]) for (const item of list) {
     const t = NOTICE_TEXT[lang];
@@ -1540,6 +1564,7 @@ async function main() {
         ${dateRows ? `<div class="detail-dates"><h2>${t.dates}</h2><dl>${dateRows}</dl></div>` : ''}
         ${noticeGuidance(item.id, lang) ? `<section class="news-learning"><h2>${t.guidance}</h2><p>${escapeHtml(noticeGuidance(item.id, lang))}</p></section>` : ''}
         <div class="detail-source"><a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noreferrer">${t.official} &#8599;</a>${homeVisitHint(item.officialUrl, lang)}</div>
+        ${HUB_EXAM_IDS.includes(item.examId) ? `<p><a href="${examUpdatesPath(item.examId, lang)}">${escapeHtml(t.updates(EXAM_NAMES[item.examId] ?? item.examId))} &rarr;</a></p>` : ''}
         ${telegramCtaHtml(lang)}
         ${adSlot('5664651910')}
       </article>
