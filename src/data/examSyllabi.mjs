@@ -8,7 +8,7 @@ export const EXAM_SYLLABI = [
   {
     slug: 'ssc-cgl',
     examName: 'SSC CGL',
-    officialUrl: 'https://ssc.gov.in/for-candidates/cgl-exam/xsd91hjkshdk92xk',
+    officialUrl: 'https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf',
     en: {
       pageTitle: 'SSC CGL Syllabus & Exam Pattern',
       lede: 'SSC CGL (Combined Graduate Level) is run as a multi-tier computer-based test. Here’s the stable shape of it — what gets tested at each stage — with a link to the official notification for this cycle’s exact marks, timing and negative-marking details, since those can be revised from one notification to the next.',

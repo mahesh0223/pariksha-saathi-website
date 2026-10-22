@@ -7,107 +7,125 @@
 
 export const EXAM_JOB_PROFILES = [
   {
-    slug: 'ssc-cgl',
-    examName: 'SSC CGL',
-    officialUrl: 'https://ssc.gov.in/for-candidates/cgl-exam/xsd91hjkshdk92xk',
-    en: {
-      pageTitle: 'SSC CGL Job Profile & Salary',
-      lede: 'SSC CGL doesn’t recruit for one job — it’s a single exam that places you into any of nearly twenty different Group B and C roles across central government departments, from anti-evasion fieldwork as a GST Inspector to desk-level policy coordination as an Assistant Section Officer. Here’s what the main posts actually involve, what each one pays, and how promotion works once you’re in.',
-      profileHeading: 'One exam, many different jobs',
-      profileBody: [
-        'Your rank in CGL and the preferences you fill in decide which post you get — so “what does a CGL recruit do” genuinely depends on which post you land. The posts below cover most of the vacancy pool most cycles, but the exact list and numbers are set fresh in every notification.',
+    "slug": "ssc-cgl",
+    "examName": "SSC CGL",
+    "officialUrl": "https://ssc.gov.in/api/attachment/uploads/masterData/NoticeBoards/Notice_of_adv_cgl_2026.pdf",
+    "en": {
+      "pageTitle": "SSC CGL Job Profile & Salary",
+      "lede": "SSC CGL fills Group ‘B’ and Group ‘C’ posts in central government ministries, departments and offices, and in constitutional and statutory bodies and tribunals. The 2026 notice lists 40 posts (the same post in different departments counts separately) at five pay levels, from Level 4 to Level 8. This page sticks to what the notice says about the posts, their pay and how posts are allotted. It does not describe daily duties or estimate take-home pay, because the notice does neither.",
+      "profileHeading": "One exam, five pay levels",
+      "profileBody": [
+        "Which post and department you get depends on your Tier-II merit and the post preferences you give SSC. Once your merit gets you your first available preference you are not considered for any other, and preferences cannot be changed later.",
+        "Tier-II has a qualifying Computer Knowledge Test and a 15-minute Data Entry Speed Test (a passage of about 2,000 key depressions) for every post. Higher qualifying standards apply where computer proficiency or data-entry speed is prescribed, for example Assistant Section Officer in CSS, MEA and AFHQ, the three Inspector posts and Executive Assistant in CBIC, Postal Assistant / Sorting Assistant, and Tax Assistant in CBIC and CBDT.",
+        "Some posts have extra conditions. Inspector (Central Excise, Examiner, Preventive Officer) in CBIC, Inspector and Sub-Inspector in the Central Bureau of Narcotics, Sub-Inspector / Junior Intelligence Officer in NCB, Sub-Inspector in CBI and NIA, and posts in BRO have physical standards, physical tests and medical standards, checked by the department after selection. Assistant Audit Officer and Assistant Accounts Officer (State Cadre) need proficiency in the state’s regional or official language. Junior Statistical Officer and Statistical Investigator Grade-II need particular subjects in the degree (or, for JSO, 60% in Mathematics at 12th level).",
+        "All the posts carry All India Service Liability, so you can be posted anywhere in India, and the department that takes you may allot you a state, UT or zone."
       ],
-      postsHeading: 'The major posts, and what they actually involve',
-      posts: [
-        { name: 'Inspector of Income Tax (CBDT)', body: 'Assists in scrutinising tax returns, supports search and survey operations, and follows up on revenue collection and assessment cases under a senior officer’s supervision.' },
-        { name: 'Inspector, Central Excise/GST (CBIC)', body: 'Field-heavy role: anti-evasion checks, physical verification of businesses claiming registration or refunds, and GST compliance work.' },
-        { name: 'Assistant Section Officer (CSS and various ministries)', body: 'Desk-based: processes files, drafts notes and correspondence, and coordinates between sections to move government decisions through a ministry or department.' },
-        { name: 'Auditor (CAG and other departments)', body: 'Examines government accounts, receipts and expenditure for compliance with financial rules — less fieldwork, more scrutiny of records.' },
-        { name: 'Statistical Investigator', body: 'Collects and compiles data for official statistics (prices, employment, agriculture and more) used in government planning.' },
+      "postsHeading": "The posts, by pay level",
+      "posts": [
+        {
+          "name": "Pay Level 8 (₹47,600–₹1,51,100) · Group ‘B’ Gazetted",
+          "body": "Assistant Audit Officer (Central Cadre and State Cadre) and Assistant Accounts Officer (State Cadre), in the Indian Audit & Accounts Department under the C&AG."
+        },
+        {
+          "name": "Pay Level 7 (₹44,900–₹1,42,400) · Group ‘B’",
+          "body": "Assistant Section Officer in the Central Secretariat Service, Intelligence Bureau, Ministry of Railways, Ministry of External Affairs, AFHQ, Ministry of Electronics & IT and other ministries; Inspector of Income Tax (CBDT); Inspector (Central Excise), Inspector (Preventive Officer) and Inspector (Examiner) in CBIC; Assistant Enforcement Officer (Directorate of Enforcement); Sub-Inspector (CBI); Inspector Posts (Department of Posts); Inspector (Central Bureau of Narcotics)."
+        },
+        {
+          "name": "Pay Level 6 (₹35,400–₹1,12,400) · Group ‘B’",
+          "body": "Assistant / Assistant Section Officer in other ministries and departments; Executive Assistant (CBIC); Research Assistant (NHRC); Divisional Accountant (offices under the C&AG); Sub-Inspector (NIA); Sub-Inspector / Junior Intelligence Officer (NCB); Junior Statistical Officer (Ministry of Statistics & Programme Implementation); Statistical Investigator Grade-II (Ministry of Home Affairs); Office Superintendent (CBDT); Section Head (Directorate General of Foreign Trade)."
+        },
+        {
+          "name": "Pay Level 5 (₹29,200–₹92,300) · Group ‘C’",
+          "body": "Auditor (offices under the C&AG, offices under the CGDA, other ministries and departments); Accountant (offices under the C&AG, Controller General of Accounts); Accountant / Junior Accountant (other ministries and departments)."
+        },
+        {
+          "name": "Pay Level 4 (₹25,500–₹81,100) · Group ‘C’",
+          "body": "Postal Assistant / Sorting Assistant (Department of Posts); Senior Secretariat Assistant / Upper Division Clerk (central government offices and ministries other than CSCS cadres); Senior Administrative Assistant (Military Engineering Services); Tax Assistant (CBDT and CBIC); Sub-Inspector (Central Bureau of Narcotics)."
+        }
       ],
-      promotionHeading: 'Promotion: steady, but the pace depends entirely on your post',
-      promotionBody: [
-        'CGL cadres promote mainly through seniority combined with a departmental qualifying exam, not a fixed timeline that’s the same for everyone. An Income Tax or GST Inspector can rise through Group B gazetted ranks over a long career, and how long the first promotion takes depends heavily on how many vacancies exist at the next rank in that specific cadre that year. An Assistant Section Officer’s path depends on the ministry they’re posted to. There’s no single “CGL promotion timeline” — check the recruitment rules for the specific post you’re aiming for.',
+      "promotionHeading": "Probation and promotion",
+      "promotionBody": [
+        "The notice does not describe promotion, which follows the recruitment rules of the department and cadre you join, and this page does not guess at it. The one service condition it spells out for a post: Assistant Audit Officers and Assistant Accounts Officers must pass the Subordinate Audit/Accounts Service Examination during probation to be confirmed."
       ],
-      salaryHeading: 'Salary: Pay Level 4 to Level 7, depending on the post',
-      salaryBody: [
-        'Posts like Auditor, Accountant and Tax Assistant sit at Pay Level 4, with a basic pay of ₹25,500. Most Inspector-rank posts and several Assistant Section Officer postings (CSS, MEA, Railways, AFHQ) sit at Level 6 (basic ₹35,400) or Level 7 (basic ₹44,900) under the 7th Pay Commission matrix.',
-        'Once Dearness Allowance, House Rent Allowance and other allowances are added and the NPS deduction is taken out, in-hand pay for CGL posts commonly works out somewhere between roughly ₹35,000 and ₹85,000 a month — the width of that range is real, and comes down to which exact post you’re allotted and which city class (X, Y or Z) you’re posted to.',
-        'DA is revised twice a year, so the exact in-hand figure moves. Every cycle’s own notification carries the current post-wise pay-level table — check it before relying on a specific number.',
+      "salaryHeading": "Pay: Level 4 to Level 8, depending on the post",
+      "salaryBody": [
+        "The notice gives the pay range of each level: Level 4 ₹25,500–₹81,100; Level 5 ₹29,200–₹92,300; Level 6 ₹35,400–₹1,12,400; Level 7 ₹44,900–₹1,42,400; Level 8 ₹47,600–₹1,51,100. The list above shows which posts sit at which level.",
+        "The notice does not list allowances or in-hand pay, and this page does not estimate them."
       ],
-      perksHeading: 'Perks and benefits',
-      perks: [
-        'Central Government Health Scheme (CGHS) or equivalent medical coverage for you and your family',
-        'National Pension System (NPS) with a matching government contribution',
-        'Leave Travel Concession (LTC) — subsidised travel home or anywhere in India once every four years',
-        'Casual, earned and medical leave, plus maternity/paternity leave',
-        'Group insurance and gratuity on retirement',
-        'A defined, rules-based transfer and promotion policy, and strong job security',
-        'Some field postings (Excise/GST, Customs) carry additional risk or kit allowances',
-      ],
-      note: 'The post-wise pay level mapping and the current DA rate change — the exact figures above are the stable structural facts, not this cycle’s precise take-home pay. Confirm current numbers against',
-      noteLinkLabel: 'SSC’s own CGL exam page',
-      recruitsHeading: 'What CGL recruits for',
-      recruitsBody: 'CGL fills Group B and Group C posts across central government ministries and departments, with the exact post-wise vacancy breakdown published fresh in each cycle’s own notification.',
-      offerHeading: 'What Pariksha Saathi offers for SSC CGL',
-      offerBody: 'Topic-wise lessons and practice across all four tested subjects, sectional tests, full-length mock tests in the real pattern with negative marking, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules for General Awareness — all free.',
-      sourceHeading: 'Official source & latest updates',
-      officialLinkLabel: 'SSC CGL — official exam page',
-      examNoticesLinkLabel: 'Latest admit card, result and deadline alerts on Pariksha Saathi',
-      syllabusLinkLabel: 'SSC CGL syllabus & exam pattern',
-      ctaLabel: 'Start studying SSC CGL free',
-      backLabel: 'Home',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official notification linked above before making a financial decision.',
+      "perksHeading": "Perks and benefits (the notice does not list any)",
+      "perks": [],
+      "note": "The official notice is the authority for posts, pay and vacancies, and it changes from cycle to cycle. Confirm current details against",
+      "noteLinkLabel": "the SSC CGL 2026 notice",
+      "recruitsHeading": "What CGL recruits for",
+      "recruitsBody": "Group ‘B’ and Group ‘C’ posts in central government ministries, departments and offices, and in constitutional and statutory bodies and tribunals. SSC’s tentative vacancy list of 24 September 2026 shows 10,731 vacancies across these posts.",
+      "offerHeading": "What Pariksha Saathi offers for SSC CGL",
+      "offerBody": "Topic-wise lessons and practice across all four tested subjects, sectional tests, full-length mock tests in the real pattern with negative marking, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules for General Awareness — all free.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "SSC CGL 2026 — official notice",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "SSC CGL syllabus & exam pattern",
+      "ctaLabel": "Start studying SSC CGL free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SSC or any government body. The posts, pay levels and conditions above are taken from the SSC CGL 2026 notice and may change with each cycle — always confirm against the official notice linked above before making any decision."
     },
-    hi: {
-      pageTitle: 'SSC CGL जॉब प्रोफाइल और सैलरी',
-      lede: 'SSC CGL किसी एक नौकरी के लिए भर्ती नहीं करता — यह एक ऐसी परीक्षा है जो आपको केंद्र सरकार के विभागों में लगभग बीस अलग-अलग ग्रुप B और C भूमिकाओं में से किसी एक में रखती है, GST इंस्पेक्टर के रूप में कर-चोरी रोकने के फील्ड काम से लेकर असिस्टेंट सेक्शन ऑफिसर के रूप में डेस्क-स्तर के नीति-समन्वय तक। यहां बताया गया है कि मुख्य पद वास्तव में क्या करते हैं, हर एक की सैलरी कितनी है, और एक बार अंदर आने पर प्रोमोशन कैसे काम करता है।',
-      profileHeading: 'एक परीक्षा, कई अलग-अलग नौकरियां',
-      profileBody: [
-        'CGL में आपकी रैंक और आपकी भरी हुई प्राथमिकताएं तय करती हैं कि आपको कौन-सा पद मिलेगा — इसलिए "CGL भर्ती क्या करता है" यह वास्तव में इस पर निर्भर करता है कि आपको कौन-सा पद मिला। नीचे दिए पद ज़्यादातर चक्रों में रिक्तियों के बड़े हिस्से को कवर करते हैं, लेकिन सटीक सूची और संख्या हर अधिसूचना में नई तय होती है।',
+    "hi": {
+      "pageTitle": "SSC CGL जॉब प्रोफाइल और सैलरी",
+      "lede": "SSC CGL केंद्र सरकार के मंत्रालयों, विभागों और कार्यालयों तथा संवैधानिक और वैधानिक निकायों और अधिकरणों में ग्रुप ‘B’ और ग्रुप ‘C’ पद भरता है। 2026 की अधिसूचना में 40 पद हैं (एक ही पद अलग-अलग विभागों में हो तो अलग गिना गया है), जो लेवल 4 से लेवल 8 तक पाँच पे लेवल पर हैं। यह पृष्ठ केवल वही बताता है जो अधिसूचना पदों, उनके वेतन और पद आवंटन के बारे में कहती है। इसमें रोज़ के कामकाज का ब्योरा या हाथ में आने वाले वेतन का अनुमान नहीं है, क्योंकि अधिसूचना में ये दोनों नहीं हैं।",
+      "profileHeading": "एक परीक्षा, पाँच पे लेवल",
+      "profileBody": [
+        "आपको कौन-सा पद और विभाग मिलेगा, यह आपकी टियर-II मेरिट और SSC को दी गई पद-प्राथमिकताओं पर निर्भर करता है। मेरिट से पहली उपलब्ध प्राथमिकता मिल जाने के बाद किसी दूसरे विकल्प पर विचार नहीं होता, और प्राथमिकताएँ बाद में बदली नहीं जा सकतीं।",
+        "टियर-II में हर पद के लिए एक अर्हक कंप्यूटर ज्ञान परीक्षा और 15 मिनट का डेटा एंट्री स्पीड टेस्ट (लगभग 2,000 की-डिप्रेशन का अनुच्छेद) होता है। जिन पदों के लिए कंप्यूटर दक्षता या डेटा-एंट्री स्पीड निर्धारित है, वहाँ अर्हता के मानक ऊँचे होते हैं, जैसे CSS, विदेश मंत्रालय और AFHQ में सहायक अनुभाग अधिकारी, CBIC के तीनों इंस्पेक्टर पद और एग्ज़ीक्यूटिव असिस्टेंट, पोस्टल असिस्टेंट / सॉर्टिंग असिस्टेंट, और CBIC व CBDT में टैक्स असिस्टेंट।",
+        "कुछ पदों की अतिरिक्त शर्तें हैं। CBIC में इंस्पेक्टर (सेंट्रल एक्साइज़, एग्ज़ामिनर, प्रिवेंटिव ऑफिसर), केंद्रीय नारकोटिक्स ब्यूरो में इंस्पेक्टर और सब-इंस्पेक्टर, NCB में सब-इंस्पेक्टर / जूनियर इंटेलिजेंस ऑफिसर, CBI और NIA में सब-इंस्पेक्टर, और BRO के पदों के लिए शारीरिक मानक, शारीरिक परीक्षण और चिकित्सा मानक हैं, जिनकी जाँच चयन के बाद विभाग करता है। सहायक लेखा परीक्षा अधिकारी और सहायक लेखा अधिकारी (स्टेट कैडर) के लिए उस राज्य की क्षेत्रीय या राजभाषा में दक्षता चाहिए। जूनियर स्टैटिस्टिकल ऑफिसर और स्टैटिस्टिकल इन्वेस्टिगेटर ग्रेड-II के लिए डिग्री में विशेष विषय चाहिए (या JSO के लिए 12वीं में गणित में 60%)।",
+        "सभी पदों पर अखिल भारतीय सेवा दायित्व है, यानी आपकी तैनाती भारत में कहीं भी हो सकती है, और जिस विभाग में आप जाते हैं वह आपको कोई राज्य, केंद्रशासित प्रदेश या ज़ोन आवंटित कर सकता है।"
       ],
-      postsHeading: 'मुख्य पद, और वे वास्तव में क्या करते हैं',
-      posts: [
-        { name: 'इंस्पेक्टर ऑफ इनकम टैक्स (CBDT)', body: 'टैक्स रिटर्न की जांच में सहायता करता है, सर्वे व सर्च ऑपरेशन में सहयोग देता है, और एक वरिष्ठ अधिकारी की देखरेख में रेवेन्यू कलेक्शन व असेसमेंट केसों का फॉलो-अप करता है।' },
-        { name: 'इंस्पेक्टर, सेंट्रल एक्साइज/GST (CBIC)', body: 'फील्ड-प्रधान भूमिका: कर-चोरी रोकने की जांच, रजिस्ट्रेशन या रिफंड का दावा करने वाले व्यवसायों का भौतिक सत्यापन, और GST अनुपालन संबंधी काम।' },
-        { name: 'असिस्टेंट सेक्शन ऑफिसर (CSS व विभिन्न मंत्रालय)', body: 'डेस्क-आधारित: फाइलों को प्रोसेस करता है, नोट्स और पत्राचार तैयार करता है, और किसी मंत्रालय या विभाग में सरकारी फैसलों को आगे बढ़ाने के लिए सेक्शनों के बीच समन्वय करता है।' },
-        { name: 'ऑडिटर (CAG व अन्य विभाग)', body: 'सरकारी खातों, प्राप्तियों और व्यय की वित्तीय नियमों के अनुपालन के लिए जांच करता है — फील्ड काम कम, रेकॉर्ड की जांच अधिक।' },
-        { name: 'स्टैटिस्टिकल इन्वेस्टिगेटर', body: 'सरकारी योजना में उपयोग होने वाले आधिकारिक आंकड़ों (कीमतें, रोजगार, कृषि व अन्य) के लिए डेटा इकट्ठा और संकलित करता है।' },
+      "postsHeading": "पे लेवल के अनुसार पद",
+      "posts": [
+        {
+          "name": "पे लेवल 8 (₹47,600–₹1,51,100) · ग्रुप ‘B’ राजपत्रित",
+          "body": "C&AG के अधीन भारतीय लेखा परीक्षा एवं लेखा विभाग में सहायक लेखा परीक्षा अधिकारी (सेंट्रल कैडर और स्टेट कैडर) तथा सहायक लेखा अधिकारी (स्टेट कैडर)।"
+        },
+        {
+          "name": "पे लेवल 7 (₹44,900–₹1,42,400) · ग्रुप ‘B’",
+          "body": "केंद्रीय सचिवालय सेवा, इंटेलिजेंस ब्यूरो, रेल मंत्रालय, विदेश मंत्रालय, AFHQ, इलेक्ट्रॉनिकी एवं सूचना प्रौद्योगिकी मंत्रालय और अन्य मंत्रालयों में सहायक अनुभाग अधिकारी; आयकर निरीक्षक (CBDT); CBIC में इंस्पेक्टर (सेंट्रल एक्साइज़), इंस्पेक्टर (प्रिवेंटिव ऑफिसर) और इंस्पेक्टर (एग्ज़ामिनर); सहायक प्रवर्तन अधिकारी (प्रवर्तन निदेशालय); सब-इंस्पेक्टर (CBI); इंस्पेक्टर पोस्ट्स (डाक विभाग); इंस्पेक्टर (केंद्रीय नारकोटिक्स ब्यूरो)।"
+        },
+        {
+          "name": "पे लेवल 6 (₹35,400–₹1,12,400) · ग्रुप ‘B’",
+          "body": "अन्य मंत्रालयों और विभागों में सहायक / सहायक अनुभाग अधिकारी; एग्ज़ीक्यूटिव असिस्टेंट (CBIC); रिसर्च असिस्टेंट (NHRC); डिविज़नल अकाउंटेंट (C&AG के अधीन कार्यालय); सब-इंस्पेक्टर (NIA); सब-इंस्पेक्टर / जूनियर इंटेलिजेंस ऑफिसर (NCB); जूनियर स्टैटिस्टिकल ऑफिसर (सांख्यिकी एवं कार्यक्रम कार्यान्वयन मंत्रालय); स्टैटिस्टिकल इन्वेस्टिगेटर ग्रेड-II (गृह मंत्रालय); ऑफिस सुपरिंटेंडेंट (CBDT); सेक्शन हेड (विदेश व्यापार महानिदेशालय)।"
+        },
+        {
+          "name": "पे लेवल 5 (₹29,200–₹92,300) · ग्रुप ‘C’",
+          "body": "ऑडिटर (C&AG के अधीन कार्यालय, CGDA के अधीन कार्यालय, अन्य मंत्रालय और विभाग); अकाउंटेंट (C&AG के अधीन कार्यालय, लेखा महानियंत्रक); अकाउंटेंट / जूनियर अकाउंटेंट (अन्य मंत्रालय और विभाग)।"
+        },
+        {
+          "name": "पे लेवल 4 (₹25,500–₹81,100) · ग्रुप ‘C’",
+          "body": "पोस्टल असिस्टेंट / सॉर्टिंग असिस्टेंट (डाक विभाग); सीनियर सेक्रेटेरिएट असिस्टेंट / अपर डिवीजन क्लर्क (CSCS कैडर के अलावा केंद्र सरकार के कार्यालय और मंत्रालय); सीनियर एडमिनिस्ट्रेटिव असिस्टेंट (मिलिट्री इंजीनियरिंग सर्विसेज़); टैक्स असिस्टेंट (CBDT और CBIC); सब-इंस्पेक्टर (केंद्रीय नारकोटिक्स ब्यूरो)।"
+        }
       ],
-      promotionHeading: 'प्रोमोशन: स्थिर, लेकिन गति पूरी तरह आपके पद पर निर्भर',
-      promotionBody: [
-        'CGL कैडर मुख्यतः वरिष्ठता और एक विभागीय योग्यता परीक्षा के संयोजन से प्रोमोट होते हैं, न कि किसी तय समय-सीमा से जो सबके लिए एक जैसी हो। एक इनकम टैक्स या GST इंस्पेक्टर लंबे करियर में ग्रुप B राजपत्रित रैंकों तक पहुंच सकता है, और पहला प्रोमोशन कितने समय में मिलेगा यह काफी हद तक इस पर निर्भर करता है कि उस विशेष कैडर में उस साल अगली रैंक पर कितनी रिक्तियां हैं। असिस्टेंट सेक्शन ऑफिसर का रास्ता इस पर निर्भर करता है कि वह किस मंत्रालय में तैनात है। कोई एक "CGL प्रोमोशन टाइमलाइन" नहीं है — जिस पद का लक्ष्य बना रहे हैं उसके भर्ती नियम देखें।',
+      "promotionHeading": "परिवीक्षा और पदोन्नति",
+      "promotionBody": [
+        "अधिसूचना में पदोन्नति का वर्णन नहीं है; वह उस विभाग और कैडर के भर्ती नियमों से चलती है जिसमें आप जाते हैं, और यह पृष्ठ उसका अनुमान नहीं लगाता। किसी पद के लिए अधिसूचना जो एक सेवा-शर्त साफ़ बताती है: सहायक लेखा परीक्षा अधिकारी और सहायक लेखा अधिकारी को पुष्टि के लिए परिवीक्षा के दौरान अधीनस्थ लेखा परीक्षा/लेखा सेवा परीक्षा पास करनी होती है।"
       ],
-      salaryHeading: 'सैलरी: पद के अनुसार पे लेवल 4 से लेवल 7 तक',
-      salaryBody: [
-        'ऑडिटर, अकाउंटेंट और टैक्स असिस्टेंट जैसे पद पे लेवल 4 में आते हैं, जिसका बेसिक पे ₹25,500 है। अधिकांश इंस्पेक्टर-स्तर के पद और कई असिस्टेंट सेक्शन ऑफिसर पोस्टिंग (CSS, MEA, रेलवे, AFHQ) 7वें वेतन आयोग मैट्रिक्स के अंतर्गत लेवल 6 (बेसिक ₹35,400) या लेवल 7 (बेसिक ₹44,900) में आते हैं।',
-        'महंगाई भत्ता (DA), मकान किराया भत्ता (HRA) और अन्य भत्ते जुड़ने और NPS कटौती के बाद, CGL पदों की इन-हैंड सैलरी आम तौर पर लगभग ₹35,000 से ₹85,000 प्रति माह के बीच आती है — यह अंतर वास्तविक है, और इस पर निर्भर करता है कि आपको कौन-सा सटीक पद मिला और आप किस शहर श्रेणी (X, Y या Z) में तैनात हैं।',
-        'DA साल में दो बार संशोधित होता है, इसलिए सटीक इन-हैंड आंकड़ा बदलता रहता है। हर चक्र की अपनी अधिसूचना में वर्तमान पद-वार पे लेवल तालिका होती है — किसी विशेष संख्या पर भरोसा करने से पहले उसे देखें।',
+      "salaryHeading": "वेतन: पद के अनुसार लेवल 4 से लेवल 8",
+      "salaryBody": [
+        "अधिसूचना हर लेवल का वेतन दायरा देती है: लेवल 4 ₹25,500–₹81,100; लेवल 5 ₹29,200–₹92,300; लेवल 6 ₹35,400–₹1,12,400; लेवल 7 ₹44,900–₹1,42,400; लेवल 8 ₹47,600–₹1,51,100। कौन-सा पद किस लेवल पर है, यह ऊपर की सूची में है।",
+        "अधिसूचना में भत्तों या हाथ में आने वाले वेतन की सूची नहीं है, और यह पृष्ठ उनका अनुमान नहीं देता।"
       ],
-      perksHeading: 'भत्ते और लाभ',
-      perks: [
-        'केंद्र सरकार स्वास्थ्य योजना (CGHS) या समतुल्य चिकित्सा कवरेज, आप और परिवार के लिए',
-        'सरकार के समतुल्य अंशदान के साथ राष्ट्रीय पेंशन प्रणाली (NPS)',
-        'अवकाश यात्रा सुविधा (LTC) — हर चार साल में एक बार घर या भारत में कहीं भी रियायती यात्रा',
-        'आकस्मिक, अर्जित और चिकित्सा अवकाश, साथ ही मातृत्व/पितृत्व अवकाश',
-        'सेवानिवृत्ति पर समूह बीमा और उपदान (ग्रेच्युटी)',
-        'एक तय, नियम-आधारित तबादला और प्रोमोशन नीति, और मजबूत नौकरी सुरक्षा',
-        'कुछ फील्ड पोस्टिंग (एक्साइज/GST, कस्टम्स) में अतिरिक्त रिस्क या किट भत्ते',
-      ],
-      note: 'पद-वार पे लेवल मैपिंग और वर्तमान DA दर बदलते रहते हैं — ऊपर दिए आंकड़े स्थिर संरचनात्मक तथ्य हैं, इस चक्र की सटीक इन-हैंड सैलरी नहीं। वर्तमान आंकड़ों की पुष्टि करें',
-      noteLinkLabel: 'SSC के अपने CGL परीक्षा पेज से',
-      recruitsHeading: 'CGL किसके लिए भर्ती करता है',
-      recruitsBody: 'CGL केंद्र सरकार के मंत्रालयों और विभागों में ग्रुप B और ग्रुप C पदों को भरता है, जिसका सटीक पद-वार रिक्ति विवरण हर चक्र की अपनी अधिसूचना में नया प्रकाशित होता है।',
-      offerHeading: 'Pariksha Saathi SSC CGL के लिए क्या देता है',
-      offerBody: 'सभी चार परखे जाने वाले विषयों में विषयवार पाठ और अभ्यास, सेक्शनल टेस्ट, नेगेटिव मार्किंग के साथ वास्तविक पैटर्न में फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक जो आपके कमज़ोर विषयों को अपने आप ट्रैक करती है, और सामान्य जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।',
-      sourceHeading: 'आधिकारिक स्रोत और नवीनतम अपडेट',
-      officialLinkLabel: 'SSC CGL — आधिकारिक परीक्षा पेज',
-      examNoticesLinkLabel: 'Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट',
-      syllabusLinkLabel: 'SSC CGL सिलेबस और परीक्षा पैटर्न',
-      ctaLabel: 'SSC CGL की मुफ्त पढ़ाई शुरू करें',
-      backLabel: 'होम',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SSC या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए वेतन और प्रोमोशन विवरण सामान्य, संरचनात्मक तथ्य हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा ऊपर दी गई आधिकारिक अधिसूचना से वर्तमान आंकड़ों की पुष्टि करें।',
-    },
+      "perksHeading": "भत्ते और लाभ (अधिसूचना में कोई सूची नहीं है)",
+      "perks": [],
+      "note": "पदों, वेतन और रिक्तियों के लिए आधिकारिक अधिसूचना ही प्रमाण है, और यह हर चक्र में बदलती है। वर्तमान विवरण की पुष्टि करें",
+      "noteLinkLabel": "SSC CGL 2026 की अधिसूचना से",
+      "recruitsHeading": "CGL किसके लिए भर्ती करता है",
+      "recruitsBody": "केंद्र सरकार के मंत्रालयों, विभागों और कार्यालयों तथा संवैधानिक और वैधानिक निकायों और अधिकरणों में ग्रुप ‘B’ और ग्रुप ‘C’ पद। SSC की 24 सितंबर 2026 की अस्थायी रिक्ति सूची में इन पदों पर कुल 10,731 रिक्तियाँ हैं।",
+      "offerHeading": "Pariksha Saathi SSC CGL के लिए क्या देता है",
+      "offerBody": "सभी चार परखे जाने वाले विषयों में विषयवार पाठ और अभ्यास, सेक्शनल टेस्ट, नेगेटिव मार्किंग के साथ वास्तविक पैटर्न में फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक जो आपके कमज़ोर विषयों को अपने आप ट्रैक करती है, और सामान्य जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "SSC CGL 2026 — आधिकारिक अधिसूचना",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "SSC CGL सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "SSC CGL की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और SSC या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पद, पे लेवल और शर्तें SSC CGL 2026 की अधिसूचना से ली गई हैं और हर चक्र के साथ बदल सकती हैं — कोई भी निर्णय लेने से पहले हमेशा ऊपर दी गई आधिकारिक अधिसूचना से पुष्टि करें।"
+    }
   },
   {
     slug: 'ssc-chsl',
@@ -195,352 +213,330 @@ export const EXAM_JOB_PROFILES = [
     },
   },
   {
-    slug: 'ibps-po',
-    examName: 'IBPS PO',
-    officialUrl: 'https://www.ibps.in/',
-    en: {
-      pageTitle: 'IBPS PO Job Profile & Salary',
-      lede: 'IBPS PO is the entry point into bank management at public sector banks other than SBI — Junior Management Grade Scale I, the first rung of a ladder that can eventually lead to a bank’s top leadership. Here’s what the two-year probation actually involves, what it pays, and how promotion works from there.',
-      profileHeading: 'What a PO actually does',
-      profileBody: [
-        'During the two-year probation, a PO typically rotates through branch functions under supervision — handling customer accounts, processing loan applications, cash and clearing operations, learning credit appraisal, and cross-selling the bank’s own products. It’s deliberately broad: the point is to understand every function a branch runs before being given independent responsibility.',
-        'After confirmation, a PO takes on real authority — sanctioning loans within set limits, supervising a small team, and in many postings, running day-to-day branch operations.',
+    "slug": "ibps-po",
+    "examName": "IBPS PO",
+    "officialUrl": "https://www.ibps.in/wp-content/uploads/Detailed-Notification_CRP-PO-XVI_Final_V1_30.06.2026.pdf",
+    "en": {
+      "pageTitle": "IBPS PO Job Profile & Salary",
+      "lede": "IBPS PO is a common recruitment process for Probationary Officers / Management Trainees in eleven public sector banks. The CRP PO/MT-XVI notification (vacancies of 2027-28) gives one pay scale and leaves allowances, duties and promotion to the bank you are allotted. This page sticks to what the notification says, and does not estimate take-home pay.",
+      "profileHeading": "One process, eleven banks",
+      "profileBody": [
+        "The participating banks are Bank of Baroda, Bank of India, Bank of Maharashtra, Canara Bank, Central Bank of India, Indian Bank, Indian Overseas Bank, Punjab National Bank, Punjab & Sind Bank, UCO Bank and Union Bank of India.",
+        "After the Preliminary and Main exams and the interview, shortlisted candidates are provisionally allotted to one of these banks on merit-cum-preference, against the vacancies the banks actually report for 2027-28; the vacancies in the notification are indicative. Once made, the allotment cannot be changed, and a candidate who does not take up the bank’s offer loses the chance in this process.",
+        "Provisional allotment is not an offer of employment. The allotted bank verifies your documents and eligibility and decides the offer, joining and other terms; the notification says the bank itself is the final authority for recruitment."
       ],
-      promotionHeading: 'Promotion: the first step usually takes a few years, after that it depends on the bank',
-      promotionBody: [
-        'Scale I officers typically become eligible for promotion to Scale II (Manager) after a minimum of around 2–3 years of service, through the bank’s own performance appraisal and often an internal exam or interview. In practice, actual promotion can take longer than that minimum, since it depends on vacancies at the next scale and the specific bank’s own policy — don’t treat the minimum as a guarantee. From Scale II, the ladder continues through Scale III, IV and beyond over a full banking career, toward senior and then executive management roles.',
+      "promotionHeading": "Probation and promotion",
+      "promotionBody": [
+        "The notification does not describe the probation, the duties or promotion. These follow the policy of the bank you are allotted, and this page does not guess at them."
       ],
-      salaryHeading: 'Salary: Scale I starts at a basic pay of ₹48,480',
-      salaryBody: [
-        'The current Scale I basic pay is ₹48,480, set under the officers’ wage revision (the Joint Note) effective from November 2022 and signed in March 2024, which raised officer pay by roughly 17% on the previous scale. Basic pay rises through annual increments to ₹85,920 at the top of Scale I, before the next promotion.',
-        'Add Dearness Allowance, House Rent Allowance and a special allowance, and gross monthly pay commonly runs ₹72,000–₹91,000; after NPS and tax deductions, in-hand pay is commonly in the ₹65,000–₹76,500 a month range — the exact figure depends heavily on your posting city (metro postings carry higher HRA) and the specific bank’s own allowance structure.',
-        'DA is revised periodically, so these figures move. Check your allotted bank’s own salary circular for the exact current numbers.',
+      "salaryHeading": "Pay: basic pay from ₹48,480",
+      "salaryBody": [
+        "The notification gives the basic pay scale as ₹48,480-2,000/7-62,480-2,340/2-67,160-2,680/7-85,920. Read it as: ₹48,480 to start, seven increments of ₹2,000 to ₹62,480, two of ₹2,340 to ₹67,160, then seven of ₹2,680 to ₹85,920.",
+        "Allowances and perquisites are as per the rules of the allotted bank in force at the time. The notification does not list them or give in-hand pay, and this page does not estimate it."
       ],
-      perksHeading: 'Perks and benefits',
-      perks: [
-        'Staff loans (home, car, personal) at well below market interest rates',
-        'Medical insurance for you and your family, often extending to parents',
-        'Concessional or free banking services for staff',
-        'Leave Fare Concession (LFC) — periodic travel allowance for you and your family',
-        'A locker facility, often free or discounted',
-        'National Pension System (NPS) with the bank’s matching contribution',
-        'A clear, defined promotion ladder and strong job security compared with private-sector banking',
-      ],
-      note: 'The figures above are the stable structural numbers; exact in-hand pay varies by posting and changes with each DA revision. Confirm current figures against',
-      noteLinkLabel: 'IBPS’s own website',
-      recruitsHeading: 'What IBPS PO recruits for',
-      recruitsBody: 'IBPS PO fills Junior Management Grade Scale I officer vacancies at participating public sector banks other than SBI, with the exact bank-wise vacancy breakdown published fresh in each cycle’s notification.',
-      offerHeading: 'What Pariksha Saathi offers for IBPS PO',
-      offerBody: 'Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General Awareness and Banking Awareness — all free.',
-      sourceHeading: 'Official source & latest updates',
-      officialLinkLabel: 'IBPS — official website',
-      examNoticesLinkLabel: 'Latest admit card, result and deadline alerts on Pariksha Saathi',
-      syllabusLinkLabel: 'IBPS PO syllabus & exam pattern',
-      ctaLabel: 'Start studying IBPS PO free',
-      backLabel: 'Home',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
+      "perksHeading": "Perks and benefits (the notification does not list any)",
+      "perks": [],
+      "note": "The official notification is the authority for pay, allotment and vacancies, and it changes from cycle to cycle. Confirm current details against",
+      "noteLinkLabel": "the IBPS CRP PO/MT-XVI notification",
+      "recruitsHeading": "What IBPS PO recruits for",
+      "recruitsBody": "Probationary Officer / Management Trainee posts in the eleven participating public sector banks, for vacancies of 2027-28. The indicative vacancies, as updated in August 2026, total 7,565; actual allotment follows the vacancies the banks report.",
+      "offerHeading": "What Pariksha Saathi offers for IBPS PO",
+      "offerBody": "Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General Awareness and Banking Awareness — all free.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "IBPS CRP PO/MT-XVI — official notification",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "IBPS PO syllabus & exam pattern",
+      "ctaLabel": "Start studying IBPS PO free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. The pay scale and allotment details above are taken from the IBPS notification and may change with each cycle — always confirm against the official notification linked above before making any decision."
     },
-    hi: {
-      pageTitle: 'IBPS PO जॉब प्रोफाइल और सैलरी',
-      lede: 'IBPS PO, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों में बैंक प्रबंधन में प्रवेश का रास्ता है — जूनियर मैनेजमेंट ग्रेड स्केल I, उस सीढ़ी का पहला पड़ाव जो आखिरकार बैंक के शीर्ष नेतृत्व तक ले जा सकता है। यहां बताया गया है कि दो साल की प्रोबेशन में वास्तव में क्या होता है, इसकी सैलरी कितनी है, और उसके बाद प्रोमोशन कैसे काम करता है।',
-      profileHeading: 'एक PO वास्तव में क्या करता है',
-      profileBody: [
-        'दो साल की प्रोबेशन के दौरान, एक PO आम तौर पर देखरेख में ब्रांच के विभिन्न कामों में घूमता है — ग्राहक खाते संभालना, लोन आवेदन प्रोसेस करना, कैश और क्लीयरिंग ऑपरेशन, क्रेडिट मूल्यांकन सीखना, और बैंक के अपने उत्पाद बेचना। यह जानबूझकर व्यापक है: उद्देश्य यह है कि स्वतंत्र जिम्मेदारी मिलने से पहले ब्रांच के हर काम को समझ लिया जाए।',
-        'पुष्टिकरण के बाद, एक PO असली अधिकार संभालता है — तय सीमा के अंदर लोन मंजूर करना, एक छोटी टीम की देखरेख करना, और कई पोस्टिंग में ब्रांच का रोज़मर्रा का परिचालन चलाना।',
+    "hi": {
+      "pageTitle": "IBPS PO जॉब प्रोफाइल और सैलरी",
+      "lede": "IBPS PO ग्यारह सार्वजनिक क्षेत्र के बैंकों में प्रोबेशनरी ऑफिसर / मैनेजमेंट ट्रेनी की एक साझा भर्ती प्रक्रिया है। CRP PO/MT-XVI की अधिसूचना (2027-28 की रिक्तियाँ) एक वेतनमान देती है और भत्ते, कामकाज और पदोन्नति आवंटित बैंक पर छोड़ती है। यह पृष्ठ केवल वही बताता है जो अधिसूचना कहती है, और हाथ में आने वाले वेतन का अनुमान नहीं देता।",
+      "profileHeading": "एक प्रक्रिया, ग्यारह बैंक",
+      "profileBody": [
+        "भाग लेने वाले बैंक हैं: बैंक ऑफ बड़ौदा, बैंक ऑफ इंडिया, बैंक ऑफ महाराष्ट्र, केनरा बैंक, सेंट्रल बैंक ऑफ इंडिया, इंडियन बैंक, इंडियन ओवरसीज़ बैंक, पंजाब नेशनल बैंक, पंजाब एंड सिंध बैंक, यूको बैंक और यूनियन बैंक ऑफ इंडिया।",
+        "प्रारंभिक और मुख्य परीक्षा तथा इंटरव्यू के बाद चुने गए अभ्यर्थियों को मेरिट-सह-प्राथमिकता के आधार पर इनमें से किसी एक बैंक में अनंतिम रूप से आवंटित किया जाता है, उन रिक्तियों के अनुसार जो बैंक 2027-28 के लिए वास्तव में बताते हैं; अधिसूचना की रिक्तियाँ सांकेतिक हैं। आवंटन होने के बाद बदला नहीं जा सकता, और जो अभ्यर्थी बैंक का प्रस्ताव स्वीकार नहीं करता वह इस प्रक्रिया में अपना अवसर खो देता है।",
+        "अनंतिम आवंटन नौकरी का प्रस्ताव नहीं है। आवंटित बैंक आपके दस्तावेज़ और पात्रता की जाँच करता है और प्रस्ताव, ज्वाइनिंग और अन्य शर्तें तय करता है; अधिसूचना के अनुसार भर्ती का अंतिम अधिकार बैंक के पास ही है।"
       ],
-      promotionHeading: 'प्रोमोशन: पहला पड़ाव आम तौर पर कुछ साल लेता है, उसके बाद बैंक पर निर्भर',
-      promotionBody: [
-        'स्केल I अधिकारी आम तौर पर लगभग 2–3 साल की सेवा के बाद स्केल II (मैनेजर) में प्रोमोशन के पात्र बनते हैं, बैंक के अपने प्रदर्शन मूल्यांकन और अक्सर एक आंतरिक परीक्षा या इंटरव्यू के ज़रिए। व्यवहार में, वास्तविक प्रोमोशन इस न्यूनतम से ज़्यादा समय ले सकता है, क्योंकि यह अगली स्केल में रिक्तियों और उस विशेष बैंक की अपनी नीति पर निर्भर करता है — न्यूनतम को गारंटी न मानें। स्केल II से, सीढ़ी स्केल III, IV और उससे आगे पूरे बैंकिंग करियर में चलती है, वरिष्ठ और फिर कार्यकारी प्रबंधन भूमिकाओं की ओर।',
+      "promotionHeading": "परिवीक्षा और पदोन्नति",
+      "promotionBody": [
+        "अधिसूचना में परिवीक्षा, कामकाज या पदोन्नति का वर्णन नहीं है। ये आवंटित बैंक की नीति से चलते हैं, और यह पृष्ठ इनका अनुमान नहीं लगाता।"
       ],
-      salaryHeading: 'सैलरी: स्केल I की शुरुआत ₹48,480 बेसिक पे से होती है',
-      salaryBody: [
-        'वर्तमान स्केल I बेसिक पे ₹48,480 है, जो अधिकारियों के वेतन संशोधन (जॉइंट नोट) के अंतर्गत नवंबर 2022 से प्रभावी और मार्च 2024 में हस्ताक्षरित हुआ, जिसने पिछले स्केल की तुलना में अधिकारी वेतन में लगभग 17% की वृद्धि की। बेसिक पे वार्षिक वेतन वृद्धि के साथ स्केल I के शीर्ष पर ₹85,920 तक बढ़ता है, अगले प्रोमोशन से पहले।',
-        'महंगाई भत्ता, मकान किराया भत्ता और एक विशेष भत्ता जोड़ने पर, मासिक सकल वेतन आम तौर पर ₹72,000–₹91,000 के बीच होता है; NPS और टैक्स कटौती के बाद, इन-हैंड सैलरी आम तौर पर ₹65,000–₹76,500 प्रति माह के दायरे में होती है — सटीक आंकड़ा काफी हद तक आपकी पोस्टिंग वाले शहर (मेट्रो पोस्टिंग में ज़्यादा HRA) और उस विशेष बैंक के अपने भत्ता ढांचे पर निर्भर करता है।',
-        'DA समय-समय पर संशोधित होता है, इसलिए ये आंकड़े बदलते रहते हैं। सटीक वर्तमान आंकड़ों के लिए अपने आवंटित बैंक का अपना सैलरी सर्कुलर देखें।',
+      "salaryHeading": "वेतन: बेसिक पे ₹48,480 से",
+      "salaryBody": [
+        "अधिसूचना बेसिक पे का वेतनमान ₹48,480-2,000/7-62,480-2,340/2-67,160-2,680/7-85,920 देती है। इसका अर्थ: शुरुआत ₹48,480 से, ₹2,000 की सात वेतनवृद्धियों से ₹62,480, ₹2,340 की दो से ₹67,160, फिर ₹2,680 की सात से ₹85,920।",
+        "भत्ते और अनुलाभ उस समय लागू आवंटित बैंक के नियमों के अनुसार मिलते हैं। अधिसूचना में इनकी सूची या हाथ में आने वाला वेतन नहीं है, और यह पृष्ठ उसका अनुमान नहीं देता।"
       ],
-      perksHeading: 'भत्ते और लाभ',
-      perks: [
-        'बाजार दर से काफी कम ब्याज दर पर स्टाफ लोन (होम, कार, पर्सनल)',
-        'आपके और परिवार के लिए मेडिकल इंश्योरेंस, अक्सर माता-पिता तक भी विस्तारित',
-        'स्टाफ के लिए रियायती या मुफ्त बैंकिंग सेवाएं',
-        'अवकाश यात्रा सुविधा (LFC) — आपके और परिवार के लिए समय-समय पर यात्रा भत्ता',
-        'लॉकर सुविधा, अक्सर मुफ्त या रियायती',
-        'बैंक के समतुल्य अंशदान के साथ राष्ट्रीय पेंशन प्रणाली (NPS)',
-        'प्राइवेट-सेक्टर बैंकिंग की तुलना में एक स्पष्ट, तय प्रोमोशन सीढ़ी और मजबूत नौकरी सुरक्षा',
-      ],
-      note: 'ऊपर दिए आंकड़े स्थिर संरचनात्मक संख्याएं हैं; सटीक इन-हैंड सैलरी पोस्टिंग के अनुसार अलग होती है और हर DA संशोधन के साथ बदलती है। वर्तमान आंकड़ों की पुष्टि करें',
-      noteLinkLabel: 'IBPS की अपनी वेबसाइट से',
-      recruitsHeading: 'IBPS PO किसके लिए भर्ती करता है',
-      recruitsBody: 'IBPS PO, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों में जूनियर मैनेजमेंट ग्रेड स्केल I अधिकारी रिक्तियों को भरता है, जिसका सटीक बैंक-वार रिक्ति विवरण हर चक्र की अधिसूचना में नया प्रकाशित होता है।',
-      offerHeading: 'Pariksha Saathi IBPS PO के लिए क्या देता है',
-      offerBody: 'रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य जागरूकता व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।',
-      sourceHeading: 'आधिकारिक स्रोत और नवीनतम अपडेट',
-      officialLinkLabel: 'IBPS — आधिकारिक वेबसाइट',
-      examNoticesLinkLabel: 'Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट',
-      syllabusLinkLabel: 'IBPS PO सिलेबस और परीक्षा पैटर्न',
-      ctaLabel: 'IBPS PO की मुफ्त पढ़ाई शुरू करें',
-      backLabel: 'होम',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और IBPS या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन और प्रोमोशन विवरण सामान्य, संरचनात्मक तथ्य हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा आधिकारिक स्रोत से वर्तमान आंकड़ों की पुष्टि करें।',
-    },
+      "perksHeading": "भत्ते और लाभ (अधिसूचना में कोई सूची नहीं है)",
+      "perks": [],
+      "note": "वेतन, आवंटन और रिक्तियों के लिए आधिकारिक अधिसूचना ही प्रमाण है, और यह हर चक्र में बदलती है। वर्तमान विवरण की पुष्टि करें",
+      "noteLinkLabel": "IBPS CRP PO/MT-XVI की अधिसूचना से",
+      "recruitsHeading": "IBPS PO किसके लिए भर्ती करता है",
+      "recruitsBody": "ग्यारह भाग लेने वाले सार्वजनिक क्षेत्र के बैंकों में 2027-28 की रिक्तियों के लिए प्रोबेशनरी ऑफिसर / मैनेजमेंट ट्रेनी के पद। अगस्त 2026 में अद्यतन सांकेतिक रिक्तियाँ कुल 7,565 हैं; वास्तविक आवंटन बैंकों की बताई रिक्तियों के अनुसार होता है।",
+      "offerHeading": "Pariksha Saathi IBPS PO के लिए क्या देता है",
+      "offerBody": "रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य जागरूकता व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "IBPS CRP PO/MT-XVI — आधिकारिक अधिसूचना",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "IBPS PO सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "IBPS PO की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और IBPS या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतनमान और आवंटन के विवरण IBPS की अधिसूचना से लिए गए हैं और हर चक्र के साथ बदल सकते हैं — कोई भी निर्णय लेने से पहले हमेशा ऊपर दी गई आधिकारिक अधिसूचना से पुष्टि करें।"
+    }
   },
   {
-    slug: 'ibps-clerk',
-    examName: 'IBPS Clerk',
-    officialUrl: 'https://www.ibps.in/',
-    en: {
-      pageTitle: 'IBPS Clerk Job Profile & Salary',
-      lede: 'IBPS Clerk recruits Customer Service Associates for public sector banks other than SBI — the front line of most branches, and for many, the first step toward an officer career. Here’s the actual day-to-day, the salary, and the two real paths up from here.',
-      profileHeading: 'What a Clerk actually does',
-      profileBody: [
-        'Most of the role is direct customer interaction: counter transactions (deposits, withdrawals, passbook updates, cheque processing), opening new accounts and completing KYC, and cross-selling the bank’s own products. Depending on the branch, there’s also back-office work — clearing, reconciliation and document handling that doesn’t involve a customer standing at the counter.',
+    "slug": "ibps-clerk",
+    "examName": "IBPS Clerk",
+    "officialUrl": "https://www.ibps.in/wp-content/uploads/Notification_CRP_CSA_XVI-Final.pdf",
+    "en": {
+      "pageTitle": "IBPS Clerk Job Profile & Salary",
+      "lede": "IBPS Clerk is a common recruitment process for Customer Service Associates (clerical cadre) in eleven public sector banks. The CRP CSA-XVI notification (vacancies of 2027-28) gives one pay scale and leaves allowances, duties and promotion to the bank you are allotted. This page sticks to what the notification says, and does not estimate take-home pay.",
+      "profileHeading": "State-wise recruitment, eleven banks",
+      "profileBody": [
+        "The participating banks are Bank of Baroda, Bank of India, Bank of Maharashtra, Canara Bank, Central Bank of India, Indian Bank, Indian Overseas Bank, Punjab National Bank, Punjab & Sind Bank, UCO Bank and Union Bank of India.",
+        "Clerical recruitment is State/UT-wise: you apply for the vacancies of one State or UT only and are considered only for that State or UT. After the Main exam, shortlisted candidates are provisionally allotted to a bank on merit-cum-preference, against the vacancies the banks actually report for 2027-28; the vacancies in the notification are indicative.",
+        "You must be proficient in the local language you opt for in that State or UT (reading, writing, speaking and understanding). A Local Language Proficiency Test is held after the Main exam or allotment and before joining, unless you have a 10th-standard or higher mark sheet or certificate showing you studied that language. Candidates who fail it are not offered appointment.",
+        "Provisional allotment is not an offer of employment: the allotted bank verifies your documents and eligibility before any offer."
       ],
-      promotionHeading: 'Promotion: two real paths, and the timeline varies a lot by bank',
-      promotionBody: [
-        'There are two realistic routes up. The first is a seniority-based path within the clerical cadre itself, toward Senior Clerk or Special Assistant grades. The second is an internal promotion exam into the officer cadre, which several public sector banks run separately from the open-market IBPS PO exam — but the minimum years of service required, and how often the exam is actually conducted, varies significantly from bank to bank. Check your specific bank’s own promotion policy rather than assuming a fixed timeline.',
+      "promotionHeading": "Probation and promotion",
+      "promotionBody": [
+        "The notification does not describe probation, the duties or promotion. These follow the policy of the bank you are allotted, and this page does not guess at them."
       ],
-      salaryHeading: 'Salary: basic pay starts at ₹24,050 (₹26,730 for graduates)',
-      salaryBody: [
-        'The clerical cadre’s pay scale was set under the 12th Bipartite Settlement, effective from November 2022 to October 2027 (signed in March 2024). Starting basic pay is ₹24,050; graduate entrants get two advance increments, taking their starting basic to ₹26,730. The scale rises through increments to ₹64,480 over roughly two decades of service.',
-        'Gross monthly pay (basic plus DA, HRA and other allowances) commonly runs around ₹37,000–₹41,000 at most participating banks; in-hand pay after deductions is commonly in the ₹37,000–₹39,500 a month range, varying by posting city and the specific bank’s own allowance structure.',
-        'These figures move with each DA revision — check your allotted bank’s own salary circular for the exact current numbers.',
+      "salaryHeading": "Pay: basic pay from ₹24,050",
+      "salaryBody": [
+        "The notification gives the basic pay scale as ₹24,050-1,340/3-28,070-1,650/3-33,020-2,000/4-41,020-2,340/7-57,400-4,400/1-61,800-2,680/1-64,480: ₹24,050 to start, rising through stages of increments to ₹64,480.",
+        "Allowances and perquisites are as per the rules of the allotted bank in force at the time. The notification does not list them or give in-hand pay, and this page does not estimate it."
       ],
-      perksHeading: 'Perks and benefits',
-      perks: [
-        'Staff loans (home, personal, car) at concessional interest rates',
-        'Medical insurance for you and your family',
-        'Leave Fare Concession (LFC) — periodic travel allowance',
-        'A locker facility, often free or discounted',
-        'National Pension System (NPS) with the bank’s matching contribution',
-        'A defined promotion channel into both senior clerical grades and, via the internal exam route, the officer cadre',
-        'Strong job security compared with private-sector banking roles',
-      ],
-      note: 'The figures above are the stable structural numbers; exact in-hand pay varies by posting and changes with each DA revision. Confirm current figures against',
-      noteLinkLabel: 'IBPS’s own website',
-      recruitsHeading: 'What IBPS Clerk recruits for',
-      recruitsBody: 'IBPS Clerk fills Customer Service Associate vacancies at participating public sector banks other than SBI, with the exact bank-wise vacancy breakdown published fresh in each cycle’s notification.',
-      offerHeading: 'What Pariksha Saathi offers for IBPS Clerk',
-      offerBody: 'Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free.',
-      sourceHeading: 'Official source & latest updates',
-      officialLinkLabel: 'IBPS — official website',
-      examNoticesLinkLabel: 'Latest admit card, result and deadline alerts on Pariksha Saathi',
-      syllabusLinkLabel: 'IBPS Clerk syllabus & exam pattern',
-      ctaLabel: 'Start studying IBPS Clerk free',
-      backLabel: 'Home',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
+      "perksHeading": "Perks and benefits (the notification does not list any)",
+      "perks": [],
+      "note": "The official notification is the authority for pay, allotment and vacancies, and it changes from cycle to cycle. Confirm current details against",
+      "noteLinkLabel": "the IBPS CRP CSA-XVI notification",
+      "recruitsHeading": "What IBPS Clerk recruits for",
+      "recruitsBody": "Customer Service Associate (clerical cadre) posts in the eleven participating public sector banks, State/UT-wise, for vacancies of 2027-28. Indicative state-wise and category-wise vacancies are in Annexure I of the notification; actual allotment follows the vacancies the banks report.",
+      "offerHeading": "What Pariksha Saathi offers for IBPS Clerk",
+      "offerBody": "Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "IBPS CRP CSA-XVI — official notification",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "IBPS Clerk syllabus & exam pattern",
+      "ctaLabel": "Start studying IBPS Clerk free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with IBPS or any bank. The pay scale and allotment details above are taken from the IBPS notification and may change with each cycle — always confirm against the official notification linked above before making any decision."
     },
-    hi: {
-      pageTitle: 'IBPS क्लर्क जॉब प्रोफाइल और सैलरी',
-      lede: 'IBPS क्लर्क, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों के लिए कस्टमर सर्विस एसोसिएट भर्ती करता है — ज़्यादातर शाखाओं की फ्रंट लाइन, और कई लोगों के लिए, अधिकारी करियर की ओर पहला पड़ाव। यहां बताया गया है कि असल रोज़मर्रा का काम क्या है, सैलरी कितनी है, और यहां से ऊपर जाने के दो वास्तविक रास्ते क्या हैं।',
-      profileHeading: 'एक क्लर्क वास्तव में क्या करता है',
-      profileBody: [
-        'भूमिका का अधिकांश हिस्सा सीधा ग्राहक संपर्क है: काउंटर लेनदेन (जमा, निकासी, पासबुक अपडेट, चेक प्रोसेसिंग), नए खाते खोलना और KYC पूरा करना, और बैंक के अपने उत्पाद बेचना। शाखा के अनुसार, बैक-ऑफिस काम भी होता है — क्लीयरिंग, रिकंसिलिएशन और दस्तावेज़ संभालना जिसमें काउंटर पर खड़ा ग्राहक शामिल नहीं होता।',
+    "hi": {
+      "pageTitle": "IBPS क्लर्क जॉब प्रोफाइल और सैलरी",
+      "lede": "IBPS क्लर्क ग्यारह सार्वजनिक क्षेत्र के बैंकों में कस्टमर सर्विस एसोसिएट (लिपिक संवर्ग) की एक साझा भर्ती प्रक्रिया है। CRP CSA-XVI की अधिसूचना (2027-28 की रिक्तियाँ) एक वेतनमान देती है और भत्ते, कामकाज और पदोन्नति आवंटित बैंक पर छोड़ती है। यह पृष्ठ केवल वही बताता है जो अधिसूचना कहती है, और हाथ में आने वाले वेतन का अनुमान नहीं देता।",
+      "profileHeading": "राज्यवार भर्ती, ग्यारह बैंक",
+      "profileBody": [
+        "भाग लेने वाले बैंक हैं: बैंक ऑफ बड़ौदा, बैंक ऑफ इंडिया, बैंक ऑफ महाराष्ट्र, केनरा बैंक, सेंट्रल बैंक ऑफ इंडिया, इंडियन बैंक, इंडियन ओवरसीज़ बैंक, पंजाब नेशनल बैंक, पंजाब एंड सिंध बैंक, यूको बैंक और यूनियन बैंक ऑफ इंडिया।",
+        "लिपिक भर्ती राज्य/केंद्रशासित प्रदेश-वार होती है: आप केवल एक राज्य या केंद्रशासित प्रदेश की रिक्तियों के लिए आवेदन करते हैं और केवल उसी के लिए विचार में आते हैं। मुख्य परीक्षा के बाद चुने गए अभ्यर्थियों को मेरिट-सह-प्राथमिकता के आधार पर किसी बैंक में अनंतिम रूप से आवंटित किया जाता है, उन रिक्तियों के अनुसार जो बैंक 2027-28 के लिए वास्तव में बताते हैं; अधिसूचना की रिक्तियाँ सांकेतिक हैं।",
+        "उस राज्य या केंद्रशासित प्रदेश की जो स्थानीय भाषा आप चुनते हैं, उसमें दक्षता (पढ़ना, लिखना, बोलना और समझना) ज़रूरी है। मुख्य परीक्षा या आवंटन के बाद और ज्वाइनिंग से पहले स्थानीय भाषा दक्षता परीक्षा (LLPT) होती है, जब तक आपके पास 10वीं या उससे ऊपर की ऐसी मार्कशीट या प्रमाण-पत्र न हो जिससे पता चले कि आपने वह भाषा पढ़ी है। इसमें असफल होने वाले अभ्यर्थियों को नियुक्ति नहीं मिलती।",
+        "अनंतिम आवंटन नौकरी का प्रस्ताव नहीं है: कोई भी प्रस्ताव देने से पहले आवंटित बैंक आपके दस्तावेज़ और पात्रता की जाँच करता है।"
       ],
-      promotionHeading: 'प्रोमोशन: दो वास्तविक रास्ते, और समय-सीमा बैंक के अनुसार बहुत अलग',
-      promotionBody: [
-        'ऊपर जाने के दो यथार्थवादी रास्ते हैं। पहला है क्लेरिकल कैडर के भीतर ही एक वरिष्ठता-आधारित रास्ता, सीनियर क्लर्क या स्पेशल असिस्टेंट ग्रेड की ओर। दूसरा है अधिकारी कैडर में एक आंतरिक प्रोमोशन परीक्षा, जिसे कई सार्वजनिक क्षेत्र के बैंक ओपन-मार्केट IBPS PO परीक्षा से अलग चलाते हैं — लेकिन आवश्यक न्यूनतम सेवा वर्ष, और परीक्षा वास्तव में कितनी बार होती है, यह बैंक-दर-बैंक काफी अलग है। किसी तय समय-सीमा मान लेने के बजाय अपने विशेष बैंक की अपनी प्रोमोशन नीति देखें।',
+      "promotionHeading": "परिवीक्षा और पदोन्नति",
+      "promotionBody": [
+        "अधिसूचना में परिवीक्षा, कामकाज या पदोन्नति का वर्णन नहीं है। ये आवंटित बैंक की नीति से चलते हैं, और यह पृष्ठ इनका अनुमान नहीं लगाता।"
       ],
-      salaryHeading: 'सैलरी: बेसिक पे ₹24,050 से शुरू (स्नातकों के लिए ₹26,730)',
-      salaryBody: [
-        'क्लेरिकल कैडर का पे स्केल 12वें द्विपक्षीय समझौते (बाइपार्टाइट सेटलमेंट) के अंतर्गत तय हुआ, जो नवंबर 2022 से अक्टूबर 2027 तक प्रभावी है (मार्च 2024 में हस्ताक्षरित)। शुरुआती बेसिक पे ₹24,050 है; स्नातक अभ्यर्थियों को दो एडवांस इंक्रीमेंट मिलते हैं, जिससे उनका शुरुआती बेसिक ₹26,730 हो जाता है। यह स्केल लगभग दो दशकों की सेवा में वेतन वृद्धि के साथ ₹64,480 तक बढ़ता है।',
-        'मासिक सकल वेतन (बेसिक + DA, HRA और अन्य भत्ते) अधिकांश भाग लेने वाले बैंकों में आम तौर पर लगभग ₹37,000–₹41,000 होता है; कटौतियों के बाद इन-हैंड सैलरी आम तौर पर ₹37,000–₹39,500 प्रति माह के दायरे में होती है, जो पोस्टिंग वाले शहर और उस विशेष बैंक के अपने भत्ता ढांचे के अनुसार अलग होती है।',
-        'ये आंकड़े हर DA संशोधन के साथ बदलते हैं — सटीक वर्तमान आंकड़ों के लिए अपने आवंटित बैंक का अपना सैलरी सर्कुलर देखें।',
+      "salaryHeading": "वेतन: बेसिक पे ₹24,050 से",
+      "salaryBody": [
+        "अधिसूचना बेसिक पे का वेतनमान ₹24,050-1,340/3-28,070-1,650/3-33,020-2,000/4-41,020-2,340/7-57,400-4,400/1-61,800-2,680/1-64,480 देती है: शुरुआत ₹24,050 से, और वेतनवृद्धियों के चरणों से ₹64,480 तक।",
+        "भत्ते और अनुलाभ उस समय लागू आवंटित बैंक के नियमों के अनुसार मिलते हैं। अधिसूचना में इनकी सूची या हाथ में आने वाला वेतन नहीं है, और यह पृष्ठ उसका अनुमान नहीं देता।"
       ],
-      perksHeading: 'भत्ते और लाभ',
-      perks: [
-        'रियायती ब्याज दर पर स्टाफ लोन (होम, पर्सनल, कार)',
-        'आपके और परिवार के लिए मेडिकल इंश्योरेंस',
-        'अवकाश यात्रा सुविधा (LFC) — समय-समय पर यात्रा भत्ता',
-        'लॉकर सुविधा, अक्सर मुफ्त या रियायती',
-        'बैंक के समतुल्य अंशदान के साथ राष्ट्रीय पेंशन प्रणाली (NPS)',
-        'वरिष्ठ क्लेरिकल ग्रेड और, आंतरिक परीक्षा के ज़रिए, अधिकारी कैडर दोनों में एक तय प्रोमोशन चैनल',
-        'प्राइवेट-सेक्टर बैंकिंग भूमिकाओं की तुलना में मजबूत नौकरी सुरक्षा',
-      ],
-      note: 'ऊपर दिए आंकड़े स्थिर संरचनात्मक संख्याएं हैं; सटीक इन-हैंड सैलरी पोस्टिंग के अनुसार अलग होती है और हर DA संशोधन के साथ बदलती है। वर्तमान आंकड़ों की पुष्टि करें',
-      noteLinkLabel: 'IBPS की अपनी वेबसाइट से',
-      recruitsHeading: 'IBPS क्लर्क किसके लिए भर्ती करता है',
-      recruitsBody: 'IBPS क्लर्क, SBI के अलावा अन्य सार्वजनिक क्षेत्र के बैंकों में कस्टमर सर्विस एसोसिएट रिक्तियों को भरता है, जिसका सटीक बैंक-वार रिक्ति विवरण हर चक्र की अधिसूचना में नया प्रकाशित होता है।',
-      offerHeading: 'Pariksha Saathi IBPS क्लर्क के लिए क्या देता है',
-      offerBody: 'रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।',
-      sourceHeading: 'आधिकारिक स्रोत और नवीनतम अपडेट',
-      officialLinkLabel: 'IBPS — आधिकारिक वेबसाइट',
-      examNoticesLinkLabel: 'Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट',
-      syllabusLinkLabel: 'IBPS क्लर्क सिलेबस और परीक्षा पैटर्न',
-      ctaLabel: 'IBPS क्लर्क की मुफ्त पढ़ाई शुरू करें',
-      backLabel: 'होम',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और IBPS या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन और प्रोमोशन विवरण सामान्य, संरचनात्मक तथ्य हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा आधिकारिक स्रोत से वर्तमान आंकड़ों की पुष्टि करें।',
-    },
+      "perksHeading": "भत्ते और लाभ (अधिसूचना में कोई सूची नहीं है)",
+      "perks": [],
+      "note": "वेतन, आवंटन और रिक्तियों के लिए आधिकारिक अधिसूचना ही प्रमाण है, और यह हर चक्र में बदलती है। वर्तमान विवरण की पुष्टि करें",
+      "noteLinkLabel": "IBPS CRP CSA-XVI की अधिसूचना से",
+      "recruitsHeading": "IBPS क्लर्क किसके लिए भर्ती करता है",
+      "recruitsBody": "ग्यारह भाग लेने वाले सार्वजनिक क्षेत्र के बैंकों में 2027-28 की रिक्तियों के लिए, राज्य/केंद्रशासित प्रदेश-वार, कस्टमर सर्विस एसोसिएट (लिपिक संवर्ग) के पद। राज्यवार और श्रेणीवार सांकेतिक रिक्तियाँ अधिसूचना के Annexure I में हैं; वास्तविक आवंटन बैंकों की बताई रिक्तियों के अनुसार होता है।",
+      "offerHeading": "Pariksha Saathi IBPS क्लर्क के लिए क्या देता है",
+      "offerBody": "रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "IBPS CRP CSA-XVI — आधिकारिक अधिसूचना",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "IBPS क्लर्क सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "IBPS क्लर्क की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और IBPS या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतनमान और आवंटन के विवरण IBPS की अधिसूचना से लिए गए हैं और हर चक्र के साथ बदल सकते हैं — कोई भी निर्णय लेने से पहले हमेशा ऊपर दी गई आधिकारिक अधिसूचना से पुष्टि करें।"
+    }
   },
   {
-    slug: 'sbi-po',
-    examName: 'SBI PO',
-    officialUrl: 'https://sbi.co.in/web/careers',
-    en: {
-      pageTitle: 'SBI PO Job Profile & Salary',
-      lede: 'SBI runs its own Probationary Officer recruitment, separate from IBPS, for Junior Management Grade Scale I at the country’s largest public sector bank. The role is broadly similar to an IBPS PO’s, but SBI’s own pay structure and nationwide branch network make the specifics worth knowing separately.',
-      profileHeading: 'What an SBI PO actually does',
-      profileBody: [
-        'The first two years are probation, spent rotating through branch functions much like at any PSU bank — customer accounts, credit appraisal, cash and clearing operations, cross-selling — but often at higher transaction volumes, given SBI’s scale. SBI POs also commonly handle government-linked accounts and schemes (pension disbursal, PMJDY accounts) that are a bigger part of the workload at SBI than at smaller banks.',
-        'After confirmation as a JMGS-I officer, a PO takes on loan-sanctioning authority within set limits, team supervision, and increasingly independent branch responsibility.',
+    "slug": "sbi-po",
+    "examName": "SBI PO",
+    "officialUrl": "https://sbi.bank.in/documents/77530/57941/18062026_1_Detailed_Adv.2026.pdf/1f1a9532-8a2f-6e59-08a0-616d62a497b1?t=1781759726353",
+    "en": {
+      "pageTitle": "SBI PO Job Profile & Salary",
+      "lede": "SBI recruits its own Probationary Officers, separately from IBPS, into Junior Management Grade Scale-I at the State Bank of India. The 2026 advertisement (CRPD/PO/2026-27/09, 1,500 vacancies) is specific about pay, the joining bond, probation and transfers, and this page sticks to what it says.",
+      "profileHeading": "What the advertisement says about the job",
+      "profileBody": [
+        "Selection has three phases: an online Preliminary exam, an online Main exam, and a psychometric test, group exercises and an interview.",
+        "Before joining you complete an online course in basic banking. At joining you sign a bond of ₹2 lakh to serve the Bank for at least three years; the Bank invokes it if you resign before three years are up.",
+        "SBI can allot or transfer you to any of its circles or offices in India, or depute you to its associates, subsidiaries or another organisation. Requests for a particular place may not be entertained."
       ],
-      promotionHeading: 'Promotion: a 2-year probation, then a broadly similar ladder to other PSU banks',
-      promotionBody: [
-        'Confirmation as a JMGS-I officer happens after the 2-year probation. From there, eligibility for the next step (Scale II) typically arrives after a further minimum of around 2–3 years, subject to SBI’s own performance appraisal and promotion process — SBI’s scale means this process tends to be more structured and predictable than at some smaller PSU banks, though actual promotion still depends on vacancies in a given year. The ladder continues through Scale III and beyond over a full career.',
+      "promotionHeading": "Probation and promotion",
+      "promotionBody": [
+        "You join as a Probationary Officer and may be on probation for two years, with continuous assessment under the Bank’s policy. If you meet the Bank’s standards you are confirmed in Junior Management Grade Scale-I; if not, your services may be terminated under the policy in force.",
+        "The advertisement gives no promotion timeline. It says only that the Bank’s promotion policy lets meritorious officers reach the Top Management Grade in a reasonably quick time, and that there are opportunities for postings abroad."
       ],
-      salaryHeading: 'Salary: a starting basic pay of ₹56,480, with four advance increments built in',
-      salaryBody: [
-        'SBI’s Scale I pay scale runs ₹48,480–₹62,480–₹67,160–₹85,920 with annual increments, same as the broader officers’ wage revision (effective November 2022, signed March 2024). SBI gives new POs four advance increments at hiring, which lifts the actual starting basic pay to ₹56,480 — a real, specific head start before you even begin.',
-        'Add Dearness Allowance, House Rent Allowance, a special allowance and city/location allowances, and gross monthly pay commonly runs ₹90,000–₹93,000; in-hand pay after NPS and tax deductions is commonly in the ₹73,000–₹86,000 a month range. SBI itself has cited an approximate annual package of around ₹21–22 lakh for prime/metro postings, and a somewhat lower figure (around ₹20.4 lakh) for the Mumbai circle specifically — treat these as the commonly-quoted industry figures, not an official CTC guarantee, since they move with allowances and posting.',
+      "salaryHeading": "Pay: starting basic ₹48,480 plus four advance increments",
+      "salaryBody": [
+        "The advertisement gives the JMGS-I basic pay scale as ₹48,480-2,000/7-62,480-2,340/2-67,160-2,680/7-85,920, and a starting basic pay of ₹48,480 plus four advance increments. On this scale, four ₹2,000 increments make a starting basic of ₹56,480.",
+        "SBI gives the approximate cost to company (CTC) at the initial scale of pay at its Mumbai centre as ₹21.97 lakh. CTC is not take-home pay, and this page does not estimate in-hand pay. The allowances and benefits the advertisement names are listed below."
       ],
-      perksHeading: 'Perks and benefits',
-      perks: [
-        'Staff loans (home, car, personal) at concessional interest rates',
-        'Medical insurance for you and your family, with SBI’s own staff welfare schemes on top',
-        'Concessional or free banking services for staff',
-        'Leave Fare Concession (LFC) — periodic travel allowance for you and your family',
-        'A locker facility, often free or discounted',
-        'National Pension System (NPS) with the bank’s matching contribution',
-        'Postings across India’s largest branch network, with a clear, structured promotion ladder',
+      "perksHeading": "Benefits the advertisement names",
+      "perks": [
+        "Dearness Allowance (DA), House Rent Allowance (HRA) and City Compensatory Allowance (CCA)",
+        "Provident Fund (PF) and the contributory pension fund (NPS)",
+        "Leave Fare Concession (LFC)",
+        "Medical facility",
+        "Lease rental facility",
+        "Other allowances and perquisites under the Bank’s rules in force"
       ],
-      note: 'The figures above are the commonly-cited structural numbers; exact in-hand pay and the annual package vary by posting and change with each DA revision. Confirm current figures against',
-      noteLinkLabel: 'SBI’s own careers page',
-      recruitsHeading: 'What SBI PO recruits for',
-      recruitsBody: 'SBI PO fills Junior Management Grade Scale I officer vacancies at the State Bank of India specifically, with the exact vacancy count published fresh in each cycle’s notification.',
-      offerHeading: 'What Pariksha Saathi offers for SBI PO',
-      offerBody: 'Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free. See also our direct comparison of IBPS PO and SBI PO if you’re deciding between the two.',
-      sourceHeading: 'Official source & latest updates',
-      officialLinkLabel: 'SBI — official careers page',
-      examNoticesLinkLabel: 'Latest admit card, result and deadline alerts on Pariksha Saathi',
-      syllabusLinkLabel: 'SBI PO syllabus & exam pattern',
-      ctaLabel: 'Start studying SBI PO free',
-      backLabel: 'Home',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
+      "note": "The advertisement is the authority for pay, service conditions and vacancies, and it changes from cycle to cycle. Confirm current details against",
+      "noteLinkLabel": "the SBI PO 2026 advertisement",
+      "recruitsHeading": "What SBI PO recruits for",
+      "recruitsBody": "Probationary Officers in Junior Management Grade Scale-I at the State Bank of India: 1,500 vacancies in the 2026 advertisement.",
+      "offerHeading": "What Pariksha Saathi offers for SBI PO",
+      "offerBody": "Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free. See also our direct comparison of IBPS PO and SBI PO if you’re deciding between the two.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "SBI PO 2026 — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "SBI PO syllabus & exam pattern",
+      "ctaLabel": "Start studying SBI PO free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. The pay, emoluments and service conditions above are taken from SBI’s advertisement and may change with each cycle — always confirm against the official advertisement linked above before making any decision."
     },
-    hi: {
-      pageTitle: 'SBI PO जॉब प्रोफाइल और सैलरी',
-      lede: 'SBI, IBPS से अलग, अपनी स्वयं की प्रोबेशनरी ऑफिसर भर्ती चलाता है, देश के सबसे बड़े सार्वजनिक क्षेत्र के बैंक में जूनियर मैनेजमेंट ग्रेड स्केल I के लिए। भूमिका मोटे तौर पर IBPS PO जैसी ही है, लेकिन SBI का अपना वेतन ढांचा और देशभर का शाखा नेटवर्क इसकी विशिष्टताओं को अलग से जानना ज़रूरी बनाते हैं।',
-      profileHeading: 'एक SBI PO वास्तव में क्या करता है',
-      profileBody: [
-        'पहले दो साल प्रोबेशन के होते हैं, जिसमें किसी भी PSU बैंक की तरह ब्रांच के विभिन्न कामों में घूमना होता है — ग्राहक खाते, क्रेडिट मूल्यांकन, कैश और क्लीयरिंग ऑपरेशन, उत्पाद बेचना — लेकिन अक्सर SBI के पैमाने को देखते हुए ज़्यादा लेनदेन मात्रा पर। SBI PO आम तौर पर सरकार से जुड़े खाते और योजनाएं (पेंशन वितरण, PMJDY खाते) भी संभालते हैं, जो SBI में छोटे बैंकों की तुलना में काम का एक बड़ा हिस्सा होता है।',
-        'JMGS-I अधिकारी के रूप में पुष्टिकरण के बाद, एक PO तय सीमा के अंदर लोन मंजूर करने का अधिकार, टीम की देखरेख, और धीरे-धीरे स्वतंत्र ब्रांच जिम्मेदारी संभालता है।',
+    "hi": {
+      "pageTitle": "SBI PO जॉब प्रोफाइल और सैलरी",
+      "lede": "SBI अपने प्रोबेशनरी ऑफिसर की भर्ती IBPS से अलग, खुद करता है, भारतीय स्टेट बैंक में जूनियर मैनेजमेंट ग्रेड स्केल-I में। 2026 का विज्ञापन (CRPD/PO/2026-27/09, 1,500 रिक्तियाँ) वेतन, ज्वाइनिंग बॉन्ड, परिवीक्षा और तबादलों के बारे में साफ़ बताता है, और यह पृष्ठ केवल वही बताता है जो उसमें लिखा है।",
+      "profileHeading": "विज्ञापन नौकरी के बारे में क्या कहता है",
+      "profileBody": [
+        "चयन तीन चरणों में होता है: ऑनलाइन प्रारंभिक परीक्षा, ऑनलाइन मुख्य परीक्षा, और साइकोमेट्रिक टेस्ट, ग्रुप एक्सरसाइज़ व इंटरव्यू।",
+        "ज्वाइनिंग से पहले आपको बुनियादी बैंकिंग का एक ऑनलाइन कोर्स पूरा करना होता है। ज्वाइनिंग के समय आपको कम से कम तीन वर्ष बैंक की सेवा करने के लिए ₹2 लाख का बॉन्ड भरना होता है; तीन वर्ष पूरे होने से पहले इस्तीफ़ा देने पर बैंक यह बॉन्ड लागू करता है।",
+        "SBI आपको भारत में अपने किसी भी सर्कल या कार्यालय में आवंटित या स्थानांतरित कर सकता है, या अपने सहयोगी, सहायक संस्थानों या किसी अन्य संगठन में प्रतिनियुक्त कर सकता है। किसी खास जगह के अनुरोध पर विचार नहीं भी किया जा सकता है।"
       ],
-      promotionHeading: 'प्रोमोशन: 2 साल की प्रोबेशन, फिर अन्य PSU बैंकों जैसी ही सीढ़ी',
-      promotionBody: [
-        '2 साल की प्रोबेशन के बाद JMGS-I अधिकारी के रूप में पुष्टिकरण होता है। वहां से, अगले पड़ाव (स्केल II) की पात्रता आम तौर पर लगभग 2–3 साल की और सेवा के बाद आती है, SBI के अपने प्रदर्शन मूल्यांकन और प्रोमोशन प्रक्रिया के अधीन — SBI के पैमाने के कारण यह प्रक्रिया कुछ छोटे PSU बैंकों की तुलना में ज़्यादा संरचित और पूर्वानुमानित होती है, हालांकि वास्तविक प्रोमोशन अभी भी किसी दिए साल में रिक्तियों पर निर्भर करता है। सीढ़ी पूरे करियर में स्केल III और उससे आगे चलती रहती है।',
+      "promotionHeading": "परिवीक्षा और पदोन्नति",
+      "promotionBody": [
+        "आप प्रोबेशनरी ऑफिसर के रूप में ज्वाइन करते हैं और दो वर्ष की परिवीक्षा पर रह सकते हैं, जिसमें बैंक की नीति के अनुसार लगातार मूल्यांकन होता है। बैंक के मानक पूरे करने पर जूनियर मैनेजमेंट ग्रेड स्केल-I में आपकी पुष्टि होती है; न करने पर लागू नीति के अनुसार सेवा समाप्त की जा सकती है।",
+        "विज्ञापन पदोन्नति की कोई समय-सीमा नहीं देता। उसमें केवल इतना लिखा है कि बैंक की पदोन्नति नीति योग्य अधिकारियों को उचित रूप से कम समय में टॉप मैनेजमेंट ग्रेड तक पहुँचने का अवसर देती है, और विदेश में तैनाती के अवसर भी हैं।"
       ],
-      salaryHeading: 'सैलरी: ₹56,480 की शुरुआती बेसिक पे, जिसमें चार एडवांस इंक्रीमेंट शामिल',
-      salaryBody: [
-        'SBI का स्केल I पे स्केल ₹48,480–₹62,480–₹67,160–₹85,920 वार्षिक वेतन वृद्धि के साथ चलता है, व्यापक अधिकारी वेतन संशोधन (नवंबर 2022 से प्रभावी, मार्च 2024 में हस्ताक्षरित) जैसा ही। SBI नए PO को नियुक्ति पर चार एडवांस इंक्रीमेंट देता है, जिससे वास्तविक शुरुआती बेसिक पे ₹56,480 हो जाता है — शुरू करने से पहले ही एक वास्तविक, विशिष्ट बढ़त।',
-        'महंगाई भत्ता, मकान किराया भत्ता, एक विशेष भत्ता और शहर/स्थान भत्ते जोड़ने पर, मासिक सकल वेतन आम तौर पर ₹90,000–₹93,000 होता है; NPS और टैक्स कटौती के बाद, इन-हैंड सैलरी आम तौर पर ₹73,000–₹86,000 प्रति माह के दायरे में होती है। SBI ने स्वयं प्राइम/मेट्रो पोस्टिंग के लिए लगभग ₹21–22 लाख का अनुमानित वार्षिक पैकेज बताया है, और मुंबई सर्कल के लिए विशेष रूप से थोड़ा कम आंकड़ा (लगभग ₹20.4 लाख) — इन्हें सामान्यतः बताए जाने वाले उद्योग के आंकड़ों के रूप में लें, किसी आधिकारिक CTC गारंटी के रूप में नहीं, क्योंकि ये भत्तों और पोस्टिंग के साथ बदलते हैं।',
+      "salaryHeading": "वेतन: शुरुआती बेसिक ₹48,480 और चार अग्रिम वेतनवृद्धियाँ",
+      "salaryBody": [
+        "विज्ञापन JMGS-I का बेसिक पे वेतनमान ₹48,480-2,000/7-62,480-2,340/2-67,160-2,680/7-85,920 देता है, और शुरुआती बेसिक पे ₹48,480 के साथ चार अग्रिम वेतनवृद्धियाँ। इस वेतनमान पर ₹2,000 की चार वेतनवृद्धियों से शुरुआती बेसिक ₹56,480 होता है।",
+        "SBI अपने मुंबई केंद्र पर शुरुआती वेतनमान पर अनुमानित कॉस्ट टू कंपनी (CTC) ₹21.97 लाख बताता है। CTC हाथ में आने वाला वेतन नहीं है, और यह पृष्ठ इन-हैंड वेतन का अनुमान नहीं देता। विज्ञापन में बताए भत्ते और लाभ नीचे दिए हैं।"
       ],
-      perksHeading: 'भत्ते और लाभ',
-      perks: [
-        'रियायती ब्याज दर पर स्टाफ लोन (होम, कार, पर्सनल)',
-        'आपके और परिवार के लिए मेडिकल इंश्योरेंस, साथ में SBI की अपनी स्टाफ कल्याण योजनाएं',
-        'स्टाफ के लिए रियायती या मुफ्त बैंकिंग सेवाएं',
-        'अवकाश यात्रा सुविधा (LFC) — आपके और परिवार के लिए समय-समय पर यात्रा भत्ता',
-        'लॉकर सुविधा, अक्सर मुफ्त या रियायती',
-        'बैंक के समतुल्य अंशदान के साथ राष्ट्रीय पेंशन प्रणाली (NPS)',
-        'भारत के सबसे बड़े शाखा नेटवर्क में पोस्टिंग, एक स्पष्ट, संरचित प्रोमोशन सीढ़ी के साथ',
+      "perksHeading": "विज्ञापन में बताए गए लाभ",
+      "perks": [
+        "महंगाई भत्ता (DA), मकान किराया भत्ता (HRA) और नगर प्रतिपूरक भत्ता (CCA)",
+        "भविष्य निधि (PF) और अंशदायी पेंशन निधि (NPS)",
+        "छुट्टी किराया रियायत (LFC)",
+        "चिकित्सा सुविधा",
+        "लीज़ रेंटल सुविधा",
+        "बैंक के लागू नियमों के अनुसार अन्य भत्ते और अनुलाभ"
       ],
-      note: 'ऊपर दिए आंकड़े सामान्यतः बताई जाने वाली संरचनात्मक संख्याएं हैं; सटीक इन-हैंड सैलरी और वार्षिक पैकेज पोस्टिंग के अनुसार अलग होते हैं और हर DA संशोधन के साथ बदलते हैं। वर्तमान आंकड़ों की पुष्टि करें',
-      noteLinkLabel: 'SBI के अपने करियर पेज से',
-      recruitsHeading: 'SBI PO किसके लिए भर्ती करता है',
-      recruitsBody: 'SBI PO विशेष रूप से स्टेट बैंक ऑफ इंडिया में जूनियर मैनेजमेंट ग्रेड स्केल I अधिकारी रिक्तियों को भरता है, जिसकी सटीक रिक्ति संख्या हर चक्र की अधिसूचना में नई प्रकाशित होती है।',
-      offerHeading: 'Pariksha Saathi SBI PO के लिए क्या देता है',
-      offerBody: 'रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है। IBPS PO और SBI PO के बीच तय करना हो तो हमारी सीधी तुलना भी देखें।',
-      sourceHeading: 'आधिकारिक स्रोत और नवीनतम अपडेट',
-      officialLinkLabel: 'SBI — आधिकारिक करियर पेज',
-      examNoticesLinkLabel: 'Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट',
-      syllabusLinkLabel: 'SBI PO सिलेबस और परीक्षा पैटर्न',
-      ctaLabel: 'SBI PO की मुफ्त पढ़ाई शुरू करें',
-      backLabel: 'होम',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SBI या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन और प्रोमोशन विवरण सामान्य, संरचनात्मक तथ्य हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा आधिकारिक स्रोत से वर्तमान आंकड़ों की पुष्टि करें।',
-    },
+      "note": "वेतन, सेवा-शर्तों और रिक्तियों के लिए विज्ञापन ही प्रमाण है, और यह हर चक्र में बदलता है। वर्तमान विवरण की पुष्टि करें",
+      "noteLinkLabel": "SBI PO 2026 के विज्ञापन से",
+      "recruitsHeading": "SBI PO किसके लिए भर्ती करता है",
+      "recruitsBody": "भारतीय स्टेट बैंक में जूनियर मैनेजमेंट ग्रेड स्केल-I में प्रोबेशनरी ऑफिसर: 2026 के विज्ञापन में 1,500 रिक्तियाँ।",
+      "offerHeading": "Pariksha Saathi SBI PO के लिए क्या देता है",
+      "offerBody": "रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है। IBPS PO और SBI PO के बीच तय करना हो तो हमारी सीधी तुलना भी देखें।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "SBI PO 2026 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "SBI PO सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "SBI PO की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और SBI या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन, परिलब्धियाँ और सेवा-शर्तें SBI के विज्ञापन से ली गई हैं और हर चक्र के साथ बदल सकती हैं — कोई भी निर्णय लेने से पहले हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
   },
   {
-    slug: 'sbi-clerk',
-    examName: 'SBI Clerk',
-    officialUrl: 'https://sbi.co.in/web/careers',
-    en: {
-      pageTitle: 'SBI Clerk Job Profile & Salary',
-      lede: 'SBI runs its own clerical recruitment, separate from IBPS Clerk, for the Junior Associate (Customer Support & Sales) role at the State Bank of India. The daily work closely mirrors any PSU bank clerk’s, but SBI’s own allowance structure and internal promotion route are worth knowing on their own terms.',
-      profileHeading: 'What an SBI Junior Associate actually does',
-      profileBody: [
-        'The core of the job is counter and customer-facing work — deposits, withdrawals, passbook updates, cheque processing, new account opening and KYC — plus cross-selling SBI’s own products. SBI branches often see higher average customer footfall than smaller banks, so the pace of the counter work tends to be busier.',
+    "slug": "sbi-clerk",
+    "examName": "SBI Clerk",
+    "officialUrl": "https://sbi.bank.in/webfiles/uploads/files_2627/08/JA_2026_Detailed_Advt_Eng.pdf",
+    "en": {
+      "pageTitle": "SBI Clerk Job Profile & Salary",
+      "lede": "SBI recruits its own clerical staff, separately from IBPS, as Junior Associates (Customer Support & Sales). The 2026 advertisement (CRPD/CR/2026-27/17, 7,680 vacancies) is specific about pay, starting emoluments, probation and transfers, and this page sticks to what it says. It does not estimate take-home pay.",
+      "profileHeading": "What the advertisement says about the job",
+      "profileBody": [
+        "Recruitment is State/UT-wise: you apply for the vacancies of one State or UT only and are considered only for that State or UT.",
+        "You must be proficient in the local language you opt for in that State or UT (reading, writing, speaking and understanding). A language test is held after the Main exam and before joining, unless you have a 10th or 12th standard mark sheet or certificate showing you studied that language. Candidates who fail it are not offered appointment.",
+        "There is no inter-circle or inter-state transfer before five years of service. After five years, the Bank may consider a transfer request only in exceptional cases, such as extreme compassionate or spouse grounds."
       ],
-      promotionHeading: 'Promotion: seniority within the clerical cadre, or SBI’s own internal route to officer',
-      promotionBody: [
-        'As with other PSU banks, there are two real paths: seniority-based progression within the clerical cadre toward Senior Associate/Special Assistant grades, and an internal promotion exam into the officer cadre. SBI specifically runs its own periodic internal exam for serving clerical staff to move into the PO cadre — a well-known route for SBI clerks specifically — though the eligibility criteria (minimum years of service) and how often the exam is held can change, so check SBI’s current circular rather than assuming a fixed cycle.',
+      "promotionHeading": "Probation and promotion",
+      "promotionBody": [
+        "You are on probation for at least six months and must complete the e-lessons the Bank prescribes to be confirmed; until you do, probation is extended. Your performance is evaluated before probation ends, and it may be extended if your performance falls short of the Bank’s expectations.",
+        "The advertisement does not describe promotion, and this page does not guess at it."
       ],
-      salaryHeading: 'Salary: the same pay scale as IBPS Clerk, but a somewhat higher in-hand figure',
-      salaryBody: [
-        'SBI Junior Associates are on the same 12th Bipartite Settlement clerical pay scale as IBPS Clerk — starting basic pay ₹24,050 (₹26,730 for graduates), rising to ₹64,480 over roughly two decades of service.',
-        'SBI’s own allowance structure tends to push gross and in-hand pay a little higher than at some other PSU banks: one commonly-cited worked example puts gross monthly pay around ₹46,000 and in-hand pay (after deductions) around ₹42,500 a month — compared with the roughly ₹37,000–₹39,500 in-hand range commonly quoted for IBPS Clerk postings elsewhere. The exact figure still depends on your posting city and current DA.',
+      "salaryHeading": "Pay: starting basic ₹26,730",
+      "salaryBody": [
+        "The advertisement gives the pay scale as ₹24,050-1,340/3-28,070-1,650/3-33,020-2,000/4-41,020-2,340/7-57,400-4,400/1-61,800-2,680/1-64,480, and a starting basic pay of ₹26,730: ₹24,050 plus two advance increments admissible to graduates.",
+        "SBI puts total starting emoluments at a metro like Mumbai at around ₹46,000 a month, including DA and other allowances at the current rate; allowances vary with the place of posting. That is gross pay, not take-home pay, and this page does not estimate in-hand pay."
       ],
-      perksHeading: 'Perks and benefits',
-      perks: [
-        'Staff loans (home, personal, car) at concessional interest rates',
-        'Medical insurance for you and your family, with SBI’s own staff welfare schemes on top',
-        'Leave Fare Concession (LFC) — periodic travel allowance',
-        'A locker facility, often free or discounted',
-        'National Pension System (NPS) with the bank’s matching contribution',
-        'A defined promotion channel into senior clerical grades, and SBI’s own internal route into the officer cadre',
-        'Strong job security compared with private-sector banking roles',
+      "perksHeading": "Benefits the advertisement names",
+      "perks": [
+        "Reimbursement of various perquisites",
+        "Provident fund",
+        "Pension under the New Pension Scheme (defined contribution)",
+        "Medical facility",
+        "Leave Fare Concession",
+        "Other facilities as per the Bank’s instructions"
       ],
-      note: 'The figures above are the commonly-cited structural numbers; exact in-hand pay varies by posting and changes with each DA revision. Confirm current figures against',
-      noteLinkLabel: 'SBI’s own careers page',
-      recruitsHeading: 'What SBI Clerk recruits for',
-      recruitsBody: 'SBI Clerk fills Junior Associate (Customer Support & Sales) vacancies at the State Bank of India specifically, with the exact vacancy count published fresh in each cycle’s notification.',
-      offerHeading: 'What Pariksha Saathi offers for SBI Clerk',
-      offerBody: 'Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free.',
-      sourceHeading: 'Official source & latest updates',
-      officialLinkLabel: 'SBI — official careers page',
-      examNoticesLinkLabel: 'Latest admit card, result and deadline alerts on Pariksha Saathi',
-      syllabusLinkLabel: 'SBI Clerk syllabus & exam pattern',
-      ctaLabel: 'Start studying SBI Clerk free',
-      backLabel: 'Home',
-      disclaimer: 'Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. Pay and promotion details above are general, structural facts, not a guarantee of any specific figure or timeline — always confirm current numbers against the official source before making a financial decision.',
+      "note": "The advertisement is the authority for pay, service conditions and vacancies, and it changes from cycle to cycle. Confirm current details against",
+      "noteLinkLabel": "the SBI Junior Associates 2026 advertisement",
+      "recruitsHeading": "What SBI Clerk recruits for",
+      "recruitsBody": "Junior Associates (Customer Support & Sales) in the clerical cadre at the State Bank of India, State/UT-wise: 7,680 vacancies in the 2026 advertisement.",
+      "offerHeading": "What Pariksha Saathi offers for SBI Clerk",
+      "offerBody": "Topic-wise lessons and practice across Reasoning, Quant and English, sectional and full-length mock tests in the real pattern, a Mistake Notebook, and dated current-affairs capsules for General and Banking Awareness — all free.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "SBI Junior Associates 2026 — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "SBI Clerk syllabus & exam pattern",
+      "ctaLabel": "Start studying SBI Clerk free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with SBI or any bank. The pay, emoluments and service conditions above are taken from SBI’s advertisement and may change with each cycle — always confirm against the official advertisement linked above before making any decision."
     },
-    hi: {
-      pageTitle: 'SBI क्लर्क जॉब प्रोफाइल और सैलरी',
-      lede: 'SBI, IBPS क्लर्क से अलग, स्टेट बैंक ऑफ इंडिया में जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स) भूमिका के लिए अपनी स्वयं की क्लेरिकल भर्ती चलाता है। दैनिक काम किसी भी PSU बैंक क्लर्क जैसा ही है, लेकिन SBI का अपना भत्ता ढांचा और आंतरिक प्रोमोशन रास्ता अलग से जानना ज़रूरी है।',
-      profileHeading: 'एक SBI जूनियर एसोसिएट वास्तव में क्या करता है',
-      profileBody: [
-        'नौकरी का मुख्य हिस्सा काउंटर और ग्राहक-सामने वाला काम है — जमा, निकासी, पासबुक अपडेट, चेक प्रोसेसिंग, नए खाते खोलना और KYC — साथ ही SBI के अपने उत्पाद बेचना। SBI शाखाओं में अक्सर छोटे बैंकों की तुलना में ज़्यादा औसत ग्राहक संख्या होती है, इसलिए काउंटर काम की गति आम तौर पर व्यस्त होती है।',
+    "hi": {
+      "pageTitle": "SBI क्लर्क जॉब प्रोफाइल और सैलरी",
+      "lede": "SBI अपने लिपिक कर्मचारियों की भर्ती IBPS से अलग, खुद करता है, जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स) के रूप में। 2026 का विज्ञापन (CRPD/CR/2026-27/17, 7,680 रिक्तियाँ) वेतन, शुरुआती परिलब्धियों, परिवीक्षा और तबादलों के बारे में साफ़ बताता है, और यह पृष्ठ केवल वही बताता है जो उसमें लिखा है। इसमें हाथ में आने वाले वेतन का अनुमान नहीं है।",
+      "profileHeading": "विज्ञापन नौकरी के बारे में क्या कहता है",
+      "profileBody": [
+        "भर्ती राज्य/केंद्रशासित प्रदेश-वार होती है: आप केवल एक राज्य या केंद्रशासित प्रदेश की रिक्तियों के लिए आवेदन करते हैं और केवल उसी के लिए विचार में आते हैं।",
+        "उस राज्य या केंद्रशासित प्रदेश की जो स्थानीय भाषा आप चुनते हैं, उसमें दक्षता (पढ़ना, लिखना, बोलना और समझना) ज़रूरी है। मुख्य परीक्षा के बाद और ज्वाइनिंग से पहले भाषा परीक्षा होती है, जब तक आपके पास 10वीं या 12वीं की ऐसी मार्कशीट या प्रमाण-पत्र न हो जिससे पता चले कि आपने वह भाषा पढ़ी है। इसमें असफल होने वाले अभ्यर्थियों को नियुक्ति नहीं मिलती।",
+        "पाँच वर्ष की सेवा से पहले अंतर-सर्कल या अंतर-राज्य तबादला नहीं होता। पाँच वर्ष बाद भी बैंक केवल असाधारण मामलों में, जैसे अत्यधिक करुणा या पति/पत्नी के आधार पर, तबादले के अनुरोध पर विचार कर सकता है।"
       ],
-      promotionHeading: 'प्रोमोशन: क्लेरिकल कैडर के भीतर वरिष्ठता, या SBI का अपना आंतरिक अधिकारी रास्ता',
-      promotionBody: [
-        'अन्य PSU बैंकों की तरह, दो वास्तविक रास्ते हैं: क्लेरिकल कैडर के भीतर वरिष्ठता-आधारित प्रगति सीनियर एसोसिएट/स्पेशल असिस्टेंट ग्रेड की ओर, और अधिकारी कैडर में एक आंतरिक प्रोमोशन परीक्षा। SBI विशेष रूप से सेवारत क्लेरिकल स्टाफ के लिए PO कैडर में जाने की अपनी समय-समय की आंतरिक परीक्षा चलाता है — SBI क्लर्कों के लिए विशेष रूप से एक जाना-पहचाना रास्ता — हालांकि पात्रता मानदंड (न्यूनतम सेवा वर्ष) और परीक्षा कितनी बार होती है यह बदल सकता है, इसलिए कोई तय चक्र मानने के बजाय SBI का वर्तमान सर्कुलर देखें।',
+      "promotionHeading": "परिवीक्षा और पदोन्नति",
+      "promotionBody": [
+        "आप कम से कम छह महीने परिवीक्षा पर रहते हैं और पुष्टि के लिए बैंक के निर्धारित ई-लेसन पूरे करने होते हैं; जब तक पूरे न हों, परिवीक्षा बढ़ती रहती है। परिवीक्षा समाप्त होने से पहले आपके प्रदर्शन का मूल्यांकन होता है, और प्रदर्शन बैंक की अपेक्षा से कम रहने पर परिवीक्षा बढ़ाई जा सकती है।",
+        "विज्ञापन में पदोन्नति का वर्णन नहीं है, और यह पृष्ठ उसका अनुमान नहीं लगाता।"
       ],
-      salaryHeading: 'सैलरी: IBPS क्लर्क जैसा ही पे स्केल, लेकिन कुछ ऊंचा इन-हैंड आंकड़ा',
-      salaryBody: [
-        'SBI जूनियर एसोसिएट IBPS क्लर्क जैसे ही 12वें द्विपक्षीय समझौते के क्लेरिकल पे स्केल पर हैं — शुरुआती बेसिक पे ₹24,050 (स्नातकों के लिए ₹26,730), जो लगभग दो दशकों की सेवा में ₹64,480 तक बढ़ता है।',
-        'SBI का अपना भत्ता ढांचा सकल और इन-हैंड सैलरी को कुछ अन्य PSU बैंकों की तुलना में थोड़ा ऊंचा रखता है: एक सामान्यतः बताया जाने वाला उदाहरण मासिक सकल वेतन लगभग ₹46,000 और कटौतियों के बाद इन-हैंड सैलरी लगभग ₹42,500 प्रति माह बताता है — जबकि अन्यत्र IBPS क्लर्क पोस्टिंग के लिए आम तौर पर ₹37,000–₹39,500 का इन-हैंड दायरा बताया जाता है। सटीक आंकड़ा अभी भी आपकी पोस्टिंग वाले शहर और वर्तमान DA पर निर्भर करता है।',
+      "salaryHeading": "वेतन: शुरुआती बेसिक ₹26,730",
+      "salaryBody": [
+        "विज्ञापन वेतनमान ₹24,050-1,340/3-28,070-1,650/3-33,020-2,000/4-41,020-2,340/7-57,400-4,400/1-61,800-2,680/1-64,480 देता है, और शुरुआती बेसिक पे ₹26,730: ₹24,050 के साथ स्नातकों को मिलने वाली दो अग्रिम वेतनवृद्धियाँ।",
+        "SBI के अनुसार मुंबई जैसे महानगर में कुल शुरुआती परिलब्धियाँ लगभग ₹46,000 प्रति माह हैं, जिसमें वर्तमान दर पर DA और अन्य भत्ते शामिल हैं; भत्ते तैनाती की जगह के अनुसार बदलते हैं। यह सकल वेतन है, हाथ में आने वाला वेतन नहीं, और यह पृष्ठ इन-हैंड वेतन का अनुमान नहीं देता।"
       ],
-      perksHeading: 'भत्ते और लाभ',
-      perks: [
-        'रियायती ब्याज दर पर स्टाफ लोन (होम, पर्सनल, कार)',
-        'आपके और परिवार के लिए मेडिकल इंश्योरेंस, साथ में SBI की अपनी स्टाफ कल्याण योजनाएं',
-        'अवकाश यात्रा सुविधा (LFC) — समय-समय पर यात्रा भत्ता',
-        'लॉकर सुविधा, अक्सर मुफ्त या रियायती',
-        'बैंक के समतुल्य अंशदान के साथ राष्ट्रीय पेंशन प्रणाली (NPS)',
-        'वरिष्ठ क्लेरिकल ग्रेड में एक तय प्रोमोशन चैनल, और अधिकारी कैडर में SBI का अपना आंतरिक रास्ता',
-        'प्राइवेट-सेक्टर बैंकिंग भूमिकाओं की तुलना में मजबूत नौकरी सुरक्षा',
+      "perksHeading": "विज्ञापन में बताए गए लाभ",
+      "perks": [
+        "विभिन्न अनुलाभों की प्रतिपूर्ति",
+        "भविष्य निधि",
+        "नई पेंशन योजना के अंतर्गत पेंशन (परिभाषित अंशदान)",
+        "चिकित्सा सुविधा",
+        "छुट्टी किराया रियायत",
+        "बैंक के निर्देशों के अनुसार अन्य सुविधाएँ"
       ],
-      note: 'ऊपर दिए आंकड़े सामान्यतः बताई जाने वाली संरचनात्मक संख्याएं हैं; सटीक इन-हैंड सैलरी पोस्टिंग के अनुसार अलग होती है और हर DA संशोधन के साथ बदलती है। वर्तमान आंकड़ों की पुष्टि करें',
-      noteLinkLabel: 'SBI के अपने करियर पेज से',
-      recruitsHeading: 'SBI क्लर्क किसके लिए भर्ती करता है',
-      recruitsBody: 'SBI क्लर्क विशेष रूप से स्टेट बैंक ऑफ इंडिया में जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स) रिक्तियों को भरता है, जिसकी सटीक रिक्ति संख्या हर चक्र की अधिसूचना में नई प्रकाशित होती है।',
-      offerHeading: 'Pariksha Saathi SBI क्लर्क के लिए क्या देता है',
-      offerBody: 'रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।',
-      sourceHeading: 'आधिकारिक स्रोत और नवीनतम अपडेट',
-      officialLinkLabel: 'SBI — आधिकारिक करियर पेज',
-      examNoticesLinkLabel: 'Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट',
-      syllabusLinkLabel: 'SBI क्लर्क सिलेबस और परीक्षा पैटर्न',
-      ctaLabel: 'SBI क्लर्क की मुफ्त पढ़ाई शुरू करें',
-      backLabel: 'होम',
-      disclaimer: 'Pariksha Saathi एक स्वतंत्र परियोजना है और SBI या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन और प्रोमोशन विवरण सामान्य, संरचनात्मक तथ्य हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा आधिकारिक स्रोत से वर्तमान आंकड़ों की पुष्टि करें।',
-    },
+      "note": "वेतन, सेवा-शर्तों और रिक्तियों के लिए विज्ञापन ही प्रमाण है, और यह हर चक्र में बदलता है। वर्तमान विवरण की पुष्टि करें",
+      "noteLinkLabel": "SBI जूनियर एसोसिएट 2026 के विज्ञापन से",
+      "recruitsHeading": "SBI क्लर्क किसके लिए भर्ती करता है",
+      "recruitsBody": "भारतीय स्टेट बैंक के लिपिक संवर्ग में, राज्य/केंद्रशासित प्रदेश-वार, जूनियर एसोसिएट (कस्टमर सपोर्ट एंड सेल्स): 2026 के विज्ञापन में 7,680 रिक्तियाँ।",
+      "offerHeading": "Pariksha Saathi SBI क्लर्क के लिए क्या देता है",
+      "offerBody": "रीज़निंग, क्वांट और अंग्रेजी में विषयवार पाठ और अभ्यास, वास्तविक पैटर्न में सेक्शनल और फुल-लेंथ मॉक टेस्ट, एक मिस्टेक नोटबुक, और सामान्य व बैंकिंग जागरूकता के लिए दिनांकित करेंट अफेयर्स कैप्सूल — यह सब मुफ्त है।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "SBI जूनियर एसोसिएट 2026 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "SBI क्लर्क सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "SBI क्लर्क की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और SBI या किसी भी बैंक से संबद्ध नहीं है। ऊपर दिए गए वेतन, परिलब्धियाँ और सेवा-शर्तें SBI के विज्ञापन से ली गई हैं और हर चक्र के साथ बदल सकती हैं — कोई भी निर्णय लेने से पहले हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
   },
   {
     "slug": "ssc-gd",
