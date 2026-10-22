@@ -10,6 +10,7 @@
 
 // Path/date helpers live in examHubPath.mjs (the entry bundle needs only those); re-exported here so
 // existing importers of this module keep working.
+import { GK_INSIGHTS_EXAMS, GK_INSIGHTS_LINK } from './gkInsights.mjs';
 import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
 import { CONTACT_EMAIL } from './reportQuestion.mjs';
 import { questionIndexPath, topicListPath } from './questionPage.mjs';
@@ -568,6 +569,8 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
           })(),
       )
       .join('')}</ul>`;
+    // The data page counted from these same papers' General Awareness questions (SSC exams only).
+    if (GK_INSIGHTS_EXAMS.includes(fact.examId)) html += `<p><a href="${GK_INSIGHTS_LINK[lang === 'hi' ? 'hi' : 'en'].href}">${esc(GK_INSIGHTS_LINK[lang === 'hi' ? 'hi' : 'en'].label)} &rarr;</a></p>`;
   }
 
   // Practice: the /q/ topic lists for each subject the syllabus tests, largest topics first.

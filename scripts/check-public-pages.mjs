@@ -18,6 +18,9 @@ import { pyqPaperPath } from '../src/lib/pyqPath.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
+import { GK_INSIGHTS_EXAMS, GK_INSIGHTS_SUMMARY, gkInsightsPath } from '../src/lib/gkInsights.mjs';
+import { GK_INSIGHTS } from '../src/data/gkInsights.mjs';
+import { PYQ_PAPER_INDEX } from '../src/data/pyqPaperIndex.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { typingTestPath } from '../src/lib/typingPage.mjs';
 import { TYPING_MODES, TYPING_SOURCES } from '../src/data/typingTest.mjs';
@@ -215,6 +218,27 @@ for (const lang of ['en', 'hi']) {
     assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the exam-calendar link`);
   }
   console.log(`Verified the ${lang} exam calendar: ${rows.length} row(s), each with an official source and a checked date; linked from every hub.`);
+}
+
+// "What SSC asks in General Awareness": both pages built from data that covers every SSC paper we publish (re-run
+// scripts/gen-gk-insights.mjs after adding papers), with its totals on the page, and linked from the four SSC hubs.
+{
+  const published = PYQ_PAPER_INDEX.filter((p) => GK_INSIGHTS_EXAMS.includes(p.examId)).length;
+  assert.equal(GK_INSIGHTS.filesRead, published, `src/data/gkInsights.mjs covers ${GK_INSIGHTS.filesRead} SSC papers but ${published} are published: run node scripts/gen-gk-insights.mjs`);
+  for (const lang of ['en', 'hi']) {
+    const urlPath = gkInsightsPath(lang);
+    const file = `dist${urlPath}index.html`;
+    assert(existsSync(file), `${urlPath}: GK insights page not built`);
+    const html = readFileSync(file, 'utf8');
+    assert(html.includes(GK_INSIGHTS_SUMMARY.total.toLocaleString('en-IN')) && html.includes(String(GK_INSIGHTS_SUMMARY.paperCount)), `${urlPath}: totals missing`);
+    assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
+    assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+    for (const examId of GK_INSIGHTS_EXAMS) {
+      const hub = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8');
+      assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the GK insights link`);
+    }
+  }
+  console.log(`Verified the GK insights page in both languages: ${GK_INSIGHTS_SUMMARY.total} questions from ${GK_INSIGHTS_SUMMARY.paperCount} papers, data current with ${published} published SSC papers, linked from the SSC hubs.`);
 }
 
 // SSC typing / data-entry practice: both pages built, every official standard and source on them, linked from the

@@ -48,6 +48,7 @@ import { lessonAuthor, lessonClosing, lessonCredit, subjectBlurb } from '../src/
 import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
 import { examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
+import { GK_INSIGHTS_PUBLISHED, gkInsightsBody, gkInsightsMeta, gkInsightsPath } from '../src/lib/gkInsights.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { typingTestMeta, typingTestPath, typingTestStaticHtml } from '../src/lib/typingPage.mjs';
 import { TYPING_CHECKED } from '../src/data/typingTest.mjs';
@@ -1339,6 +1340,39 @@ async function main() {
       ],
     }));
     sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.8' : '0.7', lastmod: summary.lastVerified ?? calendarToday });
+  }
+
+  // --- What SSC asks in General Awareness (/exams/ssc-gk-topics/, /hi/exams/ssc-gk-topics/): a data page counted from
+  // the SSC previous-year papers we publish (src/lib/gkInsights.mjs over src/data/gkInsights.mjs; regenerate the data
+  // with scripts/gen-gk-insights.mjs when papers are added). check-public-pages.mjs verifies it.
+  for (const lang of ['en', 'hi']) {
+    const meta = gkInsightsMeta(lang);
+    const urlPath = gkInsightsPath(lang);
+    writePage(urlPath.replace(/^\/|\/$/g, ''), page({
+      title: meta.title,
+      description: meta.description,
+      path: urlPath,
+      assets,
+      bodyHtml: examHubPageBody(gkInsightsBody(lang), lang),
+      type: 'article',
+      lang,
+      alternateLanguages: [
+        { lang: 'en', path: gkInsightsPath('en') },
+        { lang: 'hi', path: gkInsightsPath('hi') },
+        { lang: 'x-default', path: gkInsightsPath('en') },
+      ],
+      structuredData: {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: meta.title,
+        description: meta.description,
+        inLanguage: lang,
+        datePublished: GK_INSIGHTS_PUBLISHED,
+        author: { '@type': 'Person', name: 'Mahesh Srivastava' },
+        publisher: { '@type': 'Organization', name: SITE_NAME },
+      },
+    }));
+    sitemapUrls.push({ loc: urlPath, priority: lang === 'en' ? '0.7' : '0.6', lastmod: GK_INSIGHTS_PUBLISHED });
   }
 
   // --- Current affairs ---
