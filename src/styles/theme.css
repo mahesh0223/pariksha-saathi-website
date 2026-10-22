@@ -356,3 +356,13 @@ button {
   font-size: 0.85rem;
   color: var(--muted);
 }
+.pyq-cutoff {
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.pyq-cutoff h2 {
+  margin-top: 0;
+}

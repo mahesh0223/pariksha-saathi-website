@@ -33,12 +33,46 @@ export function pyqPaperMeta(paper) {
   };
 }
 
+// The order the official result write-ups list categories in; anything else follows in its own order.
+const CATEGORY_ORDER = ['UR', 'OBC', 'EWS', 'SC', 'ST', 'ESM', 'OH', 'HH', 'VH', 'Other PwD'];
+
+/**
+ * "Compare your score with the official cut-off": only for a paper whose seed names its own cycle's cut-off
+ * (paper.cutoff) and whose rows the API publishes - never another year's figure. cutoffRows: that exam's rows from
+ * /v1/exams/:id/cutoffs. States the marking to score by, how many questions this page lacks, and that SSC applies
+ * cut-offs to normalised marks, so a raw score on one shift is a rough guide.
+ */
+export function pyqCutoffHtml(paper, cutoffRows = []) {
+  if (!paper.cutoff) return '';
+  const rows = cutoffRows
+    .filter((r) => r.section === paper.cutoff.section && r.cycleLabel === paper.cutoff.cycleLabel)
+    .sort((a, b) => ((CATEGORY_ORDER.indexOf(a.category) + 1) || 99) - ((CATEGORY_ORDER.indexOf(b.category) + 1) || 99));
+  if (rows.length === 0) return '';
+  const n = paper.questions.length;
+  const total = paper.questionsInPaper;
+  const max = rows[0].maxScore;
+  const scoring = paper.markingNote
+    ? esc(paper.markingNote)
+    : `+${marks(paper.marksPerQuestion)} for each right answer, &minus;${marks(paper.negativeMarksPerWrong)} for each wrong one and 0 for one you skip`;
+  const leftOut = total && total > n
+    ? ` This page has ${n} of the paper's ${total} questions: count the ${total - n} left out as skipped, so the most you can score here is ${marks(n * paper.marksPerQuestion)} of ${marks(total * paper.marksPerQuestion)}.`
+    : '';
+  const checked = rows.map((r) => String(r.verifiedAt).slice(0, 10)).sort().at(-1);
+  return `<section class="pyq-cutoff" id="cut-off">
+      <h2>Compare your score with the official cut-off</h2>
+      <p>Score yourself the exam's way: ${scoring}.${leftOut}</p>
+      <p>The official ${esc(paper.cutoff.cycleLabel)} cut-off (${esc(paper.cutoff.section)}), out of ${marks(max)}:</p>
+      <div class="hub-table-wrap"><table class="hub-table"><thead><tr><th>Category</th><th>Cut-off</th></tr></thead><tbody>${rows.map((r) => `<tr><td>${esc(r.category)}</td><td>${r.targetScore.toFixed(2)}</td></tr>`).join('')}</tbody></table></div>
+      <p class="hub-source">The exam body applies the cut-off to marks normalised across all the exam's shifts, so your raw score on one shift is a rough guide, not a prediction. Source: <a href="${esc(rows[0].sourceUrl)}" target="_blank" rel="noreferrer">the official result write-up &#8599;</a> · checked ${longDate(checked)}.</p>
+    </section>`;
+}
+
 function topicLink(q) {
   const topic = QUESTION_TOPICS[q.topicKey];
   return topic && topic.en.count > 0 ? `<a href="${topicListPath(topic, 'en')}">${esc(q.topicName)}</a>` : esc(q.topicName);
 }
 
-export function pyqPaperBody(paper) {
+export function pyqPaperBody(paper, cutoffRows = []) {
   const meta = pyqPaperMeta(paper);
   const total = paper.questionsInPaper;
   const n = paper.questions.length;
@@ -86,6 +120,7 @@ export function pyqPaperBody(paper) {
     <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
+    ${pyqCutoffHtml(paper, cutoffRows)}
     ${body}
     ${telegramCtaHtml('en')}
     <p><a href="${index}">All ${esc(examName)} previous year question papers with answers &rarr;</a></p>

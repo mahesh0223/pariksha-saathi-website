@@ -336,6 +336,22 @@ for (const lang of ['en', 'hi']) {
 {
   const papers = JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'));
   assert(readFileSync('src/data/pyqPaperIndex.mjs', 'utf8') === pyqIndexSource(papers), 'src/data/pyqPaperIndex.mjs does not match pyqPapers.json: re-run node scripts/gen-pyq-pages.mjs');
+  // "Compare your score with the official cut-off" (src/lib/pyqPage.mjs pyqCutoffHtml): on every paper whose seed names
+  // its own cycle's cut-off, with the cut-off table, the normalisation caveat and a linked source; on no other paper.
+  let withCutoff = 0;
+  for (const paper of papers) {
+    const html = readFileSync(`dist${pyqPaperPath(paper)}index.html`, 'utf8');
+    const block = html.match(/<section class="pyq-cutoff" id="cut-off">([\s\S]*?)<\/section>/)?.[1];
+    if (!paper.cutoff) {
+      assert(!block, `${pyqPaperPath(paper)}: shows a cut-off though its paper names none`);
+      continue;
+    }
+    assert(block, `${pyqPaperPath(paper)}: names the ${paper.cutoff.cycleLabel} cut-off but does not show it`);
+    assert(block.includes(paper.cutoff.section) && /<td>UR<\/td><td>\d+\.\d{2}<\/td>/.test(block), `${pyqPaperPath(paper)}: the cut-off block lacks its section or the UR row`);
+    assert(block.includes('normalised') && /<a href="https:\/\/[^"]+" target="_blank" rel="noreferrer">the official result write-up/.test(block), `${pyqPaperPath(paper)}: the cut-off block lacks the normalisation caveat or its source`);
+    withCutoff++;
+  }
+  console.log(`Verified the official cut-off beside ${withCutoff} solved paper(s) whose own cycle has one, and on no other paper.`);
   for (const paper of papers) {
     const path = pyqPaperPath(paper);
     const html = readFileSync(`dist${path}index.html`, 'utf8');

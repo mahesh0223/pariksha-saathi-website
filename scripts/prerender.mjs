@@ -1210,6 +1210,7 @@ async function main() {
   const calendarNotices = { en: {}, hi: {} };
   const hubSummaries = {}; // per hub, for /llms.txt: whether it shows cut-offs, and when its facts were last verified
   const fullFacts = []; // per hub, for /llms-full.txt: the fact sheet and cut-offs the page shows
+  const cutoffsByExam = {}; // per hub, for the solved-paper pages' "compare with the official cut-off" block
   for (const examId of HUB_EXAM_IDS) {
     const facts = await fetch(`${API_BASE}/v1/exams/${examId}/facts`).then((r) => r.json());
     if (!Array.isArray(facts) || facts.length === 0) {
@@ -1217,6 +1218,7 @@ async function main() {
     }
     calendarFacts[examId] = facts;
     const cutoffs = await fetch(`${API_BASE}/v1/exams/${examId}/cutoffs`).then((r) => r.json());
+    cutoffsByExam[examId] = cutoffs;
     // Previous-year question counts per official paper - zero for every exam until the owner supplies a
     // paper (server docs/PYQ.md). A server that does not have the route yet answers 404; that must not
     // fail the build, it just renders no block.
@@ -1710,7 +1712,7 @@ async function main() {
       lang: 'en',
       type: 'article',
       scripts: false,
-      bodyHtml: pyqPaperBody(paper),
+      bodyHtml: pyqPaperBody(paper, cutoffsByExam[paper.examId] ?? []),
       structuredData: pyqPaperStructuredData(paper, SITE_URL),
     }));
     sitemapUrls.push({ loc: path, priority: '0.7' });
