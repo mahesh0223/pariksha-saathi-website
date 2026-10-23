@@ -6,6 +6,7 @@ Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_
        npm run reel:daily -- [YYYY-MM-DD] --text-only         rewrite only the upload text (titles, captions, tags)
        npm run reel:daily -- --promo                          the timeless Telegram ad reel (for boosting)
        npm run reel:daily -- --promo30                        the 30-second hook-and-pitch Telegram ad
+       npm run reel:daily -- --promo-all                      the 30-second ad for Telegram, Instagram and the website
 (default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
@@ -140,6 +141,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#f6f3ea;color:#2
 .opt.right b{background:#3f7a4e;color:#fff}
 .opt.dim{opacity:.45}
 .handle{font-size:84px;font-weight:700;color:#1e3a52}
+.body.tall{height:1640px;justify-content:flex-start;padding-top:60px}
 """
 
 def page(top_sub, body, body_class="", cta=True):
@@ -499,6 +501,107 @@ Telegram पर join करें: @{TELEGRAM} (link bio में)
 """)
     print(f"{out}: {total:.1f} s")
 
+INSTAGRAM = "parkishasathi"  # the brand's own Instagram handle as registered (src/data/socialLinks.mjs), spelling and all
+SITE = "parikshasaathi.com"
+
+def phone_shot(url, work, name, height=640):
+    """A phone-sized screenshot of a live page of our own site - real proof on screen, not a mock-up."""
+    png = os.path.join(work, f"{name}.png")
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2.5",
+                    f"--window-size=412,{height}", "--virtual-time-budget=6000", f"--screenshot={png}", url], capture_output=True, check=True)
+    return "file://" + png
+
+def bleed(body, bg="#14293a", color="#fff"):
+    """A full-bleed slide (no header band) for the hook and the end card."""
+    return f"""<!doctype html><html lang="hi"><meta charset="utf-8"><style>{CSS}
+html,body{{background:{bg};color:{color}}}
+.wrap{{height:1920px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;padding:0 70px;text-align:center}}
+.chip{{display:inline-block;padding:16px 40px;border-radius:999px;font-size:54px;font-weight:800}}
+.row{{display:flex;align-items:center;gap:30px;width:100%;padding:30px 40px;border-radius:30px;background:rgba(255,255,255,.08);text-align:left}}
+.row .ic{{font-size:84px;width:110px;text-align:center}}
+.row .k{{font-size:38px;color:#c9d6e2;font-weight:600}}
+.row .v{{font-size:64px;font-weight:800;color:#fff;line-height:1.15}}
+</style><body><div class="wrap">{body}</div></body></html>"""
+
+def phone(src, tilt=0):
+    return (f'<img src="{src}" style="width:600px;align-self:center;border-radius:46px;border:14px solid #14293a;'
+            f'box-shadow:0 26px 70px rgba(20,41,58,.40);transform:rotate({tilt}deg)">')
+
+def promo_all():
+    """The 30-second ad for all three places at once - the Telegram channel, the Instagram profile and the website. Hook
+    first (the number of real SSC previous-year questions, free), then proof shot from the live site, then where to
+    follow. Every claim is true today: 25,000+ official SSC previous-year questions (25,351 on 23 Oct 2026, from SSC's own
+    answer keys) with answers and explanations, 359 solved papers with PDFs, free Railway mock tests in Hindi too, daily
+    current affairs from official sources, and the channel's 07:00 PDF, 18:00 quiz and new exam notices. Nothing is
+    claimed about Instagram beyond "follow", and nothing about ads."""
+    pdf = os.path.join(ROOT, "public", "pdf", "latest.pdf")
+    os.makedirs(OUT_DIR, exist_ok=True)
+    with tempfile.TemporaryDirectory() as work:
+        subprocess.run(["pdftoppm", "-png", "-r", "110", "-f", "1", "-l", "1", "-singlefile", pdf, os.path.join(work, "pdfpage")], check=True)
+        daily = "file://" + os.path.join(work, "pdfpage.png")
+        papers = phone_shot(f"https://{SITE}/hi/exams/ssc-gd/question-papers/", work, "papers")
+        mocks = phone_shot(f"https://{SITE}/hi/exams/rrb-ntpc/mock-tests/", work, "mocks")
+        home = phone_shot(f"https://{SITE}/hi/", work, "home")
+        top = f"FREE · Telegram · Instagram · {SITE}"
+        voice = Voice(speed=1.35)
+        line = lambda text, size=76, color="#2a2620": f'<div class="headline" style="font-size:{size}px;color:{color}">{text}</div>'
+        chips = lambda names: ('<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">'
+                               + "".join(f'<span style="background:#1e3a52;color:#fff;font-size:40px;font-weight:700;padding:10px 26px;border-radius:999px">{n}</span>' for n in names) + '</div>')
+        segments = [
+            # 1. The hook: one huge number, on a dark full-bleed slide, with a thud.
+            segment(bleed('<div style="font-size:52px;font-weight:700;color:#e9dfcf">SSC की तैयारी कर रहे हैं?</div>'
+                          '<div style="font-size:250px;font-weight:900;color:#f2a33a;line-height:1">25,000+</div>'
+                          '<div style="font-size:88px;font-weight:800;line-height:1.25">SSC के असली प्रश्न</div>'
+                          '<div style="font-size:44px;color:#c9d6e2">पिछले वर्षों के आधिकारिक प्रश्नपत्रों से, उत्तर और हल सहित</div>'
+                          '<div class="chip" style="background:#3f7a4e;color:#fff;font-size:72px">फ़ीस? ₹0</div>'),
+                    voice.say("SSC के पच्चीस हज़ार से ज़्यादा असली प्रश्न, उत्तर और हल के साथ… और फ़ीस? ज़ीरो!"), after=0.15, sfx="thud"),
+            # 2. Proof: the solved papers, as the live site shows them.
+            segment(page(top, line("📄 359 हल प्रश्नपत्र<br>+ हर पेपर की PDF", 78) + chips(["CGL", "CHSL", "MTS", "GD"]) + phone(papers, -2), "tall", cta=False),
+                    voice.say("तीन सौ उनसठ पुराने पेपर, हर प्रश्न का हल, और पीडीएफ़ भी।"), after=0.15),
+            # 3. Railway mocks.
+            segment(page(top, line("🚆 RRB NTPC · Group D · ALP<br>फ़्री मॉक टेस्ट, हिंदी में भी", 70) + phone(mocks, 2), "tall", cta=False),
+                    voice.say("रेलवे के फ़्री मॉक टेस्ट, हिंदी में भी।"), after=0.15),
+            # 4. Daily current affairs.
+            segment(page(top, line("📰 रोज़ के करेंट अफेयर्स<br>हर खबर आधिकारिक स्रोत से", 72)
+                              + f'<img src="{daily}" style="width:560px;align-self:center;border-radius:18px;box-shadow:0 18px 50px rgba(20,41,58,.35);transform:rotate(-2deg)">', "tall", cta=False),
+                    voice.say("और रोज़ के करेंट अफेयर्स, हर खबर ऑफ़िशियल सोर्स से।"), after=0.15),
+            # 5. Telegram.
+            segment(page(top, line("✈️ Telegram पर रोज़:", 84, "#1e3a52")
+                              + line("☀️ सुबह 7 बजे: करेंट अफेयर्स PDF<br>🧠 शाम 6 बजे: क्विज़<br>📢 नई परीक्षा सूचनाएँ", 66)
+                              + f'<div class="handle" style="font-size:92px">@{TELEGRAM}</div>', "center", cta=False),
+                    voice.say("टेलीग्राम पर रोज़ — सुबह सात बजे पीडीएफ़, शाम छह बजे क्विज़, और हर नई एग्ज़ाम नोटिस।"), after=0.15),
+            # 6. Instagram.
+            segment(page(top, line("📸 Instagram पर", 96, "#1e3a52") + f'<div class="handle" style="font-size:110px">@{INSTAGRAM}</div>'
+                              + line("follow करें", 90, "#a6431f"), "center", cta=False),
+                    voice.say("इंस्टाग्राम पर फ़ॉलो करें।"), after=0.15),
+            # 7. The website.
+            segment(page(top, line(f"🌐 सब कुछ एक जगह:<br><span style=\"color:#a6431f\">{SITE}</span>", 76) + phone(home, -2), "tall", cta=False),
+                    voice.say("और सब कुछ एक जगह — परीक्षा साथी डॉट कॉम।"), after=0.15),
+            # 8. The end card: all three, held for the follow.
+            segment(bleed('<div style="font-size:96px;font-weight:900;color:#f2a33a">अभी जुड़ें 👇</div>'
+                          f'<div class="row"><div class="ic">✈️</div><div><div class="k">Telegram</div><div class="v">@{TELEGRAM}</div></div></div>'
+                          f'<div class="row"><div class="ic">📸</div><div><div class="k">Instagram</div><div class="v">@{INSTAGRAM}</div></div></div>'
+                          f'<div class="row"><div class="ic">🌐</div><div><div class="k">Website</div><div class="v">{SITE}</div></div></div>'
+                          '<div class="chip" style="background:#3f7a4e;color:#fff">बिल्कुल FREE · लिंक बायो में</div>'),
+                    voice.say("अभी जुड़ें — टेलीग्राम, इंस्टाग्राम और वेबसाइट। लिंक बायो में!"), after=1.0, sfx="ding"),
+        ]
+        out = os.path.join(OUT_DIR, "ParikshaSaathi_promo_all30.mp4")
+        total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_promo_all30_cover.png"), bpm=124)
+    open(os.path.join(OUT_DIR, "ParikshaSaathi_promo_all30_caption.txt"), "w", encoding="utf-8").write(
+        f"""SSC के 25,000+ असली प्रश्न, उत्तर और हल सहित — फ़ीस ₹0 😮👇
+📄 359 हल प्रश्नपत्र (CGL · CHSL · MTS · GD) + हर पेपर की PDF
+🚆 RRB NTPC · Group D · ALP के फ़्री मॉक टेस्ट, हिंदी में भी
+📰 रोज़ के करेंट अफेयर्स, हर खबर आधिकारिक स्रोत से
+
+✈️ Telegram: @{TELEGRAM} — सुबह 7 बजे PDF, शाम 6 बजे क्विज़, नई परीक्षा सूचनाएँ
+📸 Instagram: @{INSTAGRAM}
+🌐 Website: {SITE}
+लिंक बायो में। आवाज़ AI (Kokoro TTS) से बनी है।
+
+#sscexam #sscgd #ssccgl #sscchsl #railwayexam #rrbntpc #currentaffairs #previousyearpapers #करेंटअफेयर्स
+""")
+    print(f"{out}: {total:.1f} s")
+
 def voice_samples(date=None):
     """One short video with the same two headlines read by each Kokoro Hindi voice, to choose REEL_VOICE by ear."""
     date, items = edition(date)
@@ -520,6 +623,7 @@ if __name__ == "__main__":
     date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
     if "--voice-samples" in args: voice_samples(date)
     elif "--promo30" in args: promo30()
+    elif "--promo-all" in args: promo_all()
     elif "--promo" in args: promo()
     elif "--text-only" in args:
         date, items = edition(date)
