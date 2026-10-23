@@ -33,6 +33,8 @@ export function buildPyqPapers(files, topicNames = {}) {
       // Set when marking differs by section (SSC MTS: none in Session-I, -1 in Session-II); the page prints it instead.
       ...(f.markingNote ? { markingNote: f.markingNote } : {}),
       questionsInPaper: f.questionsInPaper ?? null,
+      // Sections a candidate chooses between (SSC GD: Part-D English or Part-D Hindi) - src/lib/pyqSections.mjs.
+      ...(f.alternativeSections ? { alternativeSections: f.alternativeSections } : {}),
       // The official cut-off of this paper's own cycle, when the seed file names one (server prisma/seed-data/pyq/README.md).
       ...(f.cutoff ? { cutoff: { section: f.cutoff.section, cycleLabel: f.cutoff.cycleLabel } } : {}),
       slug: pyqPaperSlug(f),

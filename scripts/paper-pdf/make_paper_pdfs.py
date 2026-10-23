@@ -66,6 +66,20 @@ def sections(paper):
     return out
 
 
+def optional_names(paper):
+    """Sections that are another choice for a part already counted (SSC GD: Part-D Hindi beside Part-D English) - as
+    src/lib/pyqSections.mjs."""
+    return {name for group in paper.get("alternativeSections") or [] for name in group[1:]}
+
+
+def in_hindi(items):
+    return bool(items) and all(q.get("languageCode") == "hi" for q in items)
+
+
+def lang_attr(items):
+    return ' lang="hi"' if in_hindi(items) else ""
+
+
 def options_html(q):
     short = all(len(o) <= 42 for o in q["options"])
     items = "".join(f"<li><b>({LETTERS[i]})</b> {esc(o)}</li>" for i, o in enumerate(q["options"]))
@@ -73,7 +87,9 @@ def options_html(q):
 
 
 def page_html(paper, rows):
-    n = len(paper["questions"])
+    optional = optional_names(paper)
+    n = sum(1 for q in paper["questions"] if q.get("section") not in optional)  # one Part-D, as a candidate sits it
+    extra = len(paper["questions"]) - n
     total = paper.get("questionsInPaper")
     body = BODIES.get(paper["examId"].split("_")[0], "the exam body")
     page_url = f"{SITE}/exams/{exam_slug(paper['examId'])}/question-papers/{paper['slug']}/"
@@ -89,9 +105,14 @@ def page_html(paper, rows):
                f"({esc(paper['cutoff']['section'])}), out of {marks(rows[0]['maxScore'])}</div><div class='cells'>{cells}</div>"
                f"<div class='small'>Cut-offs apply to marks normalised across all the exam's shifts, so a raw score on one shift is "
                f"a rough guide. Source: the official result write-up, {esc(rows[0]['sourceUrl'])}</div></div>")
+    alt_note = lambda name, items: (f"<p class='note'>{'The Hindi option of this part: a' if in_hindi(items) else 'A'} candidate "
+                                    f"answers either {esc(next(g[0] for g in paper['alternativeSections'] if name in g[1:]))} or this "
+                                    f"section.</p>") if name in optional else ""
     qs = "".join(
-        f"<h2>{esc(name)} <span>{len(items)} question{'s' if len(items) != 1 else ''}</span></h2>"
+        f"<section{lang_attr(items)}><h2>{esc(name)} <span>{len(items)} question{'s' if len(items) != 1 else ''}</span></h2>"
+        + alt_note(name, items)
         + "".join(f"<div class='q'><div class='num'>Q.{q.get('number') or ''}</div>{paras(q['text'])}{options_html(q)}</div>" for q in items)
+        + "</section>"
         for name, items in sections(paper))
     key = "".join(
         f"<h3>{esc(name)}</h3><div class='key'>"
@@ -99,9 +120,10 @@ def page_html(paper, rows):
         for name, items in sections(paper))
     # Grouped by section like the answer key: question numbers restart in each section, as the exam body prints them.
     expl = "".join(
-        f"<h3>{esc(name)}</h3>"
+        f"<section{lang_attr(items)}><h3>{esc(name)}</h3>"
         + "".join(f"<div class='x'><div class='xh'>Q.{q.get('number') or ''} &middot; Answer ({LETTERS[q['correctOptionIndex']]}) "
                   f"{esc(q['options'][q['correctOptionIndex']])}</div>{paras(q['explanation'])}</div>" for q in items)
+        + "</section>"
         for name, items in sections(paper))
     title = f"{paper['displayName']} question paper, {long_date(paper['date'])}, {paper['shift']}"
     return f"""<!doctype html><html lang="en"><meta charset="utf-8"><title>{esc(title)}</title><style>
@@ -132,7 +154,7 @@ h3 {{ font-size: 10.5pt; margin: 10px 0 4px; }}
 </style><body>
 <div class="hdr"><img src="file://{ICON}"><div><h1>{esc(paper['displayName'])} question paper with answers</h1>
 <div class="d">{long_date(paper['date'])} &middot; {esc(paper['shift'])}</div></div></div>
-<div class="strip">{n} questions as {esc(body)} printed them &middot; answers from the official key &middot; marking: {marking}</div>
+<div class="strip">{n} questions{f" + {extra} of the Hindi option" if extra else ""} as {esc(body)} printed them &middot; answers from the official key &middot; marking: {marking}</div>
 {left_out}
 <p class="note">Try every question first: the answer key and the explanations follow the questions. Official answer-key notice: <a href="{esc(paper['sourceUrl'])}">{esc(paper['sourceUrl'])}</a></p>
 {cut}

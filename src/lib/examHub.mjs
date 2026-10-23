@@ -92,6 +92,8 @@ const T = {
     pyq: 'Previous-year questions',
     pyqIntro: (n, papers) => `${n} question${n === 1 ? '' : 's'} from ${papers} official paper${papers === 1 ? '' : 's'}, each with the answer from the official key; questions that need a figure, and any the key cancelled, are left out. Each paper links to the exam body's own notice.`,
     pyqLanguage: { en: ' The questions are in English.', hi: ' The questions are in Hindi.' },
+    // Questions in another language that are a section of their own (SSC GD's Part-D Hindi), not a translation.
+    pyqAlsoIn: { hi: (n) => ` ${n} more, from the Hindi option of the paper's language part, are in Hindi.` },
     pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
     pyqSolved: 'solved paper with answers',
     mockTests: (exam) => `Free ${exam} mock tests in this official pattern`,
@@ -202,8 +204,10 @@ const T = {
     pyq: 'पिछले वर्षों के प्रश्न',
     pyqIntro: (n, papers) => `${papers} आधिकारिक पेपर से ${n} प्रश्न, हर प्रश्न आधिकारिक उत्तर कुंजी के उत्तर के साथ; चित्र वाले प्रश्न और कुंजी में रद्द प्रश्न शामिल नहीं। हर पेपर परीक्षा निकाय की अपनी सूचना से जुड़ा है।`,
     pyqLanguage: { en: ' प्रश्न अंग्रेज़ी में हैं।', hi: ' प्रश्न हिंदी में हैं।' },
+    pyqAlsoIn: { hi: (n) => ` भाषा वाले भाग के हिंदी विकल्प के ${n} और प्रश्न हिंदी में हैं।` },
     pyqCount: (n) => `${n} प्रश्न`,
     pyqSolved: 'उत्तर सहित हल प्रश्नपत्र (अंग्रेज़ी)',
+    pyqSolvedWithHindi: 'उत्तर सहित हल प्रश्नपत्र (अंग्रेज़ी, हिंदी विकल्प सहित)',
     mockTests: (exam) => `${exam} के मुफ़्त मॉक टेस्ट, इसी आधिकारिक पैटर्न में`,
     pyqAll: (exam) => `${exam} के सभी पिछले वर्ष के प्रश्न पत्र, उत्तर सहित, वर्ष के क्रम में`,
     pyqNotice: 'आधिकारिक सूचना',
@@ -620,7 +624,8 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   // until the owner supplies the first paper and answer key, is no exam (server docs/PYQ.md).
   if (pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
     // The summary counts one language (the server's default is English); say so when it is not the page's.
-    const pyqLanguage = pyq.languageCode && pyq.languageCode !== lang ? (t.pyqLanguage[pyq.languageCode] ?? '') : '';
+    const pyqLanguage = (pyq.languageCode && pyq.languageCode !== lang ? (t.pyqLanguage[pyq.languageCode] ?? '') : '')
+      + Object.entries(pyq.inOtherLanguages ?? {}).map(([code, n]) => t.pyqAlsoIn?.[code]?.(n) ?? '').join('');
     html += `<h2>${t.pyq}</h2><p class="hub-facts">${esc(t.pyqIntro(pyq.total, pyq.papers.length) + pyqLanguage)}</p>`;
     if (PYQ_INDEX_EXAMS.includes(fact.examId)) html += `<p><a href="${pyqIndexPath(fact.examId, lang)}">${esc(t.pyqAll(examName))} &rarr;</a></p>`;
     html += `<ul class="hub-notices hub-pyq">${pyq.papers
@@ -632,7 +637,7 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
             const name = `${esc(p.paper)}${p.shift ? ` · ${esc(p.shift)}` : ''}`;
             const notice = `<a href="${esc(p.sourceUrl)}" rel="noopener">${t.pyqNotice} &#8599;</a>`;
             return solved
-              ? `<li><a href="${solved}">${name} · ${t.pyqSolved}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}${t.noteSep}${notice}</span></li>`
+              ? `<li><a href="${solved}">${name} · ${(p.inOtherLanguages?.hi && t.pyqSolvedWithHindi) || t.pyqSolved}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}${t.noteSep}${notice}</span></li>`
               : `<li><a href="${esc(p.sourceUrl)}" rel="noopener">${name}</a><span>${esc(t.pyqCount(p.count))}${t.noteSep}${esc(formatHubDate(p.date, lang))}</span></li>`;
           })(),
       )

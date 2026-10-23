@@ -10,6 +10,7 @@ import { metaDescription } from './seoMeta.mjs';
 import { pyqIndexPath, pyqPaperPath } from './pyqPath.mjs';
 import { QUESTION_TOPICS } from '../data/questionTopics.mjs';
 import { topicListPath } from './questionPage.mjs';
+import { alternativeTo, optionalQuestions, satQuestions } from './pyqSections.mjs';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -49,7 +50,7 @@ export function pyqCutoffHtml(paper, cutoffRows = []) {
     .filter((r) => r.section === paper.cutoff.section && r.cycleLabel === paper.cutoff.cycleLabel)
     .sort((a, b) => ((CATEGORY_ORDER.indexOf(a.category) + 1) || 99) - ((CATEGORY_ORDER.indexOf(b.category) + 1) || 99));
   if (rows.length === 0) return '';
-  const n = paper.questions.length;
+  const n = satQuestions(paper).length; // one Part-D, as a candidate sits the paper
   const total = paper.questionsInPaper;
   const max = rows[0].maxScore;
   const scoring = paper.markingNote
@@ -76,7 +77,9 @@ function topicLink(q) {
 export function pyqPaperBody(paper, cutoffRows = []) {
   const meta = pyqPaperMeta(paper);
   const total = paper.questionsInPaper;
-  const n = paper.questions.length;
+  // Counted as a candidate sits the paper: with one of its alternative sections (SSC GD: Part-D English, not Hindi too).
+  const n = satQuestions(paper).length;
+  const optional = optionalQuestions(paper);
   const sections = [];
   for (const q of paper.questions) {
     const key = q.section ?? 'Questions';
@@ -88,22 +91,37 @@ export function pyqPaperBody(paper, cutoffRows = []) {
   const leftOut = total && total > n
     ? ` The other ${total - n} of the paper's ${total} questions are not reproduced: they need a figure or are printed as an image, or ask about formatting the source does not keep.`
     : '';
-  const body = sections.map((s) => `
-    <section class="pyq-section" id="${anchor(s.name)}">
-      <h2>${esc(s.name)} <span>${s.questions.length} question${s.questions.length === 1 ? '' : 's'}</span></h2>
+  const hindiOnly = (qs) => qs.length > 0 && qs.every((q) => q.languageCode === 'hi');
+  const optionalNote = optional.length
+    ? ` ${optional.length} more question${optional.length === 1 ? '' : 's'}, from ${esc([...new Set(optional.map((q) => q.section))].join(', '))}, which a candidate answers instead of ${esc(alternativeTo(paper, optional[0].section))}, ${optional.length === 1 ? 'is' : 'are'} given too${hindiOnly(optional) ? ', in Hindi as the exam body printed them' : ''}.`
+    : '';
+  // A Hindi section (the Hindi option of Part-D) is marked lang="hi", with its labels in Hindi.
+  const L = {
+    en: { show: 'Show answer and explanation', answer: 'Answer', topic: 'Topic' },
+    hi: { show: 'उत्तर और हल देखें', answer: 'उत्तर', topic: 'विषय' },
+  };
+  const body = sections.map((s) => {
+    const hi = hindiOnly(s.questions);
+    const l = L[hi ? 'hi' : 'en'];
+    const alt = alternativeTo(paper, s.name);
+    return `
+    <section class="pyq-section" id="${anchor(s.name)}"${hi ? ' lang="hi"' : ''}>
+      <h2>${esc(s.name)} <span>${s.questions.length} question${s.questions.length === 1 ? '' : 's'}</span></h2>${alt ? `
+      <p class="pyq-alt-note" lang="en">${hi ? 'The Hindi option of this part: a' : 'A'} candidate answers either ${esc(alt)} or this section.</p>` : ''}
       <ol class="pyq-list">${s.questions.map((q) => `
         <li class="pyq-q" id="${anchor(s.name)}-q${q.number ?? ''}">
           <div class="pyq-num">Q.${q.number ?? ''}</div>
           <div class="pyq-text">${paragraphs(q.text)}</div>
           <ol class="pyq-opts">${q.options.map((o, i) => `<li><b>${LETTERS[i]}</b> ${esc(o)}</li>`).join('')}</ol>
-          <details class="pyq-answer"><summary>Show answer and explanation</summary>
-            <p class="pyq-correct">Answer: (${LETTERS[q.correctOptionIndex]}) ${esc(q.options[q.correctOptionIndex])}</p>
+          <details class="pyq-answer"><summary>${l.show}</summary>
+            <p class="pyq-correct">${l.answer}: (${LETTERS[q.correctOptionIndex]}) ${esc(q.options[q.correctOptionIndex])}</p>
             <p>${esc(q.explanation)}</p>
-            <p class="pyq-topic">Topic: ${topicLink(q)}</p>
+            <p class="pyq-topic">${l.topic}: ${topicLink(q)}</p>
           </details>
         </li>`).join('')}
       </ol>
-    </section>`).join('');
+    </section>`;
+  }).join('');
   const hub = examHubPath(paper.examId, 'en');
   const index = pyqIndexPath(paper.examId, 'en');
   const examName = paper.displayName.replace(/\s+\d{4}.*$/, '');
@@ -118,7 +136,7 @@ export function pyqPaperBody(paper, cutoffRows = []) {
   <article class="wrap compare-article pyq-paper">
     <div class="compare-top-row"><a href="${hub}" class="detail-back">&larr; ${esc(examName)} exam page</a><a href="${index}" class="detail-back">All ${esc(examName)} previous year papers</a></div>
     <h1>${esc(meta.h1)}</h1>
-    <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation. ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
+    <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation.${optionalNote} ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
     ${paper.pdf ? `<p class="pyq-pdf"><a href="${esc(paper.pdf.path)}" download>Download this paper as a PDF</a> (${paper.pdf.pages} pages, ${paper.pdf.sizeKb} KB): the questions as printed, then the answer key and the explanations, to print or share.</p>` : ''}

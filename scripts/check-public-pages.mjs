@@ -394,8 +394,14 @@ for (const lang of ['en', 'hi']) {
     assert(html.includes(`href="${paper.sourceUrl}"`), `${path}: the exam body's notice is not linked`);
     assert(sitemap.includes(`<loc>https://parikshasaathi.com${path}</loc>`), `${path}: not in the sitemap`);
     assert(!/<script[^>]+src="\/assets\//.test(html), `${path}: loads the app script; it must stay plain HTML`);
+    // A section in Hindi (SSC GD's Part-D Hindi) is marked as Hindi for screen readers, search and fonts.
+    const hindiSections = new Set(paper.questions.filter((q) => q.languageCode === 'hi').map((q) => q.section));
+    for (const name of hindiSections) {
+      const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      assert(html.includes(`<section class="pyq-section" id="${id}" lang="hi">`), `${path}: the Hindi section ${name} is not marked lang="hi"`);
+    }
   }
-  console.log(`Verified ${papers.length} solved previous-year paper page(s): every question with its answer, the official notice linked, in the sitemap.`);
+  console.log(`Verified ${papers.length} solved previous-year paper page(s): every question with its answer, the official notice linked, in the sitemap, Hindi sections marked.`);
 }
 
 // One list of solved papers per exam (src/lib/pyqIndexPage.mjs, from 22 Oct 2026): it links every shift and every
