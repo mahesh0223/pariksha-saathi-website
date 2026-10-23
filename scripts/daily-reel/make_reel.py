@@ -647,6 +647,7 @@ PROMO_FREE_LINES = [
     "पिछले सालों के इम्पॉर्टेंट क्वेश्चन्स और उनके आसान सॉल्व्ड एक्सप्लनेशन्स से प्रैक्टिस करो।",
     "और रोज़ के करेंट अफ़ेयर्स पढ़ो, ताकि जीके और करेंट अफ़ेयर्स पीछे न रह जाएँ।",
     "सब कुछ फ़्री है। आज ही पढ़ाई शुरू करो, परीक्षा साथी डॉट कॉम।",
+    "करेंट अफ़ेयर्स और जॉब नोटिफ़िकेशन के लिए, हमें टेलीग्राम और इंस्टाग्राम पर फ़ॉलो करें!",
 ]
 
 def promo_free():
@@ -694,7 +695,13 @@ def promo_free():
                           '<div style="font-size:120px;font-weight:900;color:#f2a33a">Free Exam Prep</div>'
                           f'<div style="font-size:100px;font-weight:900">{SITE}</div>'
                           '<div class="chip" style="background:#3f7a4e;color:#fff">SSC · Railway · Banking · Police · PSC</div>'),
-                    say(5), after=1.0, sfx="ding"),
+                    say(5), after=0.2, sfx="whoosh"),
+            # Where the daily current affairs and exam notices are posted (added at the owner's request, 23 Oct 2026).
+            segment(bleed('<div style="font-size:84px;font-weight:900;color:#f2a33a;line-height:1.3">📰 Current Affairs<br>📢 Job Notifications</div>'
+                          '<div style="font-size:64px;font-weight:800">के लिए follow करें 👇</div>'
+                          f'<div class="row"><div class="ic">✈️</div><div><div class="k">Telegram</div><div class="v">@{TELEGRAM}</div></div></div>'
+                          f'<div class="row"><div class="ic">📸</div><div><div class="k">Instagram</div><div class="v">@{INSTAGRAM}</div></div></div>'),
+                    say(6), after=1.2, sfx="ding"),
         ]
         out = os.path.join(OUT_DIR, "ParikshaSaathi_promo_free30.mp4")
         total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_promo_free30_cover.png"), bpm=120)
