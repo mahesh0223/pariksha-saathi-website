@@ -1,0 +1,57 @@
+/* The Railway mock player (MockTestPage.tsx); question, option and palette styles come from ../app/QuizPage.css. */
+.mock-test h1 {
+  font-size: 1.35rem;
+  text-wrap: balance;
+}
+.mock-small {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.mock-sections {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  margin: 8px 0 12px;
+  padding-bottom: 4px;
+}
+.mock-section,
+.mock-filter {
+  flex: 0 0 auto;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.mock-section-on,
+.mock-filter-on {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--surface);
+}
+.mock-row,
+.mock-actions,
+.mock-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 12px 0;
+}
+.mock-score {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.mock-next {
+  font-weight: 600;
+}
+.mock-review {
+  padding-left: 1.4rem;
+}
+.mock-review li {
+  margin-bottom: 24px;
+}

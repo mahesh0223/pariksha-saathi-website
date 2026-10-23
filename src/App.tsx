@@ -87,6 +87,7 @@ const DigestPage = lazyPage(() => import('./pages/app/DigestPage').then((m) => (
 const CurrentAffairsDetailPage = lazyPage(() => import('./pages/app/CurrentAffairsDetailPage').then((m) => ({ default: m.CurrentAffairsDetailPage })));
 const ExamNoticesPage = lazyPage(() => import('./pages/app/ExamNoticesPage').then((m) => ({ default: m.ExamNoticesPage })));
 const ExamNoticeDetailPage = lazyPage(() => import('./pages/app/ExamNoticeDetailPage').then((m) => ({ default: m.ExamNoticeDetailPage })));
+const MockTestPage = lazyPage(() => import('./pages/mocks/MockTestPage').then((m) => ({ default: m.MockTestPage })));
 const AccountPage = lazyPage(() => import('./pages/app/AccountPage').then((m) => ({ default: m.AccountPage })));
 const ChallengePage = lazyPage(() => import('./pages/app/ChallengePage').then((m) => ({ default: m.ChallengePage })));
 const CurrentAffairsQuizPage = lazyPage(() => import('./pages/app/CurrentAffairsQuizPage').then((m) => ({ default: m.CurrentAffairsQuizPage })));
@@ -187,6 +188,7 @@ export function App() {
         <Route path="/app/current-affairs/:id" element={<Lazy><CurrentAffairsDetailPage /></Lazy>} />
         <Route path="/app/exam-notices" element={<Lazy><ExamNoticesPage /></Lazy>} />
         <Route path="/app/exam-notices/:id" element={<Lazy><ExamNoticeDetailPage /></Lazy>} />
+        <Route path="/app/mock-tests/:examId/:stageKey/:number" element={<Lazy><MockTestPage /></Lazy>} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

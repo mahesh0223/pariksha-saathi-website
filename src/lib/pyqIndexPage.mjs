@@ -92,24 +92,24 @@ const T = {
     title: (s) => `${s.examName} पिछले वर्ष के प्रश्न पत्र${s.pdf ? ' PDF' : ''}, उत्तर सहित (${s.range}, ${s.shifts} शिफ़्ट)`,
     h1: (s) => `${s.examName} पिछले वर्ष के प्रश्न पत्र, उत्तर सहित`,
     description: (s) => `${s.range} के ${s.examName} की ${s.shifts} हल की हुई शिफ़्टें, कुल ${num(s.questions)} प्रश्न, हर प्रश्न आधिकारिक उत्तर और समझाए गए हल के साथ, पेपर और तारीख़ के क्रम में। ऑनलाइन मुफ़्त पढ़ें।`,
-    lede: (s, body) => `${s.examName} के ${s.groups.length} आधिकारिक पेपर की ${s.shifts} शिफ़्टें, कुल ${num(s.questions)} प्रश्न। हर प्रश्न वैसे ही दिया गया है जैसे ${body ?? 'परीक्षा निकाय'} ने छापा, ${body ?? 'परीक्षा निकाय'} की आधिकारिक उत्तर कुंजी के उत्तर और समझाए गए हल के साथ। प्रश्न अंग्रेज़ी में हैं। ऑनलाइन मुफ़्त पढ़ें; साइन-अप की ज़रूरत नहीं।`,
+    lede: (s, body) => `${s.examName} के ${s.groups.length} आधिकारिक पेपर की ${s.shifts} ${s.shifts === 1 ? 'पाली' : 'पालियाँ'}, कुल ${num(s.questions)} प्रश्न। हर प्रश्न वैसे ही दिया गया है जैसे ${body ?? 'परीक्षा निकाय'} ने छापा, ${body ?? 'परीक्षा निकाय'} की आधिकारिक उत्तर कुंजी के उत्तर और समझाए गए हल के साथ। प्रश्न अंग्रेज़ी में हैं। ऑनलाइन मुफ़्त पढ़ें; साइन-अप की ज़रूरत नहीं।`,
     back: (s) => `${s.examName} परीक्षा पेज`,
-    groupLine: (g) => `${g.shifts.length} शिफ़्ट · ${num(g.shifts.reduce((n, p) => n + p.questions.length, 0))} प्रश्न`,
+    groupLine: (g) => `${g.shifts.length} ${g.shifts.length === 1 ? 'पाली' : 'पालियाँ'} · ${num(g.shifts.reduce((n, p) => n + p.questions.length, 0))} प्रश्न`,
     notice: 'आधिकारिक उत्तर-कुंजी सूचना',
-    thPaper: 'तारीख़ और शिफ़्ट',
+    thPaper: 'तारीख़ और पाली',
     thQuestions: 'उत्तर सहित प्रश्न',
     thPdf: 'PDF',
     pdf: 'डाउनलोड',
     count: (p) => (p.questionsInPaper && p.questionsInPaper > p.questions.length ? `${p.questionsInPaper} में से ${p.questions.length}` : String(p.questions.length)),
     howTitle: 'ये प्रश्न पत्र कैसे तैयार किए गए',
-    how: (body) => `प्रश्न, विकल्प और उत्तर ${body ?? 'परीक्षा निकाय'} के अपने उत्तर-कुंजी दस्तावेज़ों से लिए गए हैं, जिनका लिंक ऊपर हर पेपर के साथ है। जिस प्रश्न में चित्र चाहिए, जो छवि के रूप में छपा है या जो अंतिम कुंजी में रद्द हुआ, वह शामिल नहीं है, इसलिए कुछ शिफ़्टों में पेपर से कम प्रश्न दिखते हैं। हल Pariksha Saathi ने AI की सहायता से तैयार किए हैं और आधिकारिक उत्तरों से मिलाकर जाँचे हैं।`,
+    how: (body) => `प्रश्न, विकल्प और उत्तर ${body ?? 'परीक्षा निकाय'} के अपने उत्तर-कुंजी दस्तावेज़ों से लिए गए हैं, जिनका लिंक ऊपर हर पेपर के साथ है। जिस प्रश्न में चित्र चाहिए, जो छवि के रूप में छपा है या जो अंतिम कुंजी में रद्द हुआ, वह शामिल नहीं है, इसलिए कुछ पालियों में पेपर से कम प्रश्न दिखते हैं। हल Pariksha Saathi ने AI की सहायता से तैयार किए हैं और आधिकारिक उत्तरों से मिलाकर जाँचे हैं।`,
     error: 'कोई ग़लती दिखी?',
     tell: 'हमें बताएँ',
     faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
     faq: (s, body) => [
-      { q: `${s.examName} के कौन-से पेपर शामिल हैं?`, a: s.groups.map((g) => `${g.displayName}: ${g.shifts.length} शिफ़्ट`).join('; ') + '।' },
+      { q: `${s.examName} के कौन-से पेपर शामिल हैं?`, a: s.groups.map((g) => `${g.displayName}: ${g.shifts.length} ${g.shifts.length === 1 ? 'पाली' : 'पालियाँ'}`).join('; ') + '।' },
       { q: `क्या ये ${s.examName} के आधिकारिक प्रश्न पत्र हैं?`, a: `प्रश्न और उत्तर ${body ?? 'परीक्षा निकाय'} के अपने उत्तर-कुंजी दस्तावेज़ों से लिए गए हैं, जिनका लिंक इस पेज पर हर पेपर के साथ है। Pariksha Saathi एक स्वतंत्र परियोजना है और ${body ?? 'परीक्षा निकाय'} से संबद्ध नहीं है; केवल हल हमारे हैं।` },
-      { q: 'कुछ शिफ़्टों में पेपर से कम प्रश्न क्यों हैं?', a: 'जिन प्रश्नों में चित्र चाहिए, जो छवि के रूप में छपे हैं या जो अंतिम उत्तर कुंजी में रद्द हुए, वे शामिल नहीं हैं, क्योंकि उन्हें टेक्स्ट में ठीक-ठीक नहीं दिया जा सकता। हर शिफ़्ट के आगे लिखा है कि पेपर के कितने प्रश्न उसमें हैं।' },
+      { q: 'कुछ पालियों (शिफ़्ट) में पेपर से कम प्रश्न क्यों हैं?', a: 'जिन प्रश्नों में चित्र चाहिए, जो छवि के रूप में छपे हैं या जो अंतिम उत्तर कुंजी में रद्द हुए, वे शामिल नहीं हैं, क्योंकि उन्हें टेक्स्ट में ठीक-ठीक नहीं दिया जा सकता। हर पाली के आगे लिखा है कि पेपर के कितने प्रश्न उसमें हैं।' },
       { q: 'क्या ये प्रश्न पत्र PDF में डाउनलोड हो सकते हैं?', a: 'हर पेपर PDF नहीं, बल्कि एक मुफ़्त वेब पेज है। कॉपी रखने के लिए पेपर खोलें और ब्राउज़र के Print विकल्प में "Save as PDF" चुनें।' },
       { q: 'प्रश्न किस भाषा में हैं?', a: 'प्रश्न, विकल्प और हल अंग्रेज़ी में हैं।' },
     ],
@@ -142,7 +142,7 @@ export function pyqIndexBody(examId, papers, lang = 'en') {
       <p class="hub-source">${esc(t.groupLine(g))} · <a href="${esc(g.sourceUrl)}" target="_blank" rel="noreferrer">${t.notice} &#8599;</a></p>
       <div class="hub-table-wrap"><table class="hub-table pyq-index">
         <thead><tr><th>${t.thPaper}</th><th>${t.thQuestions}</th>${g.shifts.some((p) => p.pdf) ? `<th>${t.thPdf}</th>` : ''}</tr></thead>
-        <tbody>${g.shifts.map((p) => `<tr><td><a href="${pyqPaperPath(p)}">${esc(day(p.date, lang))}, ${esc(lang === 'hi' ? p.shift.replace('Shift', 'शिफ़्ट') : p.shift)}</a></td><td>${esc(t.count(p))}</td>${g.shifts.some((x) => x.pdf) ? `<td>${p.pdf ? `<a href="${esc(p.pdf.path)}" download>${t.pdf}</a> <span class="pyq-pdf-size">${p.pdf.sizeKb} KB</span>` : ''}</td>` : ''}</tr>`).join('')}</tbody>
+        <tbody>${g.shifts.map((p) => `<tr><td><a href="${pyqPaperPath(p)}">${esc(day(p.date, lang))}, ${esc(lang === 'hi' ? p.shift.replace('Shift', 'पाली') : p.shift)}</a></td><td>${esc(t.count(p))}</td>${g.shifts.some((x) => x.pdf) ? `<td>${p.pdf ? `<a href="${esc(p.pdf.path)}" download>${t.pdf}</a> <span class="pyq-pdf-size">${p.pdf.sizeKb} KB</span>` : ''}</td>` : ''}</tr>`).join('')}</tbody>
       </table></div>
     </section>`).join('');
   return `<div class="compare-page">

@@ -76,7 +76,7 @@ export const HINDI_GLOSSARY = [
   { en: 'essential educational qualification', hi: 'अनिवार्य शैक्षणिक योग्यता', also: ['शैक्षिक योग्यता'], src: [['chsl2026', [13]], ['mts2025', [12]], ['gd2026', [9]]] },
   { en: 'skill test; typing test', hi: 'कौशल परीक्षा; टंकण परीक्षा', note: 'Our own typing-practice tool keeps the name "टाइपिंग टेस्ट"; the exam stage is टंकण परीक्षा.', avoid: ['स्किल टेस्ट'], src: [['chsl2026', [23, 24, 25]]] },
   { en: 'Data Entry Speed Test', hi: 'डाटा प्रविष्टि गति परीक्षा', also: ['डाटा एंट्री ऑपरेटर के लिए कौशल परीक्षा (CHSL)'], avoid: ['डेटा एंट्री स्पीड टेस्ट'], src: [['cgl2025', [22]], ['chsl2026', [25]]] },
-  { en: 'shift', hi: 'पाली', also: ['पालियों'], avoid: ['शिफ्ट'], src: [['chsl2026', [21]], ['mts2025', [21]], ['cgl2025', [21]]] },
+  { en: 'shift', hi: 'पाली', also: ['पालियों'], avoid: ['शिफ्ट', 'शिफ़्ट'], src: [['chsl2026', [21]], ['mts2025', [21]], ['cgl2025', [21]]] },
   { en: 'question paper', hi: 'प्रश्नपत्र', src: [['chsl2026', [22]], ['mts2025', [22]], ['gd2026', [30]]] },
   { en: 'merit list; final selection; allocation; preference', hi: 'मेरिट सूची; अंतिम चयन; आवंटन; वरीयता', also: ['योग्यता सूची'], src: [['chsl2026', [35, 36]], ['gd2026', [2, 26]], ['mts2025', [30, 31]]] },
   { en: 'application fee; last date', hi: 'आवेदन शुल्क; अंतिम तिथि', src: [['chsl2026', [16]], ['mts2025', [15]], ['gd2026', [1, 12]]] },

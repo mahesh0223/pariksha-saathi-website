@@ -18,6 +18,7 @@ import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
 import { isSscExam, sscHindiLabels } from '../data/hindiGlossary.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
+import { MOCK_TEST_EXAMS, mockTestsPath } from './mockTestsPath.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPathFor } from './pyqPath.mjs';
 import { homeVisitHint } from './officialLink.mjs';
 import { examUpdatesPath } from './examHubPath.mjs';
@@ -93,6 +94,7 @@ const T = {
     pyqLanguage: { en: ' The questions are in English.', hi: ' The questions are in Hindi.' },
     pyqCount: (n) => `${n} question${n === 1 ? '' : 's'}`,
     pyqSolved: 'solved paper with answers',
+    mockTests: (exam) => `Free ${exam} mock tests in this official pattern`,
     pyqAll: (exam) => `All ${exam} previous year question papers with answers, by year`,
     pyqNotice: 'official notice',
     cutoffs: 'Cut-off marks by year and category',
@@ -202,6 +204,7 @@ const T = {
     pyqLanguage: { en: ' प्रश्न अंग्रेज़ी में हैं।', hi: ' प्रश्न हिंदी में हैं।' },
     pyqCount: (n) => `${n} प्रश्न`,
     pyqSolved: 'उत्तर सहित हल प्रश्नपत्र (अंग्रेज़ी)',
+    mockTests: (exam) => `${exam} के मुफ़्त मॉक टेस्ट, इसी आधिकारिक पैटर्न में`,
     pyqAll: (exam) => `${exam} के सभी पिछले वर्ष के प्रश्न पत्र, उत्तर सहित, वर्ष के क्रम में`,
     pyqNotice: 'आधिकारिक सूचना',
     cutoffs: 'वर्ष और श्रेणी के अनुसार कट-ऑफ अंक',
@@ -578,6 +581,8 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
     html += stage.parts.map((p) => partHtml(p, lang, t)).join('');
   }
   html += sourceLine(t, fact.noticeTitle, fact.sourceUrl, fact.verifiedAt, lang, { ...report, block: t.pattern });
+  // Railway exams have no papers to practise from: their numbered mocks in this very pattern (src/lib/mockTestsPage.mjs).
+  if (MOCK_TEST_EXAMS.includes(fact.examId)) html += `<p class="hub-mock-link"><a href="${mockTestsPath(fact.examId, lang)}">${esc(t.mockTests(examName))} &rarr;</a></p>`;
 
   // The subjects as the syllabus page gives them (no exam figures - those stay in the sourced blocks), linked to that
   // page and to the exam body's site.

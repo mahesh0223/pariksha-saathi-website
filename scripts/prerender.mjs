@@ -47,6 +47,8 @@ import { homeVisitHint } from '../src/lib/officialLink.mjs';
 import { examUpdatesBody, examUpdatesMeta, examUpdatesStructuredData } from '../src/lib/examUpdatesPage.mjs';
 import { examUpdatesPath } from '../src/lib/examHubPath.mjs';
 import { pyqIndexBody, pyqIndexMeta, pyqIndexStructuredData } from '../src/lib/pyqIndexPage.mjs';
+import { mockTestsBody, mockTestsMeta, mockTestsStructuredData } from '../src/lib/mockTestsPage.mjs';
+import { MOCK_TEST_EXAMS, mockTestsPath } from '../src/lib/mockTestsPath.mjs';
 import { reportQuestionLinkHtml } from '../src/lib/reportQuestion.mjs';
 import { HUB_EXAM_IDS, hubExamIdForSlug, HUB_LINK_LABEL } from '../src/data/examHubExams.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
@@ -1744,6 +1746,36 @@ async function main() {
         ],
         bodyHtml: pyqIndexBody(examId, papers, lang),
         structuredData: pyqIndexStructuredData(examId, papers, lang, SITE_URL),
+      }));
+      sitemapUrls.push({ loc: path, priority: lang === 'en' ? '0.8' : '0.7' });
+    }
+  }
+
+  // --- Railway mock tests (/exams/<exam>/mock-tests/ and /hi/...): src/lib/mockTestsPage.mjs, from the server's series
+  // (GET /v1/exams/:examId/mocks), one call per language. A failed call fails the build rather than publishing an empty list.
+  for (const examId of MOCK_TEST_EXAMS) {
+    for (const lang of ['en', 'hi']) {
+      const response = await fetch(`${API_BASE}/v1/exams/${examId}/mocks?lang=${lang}`);
+      if (!response.ok) throw new Error(`mock tests: GET /v1/exams/${examId}/mocks?lang=${lang} answered ${response.status}`);
+      const series = await response.json();
+      if (!Array.isArray(series.stages) || series.stages.length === 0) throw new Error(`mock tests: ${examId} (${lang}) has no stages`);
+      const path = mockTestsPath(examId, lang);
+      const meta = mockTestsMeta(examId, series, lang);
+      writePage(path.slice(1, -1), page({
+        title: meta.title,
+        description: meta.description,
+        path,
+        assets,
+        lang,
+        type: 'website',
+        scripts: false,
+        alternateLanguages: [
+          { lang: 'en', path: mockTestsPath(examId, 'en') },
+          { lang: 'hi', path: mockTestsPath(examId, 'hi') },
+          { lang: 'x-default', path: mockTestsPath(examId, 'en') },
+        ],
+        bodyHtml: mockTestsBody(examId, series, lang),
+        structuredData: mockTestsStructuredData(examId, series, lang, SITE_URL),
       }));
       sitemapUrls.push({ loc: path, priority: lang === 'en' ? '0.8' : '0.7' });
     }

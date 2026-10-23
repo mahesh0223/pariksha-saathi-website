@@ -34,6 +34,7 @@ import { PUBLIC_PAGES, publicPageMeta, SITE_SHOWS_ADS } from '../src/data/public
 import { PUBLIC_PAGE_ROUTES } from '../src/data/publicPageRoutes.mjs';
 import { TRUST_LINES } from '../src/data/trustLines.mjs';
 import { NOTICE_GUIDANCE } from '../src/data/examNoticeGuidance.mjs';
+import { MOCK_TEST_EXAMS, mockTestsPath } from '../src/lib/mockTestsPath.mjs';
 import { glossaryViolations, HINDI_GLOSSARY_AVOID } from '../src/data/hindiGlossary.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
@@ -422,6 +423,43 @@ for (const lang of ['en', 'hi']) {
     for (const p of own) assert(readFileSync(`dist${pyqPaperPath(p)}index.html`, 'utf8').includes(`href="${pyqIndexPath(examId, 'en')}"`), `${pyqPaperPath(p)}: does not link its exam's list of papers`);
   }
   console.log(`Verified ${PYQ_INDEX_EXAMS.length} solved-paper list page(s) x 2 languages: every shift and answer-key notice linked, hreflang, sitemap, linked from each shift page and hub.`);
+}
+
+// Railway mock tests (src/lib/mockTestsPage.mjs, from 23 Oct 2026): RRB publishes no papers to practise from, so each RRB
+// exam gets a page of numbered mocks in the notification's pattern. Every stage on the page carries its sourced, dated
+// pattern and a grid of player links in the page's language; the hub links the page; the player is an SPA route that
+// robots.txt keeps out of search.
+{
+  const redirects = readFileSync('public/_redirects', 'utf8');
+  const robots = readFileSync('public/robots.txt', 'utf8');
+  assert(/^\/app\/mock-tests\/\*\s+\/spa\s+200$/m.test(redirects), '_redirects: /app/mock-tests/* must serve the SPA');
+  assert(/^Disallow: \/app\/mock-tests$/m.test(robots), 'robots.txt: the mock player must be disallowed');
+  let mocks = 0;
+  for (const examId of MOCK_TEST_EXAMS) {
+    for (const lang of ['en', 'hi']) {
+      const urlPath = mockTestsPath(examId, lang);
+      const file = `dist${urlPath}index.html`;
+      assert(existsSync(file), `${urlPath}: mock-test page not built`);
+      const html = readFileSync(file, 'utf8');
+      assert(sitemap.includes(`<loc>https://parikshasaathi.com${urlPath}</loc>`), `${urlPath}: not in the sitemap`);
+      assert(html.includes('hreflang="hi"') && html.includes('hreflang="en"'), `${urlPath}: missing hreflang pair`);
+      const sections = [...html.matchAll(/<section id="[^"]+">([^]*?)<\/section>/g)].map((m) => m[1]);
+      assert(sections.length > 0, `${urlPath}: no stage`);
+      for (const section of sections) {
+        assert(/<p class="hub-source">[^]*?href="https?:\/\/[^]*?\d{4}<\/p>/.test(section), `${urlPath}: a stage has no linked, dated source line`);
+        const links = [...section.matchAll(/<ol class="mock-grid">([^]*?)<\/ol>/g)].flatMap((m) => [...m[1].matchAll(/href="([^"]+)"/g)].map((h) => h[1]));
+        assert(links.length > 0, `${urlPath}: a stage lists no mocks`);
+        for (const href of links) {
+          assert(href.startsWith(`/app/mock-tests/${examId}/`), `${urlPath}: mock link ${href} is not this exam's player`);
+          assert(lang === 'hi' ? href.endsWith('?lang=hi') : !href.includes('?'), `${urlPath}: mock link ${href} is not in the page's language`);
+        }
+        mocks += links.length;
+      }
+      const hub = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8');
+      assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the mock-tests link`);
+    }
+  }
+  console.log(`Verified ${MOCK_TEST_EXAMS.length} Railway mock-test page(s) x 2 languages: ${mocks} mock links, a sourced pattern per stage, hreflang, sitemap, hub links, player kept out of search.`);
 }
 
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a

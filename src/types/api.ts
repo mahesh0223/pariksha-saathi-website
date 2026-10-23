@@ -213,3 +213,59 @@ export interface MeResponse {
   bookmarkCount: number;
   missedQuestionCount: number;
 }
+
+/** An { en, hi } label pair as the server's fact sheets carry them. */
+export interface BilingualLabel {
+  en: string;
+  hi: string;
+}
+
+/** One stage of a mock series (GET /v1/exams/:examId/mocks). */
+export interface MockStage {
+  stageKey: string;
+  partKey: string;
+  stageName: BilingualLabel;
+  partName: BilingualLabel;
+  durationMinutes: number;
+  sectionTimers: boolean;
+  negativeMarksPerWrong: number | null;
+  mockCount: number;
+  sections: { key: string; name: BilingualLabel; questionCount: number; shortfall: number }[];
+  shownInEnglishFallback: boolean;
+}
+
+export interface MockSeries {
+  examId: string;
+  examName: string;
+  languageCode: string;
+  cycleLabel: string;
+  sourceUrl: string;
+  verifiedAt: string;
+  stages: MockStage[];
+}
+
+/** One numbered mock in the real paper's shape (GET /v1/exams/:examId/mocks/:stageKey/:number). */
+export interface MockPaper {
+  paperId: string;
+  examId: string;
+  examName: string;
+  languageCode: string;
+  cycleLabel: string;
+  sourceUrl: string;
+  verifiedAt: string;
+  stageName: BilingualLabel;
+  partName: BilingualLabel;
+  durationMinutes: number;
+  sectionTimers: boolean;
+  negativeMarksPerWrong: number | null;
+  mock: { number: number; count: number };
+  sections: {
+    key: string;
+    name: BilingualLabel;
+    questionCount: number;
+    marksPerQuestion: number | null;
+    shortfall: number;
+    shownInEnglishFallback: boolean;
+    questions: Question[];
+  }[];
+}
