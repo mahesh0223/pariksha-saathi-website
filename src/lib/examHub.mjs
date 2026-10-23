@@ -15,6 +15,7 @@ import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
 import { CONTACT_EMAIL } from './reportQuestion.mjs';
 import { questionIndexPath, topicListPath } from './questionPage.mjs';
 import { EXAM_HUB_EXTRAS, EXAM_HUB_TOPICS } from '../data/examHubExtras.mjs';
+import { isSscExam, sscHindiLabels } from '../data/hindiGlossary.mjs';
 import { QUESTION_SUBJECTS_HI } from '../data/lessonSubjects.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPathFor } from './pyqPath.mjs';
@@ -164,14 +165,14 @@ const T = {
     h1: (name, hasCutoffs = true) => `${name}: परीक्षा पैटर्न, अंक, नेगेटिव मार्किंग, आयु सीमा${hasCutoffs ? ' और कट-ऑफ' : ''}`,
     lede: (cycle, verified, hasCutoffs = true) =>
       `इस पृष्ठ का हर आँकड़ा उस आधिकारिक दस्तावेज़ से लिया गया है जिसका लिंक उसके साथ दिया है, और उसके साथ वह तारीख भी जब हमने उसे अंतिम बार जाँचा। पैटर्न, आयु सीमा और तिथियाँ ${cycle} की अधिसूचना से हैं${hasCutoffs ? '; कट-ऑफ पिछले वर्षों के आधिकारिक परिणाम-विवरणों से हैं' : ''}। अंतिम सत्यापन: ${verified}।`,
-    noNegative: 'कोई नेगेटिव मार्किंग नहीं',
+    noNegative: 'कोई नकारात्मक अंकन नहीं',
     negativeNotStated: 'अधिसूचना में नहीं बताया गया',
     glance: 'एक नज़र में',
     stages: 'चयन के चरण',
     totalQuestions: 'प्रश्न',
     totalMarks: 'अंक',
     time: 'समय',
-    negative: 'नेगेटिव मार्किंग',
+    negative: 'नकारात्मक अंकन',
     vacancies: 'अनंतिम रिक्तियाँ',
     vacanciesAsOf: (d) => `${d} की स्थिति में`,
     firstStage: 'पहला चरण',
@@ -209,7 +210,7 @@ const T = {
     legend: {
       UR: 'अनारक्षित',
       reserved: 'आरक्षित श्रेणियाँ',
-      ESM: 'पूर्व सैनिक',
+      ESM: 'भूतपूर्व सैनिक',
       disability: 'अस्थि, श्रवण और दृष्टि दिव्यांगता',
       'Other PwD': 'अन्य दिव्यांगजन',
       PwBD: 'बेंचमार्क दिव्यांगता वाले व्यक्ति',
@@ -227,7 +228,7 @@ const T = {
     jobProfile: 'जॉब प्रोफ़ाइल और वेतन',
     lessons: 'मुफ़्त पाठ',
     practice: 'अभ्यास शुरू करें',
-    syllabusHeading: 'सिलेबस: परीक्षा के विषय',
+    syllabusHeading: 'पाठ्यक्रम (सिलेबस): परीक्षा के विषय',
     syllabusIntro: 'विषय संक्षेप में, जैसे आधिकारिक पाठ्यक्रम में दिए हैं। परीक्षा निकाय की अपनी अधिसूचना ही अंतिम है।',
     syllabusMore: 'पूरा सिलेबस, चरण के अनुसार',
     officialSite: 'आधिकारिक वेबसाइट',
@@ -241,12 +242,12 @@ const T = {
       q: (name) => `${name} के पहले चरण में कितने प्रश्न होते हैं?`,
       a: (cycle, label, questions, marks, minutes) => `${label}: ${minutes} मिनट में ${marks} अंकों के ${questions} प्रश्न, ${cycle} की अधिसूचना के अनुसार।`,
     },
-    faqNegative: { q: (name) => `क्या ${name} में नेगेटिव मार्किंग है?`, a: (cycle, label, text) => `${label}, ${cycle} की अधिसूचना के अनुसार: ${text}` },
+    faqNegative: { q: (name) => `क्या ${name} में नकारात्मक अंकन (नेगेटिव मार्किंग) है?`, a: (cycle, label, text) => `${label}, ${cycle} की अधिसूचना के अनुसार: ${text}` },
     faqAge: { q: (name) => `${name} की आयु सीमा क्या है?` },
     faqQualification: { q: (name) => `${name} के लिए कौन-सी योग्यता चाहिए?` },
     faqDates: { q: (name) => `${name} के पहले चरण की परीक्षा तिथियाँ क्या हैं?`, a: (cycle, label, from, to) => `${label}: ${to ? `${from} से ${to} तक` : from}, ${cycle} की अधिसूचना के अनुसार।` },
     faqSubjects: { q: (name) => `${name} परीक्षा में कौन-से विषय आते हैं?`, a: (subjects) => `आधिकारिक पाठ्यक्रम में ये विषय हैं: ${subjects}।` },
-    faqNegativeStage: { q: (name, stage) => `क्या ${name} ${stage} में नेगेटिव मार्किंग है?` },
+    faqNegativeStage: { q: (name, stage) => `क्या ${name} ${stage} में नकारात्मक अंकन (नेगेटिव मार्किंग) है?` },
     faqQualifying: { q: (name) => `${name} परीक्षा के कौन-से हिस्से अर्हक (क्वालिफाइंग) हैं?`, a: (cycle, list) => `${cycle} की अधिसूचना के अनुसार ये अर्हक हैं: ${list}।` },
     faqFinalYear: {
       q: (name, degree) => (degree ? `क्या अंतिम वर्ष के छात्र ${name} के लिए आवेदन कर सकते हैं?` : `क्या परिणाम की प्रतीक्षा कर रहे छात्र ${name} के लिए आवेदन कर सकते हैं?`),
@@ -284,6 +285,10 @@ const marksText = (n) => (Number.isInteger(n) ? String(n) : n.toFixed(2));
 const perQuestionText = (n) => (n == null ? '&mdash;' : Math.abs(n * 100 - Math.round(n * 100)) < 1e-6 ? marksText(Math.round(n * 100) / 100) : '&mdash;');
 const countText = (n) => n.toLocaleString('en-IN');
 const pick = (bilingual, lang) => bilingual?.[lang] ?? bilingual?.en ?? '';
+
+// SSC pages' Hindi says विज्ञप्ति for the notice (src/data/hindiGlossary.mjs).
+const SSC_T_HI = sscHindiLabels(T.hi);
+const labels = (lang, examId) => (lang === 'hi' && isSscExam(examId) ? SSC_T_HI : T[lang]);
 
 // Every source line ends in "Report an error": a mailto with the exam, the block, the page and the document
 // already filled in, so a reader who spots a figure that differs from the official notice can say so in one tap
@@ -470,7 +475,7 @@ const NOT_APPLY = /correction|modif|edit|fee|status/i;
 const negativeText = (p, lang, t) => (p.negativeMarking === null || p.negativeMarking === undefined ? t.negativeNotStated : p.negativeMarking.perWrongAnswer > 0 ? pick(p.negativeMarking, lang) : t.noNegative);
 
 export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null, now = new Date() }) {
-  const t = T[lang];
+  const t = labels(lang, facts[0]?.examId);
   const fact = facts[0];
   const first = firstStageSummary(fact, lang, t);
   const faq = [{ q: t.faqStages.q(examName), a: t.faqStages.a(fact.cycleLabel, fact.stages.map((s) => pick(s.name, lang)).join(' → ')) }];
@@ -536,7 +541,7 @@ export function examHubFaq({ examName, facts, lang = 'en', extras = EXAM_HUB_EXT
 // The newest cycle's fact sheet drives the page; `facts` is newest-first, as the API returns it.
 // `extras` (src/data/examHubExtras.mjs) adds the syllabus summary and practice links; it defaults to the exam's own entry.
 export function examHubBody({ examName, facts, cutoffs = [], notices = [], items = [], lang = 'en', links = {}, pyq = null, liveMock = null, playStoreUrl = '', now = new Date(), extras = EXAM_HUB_EXTRAS[facts[0]?.examId] ?? null }) {
-  const t = T[lang];
+  const t = labels(lang, facts[0]?.examId);
   const fact = facts[0];
   const verifiedDates = [fact.verifiedAt, ...cutoffs.map((c) => c.verifiedAt)].map((d) => String(d).slice(0, 10));
   const lastVerified = verifiedDates.sort().at(-1);

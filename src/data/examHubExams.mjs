@@ -35,5 +35,5 @@ export function hubExamIdForSlug(slug) {
 // Shown on the syllabus page when the exam has a hub.
 export const HUB_LINK_LABEL = {
   en: 'See the exact marks, timing, negative marking, age limit and cut-offs for this exam',
-  hi: 'इस परीक्षा के सटीक अंक, समय, नेगेटिव मार्किंग, आयु सीमा और कट-ऑफ देखें',
+  hi: 'इस परीक्षा के सटीक अंक, समय, नकारात्मक अंकन, आयु सीमा और कट-ऑफ देखें',
 };

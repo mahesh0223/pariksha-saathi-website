@@ -11,6 +11,7 @@ import { PYQ_INDEX_EXAMS, pyqIndexPath } from './pyqPath.mjs';
 import { socialLinksHtml } from '../data/socialLinks.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { metaDescription } from './seoMeta.mjs';
+import { isSscExam, sscHindiLabels } from '../data/hindiGlossary.mjs';
 
 function esc(value) {
   return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
@@ -77,12 +78,12 @@ const T = {
     title: (name) => `${name} एडमिट कार्ड, रिज़ल्ट और आंसर की: आधिकारिक सूचनाएँ`,
     h1: (name) => `${name} एडमिट कार्ड, रिज़ल्ट और आंसर की`,
     description: (exam, cycle) => `Pariksha Saathi पर प्रकाशित ${exam} की हर एडमिट कार्ड, रिज़ल्ट और आंसर की सूचना, सबसे नई पहले, हर एक आधिकारिक दस्तावेज़ से जुड़ी, साथ में ${cycle} की आधिकारिक अधिसूचना की मुख्य तिथियाँ।`,
-    lede: (exam, cycle, today) => `${exam} की हर एडमिट कार्ड, रिज़ल्ट और आंसर की सूचना जो Pariksha Saathi ने प्रकाशित की है, सबसे नई पहले। हर सूचना हमारे सारांश और आधिकारिक दस्तावेज़ से जुड़ी है। नीचे इस परीक्षा की अन्य सूचनाएँ और ${cycle} की अधिसूचना की मुख्य तिथियाँ हैं। अंतिम अपडेट ${today}।`,
+    lede: (exam, cycle, today) => `${exam} के प्रवेश पत्र, परिणाम और उत्तर कुंजी की हर सूचना जो Pariksha Saathi ने प्रकाशित की है, सबसे नई पहले। हर सूचना हमारे सारांश और आधिकारिक दस्तावेज़ से जुड़ी है। नीचे इस परीक्षा की अन्य सूचनाएँ और ${cycle} की अधिसूचना की मुख्य तिथियाँ हैं। अंतिम अपडेट ${today}।`,
     back: (exam) => `${exam} परीक्षा पेज`,
-    sections: { ADMIT_CARD: 'एडमिट कार्ड (प्रवेश पत्र)', RESULT: 'रिज़ल्ट (परिणाम)', ANSWER_KEY: 'आंसर की (उत्तर कुंजी)' },
-    none: { ADMIT_CARD: (cycle) => `इस साइट पर ${cycle} की कोई एडमिट कार्ड सूचना नहीं है।`, RESULT: (cycle) => `इस साइट पर ${cycle} की कोई रिज़ल्ट सूचना नहीं है।`, ANSWER_KEY: (cycle) => `इस साइट पर ${cycle} की कोई आंसर की सूचना नहीं है।` },
+    sections: { ADMIT_CARD: 'प्रवेश पत्र (एडमिट कार्ड)', RESULT: 'परिणाम (रिज़ल्ट)', ANSWER_KEY: 'उत्तर कुंजी (आंसर की)' },
+    none: { ADMIT_CARD: (cycle) => `इस साइट पर ${cycle} की कोई प्रवेश पत्र सूचना नहीं है।`, RESULT: (cycle) => `इस साइट पर ${cycle} की कोई परिणाम सूचना नहीं है।`, ANSWER_KEY: (cycle) => `इस साइट पर ${cycle} की कोई उत्तर कुंजी सूचना नहीं है।` },
     firstStage: (stage, when) => `अधिसूचना के अनुसार ${stage}: ${when}।`,
-    pastKeys: (exam) => `पिछली आंसर की: ${exam} के हमारे हल किए हर प्रश्नपत्र, SSC के आधिकारिक उत्तरों सहित`,
+    pastKeys: (exam) => `पिछली उत्तर कुंजियाँ: ${exam} के हमारे हल किए हर प्रश्नपत्र, SSC के आधिकारिक उत्तरों सहित`,
     others: 'इस परीक्षा की अन्य सूचनाएँ',
     type: { NOTIFICATION: 'अधिसूचना', ADMIT_CARD: 'प्रवेश पत्र', ANSWER_KEY: 'उत्तर कुंजी', RESULT: 'परिणाम', DEADLINE: 'अंतिम तिथि' },
     verified: 'सत्यापित',
@@ -96,15 +97,15 @@ const T = {
     span: (from, to) => (to ? `${from} से ${to} तक` : from),
     faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
     faq: {
-      admit: (exam) => `क्या ${exam} का एडमिट कार्ड आ गया है?`,
-      result: (exam) => `क्या ${exam} का रिज़ल्ट आ गया है?`,
-      where: (exam) => `${exam} का एडमिट कार्ड और रिज़ल्ट कहाँ से डाउनलोड करें?`,
-      yes: (title, date) => `हाँ। इस साइट पर सबसे नई एडमिट कार्ड सूचना: ${title} (${date})।`,
-      yesResult: (title, date) => `हाँ। इस साइट पर सबसे नई रिज़ल्ट सूचना: ${title} (${date})।`,
+      admit: (exam) => `क्या ${exam} का प्रवेश पत्र (एडमिट कार्ड) आ गया है?`,
+      result: (exam) => `क्या ${exam} का परिणाम (रिज़ल्ट) आ गया है?`,
+      where: (exam) => `${exam} का प्रवेश पत्र (एडमिट कार्ड) और परिणाम कहाँ से डाउनलोड करें?`,
+      yes: (title, date) => `हाँ। इस साइट पर सबसे नई प्रवेश पत्र सूचना: ${title} (${date})।`,
+      yesResult: (title, date) => `हाँ। इस साइट पर सबसे नई परिणाम सूचना: ${title} (${date})।`,
       none: (kind, cycle, today, host) => `इस साइट पर ${cycle} की कोई ${kind} सूचना नहीं है (${today} को देखा गया)। इसकी घोषणा आधिकारिक वेबसाइट ${host} पर होती है; वहीं देखें।`,
       whereA: (host) => `परीक्षा निकाय की आधिकारिक वेबसाइट ${host} से, या वहाँ दिए गए डाउनलोड पोर्टल से। इस पेज की हर सूचना सटीक आधिकारिक दस्तावेज़ से जुड़ी है।`,
     },
-    more: { hub: 'परीक्षा पैटर्न, सिलेबस, कट-ऑफ और तिथियाँ', all: 'सभी परीक्षा सूचनाएँ' },
+    more: { hub: 'परीक्षा पैटर्न, पाठ्यक्रम, कट-ऑफ और तिथियाँ', all: 'सभी परीक्षा सूचनाएँ' },
     langSwitch: 'Read in English',
   },
 };
@@ -127,6 +128,10 @@ function context({ examName, facts, notices, lang, now }) {
   };
 }
 
+// SSC pages' Hindi says विज्ञप्ति for the notice (src/data/hindiGlossary.mjs).
+const SSC_T_HI = sscHindiLabels(T.hi);
+const labels = (lang, examId) => (lang === 'hi' && isSscExam(examId) ? SSC_T_HI : T[lang]);
+
 export function examUpdatesMeta({ examName, facts, notices = [], lang = 'en', now = new Date() }) {
   const t = T[lang];
   const c = context({ examName, facts, notices, lang, now });
@@ -134,7 +139,7 @@ export function examUpdatesMeta({ examName, facts, notices = [], lang = 'en', no
 }
 
 export function examUpdatesFaq({ examName, facts, notices = [], lang = 'en', now = new Date() }) {
-  const t = T[lang];
+  const t = labels(lang, facts[0]?.examId);
   const c = context({ examName, facts, notices, lang, now });
   const latest = (list, yes) => (list.length > 0 ? yes(list[0].title, formatHubDate(list[0].lastVerifiedAt, lang)) : null);
   return [
@@ -149,7 +154,7 @@ function noticeItem(n, lang, t) {
 }
 
 export function examUpdatesBody({ examName, facts, notices = [], lang = 'en', now = new Date() }) {
-  const t = T[lang];
+  const t = labels(lang, facts[0]?.examId);
   const c = context({ examName, facts, notices, lang, now });
   const { fact } = c;
   const hub = examHubPath(fact.examId, lang);

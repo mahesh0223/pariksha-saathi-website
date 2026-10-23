@@ -18,7 +18,7 @@ export const TYPING_SOURCES = {
     // The notices say skill-test evaluation follows guidelines on SSC's website and that the regional offices issue
     // the detailed instructions; this is SSC Eastern Region's copy of the June 2022 revision.
     url: 'https://sscer.org/matter/TypeDEST_Guidelines_20062022',
-    title: { en: 'SSC: Revised guidelines for evaluation of typing test/DEST scripts (June 2022)', hi: 'SSC: टाइपिंग टेस्ट/DEST उत्तर-पत्रों के मूल्यांकन के संशोधित दिशानिर्देश (जून 2022)' },
+    title: { en: 'SSC: Revised guidelines for evaluation of typing test/DEST scripts (June 2022)', hi: 'SSC: टंकण परीक्षा/DEST उत्तर-पत्रों के मूल्यांकन के संशोधित दिशानिर्देश (जून 2022)' },
   },
 };
 
@@ -60,7 +60,7 @@ export const TYPING_MODES = [
     key: 'ldc-en',
     lang: 'en',
     minutes: 10,
-    name: { en: 'CHSL LDC/JSA typing test (English, 35 w.p.m.)', hi: 'CHSL LDC/JSA टाइपिंग टेस्ट (अंग्रेज़ी, 35 w.p.m.)' },
+    name: { en: 'CHSL LDC/JSA typing test (English, 35 w.p.m.)', hi: 'CHSL LDC/JSA टंकण परीक्षा (अंग्रेज़ी, 35 w.p.m.)' },
     passageKd: [2500, 2800],
     targetWpm: 35,
     rules: {
@@ -73,7 +73,7 @@ export const TYPING_MODES = [
     key: 'ldc-hi',
     lang: 'hi',
     minutes: 10,
-    name: { en: 'CHSL LDC/JSA typing test (Hindi, 30 w.p.m.)', hi: 'CHSL LDC/JSA टाइपिंग टेस्ट (हिंदी, 30 w.p.m.)' },
+    name: { en: 'CHSL LDC/JSA typing test (Hindi, 30 w.p.m.)', hi: 'CHSL LDC/JSA टंकण परीक्षा (हिंदी, 30 w.p.m.)' },
     passageKd: [2200, 2800],
     targetWpm: 30,
     rules: {

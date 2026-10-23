@@ -34,6 +34,7 @@ import { PUBLIC_PAGES, publicPageMeta, SITE_SHOWS_ADS } from '../src/data/public
 import { PUBLIC_PAGE_ROUTES } from '../src/data/publicPageRoutes.mjs';
 import { TRUST_LINES } from '../src/data/trustLines.mjs';
 import { NOTICE_GUIDANCE } from '../src/data/examNoticeGuidance.mjs';
+import { glossaryViolations, HINDI_GLOSSARY_AVOID } from '../src/data/hindiGlossary.mjs';
 assert.deepEqual(LESSON_CATALOG.map(x=>x.slug), TOPIC_SLUGS);
 assert.deepEqual(EXAM_JOB_PROFILES.map(x=>x.slug), EXAM_JOB_PROFILE_SLUGS, 'examJobProfileSlugs.mjs is out of sync with examJobProfiles.mjs');
 // The entry bundle routes from these slim lists instead of the content modules (see App.tsx) -
@@ -214,6 +215,17 @@ for (const examId of HUB_EXAM_IDS) {
   }
 }
 console.log(`Verified ${HUB_EXAM_IDS.length} exam hub page(s) in both languages: every block carries a linked source and a verification date.`);
+
+// Hindi exam terms follow SSC's own Hindi notices (src/data/hindiGlossary.mjs, read 23 Oct 2026): on the Hindi home,
+// exam, syllabus, job-profile and typing pages, a student's search word such as "एडमिट कार्ड" or "नेगेटिव मार्किंग"
+// may stand only in the title, the h1, link text, structured data, or in brackets after the official term. Lessons
+// and practice questions are not checked: the same words mean other things there.
+{
+  const glossaryPages = ['dist/hi/index.html', ...['dist/hi/exams', 'dist/hi/compare', 'dist/hi/typing-test'].filter((d) => existsSync(d)).flatMap(htmlFiles)];
+  const offences = glossaryPages.flatMap((file) => glossaryViolations(readFileSync(file, 'utf8')).map((v) => `${file}: "${v.form}" (use "${v.official}"): …${v.context}…`));
+  assert.equal(offences.length, 0, `Hindi pages use ${offences.length} non-official exam term(s):\n${offences.slice(0, 20).join('\n')}`);
+  console.log(`Verified the Hindi glossary on ${glossaryPages.length} Hindi exam page(s): none of ${HINDI_GLOSSARY_AVOID.length} non-official terms outside titles, links or brackets.`);
+}
 
 // Exam calendar: a date never appears without the official document it was read from and the day it was
 // checked, and nothing tentative gets in (src/lib/examCalendar.mjs filters; this proves the output).
