@@ -29,4 +29,5 @@ export const QUESTION_SUBJECTS_HI = {
   'Computer Knowledge': 'कंप्यूटर ज्ञान',
   'General Studies': 'सामान्य अध्ययन',
   Pedagogy: 'शिक्षाशास्त्र',
+  Hindi: 'हिंदी',
 };

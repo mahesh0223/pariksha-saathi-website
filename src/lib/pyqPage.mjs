@@ -9,7 +9,7 @@ import { telegramCtaHtml } from './telegramCta.mjs';
 import { metaDescription } from './seoMeta.mjs';
 import { pyqIndexPath, pyqPaperPath } from './pyqPath.mjs';
 import { QUESTION_TOPICS } from '../data/questionTopics.mjs';
-import { topicListPath } from './questionPage.mjs';
+import { topicHasPage, topicListPath } from './questionPage.mjs';
 import { alternativeTo, optionalQuestions, satQuestions } from './pyqSections.mjs';
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
@@ -69,9 +69,12 @@ export function pyqCutoffHtml(paper, cutoffRows = []) {
     </section>`;
 }
 
+// The question's topic page in its own language (a Part-D Hindi question links the Hindi topic page), when there is one.
 function topicLink(q) {
   const topic = QUESTION_TOPICS[q.topicKey];
-  return topic && topic.en.count > 0 ? `<a href="${topicListPath(topic, 'en')}">${esc(q.topicName)}</a>` : esc(q.topicName);
+  const lang = q.languageCode === 'hi' ? 'hi' : 'en';
+  const name = (lang === 'hi' && topic?.hi?.name) || q.topicName;
+  return topic && topicHasPage(topic, lang) ? `<a href="${topicListPath(topic, lang)}">${esc(name)}</a>` : esc(name);
 }
 
 export function pyqPaperBody(paper, cutoffRows = []) {

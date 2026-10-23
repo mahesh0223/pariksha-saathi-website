@@ -2,6 +2,10 @@
 //   src/data/question-pages/en.json, hi.json  - one entry per question that gets a page
 //   src/data/questionTopics.mjs               - per topic: slug, names and counts (lesson pages link to the lists)
 //   src/data/questionRedirects.mjs            - old one-question page -> its place on the topic list
+//   src/data/question-pages/topic-lessons.json - the server lesson of a topic that has previous-year questions but no
+//                                                 list and no website lesson (the Hindi topics of SSC GD's Part-D)
+//   src/data/pyqTopics.mjs                     - per topic with previous-year questions: names and counts, for the
+//                                                 practice player (/app/pyq-practice/)
 //
 // Usage: node scripts/gen-question-pages.mjs [--server ../pariksha-saathi-server]
 //
@@ -18,7 +22,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
-import { selectEligible, topicSlug } from '../src/lib/questionEligibility.mjs';
+import { questionSnippet, selectEligible, topicSlug } from '../src/lib/questionEligibility.mjs';
+import { pyqPaperPath, pyqIndexPath } from '../src/lib/pyqPath.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
@@ -49,17 +54,31 @@ const enName = new Map(db.prepare('SELECT sharedTopicKey AS k, name, subjectName
 const lessonByTopic = new Map(LESSON_CATALOG.filter((c) => c.topicKey).map((c) => [c.topicKey, c]));
 const hiTitleBySlug = new Map(LESSON_CATALOG_HI.map((c) => [c.slug, c.title]));
 const dbHiLesson = new Map(db.prepare("SELECT topicKey AS k, title FROM Lesson WHERE languageCode = 'hi' AND status = 'PUBLISHED' GROUP BY topicKey").all().map((r) => [r.k, r.title]));
+// The Hindi-language topics (SSC GD's Part-D Hindi) say "हिंदी" in their name: their lesson titles ("पर्यायवाची और विलोम
+// शब्द") are also the Hindi names of the English-language topics, and the two would read alike on /hi/q/.
+const HINDI_LANGUAGE_NAMES = {
+  HINDI_PASSAGES: 'हिंदी गद्यांश (रिक्त स्थान और बोध)',
+  HINDI_SENTENCE_CORRECTION: 'हिंदी वाक्य शुद्धि और वर्तनी',
+  HINDI_SYNONYMS_ANTONYMS: 'हिंदी पर्यायवाची और विलोम शब्द',
+  HINDI_IDIOMS_PROVERBS: 'हिंदी मुहावरे और लोकोक्तियाँ',
+  HINDI_ONE_WORD_SUBSTITUTION: 'हिंदी: अनेक शब्दों के लिए एक शब्द',
+  HINDI_WORD_CHOICE: 'हिंदी: उपयुक्त शब्द और रिक्त स्थान',
+  HINDI_GRAMMAR: 'हिंदी व्याकरण',
+};
 function hiName(topicKey) {
+  if (HINDI_LANGUAGE_NAMES[topicKey]) return HINDI_LANGUAGE_NAMES[topicKey];
   // Topics that exist only as website lessons use the lesson slug as their key (see the lesson loop below).
   const lesson = lessonByTopic.get(topicKey) ?? LESSON_CATALOG.find((c) => c.slug === topicSlug(topicKey));
   const raw = (lesson && hiTitleBySlug.get(lesson.slug)) || dbHiLesson.get(topicKey) || enName.get(topicKey)?.name || topicKey;
   // Lesson titles are phrased as pages ("X के प्रश्न हल सहित", "X: मुख्य तथ्य और अभ्यास प्रश्न"); keep the topic name X.
-  return raw.replace(/\s*[:：]\s*मुख्य तथ्य.*$/, '').replace(/\s*(?:के\s+)?प्रश्न हल सहित/, '').replace(/\s{2,}/g, ' ').trim();
+  return raw.replace(/\s*[:：]\s*मुख्य (?:तथ्य|नियम).*$/, '').replace(/\s*(?:के\s+)?प्रश्न हल सहित/, '').replace(/\s{2,}/g, ' ').trim();
 }
 
-// --- Bank questions, one topic at a time.
+// --- Bank questions, one topic at a time. Previous-year questions are not copied here: each is on its solved-paper page
+// (/exams/<exam>/question-papers/<paper>/), and a second full copy on a topic list would be duplicate content. The topic
+// list links them instead (the summary below) and /app/pyq-practice/ lets a student sit them.
 const topicKeys = db.prepare("SELECT DISTINCT topicKey AS k FROM Question WHERE status = 'PUBLISHED' AND topicKey NOT LIKE 'CURRENT_AFFAIRS_%'").all().map((r) => r.k);
-const pick = db.prepare('SELECT id, topicKey, text, length(explanation) AS explLen, pairKey FROM Question WHERE status = \'PUBLISHED\' AND languageCode = ? AND topicKey = ?');
+const pick = db.prepare('SELECT id, topicKey, text, length(explanation) AS explLen, pairKey FROM Question WHERE status = \'PUBLISHED\' AND sourceType != \'PYQ\' AND languageCode = ? AND topicKey = ?');
 const full = db.prepare('SELECT options, correctOptionIndex, explanation, sourceAttribution FROM Question WHERE id = ?');
 const out = { en: [], hi: [] };
 const enPairs = new Set();
@@ -139,9 +158,76 @@ for (const lang of ['en', 'hi']) {
   }
 }
 
+// --- Previous-year questions by topic, from the same data the solved-paper pages are built from
+// (src/data/pyqPapers.json, scripts/gen-pyq-pages.mjs - run that first), so every link lands on the question's anchor.
+const PYQ_LATEST = 10;
+const sectionAnchor = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-'); // as src/lib/pyqPage.mjs
+const pyqByTopic = {};
+for (const paper of JSON.parse(readFileSync(join(ROOT, 'src', 'data', 'pyqPapers.json'), 'utf8'))) {
+  for (const q of paper.questions) {
+    if (q.languageCode !== 'en' && q.languageCode !== 'hi') continue;
+    const entry = ((pyqByTopic[q.topicKey] ??= {})[q.languageCode] ??= { count: 0, groups: {}, items: [] });
+    entry.count += 1;
+    const group = (entry.groups[paper.displayName] ??= { name: paper.displayName, href: pyqIndexPath(paper.examId, q.languageCode), count: 0 });
+    group.count += 1;
+    entry.items.push({
+      // The question itself, not the cloze passage the text opens with.
+      snippet: questionSnippet(String(q.text).split(/\n{2,}/).at(-1), 140),
+      href: `${pyqPaperPath(paper)}#${sectionAnchor(q.section ?? 'Questions')}-q${q.number ?? ''}`,
+      paper: paper.displayName,
+      date: paper.date,
+      shift: paper.shift,
+    });
+  }
+}
+const topicLessons = {};
+const serverLesson = db.prepare("SELECT title, explanation, examples, revisionSummary FROM Lesson WHERE topicKey = ? AND languageCode = ? AND status = 'PUBLISHED' ORDER BY title LIMIT 1");
+for (const [topicKey, byLang] of Object.entries(pyqByTopic)) {
+  const t = (topics[topicKey] ??= {
+    slug: topicSlug(topicKey),
+    lessonSlug: lessonByTopic.get(topicKey)?.slug,
+    subject: enName.get(topicKey)?.subject ?? null,
+    en: { name: enName.get(topicKey)?.name ?? topicKey, count: 0 },
+    hi: { name: hiName(topicKey), count: 0 },
+  });
+  t.pyq = {};
+  for (const [lang, entry] of Object.entries(byLang)) {
+    t.pyq[lang] = {
+      count: entry.count,
+      groups: Object.values(entry.groups).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)),
+      // The newest question of each of the most recent shifts, so the links spread over papers rather than one shift.
+      latest: (() => {
+        const sorted = entry.items.sort((a, b) => b.date.localeCompare(a.date) || a.shift.localeCompare(b.shift, 'en', { numeric: true }));
+        const seen = new Set();
+        const firsts = sorted.filter((q) => (seen.has(`${q.paper}|${q.date}|${q.shift}`) ? false : seen.add(`${q.paper}|${q.date}|${q.shift}`)));
+        return [...firsts, ...sorted.filter((q) => !firsts.includes(q))].slice(0, PYQ_LATEST);
+      })(),
+    };
+    // The Hindi-language topics (SSC GD's Part-D Hindi) have only previous-year questions, so no list: their page is built
+    // from the Hindi lesson written and checked for them, so that it teaches the topic rather than only linking out.
+    // (Other topics without a list - ALGEBRA and the like, whose bank questions the eligibility rules leave out - stay
+    // without a page; their previous-year questions are on the solved-paper pages and in the practice player.)
+    if (topicKey.startsWith('HINDI_') && t[lang].count === 0 && !t.lessonSlug) {
+      const lesson = serverLesson.get(topicKey, lang);
+      if (lesson) {
+        (topicLessons[topicKey] ??= {})[lang] = { ...lesson, examples: JSON.parse(lesson.examples ?? '[]') };
+        t[lang].lessonPage = true; // src/lib/questionPage.mjs topicHasPage
+      }
+    }
+  }
+}
+const hasPage = (t, lang) => t[lang].count > 0 || Boolean(t[lang].lessonPage); // as src/lib/questionPage.mjs topicHasPage
+const pyqTopics = Object.fromEntries(Object.entries(topics).filter(([, t]) => t.pyq).map(([key, t]) => [key, {
+  slug: t.slug,
+  en: { name: t.en.name, count: t.pyq.en?.count ?? 0, hasPage: hasPage(t, 'en') },
+  hi: { name: t.hi.name, count: t.pyq.hi?.count ?? 0, hasPage: hasPage(t, 'hi') },
+}]));
+
 const dataDir = join(ROOT, 'src', 'data', 'question-pages');
 mkdirSync(dataDir, { recursive: true });
 for (const lang of ['en', 'hi']) writeFileSync(join(dataDir, `${lang}.json`), `${JSON.stringify(out[lang])}\n`);
+writeFileSync(join(dataDir, 'topic-lessons.json'), `${JSON.stringify(topicLessons)}\n`);
+writeFileSync(join(ROOT, 'src', 'data', 'pyqTopics.mjs'), `// GENERATED by scripts/gen-question-pages.mjs - do not hand-edit; re-run the script.\n// Per topic with previous-year questions: list slug, and the name and number of such questions in each language.\nexport const PYQ_TOPICS = ${JSON.stringify(pyqTopics, null, 2)};\n`);
 const generated = new Date().toISOString().slice(0, 10);
 writeFileSync(join(ROOT, 'src', 'data', 'questionTopics.mjs'), `// GENERATED by scripts/gen-question-pages.mjs - do not hand-edit; re-run the script.\n// Per topic with /q/ question pages: URL slug, lesson to link back to, and the name and page count in each language.\nexport const QUESTION_PAGES_GENERATED = '${generated}';\nexport const QUESTION_TOPICS = ${JSON.stringify(topics, null, 2)};\n`);
 const count = (lang, kind) => out[lang].filter((q) => q.kind === kind).length;

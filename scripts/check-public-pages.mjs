@@ -18,6 +18,9 @@ import { PYQ_INDEX_EXAMS, pyqIndexPath, pyqPaperPath } from '../src/lib/pyqPath.
 import { questionRedirectTarget } from '../src/lib/questionRedirects.mjs';
 import { questionRedirectsSource } from '../src/lib/questionRedirectsBuild.mjs';
 import { QUESTION_REDIRECTS } from '../src/data/questionRedirects.mjs';
+import { QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
+import { PYQ_TOPICS } from '../src/data/pyqTopics.mjs';
+import { topicHasPage, topicListPath } from '../src/lib/questionPage.mjs';
 import { examHubExtrasSource } from '../src/lib/examHubExtrasBuild.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryPath } from '../src/lib/examDirectory.mjs';
 import { examCalendarPath } from '../src/lib/examCalendar.mjs';
@@ -126,6 +129,50 @@ for (const file of files) {
   const stale = sitemapLocs.filter((loc) => questionRedirectTarget(QUESTION_REDIRECTS, loc));
   assert.equal(stale.length, 0, `The sitemap still lists one-question pages, e.g. ${stale[0]}`);
   console.log(`Verified ${qFiles.length} /q/ pages: ${placed} questions each on the list page its old address redirects to, with an answer; credit sections, linked stylesheet, no app JavaScript, canonical; no one-question pages built or sitemapped.`);
+
+  // Previous-year questions on the topic lists (since 23 Oct 2026): never copied in full - each is on its solved-paper
+  // page, and a second copy would be duplicate content - but every topic page with any links them from its first page:
+  // a summary, the latest few on their anchors of the solved-paper pages, and the noindexed practice player.
+  const pyqTexts = new Set();
+  // A copy is the same question with the same options; a stem alone ("Which of the following is an input device?") is
+  // common to many questions.
+  const copyKey = (lang, q) => `${lang}|${q.text}|${JSON.stringify(q.options ?? [])}`;
+  for (const paper of JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'))) for (const q of paper.questions) pyqTexts.add(copyKey(q.languageCode, q));
+  for (const lang of ['en', 'hi']) {
+    const copied = JSON.parse(readFileSync(`src/data/question-pages/${lang}.json`, 'utf8')).filter((q) => pyqTexts.has(copyKey(lang, q)));
+    assert.equal(copied.length, 0, `A previous-year question is copied in full onto a ${lang} topic list: ${copied[0]?.slug} - its place is its solved-paper page`);
+  }
+  const paperHtml = new Map();
+  let sections = 0;
+  let links = 0;
+  for (const [topicKey, topic] of Object.entries(QUESTION_TOPICS)) {
+    for (const lang of ['en', 'hi']) {
+      if (!topicHasPage(topic, lang) || !(topic.pyq?.[lang] || (lang === 'hi' && topic.pyq?.en))) continue;
+      const path = topicListPath(topic, lang);
+      const html = readFileSync(`dist${path}index.html`, 'utf8');
+      assert(html.includes('id="previous-year-questions"'), `${path}: no previous-year-question section`);
+      const practiceLang = topic.pyq?.[lang] ? lang : 'en';
+      assert(html.includes(`href="/app/pyq-practice/${encodeURIComponent(topicKey)}/${practiceLang === 'hi' ? '?lang=hi' : ''}"`), `${path}: no link to the practice player`);
+      sections += 1;
+      for (const q of topic.pyq?.[lang]?.latest ?? []) {
+        const [target, anchor] = q.href.split('#');
+        assert(html.includes(`href="${q.href}"`), `${path}: does not link ${q.href}`);
+        if (!paperHtml.has(target)) paperHtml.set(target, readFileSync(`dist${target}index.html`, 'utf8'));
+        assert(paperHtml.get(target).includes(`id="${anchor}"`), `${path} links ${q.href}, which is not on its solved-paper page`);
+        links += 1;
+      }
+    }
+    if (topic.hi.lessonPage) {
+      const html = readFileSync(`dist${topicListPath(topic, 'hi')}index.html`, 'utf8');
+      assert(html.includes('<html lang="hi">') && html.includes('class="topic-lesson"'), `${topicListPath(topic, 'hi')}: the Hindi lesson page is not built`);
+    }
+  }
+  for (const [topicKey, topic] of Object.entries(PYQ_TOPICS)) {
+    for (const lang of ['en', 'hi']) assert.equal(topic[lang].count, QUESTION_TOPICS[topicKey]?.pyq?.[lang]?.count ?? 0, `src/data/pyqTopics.mjs is out of step for ${topicKey} - re-run node scripts/gen-question-pages.mjs`);
+  }
+  assert(readFileSync('dist/robots.txt', 'utf8').includes('Disallow: /app/pyq-practice'), 'robots.txt does not keep the practice player out of search');
+  assert(/^\/app\/pyq-practice\/\*\s+\/spa\s+200$/m.test(readFileSync('dist/_redirects', 'utf8')), '_redirects does not serve the practice player');
+  console.log(`Verified previous-year questions on ${sections} topic page(s): none copied in full, ${links} latest-question links landing on their solved-paper anchors, the practice player linked, robots and _redirects for it; the Hindi-language lesson pages built.`);
 }
 for (const [,href] of readFileSync('dist/index.html','utf8').matchAll(/href="(\/fonts\/[^"]+)"/g)) assert(existsSync(`dist${href}`),`missing font ${href}`);
 assert(readFileSync('dist/index.html','utf8').includes('id="home-preview"'),'home page is missing its baked preview JSON');

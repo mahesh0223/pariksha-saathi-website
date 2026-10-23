@@ -55,3 +55,14 @@
 .mock-review li {
   margin-bottom: 24px;
 }
+/* The previous-year-question practice player (src/pages/pyq/PyqPracticePage.tsx): the checked answer under a question. */
+.pyq-practice-answer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+.pyq-practice-passage {
+  white-space: pre-line;
+  line-height: 1.6;
+  margin: 8px 0 12px;
+}

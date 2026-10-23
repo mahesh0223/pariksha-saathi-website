@@ -20,6 +20,7 @@
 /app/current-affairs-quiz      /spa  200
 /app/current-affairs-quiz/*    /spa  200
 /app/mock-tests/*              /spa  200
+/app/pyq-practice/*            /spa  200
 
 # Unmatched paths use the generated 404.html (Cloudflare returns HTTP 404).
 

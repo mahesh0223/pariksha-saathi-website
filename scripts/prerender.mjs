@@ -33,7 +33,7 @@ import { linkExamNames } from '../src/lib/examLinks.mjs';
 import { lessonQuestionListLink } from '../src/lib/questionTopicLink.mjs';
 import { QUESTION_PAGES_GENERATED, QUESTION_TOPICS } from '../src/data/questionTopics.mjs';
 import { QUESTION_SUBJECTS_HI } from '../src/data/lessonSubjects.mjs';
-import { TOPIC_PAGE_SIZE, groupByTopic, questionIndexBody, questionIndexMeta, questionIndexPath, topicListBody, topicListMeta, topicListPath, topicListStructuredData } from '../src/lib/questionPage.mjs';
+import { TOPIC_PAGE_SIZE, groupByTopic, questionIndexBody, questionIndexMeta, questionIndexPath, topicHasPage, topicListBody, topicListMeta, topicListPath, topicListStructuredData } from '../src/lib/questionPage.mjs';
 import { questionRedirectTarget } from '../src/lib/questionRedirects.mjs';
 import { QUESTION_REDIRECTS } from '../src/data/questionRedirects.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
@@ -1635,6 +1635,8 @@ async function main() {
     return { ...topic, subject: lang === 'hi' ? (QUESTION_SUBJECTS_HI[topic.subject] ?? topic.subject) : topic.subject };
   };
   let questionCount = 0;
+  // The Hindi-language topics have no list - only previous-year questions - and their page is their lesson.
+  const topicLessons = JSON.parse(readFileSync(new URL('../src/data/question-pages/topic-lessons.json', import.meta.url), 'utf8'));
   for (const lang of ['en', 'hi']) {
     const otherLang = lang === 'hi' ? 'en' : 'hi';
     const questions = JSON.parse(readFileSync(new URL(`../src/data/question-pages/${lang}.json`, import.meta.url), 'utf8'));
@@ -1644,13 +1646,15 @@ async function main() {
       const lesson = q.lessonSlug ? TOPIC_LESSONS.find((entry) => entry.slug === q.lessonSlug) : null;
       return lessonCredit(lesson, lang).text;
     };
-    for (const [topicKey, list] of groupByTopic(questions)) {
+    const byTopic = groupByTopic(questions);
+    for (const topicKey of Object.keys(QUESTION_TOPICS).filter((key) => topicHasPage(QUESTION_TOPICS[key], lang))) {
+      const list = byTopic.get(topicKey) ?? [];
       const topic = topicFor(topicKey, lang);
-      const pages = Math.ceil(list.length / TOPIC_PAGE_SIZE);
+      const pages = Math.max(1, Math.ceil(list.length / TOPIC_PAGE_SIZE));
       for (let p = 1; p <= pages; p++) {
         const path = topicListPath(topic, lang, p);
         const items = list.slice((p - 1) * TOPIC_PAGE_SIZE, p * TOPIC_PAGE_SIZE);
-        const otherHasList = (QUESTION_TOPICS[topicKey][otherLang]?.count ?? 0) > 0;
+        const otherHasList = topicHasPage(QUESTION_TOPICS[topicKey], otherLang);
         writePage(path.slice(1, -1), page({
           ...topicListMeta(topic, lang, p, pages),
           path,
@@ -1659,7 +1663,7 @@ async function main() {
           type: 'website',
           inlineStyle: false,
           scripts: false,
-          bodyHtml: topicListBody(topic, lang, items, p, pages, creditFor),
+          bodyHtml: topicListBody(topicKey, topic, lang, items, p, pages, creditFor, topicLessons[topicKey]?.[lang] ?? null),
           structuredData: topicListStructuredData(topic, lang, items, p, pages),
           alternateLanguages: p === 1 && otherHasList
             ? [{ lang, path }, { lang: otherLang, path: topicListPath(topic, otherLang) }, { lang: 'x-default', path: topicListPath(topic, 'en') }]
@@ -1668,7 +1672,7 @@ async function main() {
         sitemapUrls.push({ loc: path, priority: '0.6', lastmod: QUESTION_PAGES_GENERATED });
       }
     }
-    const indexTopics = Object.keys(QUESTION_TOPICS).filter((key) => QUESTION_TOPICS[key][lang].count > 0).map((key) => topicFor(key, lang));
+    const indexTopics = Object.keys(QUESTION_TOPICS).filter((key) => topicHasPage(QUESTION_TOPICS[key], lang)).map((key) => topicFor(key, lang));
     writePage(questionIndexPath(lang).slice(1, -1), page({
       ...questionIndexMeta(lang),
       path: questionIndexPath(lang),

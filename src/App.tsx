@@ -88,6 +88,7 @@ const CurrentAffairsDetailPage = lazyPage(() => import('./pages/app/CurrentAffai
 const ExamNoticesPage = lazyPage(() => import('./pages/app/ExamNoticesPage').then((m) => ({ default: m.ExamNoticesPage })));
 const ExamNoticeDetailPage = lazyPage(() => import('./pages/app/ExamNoticeDetailPage').then((m) => ({ default: m.ExamNoticeDetailPage })));
 const MockTestPage = lazyPage(() => import('./pages/mocks/MockTestPage').then((m) => ({ default: m.MockTestPage })));
+const PyqPracticePage = lazyPage(() => import('./pages/pyq/PyqPracticePage').then((m) => ({ default: m.PyqPracticePage })));
 const AccountPage = lazyPage(() => import('./pages/app/AccountPage').then((m) => ({ default: m.AccountPage })));
 const ChallengePage = lazyPage(() => import('./pages/app/ChallengePage').then((m) => ({ default: m.ChallengePage })));
 const CurrentAffairsQuizPage = lazyPage(() => import('./pages/app/CurrentAffairsQuizPage').then((m) => ({ default: m.CurrentAffairsQuizPage })));
@@ -189,6 +190,7 @@ export function App() {
         <Route path="/app/exam-notices" element={<Lazy><ExamNoticesPage /></Lazy>} />
         <Route path="/app/exam-notices/:id" element={<Lazy><ExamNoticeDetailPage /></Lazy>} />
         <Route path="/app/mock-tests/:examId/:stageKey/:number" element={<Lazy><MockTestPage /></Lazy>} />
+        <Route path="/app/pyq-practice/:topicKey" element={<Lazy><PyqPracticePage /></Lazy>} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

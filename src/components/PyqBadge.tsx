@@ -15,7 +15,9 @@ export function pyqLabel(question: PyqFields, language: string): string | null {
       date = parsed.toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
     }
   }
-  const detail = [paper, date, question.pyqShift?.trim() || null].filter(Boolean).join(' · ');
+  const shift = question.pyqShift?.trim() || null;
+  // SSC's Hindi notices say पाली for a shift (src/data/hindiGlossary.mjs).
+  const detail = [paper, date, shift && language === 'hi' ? shift.replace(/^Shift\b/, 'पाली') : shift].filter(Boolean).join(' · ');
   return language === 'hi' ? `${detail} में पूछा गया` : `Asked in ${detail}`;
 }
 
