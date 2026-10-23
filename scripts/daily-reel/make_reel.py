@@ -7,6 +7,7 @@ Usage: npm run reel:daily -- [YYYY-MM-DD] [--voice hf_alpha|hf_beta|hm_omega|hm_
        npm run reel:daily -- --promo                          the timeless Telegram ad reel (for boosting)
        npm run reel:daily -- --promo30                        the 30-second hook-and-pitch Telegram ad
        npm run reel:daily -- --promo-all                      the 30-second ad for Telegram, Instagram and the website
+       npm run reel:daily -- --promo-free                     the 30-second free-prep ad (owner's script), voice from PROMO_VOICE_DIR
 (default date: the newest editionDate with Hindi items in the API; default voice: REEL_VOICE, else hf_alpha)
 Writes reels/ParikshaSaathi_CA_<date>.mp4, a cover image and an upload text (titles, descriptions, captions).
 
@@ -504,11 +505,12 @@ Telegram पर join करें: @{TELEGRAM} (link bio में)
 INSTAGRAM = "parkishasathi"  # the brand's own Instagram handle as registered (src/data/socialLinks.mjs), spelling and all
 SITE = "parikshasaathi.com"
 
-def phone_shot(url, work, name, height=640):
-    """A phone-sized screenshot of a live page of our own site - real proof on screen, not a mock-up."""
+def phone_shot(url, work, name, height=780):
+    """A phone-sized screenshot of a live page of our own site - real proof on screen, not a mock-up. 500 px wide: headless
+    Chrome will not make a window narrower than about that, and a narrower capture only crops the page's right side."""
     png = os.path.join(work, f"{name}.png")
-    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2.5",
-                    f"--window-size=412,{height}", "--virtual-time-budget=6000", f"--screenshot={png}", url], capture_output=True, check=True)
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=2.2",
+                    f"--window-size=500,{height}", "--virtual-time-budget=8000", f"--screenshot={png}", url], capture_output=True, check=True)
     return "file://" + png
 
 def bleed(body, bg="#14293a", color="#fff"):
@@ -527,6 +529,41 @@ def phone(src, tilt=0):
     return (f'<img src="{src}" style="width:600px;align-self:center;border-radius:46px;border:14px solid #14293a;'
             f'box-shadow:0 26px 70px rgba(20,41,58,.40);transform:rotate({tilt}deg)">')
 
+# The spoken lines of --promo-all, in slide order. English words are written in Devanagari so that any Hindi voice
+# says them right. `--promo-all-lines <file>` writes them as JSON, for parler_lines.py or for recording by hand.
+PROMO_ALL_LINES = [
+    "एसएससी के पच्चीस हज़ार से ज़्यादा असली प्रश्न, उत्तर और हल के साथ… और फ़ीस? ज़ीरो!",
+    "तीन सौ उनसठ पुराने पेपर, हर प्रश्न का हल, और पीडीएफ़ भी।",
+    "रेलवे के फ़्री मॉक टेस्ट, हिंदी में भी।",
+    "और रोज़ के करेंट अफ़ेयर्स, हर ख़बर ऑफ़िशियल सोर्स से।",
+    "टेलीग्राम पर रोज़ — सुबह सात बजे पीडीएफ़, शाम छह बजे क्विज़, और हर नई एग्ज़ाम नोटिस।",
+    "इंस्टाग्राम पर फ़ॉलो करें।",
+    "और सब कुछ एक जगह — परीक्षा साथी डॉट कॉम।",
+    "अभी जुड़ें — टेलीग्राम, इंस्टाग्राम और वेबसाइट। लिंक बायो में!",
+]
+
+def promo_voice(lines):
+    """Each line's audio: recorded or pre-generated files (PROMO_VOICE_DIR/line<k>.wav - e.g. from parler_lines.py or the
+    owner's own recording), else Kokoro."""
+    folder = os.environ.get("PROMO_VOICE_DIR")
+    if not folder:
+        voice = Voice(speed=1.2)
+        return lambda k: voice.say(lines[k])
+    tempo = float(os.environ.get("PROMO_TEMPO", "1"))  # e.g. 1.13: a pitch-preserving speed-up, to fit a 30 s slot
+    def load(k):
+        path = os.path.join(folder, f"line{k}.wav")
+        if tempo != 1:
+            fast = os.path.join(tempfile.gettempdir(), f"promo_line{k}_{tempo}.wav")
+            subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-i", path, "-filter:a", f"atempo={tempo}", fast], check=True)
+            path = fast
+        audio, rate = sf.read(path, dtype="float32", always_2d=True)
+        audio = audio.mean(axis=1)
+        idx = np.where(np.abs(audio) > 0.02 * np.max(np.abs(audio)))[0]
+        if len(idx): audio = audio[max(0, idx[0] - int(0.03 * rate)): idx[-1] + int(0.08 * rate)]
+        audio = np.interp(np.linspace(0, len(audio) - 1, int(len(audio) * SR / rate)), np.arange(len(audio)), audio).astype(np.float32)
+        return audio / max(1e-6, np.max(np.abs(audio))) * 0.9
+    return load
+
 def promo_all():
     """The 30-second ad for all three places at once - the Telegram channel, the Instagram profile and the website. Hook
     first (the number of real SSC previous-year questions, free), then proof shot from the live site, then where to
@@ -543,7 +580,7 @@ def promo_all():
         mocks = phone_shot(f"https://{SITE}/hi/exams/rrb-ntpc/mock-tests/", work, "mocks")
         home = phone_shot(f"https://{SITE}/hi/", work, "home")
         top = f"FREE · Telegram · Instagram · {SITE}"
-        voice = Voice(speed=1.35)
+        say = promo_voice(PROMO_ALL_LINES)
         line = lambda text, size=76, color="#2a2620": f'<div class="headline" style="font-size:{size}px;color:{color}">{text}</div>'
         chips = lambda names: ('<div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center">'
                                + "".join(f'<span style="background:#1e3a52;color:#fff;font-size:40px;font-weight:700;padding:10px 26px;border-radius:999px">{n}</span>' for n in names) + '</div>')
@@ -554,36 +591,36 @@ def promo_all():
                           '<div style="font-size:88px;font-weight:800;line-height:1.25">SSC के असली प्रश्न</div>'
                           '<div style="font-size:44px;color:#c9d6e2">पिछले वर्षों के आधिकारिक प्रश्नपत्रों से, उत्तर और हल सहित</div>'
                           '<div class="chip" style="background:#3f7a4e;color:#fff;font-size:72px">फ़ीस? ₹0</div>'),
-                    voice.say("SSC के पच्चीस हज़ार से ज़्यादा असली प्रश्न, उत्तर और हल के साथ… और फ़ीस? ज़ीरो!"), after=0.15, sfx="thud"),
+                    say(0), after=0.15, sfx="thud"),
             # 2. Proof: the solved papers, as the live site shows them.
             segment(page(top, line("📄 359 हल प्रश्नपत्र<br>+ हर पेपर की PDF", 78) + chips(["CGL", "CHSL", "MTS", "GD"]) + phone(papers, -2), "tall", cta=False),
-                    voice.say("तीन सौ उनसठ पुराने पेपर, हर प्रश्न का हल, और पीडीएफ़ भी।"), after=0.15),
+                    say(1), after=0.15),
             # 3. Railway mocks.
             segment(page(top, line("🚆 RRB NTPC · Group D · ALP<br>फ़्री मॉक टेस्ट, हिंदी में भी", 70) + phone(mocks, 2), "tall", cta=False),
-                    voice.say("रेलवे के फ़्री मॉक टेस्ट, हिंदी में भी।"), after=0.15),
+                    say(2), after=0.15),
             # 4. Daily current affairs.
             segment(page(top, line("📰 रोज़ के करेंट अफेयर्स<br>हर खबर आधिकारिक स्रोत से", 72)
                               + f'<img src="{daily}" style="width:560px;align-self:center;border-radius:18px;box-shadow:0 18px 50px rgba(20,41,58,.35);transform:rotate(-2deg)">', "tall", cta=False),
-                    voice.say("और रोज़ के करेंट अफेयर्स, हर खबर ऑफ़िशियल सोर्स से।"), after=0.15),
+                    say(3), after=0.15),
             # 5. Telegram.
             segment(page(top, line("✈️ Telegram पर रोज़:", 84, "#1e3a52")
                               + line("☀️ सुबह 7 बजे: करेंट अफेयर्स PDF<br>🧠 शाम 6 बजे: क्विज़<br>📢 नई परीक्षा सूचनाएँ", 66)
                               + f'<div class="handle" style="font-size:92px">@{TELEGRAM}</div>', "center", cta=False),
-                    voice.say("टेलीग्राम पर रोज़ — सुबह सात बजे पीडीएफ़, शाम छह बजे क्विज़, और हर नई एग्ज़ाम नोटिस।"), after=0.15),
+                    say(4), after=0.15),
             # 6. Instagram.
             segment(page(top, line("📸 Instagram पर", 96, "#1e3a52") + f'<div class="handle" style="font-size:110px">@{INSTAGRAM}</div>'
                               + line("follow करें", 90, "#a6431f"), "center", cta=False),
-                    voice.say("इंस्टाग्राम पर फ़ॉलो करें।"), after=0.15),
+                    say(5), after=0.15),
             # 7. The website.
             segment(page(top, line(f"🌐 सब कुछ एक जगह:<br><span style=\"color:#a6431f\">{SITE}</span>", 76) + phone(home, -2), "tall", cta=False),
-                    voice.say("और सब कुछ एक जगह — परीक्षा साथी डॉट कॉम।"), after=0.15),
+                    say(6), after=0.15),
             # 8. The end card: all three, held for the follow.
             segment(bleed('<div style="font-size:96px;font-weight:900;color:#f2a33a">अभी जुड़ें 👇</div>'
                           f'<div class="row"><div class="ic">✈️</div><div><div class="k">Telegram</div><div class="v">@{TELEGRAM}</div></div></div>'
                           f'<div class="row"><div class="ic">📸</div><div><div class="k">Instagram</div><div class="v">@{INSTAGRAM}</div></div></div>'
                           f'<div class="row"><div class="ic">🌐</div><div><div class="k">Website</div><div class="v">{SITE}</div></div></div>'
                           '<div class="chip" style="background:#3f7a4e;color:#fff">बिल्कुल FREE · लिंक बायो में</div>'),
-                    voice.say("अभी जुड़ें — टेलीग्राम, इंस्टाग्राम और वेबसाइट। लिंक बायो में!"), after=1.0, sfx="ding"),
+                    say(7), after=1.0, sfx="ding"),
         ]
         out = os.path.join(OUT_DIR, "ParikshaSaathi_promo_all30.mp4")
         total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_promo_all30_cover.png"), bpm=124)
@@ -600,6 +637,67 @@ def promo_all():
 
 #sscexam #sscgd #ssccgl #sscchsl #railwayexam #rrbntpc #currentaffairs #previousyearpapers #करेंटअफेयर्स
 """)
+    print(f"{out}: {total:.1f} s")
+
+# The spoken lines of --promo-free (the owner's 30-second script, 23 Oct 2026), in slide order, English words in Devanagari.
+PROMO_FREE_LINES = [
+    "एग्ज़ाम की तैयारी शुरू करनी है, लेकिन समझ नहीं आ रहा क्या पढ़ें और कहाँ से प्रैक्टिस करें?",
+    "परीक्षा साथी पर फ़्री मॉक टेस्ट दो, और पता लगाओ कि आपकी तैयारी कहाँ खड़ी है।",
+    "क्वांट, रीज़निंग, इंग्लिश और जनरल अवेयरनेस के टॉपिक-वाइज़ लेसन्स पढ़ो, सीधे एग्ज़ाम की तैयारी के लिए।",
+    "पिछले सालों के इम्पॉर्टेंट क्वेश्चन्स और उनके आसान सॉल्व्ड एक्सप्लनेशन्स से प्रैक्टिस करो।",
+    "और रोज़ के करेंट अफ़ेयर्स पढ़ो, ताकि जीके और करेंट अफ़ेयर्स पीछे न रह जाएँ।",
+    "सब कुछ फ़्री है। आज ही पढ़ाई शुरू करो, परीक्षा साथी डॉट कॉम।",
+]
+
+def promo_free():
+    """The owner's 30-second script (23 Oct 2026): a hook question, then free mock tests, topic-wise lessons, solved
+    previous-year questions and daily current affairs, then the website. Shown from the live site: the RRB NTPC mock
+    player, a Hindi lesson; a real SSC GD 2022 Part-D Hindi question with its answer and explanation (from
+    src/data/pyqPapers.json); the newest Hindi current-affairs headlines from the API. All of it is free today."""
+    os.makedirs(OUT_DIR, exist_ok=True)
+    hi_items = fetch_all("hi")
+    newest = max(i["editionDate"][:10] for i in hi_items)
+    today = [i for i in hi_items if i["editionDate"].startswith(newest)][:4]
+    pyq = next(q for p in json.load(open(os.path.join(ROOT, "src", "data", "pyqPapers.json"), encoding="utf-8"))
+               if p["examId"] == "ssc_gd" and p["date"] == "2023-01-10" and p["shift"] == "Shift 1"
+               for q in p["questions"] if q["languageCode"] == "hi" and q["number"] == 1)
+    with tempfile.TemporaryDirectory() as work:
+        mock = phone_shot(f"https://{SITE}/app/mock-tests/rrb_ntpc/cbt1/1/?lang=hi", work, "mock")
+        lesson = phone_shot(f"https://{SITE}/hi/learn/average/", work, "lesson")
+        top = f"Free Exam Prep · {SITE}"
+        say = promo_voice(PROMO_FREE_LINES)
+        title = lambda text, emoji: f'<div class="headline" style="font-size:84px;color:#1e3a52">{emoji} {text}</div>'
+        card = "background:#fff;border:3px solid #e4dcd0;border-radius:30px;padding:36px 40px;box-shadow:0 18px 50px rgba(20,41,58,.18);display:flex;flex-direction:column;gap:20px"
+        chips = lambda names: ('<div style="display:flex;flex-wrap:wrap;gap:16px">'
+                               + "".join(f'<span style="background:#1e3a52;color:#fff;font-size:40px;font-weight:700;padding:10px 26px;border-radius:999px">{n}</span>' for n in names) + '</div>')
+        question = pyq["text"].replace("? ", "?<br>", 1)
+        pyq_card = (f'<div style="{card}">'
+                    '<div style="align-self:flex-start;background:#a6431f;color:#fff;font-size:34px;font-weight:700;padding:8px 24px;border-radius:999px">SSC GD 2022 · 10 जनवरी 2023 · पाली 1</div>'
+                    f'<div style="font-size:46px;font-weight:700;line-height:1.45">{question}</div>'
+                    + "".join(f'<div class="opt{" right" if j == pyq["correctOptionIndex"] else ""}" style="font-size:42px;padding:14px 24px"><b style="width:60px;height:60px;font-size:32px">{"✓" if j == pyq["correctOptionIndex"] else LETTERS[j]}</b>{html.escape(o)}</div>' for j, o in enumerate(pyq["options"]))
+                    + f'<div style="font-size:38px;line-height:1.5;color:#2a2620;background:#eaf5ec;border-radius:20px;padding:18px 24px"><b>हल:</b> {html.escape(pyq["explanation"])}</div></div>')
+        feed = (f'<div style="{card}"><div style="font-size:40px;font-weight:800;color:#a6431f">📰 {html.escape(fmt_date(newest))}</div>'
+                + "".join(f'<div style="font-size:40px;font-weight:700;line-height:1.4;border-top:2px solid #efe9df;padding-top:18px">{html.escape(i["title"][:90] + ("…" if len(i["title"]) > 90 else ""))}</div>' for i in today)
+                + '<div style="font-size:32px;color:#1e3a52;font-weight:600">हर खबर आधिकारिक स्रोत से · हिंदी + English</div></div>')
+        icon = "file://" + os.path.join(HERE, "..", "daily-pdf", "icon.png")
+        segments = [
+            segment(bleed('<div style="font-size:150px">🤔</div>'
+                          '<div style="font-size:96px;font-weight:900;line-height:1.3"><span style="color:#f2a33a">SSC / Railway / Banking</span><br>की तैयारी कर रहे हो?</div>'
+                          '<div style="font-size:54px;color:#c9d6e2;line-height:1.5">क्या पढ़ें? कहाँ से practice करें?</div>'),
+                    say(0), after=0.15, sfx="thud"),
+            segment(page(top, title("Free Mock Tests", "✅") + phone(mock, -2), "tall", cta=False), say(1), after=0.15),
+            segment(page(top, title("Topic-wise Lessons", "📚") + chips(["Quant", "Reasoning", "English", "General Awareness"]) + phone(lesson, 2), "tall", cta=False),
+                    say(2), after=0.15),
+            segment(page(top, title("Solved Previous-Year Questions", "📝") + pyq_card, "tall", cta=False), say(3), after=0.15),
+            segment(page(top, title("Daily Current Affairs", "📰") + feed, "tall", cta=False), say(4), after=0.15),
+            segment(bleed(f'<img src="{icon}" style="width:230px;height:230px;border-radius:52px">'
+                          '<div style="font-size:120px;font-weight:900;color:#f2a33a">Free Exam Prep</div>'
+                          f'<div style="font-size:100px;font-weight:900">{SITE}</div>'
+                          '<div class="chip" style="background:#3f7a4e;color:#fff">SSC · Railway · Banking · Police · PSC</div>'),
+                    say(5), after=1.0, sfx="ding"),
+        ]
+        out = os.path.join(OUT_DIR, "ParikshaSaathi_promo_free30.mp4")
+        total = assemble(segments, out, cover=os.path.join(OUT_DIR, "ParikshaSaathi_promo_free30_cover.png"), bpm=120)
     print(f"{out}: {total:.1f} s")
 
 def voice_samples(date=None):
@@ -623,7 +721,10 @@ if __name__ == "__main__":
     date = next((a for a in args if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)), None)
     if "--voice-samples" in args: voice_samples(date)
     elif "--promo30" in args: promo30()
+    elif "--promo-all-lines" in args:
+        open(args[args.index("--promo-all-lines") + 1], "w", encoding="utf-8").write(json.dumps(PROMO_ALL_LINES, ensure_ascii=False, indent=1))
     elif "--promo-all" in args: promo_all()
+    elif "--promo-free" in args: promo_free()
     elif "--promo" in args: promo()
     elif "--text-only" in args:
         date, items = edition(date)
