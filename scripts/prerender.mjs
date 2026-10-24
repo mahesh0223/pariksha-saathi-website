@@ -58,6 +58,7 @@ import { dailyPdfBand } from '../src/lib/dailyPdf.mjs';
 import { DIRECTORY_EXAM_IDS, examDirectoryBody, examDirectoryMeta, examDirectoryPath, examDirectoryStructuredData, examsLinkHtml } from '../src/lib/examDirectory.mjs';
 import { calendarRows, calendarSummary, examCalendarBody, examCalendarMeta, examCalendarPath } from '../src/lib/examCalendar.mjs';
 import { GK_INSIGHTS_PUBLISHED, gkInsightsBody, gkInsightsMeta, gkInsightsPath } from '../src/lib/gkInsights.mjs';
+import { PYQ_WITHDRAWN, isWithdrawnPath } from '../src/data/pyqWithdrawn.mjs';
 import { PLAY_STORE_URL } from '../src/data/siteLinks.mjs';
 import { typingTestMeta, typingTestPath, typingTestStaticHtml } from '../src/lib/typingPage.mjs';
 import { TYPING_CHECKED } from '../src/data/typingTest.mjs';
@@ -318,7 +319,8 @@ async function assertNoPublishedUrlWentMissing(newSitemapUrls) {
   // Nor is a page that is still built but left out of the sitemap on purpose (a noindexed page, e.g. an admit-card
   // page with no notice yet): it does not 404.
   const stillBuilt = (u) => u.endsWith('/') && existsSync(join(DIST, u, 'index.html'));
-  const missing = [...previousUrls].filter((u) => !newUrls.has(u) && !questionRedirectTarget(QUESTION_REDIRECTS, u) && !stillBuilt(u));
+  // Nor is a withdrawn previous-year paper page (src/data/pyqWithdrawn.mjs): functions/ answers it with 410 Gone.
+  const missing = [...previousUrls].filter((u) => !newUrls.has(u) && !questionRedirectTarget(QUESTION_REDIRECTS, u) && !stillBuilt(u) && !isWithdrawnPath(u));
   if (missing.length > 0) {
     throw new Error(
       `Build check failed: ${missing.length} previously-published URL(s) are missing from the new sitemap - ` +
@@ -1391,8 +1393,9 @@ async function main() {
 
   // --- What SSC asks in General Awareness (/exams/ssc-gk-topics/, /hi/exams/ssc-gk-topics/): a data page counted from
   // the SSC previous-year papers we publish (src/lib/gkInsights.mjs over src/data/gkInsights.mjs; regenerate the data
-  // with scripts/gen-gk-insights.mjs when papers are added). check-public-pages.mjs verifies it.
-  for (const lang of ['en', 'hi']) {
+  // with scripts/gen-gk-insights.mjs when papers are added). check-public-pages.mjs verifies it. Not built while the
+  // papers are withdrawn (src/data/pyqWithdrawn.mjs).
+  for (const lang of PYQ_WITHDRAWN ? [] : ['en', 'hi']) {
     const meta = gkInsightsMeta(lang);
     const urlPath = gkInsightsPath(lang);
     writePage(urlPath.replace(/^\/|\/$/g, ''), page({

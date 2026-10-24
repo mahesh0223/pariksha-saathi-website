@@ -12,6 +12,7 @@ import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath, NEXT_STEP_PILOT_HUBS } from '../src/lib/examHub.mjs';
 import { NEXT_STEP_SURFACES } from '../src/lib/nextStep.mjs';
+import { PYQ_WITHDRAWN, isWithdrawnPath } from '../src/data/pyqWithdrawn.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
@@ -305,7 +306,8 @@ for (const lang of ['en', 'hi']) {
 
 // "What SSC asks in General Awareness": both pages built from data that covers every SSC paper we publish (re-run
 // scripts/gen-gk-insights.mjs after adding papers), with its totals on the page, and linked from the four SSC hubs.
-{
+// Not while the papers are withdrawn (the withdrawal block below checks the page is gone).
+if (!PYQ_WITHDRAWN) {
   const published = PYQ_PAPER_INDEX.filter((p) => GK_INSIGHTS_EXAMS.includes(p.examId)).length;
   assert.equal(GK_INSIGHTS.filesRead, published, `src/data/gkInsights.mjs covers ${GK_INSIGHTS.filesRead} SSC papers but ${published} are published: run node scripts/gen-gk-insights.mjs`);
   for (const lang of ['en', 'hi']) {
@@ -761,8 +763,8 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
     assert(html.includes(`href="/go/${family}-pdf"`) && html.includes(`href="/go/${family}-telegram"`), `${file}: the ${family} next-step line is missing`);
     counts[family] = (counts[family] ?? 0) + 1;
   }
-  for (const family of NEXT_STEP_SURFACES) assert(counts[family] > 0, `no ${family} page carries the next-step line`);
-  console.log(`Verified the G2 next-step line: ${NEXT_STEP_SURFACES.map((f) => `${counts[f]} ${f}`).join(', ')} page(s), each through its own /go/ links.`);
+  for (const family of NEXT_STEP_SURFACES) assert(counts[family] > 0 || (family === 'paper' && PYQ_WITHDRAWN), `no ${family} page carries the next-step line`);
+  console.log(`Verified the G2 next-step line: ${NEXT_STEP_SURFACES.map((f) => `${counts[f] ?? 0} ${f}`).join(', ')} page(s), each through its own /go/ links.`);
 }
 
 // Search Console (22 Oct 2026) listed 107 "Page with redirect" URLs. Cloudflare Pages answers a bare path whose folder
@@ -853,4 +855,29 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
     }
   }
   console.log(`Verified ${built} admit card, result and answer-key pages: each lists every notice its hub lists, hreflang, FAQ, linked from the hub; ${held.length} with no notice yet are noindex and out of the sitemap (${held.join(', ') || 'none'}).`);
+}
+
+// Previous-year papers withdrawn on 24 Oct 2026 (src/data/pyqWithdrawn.mjs): none of their pages, lists or PDFs is
+// built or in the sitemap, no page links one, and the Pages Functions that answer their old URLs with 410 are in place.
+if (PYQ_WITHDRAWN) {
+  for (const sample of ['/exams/ssc-cgl/question-papers/', '/hi/exams/ssc-gd/question-papers/x/', '/pdf/papers/ssc-cgl/x.pdf', '/exams/ssc-gk-topics/', '/hi/q/hindi-passages/']) {
+    assert(isWithdrawnPath(sample), `isWithdrawnPath does not cover ${sample}`);
+  }
+  for (const keep of ['/exams/ssc-cgl/', '/q/analogy/', '/hi/q/analogy/', '/pdf/latest.pdf']) assert(!isWithdrawnPath(keep), `isWithdrawnPath wrongly covers ${keep}`);
+  const built = files.filter((f) => isWithdrawnPath(f.replace(/^dist/, '').replace(/index\.html$/, '')));
+  assert.equal(built.length, 0, `withdrawn page(s) still built, e.g. ${built[0]}`);
+  assert(!existsSync('dist/pdf/papers'), 'dist/pdf/papers still exists: the paper PDFs are withdrawn');
+  const inSitemap = [...sitemap.matchAll(/<loc>https:\/\/parikshasaathi\.com([^<]+)<\/loc>/g)].map((m) => m[1]).filter(isWithdrawnPath);
+  assert.equal(inSitemap.length, 0, `withdrawn URL(s) in the sitemap, e.g. ${inSitemap[0]}`);
+  let linking = 0;
+  for (const file of [...files, 'dist/llms.txt', 'dist/llms-full.txt'].filter((f) => existsSync(f))) {
+    const hrefs = [...readFileSync(file, 'utf8').matchAll(/(?:href="|https:\/\/parikshasaathi\.com)(\/[^"#?\s)]*)/g)].map((m) => m[1]);
+    const bad = hrefs.find(isWithdrawnPath);
+    assert(!bad, `${file} links withdrawn ${bad}`);
+    linking += hrefs.length;
+  }
+  for (const fn of ['functions/exams/[[path]].js', 'functions/hi/exams/[[path]].js', 'functions/pdf/papers/[[path]].js', 'functions/hi/q/[[path]].js']) {
+    assert(readFileSync(fn, 'utf8').includes('pyqWithdrawn.mjs'), `${fn} does not answer withdrawn paths with 410`);
+  }
+  console.log(`Verified the previous-year papers are withdrawn: no paper, list, PDF, GK-topics or Hindi-language topic page built or in the sitemap; ${linking} links on ${files.length} pages, none to a withdrawn URL; 410 functions in place.`);
 }

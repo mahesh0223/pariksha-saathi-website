@@ -198,6 +198,10 @@ def build(paper, rows):
 
 
 def main():
+    # The previous-year papers are withdrawn (src/data/pyqWithdrawn.mjs): no paper PDF may be built until they return.
+    with open(os.path.join(ROOT, "src", "data", "pyqWithdrawn.mjs"), encoding="utf-8") as f:
+        if "export const PYQ_WITHDRAWN = true;" in f.read():
+            sys.exit("Previous-year papers are withdrawn (src/data/pyqWithdrawn.mjs) - no paper PDFs are built.")
     exams = sys.argv[1:]
     if not exams:
         sys.exit("usage: make_paper_pdfs.py <examId> [<examId> ...]   e.g. ssc_cgl")

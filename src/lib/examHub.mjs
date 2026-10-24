@@ -10,6 +10,7 @@
 
 // Path/date helpers live in examHubPath.mjs (the entry bundle needs only those); re-exported here so
 // existing importers of this module keep working.
+import { PYQ_WITHDRAWN } from '../data/pyqWithdrawn.mjs';
 import { nextStepHtml } from './nextStep.mjs';
 import { GK_INSIGHTS_EXAMS, GK_INSIGHTS_LINK } from './gkInsights.mjs';
 import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
@@ -618,7 +619,8 @@ export function examHubBody({ examName, facts, cutoffs = [], notices = [], items
   // Previous-year questions: one row per official paper and shift, each linked to the official paper/key it
   // was transcribed from (GET /v1/exams/:id/pyq-summary). Rendered only once at least one paper exists - which,
   // until the owner supplies the first paper and answer key, is no exam (server docs/PYQ.md).
-  if (pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
+  // Not while the papers are withdrawn (src/data/pyqWithdrawn.mjs), whatever the API still reports.
+  if (!PYQ_WITHDRAWN && pyq && pyq.total > 0 && Array.isArray(pyq.papers) && pyq.papers.length > 0) {
     // The summary counts one language (the server's default is English); say so when it is not the page's.
     const pyqLanguage = (pyq.languageCode && pyq.languageCode !== lang ? (t.pyqLanguage[pyq.languageCode] ?? '') : '')
       + Object.entries(pyq.inOtherLanguages ?? {}).map(([code, n]) => t.pyqAlsoIn?.[code]?.(n) ?? '').join('');

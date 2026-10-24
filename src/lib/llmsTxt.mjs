@@ -38,11 +38,23 @@ export function llmsTxt({ hubs: hubSummaries, papers, affairsCount, noticesCount
     ? `- [Android app on Google Play](${PLAY_STORE_URL}): the same lessons and practice, usable offline.`
     : '';
 
+  // Empty while no paper is published (the papers are withdrawn: src/data/pyqWithdrawn.mjs).
+  const papersSection = papers.length ? `## Solved previous-year papers
+
+${[...new Set(papers.map((p) => p.examId))].map((id) => link(`${EXAM_NAMES[id]} previous year question papers with answers`, pyqIndexPath(id, 'en'), `every solved ${EXAM_NAMES[id]} shift on one page, by paper and date`)).join('\n')}
+
+${paperSets.map((name) => { const set = papers.filter((p) => p.displayName === name); return `- ${name}: ${set.length} shifts, ${set.reduce((sum, p) => sum + p.questions, 0).toLocaleString('en-IN')} questions`; }).join('\n')}
+
+${papers.length} shifts and ${paperQuestions.toLocaleString('en-IN')} questions in all, as the exam body printed them, each with the answer from the official answer key and a worked explanation. Questions that cannot be reproduced faithfully as text (figures, tables, images) are left out.
+
+${sortedPapers.map((p) => link(`${p.displayName}, ${shortDate(p.date)}, ${p.shift}`, pyqPaperPath(p), `${p.questions} questions with answers`)).join('\n')}
+
+` : '';
   return `# ${SITE_NAME} (परीक्षा साथी)
 
 > ${SITE_DESCRIPTION}
 
-${SITE_NAME} covers ${hubs.length} exams: ${hubs.map((id) => EXAM_NAMES[id]).join(', ')}. Most pages exist in English and Hindi (Hindi pages sit under /hi/); the solved papers are in English, the language they were set in.
+${SITE_NAME} covers ${hubs.length} exams: ${hubs.map((id) => EXAM_NAMES[id]).join(', ')}. Most pages exist in English and Hindi (Hindi pages sit under /hi/)${papers.length ? '; the solved papers are in English, the language they were set in' : ''}.
 
 How the content is made, in the words of our About page: much of the content is drafted with AI assistance from the official document or release it links to, and checked against that source before publication; each page's credit line says how it was produced. Every number on an exam page (marks, timing, negative marking, age limits, fees, dates, cut-offs) is copied from the official notification or result write-up it links to, with the date it was last checked. Where a notice is silent, the page says so rather than estimating.
 
@@ -54,17 +66,7 @@ ${link('All exams', examDirectoryPath('en'), `the ${hubs.length} exams grouped b
 ${hubs.map((id) => link(EXAM_NAMES[id], examHubPath(id, 'en'), hubNote(id))).join('\n')}
 ${link('Exam calendar', examCalendarPath('en'), 'upcoming exam dates, each taken from an official notice')}
 
-## Solved previous-year papers
-
-${[...new Set(papers.map((p) => p.examId))].map((id) => link(`${EXAM_NAMES[id]} previous year question papers with answers`, pyqIndexPath(id, 'en'), `every solved ${EXAM_NAMES[id]} shift on one page, by paper and date`)).join('\n')}
-
-${paperSets.map((name) => { const set = papers.filter((p) => p.displayName === name); return `- ${name}: ${set.length} shifts, ${set.reduce((sum, p) => sum + p.questions, 0).toLocaleString('en-IN')} questions`; }).join('\n')}
-
-${papers.length} shifts and ${paperQuestions.toLocaleString('en-IN')} questions in all, as the exam body printed them, each with the answer from the official answer key and a worked explanation. Questions that cannot be reproduced faithfully as text (figures, tables, images) are left out.
-
-${sortedPapers.map((p) => link(`${p.displayName}, ${shortDate(p.date)}, ${p.shift}`, pyqPaperPath(p), `${p.questions} questions with answers`)).join('\n')}
-
-## Current affairs and exam notices
+${papersSection}## Current affairs and exam notices
 
 ${link('Current affairs', '/app/current-affairs/', `${affairsCount} daily items from Press Information Bureau (PIB) releases, in English and Hindi, each linked to its release, with a practice question and a learning note`)}
 ${link('Daily current affairs PDF', '/downloads/', 'one free Hindi PDF each morning, plus monthly capsules')}

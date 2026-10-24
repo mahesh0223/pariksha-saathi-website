@@ -13,8 +13,16 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { buildPyqPapers, pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
+import { PYQ_WITHDRAWN } from '../src/data/pyqWithdrawn.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+// Papers withdrawn (src/data/pyqWithdrawn.mjs): write no paper data at all.
+if (PYQ_WITHDRAWN) {
+  writeFileSync(join(ROOT, 'src', 'data', 'pyqPapers.json'), '[]\n');
+  writeFileSync(join(ROOT, 'src', 'data', 'pyqPaperIndex.mjs'), pyqIndexSource([]));
+  console.log('Previous-year papers are withdrawn (src/data/pyqWithdrawn.mjs): wrote empty paper data.');
+  process.exit(0);
+}
 const serverArg = process.argv.indexOf('--server');
 const SERVER = resolve(serverArg > 0 ? process.argv[serverArg + 1] : '/Users/mahesh/dev/pariksha-saathi-server');
 const PYQ_DIR = join(SERVER, 'prisma', 'seed-data', 'pyq');

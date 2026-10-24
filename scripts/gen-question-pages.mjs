@@ -24,6 +24,7 @@ import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { questionSnippet, selectEligible, topicSlug } from '../src/lib/questionEligibility.mjs';
 import { pyqPaperPath, pyqIndexPath } from '../src/lib/pyqPath.mjs';
+import { PYQ_WITHDRAWN } from '../src/data/pyqWithdrawn.mjs';
 import { TOPIC_LESSONS } from '../src/data/topicLessons.mjs';
 import { LESSON_CATALOG } from '../src/data/lessonCatalog.mjs';
 import { LESSON_CATALOG_HI } from '../src/data/lessonCatalogHi.mjs';
@@ -163,7 +164,8 @@ for (const lang of ['en', 'hi']) {
 const PYQ_LATEST = 10;
 const sectionAnchor = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-'); // as src/lib/pyqPage.mjs
 const pyqByTopic = {};
-for (const paper of JSON.parse(readFileSync(join(ROOT, 'src', 'data', 'pyqPapers.json'), 'utf8'))) {
+// Withdrawn papers (src/data/pyqWithdrawn.mjs) give no previous-year sections and no Hindi-language topic pages.
+for (const paper of PYQ_WITHDRAWN ? [] : JSON.parse(readFileSync(join(ROOT, 'src', 'data', 'pyqPapers.json'), 'utf8'))) {
   for (const q of paper.questions) {
     if (q.languageCode !== 'en' && q.languageCode !== 'hi') continue;
     const entry = ((pyqByTopic[q.topicKey] ??= {})[q.languageCode] ??= { count: 0, groups: {}, items: [] });
