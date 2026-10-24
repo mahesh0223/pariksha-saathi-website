@@ -23,7 +23,7 @@ const fraction = (x) => (Math.abs(x - 1 / 3) < 1e-6 ? '1/3' : Math.abs(x - 0.25)
 const questionsIn = (stage) => stage.sections.reduce((n, s) => n + s.questionCount, 0);
 // A stage whose mocks cover one part of it (SSC CGL Tier-II: Paper-I, Section-I) names that part; a part that only
 // restates the stage (IBPS: "Preliminary Examination (Online)" / "Preliminary Examination (Objective Test)") does not.
-const words = (name, n) => name.replace(/[^\p{L}\p{N}\s]/gu, ' ').trim().split(/\s+/).slice(0, n).join(' ').toLowerCase();
+const words = (name, n) => name.replace(/[^\p{L}\p{M}\p{N}\s]/gu, ' ').trim().split(/\s+/).slice(0, n).join(' ').toLowerCase();
 const stageLabel = (stage, lang) => {
   const stageName = pick(stage.stageName, lang);
   const partName = pick(stage.partName, lang);
