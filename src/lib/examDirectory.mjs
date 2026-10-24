@@ -24,8 +24,9 @@ const GROUPS = [
   { key: 'railway', title: { en: 'Railways', hi: 'रेलवे' }, exams: ['rrb_ntpc', 'rrb_group_d', 'rrb_alp'] },
   { key: 'police', title: { en: 'State police', hi: 'राज्य पुलिस' }, exams: ['up_police', 'bihar_police', 'mp_police', 'rajasthan_police'] },
   { key: 'defence', title: { en: 'Defence', hi: 'रक्षा' }, exams: ['agniveer_army'] },
-  { key: 'teaching', title: { en: 'Teaching', hi: 'शिक्षण' }, exams: ['ctet'] },
+  { key: 'teaching', title: { en: 'Teaching', hi: 'शिक्षण' }, exams: ['ctet', 'dsssb_tgt'] },
   { key: 'psc', title: { en: 'State PSC', hi: 'राज्य PSC' }, exams: ['uppsc', 'bpsc', 'mppsc', 'rpsc'] },
+  { key: 'state-ssc', title: { en: 'State staff selection', hi: 'राज्य कर्मचारी चयन' }, exams: ['upsssc_pet', 'bssc_inter', 'rajasthan_patwari', 'haryana_cet'] },
 ];
 
 export const DIRECTORY_EXAM_IDS = GROUPS.flatMap((g) => g.exams);

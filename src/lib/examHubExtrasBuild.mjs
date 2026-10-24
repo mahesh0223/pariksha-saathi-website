@@ -17,6 +17,7 @@ const STATE_GK = {
   bihar_police: 'BIHAR_STATE_GK', bpsc: 'BIHAR_STATE_GK',
   mp_police: 'MP_STATE_GK', mppsc: 'MP_STATE_GK',
   rajasthan_police: 'RAJASTHAN_STATE_GK', rpsc: 'RAJASTHAN_STATE_GK',
+  upsssc_pet: 'UP_STATE_GK', bssc_inter: 'BIHAR_STATE_GK', rajasthan_patwari: 'RAJASTHAN_STATE_GK', haryana_cet: 'HARYANA_STATE_GK',
 };
 
 // Which question subjects (QUESTION_TOPICS[*].subject) practise a syllabus subject, matched on its English name.

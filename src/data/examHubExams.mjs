@@ -25,6 +25,11 @@ export const HUB_EXAM_IDS = [
   'bpsc',
   'mppsc',
   'rpsc',
+  'upsssc_pet',
+  'bssc_inter',
+  'rajasthan_patwari',
+  'haryana_cet',
+  'dsssb_tgt',
 ];
 
 export function hubExamIdForSlug(slug) {

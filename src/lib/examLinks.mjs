@@ -16,6 +16,8 @@ const HINDI_NAMES = {
   rajasthan_police: ['राजस्थान पुलिस'],
   rrb_group_d: ['RRB ग्रुप डी'],
   agniveer_army: ['अग्निवीर'],
+  rajasthan_patwari: ['राजस्थान पटवारी'],
+  haryana_cet: ['हरियाणा CET'],
 };
 
 const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

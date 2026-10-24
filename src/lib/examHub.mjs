@@ -720,6 +720,11 @@ const HUB_TITLE_NAME = {
   mppsc: { 'State Service Exam 2026': { en: 'MPPSC 2026' } },
   rpsc: { 'RAS 2026': { en: 'RPSC RAS 2026' } },
   uppsc: { 'PCS 2026': { en: 'UPPSC PCS 2026' } },
+  upsssc_pet: { 'PET 2026': { en: 'UPSSSC PET 2026' } },
+  bssc_inter: { 'Advt. No. 02/23 (A) (Second Inter Level Combined Competitive Examination)': { en: 'BSSC Inter Level 2025', hi: 'BSSC इंटर स्तर 2025' } },
+  rajasthan_patwari: { 'Patwari Direct Recruitment 2025': { en: 'Rajasthan Patwari 2025', hi: 'राजस्थान पटवारी 2025' } },
+  haryana_cet: { 'CET 2025 (Group C)': { en: 'Haryana CET 2025', hi: 'हरियाणा CET 2025' } },
+  dsssb_tgt: { 'DSSSB TGT 2025 (Advt. No. 06/2025)': { en: 'DSSSB TGT 2025' } },
 };
 
 /** The hub's exam name with its cycle ("SSC CGL 2026"), or the bare name when this cycle has no row above. */

@@ -25,4 +25,9 @@ export const EXAM_NAMES = {
   bpsc: 'BPSC',
   mppsc: 'MPPSC',
   rpsc: 'RPSC',
+  upsssc_pet: 'UPSSSC PET',
+  bssc_inter: 'BSSC Inter Level',
+  rajasthan_patwari: 'Rajasthan Patwari',
+  haryana_cet: 'Haryana CET',
+  dsssb_tgt: 'DSSSB TGT',
 };

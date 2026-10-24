@@ -13,6 +13,7 @@ export const MOCK_TEST_EXAMS = [
   'ibps_po', 'ibps_clerk', 'sbi_po', 'sbi_clerk',
   'up_police', 'bihar_police', 'mp_police', 'rajasthan_police',
   'ctet', 'uppsc', 'mppsc', 'rpsc',
+  'bssc_inter', 'rajasthan_patwari',
 ];
 
 /** The exam's list of mock tests (src/lib/mockTestsPage.mjs), in English or Hindi. */
