@@ -1846,6 +1846,355 @@ export const EXAM_JOB_PROFILES = [
       "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और RPSC या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए वेतन स्तर अधिसूचना में छपे अनुसार हैं, किसी विशेष आंकड़े या समय-सीमा की गारंटी नहीं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा ऊपर दी गई आधिकारिक अधिसूचना से पुष्टि करें।"
     }
   },
+  {
+    "slug": "bssc-inter",
+    "examName": "BSSC Inter Level",
+    "officialUrl": "https://bssc.bihar.gov.in/Advertisement/02_23A_Advt.pdf",
+    "en": {
+      "pageTitle": "BSSC Inter Level Salary 2025: Official Pay Levels and Job Profile",
+      "lede": "The BSSC Inter Level exam fills many different posts across Bihar government departments from one exam. Advt. No. 02/23 (A) prints a pay level against each post but no rupee amounts, so this page sticks to the posts, their pay levels and their qualifications as the advertisement gives them, with a link to the official source.",
+      "profileHeading": "Many posts under one exam",
+      "profileBody": [
+        "Advt. No. 02/23 (A) lists posts in Bihar government departments and district collectorates, each with its own pay level and minimum qualification. Every post needs an Intermediate (10+2) or equivalent pass, and some ask for more, such as particular subjects at Intermediate or typing skills. After the Preliminary examination, the Commission will publish a separate advertisement for the Main examination and will then ask candidates for their order of post preference. The list below is not complete; every post is in the advertisement’s table.",
+        "The advertisement does not describe day-to-day duties; those are set by the department concerned. Reservation applies only to permanent residents of Bihar, and the 35% horizontal reservation for women applies only to Bihar domiciles."
+      ],
+      "postsHeading": "Posts named in the advertisement, with pay levels",
+      "posts": [
+        {
+          "name": "Lower Division Clerk (Pay Level 2)",
+          "body": "In most departments and district collectorates. Needs Intermediate (10+2) or equivalent with knowledge of computer operation and computer typing; some departments instead ask for typing on a typewriter and Hindi word processing on a computer, or Hindi and English typing."
+        },
+        {
+          "name": "Revenue Employee, Revenue and Land Reforms Department (Pay Level 2)",
+          "body": "Needs Intermediate (10+2) or equivalent."
+        },
+        {
+          "name": "Panchayat Secretary, Panchayati Raj Department (Pay Level 3)",
+          "body": "Needs Intermediate or an equivalent examination. Typing on a computer and knowledge of MS Office are desirable."
+        },
+        {
+          "name": "Junior Field Investigator, Directorate of Economics and Statistics (Pay Level 2)",
+          "body": "Needs Intermediate passed with one of Mathematics, Economics or Statistics."
+        },
+        {
+          "name": "Livestock Assistant, Animal and Fisheries Resources Department (Pay Level 2)",
+          "body": "Needs Intermediate with Biology, or an equivalent with Biology."
+        },
+        {
+          "name": "Laboratory Assistant, Rural Works Department (Pay Level 3)",
+          "body": "Needs Intermediate or 10+2 passed with Chemistry, Physics and Mathematics."
+        },
+        {
+          "name": "Filaria Inspector, Health Department (Pay Level 4)",
+          "body": "Needs Intermediate/10+2 in Science."
+        },
+        {
+          "name": "Jan Sevak Grade III, Sugarcane Industries Department (Pay Level 4)",
+          "body": "Needs Intermediate with Mathematics."
+        },
+        {
+          "name": "Assistant Instructor (Typing) and Typist-cum-Clerk, Cabinet Secretariat Department",
+          "body": "Need Intermediate or equivalent with Hindi and English typing (Hindi and English computer typing for Typist-cum-Clerk)."
+        }
+      ],
+      "promotionHeading": "Promotion",
+      "promotionBody": [],
+      "salaryHeading": "Pay: the levels printed in the advertisement",
+      "salaryBody": [
+        "The advertisement prints only a pay level against each post: Level 2 for Lower Division Clerk, Revenue Employee, Junior Field Investigator and Livestock Assistant; Level 3 for Panchayat Secretary and Laboratory Assistant; and Level 4 for Filaria Inspector and Jan Sevak Grade III.",
+        "It gives levels only, not rupee amounts, allowances or take-home pay, so none are quoted here. Your actual pay depends on the pay rules, allowances and deductions in force at the time of your appointment."
+      ],
+      "perksHeading": "Perks and benefits",
+      "perks": [],
+      "note": "The pay levels above are copied from Advt. No. 02/23 (A). The official advertisement and its corrigenda are the authority for posts, pay levels and vacancies, so confirm current details against",
+      "noteLinkLabel": "BSSC Advt. No. 02/23 (A) (PDF, Hindi)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Inter Level posts across Bihar government departments and district collectorates, filled through a Preliminary examination, a Main examination and a typing/computer test. The latest corrigendum (13 February 2026) puts the total at 26,426 vacancies; the post-wise table is in the advertisement.",
+      "offerHeading": "What Pariksha Saathi offers for BSSC Inter Level",
+      "offerBody": "Free topic-wise lessons and practice for the exam’s subjects, sectional tests by subject, full-length mock tests in the Preliminary examination’s official pattern, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "BSSC Inter Level, Advt. No. 02/23 (A) — official advertisement (Hindi)",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "BSSC Inter Level syllabus & exam pattern",
+      "ctaLabel": "Start studying BSSC Inter Level free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Bihar Staff Selection Commission or any government body. The pay levels above are copied from Advt. No. 02/23 (A) and are not a guarantee of any particular figure — always confirm current numbers against the official advertisement linked above before making a financial decision."
+    },
+    "hi": {
+      "pageTitle": "BSSC इंटर स्तरीय सैलरी 2025: आधिकारिक वेतन स्तर और जॉब प्रोफाइल",
+      "lede": "BSSC इंटर स्तरीय परीक्षा एक ही परीक्षा से बिहार सरकार के विभागों में कई अलग-अलग पद भरती है। विज्ञापन संख्या 02/23 (A) में हर पद के सामने वेतन स्तर छपा है, पर रुपयों की राशि नहीं, इसलिए यह पृष्ठ केवल पदों, उनके वेतन स्तर और उनकी योग्यता के बारे में वही बताता है जो विज्ञापन में है, साथ में आधिकारिक स्रोत का लिंक भी।",
+      "profileHeading": "एक परीक्षा, कई पद",
+      "profileBody": [
+        "विज्ञापन संख्या 02/23 (A) में बिहार सरकार के विभागों और समाहरणालयों के पद दिए गए हैं, हर एक का अपना वेतन स्तर और न्यूनतम योग्यता। हर पद के लिए इंटरमीडिएट (10+2) या समकक्ष उत्तीर्ण होना ज़रूरी है, और कुछ पदों के लिए इससे अधिक, जैसे इंटरमीडिएट में खास विषय या टंकण का ज्ञान। प्रारंभिक परीक्षा के बाद आयोग मुख्य परीक्षा के लिए अलग से विज्ञापन प्रकाशित करेगा और तभी अभ्यर्थियों से पदों की प्राथमिकता लेगा। नीचे दी गई सूची पूरी नहीं है; सभी पद विज्ञापन की तालिका में हैं।",
+        "विज्ञापन में रोज़मर्रा के कामकाज का वर्णन नहीं है; वह संबंधित विभाग तय करता है। आरक्षण का लाभ केवल बिहार के स्थायी निवासियों को मिलता है, और महिलाओं के लिए 35 प्रतिशत क्षैतिज आरक्षण केवल राज्य के मूल निवासियों को मिलता है।"
+      ],
+      "postsHeading": "विज्ञापन में दिए पद, वेतन स्तर के साथ",
+      "posts": [
+        {
+          "name": "निम्नवर्गीय लिपिक (वेतन स्तर-2)",
+          "body": "अधिकांश विभागों और समाहरणालयों में। इंटरमीडिएट (10+2) या समकक्ष, कंप्यूटर संचालन एवं कंप्यूटर टंकण के ज्ञान के साथ; कुछ विभाग इसके स्थान पर टंकण यंत्र पर टंकण और कंप्यूटर पर हिन्दी वर्ड प्रोसेसिंग, या हिन्दी एवं अंग्रेज़ी टंकण का ज्ञान माँगते हैं।"
+        },
+        {
+          "name": "राजस्व कर्मचारी, राजस्व एवं भूमि सुधार विभाग (वेतन स्तर-2)",
+          "body": "इंटरमीडिएट (10+2) या समकक्ष।"
+        },
+        {
+          "name": "पंचायत सचिव, पंचायती राज विभाग (वेतन स्तर-3)",
+          "body": "इंटरमीडिएट या समकक्ष परीक्षा उत्तीर्ण। कंप्यूटर पर टंकण और MS Office का ज्ञान वांछनीय है।"
+        },
+        {
+          "name": "कनीय क्षेत्रीय अन्वेषक, अर्थ एवं सांख्यिकी निदेशालय (वेतन स्तर-2)",
+          "body": "गणित, अर्थशास्त्र या सांख्यिकी में से किसी एक विषय के साथ इंटरमीडिएट उत्तीर्ण।"
+        },
+        {
+          "name": "पशुधन सहायक, पशु एवं मत्स्य संसाधन विभाग (वेतन स्तर-2)",
+          "body": "जीव विज्ञान के साथ इंटरमीडिएट, या जीव विज्ञान सहित समकक्ष।"
+        },
+        {
+          "name": "प्रयोगशाला सहायक, ग्रामीण कार्य विभाग (वेतन स्तर-3)",
+          "body": "रसायन शास्त्र, भौतिकी और गणित के साथ इंटरमीडिएट या 10+2 उत्तीर्ण।"
+        },
+        {
+          "name": "फाइलेरिया निरीक्षक, स्वास्थ्य विभाग (वेतन स्तर-4)",
+          "body": "इंटरमीडिएट/10+2 (विज्ञान)।"
+        },
+        {
+          "name": "जन सेवक ग्रेड III, गन्ना उद्योग विभाग (वेतन स्तर-4)",
+          "body": "गणित के साथ इंटरमीडिएट।"
+        },
+        {
+          "name": "सहायक अनुदेशक (टंकण) और टंकक-सह-लिपिक, मंत्रिमंडल सचिवालय विभाग",
+          "body": "इंटरमीडिएट या समकक्ष, हिन्दी एवं अंग्रेज़ी टंकण के साथ (टंकक-सह-लिपिक के लिए हिन्दी एवं अंग्रेज़ी कंप्यूटर टंकण)।"
+        }
+      ],
+      "promotionHeading": "पदोन्नति",
+      "promotionBody": [],
+      "salaryHeading": "वेतन: विज्ञापन में छपे वेतन स्तर",
+      "salaryBody": [
+        "विज्ञापन में हर पद के सामने केवल वेतन स्तर छपा है: निम्नवर्गीय लिपिक, राजस्व कर्मचारी, कनीय क्षेत्रीय अन्वेषक और पशुधन सहायक के लिए स्तर-2; पंचायत सचिव और प्रयोगशाला सहायक के लिए स्तर-3; तथा फाइलेरिया निरीक्षक और जन सेवक ग्रेड III के लिए स्तर-4।",
+        "इसमें केवल स्तर दिए गए हैं, रुपयों की राशि, भत्ते या हाथ में आने वाला वेतन नहीं, इसलिए यहाँ कोई आंकड़ा नहीं दिया गया है। आपका वास्तविक वेतन नियुक्ति के समय लागू वेतन नियमों, भत्तों और कटौतियों पर निर्भर करेगा।"
+      ],
+      "perksHeading": "सुविधाएं और लाभ",
+      "perks": [],
+      "note": "ऊपर दिए वेतन स्तर विज्ञापन संख्या 02/23 (A) से लिए गए हैं। पदों, वेतन स्तर और रिक्तियों के लिए आधिकारिक विज्ञापन और उसके शुद्धिपत्र ही प्रमाण हैं, इसलिए वर्तमान विवरण यहां देखें:",
+      "noteLinkLabel": "BSSC का विज्ञापन संख्या 02/23 (A) (PDF, हिन्दी)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "बिहार सरकार के विभागों और समाहरणालयों में इंटर स्तरीय पद, जो प्रारंभिक परीक्षा, मुख्य परीक्षा और टंकण/कम्प्यूटर जाँच से भरे जाते हैं। 13 फरवरी 2026 के नवीनतम शुद्धिपत्र के अनुसार कुल रिक्तियां 26,426 हैं; पदवार तालिका विज्ञापन में है।",
+      "offerHeading": "Pariksha Saathi BSSC इंटर स्तरीय परीक्षा के लिए क्या देता है",
+      "offerBody": "परीक्षा के विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, प्रारंभिक परीक्षा के आधिकारिक पैटर्न में पूर्ण-लंबाई मॉक टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "BSSC इंटर स्तरीय परीक्षा, विज्ञापन संख्या 02/23 (A) — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "BSSC इंटर स्तरीय सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "BSSC इंटर स्तरीय परीक्षा की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और बिहार कर्मचारी चयन आयोग या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए वेतन स्तर विज्ञापन संख्या 02/23 (A) से लिए गए हैं और किसी विशेष आंकड़े की गारंटी नहीं हैं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से वर्तमान आंकड़ों की पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "rajasthan-patwari",
+    "examName": "Rajasthan Patwari",
+    "officialUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1740055908.pdf",
+    "en": {
+      "pageTitle": "Rajasthan Patwari Salary 2025: Official Pay Level and Job Profile",
+      "lede": "Rajasthan Patwari Direct Recruitment fills Patwari posts for the Board of Revenue, Ajmer. Here is what the Rajasthan Staff Selection Board’s 2025 advertisement says about the post, who can apply, appointment, probation and pay, with a link to the official source. The advertisement does not describe a Patwari’s duties, so this page does not either.",
+      "profileHeading": "Patwari under the Board of Revenue, Ajmer",
+      "profileBody": [
+        "The posts are filled under the Rajasthan Revenue (Land Records, Settlement and Colonisation) Subordinate Service Rules, 2019 and, for scheduled areas, the Rajasthan Scheduled Area Subordinate, Ministerial and Class IV Service (Recruitment and Other Conditions of Service) Rules, 2014. Candidates fill in district or division preferences in the application, and the Board of Revenue allots districts by merit and preference.",
+        "Selected candidates are appointed by the District Collector as probationer trainees and get 6 months of training after appointment. Probation lasts two years."
+      ],
+      "postsHeading": "What you need to apply",
+      "posts": [
+        {
+          "name": "CET (Graduation Level) 2024",
+          "body": "Only candidates declared qualified in the Board’s Common Eligibility Test (Graduation Level) 2024 could apply for the 2025 recruitment."
+        },
+        {
+          "name": "A graduate degree and a computer qualification",
+          "body": "A graduate degree (or an equivalent recognised by the government) and one computer qualification from the advertisement’s list, such as NIELIT or DOEACC ‘O’ level or higher, the COPA or DPCS certificate, a diploma or degree in Computer Science or Computer Application, a 3-year polytechnic diploma in Computer Science and Engineering, an engineering degree in any branch, the RS-CIT certificate, or Senior Secondary with Computer Science or Computer Application as a subject. Working knowledge of Hindi written in Devanagari and knowledge of Rajasthan’s culture are also required."
+        },
+        {
+          "name": "Age",
+          "body": "At least 18 and under 40 on 1 January 2026. Every applicant gets 3 more years on the upper limit because no Patwari exam had been held in the 3 years before, and the advertisement lists further relaxations by category."
+        }
+      ],
+      "promotionHeading": "Promotion",
+      "promotionBody": [],
+      "salaryHeading": "Pay: fixed remuneration first, then Level L-5",
+      "salaryBody": [
+        "During the two-year probation, a probationer trainee is paid a monthly fixed remuneration at rates the state government sets, instead of the post’s pay scale, and no other allowances such as house rent allowance, dearness allowance, city compensatory allowance or special pay. The advertisement does not print the amount. A serving government employee selected as a trainee may be allowed his or her existing pay or the fixed remuneration, whichever is more beneficial.",
+        "After successfully completing probation, which includes the training and a post-training exam, the minimum of the pay scale and allowances are paid. The advertisement gives the Patwari post Pay Matrix Level L-5 under the state government’s 7th pay scale, but it does not print the rupee amount of Level L-5 or any in-hand figure, so this page does not estimate one.",
+        "For newly appointed employees, the state government’s pension scheme applies as per the rules."
+      ],
+      "perksHeading": "Perks and benefits",
+      "perks": [],
+      "note": "The pay details above are copied from the Board’s Patwari Direct Recruitment 2025 advertisement. The official advertisement is the authority, so confirm current details against",
+      "noteLinkLabel": "RSSB Patwari advertisement No. 02/2025 (PDF)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Patwari posts for the Board of Revenue, Ajmer, in both the non-scheduled (non-TSP) and scheduled (TSP) areas of Rajasthan. The 2025 advertisement first listed 2,020 posts, and an amendment of 20 June 2025 raised the total to 3,705.",
+      "offerHeading": "What Pariksha Saathi offers for Rajasthan Patwari",
+      "offerBody": "Free topic-wise lessons and practice for the exam’s subjects, sectional tests by subject, full-length mock tests in the advertised pattern, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "RSSB Patwari Direct Recruitment 2025 (Advt. No. 02/2025) — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "Rajasthan Patwari syllabus & exam pattern",
+      "ctaLabel": "Start studying Rajasthan Patwari free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Rajasthan Staff Selection Board, the Board of Revenue, Ajmer, or any government body. The pay details above are copied from the Board’s 2025 Patwari advertisement and are not a guarantee of any particular figure — always confirm current numbers against the official advertisement linked above before making a financial decision."
+    },
+    "hi": {
+      "pageTitle": "राजस्थान पटवारी सैलरी 2025: आधिकारिक वेतन स्तर और जॉब प्रोफाइल",
+      "lede": "पटवारी सीधी भर्ती राजस्व मण्डल, अजमेर के लिए पटवारी के पद भरती है। यहां राजस्थान कर्मचारी चयन बोर्ड के 2025 के विज्ञापन के अनुसार इस पद, आवेदन की पात्रता, नियुक्ति, परिवीक्षा और वेतन की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी। विज्ञापन में पटवारी के कार्यों का वर्णन नहीं है, इसलिए यह पृष्ठ भी उनका वर्णन नहीं करता।",
+      "profileHeading": "राजस्व मण्डल, अजमेर के अधीन पटवारी",
+      "profileBody": [
+        "ये पद राजस्थान राजस्व (भू-अभिलेख, भू-प्रबन्ध एवं उपनिवेशन) अधीनस्थ सेवा नियम, 2019 और अनुसूचित क्षेत्र के लिए राजस्थान अनुसूचित क्षेत्र अधीनस्थ, मंत्रालयिक एवं चतुर्थ श्रेणी सेवा (भर्ती एवं सेवा की अन्य शर्तें) नियम, 2014 के अंतर्गत भरे जाते हैं। अभ्यर्थी आवेदन में जिले या संभाग की प्राथमिकता भरते हैं, और राजस्व मण्डल वरीयता और प्राथमिकता के आधार पर जिले आवंटित करता है।",
+        "चयनित अभ्यर्थियों को जिला कलेक्टर प्रोबेशनर ट्रेनी के रूप में नियुक्ति देते हैं, और नियुक्ति के बाद 6 माह का प्रशिक्षण दिलाया जाता है। परिवीक्षा अवधि दो वर्ष की होती है।"
+      ],
+      "postsHeading": "आवेदन के लिए क्या चाहिए",
+      "posts": [
+        {
+          "name": "समान पात्रता परीक्षा (स्नातक स्तर)-2024",
+          "body": "2025 की भर्ती में केवल बोर्ड की समान पात्रता परीक्षा (स्नातक स्तर)-2024 में योग्य घोषित अभ्यर्थी ही आवेदन कर सकते थे।"
+        },
+        {
+          "name": "स्नातक उपाधि और कम्प्यूटर योग्यता",
+          "body": "स्नातक उपाधि (या सरकार द्वारा मान्य समकक्ष), और विज्ञापन की सूची में से कोई एक कम्प्यूटर योग्यता, जैसे NIELIT या DOEACC का 'ओ' लेवल या उच्च स्तर, COPA या DPCS का प्रमाण पत्र, कम्प्यूटर साइंस या कम्प्यूटर एप्लीकेशन में डिप्लोमा या डिग्री, पॉलिटेक्निक से कम्प्यूटर साइंस एंड इंजीनियरिंग में 3 साल का डिप्लोमा, किसी भी ब्रांच में इंजीनियरिंग की डिग्री, RS-CIT का प्रमाण पत्र, या एक विषय के रूप में कम्प्यूटर साइंस अथवा कम्प्यूटर एप्लीकेशन के साथ उच्च माध्यमिक। देवनागरी लिपि में लिखी हिन्दी में कार्य करने का ज्ञान और राजस्थान की संस्कृति का ज्ञान भी आवश्यक है।"
+        },
+        {
+          "name": "आयु सीमा",
+          "body": "1 जनवरी 2026 को 18 वर्ष पूर्ण और 40 वर्ष से कम। विगत 3 वर्षों में पटवारी भर्ती परीक्षा न होने के कारण सभी आवेदकों को अधिकतम आयु सीमा में 3 वर्ष की अतिरिक्त छूट मिली है, और विज्ञापन में वर्गवार अन्य छूट भी दी गई हैं।"
+        }
+      ],
+      "promotionHeading": "पदोन्नति",
+      "promotionBody": [],
+      "salaryHeading": "वेतन: पहले नियत पारिश्रमिक, फिर वेतन स्तर L-5",
+      "salaryBody": [
+        "दो वर्ष की परिवीक्षा अवधि में परिवीक्षाधीन प्रशिक्षु को पद की वेतन श्रृंखला के बजाय राज्य सरकार द्वारा तय दरों पर मासिक नियत पारिश्रमिक मिलता है, और मकान किराया भत्ता, महंगाई भत्ता, शहरी क्षतिपूर्ति भत्ता या विशेष वेतन जैसे कोई अन्य भत्ते नहीं मिलते। विज्ञापन में इसकी राशि नहीं छपी है। पहले से सरकारी सेवा में कार्यरत व्यक्ति प्रशिक्षु चुने जाने पर अपने मौजूदा वेतन या नियत पारिश्रमिक में से जो अधिक लाभकारी हो, वह पा सकता है।",
+        "प्रशिक्षण और प्रशिक्षण के बाद की परीक्षा सहित परिवीक्षा सफलतापूर्वक पूरी करने पर वेतन श्रृंखला का न्यूनतम और भत्ते मिलते हैं। विज्ञापन के अनुसार पटवारी पद के लिए राज्य सरकार के सातवें वेतनमान के वेतन मैट्रिक्स का स्तर L-5 देय है, पर उसमें स्तर L-5 की रुपयों में राशि या हाथ में आने वाला वेतन नहीं छपा है, इसलिए यह पृष्ठ कोई अनुमान नहीं देता।",
+        "नए नियुक्त कर्मचारियों पर नियमानुसार राज्य सरकार की पेंशन योजना लागू होती है।"
+      ],
+      "perksHeading": "सुविधाएं और लाभ",
+      "perks": [],
+      "note": "ऊपर दिए वेतन विवरण बोर्ड के पटवारी सीधी भर्ती-2025 विज्ञापन से लिए गए हैं। आधिकारिक विज्ञापन ही प्रमाण है, इसलिए वर्तमान विवरण यहां देखें:",
+      "noteLinkLabel": "RSSB का पटवारी विज्ञापन संख्या 02/2025 (PDF)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "राजस्व मण्डल, अजमेर के लिए राजस्थान के गैर अनुसूचित क्षेत्र और अनुसूचित क्षेत्र दोनों में पटवारी के पद। 2025 के विज्ञापन में पहले 2,020 पद थे, और 20 जून 2025 के संशोधन से कुल पद 3,705 हो गए।",
+      "offerHeading": "Pariksha Saathi राजस्थान पटवारी के लिए क्या देता है",
+      "offerBody": "परीक्षा के विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, विज्ञापित पैटर्न में पूर्ण-लंबाई मॉक टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "RSSB पटवारी सीधी भर्ती-2025 (विज्ञापन संख्या 02/2025) — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "राजस्थान पटवारी सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "राजस्थान पटवारी की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और राजस्थान कर्मचारी चयन बोर्ड, राजस्व मण्डल, अजमेर या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए वेतन विवरण बोर्ड के 2025 के पटवारी विज्ञापन से लिए गए हैं और किसी विशेष आंकड़े की गारंटी नहीं हैं — कोई भी वित्तीय निर्णय लेने से पहले हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से वर्तमान आंकड़ों की पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "dsssb-tgt",
+    "examName": "DSSSB TGT",
+    "officialUrl": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/advertisement_no_06-2025.pdf",
+    "en": {
+      "pageTitle": "DSSSB TGT Salary 2025: Official Pay Scale and Job Profile",
+      "lede": "DSSSB’s Advt. No. 06/2025 recruits Trained Graduate Teachers for the Directorate of Education, Delhi, along with Drawing Teacher and Special Education Teacher posts. Here is what the advertisement says about the posts, who can apply and the pay, with a link to the official source.",
+      "profileHeading": "Teacher posts in Delhi",
+      "profileBody": [
+        "Every post in the advertisement is Group B (non-gazetted, non-ministerial) at Pay Level 7. The TGT posts are advertised subject by subject, with separate post codes for male and female teachers, and all the posts are filled through the same one-tier exam: a section on general subjects and a section on the subject of the post.",
+        "The upper age limit is 30 years for every post code, judged on 7 November 2025, with relaxations for reserved categories and others listed in the advertisement. The advertisement does not describe day-to-day duties, so this page does not either."
+      ],
+      "postsHeading": "The posts advertised",
+      "posts": [
+        {
+          "name": "TGT Mathematics, English, Social Science and Natural Science (post codes 55/25 to 62/25)",
+          "body": "Directorate of Education, male and female posts. Needs a bachelor’s degree in the subject with at least 50% marks (or a master’s degree, with 50% in either degree), or a 4-year integrated B.El.Ed./B.Sc.B.Ed./B.A.B.Ed. from an NCTE-recognised institution; a B.Ed. (not needed separately after a 4-year integrated course); and a pass in CTET conducted by CBSE."
+        },
+        {
+          "name": "TGT Hindi, Sanskrit, Urdu and Punjabi (post codes 63/25 to 70/25)",
+          "body": "Directorate of Education, male and female posts. The same pattern of qualification in the language concerned (the integrated route is B.El.Ed./B.A.B.Ed.), with a B.Ed. and a pass in CTET conducted by CBSE."
+        },
+        {
+          "name": "Drawing Teacher (post code 71/25)",
+          "body": "Directorate of Education. Needs a five-year diploma in Drawing/Painting/Sculpture/Graphic Art, or a master’s degree in Drawing and Painting/Fine Art, or a bachelor’s degree in Drawing/Painting/Fine Art with a two-year full-time diploma in Painting/Fine Art. The advertisement does not list CTET for this post."
+        },
+        {
+          "name": "Special Education Teacher (post code 72/25)",
+          "body": "New Delhi Municipal Council. Needs a graduate degree with B.Ed. (Special Education), or a B.Ed. with a two-year diploma in special education, or a post-graduate professional diploma in special education, or an equivalent approved by the Rehabilitation Council of India. Qualifying CTET is compulsory for appointment."
+        }
+      ],
+      "promotionHeading": "Promotion",
+      "promotionBody": [],
+      "salaryHeading": "Pay: Pay Level 7",
+      "salaryBody": [
+        "The advertisement prints the same pay for every post: Pay Level 7, ₹44,900 – ₹1,42,400.",
+        "It does not state an in-hand salary or list allowances, so this page does not estimate one. Your actual pay depends on the allowances and deductions in force at the time of your appointment."
+      ],
+      "perksHeading": "Perks and benefits",
+      "perks": [],
+      "note": "The pay figures above are copied from Advt. No. 06/2025. The official advertisement is the authority, so confirm current numbers against",
+      "noteLinkLabel": "DSSSB Advt. No. 06/2025 (PDF)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Trained Graduate Teacher posts in Mathematics, English, Social Science, Natural Science, Hindi, Sanskrit, Urdu and Punjabi (as separate male and female posts) in the Directorate of Education, Delhi, plus Drawing Teacher in the Directorate and Special Education Teacher in the New Delhi Municipal Council. The advertisement printed 5,346 tentative vacancies; a corrigendum of 19 January 2026 lowered the EWS vacancies in six post codes without printing a new total.",
+      "offerHeading": "What Pariksha Saathi offers for DSSSB TGT",
+      "offerBody": "Free topic-wise lessons and practice, sectional tests by subject, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "DSSSB TGT, Advt. No. 06/2025 — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "syllabusLinkLabel": "DSSSB TGT syllabus & exam pattern",
+      "ctaLabel": "Start studying DSSSB TGT free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Delhi Subordinate Services Selection Board, the Directorate of Education, Delhi, or any government body. The pay details above are copied from Advt. No. 06/2025 and are not a guarantee of any particular figure — always confirm current numbers against the official advertisement linked above before making a financial decision."
+    },
+    "hi": {
+      "pageTitle": "DSSSB TGT सैलरी 2025: आधिकारिक वेतनमान और जॉब प्रोफाइल",
+      "lede": "DSSSB का विज्ञापन संख्या 06/2025 दिल्ली के शिक्षा निदेशालय के लिए प्रशिक्षित स्नातक शिक्षकों (TGT) की भर्ती करता है, साथ में ड्राइंग शिक्षक और विशेष शिक्षा शिक्षक के पद भी। यहां विज्ञापन के अनुसार इन पदों, आवेदन की पात्रता और वेतन की जानकारी दी गई है, साथ ही आधिकारिक स्रोत का लिंक भी।",
+      "profileHeading": "दिल्ली में शिक्षक के पद",
+      "profileBody": [
+        "विज्ञापन के सभी पद समूह 'ख' (अराजपत्रित, गैर-मंत्रालयिक) के हैं और वेतन स्तर-7 पर हैं। TGT के पद विषयवार विज्ञापित हैं, पुरुष और महिला शिक्षकों के अलग-अलग पद कोड के साथ, और सभी पद एक ही एक-स्तरीय परीक्षा से भरे जाते हैं: एक खंड सामान्य विषयों का और एक खंड पद के विषय का।",
+        "हर पद कोड के लिए अधिकतम आयु सीमा 30 वर्ष है, जो 7 नवंबर 2025 को देखी जाती है, और आरक्षित श्रेणियों तथा अन्य के लिए छूट विज्ञापन में दी गई है। विज्ञापन में रोज़मर्रा के कामकाज का वर्णन नहीं है, इसलिए यह पृष्ठ भी उसका वर्णन नहीं करता।"
+      ],
+      "postsHeading": "विज्ञापित पद",
+      "posts": [
+        {
+          "name": "TGT गणित, अंग्रेज़ी, सामाजिक विज्ञान और प्राकृतिक विज्ञान (पद कोड 55/25 से 62/25)",
+          "body": "शिक्षा निदेशालय, पुरुष और महिला पद। संबंधित विषय में कम से कम 50% अंकों के साथ स्नातक उपाधि (या स्नातकोत्तर उपाधि, जिसमें दोनों में से किसी एक उपाधि में 50% अंक हों), या NCTE से मान्यता प्राप्त संस्थान से 4 वर्षीय एकीकृत बी.एल.एड./बी.एससी.बी.एड./बी.ए.बी.एड.; बी.एड. (4 वर्षीय एकीकृत पाठ्यक्रम के बाद अलग से आवश्यक नहीं); और CBSE द्वारा आयोजित CTET उत्तीर्ण।"
+        },
+        {
+          "name": "TGT हिंदी, संस्कृत, उर्दू और पंजाबी (पद कोड 63/25 से 70/25)",
+          "body": "शिक्षा निदेशालय, पुरुष और महिला पद। संबंधित भाषा में इसी तरह की योग्यता (एकीकृत पाठ्यक्रम के रूप में बी.एल.एड./बी.ए.बी.एड.), साथ में बी.एड. और CBSE द्वारा आयोजित CTET उत्तीर्ण।"
+        },
+        {
+          "name": "ड्राइंग शिक्षक (पद कोड 71/25)",
+          "body": "शिक्षा निदेशालय। ड्राइंग/पेंटिंग/मूर्तिकला/ग्राफिक आर्ट में पाँच वर्षीय डिप्लोमा, या ड्राइंग एवं पेंटिंग/ललित कला में स्नातकोत्तर उपाधि, या ड्राइंग/पेंटिंग/ललित कला में स्नातक उपाधि के साथ पेंटिंग/ललित कला में दो वर्षीय पूर्णकालिक डिप्लोमा। विज्ञापन में इस पद के लिए CTET का उल्लेख नहीं है।"
+        },
+        {
+          "name": "विशेष शिक्षा शिक्षक (पद कोड 72/25)",
+          "body": "नई दिल्ली नगरपालिका परिषद। बी.एड. (विशेष शिक्षा) के साथ स्नातक, या विशेष शिक्षा में दो वर्षीय डिप्लोमा के साथ बी.एड., या विशेष शिक्षा में स्नातकोत्तर व्यावसायिक डिप्लोमा, या भारतीय पुनर्वास परिषद द्वारा अनुमोदित कोई समकक्ष योग्यता। नियुक्ति के लिए CTET उत्तीर्ण होना अनिवार्य है।"
+        }
+      ],
+      "promotionHeading": "पदोन्नति",
+      "promotionBody": [],
+      "salaryHeading": "वेतन: वेतन स्तर-7",
+      "salaryBody": [
+        "विज्ञापन में सभी पदों के लिए एक ही वेतन छपा है: वेतन स्तर-7, ₹44,900 – ₹1,42,400।",
+        "विज्ञापन में हाथ में आने वाला वेतन या भत्तों की सूची नहीं दी गई है, इसलिए यह पृष्ठ कोई अनुमान नहीं देता। आपका वास्तविक वेतन नियुक्ति के समय लागू भत्तों और कटौतियों पर निर्भर करेगा।"
+      ],
+      "perksHeading": "सुविधाएं और लाभ",
+      "perks": [],
+      "note": "ऊपर दिया गया वेतन विवरण विज्ञापन संख्या 06/2025 से लिया गया है। आधिकारिक विज्ञापन ही प्रमाण है, इसलिए वर्तमान आंकड़े यहां देखें:",
+      "noteLinkLabel": "DSSSB का विज्ञापन संख्या 06/2025 (PDF)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "दिल्ली के शिक्षा निदेशालय में गणित, अंग्रेज़ी, सामाजिक विज्ञान, प्राकृतिक विज्ञान, हिंदी, संस्कृत, उर्दू और पंजाबी के प्रशिक्षित स्नातक शिक्षक (TGT) के पद (पुरुष और महिला के अलग-अलग पद), साथ ही निदेशालय में ड्राइंग शिक्षक और नई दिल्ली नगरपालिका परिषद में विशेष शिक्षा शिक्षक के पद। विज्ञापन में 5,346 अस्थायी रिक्तियां छपी थीं; 19 जनवरी 2026 के शुद्धिपत्र ने छह पद कोड में EWS रिक्तियां घटाईं, पर नया कुल योग नहीं छापा।",
+      "offerHeading": "Pariksha Saathi DSSSB TGT के लिए क्या देता है",
+      "offerBody": "मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "DSSSB TGT, विज्ञापन संख्या 06/2025 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "syllabusLinkLabel": "DSSSB TGT सिलेबस और परीक्षा पैटर्न",
+      "ctaLabel": "DSSSB TGT की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और दिल्ली अधीनस्थ सेवा चयन बोर्ड, शिक्षा निदेशालय, दिल्ली या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिया गया वेतन विवरण विज्ञापन संख्या 06/2025 से लिया गया है और किसी विशेष आंकड़े की गारंटी नहीं है — कोई भी वित्तीय निर्णय लेने से पहले हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से वर्तमान आंकड़ों की पुष्टि करें।"
+    }
+  },
 ];
 
 export function findJobProfileEntry(slug) {

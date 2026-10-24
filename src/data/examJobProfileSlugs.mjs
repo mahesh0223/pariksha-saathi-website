@@ -22,4 +22,7 @@ export const EXAM_JOB_PROFILE_SLUGS = [
   'bpsc',
   'mppsc',
   'rpsc',
+  'bssc-inter',
+  'rajasthan-patwari',
+  'dsssb-tgt',
 ];

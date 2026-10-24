@@ -1832,6 +1832,619 @@ export const EXAM_SYLLABI = [
       "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और RPSC या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण सामान्य हैं और बदल सकते हैं — हमेशा ऊपर दी गई आधिकारिक अधिसूचना से पुष्टि करें।"
     }
   },
+  {
+    "slug": "upsssc-pet",
+    "examName": "UPSSSC PET",
+    "officialUrl": "https://upsssc.gov.in/ViewPdf.aspx?tOQhA8AoFpUkdSk5J2hr0lU0H14+rIaUtQroTArbIsw=",
+    "en": {
+      "pageTitle": "UPSSSC PET Syllabus & Exam Pattern",
+      "lede": "UPSSSC PET (Preliminary Eligibility Test, conducted by the Uttar Pradesh Subordinate Services Selection Commission) is one objective paper, and it is the first stage of the Commission’s two-stage system for Group C posts. Here’s the shape of it and the topics tested, taken from the PET-2026 advertisement (No. 16-Exam/2026, published in Hindi only), with a link to the advertisement for the exact marks and timing.",
+      "stagesHeading": "The stages",
+      "stages": [
+        {
+          "name": "Preliminary Eligibility Test (PET)",
+          "body": "One objective multiple-choice paper, compulsory for anyone who wants to be selected for posts within the Commission’s purview. There is negative marking for wrong answers, and if the test is held in more than one shift or on more than one day, scores are normalised. The advertisement prints no minimum pass mark: what counts is your score, which is used to shortlist candidates for the main examinations."
+        },
+        {
+          "name": "Your PET score",
+          "body": "The score stays valid for 3 years from the date the Commission issues the result or uploads it on its website, and PET is held every year. If you hold more than one valid PET score when a main examination is advertised, you apply and are shortlisted on the highest valid normalised score."
+        },
+        {
+          "name": "Main examinations for individual posts",
+          "body": "Advertised separately, post by post, for the Commission’s direct-recruitment Group C posts. Each main-examination advertisement sets the essential qualification and age limits for its own posts, and only candidates who hold that qualification and a valid PET score card can apply. Candidates are shortlisted for each main examination on their PET score."
+        }
+      ],
+      "subjectsHeading": "What’s tested in PET",
+      "subjects": [
+        {
+          "name": "Indian History",
+          "body": "The Indus Valley Civilisation, Vedic culture, Buddhism (Gautam Buddha’s life and teachings) and Jainism (Mahavir’s life and teachings), the Mauryas (Emperor Ashoka), the Guptas (Samudragupta and Chandragupta II), Harshavardhana, the Rajput and Sultanate periods, the Mughal empire, the Marathas, the rise of British rule and the First War of Independence, and the socio-economic impact of British rule."
+        },
+        {
+          "name": "Indian National Movement",
+          "body": "The early years of the freedom movement, the Swadeshi and Civil Disobedience movements and the role of Mahatma Gandhi and other leaders, the revolutionary movement and the rise of militant nationalism, legislative reforms and the British India Act, 1935, and the Quit India Movement, the Azad Hind Fauj and Netaji Subhas Chandra Bose."
+        },
+        {
+          "name": "Geography",
+          "body": "Physical geography of India and the world (rivers and river valleys, groundwater resources, mountains, hills and glaciers, deserts and arid regions, forests, and mineral resources, especially in India), political geography of India and the world, climate and weather, time zones, and demographic change and migration."
+        },
+        {
+          "name": "Indian Economy",
+          "body": "The economy from 1947 to 1991 (the Planning Commission and Five-Year Plans, the growth of the mixed economy with its private and public sectors, the Green Revolution, dairy development and Operation Flood, and bank nationalisation and reforms), the 1991 economic reforms and the economy since, and reforms after 2014: agricultural, infrastructure, labour and economic reforms, and GST."
+        },
+        {
+          "name": "Indian Constitution & Public Administration",
+          "body": "The main features of the Constitution, the Directive Principles of State Policy, Fundamental Rights and Duties, the parliamentary system, the federal system, the Union and Union Territories and Centre–State relations, the judicial structure (Supreme Court and High Courts), district administration, and local bodies and Panchayati Raj institutions."
+        },
+        {
+          "name": "General Science and Elementary Arithmetic",
+          "body": "Elementary physics, chemistry and biology. Arithmetic: whole numbers, fractions and decimals, percentage, simple arithmetic equations, squares and square roots, exponents and powers, and average."
+        },
+        {
+          "name": "General Hindi and General English",
+          "body": "General Hindi: sandhi, antonyms, synonyms, one word for a phrase, gender, words that sound alike but differ in meaning, idioms and proverbs, common errors, and writers and their works (prose and poetry). General English: English grammar and questions on an unseen passage."
+        },
+        {
+          "name": "Logic & Reasoning",
+          "body": "Big and small, order and ranking, relationships, odd one out, calendar and clock, cause and effect, coding-decoding with numbers and letters, and deductive reasoning, statement analysis and decision."
+        },
+        {
+          "name": "Current Affairs and General Awareness",
+          "body": "Current affairs, Indian and global. General awareness: India’s neighbouring countries, countries with their capitals and currencies, the states and Union Territories of India, Parliament (Rajya Sabha and Lok Sabha) and the state Legislative Assemblies and Councils, national and international days, world organisations and their headquarters, Indian tourist places, the art and culture of India, sports in India and the world, Indian research organisations, famous books and authors, awards and winners, and climate change and environment."
+        },
+        {
+          "name": "Unseen Hindi passages, graphs and tables",
+          "body": "Interpretation and analysis of two unseen Hindi passages, two graphs and two tables, with five questions on each."
+        }
+      ],
+      "note": "Questions on the first nine academic subjects in the advertisement, from Indian History to General English, are set at NCERT’s secondary / senior secondary level. The advertisement gives current affairs, general awareness and each of the passage, graph and table sections twice the marks of each other subject, but it does not print how many questions each subject has, and the scheme can change between years. Treat the subjects above as the shape to study toward, and check",
+      "noteLinkLabel": "the PET-2026 advertisement (PDF, Hindi)",
+      "recruitsHeading": "What PET is for",
+      "recruitsBody": "PET does not recruit anyone and has no vacancies of its own. It leads to the Commission’s main examinations for direct-recruitment Group C posts, which are advertised separately, and candidates are shortlisted for each of them on their valid PET score. Applying for or taking PET, or getting its result or score card, gives no claim to selection for any post.",
+      "offerHeading": "What Pariksha Saathi offers for UPSSSC PET",
+      "offerBody": "Free topic-wise lessons and practice for the subjects above, sectional tests by subject, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "UPSSSC PET-2026, Advt. No. 16-Exam/2026 — official advertisement (Hindi)",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "ctaLabel": "Start studying UPSSSC PET free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Uttar Pradesh Subordinate Services Selection Commission or any government body. The syllabus and pattern details above come from the Commission’s PET-2026 advertisement and may change — always confirm against the official advertisement linked above."
+    },
+    "hi": {
+      "pageTitle": "UPSSSC PET सिलेबस और परीक्षा पैटर्न",
+      "lede": "UPSSSC PET (प्रारम्भिक अर्हता परीक्षा, जिसे उत्तर प्रदेश अधीनस्थ सेवा चयन आयोग आयोजित करता है) एक वस्तुनिष्ठ प्रश्नपत्र है, और यह समूह 'ग' के पदों के लिए आयोग की द्विस्तरीय परीक्षा प्रणाली का पहला चरण है। यहाँ प्रारम्भिक अर्हता परीक्षा-2026 के विज्ञापन (संख्या 16-परीक्षा/2026, केवल हिन्दी में प्रकाशित) के आधार पर इसकी संरचना और परखे जाने वाले विषय दिए गए हैं, साथ ही सटीक अंक और समय के लिए विज्ञापन का लिंक भी।",
+      "stagesHeading": "चरण",
+      "stages": [
+        {
+          "name": "प्रारम्भिक अर्हता परीक्षा (PET)",
+          "body": "वस्तुनिष्ठ प्रकार के बहुविकल्पीय प्रश्नों का एक प्रश्नपत्र, जो आयोग की परिधि में आने वाले पदों पर चयन के इच्छुक सभी अभ्यर्थियों के लिए अनिवार्य है। गलत उत्तर पर नकारात्मक अंकन होता है, और परीक्षा एक से अधिक पालियों या दिनों में होने पर अंक सामान्यीकृत किए जाते हैं। विज्ञापन में कोई न्यूनतम अर्हक अंक नहीं छपे हैं: असल में आपका स्कोर काम आता है, जिससे मुख्य परीक्षाओं के लिए शॉर्टलिस्टिंग होती है।"
+        },
+        {
+          "name": "आपका PET स्कोर",
+          "body": "स्कोर आयोग द्वारा परिणाम निर्गत किए जाने या वेबसाइट पर अपलोड किए जाने की तिथि से 3 वर्ष तक मान्य रहता है, और यह परीक्षा हर वर्ष होती है। किसी मुख्य परीक्षा के विज्ञापन के समय आपके पास एक से अधिक वैध स्कोर हों, तो आवेदन और शॉर्टलिस्टिंग सर्वाधिक वैध सामान्यीकृत अंकों के आधार पर होती है।"
+        },
+        {
+          "name": "पदों की मुख्य परीक्षाएँ",
+          "body": "आयोग के सीधी भर्ती वाले समूह 'ग' के पदों के लिए पदवार अलग से विज्ञापित। हर मुख्य परीक्षा का विज्ञापन अपने पदों की अनिवार्य शैक्षणिक योग्यता और आयु सीमा स्वयं तय करता है, और केवल वही अभ्यर्थी आवेदन कर सकते हैं जिनके पास वह योग्यता और PET का वैध स्कोर कार्ड हो। हर मुख्य परीक्षा के लिए शॉर्टलिस्टिंग PET स्कोर पर होती है।"
+        }
+      ],
+      "subjectsHeading": "PET में क्या परखा जाता है",
+      "subjects": [
+        {
+          "name": "भारतीय इतिहास",
+          "body": "सिन्धु घाटी की सभ्यता, वैदिक संस्कृति, बौद्ध धर्म (गौतम बुद्ध की जीवनी एवं शिक्षाएँ) और जैन धर्म (महावीर की जीवनी एवं शिक्षाएँ), मौर्य वंश (सम्राट अशोक), गुप्त वंश (समुद्रगुप्त, चन्द्रगुप्त द्वितीय), हर्षवर्द्धन, राजपूत काल, सल्तनत काल, मुगल साम्राज्य, मराठा, ब्रिटिश राज का अभ्युदय एवं प्रथम स्वतंत्रता संग्राम, तथा ब्रिटिश राज का सामाजिक-आर्थिक प्रभाव।"
+        },
+        {
+          "name": "भारतीय राष्ट्रीय आन्दोलन",
+          "body": "स्वाधीनता आन्दोलन के प्रारम्भिक वर्ष, स्वदेशी तथा सविनय अवज्ञा आन्दोलन और उनमें महात्मा गांधी तथा अन्य नेताओं की भूमिका, क्रांतिकारी आन्दोलन तथा उग्र राष्ट्रवाद का उदय, विधायी संशोधन तथा ब्रिटिश इंडिया एक्ट, 1935, और भारत छोड़ो आन्दोलन, आज़ाद हिंद फौज तथा नेताजी सुभाष चन्द्र बोस।"
+        },
+        {
+          "name": "भूगोल",
+          "body": "भारत एवं विश्व का भौतिक भूगोल (नदियाँ तथा नदियों की घाटी, भूजल संसाधन, पर्वत, पहाड़ियाँ तथा हिमनद, मरुस्थल और शुष्क क्षेत्र, वन, तथा विशेषकर भारत के खनिज संसाधन), भारत एवं विश्व का राजनैतिक भूगोल, जलवायु तथा मौसम, टाइम ज़ोन, और जनसांख्यिकीय परिवर्तन तथा प्रवास।"
+        },
+        {
+          "name": "भारतीय अर्थव्यवस्था",
+          "body": "1947 से 1991 तक की अर्थव्यवस्था (योजना आयोग तथा पंचवर्षीय योजनाएँ, मिश्रित अर्थव्यवस्था का विकास और निजी एवं सार्वजनिक क्षेत्र, हरित क्रांति, दुग्ध विकास एवं ऑपरेशन फ्लड, तथा बैंकों का राष्ट्रीयकरण और सुधार), 1991 के आर्थिक सुधार और उसके बाद की अर्थव्यवस्था, तथा 2014 के बाद के सुधार: कृषि, ढांचागत, श्रम और आर्थिक सुधार, और GST।"
+        },
+        {
+          "name": "भारतीय संविधान एवं लोक प्रशासन",
+          "body": "भारतीय संविधान की मुख्य विशेषताएँ, राज्य के नीति-निर्देशक सिद्धान्त, मौलिक अधिकार एवं कर्तव्य, संसदीय प्रणाली, संघीय प्रणाली, संघ एवं केन्द्रशासित प्रदेश और केन्द्र-राज्य सम्बन्ध, न्यायिक ढांचा (सर्वोच्च न्यायालय, उच्च न्यायालय), जिला प्रशासन, तथा स्थानीय निकाय और पंचायती राज संस्थाएँ।"
+        },
+        {
+          "name": "सामान्य विज्ञान और प्रारम्भिक अंकगणित",
+          "body": "प्रारम्भिक भौतिक विज्ञान, रसायन विज्ञान और जीव विज्ञान। अंकगणित: पूर्ण संख्या, भिन्न तथा दशमलव, प्रतिशतता, साधारण अंकगणितीय समीकरण, वर्ग एवं वर्गमूल, घातांक एवं घात, और औसत।"
+        },
+        {
+          "name": "सामान्य हिन्दी और सामान्य अंग्रेजी",
+          "body": "सामान्य हिन्दी: संधि, विलोम शब्द, पर्यायवाची शब्द, वाक्यांशों के लिए एक शब्द, लिंग, समश्रुत भिन्नार्थक शब्द, मुहावरे-लोकोक्तियाँ, सामान्य अशुद्धियाँ, तथा लेखक और रचनाएँ (गद्य एवं पद्य)। सामान्य अंग्रेजी: अंग्रेजी व्याकरण और अपठित गद्यांश पर आधारित प्रश्न।"
+        },
+        {
+          "name": "तर्क एवं तर्कशक्ति",
+          "body": "वृहत एवं लघु, क्रम एवं रैंकिंग, संबंध, समूह से भिन्न को अलग करना, कैलेण्डर एवं घड़ी, कारण और प्रभाव, कोडिंग-डिकोडिंग (संख्या तथा अक्षर), और निगमनात्मक तर्क/कथन विश्लेषण एवं निर्णय।"
+        },
+        {
+          "name": "सामयिकी और सामान्य जागरूकता",
+          "body": "भारतीय एवं वैश्विक सामयिकी। सामान्य जागरूकता: भारत के पड़ोसी देश, देश, राजधानी एवं मुद्रा, भारत के राज्य तथा केन्द्रशासित प्रदेश, भारतीय संसद (राज्यसभा, लोकसभा) और विधानसभा व विधान परिषद, राष्ट्रीय एवं अन्तर्राष्ट्रीय दिवस, विश्व संगठन एवं उनके मुख्यालय, भारतीय पर्यटन स्थल, भारत की कला एवं संस्कृति, भारत एवं विश्व के खेल, भारतीय अनुसंधान संगठन, प्रसिद्ध पुस्तकें और लेखक, पुरस्कार एवं विजेता, तथा जलवायु परिवर्तन एवं पर्यावरण।"
+        },
+        {
+          "name": "अपठित हिन्दी गद्यांश, ग्राफ और तालिका",
+          "body": "दो अपठित हिन्दी गद्यांशों, दो ग्राफ और दो तालिकाओं का विवेचन एवं विश्लेषण, प्रत्येक पर पाँच प्रश्न।"
+        }
+      ],
+      "note": "विज्ञापन के पहले नौ शैक्षणिक विषयों, भारतीय इतिहास से सामान्य अंग्रेजी तक, के प्रश्नों का स्तर NCERT द्वारा निर्धारित सेकेन्ड्री/सीनियर सेकेन्ड्री स्तर का होता है। विज्ञापन में सामयिकी, सामान्य जागरूकता और गद्यांश, ग्राफ व तालिका वाले हर खंड को बाकी प्रत्येक विषय से दोगुने अंक दिए गए हैं, पर हर विषय के प्रश्नों की संख्या नहीं दी गई है, और परीक्षा की रूपरेखा वर्षों के बीच बदल सकती है। ऊपर दिए विषयों को अध्ययन का आधार मानें, और देखें",
+      "noteLinkLabel": "प्रारम्भिक अर्हता परीक्षा-2026 का विज्ञापन (PDF, हिन्दी)",
+      "recruitsHeading": "PET किसलिए है",
+      "recruitsBody": "PET किसी की भर्ती नहीं करती और इसकी अपनी कोई रिक्तियां नहीं हैं। इसके बाद आयोग के सीधी भर्ती वाले समूह 'ग' के पदों की मुख्य परीक्षाएँ आती हैं, जो अलग से विज्ञापित होती हैं, और हर एक के लिए शॉर्टलिस्टिंग PET के वैध स्कोर पर होती है। केवल PET में आवेदन करने, उसमें बैठने या उसका परिणाम/स्कोर कार्ड मिलने से किसी पद पर चयन का दावा नहीं बनता।",
+      "offerHeading": "Pariksha Saathi UPSSSC PET के लिए क्या देता है",
+      "offerBody": "ऊपर दिए विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "UPSSSC प्रारम्भिक अर्हता परीक्षा-2026, विज्ञापन संख्या 16-परीक्षा/2026 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "ctaLabel": "UPSSSC PET की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और उत्तर प्रदेश अधीनस्थ सेवा चयन आयोग या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण आयोग के प्रारम्भिक अर्हता परीक्षा-2026 के विज्ञापन से लिए गए हैं और बदल सकते हैं — हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "bssc-inter",
+    "examName": "BSSC Inter Level",
+    "officialUrl": "https://bssc.bihar.gov.in/Advertisement/02_23A_Advt.pdf",
+    "en": {
+      "pageTitle": "BSSC Inter Level Syllabus & Exam Pattern",
+      "lede": "The Bihar Staff Selection Commission’s Inter Level Combined Competitive Examination fills a range of posts that need an Intermediate (10+2) pass, such as Lower Division Clerk, Revenue Employee and Panchayat Secretary. Here’s the shape of it and the topics tested, taken from Advt. No. 02/23 (A), the revised advertisement of the Second Inter Level Combined Competitive Examination (published in Hindi only), with a link to the advertisement for the exact marks and timing.",
+      "stagesHeading": "The stages",
+      "stages": [
+        {
+          "name": "Preliminary examination (open book)",
+          "body": "One objective General Knowledge paper in three parts, held when more than 40,000 applications are received. It is an open-book exam: you may bring three books, one each for General Studies, Mathematics and General Science, and only textbooks of NCERT, BSEB, ICSE and other boards are allowed. Guides, photocopies, handwritten notes and electronic devices are not, and nothing but your name and roll number may be written in the books. There is negative marking for wrong answers."
+        },
+        {
+          "name": "Main examination",
+          "body": "Candidates equal to 5 times the category-wise vacancies are chosen from the Preliminary examination. The Commission will publish a separate advertisement for the Main examination, and only then will it ask candidates for their order of post preference. Advt. No. 02/23 (A) does not give the Main examination’s papers, marks or timing; it describes the examination as objective."
+        },
+        {
+          "name": "Typing / computer test",
+          "body": "Candidates who pass the Main examination take a typing / computer test. The Commission will give its details after the written examination, and the advertisement does not say whether the test is qualifying only."
+        }
+      ],
+      "subjectsHeading": "What’s tested in the Preliminary examination",
+      "subjects": [
+        {
+          "name": "General Studies",
+          "body": "Questions on your surroundings and their application in society, especially about Bihar, India and its neighbours. Current affairs: scientific progress, national and international awards, Indian languages, books, scripts, capitals, currencies, sports and sportspersons, and important events. India and its neighbouring countries: the history of the neighbouring countries, India’s history, culture, geography and economic scene, the freedom movement, the main features of Indian agriculture and natural resources, the Constitution and polity, the country’s political system, Panchayati Raj, community development, Five-Year Plans, and Bihar’s contribution to the national movement."
+        },
+        {
+          "name": "General Science and Mathematics (Matric level)",
+          "body": "General Science: physics, chemistry, biology and geography. Mathematics: number system, computation of whole numbers, decimals and fractions, relationships between numbers, fundamental arithmetical operations, percentage, ratio and proportion, average, interest, and profit and loss."
+        },
+        {
+          "name": "Mental Ability Test",
+          "body": "Comprehension, logic, reasoning and mental ability, both verbal and non-verbal: analogies, similarities and differences, spatial visualisation, problem solving, analysis, visual memory, discrimination, observation, relationship concepts, arithmetical reasoning, arithmetical number series, and coding and decoding."
+        }
+      ],
+      "note": "Questions are in Hindi and English, and if the two differ the English version is taken as correct. The exam may be held online (computer based) or offline. The number of questions, marks and timing are set by the advertisement and can change, and the Main examination’s pattern will come in its own advertisement. Treat the subjects above as the shape to study toward, and check",
+      "noteLinkLabel": "BSSC Advt. No. 02/23 (A) (PDF, Hindi)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Advt. No. 02/23 (A) fills posts across Bihar government departments and district collectorates: Lower Division Clerk in most departments and collectorates, along with posts such as Revenue Employee, Panchayat Secretary, Junior Field Investigator, Livestock Assistant, Filaria Inspector, Laboratory Assistant and Jan Sevak Grade III. The latest corrigendum (13 February 2026) puts the total at 26,426 vacancies.",
+      "offerHeading": "What Pariksha Saathi offers for BSSC Inter Level",
+      "offerBody": "Free topic-wise lessons and practice for the subjects above, sectional tests by subject, full-length mock tests in the Preliminary examination’s official pattern, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "BSSC Inter Level, Advt. No. 02/23 (A) — official advertisement (Hindi)",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "ctaLabel": "Start studying BSSC Inter Level free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Bihar Staff Selection Commission or any government body. The syllabus and pattern details above come from the Commission’s Advt. No. 02/23 (A) and its corrigenda and may change — always confirm against the official advertisement linked above."
+    },
+    "hi": {
+      "pageTitle": "BSSC इंटर स्तरीय सिलेबस और परीक्षा पैटर्न",
+      "lede": "बिहार कर्मचारी चयन आयोग की इंटर स्तरीय संयुक्त प्रतियोगिता परीक्षा से वे कई पद भरे जाते हैं जिनके लिए इंटरमीडिएट (10+2) उत्तीर्ण होना ज़रूरी है, जैसे निम्नवर्गीय लिपिक, राजस्व कर्मचारी और पंचायत सचिव। यहाँ विज्ञापन संख्या 02/23 (A), यानी द्वितीय इंटर स्तरीय संयुक्त प्रतियोगिता परीक्षा के संशोधित विज्ञापन (केवल हिन्दी में प्रकाशित), के आधार पर इसकी संरचना और परखे जाने वाले विषय दिए गए हैं, साथ ही सटीक अंक और समय के लिए विज्ञापन का लिंक भी।",
+      "stagesHeading": "चरण",
+      "stages": [
+        {
+          "name": "प्रारंभिक परीक्षा (पुस्तक सहित)",
+          "body": "तीन खंडों वाला सामान्य ज्ञान का एक वस्तुनिष्ठ प्रश्नपत्र, जो 40 हजार से अधिक आवेदन प्राप्त होने पर आयोजित होता है। यह पुस्तक सहित परीक्षा है: आप तीन पुस्तकें ले जा सकते हैं, सामान्य अध्ययन, गणित और सामान्य विज्ञान के लिए एक-एक, और केवल NCERT, BSEB, ICSE एवं अन्य बोर्ड की पाठ्यपुस्तकें मान्य हैं। गाइड, फोटोकॉपी, हस्तलिखित नोट्स और इलेक्ट्रॉनिक उपकरण वर्जित हैं, और पुस्तकों पर अपने नाम और रौल नंबर के अलावा कुछ भी लिखा नहीं होना चाहिए। गलत उत्तर पर नकारात्मक अंकन होता है।"
+        },
+        {
+          "name": "मुख्य परीक्षा",
+          "body": "प्रारंभिक परीक्षा से कोटिवार रिक्तियों के 5 गुना अभ्यर्थी चुने जाते हैं। मुख्य परीक्षा के लिए आयोग अलग से विज्ञापन प्रकाशित करेगा, और तभी अभ्यर्थियों से पदों की प्राथमिकता ली जाएगी। विज्ञापन संख्या 02/23 (A) में मुख्य परीक्षा के प्रश्नपत्र, अंक या समय नहीं दिए गए हैं; इसमें परीक्षा की प्रकृति वस्तुनिष्ठ बताई गई है।"
+        },
+        {
+          "name": "टंकण/कम्प्यूटर जाँच",
+          "body": "मुख्य परीक्षा में उत्तीर्ण अभ्यर्थियों को टंकण/कम्प्यूटर जाँच में शामिल होना होता है। इसकी विस्तृत सूचना आयोग लिखित परीक्षा के बाद देगा, और विज्ञापन में यह नहीं बताया गया है कि यह जाँच केवल अर्हक है या नहीं।"
+        }
+      ],
+      "subjectsHeading": "प्रारंभिक परीक्षा में क्या परखा जाता है",
+      "subjects": [
+        {
+          "name": "सामान्य अध्ययन",
+          "body": "अभ्यर्थी के आसपास के परिवेश और समाज में उसके उपयोग से जुड़े प्रश्न, विशेषकर बिहार, भारत और उसके पड़ोसी देशों के बारे में। सम-सामयिक विषय: वैज्ञानिक प्रगति, राष्ट्रीय/अंतर्राष्ट्रीय पुरस्कार, भारतीय भाषाएँ, पुस्तक, लिपि, राजधानी, मुद्रा, खेल-खिलाड़ी और महत्त्वपूर्ण घटनाएँ। भारत और उसके पड़ोसी देश: पड़ोसी देशों का इतिहास, भारत का इतिहास, संस्कृति, भूगोल और आर्थिक परिदृश्य, स्वतंत्रता आन्दोलन, भारतीय कृषि तथा प्राकृतिक संसाधनों की प्रमुख विशेषताएँ, भारत का संविधान एवं राज्य व्यवस्था, देश की राजनीतिक प्रणाली, पंचायती राज, सामुदायिक विकास, पंचवर्षीय योजना और राष्ट्रीय आन्दोलन में बिहार का योगदान।"
+        },
+        {
+          "name": "सामान्य विज्ञान एवं गणित (मैट्रिक स्तर)",
+          "body": "सामान्य विज्ञान: भौतिक शास्त्र, रसायन शास्त्र, जीव विज्ञान और भूगोल। गणित: संख्या पद्धति, पूर्ण संख्याओं का अभिकलन, दशमलव और भिन्न, संख्याओं के बीच परस्पर संबंध, मूलभूत अंकगणितीय संक्रियाएँ, प्रतिशत, अनुपात तथा समानुपात, औसत, ब्याज, और लाभ और हानि।"
+        },
+        {
+          "name": "मानसिक क्षमता जाँच",
+          "body": "बोध, तर्क और मानसिक क्षमता (Comprehension/Logic/Reasoning/Mental Ability), शाब्दिक और गैर-शाब्दिक दोनों: सादृश्य, समानता एवं भिन्नता, स्थान कल्पना, समस्या समाधान, विश्लेषण, दृश्य स्मृति, विभेद, अवलोकन, संबंध अवधारणा, अंकगणितीय तर्कशक्ति, अंकगणितीय संख्या श्रृंखला, और कूट लेखन एवं कूट व्याख्या।"
+        }
+      ],
+      "note": "प्रश्न हिन्दी और अंग्रेज़ी में होते हैं, और दोनों में भिन्नता होने पर अंग्रेज़ी के प्रश्न ही मान्य होते हैं। परीक्षा ऑनलाइन (कंप्यूटर आधारित परीक्षा) या ऑफलाइन हो सकती है। प्रश्नों की संख्या, अंक और समय विज्ञापन तय करता है और ये बदल सकते हैं, और मुख्य परीक्षा का पैटर्न उसके अपने विज्ञापन में आएगा। ऊपर दिए विषयों को अध्ययन का आधार मानें, और देखें",
+      "noteLinkLabel": "BSSC का विज्ञापन संख्या 02/23 (A) (PDF, हिन्दी)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "विज्ञापन संख्या 02/23 (A) बिहार सरकार के विभागों और समाहरणालयों में पद भरता है: अधिकांश विभागों और समाहरणालयों में निम्नवर्गीय लिपिक, और साथ में राजस्व कर्मचारी, पंचायत सचिव, कनीय क्षेत्रीय अन्वेषक, पशुधन सहायक, फाइलेरिया निरीक्षक, प्रयोगशाला सहायक और जन सेवक ग्रेड III जैसे पद। 13 फरवरी 2026 के नवीनतम शुद्धिपत्र के अनुसार कुल रिक्तियां 26,426 हैं।",
+      "offerHeading": "Pariksha Saathi BSSC इंटर स्तरीय परीक्षा के लिए क्या देता है",
+      "offerBody": "ऊपर दिए विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, प्रारंभिक परीक्षा के आधिकारिक पैटर्न में पूर्ण-लंबाई मॉक टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "BSSC इंटर स्तरीय परीक्षा, विज्ञापन संख्या 02/23 (A) — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "ctaLabel": "BSSC इंटर स्तरीय परीक्षा की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और बिहार कर्मचारी चयन आयोग या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण आयोग के विज्ञापन संख्या 02/23 (A) और उसके शुद्धिपत्रों से लिए गए हैं और बदल सकते हैं — हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "rajasthan-patwari",
+    "examName": "Rajasthan Patwari",
+    "officialUrl": "https://rssb.rajasthan.gov.in/storage/advertisement_item/1740055908.pdf",
+    "en": {
+      "pageTitle": "Rajasthan Patwari Syllabus & Exam Pattern",
+      "lede": "Rajasthan Patwari recruitment is run by the Rajasthan Staff Selection Board, and only candidates who qualified the Board’s Common Eligibility Test (Graduation Level) can apply. Selection rests on one written exam. Here’s the shape of it and the topics tested, taken from the Board’s Patwari Direct Recruitment 2025 advertisement (No. 02/2025), with a link to the advertisement for the exact marks and timing.",
+      "stagesHeading": "The stages",
+      "stages": [
+        {
+          "name": "Common Eligibility Test (Graduation Level)",
+          "body": "The gateway to the recruitment. For Patwari Direct Recruitment 2025, only candidates declared qualified in the CET (Graduation Level) 2024 could apply. You also need a graduate degree and one of the computer qualifications listed in the advertisement, such as RS-CIT, NIELIT ‘O’ level, or a diploma or degree in Computer Science or Computer Application."
+        },
+        {
+          "name": "Written exam",
+          "body": "One offline, OMR-based objective paper in five parts, and its marks decide the order of merit. A wrong answer costs one-third of the question’s marks. Each question has five circles, A to D for the answer and E for “question not attempted”: leaving a question with none of the five darkened also costs one-third of its marks, and a candidate who leaves more than 10% of the questions that way is disqualified. 10 extra minutes are given at the end to make sure a circle is darkened for every question."
+        },
+        {
+          "name": "Eligibility check and document verification",
+          "body": "Shortlisted candidates have their eligibility and documents checked before the final result. In the 2025 cycle the Board shortlisted up to twice the advertised posts in each category for this stage."
+        }
+      ],
+      "subjectsHeading": "What’s tested in the written exam",
+      "subjects": [
+        {
+          "name": "General Science; History, Polity and Geography of India; General Knowledge, Current Affairs",
+          "body": "Basic elements of science and everyday science, the human body, food and nutrition, and health care; the main features of ancient and medieval Indian history, and important historical events from the mid-18th century to the present; the Indian Constitution, political system and system of governance, and constitutional development; India’s geographical features, and environmental and ecological changes and their effects; and current national events."
+        },
+        {
+          "name": "Geography, History, Culture and Polity of Rajasthan",
+          "body": "Important events in Rajasthan’s history; the state’s administrative system (Governor, Legislative Assembly, High Court, Rajasthan Public Service Commission, district administration, State Human Rights Commission, State Election Commission, Lokayukta, State Information Commission and public policy); socio-cultural issues; the freedom movement, public awakening and political integration; folk arts, paintings, handicrafts and architecture; fairs, festivals, folk music and folk dances; Rajasthani culture, heritage and literature; religious movements, saints and folk deities; important tourist places; and leading personalities of Rajasthan."
+        },
+        {
+          "name": "General English & Hindi",
+          "body": "Hindi: sandhi and sandhi-viched, prefixes and suffixes, forming and splitting compound words (samas), differences in meaning between word pairs, synonyms and antonyms, correcting misspelt words, correcting grammatical errors in sentences, one word for a phrase, Hindi equivalents of English administrative terms, and idioms and proverbs. English: comprehension of an unseen passage, correction of common errors and correct usage, synonyms and antonyms, and phrases and idioms."
+        },
+        {
+          "name": "Mental Ability and Reasoning, Basic Numerical Efficiency",
+          "body": "Series and analogy, figure matrix, classification, alphabet test, passage and conclusions, blood relations, coding-decoding, direction sense, sitting arrangement, input-output, number ranking, making judgments, logical arrangement of words, and inserting the missing character or number; with mathematical operations, average, ratio, area and volume, percentage, simple and compound interest, unitary method, and profit and loss."
+        },
+        {
+          "name": "Basic Computer",
+          "body": "Characteristics of computers; computer organisation, including RAM, ROM, the file system, input devices, software, and the relationship between hardware and software; operating systems; and MS Office (Word, Excel/spreadsheets and PowerPoint)."
+        }
+      ],
+      "note": "The scheme gives the five parts an approximate weightage of 25, 20, 15, 30 and 10 (out of 100), in the order above. The number of questions, marks and timing are set by each recruitment’s advertisement and can change. Treat the subjects above as the shape to study toward, and check",
+      "noteLinkLabel": "RSSB Patwari advertisement No. 02/2025 (PDF)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Patwari posts for the Board of Revenue, Ajmer, in both the non-scheduled (non-TSP) and scheduled (TSP) areas of Rajasthan. The 2025 advertisement first listed 2,020 posts, and an amendment of 20 June 2025 raised the total to 3,705.",
+      "offerHeading": "What Pariksha Saathi offers for Rajasthan Patwari",
+      "offerBody": "Free topic-wise lessons and practice for the subjects above, sectional tests by subject, full-length mock tests in the advertised pattern, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "RSSB Patwari Direct Recruitment 2025 (Advt. No. 02/2025) — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "ctaLabel": "Start studying Rajasthan Patwari free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Rajasthan Staff Selection Board, the Board of Revenue, Ajmer, or any government body. The syllabus and pattern details above come from the Board’s Patwari Direct Recruitment 2025 advertisement and its amendment and may change — always confirm against the official advertisement linked above."
+    },
+    "hi": {
+      "pageTitle": "राजस्थान पटवारी सिलेबस और परीक्षा पैटर्न",
+      "lede": "राजस्थान पटवारी भर्ती राजस्थान कर्मचारी चयन बोर्ड आयोजित करता है, और इसमें केवल वही अभ्यर्थी आवेदन कर सकते हैं जो बोर्ड की समान पात्रता परीक्षा (स्नातक स्तर) में योग्य घोषित हुए हों। चयन एक लिखित परीक्षा पर आधारित है। यहां बोर्ड के पटवारी सीधी भर्ती-2025 विज्ञापन (संख्या 02/2025) के आधार पर इसकी संरचना और परखे जाने वाले विषय दिए गए हैं, साथ ही सटीक अंक और समय के लिए विज्ञापन का लिंक भी।",
+      "stagesHeading": "चरण",
+      "stages": [
+        {
+          "name": "समान पात्रता परीक्षा (स्नातक स्तर)",
+          "body": "भर्ती का प्रवेश द्वार। पटवारी सीधी भर्ती-2025 में केवल समान पात्रता परीक्षा (स्नातक स्तर)-2024 में योग्य घोषित अभ्यर्थी ही आवेदन कर सकते थे। इसके साथ स्नातक उपाधि और विज्ञापन की सूची में से कोई एक कम्प्यूटर योग्यता भी चाहिए, जैसे RS-CIT, NIELIT का 'ओ' लेवल, या कम्प्यूटर साइंस अथवा कम्प्यूटर एप्लीकेशन में डिप्लोमा या डिग्री।"
+        },
+        {
+          "name": "लिखित परीक्षा",
+          "body": "पाँच भागों वाला एक ऑफलाइन, ओ.एम.आर. आधारित वस्तुनिष्ठ प्रश्नपत्र, जिसके अंकों से वरीयता क्रम तय होता है। गलत उत्तर पर प्रश्न के अंकों का 1/3 भाग काटा जाता है। हर प्रश्न के पाँच गोले होते हैं, उत्तर के लिए A से D और 'अनुत्तरित प्रश्न' के लिए E: पाँचों में से कोई भी गोला गहरा न करने पर भी उस प्रश्न के अंकों का 1/3 भाग कटता है, और 10 प्रतिशत से अधिक प्रश्न इस तरह छोड़ने वाले अभ्यर्थी को अयोग्य घोषित किया जाता है। हर प्रश्न का एक गोला गहरा भरा है, यह सुनिश्चित करने के लिए अंत में 10 मिनट का अतिरिक्त समय मिलता है।"
+        },
+        {
+          "name": "पात्रता जांच और दस्तावेज़ सत्यापन",
+          "body": "अंतिम परिणाम से पहले सूचीबद्ध अभ्यर्थियों की पात्रता और दस्तावेज़ों की जांच होती है। 2025 की भर्ती में बोर्ड ने इस चरण के लिए हर प्रवर्ग में विज्ञापित पदों के 2 गुना तक अभ्यर्थी सूचीबद्ध किए।"
+        }
+      ],
+      "subjectsHeading": "लिखित परीक्षा में क्या परखा जाता है",
+      "subjects": [
+        {
+          "name": "सामान्य विज्ञान; भारत का इतिहास, राजव्यवस्था एवं भूगोल; सामान्य ज्ञान, समसामयिक घटनाएँ",
+          "body": "विज्ञान के सामान्य आधारभूत तत्व एवं दैनिक विज्ञान, मानव शरीर, आहार एवं पोषण, स्वास्थ्य देखभाल; प्राचीन एवं मध्यकालीन भारत के इतिहास की प्रमुख विशेषताएँ और 18वीं शताब्दी के मध्य से वर्तमान तक की महत्वपूर्ण ऐतिहासिक घटनाएँ; भारतीय संविधान, राजनीतिक व्यवस्था एवं शासन प्रणाली, संवैधानिक विकास; भारत की भौगोलिक विशेषताएँ, पर्यावरणीय एवं पारिस्थितिकीय परिवर्तन और इनके प्रभाव; तथा समसामयिक राष्ट्रीय घटनाएँ।"
+        },
+        {
+          "name": "राजस्थान का भूगोल, इतिहास, संस्कृति एवं राजव्यवस्था",
+          "body": "राजस्थान के इतिहास की महत्वपूर्ण घटनाएँ; राजस्थान की प्रशासनिक व्यवस्था (राज्यपाल, राज्य विधान सभा, उच्च न्यायालय, राजस्थान लोक सेवा आयोग, जिला प्रशासन, राज्य मानवाधिकार आयोग, राज्य निर्वाचन आयोग, लोकायुक्त, राज्य सूचना आयोग, लोक नीति); सामाजिक-सांस्कृतिक मुद्दे; स्वतन्त्रता आन्दोलन, जन-जागरण एवं राजनीतिक एकीकरण; लोक कलाएँ, चित्रकलाएँ, हस्तशिल्प एवं स्थापत्य; मेले, त्यौहार, लोकसंगीत एवं लोकनृत्य; राजस्थानी संस्कृति, विरासत एवं साहित्य; राजस्थान के धार्मिक आन्दोलन, सन्त एवं लोकदेवता; महत्वपूर्ण पर्यटन स्थल; तथा राजस्थान के प्रमुख व्यक्तित्व।"
+        },
+        {
+          "name": "सामान्य अंग्रेज़ी एवं हिन्दी",
+          "body": "हिन्दी: संधि एवं संधि-विच्छेद, उपसर्ग एवं प्रत्यय, समस्त (सामासिक) पद की रचना और विग्रह, शब्द युग्मों का अर्थ भेद, पर्यायवाची और विलोम शब्द, शब्द शुद्धि, वाक्य शुद्धि, वाक्यांश के लिए एक उपयुक्त शब्द, पारिभाषिक शब्दावली (प्रशासन से जुड़े अंग्रेज़ी शब्दों के हिन्दी समकक्ष), तथा मुहावरे एवं लोकोक्ति। अंग्रेज़ी: अपठित गद्यांश का बोध, सामान्य त्रुटियों का सुधार और सही प्रयोग, समानार्थी और विलोम शब्द, तथा फ्रेज़ और मुहावरे।"
+        },
+        {
+          "name": "मानसिक योग्यता एवं तर्कशक्ति, आधारभूत संख्यात्मक दक्षता",
+          "body": "श्रृंखला और सादृश्य, आकृति आव्यूह (फिगर मैट्रिक्स), वर्गीकरण, वर्णमाला परीक्षण, गद्यांश और निष्कर्ष, रक्त संबंध, कोडिंग-डिकोडिंग, दिशा ज्ञान, बैठक व्यवस्था, इनपुट-आउटपुट, संख्या रैंकिंग, निर्णय लेना, शब्दों का तार्किक क्रम, और लुप्त अक्षर/संख्या भरना; साथ में गणितीय संक्रियाएँ, औसत, अनुपात, क्षेत्रफल और आयतन, प्रतिशत, साधारण और चक्रवृद्धि ब्याज, ऐकिक नियम, तथा लाभ और हानि।"
+        },
+        {
+          "name": "आधारभूत कंप्यूटर",
+          "body": "कंप्यूटर की विशेषताएँ; कंप्यूटर संगठन, जिसमें RAM, ROM, फाइल सिस्टम, इनपुट डिवाइस, सॉफ्टवेयर और हार्डवेयर व सॉफ्टवेयर का संबंध शामिल हैं; ऑपरेटिंग सिस्टम; तथा MS Office (Word, Excel/स्प्रेडशीट और PowerPoint)।"
+        }
+      ],
+      "note": "स्कीम में पाँचों भागों का अनुमानित भारांक ऊपर के क्रम में 25, 20, 15, 30 और 10 (100 में से) दिया गया है। प्रश्नों की संख्या, अंक और समय हर भर्ती का विज्ञापन तय करता है और ये बदल सकते हैं। स्कीम केवल अंग्रेज़ी में छपी है, इसलिए ऊपर भागों के हिन्दी नाम हमारे अनुवाद हैं। ऊपर दिए विषयों को अध्ययन का आधार मानें, और देखें",
+      "noteLinkLabel": "RSSB का पटवारी विज्ञापन संख्या 02/2025 (PDF)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "राजस्व मण्डल, अजमेर के लिए राजस्थान के गैर अनुसूचित क्षेत्र और अनुसूचित क्षेत्र दोनों में पटवारी के पद। 2025 के विज्ञापन में पहले 2,020 पद थे, और 20 जून 2025 के संशोधन से कुल पद 3,705 हो गए।",
+      "offerHeading": "Pariksha Saathi राजस्थान पटवारी के लिए क्या देता है",
+      "offerBody": "ऊपर दिए विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, विज्ञापित पैटर्न में पूर्ण-लंबाई मॉक टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "RSSB पटवारी सीधी भर्ती-2025 (विज्ञापन संख्या 02/2025) — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "ctaLabel": "राजस्थान पटवारी की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और राजस्थान कर्मचारी चयन बोर्ड, राजस्व मण्डल, अजमेर या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण बोर्ड के पटवारी सीधी भर्ती-2025 विज्ञापन और उसके संशोधन से लिए गए हैं और बदल सकते हैं — हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "haryana-cet",
+    "examName": "Haryana CET",
+    "officialUrl": "https://hssc.gov.in/file/45b289f8-4c0a-11f0-a79d-0a499e779f6d/advertisements",
+    "en": {
+      "pageTitle": "Haryana CET (Group C) Syllabus & Exam Pattern",
+      "lede": "Haryana CET (Common Eligibility Test, conducted by the Haryana Staff Selection Commission) is the first step to direct recruitment for the Group C posts covered by the state’s CET policy. It is one OMR-based objective paper, and its marks decide who is called to the second stage for advertised posts. Here’s the shape of it and the topics tested, taken from CET Advt. No. 01/2025 and the CET policy printed with it, with a link to the advertisement for the exact marks and timing.",
+      "stagesHeading": "The stages",
+      "stages": [
+        {
+          "name": "Common Eligibility Test (CET)",
+          "body": "One bilingual (English and Hindi) objective paper answered offline on an OMR sheet. There is no negative marking for a wrong answer, but every question has a fifth option, E, for “not attempted”: if you do not want to answer a question you must fill that bubble, and a question left with no bubble filled costs one mark. To qualify you need at least 50% (General category) or 40% (reserved categories), and marks across shifts are normalised."
+        },
+        {
+          "name": "Your CET score",
+          "body": "CET marks are valid for three years from the date the result is declared. There is no limit on attempts: you can sit again to improve your score, and an improved score gets a fresh three-year validity. For shortlisting, your highest score across all CET attempts counts, in the category you claim in the current application."
+        },
+        {
+          "name": "Second stage (CET Phase-II)",
+          "body": "For each later post-wise advertisement, the Commission calls CET-qualified applicants in order of CET marks. For Group C posts other than police service and teaching posts, up to 10 times the number of advertised posts sit a written and/or skill examination, and final selection is made on its marks. For police service posts, a Physical Measurement Test and a Physical Screening Test, both qualifying, come before the written test. Each Phase-II advertisement sets its own pattern and syllabus."
+        }
+      ],
+      "subjectsHeading": "What’s tested in the CET",
+      "subjects": [
+        {
+          "name": "General Awareness",
+          "body": "Your awareness of the environment and its relevance to society, current events, and matters of everyday observation, including questions on India and its neighbouring countries: history, Indian polity and Constitution, art and culture, geography, economics, general policy, national and international organisations and institutions, environment, globalisation, climate, events and general science."
+        },
+        {
+          "name": "Reasoning",
+          "body": "Verbal and non-verbal questions: semantic, symbolic, number and figural analogies, symbolic operations, trends, space orientation, semantic, number and figural classification, observation, relationships, concepts, Venn diagrams, drawing inferences, punched-hole pattern folding and unfolding, semantic and figural series, figural pattern folding and completion, number series, embedded figures, critical thinking, problem solving, emotional intelligence, arithmetical number series, arithmetical reasoning, word building, social intelligence, and coding and decoding."
+        },
+        {
+          "name": "Quantitative Ability",
+          "body": "Number system, including simplification, decimals, fractions and relationships between numbers; LCM and HCF, ratio and proportion, percentage, roots, average, profit and loss, discount, simple and compound interest, mensuration, partnership, mixture and alligation, time and work, time and distance, tables and graphs, trigonometry, basic algebra and geometry."
+        },
+        {
+          "name": "English Language",
+          "body": "Spot the error, fill in the blanks, synonyms and homonyms, antonyms, spellings and misspelt words, idioms and phrases, one-word substitution, improvement of sentences, active and passive voice, direct and indirect narration, shuffling of sentence parts and of sentences in a passage, tenses, cloze passage and comprehension passage."
+        },
+        {
+          "name": "Hindi Language",
+          "body": "Letters, vowels, consonants, ayogvah and foreign sounds; words, pad and padbandh; nouns, pronouns, adjectives, verbs and adverbs; vikari and avikari words, postpositions, conjunctions, interjections and nipat; number, gender, case (karak) and tense; sandhi, prefixes, suffixes and samas; synonyms, antonyms, words with several meanings, words with one meaning, word pairs, and tatsam and tadbhav words; alankar; idioms and proverbs; sentences, sentence correction and spelling; punctuation; and one word for many words."
+        },
+        {
+          "name": "Computer Knowledge",
+          "body": "Computer basics: organisation of a computer, the CPU, input/output devices, computer memory and its organisation, back-up devices, ports, Windows Explorer, keyboard shortcuts, the Windows operating system and the basics of MS Word, MS Excel and PowerPoint; and working with the internet and e-mail: browsing and searching, downloading and uploading, and managing an e-mail account."
+        },
+        {
+          "name": "General Knowledge of Haryana",
+          "body": "The history, literature, geography, economy, civics, polity, environment, art, culture, customs, norms, society, current affairs and events of Haryana. Under the CET policy this part carries 25% of the weightage, and the six subjects above together carry the other 75%."
+        }
+      ],
+      "note": "Questions are of Senior Secondary (10+2) level, except Hindi and English, which are of Matric level. The CET policy sets the 75/25 weightage, but the advertisement prints no question count for each subject, and marks and timing are set by each CET advertisement and can change. Treat the subjects above as the shape to study toward, and check",
+      "noteLinkLabel": "HSSC CET Advt. No. 01/2025",
+      "recruitsHeading": "What the CET is for",
+      "recruitsBody": "The CET has no vacancies of its own and does not by itself lead to a job. Qualifying it lets you apply against the Commission’s later post-wise advertisements for Group C posts covered by the CET policy, including posts in the police service, prisons and home guards; teaching posts and Ex-Agniveer posts are outside the policy. Reservation is given only to bona fide residents of Haryana.",
+      "offerHeading": "What Pariksha Saathi offers for Haryana CET",
+      "offerBody": "Free topic-wise lessons and practice for the subjects above, sectional tests by subject, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "HSSC CET (Group C), Advt. No. 01/2025 — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "ctaLabel": "Start studying Haryana CET free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Haryana Staff Selection Commission or any government body. The syllabus and pattern details above come from the Commission’s CET Advt. No. 01/2025 and the CET policy and may change — always confirm against the official advertisement linked above."
+    },
+    "hi": {
+      "pageTitle": "हरियाणा CET (समूह 'ग') सिलेबस और परीक्षा पैटर्न",
+      "lede": "हरियाणा CET (सामान्य पात्रता परीक्षा, जिसे हरियाणा कर्मचारी चयन आयोग आयोजित करता है) राज्य की CET नीति के अंतर्गत आने वाले समूह 'ग' के पदों पर सीधी भर्ती का पहला कदम है। यह ओ.एम.आर. आधारित एक वस्तुनिष्ठ प्रश्नपत्र है, और इसके अंकों से तय होता है कि विज्ञापित पदों के दूसरे चरण के लिए किसे बुलाया जाएगा। यहाँ CET विज्ञापन संख्या 01/2025 और उसके साथ छपी CET नीति के आधार पर इसकी संरचना और परखे जाने वाले विषय दिए गए हैं, साथ ही सटीक अंक और समय के लिए विज्ञापन का लिंक भी।",
+      "stagesHeading": "चरण",
+      "stages": [
+        {
+          "name": "सामान्य पात्रता परीक्षा (CET)",
+          "body": "ओ.एम.आर. उत्तर पत्रक पर ऑफ़लाइन हल किया जाने वाला एक द्विभाषी (अंग्रेज़ी और हिंदी) वस्तुनिष्ठ प्रश्नपत्र। गलत उत्तर पर कोई नकारात्मक अंकन नहीं है, पर हर प्रश्न में पाँचवाँ विकल्प E ('प्रयास नहीं') होता है: जो प्रश्न आप हल नहीं करना चाहते, उस पर यह गोला भरना होता है, और जिस प्रश्न पर कोई भी गोला न भरा हो, उस पर एक अंक काटा जाता है। उत्तीर्ण होने के लिए सामान्य प्रवर्ग को कम से कम 50% और आरक्षित प्रवर्गों को 40% अंक चाहिए, और अलग-अलग पालियों के अंक सामान्यीकृत किए जाते हैं।"
+        },
+        {
+          "name": "आपका CET स्कोर",
+          "body": "CET अंक परिणाम की घोषणा की तिथि से तीन वर्ष तक वैध रहते हैं। प्रयासों की कोई सीमा नहीं है: अंक सुधारने के लिए आप दोबारा परीक्षा दे सकते हैं, और सुधरे हुए अंकों को फिर से तीन वर्ष की वैधता मिलती है। शॉर्टलिस्टिंग में आपके सभी CET प्रयासों के सर्वाधिक अंक गिने जाते हैं, उसी प्रवर्ग में जिसका दावा आपने वर्तमान आवेदन में किया है।"
+        },
+        {
+          "name": "दूसरा चरण (CET फेज़-II)",
+          "body": "आयोग के हर बाद वाले पदवार विज्ञापन के लिए CET उत्तीर्ण आवेदकों को CET अंकों के क्रम में बुलाया जाता है। पुलिस सेवा और शिक्षण पदों को छोड़कर समूह 'ग' के पदों के लिए विज्ञापित पदों के अधिकतम 10 गुना अभ्यर्थी लिखित और/या कौशल परीक्षा देते हैं, और अंतिम चयन उसी परीक्षा के अंकों पर होता है। पुलिस सेवा के पदों के लिए लिखित परीक्षा से पहले शारीरिक माप परीक्षण और शारीरिक जांच परीक्षण होते हैं, दोनों केवल अर्हक। हर फेज़-II विज्ञापन अपना पैटर्न और पाठ्यक्रम स्वयं तय करता है।"
+        }
+      ],
+      "subjectsHeading": "CET में क्या परखा जाता है",
+      "subjects": [
+        {
+          "name": "सामान्य जागरूकता",
+          "body": "परिवेश और समाज में उसकी प्रासंगिकता की आपकी जानकारी, समसामयिक घटनाएँ और रोज़मर्रा के अवलोकन की बातें, जिनमें भारत और पड़ोसी देशों से जुड़े प्रश्न शामिल हैं: इतिहास, भारतीय राजव्यवस्था और संविधान, कला एवं संस्कृति, भूगोल, अर्थशास्त्र, सामान्य नीति, राष्ट्रीय/अंतर्राष्ट्रीय संगठन और संस्थान, पर्यावरण, वैश्वीकरण, जलवायु, घटनाएँ और सामान्य विज्ञान।"
+        },
+        {
+          "name": "तर्कशक्ति",
+          "body": "शाब्दिक और अशाब्दिक दोनों प्रकार के प्रश्न: शाब्दिक, प्रतीकात्मक, संख्यात्मक और आकृतिगत सादृश्य, प्रतीकात्मक संक्रियाएँ, प्रवृत्तियाँ, स्थानिक अभिविन्यास, शाब्दिक, संख्या और आकृतिगत वर्गीकरण, अवलोकन, संबंध, अवधारणाएँ, वेन आरेख, निष्कर्ष निकालना, छिद्रित कागज़ को मोड़ना और खोलना, शाब्दिक और आकृतिगत श्रृंखला, आकृति मोड़ना और पूर्ण करना, संख्या श्रृंखला, अंतर्निहित आकृतियाँ, आलोचनात्मक चिंतन, समस्या समाधान, भावनात्मक बुद्धिमत्ता, अंकगणितीय संख्या श्रृंखला, अंकगणितीय तर्क, शब्द निर्माण, सामाजिक बुद्धिमत्ता, और कोडिंग-डिकोडिंग।"
+        },
+        {
+          "name": "मात्रात्मक योग्यता",
+          "body": "संख्या पद्धति, जिसमें सरलीकरण, दशमलव, भिन्न और संख्याओं के आपसी संबंध शामिल हैं; LCM और HCF, अनुपात एवं समानुपात, प्रतिशत, मूल, औसत, लाभ-हानि, बट्टा, साधारण और चक्रवृद्धि ब्याज, क्षेत्रमिति, साझेदारी, मिश्रण और एलीगेशन, समय और कार्य, समय और दूरी, तालिकाएँ और ग्राफ, त्रिकोणमिति, बुनियादी बीजगणित और ज्यामिति।"
+        },
+        {
+          "name": "अंग्रेज़ी भाषा",
+          "body": "त्रुटि पहचान (स्पॉट द एरर), रिक्त स्थान भरना, समानार्थी और होमोनिम, विलोम, वर्तनी और गलत वर्तनी वाले शब्द, मुहावरे और फ्रेज़, एक शब्द प्रतिस्थापन, वाक्य सुधार, कर्तृवाच्य और कर्मवाच्य, प्रत्यक्ष और अप्रत्यक्ष कथन, वाक्य-भागों और गद्यांश में वाक्यों का क्रम, काल (टेंस), क्लोज़ पैसेज और अपठित गद्यांश।"
+        },
+        {
+          "name": "हिंदी भाषा",
+          "body": "वर्ण, स्वर, व्यंजन, अयोगवाह और विदेशी ध्वनियाँ; शब्द, पद और पदबंध; संज्ञा, सर्वनाम, विशेषण, क्रिया और क्रिया विशेषण; विकारी और अविकारी शब्द, संबंधबोधक, समुच्चय बोधक, विस्मय बोधक और निपात (अवधारक); वचन, लिंग, कारक और काल; संधि, उपसर्ग, प्रत्यय और समास; पर्यायवाची, विलोम व अनेकार्थी शब्द, एकार्थक शब्द, युग्म शब्द और तद्भव-तत्सम शब्द; अलंकार; मुहावरे और लोकोक्तियाँ; वाक्य, वाक्य शोधन और वर्तनी (शब्द एवं वाक्य शुद्धिकरण); विराम चिह्न; और अनेक शब्दों के लिए एक शब्द।"
+        },
+        {
+          "name": "कंप्यूटर ज्ञान",
+          "body": "कंप्यूटर की बुनियादी बातें: कंप्यूटर का संगठन, सेंट्रल प्रोसेसिंग यूनिट (CPU), इनपुट/आउटपुट डिवाइस, कंप्यूटर मेमोरी और उसका संगठन, बैक-अप डिवाइस, पोर्ट, विंडोज़ एक्सप्लोरर, कीबोर्ड शॉर्टकट, विंडोज़ ऑपरेटिंग सिस्टम तथा MS Word, MS Excel और PowerPoint की बुनियादी बातें; और इंटरनेट व ई-मेल का उपयोग: वेब ब्राउज़िंग और सर्च, डाउनलोड और अपलोड, तथा ई-मेल खाता चलाना।"
+        },
+        {
+          "name": "हरियाणा का सामान्य ज्ञान",
+          "body": "हरियाणा का इतिहास, साहित्य, भूगोल, अर्थव्यवस्था, नागरिक शास्त्र, राजव्यवस्था, पर्यावरण, कला, संस्कृति, रीति-रिवाज, मानदंड, समाज, समसामयिक विषय और घटनाएँ। CET नीति में इस भाग को 25% भारांक दिया गया है, और ऊपर के छह विषयों को मिलाकर बाकी 75%।"
+        }
+      ],
+      "note": "प्रश्न वरिष्ठ माध्यमिक (10+2) स्तर के होते हैं, केवल हिंदी और अंग्रेज़ी के प्रश्न मैट्रिक स्तर के। CET नीति 75/25 का भारांक तय करती है, पर विज्ञापन में हर विषय के प्रश्नों की संख्या नहीं दी गई है, और अंक व समय हर CET विज्ञापन तय करता है और ये बदल सकते हैं। ऊपर दिए विषयों को अध्ययन का आधार मानें, और देखें",
+      "noteLinkLabel": "HSSC का CET विज्ञापन संख्या 01/2025",
+      "recruitsHeading": "CET किसलिए है",
+      "recruitsBody": "CET की अपनी कोई रिक्तियां नहीं हैं और यह अपने आप में नौकरी नहीं दिलाती। इसे उत्तीर्ण करने पर आप CET नीति के अंतर्गत आने वाले समूह 'ग' के पदों के लिए आयोग के बाद वाले पदवार विज्ञापनों में आवेदन कर सकते हैं, जिनमें पुलिस सेवा, कारागार और होम गार्ड्स के पद भी शामिल हैं; शिक्षण पद और पूर्व-अग्निवीर के पद इस नीति से बाहर हैं। आरक्षण केवल हरियाणा के मूल निवासियों को मिलता है।",
+      "offerHeading": "Pariksha Saathi हरियाणा CET के लिए क्या देता है",
+      "offerBody": "ऊपर दिए विषयों के लिए मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "HSSC CET (समूह 'ग'), विज्ञापन संख्या 01/2025 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "ctaLabel": "हरियाणा CET की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और हरियाणा कर्मचारी चयन आयोग या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण आयोग के CET विज्ञापन संख्या 01/2025 और CET नीति से लिए गए हैं और बदल सकते हैं — हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
+  },
+  {
+    "slug": "dsssb-tgt",
+    "examName": "DSSSB TGT",
+    "officialUrl": "https://dsssb.delhi.gov.in/sites/default/files/DSSSB/circulars-orders/advertisement_no_06-2025.pdf",
+    "en": {
+      "pageTitle": "DSSSB TGT Syllabus & Exam Pattern",
+      "lede": "DSSSB TGT (Trained Graduate Teacher recruitment by the Delhi Subordinate Services Selection Board) is a one-tier, computer-based exam: one paper with a section on general subjects and a section on the subject you will teach. Here’s the shape of it and the topics tested, taken from Advt. No. 06/2025 and the Board’s indicative syllabi, with a link to the advertisement for the exact marks and timing.",
+      "stagesHeading": "The exam",
+      "stages": [
+        {
+          "name": "One-tier exam (Technical/Teaching): Section A",
+          "body": "Objective multiple-choice questions of one mark each on five general subjects of equal weight: General Awareness, General Intelligence & Reasoning Ability, Arithmetical & Numerical Ability, Hindi Language & Comprehension, and English Language & Comprehension. Section A has no minimum qualifying marks, but its marks are added to Section B’s for the final merit list."
+        },
+        {
+          "name": "The same paper: Section B",
+          "body": "Objective questions of one mark each on the subject of the post, including questions on teaching methodology / B.Ed. This is the section with minimum qualifying marks: in Advt. No. 06/2025, 40% for General/EWS, 35% for OBC (Delhi) and 30% for SC/ST/PwBD, with a 5% relaxation for ex-servicemen subject to a minimum of 30%. On equal marks in the same category, the candidate with more marks in Section B ranks higher."
+        },
+        {
+          "name": "Before you apply: CTET and B.Ed.",
+          "body": "For the subject TGT posts, a pass in CTET conducted by CBSE is part of the essential qualification, along with a bachelor’s degree in the subject with at least 50% marks (or a master’s degree, with 50% in either degree) and a B.Ed., or a 4-year integrated B.El.Ed., B.Sc.B.Ed. or B.A.B.Ed. course as listed for each post. CTET is also compulsory for the Special Education Teacher post; the advertisement does not list it for Drawing Teacher."
+        }
+      ],
+      "subjectsHeading": "What’s tested",
+      "subjects": [
+        {
+          "name": "Section A: General Awareness",
+          "body": "Current events, history, polity, the Constitution, sports, art and culture, geography, economics, everyday science, scientific research, and national and international organisations and institutions."
+        },
+        {
+          "name": "Section A: General Intelligence & Reasoning Ability",
+          "body": "Topics such as analogy, classification, series, coding-decoding, blood relations, direction sense and logical Venn diagrams."
+        },
+        {
+          "name": "Section A: Arithmetical & Numerical Ability",
+          "body": "Topics such as number systems, simplification, decimals, data interpretation, fractions, LCM and HCF, ratio and proportion, percentage, average, and profit and loss."
+        },
+        {
+          "name": "Section A: Hindi and English Language & Comprehension",
+          "body": "Two separate tests, one in Hindi and one in English, each covering vocabulary, grammar, sentence structure, synonyms, antonyms and their correct usage."
+        },
+        {
+          "name": "Section B: your subject",
+          "body": "Graduation-level questions on the subject of the post, following the Board’s indicative syllabus for each post code. For example, TGT Mathematics covers calculus, algebra, real analysis, differential equations, group and ring theory, linear algebra, metric spaces and complex analysis; TGT Social Science covers history, geography, economics and civics; TGT Natural Science covers physics, chemistry and biology topics, including zoology; and the language posts centre on the literature of the language concerned."
+        },
+        {
+          "name": "Section B: Teaching Education and Methodology",
+          "body": "Every post’s indicative syllabus ends with the same ten topics: learning and teaching; language across the curriculum; understanding disciplines and subjects; gender, school and society; pedagogy of a school subject; knowledge and curriculum; assessment for learning; creating an inclusive school; childhood and growing up; and drama and art in education."
+        }
+      ],
+      "note": "Questions are bilingual (Hindi and English), except in the language tests, and there is negative marking for wrong answers. The Section B syllabi are indicative and print no marks or weightage for their topics. The number of questions, marks and timing are set by each advertisement and can change, so treat the subjects above as the shape to study toward, and check",
+      "noteLinkLabel": "DSSSB Advt. No. 06/2025 (PDF)",
+      "recruitsHeading": "What this recruitment is for",
+      "recruitsBody": "Advt. No. 06/2025 fills Trained Graduate Teacher posts in Mathematics, English, Social Science, Natural Science, Hindi, Sanskrit, Urdu and Punjabi (as separate male and female posts) in the Directorate of Education, Delhi, plus Drawing Teacher in the Directorate and Special Education Teacher in the New Delhi Municipal Council. It printed 5,346 tentative vacancies; a corrigendum of 19 January 2026 lowered the EWS vacancies in six post codes without printing a new total.",
+      "offerHeading": "What Pariksha Saathi offers for DSSSB TGT",
+      "offerBody": "Free topic-wise lessons and practice, sectional tests by subject, a Mistake Notebook that tracks your weak topics automatically, and dated current-affairs capsules.",
+      "sourceHeading": "Official source & latest updates",
+      "officialLinkLabel": "DSSSB TGT, Advt. No. 06/2025 — official advertisement",
+      "examNoticesLinkLabel": "Latest admit card, result and deadline alerts on Pariksha Saathi",
+      "ctaLabel": "Start studying DSSSB TGT free",
+      "backLabel": "Home",
+      "disclaimer": "Pariksha Saathi is an independent project and is not affiliated with the Delhi Subordinate Services Selection Board or any government body. The syllabus and pattern details above come from the Board’s Advt. No. 06/2025 and its indicative syllabi and may change — always confirm against the official advertisement linked above."
+    },
+    "hi": {
+      "pageTitle": "DSSSB TGT सिलेबस और परीक्षा पैटर्न",
+      "lede": "DSSSB TGT (दिल्ली अधीनस्थ सेवा चयन बोर्ड द्वारा प्रशिक्षित स्नातक शिक्षक की भर्ती) एक-स्तरीय कंप्यूटर आधारित परीक्षा है: एक प्रश्नपत्र, जिसमें एक खंड सामान्य विषयों का और एक खंड उस विषय का होता है जिसे आप पढ़ाएँगे। यहाँ विज्ञापन संख्या 06/2025 और बोर्ड के सांकेतिक पाठ्यक्रम के आधार पर इसकी संरचना और परखे जाने वाले विषय दिए गए हैं, साथ ही सटीक अंक और समय के लिए विज्ञापन का लिंक भी।",
+      "stagesHeading": "परीक्षा",
+      "stages": [
+        {
+          "name": "एक-स्तरीय परीक्षा (तकनीकी/शिक्षण): खंड A",
+          "body": "पाँच सामान्य विषयों पर एक-एक अंक के वस्तुनिष्ठ बहुविकल्पीय प्रश्न, सभी विषयों का भार बराबर: सामान्य जागरूकता, सामान्य बुद्धि एवं तर्क क्षमता, अंकगणितीय एवं संख्यात्मक क्षमता, हिंदी भाषा एवं बोध, और अंग्रेज़ी भाषा एवं बोध। खंड A में कोई न्यूनतम अर्हक अंक नहीं है, पर अंतिम मेरिट सूची के लिए इसके अंक खंड B के अंकों में जोड़े जाते हैं।"
+        },
+        {
+          "name": "उसी प्रश्नपत्र का खंड B",
+          "body": "पद के विषय पर एक-एक अंक के वस्तुनिष्ठ प्रश्न, शिक्षण पद्धति/बी.एड. के प्रश्नों सहित। न्यूनतम अर्हक अंक इसी खंड पर लागू होते हैं: विज्ञापन संख्या 06/2025 में सामान्य/EWS के लिए 40%, OBC (दिल्ली) के लिए 35% और SC/ST/PwBD के लिए 30%, तथा भूतपूर्व सैनिकों को 5% की छूट, पर न्यूनतम 30%। एक ही श्रेणी में अंक बराबर होने पर खंड B में अधिक अंक वाला अभ्यर्थी ऊपर रहता है।"
+        },
+        {
+          "name": "आवेदन से पहले: CTET और बी.एड.",
+          "body": "विषय वाले TGT पदों के लिए CBSE द्वारा आयोजित CTET उत्तीर्ण होना अनिवार्य योग्यता का हिस्सा है, साथ में संबंधित विषय में कम से कम 50% अंकों के साथ स्नातक उपाधि (या स्नातकोत्तर उपाधि, जिसमें दोनों में से किसी एक उपाधि में 50% अंक हों) और बी.एड., या हर पद के लिए बताया गया 4 वर्षीय एकीकृत बी.एल.एड., बी.एससी.बी.एड. या बी.ए.बी.एड. पाठ्यक्रम। विशेष शिक्षा शिक्षक के पद के लिए भी CTET अनिवार्य है; ड्राइंग शिक्षक के लिए विज्ञापन में CTET का उल्लेख नहीं है।"
+        }
+      ],
+      "subjectsHeading": "क्या परखा जाता है",
+      "subjects": [
+        {
+          "name": "खंड A: सामान्य जागरूकता",
+          "body": "समसामयिक घटनाएँ, इतिहास, राजव्यवस्था, संविधान, खेल, कला एवं संस्कृति, भूगोल, अर्थशास्त्र, दैनिक विज्ञान, वैज्ञानिक अनुसंधान, और राष्ट्रीय/अंतर्राष्ट्रीय संगठन एवं संस्थान।"
+        },
+        {
+          "name": "खंड A: सामान्य बुद्धि एवं तर्क क्षमता",
+          "body": "सादृश्य, वर्गीकरण, श्रृंखला, कोडिंग-डिकोडिंग, रक्त संबंध, दिशा ज्ञान परीक्षण और तार्किक वेन आरेख जैसे विषय।"
+        },
+        {
+          "name": "खंड A: अंकगणितीय एवं संख्यात्मक क्षमता",
+          "body": "संख्या पद्धति, सरलीकरण, दशमलव, आँकड़ों की व्याख्या, भिन्न, LCM और HCF, अनुपात एवं समानुपात, प्रतिशत, औसत और लाभ-हानि जैसे विषय।"
+        },
+        {
+          "name": "खंड A: हिंदी और अंग्रेज़ी भाषा एवं बोध",
+          "body": "दो अलग परीक्षाएँ, एक हिंदी में और एक अंग्रेज़ी में, दोनों में शब्दावली, व्याकरण, वाक्य संरचना, पर्यायवाची, विलोम और उनका सही प्रयोग।"
+        },
+        {
+          "name": "खंड B: आपका विषय",
+          "body": "पद के विषय पर स्नातक स्तर के प्रश्न, हर पद कोड के लिए बोर्ड के सांकेतिक पाठ्यक्रम के अनुसार। उदाहरण के लिए, TGT गणित में कलन, बीजगणित, वास्तविक विश्लेषण, अवकल समीकरण, समूह और वलय सिद्धांत, रैखिक बीजगणित, दूरीक समष्टि और सम्मिश्र विश्लेषण; TGT सामाजिक विज्ञान में इतिहास, भूगोल, अर्थशास्त्र और नागरिक शास्त्र; TGT प्राकृतिक विज्ञान में भौतिकी, रसायन और जीव विज्ञान (प्राणि विज्ञान सहित) के विषय; और भाषा के पदों में मुख्यतः संबंधित भाषा का साहित्य।"
+        },
+        {
+          "name": "खंड B: शिक्षण शिक्षा एवं पद्धति",
+          "body": "हर पद के सांकेतिक पाठ्यक्रम के अंत में यही दस विषय हैं: अधिगम एवं शिक्षण; पाठ्यक्रम में भाषा; अनुशासन और विषय की समझ; जेंडर, विद्यालय और समाज; विद्यालयी विषय का शिक्षाशास्त्र; ज्ञान और पाठ्यचर्या; सीखने के लिए आकलन; समावेशी विद्यालय का निर्माण; बचपन और बड़ा होना; तथा शिक्षा में नाटक और कला।"
+        }
+      ],
+      "note": "प्रश्न द्विभाषी (हिंदी और अंग्रेज़ी) होते हैं, केवल भाषा की परीक्षाएँ संबंधित भाषा में होती हैं, और गलत उत्तर पर नकारात्मक अंकन होता है। खंड B के पाठ्यक्रम सांकेतिक हैं और उनमें विषयों के अंक या भारांक नहीं दिए गए हैं। प्रश्नों की संख्या, अंक और समय हर विज्ञापन तय करता है और ये बदल सकते हैं। ऊपर दिए विषयों को अध्ययन का आधार मानें, और देखें",
+      "noteLinkLabel": "DSSSB का विज्ञापन संख्या 06/2025 (PDF)",
+      "recruitsHeading": "यह भर्ती किसके लिए है",
+      "recruitsBody": "विज्ञापन संख्या 06/2025 दिल्ली के शिक्षा निदेशालय में गणित, अंग्रेज़ी, सामाजिक विज्ञान, प्राकृतिक विज्ञान, हिंदी, संस्कृत, उर्दू और पंजाबी के प्रशिक्षित स्नातक शिक्षक (TGT) के पद (पुरुष और महिला के अलग-अलग पद), साथ ही निदेशालय में ड्राइंग शिक्षक और नई दिल्ली नगरपालिका परिषद में विशेष शिक्षा शिक्षक के पद भरता है। इसमें 5,346 अस्थायी रिक्तियां छपी थीं; 19 जनवरी 2026 के शुद्धिपत्र ने छह पद कोड में EWS रिक्तियां घटाईं, पर नया कुल योग नहीं छापा।",
+      "offerHeading": "Pariksha Saathi DSSSB TGT के लिए क्या देता है",
+      "offerBody": "मुफ्त विषयवार पाठ और अभ्यास, विषयवार सेक्शनल टेस्ट, आपके कमज़ोर विषयों को अपने-आप ट्रैक करने वाली Mistake Notebook, और तारीख़वार करंट अफेयर्स कैप्सूल।",
+      "sourceHeading": "आधिकारिक स्रोत और नवीनतम अपडेट",
+      "officialLinkLabel": "DSSSB TGT, विज्ञापन संख्या 06/2025 — आधिकारिक विज्ञापन",
+      "examNoticesLinkLabel": "Pariksha Saathi पर नवीनतम एडमिट कार्ड, परिणाम और डेडलाइन अलर्ट",
+      "ctaLabel": "DSSSB TGT की मुफ्त पढ़ाई शुरू करें",
+      "backLabel": "होम",
+      "disclaimer": "Pariksha Saathi एक स्वतंत्र परियोजना है और दिल्ली अधीनस्थ सेवा चयन बोर्ड या किसी भी सरकारी निकाय से संबद्ध नहीं है। ऊपर दिए गए पाठ्यक्रम और पैटर्न विवरण बोर्ड के विज्ञापन संख्या 06/2025 और उसके सांकेतिक पाठ्यक्रम से लिए गए हैं और बदल सकते हैं — हमेशा ऊपर दिए गए आधिकारिक विज्ञापन से पुष्टि करें।"
+    }
+  },
 ];
 
 export function findSyllabusEntry(slug) {

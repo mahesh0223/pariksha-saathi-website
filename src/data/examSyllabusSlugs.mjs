@@ -24,4 +24,9 @@ export const EXAM_SYLLABUS_SLUGS = [
   'bpsc',
   'mppsc',
   'rpsc',
+  'upsssc-pet',
+  'bssc-inter',
+  'rajasthan-patwari',
+  'haryana-cet',
+  'dsssb-tgt',
 ];
