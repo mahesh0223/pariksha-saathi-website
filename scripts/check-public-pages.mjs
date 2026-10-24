@@ -481,8 +481,8 @@ for (const lang of ['en', 'hi']) {
   console.log(`Verified ${PYQ_INDEX_EXAMS.length} solved-paper list page(s) x 2 languages: every shift and answer-key notice linked, hreflang, sitemap, linked from each shift page and hub.`);
 }
 
-// Railway mock tests (src/lib/mockTestsPage.mjs, from 23 Oct 2026): RRB publishes no papers to practise from, so each RRB
-// exam gets a page of numbered mocks in the notification's pattern. Every stage on the page carries its sourced, dated
+// Mock tests (src/lib/mockTestsPage.mjs; Railway from 23 Oct 2026, every exam with a fact sheet from 24 Oct): each
+// exam gets a page of numbered mocks in the notification's pattern, which never claims to hold exam papers. Every stage on the page carries its sourced, dated
 // pattern and a grid of player links in the page's language; the hub links the page; the player is an SPA route that
 // robots.txt keeps out of search.
 {
@@ -511,11 +511,12 @@ for (const lang of ['en', 'hi']) {
         }
         mocks += links.length;
       }
+      assert(!/official papers|आधिकारिक प्रश्नपत्रों/.test(html), `${urlPath}: claims questions from official papers (none are published: src/data/pyqWithdrawn.mjs)`);
       const hub = readFileSync(`dist${examHubPath(examId, lang)}index.html`, 'utf8');
       assert(hub.includes(`href="${urlPath}"`), `${examHubPath(examId, lang)}: missing the mock-tests link`);
     }
   }
-  console.log(`Verified ${MOCK_TEST_EXAMS.length} Railway mock-test page(s) x 2 languages: ${mocks} mock links, a sourced pattern per stage, hreflang, sitemap, hub links, player kept out of search.`);
+  console.log(`Verified ${MOCK_TEST_EXAMS.length} exams' mock-test page(s) x 2 languages: ${mocks} mock links, a sourced pattern per stage, hreflang, sitemap, hub links, player kept out of search.`);
 }
 
 // Every exam-notice page carries a "What this means for you" paragraph (src/data/examNoticeGuidance.mjs): a

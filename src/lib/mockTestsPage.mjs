@@ -1,5 +1,5 @@
-// One Railway exam's mock tests (/exams/<exam>/mock-tests/ and the /hi/ twin): the page a search for "RRB NTPC mock
-// test" should land on. For every stage whose pattern the notification fixes, the official pattern (sections, questions,
+// One exam's mock tests (/exams/<exam>/mock-tests/ and the /hi/ twin): the page a search for "SSC CGL mock test" or
+// "RRB NTPC mock test" should land on. Railway exams from 23 Oct 2026, every exam with a fact sheet from 24 Oct. For every stage whose pattern the notification fixes, the official pattern (sections, questions,
 // time, negative marking) with its source and check date, and the numbered mocks of that stage, each opening the
 // in-browser player (src/pages/mocks/MockTestPage.tsx). Plain HTML, no app script. Data: the server's
 // GET /v1/exams/:examId/mocks?lang= (pariksha-saathi-server docs/REAL_PAPER.md), one call per language - a series can be
@@ -21,6 +21,16 @@ const pick = (bilingual, lang) => bilingual?.[lang] ?? bilingual?.en ?? '';
 // 0.3333... is how the fact sheet stores RRB's "one-third of the marks"; print it the way the notice does.
 const fraction = (x) => (Math.abs(x - 1 / 3) < 1e-6 ? '1/3' : Math.abs(x - 0.25) < 1e-6 ? '1/4' : String(Math.round(x * 100) / 100));
 const questionsIn = (stage) => stage.sections.reduce((n, s) => n + s.questionCount, 0);
+// A stage whose mocks cover one part of it (SSC CGL Tier-II: Paper-I, Section-I) names that part; a part that only
+// restates the stage (IBPS: "Preliminary Examination (Online)" / "Preliminary Examination (Objective Test)") does not.
+const words = (name, n) => name.replace(/[^\p{L}\p{N}\s]/gu, ' ').trim().split(/\s+/).slice(0, n).join(' ').toLowerCase();
+const stageLabel = (stage, lang) => {
+  const stageName = pick(stage.stageName, lang);
+  const partName = pick(stage.partName, lang);
+  const restates = !partName || partName === stageName || stageName.includes(partName)
+    || words(partName, 2) === words(stageName, 2) || words(stageName, 99).includes(words(partName, 3));
+  return restates ? stageName : `${stageName}, ${partName}`;
+};
 
 // Stages a notification lists but our mocks cannot follow, said plainly rather than left out silently.
 const NOT_OFFERED = {
@@ -45,27 +55,27 @@ const T = {
     description: (s, series) => `${s.total} free full-length ${s.examName} mock tests built to the pattern in the official notification (${series.cycleLabel}): the same sections, number of questions, time and negative marking. In English or Hindi, no sign-up.`,
     lede: (s, series) => `${s.total} free full-length mock tests for ${s.examName}, each built to the pattern in the official notification (${series.cycleLabel}): the same sections, number of questions, time limit and negative marking. Every mock keeps its questions, so you can retake it and compare scores, and no question repeats within a stage's series. Take them online in English or Hindi; no sign-up.`,
     back: (s) => `${s.examName} exam page`,
-    stageTitle: (stage) => `${pick(stage.stageName, 'en')}: ${stage.mockCount} mock test${stage.mockCount === 1 ? '' : 's'}`,
+    stageTitle: (stage) => `${stageLabel(stage, 'en')}: ${stage.mockCount} mock test${stage.mockCount === 1 ? '' : 's'}`,
     thSection: 'Section',
     thQuestions: 'Questions',
     total: 'Total',
     shortNote: (n) => ` (${n} in our mocks)`,
-    meta: (stage) => `Time: ${stage.durationMinutes} minutes for the whole paper.`,
+    meta: (stage) => `Time: ${stage.durationMinutes} minutes${stage.sectionTimers ? ', each section timed on its own as the notification sets it' : ' for the whole paper'}.`,
     negative: (x) => (x == null ? 'Negative marking: not stated in the notification, so nothing is deducted in these mocks.' : `Negative marking: ${fraction(x)} mark deducted for each wrong answer; an unanswered question scores zero.`),
     source: 'Pattern from the official notification',
     checked: 'checked',
     mock: (n) => `Mock ${n}`,
     startHint: 'Each mock opens in your browser and starts its timer when you press Start.',
     howTitle: 'How these mocks are made',
-    how: 'These are practice mocks, not RRB question papers: RRB does not publish its papers for practice, so each mock is filled from the Pariksha Saathi question bank, topic by topic, in the official sections. Some questions are from SSC\'s official papers and say so; the rest are written by Pariksha Saathi with AI assistance and fact-checked. The pattern figures are copied from the notification linked above.',
+    how: 'These are practice mocks in the official pattern, not the exam body\'s question papers: each mock is filled from the Pariksha Saathi question bank, topic by topic, in the official sections. The questions are written by Pariksha Saathi with AI assistance and fact-checked. The pattern figures are copied from the notification linked above.',
     error: 'Spotted an error?',
     tell: 'Tell us',
     faqTitle: 'Frequently asked questions',
     faq: (s) => [
       { q: `Are these ${s.examName} mock tests free?`, a: 'Yes. Every mock is free to take in your browser, with no sign-up and no payment.' },
       { q: `Is there negative marking in these ${s.examName} mocks?`, a: s.negative == null ? 'The notification does not state negative marking, so nothing is deducted.' : `Yes, as the notification states: ${fraction(s.negative)} mark is deducted for each wrong answer. An unanswered question scores zero.` },
-      { q: `Are these previous year ${s.examName} papers?`, a: 'No. They are practice mocks in the official pattern. RRB does not publish its question papers for practice, so the questions come from the Pariksha Saathi question bank; a question taken from an official SSC paper says so.' },
-      { q: 'Can I take the mocks in Hindi?', a: s.englishInHindi ? 'Yes. Open the Hindi page and the mocks use Hindi questions; a few topics have no Hindi questions yet, so some questions are in English.' : 'Yes. Open the Hindi page and every question in the mocks is in Hindi.' },
+      { q: `Are these previous year ${s.examName} papers?`, a: 'No. They are practice mocks in the official pattern, filled from the Pariksha Saathi question bank. We do not publish the exam body\'s question papers.' },
+      { q: 'Can I take the mocks in Hindi?', a: s.englishInHindi ? 'Yes. Open the Hindi page and the mocks use Hindi questions; an English-language section stays in English, as in the exam, and a few topics with no Hindi questions yet are in English too.' : 'Yes. Open the Hindi page and every question in the mocks is in Hindi.' },
       { q: 'Do the mocks repeat questions?', a: 'No question repeats within a stage\'s series, and each mock is the same set of questions every time you take it, so a retake shows your real progress.' },
     ],
     moreTitle: (s) => `More for ${s.examName}`,
@@ -79,27 +89,27 @@ const T = {
     description: (s, series) => `आधिकारिक अधिसूचना (${series.cycleLabel}) के पैटर्न पर बने ${s.examName} के ${s.total} मुफ़्त पूरे मॉक टेस्ट: वही खंड, प्रश्नों की संख्या, समय और नकारात्मक अंकन। हिंदी या अंग्रेज़ी में, बिना साइन-अप।`,
     lede: (s, series) => `${s.examName} के ${s.total} मुफ़्त पूरे मॉक टेस्ट, हर एक आधिकारिक अधिसूचना (${series.cycleLabel}) के पैटर्न पर: वही खंड, प्रश्नों की संख्या, समय-सीमा और नकारात्मक अंकन। हर मॉक के प्रश्न तय रहते हैं, इसलिए दोबारा देकर अंकों की तुलना कर सकते हैं, और किसी चरण की शृंखला में कोई प्रश्न दोहराया नहीं जाता। हिंदी या अंग्रेज़ी में ऑनलाइन दें; साइन-अप की ज़रूरत नहीं।`,
     back: (s) => `${s.examName} परीक्षा पेज`,
-    stageTitle: (stage) => `${pick(stage.stageName, 'hi')}: ${stage.mockCount} मॉक टेस्ट`,
+    stageTitle: (stage) => `${stageLabel(stage, 'hi')}: ${stage.mockCount} मॉक टेस्ट`,
     thSection: 'खंड',
     thQuestions: 'प्रश्न',
     total: 'कुल',
     shortNote: (n) => ` (हमारे मॉक में ${n})`,
-    meta: (stage) => `समय: पूरे प्रश्नपत्र के लिए ${stage.durationMinutes} मिनट।`,
+    meta: (stage) => (stage.sectionTimers ? `समय: ${stage.durationMinutes} मिनट, हर खंड का समय अलग, जैसा अधिसूचना में तय है।` : `समय: पूरे प्रश्नपत्र के लिए ${stage.durationMinutes} मिनट।`),
     negative: (x) => (x == null ? 'नकारात्मक अंकन: अधिसूचना में नहीं बताया गया, इसलिए इन मॉक में कुछ नहीं काटा जाता।' : `नकारात्मक अंकन: हर गलत उत्तर पर ${fraction(x)} अंक काटा जाता है; बिना उत्तर वाले प्रश्न पर शून्य।`),
     source: 'पैटर्न आधिकारिक अधिसूचना से',
     checked: 'जाँचा गया',
     mock: (n) => `मॉक ${n}`,
     startHint: 'हर मॉक आपके ब्राउज़र में खुलता है और "शुरू करें" दबाने पर उसका टाइमर चलता है।',
     howTitle: 'ये मॉक कैसे बने हैं',
-    how: 'ये अभ्यास मॉक हैं, RRB के प्रश्नपत्र नहीं: RRB अपने प्रश्नपत्र अभ्यास के लिए प्रकाशित नहीं करता, इसलिए हर मॉक Pariksha Saathi के प्रश्न बैंक से, विषयवार, आधिकारिक खंडों में भरा गया है। कुछ प्रश्न SSC के आधिकारिक प्रश्नपत्रों से हैं और यह बताते हैं; बाकी Pariksha Saathi ने AI की सहायता से लिखे और तथ्य-जाँचे हैं। पैटर्न के आँकड़े ऊपर लिंक की गई अधिसूचना से लिए गए हैं।',
+    how: 'ये आधिकारिक पैटर्न में अभ्यास मॉक हैं, परीक्षा संस्था के प्रश्नपत्र नहीं: हर मॉक Pariksha Saathi के प्रश्न बैंक से, विषयवार, आधिकारिक खंडों में भरा गया है। प्रश्न Pariksha Saathi ने AI की सहायता से लिखे और तथ्य-जाँचे हैं। पैटर्न के आँकड़े ऊपर लिंक की गई अधिसूचना से लिए गए हैं।',
     error: 'कोई ग़लती दिखी?',
     tell: 'हमें बताएँ',
     faqTitle: 'अक्सर पूछे जाने वाले प्रश्न',
     faq: (s) => [
       { q: `क्या ${s.examName} के ये मॉक टेस्ट मुफ़्त हैं?`, a: 'हाँ। हर मॉक ब्राउज़र में मुफ़्त दिया जा सकता है, बिना साइन-अप और बिना भुगतान।' },
       { q: `क्या ${s.examName} के इन मॉक में नकारात्मक अंकन (नेगेटिव मार्किंग) है?`, a: s.negative == null ? 'अधिसूचना में नकारात्मक अंकन नहीं बताया गया, इसलिए कुछ नहीं काटा जाता।' : `हाँ, जैसा अधिसूचना में है: हर गलत उत्तर पर ${fraction(s.negative)} अंक काटा जाता है। बिना उत्तर वाले प्रश्न पर शून्य अंक।` },
-      { q: `क्या ये ${s.examName} के पिछले वर्ष के प्रश्नपत्र हैं?`, a: 'नहीं। ये आधिकारिक पैटर्न में अभ्यास मॉक हैं। RRB अपने प्रश्नपत्र अभ्यास के लिए प्रकाशित नहीं करता, इसलिए प्रश्न Pariksha Saathi के प्रश्न बैंक से हैं; SSC के आधिकारिक प्रश्नपत्र से लिया गया प्रश्न यह बताता है।' },
-      { q: 'क्या मॉक हिंदी में दिए जा सकते हैं?', a: s.englishInHindi ? 'हाँ। हिंदी पेज से खोलने पर मॉक में हिंदी प्रश्न आते हैं; कुछ विषयों के हिंदी प्रश्न अभी नहीं हैं, इसलिए कुछ प्रश्न अंग्रेज़ी में हैं।' : 'हाँ। हिंदी पेज से खोलने पर मॉक का हर प्रश्न हिंदी में होता है।' },
+      { q: `क्या ये ${s.examName} के पिछले वर्ष के प्रश्नपत्र हैं?`, a: 'नहीं। ये आधिकारिक पैटर्न में अभ्यास मॉक हैं, जो Pariksha Saathi के प्रश्न बैंक से भरे गए हैं। हम परीक्षा संस्था के प्रश्नपत्र प्रकाशित नहीं करते।' },
+      { q: 'क्या मॉक हिंदी में दिए जा सकते हैं?', a: s.englishInHindi ? 'हाँ। हिंदी पेज से खोलने पर मॉक में हिंदी प्रश्न आते हैं; अंग्रेज़ी भाषा का खंड परीक्षा की तरह अंग्रेज़ी में रहता है, और जिन कुछ विषयों के हिंदी प्रश्न अभी नहीं हैं, वे भी अंग्रेज़ी में हैं।' : 'हाँ। हिंदी पेज से खोलने पर मॉक का हर प्रश्न हिंदी में होता है।' },
       { q: 'क्या मॉक में प्रश्न दोहराए जाते हैं?', a: 'किसी चरण की शृंखला में कोई प्रश्न दोहराया नहीं जाता, और हर मॉक हर बार प्रश्नों का वही सेट रहता है, इसलिए दोबारा देने पर आपकी असली प्रगति दिखती है।' },
     ],
     moreTitle: (s) => `${s.examName} के लिए और`,

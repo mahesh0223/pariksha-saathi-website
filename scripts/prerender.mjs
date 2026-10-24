@@ -1761,7 +1761,7 @@ async function main() {
     }
   }
 
-  // --- Railway mock tests (/exams/<exam>/mock-tests/ and /hi/...): src/lib/mockTestsPage.mjs, from the server's series
+  // --- Mock tests for every exam in MOCK_TEST_EXAMS (/exams/<exam>/mock-tests/ and /hi/...): src/lib/mockTestsPage.mjs, from the server's series
   // (GET /v1/exams/:examId/mocks), one call per language. A failed call fails the build rather than publishing an empty list.
   for (const examId of MOCK_TEST_EXAMS) {
     for (const lang of ['en', 'hi']) {
