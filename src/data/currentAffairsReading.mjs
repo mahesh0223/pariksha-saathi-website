@@ -4012,6 +4012,63 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से प्रयोगशाला का नाम, उसका स्थान, वह जिस मिशन के तहत है, वह किन प्रदूषण स्रोतों को अलग पहचानती है, और AIRWISE के पूर्वानुमान का विभेदन व अवधि लिखें; नोट से मिशन मौसम की मंज़ूरी की तारीख़, परिव्यय और तीन लागू करने वाले संस्थान।',
     },
   },
+  {
+    match: /[?&]PRID=2328040(?:&|$)/i,
+    en: {
+      body: 'DRDO proved the land-based prototype of its fuel cell-based Air Independent Propulsion (AIP) system on 8 March 2021, operating the plant in endurance mode and maximum power mode as per the user requirements. The system was developed by the Naval Materials Research Laboratory (NMRL) with industry partners L&T and Thermax. Among the AIP systems being pursued internationally, NMRL\'s fuel cell-based AIP is described as unique because the hydrogen is generated onboard.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1703456',
+      refLabel: 'Reference: PIB, \'Fuel Cell based Air Independent Propulsion (AIP) System Crosses Important Milestone of User Specific Tests\', 9 March 2021',
+      checkQ: 'Check yourself: when did DRDO prove the land-based prototype of its AIP system, and what makes NMRL\'s fuel cell-based AIP unique?',
+      checkA: 'On 8 March 2021; the hydrogen is generated onboard.',
+      task: 'Revision task: from this release, note the module\'s developer, the phase inaugurated and where, what an AIP system does, and the submarine class and year of integration; from the note, the date the land-based prototype was proved, the industry partners and why NMRL\'s AIP is unique.',
+    },
+    hi: {
+      body: 'DRDO ने 8 मार्च 2021 को अपनी ईंधन सेल आधारित वायु स्वतंत्र प्रणोदन (AIP) प्रणाली के भूमि-आधारित प्रोटोटाइप को सिद्ध किया और संयंत्र को उपयोगकर्ता की आवश्यकताओं के अनुसार एंड्योरेंस मोड और अधिकतम पावर मोड में चलाया। यह प्रणाली नौसेना सामग्री अनुसंधान प्रयोगशाला (NMRL) ने उद्योग भागीदारों L&T और थर्मैक्स के सहयोग से विकसित की। दुनिया में अपनाई जा रही विभिन्न AIP प्रणालियों में NMRL की ईंधन सेल आधारित AIP को अनूठा बताया गया है, क्योंकि इसमें हाइड्रोजन पनडुब्बी पर ही बनाई जाती है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1703456',
+      refLabel: 'संदर्भ: PIB, \'ईंधन सेल आधारित वायु स्वतंत्र प्रणोदन (AIP) प्रणाली ने उपयोगकर्ता-विशिष्ट परीक्षणों का महत्वपूर्ण पड़ाव पार किया\', 9 मार्च 2021',
+      checkQ: 'खुद जाँचें: DRDO ने अपनी AIP प्रणाली के भूमि-आधारित प्रोटोटाइप को कब सिद्ध किया, और NMRL की ईंधन सेल आधारित AIP अनूठी क्यों है?',
+      checkA: '8 मार्च 2021 को; इसमें हाइड्रोजन पनडुब्बी पर ही बनाई जाती है।',
+      task: 'अभ्यास: इस रिलीज़ से मॉड्यूल को विकसित करने वाली प्रयोगशाला, उद्घाटन हुआ चरण और स्थान, AIP प्रणाली क्या करती है, और जिस श्रेणी की पनडुब्बी पर इसे लगाया जाना है व उसका वर्ष लिखें; नोट से भूमि-आधारित प्रोटोटाइप सिद्ध होने की तारीख़, उद्योग भागीदार और NMRL की AIP के अनूठेपन का कारण।',
+    },
+  },
+  {
+    match: /[?&]PRID=2328067(?:&|$)/i,
+    en: {
+      body: 'On 28 August 2024 the Cabinet Committee on Economic Affairs approved 12 new project proposals under the National Industrial Corridor Development Programme (NICDP), with an estimated investment of ₹28,602 crore. Spread across 10 states and planned along 6 major corridors, they include Gaya in Bihar, Agra and Prayagraj in Uttar Pradesh and Jodhpur-Pali in Rajasthan. They are to be built as greenfield industrial smart cities on the \'plug-n-play\' and \'walk-to-work\' concepts, aligned with the PM GatiShakti National Master Plan.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2049314',
+      refLabel: 'Reference: PIB, \'Cabinet approves 12 Industrial nodes/cities under National Industrial Corridor Development Programme\', 28 August 2024',
+      checkQ: 'Check yourself: how many industrial nodes/cities did the Cabinet approve under NICDP on 28 August 2024, with what estimated investment, and across how many states?',
+      checkA: '12 nodes/cities, with an estimated investment of ₹28,602 crore, across 10 states.',
+      task: 'Revision task: from this release, note the company launched, its role, the corridor and programme, the project\'s area, approval date and cost, and BIMCGL\'s two partners; from the note, the number of cities approved in August 2024, the investment, and the number of states and corridors they span.',
+    },
+    hi: {
+      body: '28 अगस्त 2024 को आर्थिक मामलों की मंत्रिमंडलीय समिति ने राष्ट्रीय औद्योगिक गलियारा विकास कार्यक्रम (NICDP) के तहत ₹28,602 करोड़ के अनुमानित निवेश वाले 12 नए परियोजना प्रस्तावों को मंज़ूरी दी। 10 राज्यों में फैली और 6 प्रमुख गलियारों पर नियोजित इन परियोजनाओं में बिहार का गया, उत्तर प्रदेश के आगरा और प्रयागराज, तथा राजस्थान का जोधपुर-पाली शामिल हैं। इन्हें पीएम गतिशक्ति राष्ट्रीय मास्टर प्लान के अनुरूप \'प्लग-एन-प्ले\' और \'वॉक-टू-वर्क\' अवधारणाओं पर ग्रीनफ़ील्ड औद्योगिक स्मार्ट शहरों के रूप में बनाया जाना है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2049314',
+      refLabel: 'संदर्भ: PIB, \'मंत्रिमंडल ने राष्ट्रीय औद्योगिक गलियारा विकास कार्यक्रम के तहत 12 औद्योगिक नोड/शहरों को मंज़ूरी दी\', 28 अगस्त 2024',
+      checkQ: 'खुद जाँचें: 28 अगस्त 2024 को मंत्रिमंडल ने NICDP के तहत कितने औद्योगिक नोड/शहरों को, कितने अनुमानित निवेश के साथ और कितने राज्यों में मंज़ूरी दी?',
+      checkA: '12 नोड/शहर, ₹28,602 करोड़ के अनुमानित निवेश के साथ, 10 राज्यों में।',
+      task: 'अभ्यास: इस रिलीज़ से शुभारंभ हुई कंपनी, उसकी भूमिका, गलियारा और कार्यक्रम, परियोजना का क्षेत्रफल, मंज़ूरी की तारीख़ व लागत, और BIMCGL के दो साझेदार लिखें; नोट से अगस्त 2024 में मंज़ूर शहरों की संख्या, निवेश, और वे कितने राज्यों व गलियारों में फैले हैं।',
+    },
+  },
+  {
+    match: /[?&]PRID=2328070(?:&|$)/i,
+    en: {
+      body: 'Under the Amrit Bharat Station scheme, a scheme for the modernisation of railway stations, the Ministry of Railways identified a total of 1,275 stations across the country, including border areas, for development; the Railway Minister gave the State/UT-wise list in a written reply in the Lok Sabha on 8 February 2023. Madhya Pradesh\'s list has 80 stations, among them Khajuraho, Rewa, Orchha and Chhindwara. Station modernisation works are generally executed under Plan Head-53, Customer Amenities.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1897382',
+      refLabel: 'Reference: PIB, \'1275 railway stations have been identified under Amrit Bharat Station scheme\', 8 February 2023',
+      checkQ: 'Check yourself: how many stations were identified under the Amrit Bharat Station scheme in the February 2023 list, and how many of them are in Madhya Pradesh?',
+      checkA: '1,275 stations in all, 80 of them in Madhya Pradesh.',
+      task: 'Revision task: from this release, note the two sections, their lengths and costs, the parent project and its length, the district newly connected and the new passenger train; from the note, the scheme\'s name, the number of stations, Madhya Pradesh\'s count and the plan head that funds station works.',
+    },
+    hi: {
+      body: 'रेलवे स्टेशनों के आधुनिकीकरण की योजना, अमृत भारत स्टेशन योजना के तहत रेल मंत्रालय ने सीमावर्ती क्षेत्रों सहित देश भर में कुल 1,275 स्टेशनों को विकास के लिए चिह्नित किया; रेल मंत्री ने 8 फ़रवरी 2023 को लोकसभा में एक लिखित उत्तर में राज्य/केंद्रशासित प्रदेश-वार सूची दी। मध्य प्रदेश की सूची में 80 स्टेशन हैं, जिनमें खजुराहो, रीवा, ओरछा और छिंदवाड़ा शामिल हैं। स्टेशन आधुनिकीकरण के काम आम तौर पर प्लान हेड-53 (ग्राहक सुविधाएँ) के तहत किए जाते हैं।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1897382',
+      refLabel: 'संदर्भ: PIB, \'अमृत भारत स्टेशन योजना के तहत 1275 रेलवे स्टेशन चिह्नित किए गए\', 8 फ़रवरी 2023',
+      checkQ: 'खुद जाँचें: फ़रवरी 2023 की सूची में अमृत भारत स्टेशन योजना के तहत कितने स्टेशन चिह्नित किए गए, और उनमें से कितने मध्य प्रदेश में हैं?',
+      checkA: 'कुल 1,275 स्टेशन, जिनमें से 80 मध्य प्रदेश में।',
+      task: 'अभ्यास: इस रिलीज़ से दोनों रेलखंड, उनकी लंबाई और लागत, मूल परियोजना और उसकी लंबाई, नया जुड़ा ज़िला और नई यात्री ट्रेन लिखें; नोट से योजना का नाम, स्टेशनों की संख्या, मध्य प्रदेश के स्टेशनों की संख्या और स्टेशन कार्यों का प्लान हेड।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
