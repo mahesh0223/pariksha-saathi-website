@@ -5,6 +5,7 @@
 import { homeVisitNote } from './officialLink.mjs';
 import { EXAM_NAMES } from './examNames.mjs';
 import { MONTHS, examHubPath, formatHubDate } from './examHubPath.mjs';
+import { surfaceNextStepHtml } from './nextStep.mjs';
 
 export const CALENDAR_LINK = {
   en: { href: '/exams/calendar/', label: 'Exam calendar' },
@@ -137,7 +138,7 @@ export function examCalendarBody({ groups, lang = 'en' }) {
   const { total, examCount } = calendarSummary(groups);
   const otherPath = examCalendarPath(lang === 'hi' ? 'en' : 'hi');
   let html = `<div class="compare-top-row"><a href="${lang === 'hi' ? '/hi/exams/' : '/exams/'}" class="detail-back">&larr; ${t.exams}</a><a href="${otherPath}" class="compare-lang-switch">${t.switchLabel}</a></div>`;
-  html += `<h1>${t.h1}</h1><p class="compare-lede">${esc(t.lede(total, examCount))}</p>`;
+  html += `<h1>${t.h1}</h1><p class="compare-lede">${esc(t.lede(total, examCount))}</p>${surfaceNextStepHtml('calendar', lang)}`;
   if (total === 0) html += `<p class="exam-dir-note">${esc(t.empty)}</p>`;
   for (const group of groups) {
     html += `<h2 class="calendar-month">${esc(group.label)}</h2><div class="hub-table-wrap"><table class="hub-table calendar-table"><thead><tr><th>${t.date}</th><th>${t.exam}</th><th>${t.step}</th><th>${t.source}</th></tr></thead><tbody>`;

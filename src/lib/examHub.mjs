@@ -10,6 +10,7 @@
 
 // Path/date helpers live in examHubPath.mjs (the entry bundle needs only those); re-exported here so
 // existing importers of this module keep working.
+import { nextStepHtml } from './nextStep.mjs';
 import { GK_INSIGHTS_EXAMS, GK_INSIGHTS_LINK } from './gkInsights.mjs';
 import { formatHubDate, examHubSlug, examHubPath } from './examHubPath.mjs';
 import { CONTACT_EMAIL } from './reportQuestion.mjs';
@@ -381,14 +382,9 @@ function dateSpan(from, to, lang, t) {
 // redirects (public/_redirects) so Cloudflare's HTTP analytics counts the clicks. Compare with the other hubs' Telegram
 // box and Referral Traffic; drop the line if it does not move them. Not exam-specific: the PDF is national current affairs.
 export const NEXT_STEP_PILOT_HUBS = ['ssc_cgl', 'ssc_chsl', 'sbi_po', 'mppsc'];
-const NEXT_STEP_T = {
-  en: { lead: 'Current affairs free every morning:', pdf: "today's PDF", pdfNote: '(in Hindi)', telegram: 'on Telegram' },
-  hi: { lead: 'हर सुबह मुफ़्त करेंट अफेयर्स:', pdf: 'आज का PDF', pdfNote: '', telegram: 'Telegram पर' },
-};
 export function nextStepLineHtml(examId, lang = 'en') {
   if (!NEXT_STEP_PILOT_HUBS.includes(examId)) return '';
-  const n = NEXT_STEP_T[lang] ?? NEXT_STEP_T.en;
-  return `<p class="hub-next">${n.lead} <a href="/go/hub-pdf" rel="nofollow">${n.pdf}</a>${n.pdfNote ? ` ${n.pdfNote}` : ''} &middot; <a href="/go/hub-telegram" rel="nofollow noopener" target="_blank">${n.telegram}</a></p>`;
+  return nextStepHtml('/go/hub-pdf', '/go/hub-telegram', lang);
 }
 
 export function liveMockLineHtml(liveMock, playStoreUrl, lang = 'en', now = new Date()) {

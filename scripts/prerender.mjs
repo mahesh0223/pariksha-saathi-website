@@ -38,6 +38,7 @@ import { questionRedirectTarget } from '../src/lib/questionRedirects.mjs';
 import { QUESTION_REDIRECTS } from '../src/data/questionRedirects.mjs';
 import { EXAM_NAMES } from '../src/lib/examNames.mjs';
 import { examHubBody, examHubMeta, examHubPath, examHubSlug, examHubStructuredData, hubItems } from '../src/lib/examHub.mjs';
+import { surfaceNextStepHtml } from '../src/lib/nextStep.mjs';
 import { relatedItemsHtml } from '../src/lib/relatedItems.mjs';
 import { telegramCtaHtml } from '../src/lib/telegramCta.mjs';
 import { TELEGRAM_PAGE_PATH, telegramPageBody, telegramPageMeta } from '../src/lib/telegramPage.mjs';
@@ -707,6 +708,7 @@ function syllabusPageBody(entry, lang) {
         </div>
         <h1>${escapeHtml(c.pageTitle)}</h1>
         <p class="compare-lede">${escapeHtml(c.lede)}</p>
+        ${surfaceNextStepHtml('syllabus', lang)}
         <h2>${escapeHtml(c.stagesHeading)}</h2>
         <div class="compare-table">
           ${tableRows(c.stages)}
@@ -806,6 +808,7 @@ function jobProfilePageBody(entry, lang) {
         </div>
         <h1>${escapeHtml(c.pageTitle)}</h1>
         <p class="compare-lede">${escapeHtml(c.lede)}</p>
+        ${surfaceNextStepHtml('job-profile', lang)}
         <h2>${escapeHtml(c.profileHeading)}</h2>
         ${paragraphs(c.profileBody)}
         ${postsTable}

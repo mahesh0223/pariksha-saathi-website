@@ -4,6 +4,7 @@
 // (scripts/gen-pyq-pages.mjs, from the server's PYQ seed files).
 import { examsLinkHtml } from './examDirectory.mjs';
 import { examHubPath } from './examHubPath.mjs';
+import { surfaceNextStepHtml } from './nextStep.mjs';
 import { socialLinksHtml } from '../data/socialLinks.mjs';
 import { telegramCtaHtml } from './telegramCta.mjs';
 import { metaDescription } from './seoMeta.mjs';
@@ -141,6 +142,7 @@ export function pyqPaperBody(paper, cutoffRows = []) {
     <h1>${esc(meta.h1)}</h1>
     <p class="compare-lede">${n} questions from the official paper of ${longDate(paper.date)} (${esc(paper.shift)}), exactly as the exam body printed them, each with the answer from the official key and a worked explanation.${optionalNote} ${paper.markingNote ? `Marking: ${esc(paper.markingNote)}` : `Every question carries ${marks(paper.marksPerQuestion)} marks, and ${marks(paper.negativeMarksPerWrong)} is deducted for a wrong answer.`}${leftOut} Try each question before opening its answer.</p>
     <p class="hub-source">Source: <a href="${esc(paper.sourceUrl)}" target="_blank" rel="noreferrer">the exam body's answer-key notice &#8599;</a> · Questions and answers: the exam body. Explanations: drafted with AI assistance by Pariksha Saathi and checked against the official answers. Spotted an error? <a href="/contact/">Tell us</a>.</p>
+    ${surfaceNextStepHtml('paper', 'en')}
     <nav class="pyq-jump">${sections.map((s) => `<a href="#${anchor(s.name)}">${esc(s.name)}</a>`).join('')}</nav>
     ${paper.pdf ? `<p class="pyq-pdf"><a href="${esc(paper.pdf.path)}" download>Download this paper as a PDF</a> (${paper.pdf.pages} pages, ${paper.pdf.sizeKb} KB): the questions as printed, then the answer key and the explanations, to print or share.</p>` : ''}
     ${pyqCutoffHtml(paper, cutoffRows)}

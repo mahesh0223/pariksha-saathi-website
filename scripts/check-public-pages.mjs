@@ -11,6 +11,7 @@ import { EXAM_SYLLABI } from '../src/data/examSyllabi.mjs';
 import { EXAM_SYLLABUS_SLUGS } from '../src/data/examSyllabusSlugs.mjs';
 import { LESSON_SUBJECTS } from '../src/data/lessonSubjects.mjs';
 import { examHubPath, NEXT_STEP_PILOT_HUBS } from '../src/lib/examHub.mjs';
+import { NEXT_STEP_SURFACES } from '../src/lib/nextStep.mjs';
 import { EXAM_HUB_EXTRAS } from '../src/data/examHubExtras.mjs';
 import { TELEGRAM_CHANNEL_URL, TELEGRAM_JOIN_URL } from '../src/data/socialLinks.mjs';
 import { pyqIndexSource } from '../src/lib/pyqPapersBuild.mjs';
@@ -739,6 +740,29 @@ console.log(`Verified the Hindi landing page and lesson library: built, in the s
     }
   }
   console.log(`Verified the G1 experiment: next-step line on ${NEXT_STEP_PILOT_HUBS.length} pilot hubs x 2 languages only, /go/ redirects and robots rule in place; no "X to X" date ranges on any hub.`);
+}
+
+// G2 (24 Oct 2026, reviewed with G1 on 3 Nov): the same line on the calendar, syllabus, job-profile and solved-paper
+// pages, each family through its own /go/ paths so the clicks can be told apart.
+{
+  const redirects = readFileSync('dist/_redirects', 'utf8');
+  for (const surface of NEXT_STEP_SURFACES) {
+    for (const kind of ['pdf', 'telegram']) assert(new RegExp(`^/go/${surface}-${kind}\\s`, 'm').test(redirects), `_redirects lost /go/${surface}-${kind}`);
+  }
+  const papers = JSON.parse(readFileSync('src/data/pyqPapers.json', 'utf8'));
+  const familyOf = (f) => (/^dist\/(hi\/)?exams\/calendar\/index\.html$/.test(f) ? 'calendar'
+    : /^dist\/(hi\/)?compare\/[a-z0-9-]+-syllabus\/index\.html$/.test(f) ? 'syllabus'
+      : /^dist\/(hi\/)?compare\/[a-z0-9-]+-job-profile\/index\.html$/.test(f) ? 'job-profile'
+        : null);
+  const pages = [...files.map((f) => [f, familyOf(f)]).filter(([, family]) => family), ...papers.map((paper) => [`dist${pyqPaperPath(paper)}index.html`, 'paper'])];
+  const counts = {};
+  for (const [file, family] of pages) {
+    const html = readFileSync(file, 'utf8');
+    assert(html.includes(`href="/go/${family}-pdf"`) && html.includes(`href="/go/${family}-telegram"`), `${file}: the ${family} next-step line is missing`);
+    counts[family] = (counts[family] ?? 0) + 1;
+  }
+  for (const family of NEXT_STEP_SURFACES) assert(counts[family] > 0, `no ${family} page carries the next-step line`);
+  console.log(`Verified the G2 next-step line: ${NEXT_STEP_SURFACES.map((f) => `${counts[f]} ${f}`).join(', ')} page(s), each through its own /go/ links.`);
 }
 
 // Search Console (22 Oct 2026) listed 107 "Page with redirect" URLs. Cloudflare Pages answers a bare path whose folder

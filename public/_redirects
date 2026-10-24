@@ -46,3 +46,14 @@
 # up in Cloudflare Analytics > HTTP Traffic as requests to /go/hub-pdf and /go/hub-telegram (robots.txt keeps crawlers out).
 /go/hub-pdf                            /pdf/latest.pdf           302
 /go/hub-telegram                       https://t.me/parikshasaathiapp 302
+
+# G2 (from 24 Oct 2026, same review): the same line on the calendar, syllabus, job-profile and solved-paper pages, one
+# pair of paths per page family (src/lib/nextStep.mjs).
+/go/calendar-pdf                       /pdf/latest.pdf           302
+/go/calendar-telegram                  https://t.me/parikshasaathiapp 302
+/go/syllabus-pdf                       /pdf/latest.pdf           302
+/go/syllabus-telegram                  https://t.me/parikshasaathiapp 302
+/go/job-profile-pdf                    /pdf/latest.pdf           302
+/go/job-profile-telegram               https://t.me/parikshasaathiapp 302
+/go/paper-pdf                          /pdf/latest.pdf           302
+/go/paper-telegram                     https://t.me/parikshasaathiapp 302
