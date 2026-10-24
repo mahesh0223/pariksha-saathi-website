@@ -85,10 +85,10 @@ export function hindiHomeBody() {
         <div class="wrap hero-grid">
           <div>
             <div class="eyebrow">SSC &middot; बैंकिंग &middot; रेलवे &middot; पुलिस &middot; PSC</div>
-            <h1>परीक्षा की तैयारी जो वहाँ भी चले, <em>जहाँ नेटवर्क न चले।</em></h1>
-            <p class="lede">SSC, बैंकिंग, रेलवे, राज्य पुलिस, CTET और राज्य PSC परीक्षाओं के लिए पाठ, अभ्यास क्विज़, मॉक टेस्ट और तारीख़ के साथ असली करेंट अफेयर्स — मुफ़्त, सीधे आपके ब्राउज़र में।</p>
+            <h1>नेटवर्क कमज़ोर हो, <em>तैयारी नहीं।</em></h1>
+            <p class="lede">SSC, Banking, Railway, Police और PSC की free तैयारी करें — lessons, quizzes, mock tests और current affairs के साथ।</p>
             <div class="cta-row">
-              <a class="btn-primary-cream" href="/onboarding/">मुफ़्त पढ़ाई शुरू करें</a>
+              <a class="btn-primary-cream" href="/onboarding/">Free में शुरू करें</a>
               <a class="btn-ghost-cream" href="#features">अंदर क्या है, देखें</a>
             </div>
             <a class="hero-lang-switch" href="/" lang="en">Read this page in English &rarr;</a>
