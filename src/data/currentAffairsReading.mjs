@@ -3974,6 +3974,44 @@ const LEARNING_NOTES = [
       task: 'अभ्यास: इस रिलीज़ से अधिनियम लागू होने की तारीख़, गारंटी के दिन, चार विषय-क्षेत्र, अनुमेय कार्यों की संख्या और 24 सितंबर 2026 तक के प्रगति आँकड़े लिखें; नोट से स्वीकृति की तारीख़, जिस अधिनियम की जगह ली वह, विराम अवधि और लागत-साझेदारी अनुपात।',
     },
   },
+  {
+    match: /[?&]PRID=2327905(?:&|$)/i,
+    en: {
+      body: 'The Union Cabinet approved the Digital Agriculture Mission on 2 September 2024 with an outlay of ₹2,817 crore, including a central share of ₹1,940 crore. It builds three Digital Public Infrastructures - AgriStack, the Krishi Decision Support System and Soil Profile Mapping - and AgriStack rests on three registries kept by the States and Union Territories: the Farmers\' Registry, geo-referenced village maps and the Crop Sown Registry. Under AgriStack each farmer gets a Farmer ID, a digital identity similar to Aadhaar.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2050966',
+      refLabel: 'Reference: PIB, \'Cabinet approves the Digital Agriculture Mission today with an outlay of Rs. 2817 Crore, including the central share of Rs. 1940 Crore\', 2 September 2024',
+      checkQ: 'Check yourself: what is the Digital Agriculture Mission\'s outlay, and which three registries make up AgriStack?',
+      checkA: '₹2,817 crore, including a central share of ₹1,940 crore; the Farmers\' Registry, geo-referenced village maps and the Crop Sown Registry.',
+      task: 'Revision task: from this release, note the number of Farmer IDs, the date the target was met, the original deadline, the services a Farmer ID eases and the number of farmers already benefited; from the note, the mission\'s approval date, outlay, three DPIs and AgriStack\'s three registries.',
+    },
+    hi: {
+      body: 'केंद्रीय मंत्रिमंडल ने 2 सितंबर 2024 को ₹2,817 करोड़ के परिव्यय वाले डिजिटल कृषि मिशन को मंज़ूरी दी, जिसमें केंद्र का हिस्सा ₹1,940 करोड़ है। यह मिशन तीन डिजिटल सार्वजनिक अवसंरचनाएँ बनाता है - एग्रीस्टैक, कृषि निर्णय सहायता प्रणाली और मृदा प्रोफ़ाइल मानचित्रण - और एग्रीस्टैक राज्यों व केंद्र शासित प्रदेशों द्वारा रखी जाने वाली तीन रजिस्ट्रियों पर आधारित है: किसान रजिस्ट्री, भू-संदर्भित ग्राम मानचित्र और बोई गई फसल रजिस्ट्री। एग्रीस्टैक के तहत हर किसान को आधार जैसी एक डिजिटल पहचान, फ़ार्मर आईडी, मिलती है।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2050966',
+      refLabel: 'संदर्भ: PIB, \'मंत्रिमंडल ने ₹2,817 करोड़ के परिव्यय वाले डिजिटल कृषि मिशन को मंज़ूरी दी, जिसमें केंद्र का हिस्सा ₹1,940 करोड़\', 2 सितंबर 2024',
+      checkQ: 'खुद जाँचें: डिजिटल कृषि मिशन का परिव्यय कितना है, और एग्रीस्टैक किन तीन रजिस्ट्रियों से बना है?',
+      checkA: '₹2,817 करोड़, जिसमें केंद्र का हिस्सा ₹1,940 करोड़; किसान रजिस्ट्री, भू-संदर्भित ग्राम मानचित्र और बोई गई फसल रजिस्ट्री।',
+      task: 'अभ्यास: इस रिलीज़ से फ़ार्मर आईडी की संख्या, लक्ष्य पूरा होने की तारीख़, मूल समय-सीमा, फ़ार्मर आईडी से आसान होने वाली सेवाएँ और अब तक लाभ पाने वाले किसानों की संख्या लिखें; नोट से मिशन की मंज़ूरी की तारीख़, परिव्यय, तीन डिजिटल अवसंरचनाएँ और एग्रीस्टैक की तीन रजिस्ट्रियाँ।',
+    },
+  },
+  {
+    match: /[?&]PRID=2327957(?:&|$)/i,
+    en: {
+      body: 'The Union Cabinet approved Mission Mausam on 11 September 2024 with an outlay of ₹2,000 crore over two years, to create a more weather-ready and climate-smart Bharat. Three institutes of the Ministry of Earth Sciences primarily implement it: the India Meteorological Department (IMD), the Indian Institute of Tropical Meteorology (IITM) and the National Centre for Medium-Range Weather Forecasting (NCMRWF). Its focus includes monsoon forecasts and alerts for air quality, extreme weather events and cyclones.',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2053896',
+      refLabel: 'Reference: PIB, \'Cabinet approves Mission Mausam to create a more weather-ready and climate-smart Bharat with an outlay of Rs.2,000 crore over two years\', 11 September 2024',
+      checkQ: 'Check yourself: when was Mission Mausam approved, with what outlay, and which three institutes primarily implement it?',
+      checkA: 'On 11 September 2024, with ₹2,000 crore over two years; IMD, IITM and NCMRWF.',
+      task: 'Revision task: from this release, note the laboratory\'s name, where it is, the mission it comes under, the pollution sources it tells apart and AIRWISE\'s forecast resolution and range; from the note, Mission Mausam\'s approval date, outlay and three implementing institutes.',
+    },
+    hi: {
+      body: 'केंद्रीय मंत्रिमंडल ने 11 सितंबर 2024 को अधिक मौसम-तैयार और जलवायु-स्मार्ट भारत बनाने के लिए दो वर्षों में ₹2,000 करोड़ के परिव्यय वाले मिशन मौसम को मंज़ूरी दी। इसे मुख्य रूप से पृथ्वी विज्ञान मंत्रालय के तीन संस्थान लागू करते हैं: भारत मौसम विज्ञान विभाग (IMD), भारतीय उष्णदेशीय मौसम विज्ञान संस्थान (IITM) और राष्ट्रीय मध्यम अवधि मौसम पूर्वानुमान केंद्र (NCMRWF)। इसके केंद्र में मानसून पूर्वानुमान और वायु गुणवत्ता, चरम मौसमी घटनाओं व चक्रवातों की चेतावनियाँ शामिल हैं।',
+      refUrl: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2053896',
+      refLabel: 'संदर्भ: PIB, \'मंत्रिमंडल ने अधिक मौसम-तैयार और जलवायु-स्मार्ट भारत के लिए दो वर्षों में ₹2,000 करोड़ के परिव्यय वाले मिशन मौसम को मंज़ूरी दी\', 11 सितंबर 2024',
+      checkQ: 'खुद जाँचें: मिशन मौसम को कब और कितने परिव्यय के साथ मंज़ूरी मिली, और इसे कौन-से तीन संस्थान मुख्य रूप से लागू करते हैं?',
+      checkA: '11 सितंबर 2024 को, दो वर्षों में ₹2,000 करोड़ के साथ; IMD, IITM और NCMRWF।',
+      task: 'अभ्यास: इस रिलीज़ से प्रयोगशाला का नाम, उसका स्थान, वह जिस मिशन के तहत है, वह किन प्रदूषण स्रोतों को अलग पहचानती है, और AIRWISE के पूर्वानुमान का विभेदन व अवधि लिखें; नोट से मिशन मौसम की मंज़ूरी की तारीख़, परिव्यय और तीन लागू करने वाले संस्थान।',
+    },
+  },
 ];
 
 export function learningNote(item, lang = 'en') {
